@@ -29,23 +29,23 @@ whitespace   ([ \t\n]*)
 {comment}      { /* skip */ }
 
 
-{int_const}    { 
-		//Rule to identify an integer constant. 
-		//The return value indicates the type of token;
-		//in this case T_int as defined in parser.yy.
-		//The actual value of the constant is returned
-		//in the intconst field of yylval (defined in the union
-		//type in parser.yy).
+{int_const}    {
+		// Rule to identify an integer constant.
+		// The return value indicates the type of token;
+		// in this case T_int as defined in parser.yy.
+		// The actual value of the constant is returned
+		// in the intconst field of yylval (defined in the union
+		// type in parser.yy).
 			yylval->intconst = atoi(yytext);
 			return T_int;
 		}
 
 %{
-// The rest of your lexical rules go here. 
-// rules have the form 
+// The rest of your lexical rules go here.
+// rules have the form
 // pattern action
 // we have defined a few rules for you above, but you need
-// to provide additional lexical rules for string constants, 
+// to provide additional lexical rules for string constants,
 // operators, keywords and identifiers.
 %}
 
