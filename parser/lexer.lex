@@ -15,6 +15,9 @@ using std::string;
 int_const [0-9][0-9]*
 
 whitespace   ([ \t\n]*)
+
+comment  "//".*"\n"
+
 %{
 // Initial declarations
 // In this section of the file, you can define named regular expressions.
