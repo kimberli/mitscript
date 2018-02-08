@@ -6,7 +6,7 @@ foo = fun(t){
 	x = 3; 
 	boo = fun(v){
 		print("x should be " + v + " is " + x);
-	}
+	};
 	boo(3);
         x = 2;
 	boo(2);
