@@ -4,7 +4,7 @@
 		y:0;
 		
 	};
-	im = fun( x y){
+	im = fun(,x,y){
 		if(((x==p.x)&(y==p.y))){
 			return "x";
 			

@@ -1,11 +1,11 @@
 {
 	x = 5;
-	foo = fun( t){
+	foo = fun(,t){
 		if((t>4)){
 			x = t;
-			moo = fun( u){
+			moo = fun(,u){
 				x = 3;
-				boo = fun( v){
+				boo = fun(,v){
 					print(((("x should be "+v)+" is ")+x));
 					
 				};

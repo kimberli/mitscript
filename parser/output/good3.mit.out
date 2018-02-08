@@ -5,7 +5,7 @@
 		name:"point1";
 		
 	};
-	display = fun( pt){
+	display = fun(,pt){
 		print((((((("Point("+pt.name)+", ")+pt.x)+", ")+pt.y)+")"));
 		
 	};
