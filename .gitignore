@@ -4,3 +4,15 @@ mitscript*
 parser.cpp
 parser.h
 parser.output
+MITScript.interp
+MITScript.tokens
+MITScriptBaseVisitor.cpp
+MITScriptBaseVisitor.h
+MITScriptLexer.cpp
+MITScriptLexer.h
+MITScriptLexer.interp
+MITScriptLexer.tokens
+MITScriptParser.cpp
+MITScriptParser.h
+MITScriptVisitor.cpp
+MITScriptVisitor.h
