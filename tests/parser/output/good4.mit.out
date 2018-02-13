@@ -5,6 +5,8 @@
 		
 	};
 	x = intcast(input());
-	while(((x+1)>0))x = foo(x);
-	
+	while(((x+1)>0)){
+		x = foo(x);
+		
+	}
 }

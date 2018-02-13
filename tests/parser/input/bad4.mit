@@ -3,5 +3,6 @@ foo = fun(x){
   return x - 1;
 }
 x = input();
-while(x + 1 > 0)
+while(x + 1 > 0){
    x = foo(x);
+}
