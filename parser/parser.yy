@@ -78,6 +78,11 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 // Your grammar rules should be written here.
 
 Program:
+StatementList {  
+    $$ = // assign a new block to $$.
+    // and make sure the out variable is set, because that is what main is going to read.
+out = $$;
+
 %%
 
 // Error reporting function. You should not have to modify this.
