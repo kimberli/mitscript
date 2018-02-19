@@ -14,9 +14,9 @@ using std::string;
 
 int_const [0-9][0-9]*
 str_const \"(\\[nt\\\"]|[^\\\"])*\"
-none_const None
 true_const true
 false_const false
+none_const None
 
 identifier [a-zA-Z_]\w*
 
@@ -33,21 +33,34 @@ comment  "//".*"\n"
 %%
 
 
-{whitespace}   { /* skip */ }
+{whitespace} {} /* skip */
 
-{comment}      { /* skip */ }
+{comment} {} /* skip */
 
+{int_const} {
+    yylval->intconst = atoi(yytext);
+    return T_INT;
+}
 
-{int_const}    {
-		// Rule to identify an integer constant.
-		// The return value indicates the type of token;
-		// in this case T_int as defined in parser.yy.
-		// The actual value of the constant is returned
-		// in the intconst field of yylval (defined in the union
-		// type in parser.yy).
-			yylval->intconst = atoi(yytext);
-			return T_int;
-		}
+{str_const} {
+    yylval->strconst = yytext;
+    return T_STR;
+}
+
+{true_const} {
+    yylval->boolconst = true;
+    return T_BOOL;
+}
+
+{false_const} {
+    yylval->boolconst = false;
+    return T_BOOL;
+}
+
+{none_const} {
+    yylval->noneconst = 0;
+    return T_NONE;
+}
 
 %{
 // The rest of your lexical rules go here.

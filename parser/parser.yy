@@ -52,14 +52,21 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 // stmt field with a pointer to a statement. Note that one limitation
 // is that you can only use primitive types and pointers in the union.
 %union {
-	int intconst;
-	Statement*   stmt;
+	int         intconst;
+    string      strconst;
+    bool        boolconst;
+    int         noneconst;
+
+	Statement*  stmt;
 }
 
 // Below is where you define your tokens and their types.
 // for example, we have defined for you a T_int token, with type intconst
 // the type is the name of a field from the union above
-%token<intconst> T_int
+%token<intconst> T_INT
+%token<strconst> T_STR
+%token<boolconst> T_BOOL
+%token<noneconst> T_NONE
 
 // Use the %type directive to specify the types of AST nodes produced by each production.
 // For example, you will have a program non-terimnal in your grammar, and it will
@@ -82,6 +89,7 @@ StatementList {
     $$ = // assign a new block to $$.
     // and make sure the out variable is set, because that is what main is going to read.
 out = $$;
+}
 
 %%
 
