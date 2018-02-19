@@ -13,6 +13,12 @@ using std::string;
 %option never-interactive
 
 int_const [0-9][0-9]*
+str_const \"(\\[nt\\\"]|[^\\\"])*\"
+none_const None
+true_const true
+false_const false
+
+identifier [a-zA-Z_]\w*
 
 whitespace   ([ \t\n]*)
 
