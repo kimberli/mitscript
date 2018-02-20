@@ -85,13 +85,21 @@ class PrettyPrinter : public Visitor {
         exp.body.accept(*this);
     };
     void visit(BinaryExpr& exp) override {
+        cout << "(";
         exp.left.accept(*this);
         cout << op_map[exp.op];
         exp.right.accept(*this);
+        cout << ")";
     };
     void visit(UnaryExpr& exp) override {
-        cout << op_map[exp.op];
+        if (exp.op != Op::None) {
+            cout << op_map[exp.op];
+            cout << "(";
+        }
         exp.expr.accept(*this);
+        if (exp.op != Op::None) {
+            cout << ")";
+        }
     };
     void visit(FieldDeref& exp) override {
         exp.base.accept(*this);
