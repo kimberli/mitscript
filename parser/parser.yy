@@ -52,13 +52,15 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 // stmt field with a pointer to a statement. Note that one limitation
 // is that you can only use primitive types and pointers in the union.
 %union {
-	int         intconst;
-    string      *strconst;
-    bool        boolconst;
+	int intconst;
+    string* strconst;
+    bool boolconst;
 
-	Statement   *stmt_type;
-    Expression  *expr_type;
-    vector<Statement*> *stmt_list_type;
+	Statement* stmt_type;
+    Expression* expr_type;
+    Block* block_type;
+    vector<Expression*>* expr_list_type;
+    vector<string>* str_list_type;
 }
 
 // Below is where you define your tokens and their types.
@@ -80,16 +82,20 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 // return a Statement*. As with tokens, the name of the type comes
 // from the union defined earlier.
 
-%type<stmt_type> Program
-%type<stmt_type> StatementList
+%type<block_type> Program
+%type<block_type> StatementList Block
 %type<stmt_type> Statement Assignment CallStatement Global IfStatement WhileLoop Return
-%type<expr_type> Lhs
+%type<expr_type> Expression Function Boolean Record Constant
+%type<expr_list_type> ExpressionList ExpressionListHead RecordList
+%type<str_list_type> ArgsList ArgsListHead
+%type<expr_type> Conjunction BoolUnit Predicate Arithmetic Product Unit PosUnit Lhs LhsTail Call
+%type<strconst> Name
 
 %start Program
 
 // You must also define any associativity directives that are necessary
 // to resolve ambiguities and properly parse the code.
-// TODO
+// TODO: don't think I need this? since left associative
 
 %%
 
@@ -97,18 +103,22 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 
 Program:
 StatementList {  
-    // $$ = $1; // TODO
-    cout << "Program: " << $1 << endl;
-    // out = $$;
+    cout << "Program: " << $$ <<  endl;
+    $$ = new Block(*$1);
+    out = $$->stmts.front(); // TODO: what type to return?
 }
-;
 
 StatementList:
 %empty
 | StatementList Statement {
     cout << "Statement done" << endl;
+    $1->stmts.push_back($2);
 }
-;
+
+Block:
+'{' StatementList '}' {
+    $$ = $2;
+}
 
 Statement:
 Assignment
@@ -116,142 +126,164 @@ Assignment
 | Global
 | IfStatement
 | WhileLoop
-| Return {
-}
-;
-
-Global:
-T_GLOBAL Name ';' {
-    cout << "Global: " << endl;
-}
-;
+| Return
 
 Assignment:
 Lhs T_EQ Expression ';' {
-    cout << "Assignment: " << endl;
+    $$ = new Assignment(*$1, *$3);
+    cout << "Assignment" << endl;
 }
-;
 
 CallStatement:
 Call ';' {
-    cout << "Call: " << endl;
+    $$ = new CallStatement(*$1);
+    cout << "Call" << endl;
 }
 
-Block:
-'{' StatementList '}' {
+Global:
+T_GLOBAL Name ';' {
+    $$ = new Global(*$2);
+    cout << "Global" << endl;
 }
 
 IfStatement:
-T_IF '(' Expression ')' Block T_ELSE Block
+T_IF '(' Expression ')' Block T_ELSE Block {
+    $$ = new IfStatement(*$3, *$5, $7);
+    cout << "IfStatement" << endl;
+}
 | T_IF '(' Expression ')' Block {
-    cout << "IfStatement: " << endl;
+    $$ = new IfStatement(*$3, *$5, nullptr);
+    cout << "IfStatement" << endl;
 }
 
 WhileLoop:
 T_WHILE '(' Expression ')' Block {
-    cout << "WhileLoop: " << endl;
+    $$ = new WhileLoop(*$3, *$5);
+    cout << "WhileLoop" << endl;
 }
 
 Return:
 T_RETURN Expression ';' {
-    cout << "Return: " << endl;
+    $$ = new Return(*$2);
+    cout << "Return" << endl;
 }
 
 Expression:
-Function {
-}
-| Boolean {
-}
-| Record {
-}
+Function
+| Boolean
+| Record
 
 Function:
 T_FUN '(' ArgsList ')' Block {
+    $$ = new Function(*$3, *$5);
 }
 
 ArgsList:
-%empty
+%empty {
+    $$ = new vector<string>();
+}
 | ArgsListHead Name {
+    $$ = new vector<string>();
+    $$->push_back(*$2);
 }
 
 ArgsListHead:
 %empty
 | ArgsListHead Name ',' {
+    $$->push_back(*$2);
 }
 
 Boolean:
 Conjunction {
+    $$ = new UnaryExpr(*$1);
 }
 | Conjunction T_OR Boolean {
+    $$ = new BinaryExpr(Op::Or, *$1, *$3);
 }
 
 Conjunction:
 BoolUnit {
+    $$ = new UnaryExpr(*$1);
 }
 | BoolUnit T_AND Conjunction {
+    $$ = new BinaryExpr(Op::And, *$1, *$3);
 }
 
 BoolUnit:
 Predicate {
+    $$ = new UnaryExpr(*$1);
 }
 | T_NOT Predicate {
+    $$ = new UnaryExpr(Op::Not, *$2);
 }
 
 Predicate:
 Arithmetic {
+    $$ = new UnaryExpr(*$1);
 }
 | Arithmetic T_LT Arithmetic {
+    $$ = new BinaryExpr(Op::Lt, *$1, *$3);
 }
 | Arithmetic T_GT Arithmetic {
+    $$ = new BinaryExpr(Op::Gt, *$1, *$3);
 }
 | Arithmetic T_LTEQ Arithmetic {
+    $$ = new BinaryExpr(Op::Lt_eq, *$1, *$3);
 }
 | Arithmetic T_GTEQ Arithmetic {
+    $$ = new BinaryExpr(Op::Gt_eq, *$1, *$3);
 }
 | Arithmetic T_EQEQ Arithmetic {
+    $$ = new BinaryExpr(Op::Eq_eq, *$1, *$3);
 }
 
 Arithmetic:
 Product {
+    $$ = new UnaryExpr(*$1);
 }
 | Product T_PLUS Arithmetic {
+    $$ = new BinaryExpr(Op::Plus, *$1, *$3);
 }
 | Product T_MINUS Arithmetic {
+    $$ = new BinaryExpr(Op::Minus, *$1, *$3);
 }
 
 Product:
 Unit {
+    $$ = new UnaryExpr(*$1);
 }
 | Unit T_TIMES Product {
+    $$ = new BinaryExpr(Op::Times, *$1, *$3);
 }
 | Unit T_DIVIDE Product {
+    $$ = new BinaryExpr(Op::Divide, *$1, *$3);
 }
 
 Unit:
 PosUnit {
+    $$ = new UnaryExpr(*$1);
 }
 | T_MINUS PosUnit {
+    $$ = new UnaryExpr(Op::Minus, *$2);
 }
 
 PosUnit:
-Lhs {
-}
-| Constant {
-}
-| Call {
-}
+Lhs
+| Constant
+| Call
 | '(' Boolean ')' {
+    $$ = $2;
 }
 
 Lhs:
-Name Rhs {
+Name LhsTail {
 }
 
-Rhs:
+LhsTail:
 %empty
-| Rhs '.' Name {
+| LhsTail '.' Name {
 }
-| Rhs '[' Expression ']' {
+| LhsTail '[' Expression ']' {
 }
 
 Call:

@@ -4,15 +4,45 @@
 
 using namespace std;
 
-
-// You will need to a virtual visitor class with a
-// visit method for each different type of expression and statement
-// as defined in AST.h
+class Block;
+class Global;
+class Assignment;
+class CallStatement;
+class IfStatement;
+class WhileLoop;
+class Return;
+class Function;
+class BinaryExpr;
+class UnaryExpr;
+class FieldDeref;
+class IndexExpr;
+class Call;
+class Record;
+class Identifier;
+class IntConst;
+class StrConst;
+class NoneConst;
 
 class Visitor {
 public:
-// For each AST node, you need a virtual method of the form
-// virtual void visit(EXPRESSION_TYPE& exp)=0;
+    virtual void visit(Block& exp) = 0;
+    virtual void visit(Global& exp) = 0;
+    virtual void visit(Assignment& exp) = 0;
+    virtual void visit(CallStatement& exp) = 0;
+    virtual void visit(IfStatement& exp) = 0;
+    virtual void visit(WhileLoop& exp) = 0;
+    virtual void visit(Return& exp) = 0;
+    virtual void visit(Function& exp) = 0;
+    virtual void visit(BinaryExpr& exp) = 0;
+    virtual void visit(UnaryExpr& exp) = 0;
+    virtual void visit(FieldDeref& exp) = 0;
+    virtual void visit(IndexExpr& exp) = 0;
+    virtual void visit(Call& exp) = 0;
+    virtual void visit(Record& exp) = 0;
+    virtual void visit(Identifier& exp) = 0;
+    virtual void visit(IntConst& exp) = 0;
+    virtual void visit(StrConst& exp) = 0;
+    virtual void visit(NoneConst& exp) = 0;
 };
 
 
