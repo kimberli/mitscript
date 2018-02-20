@@ -48,115 +48,141 @@ comment  "//".*"\n"
 {comment} {} /* skip */
 
 {int_const} {
+    DEBUG(1, "\tlexed " << yytext << endl);
     yylval->intconst = atoi(yytext);
     return T_INT;
 }
 
 {str_const} {
+    DEBUG(1, "\tlexed " << yytext << endl);
     yylval->strconst = new string(yytext);
     return T_STR;
 }
 
 {true_const} {
+    DEBUG(1, "\tlexed " << yytext << endl);
     yylval->boolconst = true;
     return T_BOOL;
 }
 
 {false_const} {
+    DEBUG(1, "\tlexed " << yytext << endl);
     yylval->boolconst = false;
     return T_BOOL;
 }
 
 {none_const} {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_NONE;
 }
 
 {global_kywd} {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_GLOBAL;
 }
 
 {if_kywd} {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_IF;
 }
 
 {else_kywd} {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_ELSE;
 }
 
 {while_kywd} {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_WHILE;
 }
 
 {return_kywd} {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_RETURN;
 }
 
 {fun_kywd} {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_FUN;
 }
 
 = {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_EQ;
 }
 
 \< {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_LT;
 }
 
 \> {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_GT;
 }
 
 \<= {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_LTEQ;
 }
 
 \>= {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_GTEQ;
 }
 
 == {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_EQEQ;
 }
 
 \+ {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_PLUS;
 }
 
 \- {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_MINUS;
 }
 
 \* {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_TIMES;
 }
 
 \/ {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_DIVIDE;
 }
 
 \& {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_AND;
 }
 
 \| {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_OR;
 }
 
 ! {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return T_NOT;
 }
 
 {brace} {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return yytext[0];
 }
 
 {sep} {
+    DEBUG(1, "\tlexed " << yytext << endl);
     return yytext[0];
 }
 
 {identifier} {
-    DEBUG("\t" << yytext << endl);
+    DEBUG(1, "\tlexed " << yytext << endl);
     yylval->strconst = new string(yytext);
     return T_ID;
 }

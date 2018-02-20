@@ -7,8 +7,8 @@
 #include "lexer.h"
 #endif
 
-// set to true or false to turn debug statements on/off
-#define DEBUG(x) if (true) { std::cerr << x; }
+// set debug level to 100 for no messages, 0 for all messages
+#define DEBUG(l, x) if (l > 0) { std::cerr << x; }
 
 using namespace std;
 
@@ -108,9 +108,9 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 // Your grammar rules should be written here.
 
 Program:
-StatementList {  
-    DEBUG("Parsing success, program @ " << $$ << endl);
+StatementList {
     $$ = $1;
+    DEBUG(2, "Parsing success, program @ " << $$ << endl);
     out = $$->stmts.front(); // TODO: what type to return?
 }
 
@@ -119,7 +119,7 @@ StatementList:
     $$ = new Block();
 }
 | StatementList Statement {
-    DEBUG("  End of statement" << endl);
+    DEBUG(2, "  End of statement" << endl);
     $1->stmts.push_back($2);
 }
 
@@ -139,41 +139,41 @@ Assignment
 Assignment:
 Lhs T_EQ Expression ';' {
     $$ = new Assignment(*$1, *$3);
-    DEBUG("Assignment" << endl);
+    DEBUG(2, "Assignment" << endl);
 }
 
 CallStatement:
 Call ';' {
     $$ = new CallStatement(*$1);
-    DEBUG("Call" << endl);
+    DEBUG(2, "Call" << endl);
 }
 
 Global:
 T_GLOBAL Name ';' {
     $$ = new Global(*$2);
-    DEBUG("Global" << endl);
+    DEBUG(2, "Global" << endl);
 }
 
 IfStatement:
 T_IF '(' Expression ')' Block T_ELSE Block {
     $$ = new IfStatement(*$3, *$5, $7);
-    DEBUG("IfStatement" << endl);
+    DEBUG(2, "IfStatement" << endl);
 }
 | T_IF '(' Expression ')' Block {
     $$ = new IfStatement(*$3, *$5, nullptr);
-    DEBUG("IfStatement" << endl);
+    DEBUG(2, "IfStatement" << endl);
 }
 
 WhileLoop:
 T_WHILE '(' Expression ')' Block {
     $$ = new WhileLoop(*$3, *$5);
-    DEBUG("WhileLoop" << endl);
+    DEBUG(2, "WhileLoop" << endl);
 }
 
 Return:
 T_RETURN Expression ';' {
     $$ = new Return(*$2);
-    DEBUG("Return" << endl);
+    DEBUG(2, "Return" << endl);
 }
 
 Expression:
@@ -288,7 +288,7 @@ Lhs
 Lhs:
 Name {
     $$ = new Identifier(*$1);
-    DEBUG("LHS" << endl);
+    DEBUG(2, "LHS" << endl);
 }
 | Lhs '.' Name {
     $$ = new FieldDeref(*$1, *$3);
