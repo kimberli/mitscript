@@ -26,9 +26,7 @@ return_kywd return
 fun_kywd fun
 
 brace [\(\)\[\]\{\}]
-stmt_end ;
-arg_sep ,
-record_sep :
+sep [;:,]
 
 identifier [a-zA-Z_]\w*
 
@@ -152,6 +150,14 @@ comment  "//".*"\n"
 
 ! {
     return T_NOT;
+}
+
+{brace} {
+    return yytext[0];
+}
+
+{sep} {
+    return yytext[0];
 }
 
 . {

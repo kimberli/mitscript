@@ -79,7 +79,9 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 // return a Statement*. As with tokens, the name of the type comes
 // from the union defined earlier.
 
-%type<stmt_list_type> Program
+%type<stmt_type> Program
+%type<stmt_type> StatementList
+%type<stmt_type> Statement Assignment CallStatement Global IfStatement WhileLoop Return
 
 %start Program
 
@@ -94,6 +96,7 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 Program:
 StatementList {  
     // $$ = $1; // TODO
+    cout << "Program: " << $1 << endl;
     // out = $$;
 }
 ;
@@ -101,21 +104,18 @@ StatementList {
 StatementList:
 %empty
 | StatementList Statement {
+    cout << "StatementList: " << $2 << endl;
 }
 ;
 
 Statement:
-Assignment {
-}
-| CallStatement {
-}
-| Global {
-}
-| IfStatement {
-}
-| WhileLoop {
-}
+Assignment
+| CallStatement
+| Global
+| IfStatement
+| WhileLoop
 | Return {
+    cout << "Statement: " << $1 << endl;
 }
 ;
 
@@ -154,9 +154,9 @@ T_RETURN Expression ';' {
 Expression:
 Function {
 }
-Boolean {
+| Boolean {
 }
-Record {
+| Record {
 }
 
 Function:
@@ -290,7 +290,7 @@ T_INT {
 // Error reporting function. You should not have to modify this.
 int yyerror(YYLTYPE * yylloc, void* p, Statement*& out, const char*  msg){
 
-  cout<<"Error in line "<<yylloc->last_line<<", col "<<yylloc->last_column<<": "<<msg;
+  cout<<"Error in line "<<yylloc->last_line<<", col "<<yylloc->last_column<<": "<<msg<<endl;
   return 0;
 }
 
