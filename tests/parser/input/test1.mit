@@ -1,6 +1,6 @@
 _var1 = "hi" ;
 _var2 = "\\ blah\n" ;
-_var3 = 124210;
+_var3 = -124210;
 DEG = 180;
 global name;
 name = "Kimberli_@@*$(!$*$";
