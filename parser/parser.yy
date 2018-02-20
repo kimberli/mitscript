@@ -88,7 +88,7 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 %type<expr_type> Expression Function Boolean Record Constant
 %type<expr_list_type> ExpressionList ExpressionListHead RecordList
 %type<str_list_type> ArgsList ArgsListHead
-%type<expr_type> Conjunction BoolUnit Predicate Arithmetic Product Unit PosUnit Lhs LhsTail Call
+%type<expr_type> Conjunction BoolUnit Predicate Arithmetic Product Unit PosUnit Lhs Call
 %type<strconst> Name
 
 %start Program
@@ -190,7 +190,7 @@ ArgsList:
 ArgsListHead:
 %empty
 | ArgsListHead Name ',' {
-    $$->push_back(*$2);
+    $1->push_back(*$2);
 }
 
 Boolean:
@@ -276,37 +276,46 @@ Lhs
 }
 
 Lhs:
-Name LhsTail {
+Name {
+    $$ = new Identifier(*$1);
 }
-
-LhsTail:
-%empty
-| LhsTail '.' Name {
+| Lhs '.' Name {
+    $$ = new FieldDeref(*$1, *$3);
 }
-| LhsTail '[' Expression ']' {
+| Lhs '[' Expression ']' {
+    $$ = new IndexExpr(*$1, *$3);
 }
 
 Call:
 Lhs '(' ExpressionList ')' {
+    $$ = new Call(*$1, *$3);
 }
 
 ExpressionList:
-%empty
+%empty {
+    $$ = new vector<Expression*>();
+}
 | ExpressionListHead Expression {
+    $$ = new vector<Expression*>();
+    $$->push_back($2);
 }
 
 ExpressionListHead:
 %empty
 | ExpressionListHead Expression ',' {
+    $1->push_back($2);
 }
 
 Record:
 '{' RecordList '}' {
+    $$ = new Record();
 }
 
 RecordList:
-%empty
+%empty {
+}
 | RecordList Name ':' Expression ';' {
+    // $1->insert(make_pair(*$2, $4));
 }
 
 Name:
