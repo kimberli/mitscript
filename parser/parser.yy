@@ -194,7 +194,7 @@ Boolean:
 Conjunction {
     $$ = new UnaryExpr(*$1);
 }
-| Conjunction T_OR Boolean {
+| Boolean T_OR Conjunction {
     $$ = new BinaryExpr(Op::Or, *$1, *$3);
 }
 
@@ -202,7 +202,7 @@ Conjunction:
 BoolUnit {
     $$ = new UnaryExpr(*$1);
 }
-| BoolUnit T_AND Conjunction {
+| Conjunction T_AND BoolUnit {
     $$ = new BinaryExpr(Op::And, *$1, *$3);
 }
 
@@ -238,10 +238,10 @@ Arithmetic:
 Product {
     $$ = new UnaryExpr(*$1);
 }
-| Product T_PLUS Arithmetic {
+| Arithmetic T_PLUS Product {
     $$ = new BinaryExpr(Op::Plus, *$1, *$3);
 }
-| Product T_MINUS Arithmetic {
+| Arithmetic T_MINUS Product {
     $$ = new BinaryExpr(Op::Minus, *$1, *$3);
 }
 
@@ -249,10 +249,10 @@ Product:
 Unit {
     $$ = new UnaryExpr(*$1);
 }
-| Unit T_TIMES Product {
+| Product T_TIMES Unit {
     $$ = new BinaryExpr(Op::Times, *$1, *$3);
 }
-| Unit T_DIVIDE Product {
+| Product T_DIVIDE Unit {
     $$ = new BinaryExpr(Op::Divide, *$1, *$3);
 }
 
