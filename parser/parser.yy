@@ -59,8 +59,10 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 	Statement* stmt_type;
     Expression* expr_type;
     Block* block_type;
+    Record* record_type;
+    Identifier* id_type;
     vector<Expression*>* expr_list_type;
-    vector<string>* str_list_type;
+    vector<Identifier*>* id_list_type;
 }
 
 // Below is where you define your tokens and their types.
@@ -86,10 +88,11 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 %type<block_type> StatementList Block
 %type<stmt_type> Statement Assignment CallStatement Global IfStatement WhileLoop Return
 %type<expr_type> Expression Function Boolean Record Constant
-%type<expr_list_type> ExpressionList ExpressionListHead RecordList
-%type<str_list_type> ArgsList ArgsListHead
+%type<expr_list_type> ExpressionList ExpressionListHead
+%type<id_list_type> ArgsList ArgsListHead
 %type<expr_type> Conjunction BoolUnit Predicate Arithmetic Product Unit PosUnit Lhs Call
-%type<strconst> Name
+%type<record_type> RecordList
+%type<id_type> Name
 
 %start Program
 
@@ -104,12 +107,14 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 Program:
 StatementList {  
     cout << "Program: " << $$ <<  endl;
-    $$ = new Block(*$1);
+    $$ = $1;
     out = $$->stmts.front(); // TODO: what type to return?
 }
 
 StatementList:
-%empty
+%empty {
+    $$ = new Block();
+}
 | StatementList Statement {
     cout << "Statement done" << endl;
     $1->stmts.push_back($2);
@@ -180,17 +185,19 @@ T_FUN '(' ArgsList ')' Block {
 
 ArgsList:
 %empty {
-    $$ = new vector<string>();
+    $$ = new vector<Identifier*>();
 }
 | ArgsListHead Name {
-    $$ = new vector<string>();
-    $$->push_back(*$2);
+    $1->push_back($2);
 }
 
 ArgsListHead:
-%empty
+%empty {
+    $$ = new vector<Identifier*>();
+}
 | ArgsListHead Name ',' {
-    $1->push_back(*$2);
+    $1->push_back($2);
+    $$ = $1;
 }
 
 Boolean:
@@ -296,40 +303,48 @@ ExpressionList:
     $$ = new vector<Expression*>();
 }
 | ExpressionListHead Expression {
-    $$ = new vector<Expression*>();
-    $$->push_back($2);
+    $1->push_back($2);
+    $$ = $1;
 }
 
 ExpressionListHead:
-%empty
+%empty {
+    $$ = new vector<Expression*>();
+}
 | ExpressionListHead Expression ',' {
     $1->push_back($2);
 }
 
 Record:
 '{' RecordList '}' {
-    $$ = new Record();
+    $$ = $2;
 }
 
 RecordList:
 %empty {
+    $$ = new Record();
 }
 | RecordList Name ':' Expression ';' {
-    // $1->insert(make_pair(*$2, $4));
+    $1->record.insert(make_pair($2, $4));
 }
 
 Name:
 T_ID {
+    $$ = new Identifier(*$1);
 }
 
 Constant:
 T_INT {
+    $$ = new IntConst($1);
 }
 | T_STR {
+    $$ = new StrConst(*$1);
 }
 | T_BOOL {
+    $$ = new BoolConst($1);
 }
 | T_NONE {
+    $$ = new NoneConst();
 }
 
 %%

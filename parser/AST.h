@@ -54,8 +54,8 @@ public:
 
 class Global: public Statement {
 public:
-    string name;
-    Global(string name): name(name) {};
+    Identifier& name;
+    Global(Identifier& name): name(name) {};
     void accept(Visitor& v) override {
         v.visit(*this);
     }
@@ -114,9 +114,9 @@ public:
 
 class Function: public Expression {
 public:
-    vector<string> args;
+    vector<Identifier*> args;
     Block& body;
-    Function(vector<string> args, Block& body): args(args), body(body) {};
+    Function(vector<Identifier*> args, Block& body): args(args), body(body) {};
     void accept(Visitor& v) override {
         v.visit(*this);
     }
@@ -148,8 +148,8 @@ public:
 class FieldDeref: public Expression {
 public:
     Expression& base;
-    string field;
-    FieldDeref(Expression& base, string field): base(base), field(field) {};
+    Identifier& field;
+    FieldDeref(Expression& base, Identifier& field): base(base), field(field) {};
     void accept(Visitor& v) override {
         v.visit(*this);
     }
@@ -178,7 +178,7 @@ public:
 
 class Record: public Expression {
 public:
-    map<string, Expression*> record;
+    map<Identifier*, Expression*> record;
     void accept(Visitor& v) override {
         v.visit(*this);
     }
@@ -206,6 +206,15 @@ class StrConst: public Expression {
 public:
     string val;
     StrConst(string val): val(val) {};
+    void accept(Visitor& v) override {
+        v.visit(*this);
+    }
+};
+
+class BoolConst: public Expression {
+public:
+    bool val;
+    BoolConst(bool val): val(val) {};
     void accept(Visitor& v) override {
         v.visit(*this);
     }

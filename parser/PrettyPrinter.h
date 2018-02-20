@@ -41,6 +41,8 @@ class PrettyPrinter : public Visitor {
     };
     void visit(StrConst& exp) override {
     };
+    void visit(BoolConst& exp) override {
+    };
     void visit(NoneConst& exp) override {
     };
 };

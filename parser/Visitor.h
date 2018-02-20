@@ -21,6 +21,7 @@ class Record;
 class Identifier;
 class IntConst;
 class StrConst;
+class BoolConst;
 class NoneConst;
 
 class Visitor {
@@ -42,6 +43,7 @@ public:
     virtual void visit(Identifier& exp) = 0;
     virtual void visit(IntConst& exp) = 0;
     virtual void visit(StrConst& exp) = 0;
+    virtual void visit(BoolConst& exp) = 0;
     virtual void visit(NoneConst& exp) = 0;
 };
 
