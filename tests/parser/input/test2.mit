@@ -4,6 +4,11 @@ if(-record_test["hi"].concat("hihi")) {
     print(record_test["hi"].concat("hihi"));
 }
 
+field_deref.hi.blah = 4;
+
+index_expr[count(5, field_deref.test) + 5 + "str"][4] = 4;
+mix[record_test["hi"]].field.call();
+
 x = 1 + 2 + 3 * 4 - 5 + 6 * 2 + 7 + 8 + (2 + 4 - 3) * 2 / 2 + 1 / 2;
 y = 2 - 2 * 3 - 3 / 3;
 z = (2 * 2) - (3 / 4);
