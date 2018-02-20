@@ -1,0 +1,18 @@
+x = 90;
+y = -501;
+
+print(x < y);
+
+print(x > y);
+
+print_pretty(y/(x + 3 * 2)== y);
+print_pretty(x >= y + 3);
+
+print_pretty(x <= 2* (1+_EDIT_CALL(
+    { a_ele: y;
+      b_ele: x;
+    },
+    "hellE",
+    print
+    )));
+
