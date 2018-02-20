@@ -5,6 +5,11 @@ DEG = 180;
 global name;
 name = "Kimberli_@@*$(!$*$";
 
+if(true) {
+    print("hi");
+    return add(3, 5, "hi", minus(jf_20));
+}
+
 f = fun(pred, name){
     print("Hello" + convert(_var3));
     if(pred) {

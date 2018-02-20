@@ -8,7 +8,7 @@
 #endif
 
 // set debug level to 100 for no messages, 0 for all messages
-#define DEBUG(l, x) if (l > 0) { std::cerr << x; }
+#define DEBUG(l, x) if (l > 100) { std::cerr << x; }
 
 using namespace std;
 
@@ -98,7 +98,7 @@ Program:
 StatementList {
     $$ = $1;
     out = $$;
-    DEBUG(2, "Parse output program @ " << $$ << endl);
+    DEBUG(2, "Parse output program @ " << $$ << "\n");
 }
 
 StatementList:
@@ -106,7 +106,7 @@ StatementList:
     $$ = new Block();
 }
 | StatementList Statement {
-    DEBUG(2, "  End of statement" << endl);
+    DEBUG(2, "  End of statement" << "\n");
     $1->stmts.push_back($2);
 }
 
@@ -126,41 +126,41 @@ Assignment
 Assignment:
 Lhs T_EQ Expression ';' {
     $$ = new Assignment(*$1, *$3);
-    DEBUG(2, "Assignment" << endl);
+    DEBUG(2, "Assignment" << "\n");
 }
 
 CallStatement:
 Call ';' {
     $$ = new CallStatement(*$1);
-    DEBUG(2, "Call" << endl);
+    DEBUG(2, "Call" << "\n");
 }
 
 Global:
 T_GLOBAL Name ';' {
     $$ = new Global(*$2);
-    DEBUG(2, "Global" << endl);
+    DEBUG(2, "Global" << "\n");
 }
 
 IfStatement:
 T_IF '(' Expression ')' Block T_ELSE Block {
     $$ = new IfStatement(*$3, *$5, $7);
-    DEBUG(2, "IfStatement" << endl);
+    DEBUG(2, "IfStatement" << "\n");
 }
 | T_IF '(' Expression ')' Block {
     $$ = new IfStatement(*$3, *$5, nullptr);
-    DEBUG(2, "IfStatement" << endl);
+    DEBUG(2, "IfStatement" << "\n");
 }
 
 WhileLoop:
 T_WHILE '(' Expression ')' Block {
     $$ = new WhileLoop(*$3, *$5);
-    DEBUG(2, "WhileLoop" << endl);
+    DEBUG(2, "WhileLoop" << "\n");
 }
 
 Return:
 T_RETURN Expression ';' {
     $$ = new Return(*$2);
-    DEBUG(2, "Return" << endl);
+    DEBUG(2, "Return" << "\n");
 }
 
 Expression:
@@ -275,7 +275,7 @@ Lhs
 Lhs:
 Name {
     $$ = new Identifier(*$1);
-    DEBUG(2, "LHS" << endl);
+    DEBUG(2, "LHS" << "\n");
 }
 | Lhs '.' Name {
     $$ = new FieldDeref(*$1, *$3);
@@ -343,7 +343,7 @@ T_INT {
 // Error reporting function. You should not have to modify this.
 int yyerror(YYLTYPE * yylloc, void* p, Block*& out, const char*  msg){
 
-  cout<<"Error in line "<<yylloc->last_line<<", col "<<yylloc->last_column<<": "<<msg<<endl;
+  cout<<"Error in line "<<yylloc->last_line<<", col "<<yylloc->last_column<<": "<<msg<<"\n";
   return 0;
 }
 

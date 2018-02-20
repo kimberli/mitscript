@@ -19,4 +19,5 @@ int main(int argc, char** argv){
   }
   PrettyPrinter printer;
   output->accept(printer);
+  cout<<"\n";
 }
