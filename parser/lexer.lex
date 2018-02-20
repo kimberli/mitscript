@@ -187,6 +187,10 @@ comment  "//".*"\n"
     return T_ID;
 }
 
+<<EOF>> {
+    yyterminate();
+}
+
 . {
     cout << "ERROR unrecognized symbol!" << endl;
 }
