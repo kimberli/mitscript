@@ -26,9 +26,9 @@ return_kywd return
 fun_kywd fun
 
 brace [\(\)\[\]\{\}]
-sep [;:,]
+sep [;:,\.]
 
-identifier [a-zA-Z_]\w*
+identifier [a-zA-Z_][a-zA-Z0-9_]*
 
 whitespace   ([ \t\n]*)
 
@@ -46,11 +46,6 @@ comment  "//".*"\n"
 {whitespace} {} /* skip */
 
 {comment} {} /* skip */
-
-{identifier} {
-    yylval->strconst = new string(yytext);
-    return T_ID;
-}
 
 {int_const} {
     yylval->intconst = atoi(yytext);
@@ -158,6 +153,12 @@ comment  "//".*"\n"
 
 {sep} {
     return yytext[0];
+}
+
+{identifier} {
+    cout << "\tT_ID: " << yytext << endl;
+    yylval->strconst = new string(yytext);
+    return T_ID;
 }
 
 . {

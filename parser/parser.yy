@@ -57,6 +57,7 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
     bool        boolconst;
 
 	Statement   *stmt_type;
+    Expression  *expr_type;
     vector<Statement*> *stmt_list_type;
 }
 
@@ -82,6 +83,7 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 %type<stmt_type> Program
 %type<stmt_type> StatementList
 %type<stmt_type> Statement Assignment CallStatement Global IfStatement WhileLoop Return
+%type<expr_type> Lhs
 
 %start Program
 
@@ -104,7 +106,7 @@ StatementList {
 StatementList:
 %empty
 | StatementList Statement {
-    cout << "StatementList: " << $2 << endl;
+    cout << "Statement done" << endl;
 }
 ;
 
@@ -115,22 +117,24 @@ Assignment
 | IfStatement
 | WhileLoop
 | Return {
-    cout << "Statement: " << $1 << endl;
 }
 ;
 
 Global:
 T_GLOBAL Name ';' {
+    cout << "Global: " << endl;
 }
 ;
 
 Assignment:
 Lhs T_EQ Expression ';' {
+    cout << "Assignment: " << endl;
 }
 ;
 
 CallStatement:
 Call ';' {
+    cout << "Call: " << endl;
 }
 
 Block:
@@ -138,17 +142,19 @@ Block:
 }
 
 IfStatement:
-T_IF '(' Expression ')' Block T_ELSE Block {
-}
+T_IF '(' Expression ')' Block T_ELSE Block
 | T_IF '(' Expression ')' Block {
+    cout << "IfStatement: " << endl;
 }
 
 WhileLoop:
 T_WHILE '(' Expression ')' Block {
+    cout << "WhileLoop: " << endl;
 }
 
 Return:
 T_RETURN Expression ';' {
+    cout << "Return: " << endl;
 }
 
 Expression:
