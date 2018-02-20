@@ -1,3 +1,4 @@
+empty_record = {};
 record_test = { hi: "hI" ; }; record_test.add("hi2", 12214);
 print(-record_test["hi2"]);
 if(-record_test["hi"].concat("hihi")) {

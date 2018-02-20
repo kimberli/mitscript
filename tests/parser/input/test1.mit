@@ -14,6 +14,9 @@ f = fun(pred, name){
     }
 };
 
+y = fun() {
+};
+
 f(_var1 | _var2 & !_var3, name);
 
 i = 0;
@@ -22,3 +25,8 @@ while(i < 100) {
     i = 2*(i + 1)*3;
     i = i / 2;
 }
+// this is a comment
+z = fun(test, test2) {
+    pass();
+    a = {};
+};
