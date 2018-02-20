@@ -122,14 +122,17 @@ class PrettyPrinter : public Visitor {
         cout << ")";
     };
     void visit(Record& exp) override {
-        cout << "{ ";
+        cout << "{\n";
+        tab_count++;
         for (auto &r : exp.record) {
+            cout << tabs();
             r.first->accept(*this);
             cout << ":";
             r.second->accept(*this);
-            cout << ";";
+            cout << ";\n";
         }
-        cout << " }";
+        tab_count--;
+        cout << tabs() << "}";
     };
     void visit(Identifier& exp) override {
         cout << exp.val;
