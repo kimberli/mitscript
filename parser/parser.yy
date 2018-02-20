@@ -7,6 +7,9 @@
 #include "lexer.h"
 #endif
 
+// set to true or false to turn debug statements on/off
+#define DEBUG(x) if (true) { std::cerr << x; }
+
 using namespace std;
 
 // The macro below is used by bison for error reporting
@@ -106,7 +109,7 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 
 Program:
 StatementList {  
-    cout << "Program: " << $$ <<  endl;
+    DEBUG("Parsing success, program @ " << $$ << endl);
     $$ = $1;
     out = $$->stmts.front(); // TODO: what type to return?
 }
@@ -116,7 +119,7 @@ StatementList:
     $$ = new Block();
 }
 | StatementList Statement {
-    cout << "Statement done" << endl;
+    DEBUG("  End of statement" << endl);
     $1->stmts.push_back($2);
 }
 
@@ -136,41 +139,41 @@ Assignment
 Assignment:
 Lhs T_EQ Expression ';' {
     $$ = new Assignment(*$1, *$3);
-    cout << "Assignment" << endl;
+    DEBUG("Assignment" << endl);
 }
 
 CallStatement:
 Call ';' {
     $$ = new CallStatement(*$1);
-    cout << "Call" << endl;
+    DEBUG("Call" << endl);
 }
 
 Global:
 T_GLOBAL Name ';' {
     $$ = new Global(*$2);
-    cout << "Global" << endl;
+    DEBUG("Global" << endl);
 }
 
 IfStatement:
 T_IF '(' Expression ')' Block T_ELSE Block {
     $$ = new IfStatement(*$3, *$5, $7);
-    cout << "IfStatement" << endl;
+    DEBUG("IfStatement" << endl);
 }
 | T_IF '(' Expression ')' Block {
     $$ = new IfStatement(*$3, *$5, nullptr);
-    cout << "IfStatement" << endl;
+    DEBUG("IfStatement" << endl);
 }
 
 WhileLoop:
 T_WHILE '(' Expression ')' Block {
     $$ = new WhileLoop(*$3, *$5);
-    cout << "WhileLoop" << endl;
+    DEBUG("WhileLoop" << endl);
 }
 
 Return:
 T_RETURN Expression ';' {
     $$ = new Return(*$2);
-    cout << "Return" << endl;
+    DEBUG("Return" << endl);
 }
 
 Expression:
@@ -285,6 +288,7 @@ Lhs
 Lhs:
 Name {
     $$ = new Identifier(*$1);
+    DEBUG("LHS" << endl);
 }
 | Lhs '.' Name {
     $$ = new FieldDeref(*$1, *$3);

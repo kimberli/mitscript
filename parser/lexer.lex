@@ -156,7 +156,7 @@ comment  "//".*"\n"
 }
 
 {identifier} {
-    cout << "\tT_ID: " << yytext << endl;
+    DEBUG("\t" << yytext << endl);
     yylval->strconst = new string(yytext);
     return T_ID;
 }
