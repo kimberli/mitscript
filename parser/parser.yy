@@ -53,11 +53,11 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 // is that you can only use primitive types and pointers in the union.
 %union {
 	int         intconst;
-    string      strconst;
+    string      *strconst;
     bool        boolconst;
-    int         noneconst;
 
-	Statement*  stmt;
+	Statement   *stmt_type;
+    vector<Statement*> *stmt_list_type;
 }
 
 // Below is where you define your tokens and their types.
@@ -66,19 +66,26 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 %token<intconst> T_INT
 %token<strconst> T_STR
 %token<boolconst> T_BOOL
-%token<noneconst> T_NONE
+%token<intconst> T_NONE
+%token<intconst> T_GLOBAL T_IF T_ELSE T_WHILE T_RETURN T_FUN
+%token<intconst> T_EQ
+%token<intconst> T_LT T_GT T_LTEQ T_GTEQ T_EQEQ
+%token<intconst> T_PLUS T_MINUS T_TIMES T_DIVIDE
+%token<intconst> T_AND T_OR T_NOT
+%token<strconst> T_ID
 
 // Use the %type directive to specify the types of AST nodes produced by each production.
 // For example, you will have a program non-terimnal in your grammar, and it will
 // return a Statement*. As with tokens, the name of the type comes
 // from the union defined earlier.
 
-%type<stmt> Program
+%type<stmt_list_type> Program
 
 %start Program
 
 // You must also define any associativity directives that are necessary
 // to resolve ambiguities and properly parse the code.
+// TODO
 
 %%
 
@@ -86,9 +93,196 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 
 Program:
 StatementList {  
-    $$ = // assign a new block to $$.
-    // and make sure the out variable is set, because that is what main is going to read.
-out = $$;
+    // $$ = $1; // TODO
+    // out = $$;
+}
+;
+
+StatementList:
+%empty
+| StatementList Statement {
+}
+;
+
+Statement:
+Assignment {
+}
+| CallStatement {
+}
+| Global {
+}
+| IfStatement {
+}
+| WhileLoop {
+}
+| Return {
+}
+;
+
+Global:
+T_GLOBAL Name ';' {
+}
+;
+
+Assignment:
+Lhs T_EQ Expression ';' {
+}
+;
+
+CallStatement:
+Call ';' {
+}
+
+Block:
+'{' StatementList '}' {
+}
+
+IfStatement:
+T_IF '(' Expression ')' Block T_ELSE Block {
+}
+| T_IF '(' Expression ')' Block {
+}
+
+WhileLoop:
+T_WHILE '(' Expression ')' Block {
+}
+
+Return:
+T_RETURN Expression ';' {
+}
+
+Expression:
+Function {
+}
+Boolean {
+}
+Record {
+}
+
+Function:
+T_FUN '(' ArgsList ')' Block {
+}
+
+ArgsList:
+%empty
+| ArgsListHead Name {
+}
+
+ArgsListHead:
+%empty
+| ArgsListHead Name ',' {
+}
+
+Boolean:
+Conjunction {
+}
+| Conjunction T_OR Boolean {
+}
+
+Conjunction:
+BoolUnit {
+}
+| BoolUnit T_AND Conjunction {
+}
+
+BoolUnit:
+Predicate {
+}
+| T_NOT Predicate {
+}
+
+Predicate:
+Arithmetic {
+}
+| Arithmetic T_LT Arithmetic {
+}
+| Arithmetic T_GT Arithmetic {
+}
+| Arithmetic T_LTEQ Arithmetic {
+}
+| Arithmetic T_GTEQ Arithmetic {
+}
+| Arithmetic T_EQEQ Arithmetic {
+}
+
+Arithmetic:
+Product {
+}
+| Product T_PLUS Arithmetic {
+}
+| Product T_MINUS Arithmetic {
+}
+
+Product:
+Unit {
+}
+| Unit T_TIMES Product {
+}
+| Unit T_DIVIDE Product {
+}
+
+Unit:
+PosUnit {
+}
+| T_MINUS PosUnit {
+}
+
+PosUnit:
+Lhs {
+}
+| Constant {
+}
+| Call {
+}
+| '(' Boolean ')' {
+}
+
+Lhs:
+Name Rhs {
+}
+
+Rhs:
+%empty
+| Rhs '.' Name {
+}
+| Rhs '[' Expression ']' {
+}
+
+Call:
+Lhs '(' ExpressionList ')' {
+}
+
+ExpressionList:
+%empty
+| ExpressionListHead Expression {
+}
+
+ExpressionListHead:
+%empty
+| ExpressionListHead Expression ',' {
+}
+
+Record:
+'{' RecordList '}' {
+}
+
+RecordList:
+%empty
+| RecordList Name ':' Expression ';' {
+}
+
+Name:
+T_ID {
+}
+
+Constant:
+T_INT {
+}
+| T_STR {
+}
+| T_BOOL {
+}
+| T_NONE {
 }
 
 %%

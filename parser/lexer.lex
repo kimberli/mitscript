@@ -18,6 +18,18 @@ true_const true
 false_const false
 none_const None
 
+global_kywd global
+if_kywd if
+else_kywd else
+while_kywd while
+return_kywd return
+fun_kywd fun
+
+brace [\(\)\[\]\{\}]
+stmt_end ;
+arg_sep ,
+record_sep :
+
 identifier [a-zA-Z_]\w*
 
 whitespace   ([ \t\n]*)
@@ -37,13 +49,18 @@ comment  "//".*"\n"
 
 {comment} {} /* skip */
 
+{identifier} {
+    yylval->strconst = new string(yytext);
+    return T_ID;
+}
+
 {int_const} {
     yylval->intconst = atoi(yytext);
     return T_INT;
 }
 
 {str_const} {
-    yylval->strconst = yytext;
+    yylval->strconst = new string(yytext);
     return T_STR;
 }
 
@@ -58,8 +75,87 @@ comment  "//".*"\n"
 }
 
 {none_const} {
-    yylval->noneconst = 0;
     return T_NONE;
+}
+
+{global_kywd} {
+    return T_GLOBAL;
+}
+
+{if_kywd} {
+    return T_IF;
+}
+
+{else_kywd} {
+    return T_ELSE;
+}
+
+{while_kywd} {
+    return T_WHILE;
+}
+
+{return_kywd} {
+    return T_RETURN;
+}
+
+{fun_kywd} {
+    return T_FUN;
+}
+
+= {
+    return T_EQ;
+}
+
+\< {
+    return T_LT;
+}
+
+\> {
+    return T_GT;
+}
+
+\<= {
+    return T_LTEQ;
+}
+
+\>= {
+    return T_GTEQ;
+}
+
+== {
+    return T_EQEQ;
+}
+
+\+ {
+    return T_PLUS;
+}
+
+\- {
+    return T_MINUS;
+}
+
+\* {
+    return T_TIMES;
+}
+
+\/ {
+    return T_DIVIDE;
+}
+
+\& {
+    return T_AND;
+}
+
+\| {
+    return T_OR;
+}
+
+! {
+    return T_NOT;
+}
+
+. {
+    cout << "ERROR unrecognized symbol!" << endl;
 }
 
 %{
