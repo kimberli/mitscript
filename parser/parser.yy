@@ -37,23 +37,18 @@ using namespace std;
 
 
 %define api.pure full
-%parse-param {yyscan_t yyscanner} {Statement*& out}
+%parse-param {yyscan_t yyscanner} {Block*& out}
 %lex-param {yyscan_t yyscanner}
 %locations
 %define parse.error verbose
 
 %code provides{
 YY_DECL;
-int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* message);
+int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Block*& out, const char* message);
 }
 
 
 
-// The union directive defines a union type that will be used to store
-// the return values of all the parse rules. We have initialized for you
-// with an intconst field that you can use to store an integer, and a
-// stmt field with a pointer to a statement. Note that one limitation
-// is that you can only use primitive types and pointers in the union.
 %union {
 	int intconst;
     string* strconst;
@@ -68,9 +63,6 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
     vector<Identifier*>* id_list_type;
 }
 
-// Below is where you define your tokens and their types.
-// for example, we have defined for you a T_int token, with type intconst
-// the type is the name of a field from the union above
 %token<intconst> T_INT
 %token<strconst> T_STR
 %token<boolconst> T_BOOL
@@ -81,11 +73,6 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 %token<intconst> T_PLUS T_MINUS T_TIMES T_DIVIDE
 %token<intconst> T_AND T_OR T_NOT
 %token<strconst> T_ID
-
-// Use the %type directive to specify the types of AST nodes produced by each production.
-// For example, you will have a program non-terimnal in your grammar, and it will
-// return a Statement*. As with tokens, the name of the type comes
-// from the union defined earlier.
 
 %type<block_type> Program
 %type<block_type> StatementList Block
@@ -110,8 +97,8 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Statement*& out, const char* m
 Program:
 StatementList {
     $$ = $1;
-    DEBUG(2, "Parsing success, program @ " << $$ << endl);
-    out = $$->stmts.front(); // TODO: what type to return?
+    out = $$;
+    DEBUG(2, "Parse output program @ " << $$ << endl);
 }
 
 StatementList:
@@ -354,7 +341,7 @@ T_INT {
 %%
 
 // Error reporting function. You should not have to modify this.
-int yyerror(YYLTYPE * yylloc, void* p, Statement*& out, const char*  msg){
+int yyerror(YYLTYPE * yylloc, void* p, Block*& out, const char*  msg){
 
   cout<<"Error in line "<<yylloc->last_line<<", col "<<yylloc->last_column<<": "<<msg<<endl;
   return 0;

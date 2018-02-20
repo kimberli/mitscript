@@ -11,7 +11,7 @@ int main(int argc, char** argv){
   void* scanner;
   yylex_init(&scanner);
   yyset_in(stdin, scanner);
-  Statement* output;
+  Block* output;
   int rvalue = yyparse(scanner, output);
   if(rvalue == 1){
     cout<<"Parsing failed"<<endl;
