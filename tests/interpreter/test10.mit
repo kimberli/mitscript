@@ -1,0 +1,13 @@
+x = 5;
+f = fun(){
+	x = 7;
+	g = fun(){
+		print("Value = " + x);
+		if(x == 10){
+		  global x;
+		}
+	};
+	return g;
+};
+h = f();
+h();
