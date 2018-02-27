@@ -13,7 +13,7 @@ print("P" + r.z);
 print("P" + r.a);
 print("P" + r.b);
 
-paramorder = fun(a b c d){
+paramorder = fun(a, b, c, d){
 print("Q " + a);
 print("Q " + b);
 print("Q " + c);

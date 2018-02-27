@@ -1,4 +1,4 @@
-Vector = fun(x y){
+Vector = fun(x, y){
   this = {
     getx : fun(){ return x; };
     gety : fun(){ return y; };

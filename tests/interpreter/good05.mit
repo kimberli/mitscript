@@ -1,4 +1,4 @@
-consolePrint = fun(im x y){
+consolePrint = fun(im, x, y){
 i=0; 
 while(i<x){
 j = 0;
@@ -15,7 +15,7 @@ i = i + 1;
 };
 
 p = {x:0; y:0;};
-im = fun(x y){ 
+im = fun(x, y){ 
    if(x==p.x & y==p.y){
       return "x";
    }

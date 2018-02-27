@@ -1,4 +1,4 @@
-Point = fun(x y){
+Point = fun(x, y){
 this = {
 	x:x;
 	y:y;

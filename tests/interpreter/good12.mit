@@ -1,6 +1,6 @@
 Array = fun(size){
   this = {
-	put: fun(idx val){ 
+	put: fun(idx, val){ 
             if( idx < size){
 		this[idx] = val; 
 	    }else{

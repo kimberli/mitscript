@@ -1,5 +1,5 @@
 Nil = { toStr_: fun(){ return "";}; toStr:fun(){ return "[]";}; };
-Cons = fun(h t){ 
+Cons = fun(h, t){ 
    this = { head:fun(){ return h; }; 
             tail:fun(){ return t; };
 	    toStr_:fun(){ return h + ", " + t.toStr_(); };
@@ -8,7 +8,7 @@ Cons = fun(h t){
    return this;
 };
 
-forall = fun(list f){
+forall = fun(list, f){
   if(list == Nil){
   }else{
 	f(list.head());
