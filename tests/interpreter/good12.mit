@@ -1,17 +1,17 @@
 Array = fun(size){
   this = {
-	put: fun(idx, val){ 
+	put: fun(idx, val){
             if( idx < size){
-		this[idx] = val; 
+		this[idx] = val;
 	    }else{
-		print("Index " + idx + " out of bounds ");
+		print("Index " + idx + " out of bounds");
             }
 	};
 	get: fun(idx){
 	    if( idx < size){
 		return this[idx];
             }else{
-                print("Index " + idx + " out of bounds ");
+                print("Index " + idx + " out of bounds");
             }
 	};
 	print: fun(){
