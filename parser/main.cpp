@@ -6,9 +6,11 @@
 
 using namespace std;
 
+extern int yydebug;
 
 int main(int argc, char** argv){
   void* scanner;
+  yydebug = 1;  // set to nonzero for parser debug statements
   yylex_init(&scanner);
   yyset_in(stdin, scanner);
   Block* output;

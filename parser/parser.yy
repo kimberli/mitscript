@@ -37,6 +37,7 @@ using namespace std;
 %lex-param {yyscan_t yyscanner}
 %locations
 %define parse.error verbose
+%debug
 
 %code provides{
 YY_DECL;
