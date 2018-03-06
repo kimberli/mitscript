@@ -141,7 +141,7 @@ class PrettyPrinter : public Visitor {
         cout << exp.val;
     };
     void visit(StrConst& exp) override {
-        cout << exp.val;
+        cout << "\"" << exp.val << "\"";
     };
     void visit(BoolConst& exp) override {
         if (exp.val) {

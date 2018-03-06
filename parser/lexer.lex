@@ -53,7 +53,8 @@ comment  "//".*"\n"
 }
 
 {str_const} {
-    yylval->strconst = new string(yytext);
+    yylval->strconst = new string(yytext+1);
+    yylval->strconst->pop_back();
     return T_STR;
 }
 
