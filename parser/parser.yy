@@ -180,7 +180,7 @@ ArgsListHead:
 
 Boolean:
 Conjunction {
-    $$ = new UnaryExpr(*$1);
+    $$ = $1;
 }
 | Boolean T_OR Conjunction {
     $$ = new BinaryExpr(Op::Or, *$1, *$3);
@@ -188,7 +188,7 @@ Conjunction {
 
 Conjunction:
 BoolUnit {
-    $$ = new UnaryExpr(*$1);
+    $$ = $1;
 }
 | Conjunction T_AND BoolUnit {
     $$ = new BinaryExpr(Op::And, *$1, *$3);
@@ -196,7 +196,7 @@ BoolUnit {
 
 BoolUnit:
 Predicate {
-    $$ = new UnaryExpr(*$1);
+    $$ = $1;
 }
 | T_NOT Predicate {
     $$ = new UnaryExpr(Op::Not, *$2);
@@ -204,7 +204,7 @@ Predicate {
 
 Predicate:
 Arithmetic {
-    $$ = new UnaryExpr(*$1);
+    $$ = $1;
 }
 | Arithmetic T_LT Arithmetic {
     $$ = new BinaryExpr(Op::Lt, *$1, *$3);
@@ -224,7 +224,7 @@ Arithmetic {
 
 Arithmetic:
 Product {
-    $$ = new UnaryExpr(*$1);
+    $$ = $1;
 }
 | Arithmetic T_PLUS Product {
     $$ = new BinaryExpr(Op::Plus, *$1, *$3);
@@ -235,7 +235,7 @@ Product {
 
 Product:
 Unit {
-    $$ = new UnaryExpr(*$1);
+    $$ = $1;
 }
 | Product T_TIMES Unit {
     $$ = new BinaryExpr(Op::Times, *$1, *$3);
@@ -246,7 +246,7 @@ Unit {
 
 Unit:
 PosUnit {
-    $$ = new UnaryExpr(*$1);
+    $$ = $1;
 }
 | T_MINUS PosUnit {
     $$ = new UnaryExpr(Op::Minus, *$2);

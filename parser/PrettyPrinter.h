@@ -9,7 +9,6 @@ using namespace std;
 class PrettyPrinter : public Visitor {
     int tab_count = 0;
     map<Op, string> op_map = {
-        { Op::None, ""},
         { Op::Or, "|"},
         { Op::And, "&"},
         { Op::Not, "!"},
@@ -92,14 +91,10 @@ class PrettyPrinter : public Visitor {
         cout << ")";
     };
     void visit(UnaryExpr& exp) override {
-        if (exp.op != Op::None) {
-            cout << op_map[exp.op];
-            cout << "(";
-        }
+        cout << op_map[exp.op];
+        cout << "(";
         exp.expr.accept(*this);
-        if (exp.op != Op::None) {
-            cout << ")";
-        }
+        cout << ")";
     };
     void visit(FieldDeref& exp) override {
         exp.base.accept(*this);

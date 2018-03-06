@@ -9,7 +9,6 @@
 #define Assert(cond, msg) if(!(cond)){ std::cerr<<msg<<endl; throw SystemException("Bad stuff"); }
 
 enum Op {
-    None,
     Or,
     And,
     Not,
@@ -139,10 +138,9 @@ public:
 
 class UnaryExpr: public Expression {
 public:
-    Op op = Op::None;
+    Op op;
     Expression& expr;
     UnaryExpr(Op op, Expression& expr): op(op), expr(expr) {};
-    UnaryExpr(Expression& expr): expr(expr) {};
     void accept(Visitor& v) override {
         v.visit(*this);
     }
