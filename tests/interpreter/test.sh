@@ -2,6 +2,11 @@
 ROOT=$(git rev-parse --show-toplevel)
 PARSER=$ROOT/parser/mitscript
 
+if [ ! -f "$PARSER" ]; then
+    echo "Parser not found!"
+    exit 1
+fi
+
 for filename in $ROOT/tests/interpreter/bad*.mit; do
     echo "Test - $(basename $filename)"
     if $PARSER $filename > tmp.out; then
