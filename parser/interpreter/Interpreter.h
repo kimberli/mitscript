@@ -10,7 +10,8 @@
 using namespace std;
 
 class Interpreter : public Visitor {
-    stack<Frame*> frameStack;
+    Frame* rootFrame;
+    Frame* currentFrame;
     Value* retval;
 
     Value* eval(Expression* exp){
@@ -93,4 +94,9 @@ class Interpreter : public Visitor {
     };
     void visit(NoneConst& exp) override {
     };
+
+    public:
+        Interpreter() {
+            rootFrame = new Frame();
+        };
 };
