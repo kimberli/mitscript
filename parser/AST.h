@@ -43,7 +43,10 @@ class Expression : public AST_node {
 class Statement: public AST_node {
 };
 
-class Constant: public Expression {
+class Value: public Expression {
+};
+
+class Constant: public Value {
 };
 
 class Block: public AST_node {
@@ -114,7 +117,7 @@ public:
     }
 };
 
-class Function: public Expression {
+class Function: public Value {
 public:
     vector<Identifier*> args;
     Block& body;
@@ -177,7 +180,7 @@ public:
     }
 };
 
-class Record: public Expression {
+class Record: public Value {
 public:
     map<Identifier*, Expression*> record;
     void accept(Visitor& v) override {

@@ -1,7 +1,7 @@
 #include "parser.h"
 #include "lexer.h"
 #include "AST.h"
-#include "Interpreter.h"
+#include "interpreter/Interpreter.h"
 #include <iostream>
 
 using namespace std;
