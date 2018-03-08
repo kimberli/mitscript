@@ -130,7 +130,7 @@ class PrettyPrinter : public Visitor {
         cout << tabs() << "}";
     };
     void visit(Identifier& exp) override {
-        cout << exp.val;
+        cout << exp.name;
     };
     void visit(IntConst& exp) override {
         cout << exp.val;

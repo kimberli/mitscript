@@ -43,10 +43,7 @@ class Expression : public AST_node {
 class Statement: public AST_node {
 };
 
-class Value: public Expression {
-};
-
-class Constant: public Value {
+class Constant: public Expression {
 };
 
 class Block: public AST_node {
@@ -117,7 +114,7 @@ public:
     }
 };
 
-class Function: public Value {
+class Function: public Expression {
 public:
     vector<Identifier*> args;
     Block& body;
@@ -180,7 +177,7 @@ public:
     }
 };
 
-class Record: public Value {
+class Record: public Expression {
 public:
     map<Identifier*, Expression*> record;
     void accept(Visitor& v) override {
@@ -190,8 +187,8 @@ public:
 
 class Identifier: public Expression {
 public:
-    string val;
-    Identifier(string val): val(val) {};
+    string name;
+    Identifier(string name): name(name) {};
     void accept(Visitor& v) override {
         v.visit(*this);
     }

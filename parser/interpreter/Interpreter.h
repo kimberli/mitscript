@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../AST.h"
-#include "Exception.h"
 #include "State.h"
 #include <string>
 #include <stack>
@@ -12,11 +11,12 @@ using namespace std;
 class Interpreter : public Visitor {
     Frame* rootFrame;
     Frame* currentFrame;
-    Value* retval;
+    Value* rval;
+    NoneValue* NONE = new NoneValue();
 
     Value* eval(Expression* exp){
         exp->accept(*this);
-        return retval;
+        return rval;
     }
 
     void visit(Block& exp) override {
@@ -76,27 +76,28 @@ class Interpreter : public Visitor {
         }
     };
     void visit(Record& exp) override {
+        RecordValue* val = new RecordValue();
         for (auto &r : exp.record) {
-            r.first->accept(*this);
-            r.second->accept(*this);
+            val->setItem(r.first->name, eval(r.second));
         }
+        rval = val;
     };
     void visit(Identifier& exp) override {
+        rval = currentFrame->lookup(exp.name);
     };
     void visit(IntConst& exp) override {
+        rval = new IntValue(exp.val);
     };
     void visit(StrConst& exp) override {
+        rval = new StrValue(exp.val);
     };
     void visit(BoolConst& exp) override {
-        if (exp.val) {
-        } else {
-        }
+        rval = new BoolValue(exp.val);
     };
     void visit(NoneConst& exp) override {
+        rval = NONE;
     };
 
     public:
-        Interpreter() {
-            rootFrame = new Frame();
-        };
+        Interpreter() : currentFrame(rootFrame), rval(NONE) {};
 };
