@@ -20,25 +20,30 @@ class Interpreter : public Visitor {
     }
 
     void visit(Block& exp) override {
+        // TODO
         for (auto &stmt : exp.stmts) {
             stmt->accept(*this);
         }
     };
 
     void visit(Global& exp) override {
+        // TODO
         exp.name.accept(*this);
     };
 
     void visit(Assignment& exp) override {
+        // TODO
         exp.lhs.accept(*this);
         exp.expr.accept(*this);
     };
 
     void visit(CallStatement& exp) override {
+        // TODO
         exp.call.accept(*this);
     };
 
     void visit(IfStatement& exp) override {
+        // TODO
         exp.condition.accept(*this);
         exp.then_block.accept(*this);
         if (exp.else_block) {
@@ -47,14 +52,18 @@ class Interpreter : public Visitor {
     };
 
     void visit(WhileLoop& exp) override {
+        // TODO
         exp.condition.accept(*this);
         exp.body.accept(*this);
     };
+
     void visit(Return& exp) override {
+        // TODO
         exp.expr.accept(*this);
     };
 
     void visit(Function& exp) override {
+        // TODO
         for (auto it = exp.args.begin(), end = exp.args.end(); it != end; it++) {
             (*it)->accept(*this);
         }
@@ -62,25 +71,125 @@ class Interpreter : public Visitor {
     };
 
     void visit(BinaryExpr& exp) override {
-        exp.left.accept(*this);
-        exp.right.accept(*this);
+        Value* left = eval(&exp.left);
+        Value* right = eval(&exp.right);
+        switch(exp.op) {
+            case BinOp::Or:
+            {
+                auto bLeft = left->cast<BoolValue>();
+                auto bRight = right->cast<BoolValue>();
+                rval = new BoolValue(bLeft->val || bRight->val);
+                break;
+            }
+            case BinOp::And:
+            {
+                auto bLeft = left->cast<BoolValue>();
+                auto bRight = right->cast<BoolValue>();
+                rval = new BoolValue(bLeft->val & bRight->val);
+                break;
+            }
+            case BinOp::Lt:
+            {
+                auto iLeft = left->cast<IntValue>();
+                auto iRight = right->cast<IntValue>();
+                rval = new BoolValue(iLeft->val < iRight->val);
+                break;
+            }
+            case BinOp::Gt:
+            {
+                auto iLeft = left->cast<IntValue>();
+                auto iRight = right->cast<IntValue>();
+                rval = new BoolValue(iLeft->val > iRight->val);
+                break;
+            }
+            case BinOp::Lt_eq:
+            {
+                auto iLeft = left->cast<IntValue>();
+                auto iRight = right->cast<IntValue>();
+                rval = new BoolValue(iLeft->val <= iRight->val);
+                break;
+            }
+            case BinOp::Gt_eq:
+            {
+                auto iLeft = left->cast<IntValue>();
+                auto iRight = right->cast<IntValue>();
+                rval = new BoolValue(iLeft->val >= iRight->val);
+                break;
+            }
+            case BinOp::Eq_eq:
+            {
+                rval = new BoolValue(left->equals(right));
+                break;
+            }
+            case BinOp::Plus:
+            {
+                auto iLeft = left->cast<IntValue>();
+                auto iRight = right->cast<IntValue>();
+                rval = new IntValue(iLeft->val + iRight->val);
+                break;
+            }
+            case BinOp::Minus:
+            {
+                auto iLeft = left->cast<IntValue>();
+                auto iRight = right->cast<IntValue>();
+                rval = new IntValue(iLeft->val - iRight->val);
+                break;
+            }
+            case BinOp::Times:
+            {
+                auto iLeft = left->cast<IntValue>();
+                auto iRight = right->cast<IntValue>();
+                rval = new IntValue(iLeft->val * iRight->val);
+                break;
+            }
+            case BinOp::Divide:
+            {
+                auto iLeft = left->cast<IntValue>();
+                auto iRight = right->cast<IntValue>();
+                if (iRight->val == 0) {
+                    throw IllegalArithmeticException();
+                }
+                rval = new IntValue(iLeft->val / iRight->val);
+                break;
+            }
+        }
     };
 
     void visit(UnaryExpr& exp) override {
+        Value* innerVal = eval(&exp);
+        switch(exp.op) {
+            case UnOp::Not:
+            {
+                auto bval = innerVal->cast<BoolValue>();
+                rval = new BoolValue(!bval->val);
+                break;
+            }
+            case UnOp::Neg:
+            {
+                auto ival = innerVal->cast<IntValue>();
+                rval = new IntValue(-ival->val);
+                break;
+            }
+            default:
+                throw RuntimeException(); // should never get here
+        }
         exp.expr.accept(*this);
     };
 
     void visit(FieldDeref& exp) override {
+        // TODO
         exp.base.accept(*this);
         exp.field.accept(*this);
     };
 
     void visit(IndexExpr& exp) override {
+        // TODO
         exp.base.accept(*this);
         exp.index.accept(*this);
     };
 
     void visit(Call& exp) override {
+        // TODO
         exp.target.accept(*this);
         for (auto it = exp.args.begin(), end = exp.args.end(); it != end; it++) {
             (*it)->accept(*this);

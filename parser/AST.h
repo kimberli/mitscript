@@ -8,10 +8,14 @@
 
 #define Assert(cond, msg) if(!(cond)){ std::cerr<<msg<<endl; throw SystemException("Bad stuff"); }
 
-enum Op {
+enum UnOp {
+    Not,
+    Neg
+};
+
+enum BinOp {
     Or,
     And,
-    Not,
     Lt,
     Gt,
     Lt_eq,
@@ -28,7 +32,7 @@ using namespace std;
 class SystemException {
 	string msg_;
 public:
-	SystemException(const string& msg) :msg_(msg) {}
+	SystemException(const string& msg): msg_(msg) {}
 };
 
 
@@ -127,9 +131,9 @@ public:
 class BinaryExpr: public Expression {
 public:
     Expression& left;
-    Op op;
+    BinOp op;
     Expression& right;
-    BinaryExpr(Op op, Expression& left, Expression& right):
+    BinaryExpr(BinOp op, Expression& left, Expression& right):
         left(left), op(op), right(right) {};
     void accept(Visitor& v) override {
         v.visit(*this);
@@ -138,9 +142,9 @@ public:
 
 class UnaryExpr: public Expression {
 public:
-    Op op;
+    UnOp op;
     Expression& expr;
-    UnaryExpr(Op op, Expression& expr): op(op), expr(expr) {};
+    UnaryExpr(UnOp op, Expression& expr): op(op), expr(expr) {};
     void accept(Visitor& v) override {
         v.visit(*this);
     }

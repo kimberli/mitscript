@@ -1,4 +1,4 @@
-parser: parser.cpp lexer.cpp main.cpp interpreter/Interpreter.h Visitor.h AST.h
+parser: parser.cpp lexer.cpp main.cpp interpreter/Interpreter.h interpreter/State.h interpreter/Value.h interpreter/Exception.h Visitor.h AST.h
 	g++ -O2 -g -std=gnu++11 main.cpp parser.cpp lexer.cpp -o mitscript
 
 printer: parser.cpp lexer.cpp main.cpp PrettyPrinter.h Visitor.h AST.h

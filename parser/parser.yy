@@ -183,7 +183,7 @@ Conjunction {
     $$ = $1;
 }
 | Boolean T_OR Conjunction {
-    $$ = new BinaryExpr(Op::Or, *$1, *$3);
+    $$ = new BinaryExpr(BinOp::Or, *$1, *$3);
 }
 
 Conjunction:
@@ -191,7 +191,7 @@ BoolUnit {
     $$ = $1;
 }
 | Conjunction T_AND BoolUnit {
-    $$ = new BinaryExpr(Op::And, *$1, *$3);
+    $$ = new BinaryExpr(BinOp::And, *$1, *$3);
 }
 
 BoolUnit:
@@ -199,7 +199,7 @@ Predicate {
     $$ = $1;
 }
 | T_NOT Predicate {
-    $$ = new UnaryExpr(Op::Not, *$2);
+    $$ = new UnaryExpr(UnOp::Not, *$2);
 }
 
 Predicate:
@@ -207,19 +207,19 @@ Arithmetic {
     $$ = $1;
 }
 | Arithmetic T_LT Arithmetic {
-    $$ = new BinaryExpr(Op::Lt, *$1, *$3);
+    $$ = new BinaryExpr(BinOp::Lt, *$1, *$3);
 }
 | Arithmetic T_GT Arithmetic {
-    $$ = new BinaryExpr(Op::Gt, *$1, *$3);
+    $$ = new BinaryExpr(BinOp::Gt, *$1, *$3);
 }
 | Arithmetic T_LTEQ Arithmetic {
-    $$ = new BinaryExpr(Op::Lt_eq, *$1, *$3);
+    $$ = new BinaryExpr(BinOp::Lt_eq, *$1, *$3);
 }
 | Arithmetic T_GTEQ Arithmetic {
-    $$ = new BinaryExpr(Op::Gt_eq, *$1, *$3);
+    $$ = new BinaryExpr(BinOp::Gt_eq, *$1, *$3);
 }
 | Arithmetic T_EQEQ Arithmetic {
-    $$ = new BinaryExpr(Op::Eq_eq, *$1, *$3);
+    $$ = new BinaryExpr(BinOp::Eq_eq, *$1, *$3);
 }
 
 Arithmetic:
@@ -227,10 +227,10 @@ Product {
     $$ = $1;
 }
 | Arithmetic T_PLUS Product {
-    $$ = new BinaryExpr(Op::Plus, *$1, *$3);
+    $$ = new BinaryExpr(BinOp::Plus, *$1, *$3);
 }
 | Arithmetic T_MINUS Product {
-    $$ = new BinaryExpr(Op::Minus, *$1, *$3);
+    $$ = new BinaryExpr(BinOp::Minus, *$1, *$3);
 }
 
 Product:
@@ -238,10 +238,10 @@ Unit {
     $$ = $1;
 }
 | Product T_TIMES Unit {
-    $$ = new BinaryExpr(Op::Times, *$1, *$3);
+    $$ = new BinaryExpr(BinOp::Times, *$1, *$3);
 }
 | Product T_DIVIDE Unit {
-    $$ = new BinaryExpr(Op::Divide, *$1, *$3);
+    $$ = new BinaryExpr(BinOp::Divide, *$1, *$3);
 }
 
 Unit:
@@ -249,7 +249,7 @@ PosUnit {
     $$ = $1;
 }
 | T_MINUS PosUnit {
-    $$ = new UnaryExpr(Op::Minus, *$2);
+    $$ = new UnaryExpr(UnOp::Neg, *$2);
 }
 
 PosUnit:

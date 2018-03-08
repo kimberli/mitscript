@@ -3,29 +3,29 @@
 class InterpreterException : public exception {
     public:
 	    string message;
-	    InterpreterException(const string& message): message(message) {};
+        InterpreterException(string message): message(message) {};
 };
 
 class UninitializedVariableException: public InterpreterException {
     public:
-	    UninitializedVariableException(const string& message):
-            InterpreterException(message) {};
+	    UninitializedVariableException():
+            InterpreterException("UninitializedVariableException") {};
 };
 
 class IllegalCastException : public InterpreterException {
     public:
-	    IllegalCastException(const string& message):
-            InterpreterException(message) {};
+	    IllegalCastException():
+            InterpreterException("IllegalCastException") {};
 };
 
 class IllegalArithmeticException : public InterpreterException {
     public:
-	    IllegalArithmeticException(const string& message):
-            InterpreterException(message) {};
+	    IllegalArithmeticException():
+            InterpreterException("IllegalArithmeticException") {};
 };
 
 class RuntimeException : public InterpreterException {
     public:
-	    RuntimeException(const string& message):
-            InterpreterException(message) {};
+	    RuntimeException():
+            InterpreterException("RuntimeException") {};
 };

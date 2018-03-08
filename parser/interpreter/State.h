@@ -21,7 +21,7 @@ public:
         if (search != localVars.end()) {
             return search->second;
         }
-        throw UninitializedVariableException(var);
+        throw UninitializedVariableException();
     }
 
     void setLocal(string var, Value* val) {
