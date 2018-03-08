@@ -63,11 +63,7 @@ class Interpreter : public Visitor {
     };
 
     void visit(Function& exp) override {
-        // TODO
-        for (auto it = exp.args.begin(), end = exp.args.end(); it != end; it++) {
-            (*it)->accept(*this);
-        }
-        exp.body.accept(*this);
+        rval = new FuncValue(currentFrame, exp.args, exp.body);
     };
 
     void visit(BinaryExpr& exp) override {

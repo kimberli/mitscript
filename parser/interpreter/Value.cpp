@@ -1,7 +1,9 @@
+#include "../AST.h"
 #include "State.h"
 #include "Value.h"
-#include <string>
 #include <map>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -95,6 +97,19 @@ bool RecordValue::equals(Value* other) {
 };
 
 /* FuncValue */
-FuncValue::FuncValue(Frame* parent, Frame* global) {
-    frame = new Frame(parent, global);
+FuncValue::FuncValue(Frame* frame, vector<Identifier*> args, Block& body):
+    frame(frame), args(args), body(body) {};
+
+string FuncValue::toString() {
+    return "FUNCTION";
+}
+
+bool FuncValue::equals(Value* other) {
+    auto o = dynamic_cast<FuncValue*>(other);
+    if (o == NULL) {
+        return false;
+    }
+    return o->frame == this->frame &&
+        o->args == this->args &&
+        &o->body == &this->body;
 }

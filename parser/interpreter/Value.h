@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Exception.h"
-#include <string>
 #include <map>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -71,5 +72,10 @@ public:
 class FuncValue : public Value {
 public:
     Frame* frame;
-    FuncValue(Frame* parent, Frame* global);
+    vector<Identifier*> args;
+    Block& body;
+    FuncValue(Frame* frame, vector<Identifier*> args, Block& body);
+
+    string toString();
+    bool equals(Value* other);
 };
