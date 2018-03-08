@@ -1,6 +1,6 @@
 #!/bin/bash
 ROOT=$(git rev-parse --show-toplevel)
-PARSER=$ROOT/parser/mitscript-parser
+PARSER=$ROOT/parser/mitscript-print
 TOTAL=0
 SUCCESS=0
 RED='\033[0;31m'
