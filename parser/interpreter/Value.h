@@ -6,6 +6,8 @@
 
 using namespace std;
 
+class Frame;
+
 class Value {
 public:
 	virtual string toString() = 0;
@@ -67,4 +69,7 @@ public:
 };
 
 class FuncValue : public Value {
+public:
+    Frame* frame;
+    FuncValue(Frame* parent, Frame* global);
 };

@@ -1,3 +1,4 @@
+#include "State.h"
 #include "Value.h"
 #include <string>
 #include <map>
@@ -68,7 +69,7 @@ Value* RecordValue::getItem(string key) {
     if (search != record.end()) {
         return search->second;
     }
-    throw IllegalCastException();
+    return NULL;
 };
 
 Value* RecordValue::setItem(string key, Value* val) {
@@ -92,3 +93,8 @@ bool RecordValue::equals(Value* other) {
     }
     return o->record == this->record;
 };
+
+/* FuncValue */
+FuncValue::FuncValue(Frame* parent, Frame* global) {
+    frame = new Frame(parent, global);
+}

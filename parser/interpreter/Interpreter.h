@@ -186,15 +186,23 @@ class Interpreter : public Visitor {
     };
 
     void visit(FieldDeref& exp) override {
-        // TODO
-        exp.base.accept(*this);
-        exp.field.accept(*this);
+        string key = exp.field.name;
+        Value* base = eval(&exp.base);
+        auto rBase = base->cast<RecordValue>();
+        rval = rBase->getItem(key);
+        if (rval == NULL) {
+            rval = &NONE;
+        }
     };
 
     void visit(IndexExpr& exp) override {
-        // TODO
-        exp.base.accept(*this);
-        exp.index.accept(*this);
+        string key = eval(&exp.index)->toString();
+        Value* base = eval(&exp.base);
+        auto rBase = base->cast<RecordValue>();
+        rval = rBase->getItem(key);
+        if (rval == NULL) {
+            rval = &NONE;
+        }
     };
 
     void visit(Call& exp) override {
