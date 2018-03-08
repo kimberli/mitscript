@@ -12,7 +12,7 @@ class Interpreter : public Visitor {
     Frame* rootFrame;
     Frame* currentFrame;
     Value* rval;
-    NoneValue* NONE = new NoneValue();
+    Value& NONE = *new NoneValue();
 
     Value* eval(Expression* exp){
         exp->accept(*this);
@@ -24,16 +24,20 @@ class Interpreter : public Visitor {
             stmt->accept(*this);
         }
     };
+
     void visit(Global& exp) override {
         exp.name.accept(*this);
     };
+
     void visit(Assignment& exp) override {
         exp.lhs.accept(*this);
         exp.expr.accept(*this);
     };
+
     void visit(CallStatement& exp) override {
         exp.call.accept(*this);
     };
+
     void visit(IfStatement& exp) override {
         exp.condition.accept(*this);
         exp.then_block.accept(*this);
@@ -41,6 +45,7 @@ class Interpreter : public Visitor {
             exp.else_block->accept(*this);
         }
     };
+
     void visit(WhileLoop& exp) override {
         exp.condition.accept(*this);
         exp.body.accept(*this);
@@ -48,33 +53,40 @@ class Interpreter : public Visitor {
     void visit(Return& exp) override {
         exp.expr.accept(*this);
     };
+
     void visit(Function& exp) override {
         for (auto it = exp.args.begin(), end = exp.args.end(); it != end; it++) {
             (*it)->accept(*this);
         }
         exp.body.accept(*this);
     };
+
     void visit(BinaryExpr& exp) override {
         exp.left.accept(*this);
         exp.right.accept(*this);
     };
+
     void visit(UnaryExpr& exp) override {
         exp.expr.accept(*this);
     };
+
     void visit(FieldDeref& exp) override {
         exp.base.accept(*this);
         exp.field.accept(*this);
     };
+
     void visit(IndexExpr& exp) override {
         exp.base.accept(*this);
         exp.index.accept(*this);
     };
+
     void visit(Call& exp) override {
         exp.target.accept(*this);
         for (auto it = exp.args.begin(), end = exp.args.end(); it != end; it++) {
             (*it)->accept(*this);
         }
     };
+
     void visit(Record& exp) override {
         RecordValue* val = new RecordValue();
         for (auto &r : exp.record) {
@@ -82,22 +94,27 @@ class Interpreter : public Visitor {
         }
         rval = val;
     };
+
     void visit(Identifier& exp) override {
         rval = currentFrame->lookup(exp.name);
     };
+
     void visit(IntConst& exp) override {
         rval = new IntValue(exp.val);
     };
+
     void visit(StrConst& exp) override {
         rval = new StrValue(exp.val);
     };
+
     void visit(BoolConst& exp) override {
         rval = new BoolValue(exp.val);
     };
+
     void visit(NoneConst& exp) override {
-        rval = NONE;
+        rval = &NONE;
     };
 
     public:
-        Interpreter() : currentFrame(rootFrame), rval(NONE) {};
+        Interpreter() : currentFrame(rootFrame), rval(&NONE) {};
 };
