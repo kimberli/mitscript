@@ -8,23 +8,26 @@ using namespace std;
 
 class PrettyPrinter : public Visitor {
     int tab_count = 0;
-    map<Op, string> op_map = {
-        { Op::Or, "|"},
-        { Op::And, "&"},
-        { Op::Not, "!"},
-        { Op::Lt, "<"},
-        { Op::Gt, ">"},
-        { Op::Lt_eq, "<="},
-        { Op::Gt_eq, ">-"},
-        { Op::Eq_eq, "=="},
-        { Op::Plus, "+"},
-        { Op::Minus, "-"},
-        { Op::Times, "*"},
-        { Op::Divide, "/"},
+    map<BinOp, string> bin_op_map = {
+        { BinOp::Or, "|"},
+        { BinOp::And, "&"},
+        { BinOp::Lt, "<"},
+        { BinOp::Gt, ">"},
+        { BinOp::Lt_eq, "<="},
+        { BinOp::Gt_eq, ">-"},
+        { BinOp::Eq_eq, "=="},
+        { BinOp::Plus, "+"},
+        { BinOp::Minus, "-"},
+        { BinOp::Times, "*"},
+        { BinOp::Divide, "/"},
+    };
+    map<UnOp, string> un_op_map = {
+        { UnOp::Not, "!"},
+        { UnOp::Neg, "-"},
     };
     string tabs() {
         return string(tab_count, '\t');
-    }
+    };
     void visit(Block& exp) override {
         cout << "{\n";
         tab_count++;
@@ -86,12 +89,12 @@ class PrettyPrinter : public Visitor {
     void visit(BinaryExpr& exp) override {
         cout << "(";
         exp.left.accept(*this);
-        cout << op_map[exp.op];
+        cout << bin_op_map[exp.op];
         exp.right.accept(*this);
         cout << ")";
     };
     void visit(UnaryExpr& exp) override {
-        cout << op_map[exp.op];
+        cout << un_op_map[exp.op];
         cout << "(";
         exp.expr.accept(*this);
         cout << ")";
