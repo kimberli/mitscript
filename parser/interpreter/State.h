@@ -36,4 +36,12 @@ class Frame {
             globalVars.insert(var);
             globalFrame->setLocal(var, val);
         }
+
+        Value* lookup(string var) {
+            auto search = localVars.find(var);
+            if (search != localVars.end()) {
+                return search->second;
+            }
+            parentFrame->lookup(var);
+        }
 };
