@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Value.h"
 #include <string>
 #include <map>

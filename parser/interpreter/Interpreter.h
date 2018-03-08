@@ -123,6 +123,15 @@ class Interpreter : public Visitor {
             }
             case BinOp::Plus:
             {
+                auto sLeft = dynamic_cast<StrValue*>(left);
+                auto sRight = dynamic_cast<StrValue*>(right);
+                if (sLeft != NULL) {
+                    rval = new StrValue(sLeft->val + right->toString());
+                    break;
+                } else if (sRight != NULL) {
+                    rval = new StrValue(left->toString() + sRight->val);
+                    break;
+                }
                 auto iLeft = left->cast<IntValue>();
                 auto iRight = right->cast<IntValue>();
                 rval = new IntValue(iLeft->val + iRight->val);

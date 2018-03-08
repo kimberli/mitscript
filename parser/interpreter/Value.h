@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Exception.h"
 #include <string>
 #include <map>
@@ -7,7 +9,6 @@ using namespace std;
 class Value {
 public:
 	virtual string toString() = 0;
-
     virtual bool equals(Value* other) = 0;
 
     template <typename T>
@@ -18,110 +19,51 @@ public:
         }
         return val;
     }
+
 };
 
 class NoneValue : public Value {
 public:
-    string toString() {
-        return "None";
-    };
-
-    bool equals(Value* other) {
-        auto o = dynamic_cast<NoneValue*>(other);
-        if (o == NULL) {
-            return false;
-        }
-        return true;
-    };
+    string toString();
+    bool equals(Value* other);
 };
 
 class BoolValue : public Value {
 public:
     bool val;
-    BoolValue(bool val) : val(val) {};
+    BoolValue(bool val);
 
-    string toString() {
-        return val? "true" : "false";
-    };
-
-    bool equals(Value* other) {
-        auto o = dynamic_cast<BoolValue*>(other);
-        if (o == NULL) {
-            return false;
-        }
-        return o->val == this->val;
-    };
+    string toString();
+    bool equals(Value* other);
 };
 
 class IntValue : public Value {
 public:
     int val;
-    IntValue(int val) : val(val) {};
+    IntValue(int val);
 
-    string toString() {
-        return std::to_string(val);
-    };
-
-    bool equals(Value* other) {
-        auto o = dynamic_cast<IntValue*>(other);
-        if (o == NULL) {
-            return false;
-        }
-        return o->val == this->val;
-    };
+    string toString();
+    bool equals(Value* other);
 };
 
 class StrValue : public Value {
 public:
     string val;
-    StrValue(string val) : val(val) {};
+    StrValue(string val);
 
-    string toString() {
-        return val;
-    };
-
-    bool equals(Value* other) {
-        auto o = dynamic_cast<StrValue*>(other);
-        if (o == NULL) {
-            return false;
-        }
-        return o->val.compare(this->val) == 0;
-    };
+    string toString();
+    bool equals(Value* other);
 };
 
 class RecordValue : public Value {
 public:
     map<string, Value*> record;
 
-    Value* getItem(string key) {
-        auto search = record.find(key);
-        if (search != record.end()) {
-            return search->second;
-        }
-        throw IllegalCastException();
-    };
+    Value* getItem(string key);
+    Value* setItem(string key, Value* val);
 
-    Value* setItem(string key, Value* val) {
-        record[key] = val;
-        }
-
-    string toString() {
-        string result = "{";
-        for (auto &r : record) {
-            result += r.first + " : ";
-            result += r.second->toString() + ";";
-        }
-        result += "}";
-        return result;
-    }
-
-    bool equals(Value* other) {
-        auto o = dynamic_cast<RecordValue*>(other);
-        if (o == NULL) {
-            return false;
-        }
-        return o->record == this->record;
-    };
+    string toString();
+    bool equals(Value* other);
 };
 
 class FuncValue : public Value {

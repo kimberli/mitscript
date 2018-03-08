@@ -1,4 +1,8 @@
+#pragma once
+
 #include <string>
+
+using namespace std;
 
 class InterpreterException : public exception {
     public:
