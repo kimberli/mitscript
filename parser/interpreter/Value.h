@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#define LOG(lvl, msg) { if (lvl > 0) std::cerr << msg << endl; }
+#define LOG(lvl, msg) { if (lvl > 10) std::cerr << msg << endl; }
 
 using namespace std;
 
@@ -21,7 +21,7 @@ public:
     T* cast() {
         auto val = dynamic_cast<T*>(this);
         if (val == NULL) {
-            throw IllegalCastException("cannot cast type " + this->type() + " to " + typeid(T).name());  // target T will be name mangled
+            throw IllegalCastException("cannot cast type " + this->type() + " to " + T::typeS);
         }
         return val;
     }
@@ -33,6 +33,7 @@ public:
     string toString();
     bool equals(Value* other);
 
+    static const string typeS;
     string type() {
         return "NoneValue";
     };
@@ -46,6 +47,7 @@ public:
     string toString();
     bool equals(Value* other);
 
+    static const string typeS;
     string type() {
         return "BoolValue";
     };
@@ -59,6 +61,7 @@ public:
     string toString();
     bool equals(Value* other);
 
+    static const string typeS;
     string type() {
         return "IntValue";
     };
@@ -72,6 +75,7 @@ public:
     string toString();
     bool equals(Value* other);
 
+    static const string typeS;
     string type() {
         return "StrValue";
     };
@@ -87,6 +91,7 @@ public:
     string toString();
     bool equals(Value* other);
 
+    static const string typeS;
     string type() {
         return "RecordValue";
     };
@@ -102,6 +107,7 @@ public:
     string toString();
     bool equals(Value* other);
 
+    static const string typeS;
     string type() {
         return "FuncValue";
     };

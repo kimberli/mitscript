@@ -19,11 +19,10 @@ public:
         parentFrame(parent), globalFrame(global) {};
 
     Value* getLocal(string var) {
-        // only called when you're sure var is defined locally
         if (localVars.count(var)) {
             return localVars[var];
         }
-        throw RuntimeException("should never get here");
+        throw UninitializedVariableException(var + " is not initialized");
     }
 
     void setLocal(string var, Value* val) {
@@ -55,9 +54,7 @@ public:
     }
 
     void assign(string var, Value* val) {
-        LOG(1, "\t starting assign");
-        auto gSearch = globalVars.find(var);
-        if (gSearch != globalVars.end()) {
+        if (globalVars.count(var)) {
             LOG(1, "\tState: setting global " + var);
             globalFrame->setLocal(var, val);
             return;

@@ -9,6 +9,13 @@ using namespace std;
 
 NoneValue& NONE = *(new NoneValue());
 
+const string NoneValue::typeS = "NoneValue";
+const string BoolValue::typeS = "BoolValue";
+const string IntValue::typeS = "IntValue";
+const string StrValue::typeS = "StrValue";
+const string RecordValue::typeS = "RecordValue";
+const string FuncValue::typeS = "FuncValue";
+
 /* NoneValue */
 string NoneValue::toString() {
     return "None";

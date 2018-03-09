@@ -1,3 +1,3 @@
 x = false;
-xyaAFWE = x | true;
-zzz = 2 | "hi";
+xyaAFWE = x & true;
+zzz = xyaAFWE | false | 2 | "hi";
