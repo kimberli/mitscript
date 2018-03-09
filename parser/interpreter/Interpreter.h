@@ -266,7 +266,6 @@ class Interpreter : public Visitor {
             default:
                 throw RuntimeException("shouldn't get here"); // should never get here
         }
-        exp.expr.accept(*this);
     };
 
     void visit(FieldDeref& exp) override {
@@ -297,8 +296,7 @@ class Interpreter : public Visitor {
         Frame* oldFrame = currentFrame;
         // first, check to make sure base exp is a FuncValue
         LOG(1, "\tCall: check for func value");
-        Value* target = eval(&exp.target); // TODO: combine
-        auto func = target->cast<FuncValue>();
+        auto func = eval(&exp.target)->cast<FuncValue>();
         // next, eval args left to right and make sure args length is correct
         LOG(1, "\tCall: eval args and check length");
         vector<Value*>* args = new vector<Value*>();
