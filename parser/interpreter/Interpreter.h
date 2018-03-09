@@ -318,5 +318,9 @@ class Interpreter : public Visitor {
     };
 
     public:
-        Interpreter() : currentFrame(rootFrame), rval(&NONE) {};
+        Interpreter() {
+            rootFrame = new Frame();
+            currentFrame = rootFrame;
+            rval = &NONE;
+        };
 };
