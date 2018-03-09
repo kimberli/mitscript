@@ -218,7 +218,7 @@ class Interpreter : public Visitor {
                 auto iLeft = left->cast<IntValue>();
                 auto iRight = right->cast<IntValue>();
                 if (iRight->val == 0) {
-                    throw IllegalArithmeticException();
+                    throw IllegalArithmeticException("cannot divide by zero");
                 }
                 rval = new IntValue(iLeft->val / iRight->val);
                 break;
@@ -242,7 +242,7 @@ class Interpreter : public Visitor {
                 break;
             }
             default:
-                throw RuntimeException(); // should never get here
+                throw RuntimeException("shouldn't get here"); // should never get here
         }
         exp.expr.accept(*this);
     };
@@ -276,7 +276,7 @@ class Interpreter : public Visitor {
             args->push_back(eval(*a));
         }
         if (args->size() != func->args.size()) {
-            throw RuntimeException();
+            throw RuntimeException("mismatched number of arguments");
         }
         // next, allocate a new stack frame and add globals and locals to it
         currentFrame = new Frame(func->frame, rootFrame);

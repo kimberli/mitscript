@@ -18,7 +18,7 @@ public:
     T* cast() {
         auto val = dynamic_cast<T*>(this);
         if (val == NULL) {
-            throw IllegalCastException();
+            throw IllegalCastException("cannot cast type");
         }
         return val;
     }

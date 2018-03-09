@@ -23,7 +23,7 @@ public:
         if (search != localVars.end()) {
             return search->second;
         }
-        throw UninitializedVariableException();
+        throw UninitializedVariableException(" is not initialized");
     }
 
     void setLocal(string var, Value* val) {
@@ -48,7 +48,7 @@ public:
             return lSearch->second;
         }
         if (parentFrame == NULL) {
-            throw UninitializedVariableException();
+            throw UninitializedVariableException(var + " is not initialized");
         }
         parentFrame->lookup_read(var);
     }

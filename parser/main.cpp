@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
         output->accept(interp);
     }
     catch (InterpreterException& exception) {
-        cout << exception.message << endl;
+        cout << exception.toString() << endl;
         return 1;
     }
     return 0;
