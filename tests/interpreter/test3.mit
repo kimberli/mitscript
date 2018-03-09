@@ -1,8 +1,9 @@
 f = fun() {
     y = fun() {
+        print("hi");
         return 3;
     };
-    x = y();
+    print(y());
 };
 
 print(f());
