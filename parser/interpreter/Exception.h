@@ -6,8 +6,8 @@ using namespace std;
 
 class InterpreterException : public exception {
     public:
-	    string& message;
-        InterpreterException(string& message): message(message) {};
+	    string message;
+        InterpreterException(string message): message(message) {};
         virtual string toString() = 0;
 };
 
