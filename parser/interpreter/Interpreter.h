@@ -22,17 +22,22 @@ class Interpreter : public Visitor {
     void processAssign(Expression* lhs, Value* rhs) {
         auto id = dynamic_cast<Identifier*>(lhs);
         if (id != NULL) {
+            LOG(1, "\tprocessAssign: cast to ID " + id->name);
             currentFrame->assign(id->name, rhs);
+            LOG(1, "\tprocessAssign: done");
             return;
         }
         auto fieldD = dynamic_cast<FieldDeref*>(lhs);
         if (fieldD != NULL) {
+            LOG(1, "\tprocessAssign: cast to FIELD_DEREF");
             Value* exp = eval(&fieldD->base);
             auto recVal = exp->cast<RecordValue>();
             recVal->setItem(fieldD->field.name, rhs);
+            LOG(1, "\tprocessAssign: done");
         }
         auto indexE = dynamic_cast<IndexExpr*>(lhs);
         if (indexE != NULL) {
+            LOG(1, "\tprocessAssign: cast to INDEX_EXPR");
             Value* exp = eval(&indexE->base);
             string field = eval(&indexE->index)->toString();
             auto recVal = exp->cast<RecordValue>();
@@ -45,11 +50,13 @@ class Interpreter : public Visitor {
             auto globStmt = dynamic_cast<Global*>(stmt);
             // add global
             if (globStmt != NULL) {
+                LOG(1, "\tprocessFuncVars: adding global " + globStmt->name.name);
                 frame.setGlobal(globStmt->name.name);
             }
             // add locals to None
             auto asmtStmt = dynamic_cast<Assignment*>(stmt);
             if (asmtStmt != NULL) {
+                LOG(1, "\tprocessFuncVars: init local");
                 processAssign(&asmtStmt->lhs, &NONE);
             }
             // recurse into other blocks
@@ -71,12 +78,12 @@ class Interpreter : public Visitor {
                 processFuncVars(frame, blockStmt);
                 break;
             }
-
         }
+        LOG(1, "\tprocessFuncVars: done");
     }
 
-
     void visit(Block& exp) override {
+        LOG(2, "Visiting Block");
         for (auto &stmt : exp.stmts) {
             auto retExp = dynamic_cast<Return*>(stmt);
             if (retExp != NULL) {
@@ -89,18 +96,22 @@ class Interpreter : public Visitor {
 
     void visit(Global& exp) override {
         // globals are handled in function calls
+        LOG(2, "Visiting Global");
     };
 
     void visit(Assignment& exp) override {
+        LOG(2, "Visiting Assignment");
         Value* rhs = eval(&exp.expr);
         processAssign(&exp.lhs, rhs);
     };
 
     void visit(CallStatement& exp) override {
+        LOG(2, "Visiting CallStatement");
         rval = eval(&exp.call);
     };
 
     void visit(IfStatement& exp) override {
+        LOG(2, "Visiting IfStatement");
         Value* condition = eval(&exp.condition);
         auto condVal = condition->cast<BoolValue>();
         if (condVal->val) {
@@ -111,6 +122,7 @@ class Interpreter : public Visitor {
     };
 
     void visit(WhileLoop& exp) override {
+        LOG(2, "Visiting WhileLoop");
         while (true) {
             Value* condition = eval(&exp.condition);
             auto condVal = condition->cast<BoolValue>();
@@ -122,14 +134,17 @@ class Interpreter : public Visitor {
     };
 
     void visit(Return& exp) override {
+        LOG(2, "Visiting Return");
         rval = eval(&exp.expr);
     };
 
     void visit(Function& exp) override {
+        LOG(2, "Visiting Function");
         rval = new FuncValue(currentFrame, exp.args, exp.body);
     };
 
     void visit(BinaryExpr& exp) override {
+        LOG(2, "Visiting BinaryExpr");
         Value* left = eval(&exp.left);
         Value* right = eval(&exp.right);
         switch(exp.op) {
@@ -227,6 +242,7 @@ class Interpreter : public Visitor {
     };
 
     void visit(UnaryExpr& exp) override {
+        LOG(2, "Visiting UnaryExpr");
         Value* innerVal = eval(&exp);
         switch(exp.op) {
             case UnOp::Not:
@@ -248,6 +264,7 @@ class Interpreter : public Visitor {
     };
 
     void visit(FieldDeref& exp) override {
+        LOG(2, "Visiting FieldDeref");
         string key = exp.field.name;
         Value* base = eval(&exp.base);
         auto rBase = base->cast<RecordValue>();
@@ -258,6 +275,7 @@ class Interpreter : public Visitor {
     };
 
     void visit(IndexExpr& exp) override {
+        LOG(2, "Visiting IndexExpr");
         string key = eval(&exp.index)->toString();
         Value* base = eval(&exp.base);
         auto rBase = base->cast<RecordValue>();
@@ -268,9 +286,12 @@ class Interpreter : public Visitor {
     };
 
     void visit(Call& exp) override {
+        LOG(2, "Visiting Call");
         // first, check to make sure base exp is a FuncValue
+        LOG(1, "\tCall: check for func value");
         auto func = eval(&exp.target)->cast<FuncValue>();
         // next, eval args left to right and make sure args length is correct
+        LOG(1, "\tCall: eval args and check length");
         vector<Value*>* args = new vector<Value*>();
         for (auto a = func->args.begin(), end = func->args.end(); a != end; a++) {
             args->push_back(eval(*a));
@@ -279,17 +300,21 @@ class Interpreter : public Visitor {
             throw RuntimeException("mismatched number of arguments");
         }
         // next, allocate a new stack frame and add globals and locals to it
+        LOG(1, "\tCall: alloc new frame, load globals and locals");
         currentFrame = new Frame(func->frame, rootFrame);
         processFuncVars(*currentFrame, &func->body);
         // set all params to the right values
+        LOG(1, "\tCall: set params");
         for (int i = 0; i < args->size(); i++) {
             currentFrame->setLocal(func->args.at(i)->name, args->at(i));
         }
         // eval function body
+        LOG(1, "\tCall: eval function body");
         rval = eval(&func->body);
     };
 
     void visit(Record& exp) override {
+        LOG(2, "Visiting Record");
         RecordValue* val = new RecordValue();
         for (auto &r : exp.record) {
             val->setItem(r.first->name, eval(r.second));
@@ -298,22 +323,27 @@ class Interpreter : public Visitor {
     };
 
     void visit(Identifier& exp) override {
+        LOG(2, "Visiting Identifier: " + exp.name);
         rval = currentFrame->lookup_read(exp.name);
     };
 
     void visit(IntConst& exp) override {
+        LOG(2, "Visiting IntConst");
         rval = new IntValue(exp.val);
     };
 
     void visit(StrConst& exp) override {
+        LOG(2, "Visiting StrConst " + exp.val);
         rval = new StrValue(exp.val);
     };
 
     void visit(BoolConst& exp) override {
+        LOG(2, "Visiting BoolConst");
         rval = new BoolValue(exp.val);
     };
 
     void visit(NoneConst& exp) override {
+        LOG(2, "Visiting NoneConst");
         rval = &NONE;
     };
 

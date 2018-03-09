@@ -5,6 +5,8 @@
 #include <map>
 #include <set>
 
+#define LOG(lvl, msg) { if (lvl > 10) std::cerr << msg << endl; }
+
 using namespace std;
 
 class Frame {
@@ -54,15 +56,15 @@ public:
     }
 
     void assign(string var, Value* val) {
+        LOG(1, "\t starting assign");
         auto gSearch = globalVars.find(var);
         if (gSearch != globalVars.end()) {
+            LOG(1, "\tState: setting global " + var);
             globalFrame->setLocal(var, val);
             return;
         }
-        auto lSearch = localVars.find(var);
-        if (lSearch != localVars.end()) {
-            setLocal(var, val);
-            return;
-        }
+        LOG(1, "\tState: setting local " + var);
+        setLocal(var, val);
+        return;
     }
 };
