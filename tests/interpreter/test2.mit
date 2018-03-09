@@ -1,4 +1,5 @@
 f = fun() {
+    print("blah");
 };
 
 f();

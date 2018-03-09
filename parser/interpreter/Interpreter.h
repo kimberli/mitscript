@@ -17,7 +17,7 @@ class Interpreter : public Visitor {
     NativeFunc* nativeIntcast;
     bool returned;
 
-    Value* eval(AST_node* exp){
+    Value* eval(Expression* exp){
         exp->accept(*this);
         return rval;
     }
@@ -90,11 +90,10 @@ class Interpreter : public Visitor {
         for (auto &stmt : exp.stmts) {
             auto retExp = dynamic_cast<Return*>(stmt);
             if (retExp != NULL) {
-                rval = eval(stmt);
-                returned = true;
-                break;
+                retExp->accept(*this);
+                return;
             }
-            eval(stmt);
+            stmt->accept(*this);
         }
     };
 
@@ -142,6 +141,7 @@ class Interpreter : public Visitor {
     void visit(Return& exp) override {
         LOG(2, "Visiting Return");
         rval = eval(&exp.expr);
+        returned = true;
     };
 
     void visit(Function& exp) override {
@@ -244,6 +244,8 @@ class Interpreter : public Visitor {
                 rval = new IntValue(iLeft->val / iRight->val);
                 break;
             }
+            default:
+                throw RuntimeException("shouldn't get here");
         }
     };
 
@@ -264,7 +266,7 @@ class Interpreter : public Visitor {
                 break;
             }
             default:
-                throw RuntimeException("shouldn't get here"); // should never get here
+                throw RuntimeException("shouldn't get here");
         }
     };
 
@@ -322,7 +324,7 @@ class Interpreter : public Visitor {
             rval = nFunc->evalNativeFunc(*currentFrame);
             LOG(1, "\tReturning " + rval->toString());
         } else {
-            rval = eval(&func->body);
+            eval(&func->body);
             if (!returned) {
                 rval = &NONE;
             }

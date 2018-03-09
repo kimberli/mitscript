@@ -1,0 +1,4 @@
+while (true) {
+    return 6;
+}
+print("completion");

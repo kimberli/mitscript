@@ -50,7 +50,7 @@ public:
         if (parentFrame == NULL) {
             throw UninitializedVariableException(var + " is not initialized");
         }
-        parentFrame->lookup_read(var);
+        return parentFrame->lookup_read(var);
     }
 
     void assign(string var, Value* val) {
