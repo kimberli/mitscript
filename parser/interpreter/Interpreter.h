@@ -243,7 +243,7 @@ class Interpreter : public Visitor {
 
     void visit(UnaryExpr& exp) override {
         LOG(2, "Visiting UnaryExpr");
-        Value* innerVal = eval(&exp);
+        Value* innerVal = eval(&exp.expr);
         switch(exp.op) {
             case UnOp::Not:
             {
@@ -293,7 +293,7 @@ class Interpreter : public Visitor {
         // next, eval args left to right and make sure args length is correct
         LOG(1, "\tCall: eval args and check length");
         vector<Value*>* args = new vector<Value*>();
-        for (auto a = func->args.begin(), end = func->args.end(); a != end; a++) {
+        for (auto a = exp.args.begin(), end = exp.args.end(); a != end; a++) {
             args->push_back(eval(*a));
         }
         if (args->size() != func->args.size()) {
