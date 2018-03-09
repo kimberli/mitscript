@@ -294,6 +294,7 @@ class Interpreter : public Visitor {
 
     void visit(Call& exp) override {
         LOG(2, "Visiting Call");
+        bool oldReturned = returned;
         returned = false;
         // first, check to make sure base exp is a FuncValue
         LOG(1, "\tCall: check for func value");
@@ -330,6 +331,7 @@ class Interpreter : public Visitor {
             }
             LOG(1, "\tReturning " + rval->toString());
         }
+        returned = oldReturned;
     };
 
     void visit(Record& exp) override {
@@ -372,6 +374,7 @@ class Interpreter : public Visitor {
             rootFrame = new Frame();
             currentFrame = rootFrame;
             rval = &NONE;
+            returned = false;
             // create native functions
             Block* emptyBlock = new Block({});
             Identifier* s = new Identifier("s");

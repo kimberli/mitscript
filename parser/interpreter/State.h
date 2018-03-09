@@ -19,10 +19,6 @@ public:
         parentFrame(parent), globalFrame(global) {};
 
     Value* getLocal(string var) {
-        //auto search = localVars.find(var);
-        //if (search != localVars.end()) {
-        //    return search->second;
-        //}
         if (localVars.count(var)) {
             return localVars[var];
         }
@@ -52,20 +48,6 @@ public:
         if ((r = getLocal(var)) != NULL) {
             return r;
         }
-        // if (globalFrame->localVars.count(var)) {
-        //     return getGlobal(var);
-        // }
-        // if (localVars.count(var)) {
-        //     return getLocal(var);
-        // }
-        // auto gSearch = globalVars.find(var);
-        // if (gSearch != globalVars.end()) {
-        //     return getGlobal(var);
-        // }
-        // auto lSearch = localVars.find(var);
-        // if (lSearch != localVars.end()) {
-        //     return getLocal(var);
-        // }
         if (parentFrame == NULL) {
             throw UninitializedVariableException(var + " is not initialized");
         }
