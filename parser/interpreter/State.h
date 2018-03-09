@@ -5,8 +5,6 @@
 #include <map>
 #include <set>
 
-#define LOG(lvl, msg) { if (lvl > 10) std::cerr << msg << endl; }
-
 using namespace std;
 
 class Frame {

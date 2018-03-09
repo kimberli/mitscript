@@ -12,7 +12,9 @@ class Interpreter : public Visitor {
     Frame* rootFrame;
     Frame* currentFrame;
     Value* rval;
-    Value& NONE = *new NoneValue();
+    NativeFunc* nativePrint;
+    NativeFunc* nativeInput;
+    NativeFunc* nativeIntcast;
 
     Value* eval(AST_node* exp){
         exp->accept(*this);
@@ -107,7 +109,7 @@ class Interpreter : public Visitor {
 
     void visit(CallStatement& exp) override {
         LOG(2, "Visiting CallStatement");
-        rval = eval(&exp.call);
+        eval(&exp.call);
     };
 
     void visit(IfStatement& exp) override {
@@ -115,9 +117,11 @@ class Interpreter : public Visitor {
         Value* condition = eval(&exp.condition);
         auto condVal = condition->cast<BoolValue>();
         if (condVal->val) {
-            rval = eval(&exp.thenBlock);
+            LOG(1, "\tIfStatement: took if block");
+            eval(&exp.thenBlock);
         } else if (exp.elseBlock != NULL) {
-            rval = eval(exp.elseBlock);
+            LOG(1, "\tIfStatement: took else block");
+            eval(exp.elseBlock);
         }
     };
 
@@ -129,18 +133,19 @@ class Interpreter : public Visitor {
             if (!condVal->val) {
                 break;
             }
-            rval = eval(&exp.body);
+            eval(&exp.body);
         }
     };
 
     void visit(Return& exp) override {
         LOG(2, "Visiting Return");
         rval = eval(&exp.expr);
+        currentFrame = currentFrame->parentFrame;
     };
 
     void visit(Function& exp) override {
         LOG(2, "Visiting Function");
-        rval = new FuncValue(currentFrame, exp.args, exp.body);
+        rval = new FuncValue(*currentFrame, exp.args, exp.body);
     };
 
     void visit(BinaryExpr& exp) override {
@@ -289,7 +294,8 @@ class Interpreter : public Visitor {
         LOG(2, "Visiting Call");
         // first, check to make sure base exp is a FuncValue
         LOG(1, "\tCall: check for func value");
-        auto func = eval(&exp.target)->cast<FuncValue>();
+        Value* target = eval(&exp.target); // TODO: combine
+        auto func = target->cast<FuncValue>();
         // next, eval args left to right and make sure args length is correct
         LOG(1, "\tCall: eval args and check length");
         vector<Value*>* args = new vector<Value*>();
@@ -301,7 +307,7 @@ class Interpreter : public Visitor {
         }
         // next, allocate a new stack frame and add globals and locals to it
         LOG(1, "\tCall: alloc new frame, load globals and locals");
-        currentFrame = new Frame(func->frame, rootFrame);
+        currentFrame = new Frame(&func->frame, rootFrame);
         processFuncVars(*currentFrame, &func->body);
         // set all params to the right values
         LOG(1, "\tCall: set params");
@@ -310,7 +316,12 @@ class Interpreter : public Visitor {
         }
         // eval function body
         LOG(1, "\tCall: eval function body");
-        rval = eval(&func->body);
+        auto nFunc = dynamic_cast<NativeFunc*>(func);
+        if (nFunc != NULL) {
+            rval = nFunc->evalNativeFunc(*currentFrame);
+        } else {
+            rval = eval(&func->body);
+        }
     };
 
     void visit(Record& exp) override {
@@ -325,6 +336,7 @@ class Interpreter : public Visitor {
     void visit(Identifier& exp) override {
         LOG(2, "Visiting Identifier: " + exp.name);
         rval = currentFrame->lookup_read(exp.name);
+        // LOG(1, "\tIdentifier: got type " + rval->type());
     };
 
     void visit(IntConst& exp) override {
@@ -352,5 +364,21 @@ class Interpreter : public Visitor {
             rootFrame = new Frame();
             currentFrame = rootFrame;
             rval = &NONE;
+            // create native functions
+            Block* emptyBlock = new Block({});
+            Identifier* s = new Identifier("s");
+            vector<Identifier*> args0;
+            vector<Identifier*> args1 = { s };
+            nativePrint = new PrintNativeFunc(*rootFrame, args1, *emptyBlock);
+            nativeInput = new InputNativeFunc(*rootFrame, args0, *emptyBlock);
+            nativeIntcast = new IntcastNativeFunc(*rootFrame, args1, *emptyBlock);
+
+            Identifier* print = new Identifier("print");
+            Identifier* input = new Identifier("input");
+            Identifier* intcast = new Identifier("intcast");
+
+            processAssign(print, nativePrint);
+            processAssign(input, nativeInput);
+            processAssign(intcast, nativeIntcast);
         };
 };

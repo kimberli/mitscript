@@ -7,6 +7,8 @@
 
 using namespace std;
 
+NoneValue& NONE = *(new NoneValue());
+
 /* NoneValue */
 string NoneValue::toString() {
     return "None";
@@ -97,7 +99,7 @@ bool RecordValue::equals(Value* other) {
 };
 
 /* FuncValue */
-FuncValue::FuncValue(Frame* frame, vector<Identifier*> args, Block& body):
+FuncValue::FuncValue(Frame& frame, vector<Identifier*> args, Block& body):
     frame(frame), args(args), body(body) {};
 
 string FuncValue::toString() {
@@ -109,7 +111,50 @@ bool FuncValue::equals(Value* other) {
     if (o == NULL) {
         return false;
     }
-    return o->frame == this->frame &&
+    return &o->frame == &this->frame &&
         o->args == this->args &&
         &o->body == &this->body;
 }
+
+/* Native functions */
+PrintNativeFunc::PrintNativeFunc(Frame& frame, vector<Identifier*> args, Block& body):
+    NativeFunc(frame, args, body) {};
+
+Value* PrintNativeFunc::evalNativeFunc(Frame& currentFrame) {
+    LOG(1, "\tevalNativeFunc: print");
+    Identifier* s = args[0];
+    Value* val = currentFrame.getLocal(s->name);
+    cout << val->toString() << endl;
+    return &NONE;
+};
+
+InputNativeFunc::InputNativeFunc(Frame& frame, vector<Identifier*> args, Block& body):
+    NativeFunc(frame, args, body) {};
+
+Value* InputNativeFunc::evalNativeFunc(Frame& currentFrame) {
+    LOG(1, "\tevalNativeFunc: input");
+    string input;
+    getline(cin, input);
+    return new StrValue(input);
+};
+
+IntcastNativeFunc::IntcastNativeFunc(Frame& frame, vector<Identifier*> args, Block& body):
+    NativeFunc(frame, args, body) {};
+
+Value* IntcastNativeFunc::evalNativeFunc(Frame& currentFrame) {
+    LOG(1, "\tevalNativeFunc: intcast");
+    Identifier* s = args[0];
+    Value* val = currentFrame.getLocal(s->name);
+    if (dynamic_cast<IntValue*>(val) != NULL) {
+        return val;
+    }
+    auto strVal = val->cast<StrValue>();
+    if (strVal->val == "0") {
+        return new IntValue(0);
+    }
+    int result = atoi(strVal->val.c_str());
+    if (result == 0) {
+        throw IllegalCastException("cannot convert value " + strVal->val + " to IntValue");
+    }
+    return new IntValue(result);
+};
