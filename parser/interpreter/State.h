@@ -19,10 +19,11 @@ public:
         parentFrame(parent), globalFrame(global) {};
 
     Value* getLocal(string var) {
+        // only called when you're sure var is defined locally
         if (localVars.count(var)) {
             return localVars[var];
         }
-        return NULL;
+        throw RuntimeException("should never get here");
     }
 
     void setLocal(string var, Value* val) {
@@ -41,12 +42,11 @@ public:
     }
 
     Value* lookup_read(string var) {
-        Value* r;
         if (globalVars.count(var)) {
             return getGlobal(var);
         }
-        if ((r = getLocal(var)) != NULL) {
-            return r;
+        if (localVars.count(var)) {
+            return getLocal(var);
         }
         if (parentFrame == NULL) {
             throw UninitializedVariableException(var + " is not initialized");

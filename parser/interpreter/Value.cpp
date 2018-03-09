@@ -124,9 +124,6 @@ Value* PrintNativeFunc::evalNativeFunc(Frame& currentFrame) {
     LOG(1, "\tevalNativeFunc: print");
     Identifier* s = args[0];
     Value* val = currentFrame.getLocal(s->name);
-    if (val == NULL) {
-        throw RuntimeException("should never get here");
-    }
     cout << val->toString() << endl;
     return &NONE;
 };
@@ -148,9 +145,6 @@ Value* IntcastNativeFunc::evalNativeFunc(Frame& currentFrame) {
     LOG(1, "\tevalNativeFunc: intcast");
     Identifier* s = args[0];
     Value* val = currentFrame.getLocal(s->name);
-    if (val == NULL) {
-        throw RuntimeException("should never get here");
-    }
     if (dynamic_cast<IntValue*>(val) != NULL) {
         return val;
     }

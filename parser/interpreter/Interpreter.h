@@ -142,7 +142,6 @@ class Interpreter : public Visitor {
     void visit(Return& exp) override {
         LOG(2, "Visiting Return");
         rval = eval(&exp.expr);
-        currentFrame = currentFrame->parentFrame;
     };
 
     void visit(Function& exp) override {
@@ -294,8 +293,8 @@ class Interpreter : public Visitor {
 
     void visit(Call& exp) override {
         LOG(2, "Visiting Call");
-        bool oldReturned = returned;
         returned = false;
+        Frame* oldFrame = currentFrame;
         // first, check to make sure base exp is a FuncValue
         LOG(1, "\tCall: check for func value");
         Value* target = eval(&exp.target); // TODO: combine
@@ -331,7 +330,8 @@ class Interpreter : public Visitor {
             }
             LOG(1, "\tReturning " + rval->toString());
         }
-        returned = oldReturned;
+        returned = false;
+        currentFrame = oldFrame;
     };
 
     void visit(Record& exp) override {
@@ -346,7 +346,7 @@ class Interpreter : public Visitor {
     void visit(Identifier& exp) override {
         LOG(2, "Visiting Identifier: " + exp.name);
         rval = currentFrame->lookup_read(exp.name);
-        // LOG(1, "\tIdentifier: got type " + rval->type());
+        LOG(1, "\tIdentifier: got val " + rval->toString());
     };
 
     void visit(IntConst& exp) override {
