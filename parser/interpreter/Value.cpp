@@ -76,9 +76,8 @@ bool StrValue::equals(Value* other) {
 
 /* RecordValue */
 Value* RecordValue::getItem(string key) {
-    auto search = record.find(key);
-    if (search != record.end()) {
-        return search->second;
+    if (record.count(key)) {
+        return record[key];
     }
     return NULL;
 };
