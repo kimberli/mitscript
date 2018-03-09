@@ -90,8 +90,8 @@ Value* RecordValue::setItem(string key, Value* val) {
 string RecordValue::toString() {
     string result = "{";
     for (auto &r : record) {
-        result += r.first + " : ";
-        result += r.second->toString() + ";";
+        result += r.first + ":";
+        result += r.second->toString() + " ";
     }
     result += "}";
     return result;
