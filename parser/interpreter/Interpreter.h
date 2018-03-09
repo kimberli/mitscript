@@ -15,6 +15,7 @@ class Interpreter : public Visitor {
     NativeFunc* nativePrint;
     NativeFunc* nativeInput;
     NativeFunc* nativeIntcast;
+    bool returned;
 
     Value* eval(AST_node* exp){
         exp->accept(*this);
@@ -90,6 +91,7 @@ class Interpreter : public Visitor {
             auto retExp = dynamic_cast<Return*>(stmt);
             if (retExp != NULL) {
                 rval = eval(stmt);
+                returned = true;
                 break;
             }
             eval(stmt);
@@ -292,6 +294,7 @@ class Interpreter : public Visitor {
 
     void visit(Call& exp) override {
         LOG(2, "Visiting Call");
+        returned = false;
         // first, check to make sure base exp is a FuncValue
         LOG(1, "\tCall: check for func value");
         Value* target = eval(&exp.target); // TODO: combine
@@ -319,8 +322,13 @@ class Interpreter : public Visitor {
         auto nFunc = dynamic_cast<NativeFunc*>(func);
         if (nFunc != NULL) {
             rval = nFunc->evalNativeFunc(*currentFrame);
+            LOG(1, "\tReturning " + rval->toString());
         } else {
             rval = eval(&func->body);
+            if (!returned) {
+                rval = &NONE;
+            }
+            LOG(1, "\tReturning " + rval->toString());
         }
     };
 
