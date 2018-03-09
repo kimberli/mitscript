@@ -58,10 +58,10 @@ class PrettyPrinter : public Visitor {
         cout << tabs() << "if (";
         exp.condition.accept(*this);
         cout << ") ";
-        exp.then_block.accept(*this);
-        if (exp.else_block) {
+        exp.thenBlock.accept(*this);
+        if (exp.elseBlock) {
             cout << " else ";
-            exp.else_block->accept(*this);
+            exp.elseBlock->accept(*this);
         }
         cout << "\n";
     };

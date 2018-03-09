@@ -50,7 +50,7 @@ class Statement: public AST_node {
 class Constant: public Expression {
 };
 
-class Block: public AST_node {
+class Block: public Expression {
 public:
     vector<Statement*> stmts;
     void accept(Visitor& v) override {
@@ -89,10 +89,10 @@ public:
 class IfStatement: public Statement {
 public:
     Expression& condition;
-    Block& then_block;
-    Block* else_block;
-    IfStatement(Expression& condition, Block& then_block, Block* else_block):
-        condition(condition), then_block(then_block), else_block(else_block) {};
+    Block& thenBlock;
+    Block* elseBlock;
+    IfStatement(Expression& condition, Block& thenBlock, Block* elseBlock):
+        condition(condition), thenBlock(thenBlock), elseBlock(elseBlock) {};
     void accept(Visitor& v) override {
         v.visit(*this);
     }

@@ -19,6 +19,63 @@ class Interpreter : public Visitor {
         return rval;
     }
 
+    void processAssign(Expression* lhs, Value* rhs) {
+        auto id = dynamic_cast<Identifier*>(lhs);
+        if (id != NULL) {
+            currentFrame->assign(id->name, rhs);
+            return;
+        }
+        auto fieldD = dynamic_cast<FieldDeref*>(lhs);
+        if (fieldD != NULL) {
+            Value* exp = eval(&fieldD->base);
+            auto recVal = exp->cast<RecordValue>();
+            recVal->setItem(fieldD->field.name, rhs);
+        }
+        auto indexE = dynamic_cast<IndexExpr*>(lhs);
+        if (indexE != NULL) {
+            Value* exp = eval(&indexE->base);
+            string field = eval(&indexE->index)->toString();
+            auto recVal = exp->cast<RecordValue>();
+            recVal->setItem(field, rhs);
+        }
+    }
+
+    void processFuncVars(Frame& frame, Block* block) {
+        for (auto &stmt : block->stmts) {
+            auto globStmt = dynamic_cast<Global*>(stmt);
+            // add global
+            if (globStmt != NULL) {
+                frame.setGlobal(globStmt->name.name);
+            }
+            // add locals to None
+            auto asmtStmt = dynamic_cast<Assignment*>(stmt);
+            if (asmtStmt != NULL) {
+                processAssign(&asmtStmt->lhs, &NONE);
+            }
+            // recurse into other blocks
+            auto ifStmt = dynamic_cast<IfStatement*>(stmt);
+            if (ifStmt != NULL) {
+                processFuncVars(frame, &ifStmt->thenBlock);
+                if (ifStmt->elseBlock != NULL) {
+                    processFuncVars(frame, ifStmt->elseBlock);
+                }
+                break;
+            }
+            auto whileStmt = dynamic_cast<WhileLoop*>(stmt);
+            if (whileStmt != NULL) {
+                processFuncVars(frame, &whileStmt->body);
+                break;
+            }
+            auto blockStmt = dynamic_cast<Block*>(stmt);
+            if (blockStmt != NULL) {
+                processFuncVars(frame, blockStmt);
+                break;
+            }
+
+        }
+    }
+
+
     void visit(Block& exp) override {
         // TODO
         for (auto &stmt : exp.stmts) {
@@ -27,8 +84,7 @@ class Interpreter : public Visitor {
     };
 
     void visit(Global& exp) override {
-        // TODO
-        exp.name.accept(*this);
+        // globals are handled in function calls
     };
 
     void visit(Assignment& exp) override {
@@ -45,9 +101,9 @@ class Interpreter : public Visitor {
     void visit(IfStatement& exp) override {
         // TODO
         exp.condition.accept(*this);
-        exp.then_block.accept(*this);
-        if (exp.else_block) {
-            exp.else_block->accept(*this);
+        exp.thenBlock.accept(*this);
+        if (exp.elseBlock) {
+            exp.elseBlock->accept(*this);
         }
     };
 
@@ -119,8 +175,10 @@ class Interpreter : public Visitor {
             }
             case BinOp::Plus:
             {
+                // first, check if either operand is a StrValue
                 auto sLeft = dynamic_cast<StrValue*>(left);
                 auto sRight = dynamic_cast<StrValue*>(right);
+                // if so, automatically cast and concatenate
                 if (sLeft != NULL) {
                     rval = new StrValue(sLeft->val + right->toString());
                     break;
@@ -128,6 +186,7 @@ class Interpreter : public Visitor {
                     rval = new StrValue(left->toString() + sRight->val);
                     break;
                 }
+                // otherwise, make sure both arguments are IntValues and add
                 auto iLeft = left->cast<IntValue>();
                 auto iRight = right->cast<IntValue>();
                 rval = new IntValue(iLeft->val + iRight->val);
@@ -202,11 +261,25 @@ class Interpreter : public Visitor {
     };
 
     void visit(Call& exp) override {
-        // TODO
-        exp.target.accept(*this);
-        for (auto it = exp.args.begin(), end = exp.args.end(); it != end; it++) {
-            (*it)->accept(*this);
+        // first, check to make sure base exp is a FuncValue
+        auto func = eval(&exp.target)->cast<FuncValue>();
+        // next, eval args left to right and make sure args length is correct
+        vector<Value*>* args = new vector<Value*>();
+        for (auto a = func->args.begin(), end = func->args.end(); a != end; a++) {
+            args->push_back(eval(*a));
         }
+        if (args->size() != func->args.size()) {
+            throw RuntimeException();
+        }
+        // next, allocate a new stack frame and add globals and locals to it
+        currentFrame = new Frame(func->frame, rootFrame);
+        processFuncVars(*currentFrame, &func->body);
+        // set all params to the right values
+        for (int i = 0; i < args->size(); i++) {
+            currentFrame->setLocal(func->args.at(i)->name, args->at(i));
+        }
+        // eval function body
+        rval = eval(&func->body);
     };
 
     void visit(Record& exp) override {
@@ -218,7 +291,7 @@ class Interpreter : public Visitor {
     };
 
     void visit(Identifier& exp) override {
-        rval = currentFrame->lookup(exp.name);
+        rval = currentFrame->lookup_read(exp.name);
     };
 
     void visit(IntConst& exp) override {

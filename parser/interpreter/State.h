@@ -34,16 +34,35 @@ public:
         return globalFrame->getLocal(var);
     }
 
-    void setGlobal(string var, Value* val) {
+    void setGlobal(string var) {
         globalVars.insert(var);
-        globalFrame->setLocal(var, val);
     }
 
-    Value* lookup(string var) {
-        auto search = localVars.find(var);
-        if (search != localVars.end()) {
-            return search->second;
+    Value* lookup_read(string var) {
+        auto gSearch = globalVars.find(var);
+        if (gSearch != globalVars.end()) {
+            return getGlobal(var);
         }
-        parentFrame->lookup(var);
+        auto lSearch = localVars.find(var);
+        if (lSearch != localVars.end()) {
+            return lSearch->second;
+        }
+        if (parentFrame == NULL) {
+            throw UninitializedVariableException();
+        }
+        parentFrame->lookup_read(var);
+    }
+
+    void assign(string var, Value* val) {
+        auto gSearch = globalVars.find(var);
+        if (gSearch != globalVars.end()) {
+            globalFrame->setLocal(var, val);
+            return;
+        }
+        auto lSearch = localVars.find(var);
+        if (lSearch != localVars.end()) {
+            setLocal(var, val);
+            return;
+        }
     }
 };
