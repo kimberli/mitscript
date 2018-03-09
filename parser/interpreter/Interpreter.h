@@ -14,7 +14,7 @@ class Interpreter : public Visitor {
     Value* rval;
     Value& NONE = *new NoneValue();
 
-    Value* eval(Expression* exp){
+    Value* eval(AST_node* exp){
         exp->accept(*this);
         return rval;
     }
@@ -77,9 +77,13 @@ class Interpreter : public Visitor {
 
 
     void visit(Block& exp) override {
-        // TODO
         for (auto &stmt : exp.stmts) {
-            stmt->accept(*this);
+            auto retExp = dynamic_cast<Return*>(stmt);
+            if (retExp != NULL) {
+                rval = eval(stmt);
+                break;
+            }
+            eval(stmt);
         }
     };
 
@@ -88,34 +92,37 @@ class Interpreter : public Visitor {
     };
 
     void visit(Assignment& exp) override {
-        // TODO
-        exp.lhs.accept(*this);
-        exp.expr.accept(*this);
+        Value* rhs = eval(&exp.expr);
+        processAssign(&exp.lhs, rhs);
     };
 
     void visit(CallStatement& exp) override {
-        // TODO
-        exp.call.accept(*this);
+        rval = eval(&exp.call);
     };
 
     void visit(IfStatement& exp) override {
-        // TODO
-        exp.condition.accept(*this);
-        exp.thenBlock.accept(*this);
-        if (exp.elseBlock) {
-            exp.elseBlock->accept(*this);
+        Value* condition = eval(&exp.condition);
+        auto condVal = condition->cast<BoolValue>();
+        if (condVal->val) {
+            rval = eval(&exp.thenBlock);
+        } else if (exp.elseBlock != NULL) {
+            rval = eval(exp.elseBlock);
         }
     };
 
     void visit(WhileLoop& exp) override {
-        // TODO
-        exp.condition.accept(*this);
-        exp.body.accept(*this);
+        while (true) {
+            Value* condition = eval(&exp.condition);
+            auto condVal = condition->cast<BoolValue>();
+            if (!condVal->val) {
+                break;
+            }
+            rval = eval(&exp.body);
+        }
     };
 
     void visit(Return& exp) override {
-        // TODO
-        exp.expr.accept(*this);
+        rval = eval(&exp.expr);
     };
 
     void visit(Function& exp) override {
