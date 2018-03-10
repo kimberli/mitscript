@@ -38,6 +38,7 @@ public:
     }
 
     void setGlobal(string var) {
+        LOG(1, "\tState: adding global " + var);
         globalVars.insert(var);
     }
 
@@ -56,11 +57,11 @@ public:
 
     void assign(string var, Value* val) {
         if (globalVars.count(var)) {
-            LOG(1, "\tState: setting global " + var);
+            LOG(1, "\tState: setting global " + var + " to " + val->toString());
             globalFrame->setLocal(var, val);
             return;
         }
-        LOG(1, "\tState: setting local " + var);
+        LOG(1, "\tState: setting local " + var + " to " + val->toString());
         setLocal(var, val);
         return;
     }

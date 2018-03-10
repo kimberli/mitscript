@@ -50,19 +50,42 @@ class Interpreter : public Visitor {
 
     void processFuncVars(Frame& frame, Block* block) {
         for (auto &stmt : block->stmts) {
-            auto globStmt = dynamic_cast<Global*>(stmt);
             // add global
+            auto globStmt = dynamic_cast<Global*>(stmt);
             if (globStmt != NULL) {
                 LOG(1, "\tprocessFuncVars: adding global " + globStmt->name.name);
                 frame.setGlobal(globStmt->name.name);
             }
+            // recurse into other blocks
+            auto ifStmt = dynamic_cast<IfStatement*>(stmt);
+            if (ifStmt != NULL) {
+                processFuncVars(frame, &ifStmt->thenBlock);
+                if (ifStmt->elseBlock != NULL) {
+                    processFuncVars(frame, ifStmt->elseBlock);
+                }
+                break;
+            }
+            auto whileStmt = dynamic_cast<WhileLoop*>(stmt);
+            if (whileStmt != NULL) {
+                processFuncVars(frame, &whileStmt->body);
+                break;
+            }
+            auto blockStmt = dynamic_cast<Block*>(stmt);
+            if (blockStmt != NULL) {
+                processFuncVars(frame, blockStmt);
+                break;
+            }
+        }
+        for (auto &stmt : block->stmts) {
             // add locals to None
             auto asmtStmt = dynamic_cast<Assignment*>(stmt);
             if (asmtStmt != NULL) {
                 auto id = dynamic_cast<Identifier*>(&asmtStmt->lhs);
                 if (id != NULL) {
-                    LOG(1, "\tprocessFuncVars: init local");
-                    processAssign(&asmtStmt->lhs, &NONE);
+                    if (frame.globalVars.count(id->name) == 0) {
+                        LOG(1, "\tprocessFuncVars: init local");
+                        processAssign(&asmtStmt->lhs, &NONE);
+                    }
                 }
             }
             // recurse into other blocks
