@@ -59,8 +59,11 @@ class Interpreter : public Visitor {
             // add locals to None
             auto asmtStmt = dynamic_cast<Assignment*>(stmt);
             if (asmtStmt != NULL) {
-                LOG(1, "\tprocessFuncVars: init local");
-                processAssign(&asmtStmt->lhs, &NONE);
+                auto id = dynamic_cast<Identifier*>(&asmtStmt->lhs);
+                if (id != NULL) {
+                    LOG(1, "\tprocessFuncVars: init local");
+                    processAssign(&asmtStmt->lhs, &NONE);
+                }
             }
             // recurse into other blocks
             auto ifStmt = dynamic_cast<IfStatement*>(stmt);
@@ -308,9 +311,10 @@ class Interpreter : public Visitor {
         if (args->size() != func->args.size()) {
             throw RuntimeException("mismatched number of arguments");
         }
-        // next, allocate a new stack frame and add globals and locals to it
+        // next, allocate a new stack frame
         LOG(1, "\tCall: alloc new frame, load globals and locals");
         currentFrame = new Frame(&func->frame, currentFrame, rootFrame);
+        // set globals, set locals to None
         processFuncVars(*currentFrame, &func->body);
         // set all params to the right values
         LOG(1, "\tCall: set params");

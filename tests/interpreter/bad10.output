@@ -1,1 +1,1 @@
-IllegalCastException: cannot cast type NoneValue to RecordValue
+IllegalCastException: cannot cast type StrValue to RecordValue
