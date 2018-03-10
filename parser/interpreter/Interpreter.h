@@ -129,7 +129,7 @@ class Interpreter : public Visitor {
 
     void visit(WhileLoop& exp) override {
         LOG(2, "Visiting WhileLoop");
-        while (true) {
+        while (!returned) {
             Value* condition = eval(&exp.condition);
             auto condVal = condition->cast<BoolValue>();
             if (!condVal->val) {
