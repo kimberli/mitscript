@@ -11,12 +11,13 @@ class Frame {
 public:
     map<string, Value*> localVars;
     Frame* parentFrame;
+    Frame* callerFrame;
     Frame* globalFrame;
     set<string> globalVars;
 
     Frame() {};
-    Frame(Frame* parent, Frame* global):
-        parentFrame(parent), globalFrame(global) {};
+    Frame(Frame* parent, Frame* caller, Frame* global):
+        parentFrame(parent), callerFrame(caller), globalFrame(global) {};
 
     Value* getLocal(string var) {
         if (localVars.count(var)) {

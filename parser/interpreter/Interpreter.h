@@ -88,12 +88,13 @@ class Interpreter : public Visitor {
     void visit(Block& exp) override {
         LOG(2, "Visiting Block");
         for (auto &stmt : exp.stmts) {
-            auto retExp = dynamic_cast<Return*>(stmt);
-            if (retExp != NULL) {
-                retExp->accept(*this);
+            if (currentFrame == NULL) {
                 return;
             }
             stmt->accept(*this);
+            if (returned) {
+                return;
+            }
         }
     };
 
@@ -295,7 +296,6 @@ class Interpreter : public Visitor {
     void visit(Call& exp) override {
         LOG(2, "Visiting Call");
         returned = false;
-        Frame* oldFrame = currentFrame;
         // first, check to make sure base exp is a FuncValue
         LOG(1, "\tCall: check for func value");
         auto func = eval(&exp.target)->cast<FuncValue>();
@@ -310,7 +310,7 @@ class Interpreter : public Visitor {
         }
         // next, allocate a new stack frame and add globals and locals to it
         LOG(1, "\tCall: alloc new frame, load globals and locals");
-        currentFrame = new Frame(&func->frame, rootFrame);
+        currentFrame = new Frame(&func->frame, currentFrame, rootFrame);
         processFuncVars(*currentFrame, &func->body);
         // set all params to the right values
         LOG(1, "\tCall: set params");
@@ -331,7 +331,7 @@ class Interpreter : public Visitor {
             LOG(1, "\tReturning " + rval->toString());
         }
         returned = false;
-        currentFrame = oldFrame;
+        currentFrame = currentFrame->callerFrame;
     };
 
     void visit(Record& exp) override {

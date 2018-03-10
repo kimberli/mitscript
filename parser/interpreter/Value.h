@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#define LOG(lvl, msg) { if (lvl > 0) std::cerr << msg << endl; }
+#define LOG(lvl, msg) { if (lvl > 10) std::cerr << msg << endl; }
 
 using namespace std;
 
