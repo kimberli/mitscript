@@ -27,7 +27,7 @@ false
  test string casting
 hi -400
 hi false
-hi {x:5 y:hello z:{j:{} xyz:true } }
+hi {x:25 y:hello z:{j:{} xyz:true } }
 hi FUNCTION
 hi None
  test native

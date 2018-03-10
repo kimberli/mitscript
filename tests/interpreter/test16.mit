@@ -21,7 +21,7 @@ print(None == None);
 print(None == 0);
 print(None == "");
 
-a = {x: a; y: "hello"; z: {xyz: true; j: {};};};
+a = {x: a; y: "hello"; z: {xyz: true; j: {};}; x: a * a;};
 AAA = a;
 print(a == AAA);
 b = {x: a; y: "hello"; z: {xyz: true; j: {};};};
