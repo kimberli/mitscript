@@ -6,88 +6,89 @@
 enum class Operation
 {
     // Description: push a constant onto the operand stack
-    // Operand 0:   index of constant in enclosing function's list of constants 
     // Mnemonic:    load_const i
+    // Operand 0:   index of constant in enclosing function's list of constants
     // Stack:       S =>  S :: f.constants()[i]
     LoadConst,
 
     // Description: push a  function onto the operand stack
-    // Operand 0:   index of function  in enclosing function's list of functions 
     // Mnemonic:    load_func i
+    // Operand 0:   index of function  in enclosing function's list of functions
     // Stack:       S => S :: f.functions()[i] 
     LoadFunc,
    
     // Description: load value of local variable and push onto operand stack
-    // Operand 0:   index of local variable to read
     // Mnemonic:    load_local i
+    // Operand 0:   index of local variable to read
     // Stack:       S => S :: value_of(f.local_vars[i]) 
     LoadLocal,
 
     // Description: store top of operand stack into local variable
+    // Mnemonic:    store_local i
     // Operand 0:   index of local variable to store into
     // Operand 1:   value to store
-    // Mnemonic:    store_local i
     // Stack:       S :: operand 1==> S
     StoreLocal,
 
     // Description: load value of global variable
-    // Operand 0:   index of name of global variable in enclosing function's names list
     // Mnemonic:    load_global i
+    // Operand 0:   index of name of global variable in enclosing function's names list
     // Stack:       S =>  S :: global_value_of(f.names[i])
     LoadGlobal,
 
     // Description: store value into global variable
+    // Mnemonic:    store_global i
     // Operand 0:   index of name of global variable in enclosing function's names list
     // Operand 1:   value to store
-    // Mnemonic:    store_global i
     // Stack:       S :: operand 1 ==> S
     StoreGlobal,
 
     // Description: push a reference to a local variable or free variable reference onto the operand stack
-    // Operand 0:   index of local variable reference 
     // Mnemonic:    push_ref i
+    // Operand 0:   index of local variable reference
     // Stack:       S ==>  address_of(var) :: S
     //                  where var = i < f.local_reference_vars.size() ? f.local_reference_vars[i] 
     //                                                           :  f.free_vars[i - f.local_reference_vars.size()]
     PushReference,
 
     // Description: loads the value of a reference onto the operand stack
+    // Mnemonic:    load_ref
     // Operand 0:   N/A
     // Operand 1:   reference to load from
-    // Mnemonic:    load_ref
     // Stack:       S :: operand 1 => S :: value_of(operand 1)
     LoadReference,
 
     // Description: loads the value of a reference onto the operand stack
+    // Mnemonic:    load_ref
     // Operand 0:   N/A
     // Operand 1:   value to store
     // Operand 2:   reference to store to
-    // Mnemonic:    load_ref
     // Stack:       S :: operand 2 :: operand 1 => S
     StoreReference,
     
     // Description: allocates a record and pushes it on the operand stack
-    // Operand 0:   N/A
     // Mnemonic:    alloc_record
+    // Operand 0:   N/A
     // Stack:       S => S :: record
     AllocRecord,
 
     // Description: load value of field from record
+    // Mnemonic:    field_load i
     // Operand 0:   index of the field's name within the enclosing function's names list
     // Operand 1:   record from which to load
-    // Mnemonic:    field_load i
     // Stack:       S :: operand 1 => S :: record_value_of(operand, f.names[i])
     FieldLoad,
 
     // Description: store value into field of record
+    // Mnemonic:    field_store i
     // Operand 0:   index of the field's name within the enclosing function's names list
     // Operand 1:   the value to store
     // Operand 2:   the record to store into  
-    // Mnemonic:    field_store i
     // Stack:       S :: operand 2 :: operand 1 => S
     FieldStore,
 
     // Description: load value from index of record 
+    // Mnemonic:    index_load
     // Operand 0:   N/A
     // Operand 1:   the index to read from (can be arbitrary value. indexing adheres to semantics of Assignment #2)
     // Operand 2:   the record to read from
@@ -95,6 +96,7 @@ enum class Operation
     IndexLoad,
 
     // Description: store value into index of record
+    // Mnemonic:    index_store
     // Operand 0:   N/A
     // Operand 1:   the value to store
     // Operand 2:   the index to store to (can be arbitrary value. indexing adheres to semantics of Assignment #2)
@@ -103,122 +105,122 @@ enum class Operation
     IndexStore,
     
     // Description: allocate a closure
+    // Mnemonic:    alloc_closure m
     // Operand 0:   the number of free variable references passed to the closure
     // Operand 1:   function
     // Operand 2-N: references to the function's free variables
-    // Mnemonic:    alloc_closure m
     // Stack:       S :: operand n :: ... :: operand 3 :: operand 2 :: operand 1 => S :: closure 
     AllocClosure, 
    
     // Description: call a closure
+    // Mnemonic:    call m
     // Operand 0:   number of arguments to the function (m)
     // Operand i  (0 < i < m) : argument (m - i)
     // Operand N:   closure to call (closure reference)
-    // Mnemonic:    call m
     // Stack:       S::operand n :: .. :: operand 3 :: operand 2 :: operand 1 => S :: return value
     Call,
 
     // Description: ends the execution of the enclosing function and returns the top of the stack
+    // Mnemonic:    return
     // Operand 0:   N/A
     // Operand 1:   value to return
-    // Mnemonic:    return
     // Stack::      S :: operand 1 => S
     Return,
 
     // Description: implements addition (as given in the semantics of Assignment #2)
+    // Mnemonic:    add
     // Operand 0:   N/A
     // Operand 1:   right value 
     // Operand 2:   left value
     // Result:      value of the operation as specified by the semantics of Assignment #2
-    // Mnemonic:    add
     // Stack:       S:: operand 2 :: operand 1 => S :: op(operand 2, operand 1)
     Add,
 
     // Description: performs an arithmetic operation on two integer operands
+    // Mnemonic:    sub/mul/div
     // Operand 0:   N/A
     // Operand 1:   right value 
     // Operand 2:   left value
-    // Mnemonic:    sub/mul/div
     // Stack:       S:: operand 2 :: operand 1 => S :: op(operand 2, operand 1)
     Sub,
     Mul,
     Div,
 
     // Description: computes the unary minus of the integer operation
+    // Mnemonic:    neg
     // Operand 0:   N/A
     // Operand 1:   value 
-    // Mnemonic:    neg
     // Stack:       S :: operand 1 => S:: - operand 1
     Neg,
 
     // Description: computes a comparison operation on two integer operands
+    // Mnemonic:    gt/geq
     // Operand 0:   N/A
     // Operand 1:   right value 
     // Operand 2:   left value
-    // Mnemonic:    gt/geq
     // Stack:       S :: operand 2 :: operand 1 => S:: op(operand 2, operand 1)
     Gt,
     Geq,
 
     // Description: computes an equality between two values (semantics according to Assignment #2)
+    // Mnemonic:    eq
     // Operand 0:   N/A
     // Operand 1:   right value 
     // Operand 2:   left value
-    // Mnemonic:    eq
     // Stack:       S :: operand 2 :: operand 1 => S:: eq(operand 2, operand 1)
     Eq,
 
     // Description: computes a boolean operation on two boolean operands (semantics according to Assignment #2)
+    // Mnemonic:    and/or
     // Operand 0:   N/A
     // Operand 1:   right value 
     // Operand 2:   left value
-    // Mnemonic:    and/or
     // Stack:       S :: operand 2 :: operand 1 => S:: op(operand 2, operand 1)
     And,
     Or,
     
     // Description: computes the logical negation of a boolean operand
+    // Mnemonic:    not
     // Operand 0:   N/A
     // Operand 1:   value
-    // Mnemonic:    not
     // Stack:       S :: operand 1 => S:: op(operand 1)
     Not,
     
     // Description: transfers execution of the function to a new instruction offset within the current function
+    // Mnemonic:    goto i
     // Example: goto 0 jumps to the current instruction. goto 1 jumps to the following instruction. goto -1 jumps to the preceding instruction
     // Operand 0: offset relative to the current instruction offset to jump to.
-    // Mnemonic:    goto i
     // Stack:       S => S
     Goto,
 
     // Description: transfers execution of the function to a new instruction offset within the current function if the operand evaluates to true. 
+    // Mnemonic:    if i
     // If operand evaluates to false, then execution continues at the next instruction
     // Operand 0:   offset relative to the current instruction offset to jump to.
     // Operand 1:   value
-    // Mnemonic:    if i
     // Stack:       S :: operand 1 => S
     If,
 
     // Description: duplicates the element at the top of the stack. 
+    // Mnemonic:    dup
     // If this element is a reference to a record, function, or local variable, the operation only duplicates the reference.
     // Operand 0:   N/A
     // Operand 1:   value
-    // Mnemonic:    dup
     // Stack:       S :: operand 1 => S :: operand 1 :: operand 1
     Dup,
 
     // Description: swaps the two values at the top of the stack
+    // Mnemonic:    swap
     // Operand 0:   N/A
     // Operand 1:   a value
     // Operand 2:   a value
-    // Mnemonic:    swap
     // Stack:       S :: operand 2 :: operand 1 => S :: operand 1 :: operand 2
     Swap,
 
     // Description: pops and discards the top of the stack 
+    // Mnemonic:    pop
     // Operand 0:   N/A
     // Operand 1:   a value
-    // Mnemonic:    swap
     // Stack:       S :: operand 1 => S
     Pop
 };
