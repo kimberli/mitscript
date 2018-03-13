@@ -1,4 +1,3 @@
-#pragma once
 
 #include <experimental/optional>
 #include <vector>

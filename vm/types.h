@@ -9,25 +9,23 @@
 
 struct Constant
 {
-
   virtual ~Constant() { }
 };
 
 struct None : public Constant
 {
-
   virtual ~None() { }
 };
 
 struct Integer : public Constant
 {
-  Integer(int64_t value) 
+  Integer(int32_t value) 
   : value(value)
   {
 
   }
 
-   int64_t value;
+   int32_t value;
 
    virtual ~Integer() { }
 };
