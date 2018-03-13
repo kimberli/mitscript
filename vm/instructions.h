@@ -132,7 +132,6 @@ enum class Operation
     // Result:      value of the operation as specified by the semantics of Assignment #2
     // Mnemonic:    add
     // Stack:       S:: operand 2 :: operand 1 => S :: op(operand 2, operand 1)
-   
     Add,
 
     // Description: performs an arithmetic operation on two integer operands
@@ -152,7 +151,6 @@ enum class Operation
     // Stack:       S :: operand 1 => S:: - operand 1
     Neg,
 
-
     // Description: computes a comparison operation on two integer operands
     // Operand 0:   N/A
     // Operand 1:   right value 
@@ -161,7 +159,6 @@ enum class Operation
     // Stack:       S :: operand 2 :: operand 1 => S:: op(operand 2, operand 1)
     Gt,
     Geq,
-
 
     // Description: computes an equality between two values (semantics according to Assignment #2)
     // Operand 0:   N/A
@@ -186,7 +183,6 @@ enum class Operation
     // Mnemonic:    not
     // Stack:       S :: operand 1 => S:: op(operand 1)
     Not,
-    
     
     // Description: transfers execution of the function to a new instruction offset within the current function
     // Example: goto 0 jumps to the current instruction. goto 1 jumps to the following instruction. goto -1 jumps to the preceding instruction
