@@ -50,7 +50,7 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* me
 
 
 %union {
-	int64_t intconst;
+	int32_t intconst;
 	std::string* strconst;
 
 	Function*   func;
