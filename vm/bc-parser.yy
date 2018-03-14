@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <string>
-#define YY_DECL int yylex (YYSTYPE* yylval, YYLTYPE * yylloc, yyscan_t yyscanner)
+#define YY_DECL int bclex (BCSTYPE* yylval, BCLTYPE * yylloc, yyscan_t yyscanner)
 #ifndef FLEX_SCANNER 
 #include "bc-lexer.h"
 #endif 
@@ -45,7 +45,7 @@ uint32_t safe_unsigned_cast(int64_t value);
 
 %code provides{
 YY_DECL;
-int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* message);
+int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* message);
 }
 
 
@@ -413,7 +413,7 @@ InstructionList:
 %%
 
 // Error reporting function. You should not have to modify this.
-int yyerror(YYLTYPE * yylloc, void* p, Function*& out, const char*  msg){
+int yyerror(BCLTYPE * yylloc, void* p, Function*& out, const char*  msg){
 
   cout<<"Error in line "<<yylloc->last_line<<", col "<<yylloc->last_column<<": "<<msg <<endl;
   return 0;
