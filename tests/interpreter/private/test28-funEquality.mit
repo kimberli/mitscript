@@ -1,0 +1,19 @@
+
+f = fun(){
+  t = 5;
+  return fun(x){ return x + t; };
+};
+
+g = f();
+print("g(5) = " + g(5));
+q = f();
+h = g;
+
+if(h == g){
+  print("You should print this");
+}
+
+if(g == f){  
+  print("But not this");
+}
+print("Bye!");
