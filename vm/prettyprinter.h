@@ -142,7 +142,7 @@ class PrettyPrinter
         }
         else if (const auto *value = dynamic_cast<const Boolean *>(&constant))
         {
-            os << value->value;
+            os << (value->value ? "true" : "false"); 
         }
         else if (const auto *value = dynamic_cast<const Integer *>(&constant))
         {
