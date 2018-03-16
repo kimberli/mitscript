@@ -1,0 +1,2 @@
+s = "\n hello \n \t hi he said \" hello \" \\\\";
+print(s);

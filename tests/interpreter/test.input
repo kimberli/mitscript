@@ -1,0 +1,3 @@
+print("say something:");
+s = input();
+print("you typed \"" + s + "\"");
