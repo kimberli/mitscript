@@ -29,6 +29,7 @@ int main(int argc, char** argv) {
     std::shared_ptr<Function> func(output);
   
     Interpreter* intp = new Interpreter(output); 
+    intp->run();
 
     return 0;
 }
