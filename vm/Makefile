@@ -1,4 +1,4 @@
-interpreter: main.cpp bc-parser
+interpreter: main.cpp interpreter.cpp bc-parser
 	g++ -g -std=c++1y main.cpp interpreter.cpp bc-parser.cpp bc-lexer.cpp -o interpreter
 
 bc-parser: bc-parser.cpp bc-lexer.cpp bc-parser-driver.cpp
