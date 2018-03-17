@@ -9,8 +9,8 @@ using namespace std;
 class Interpreter {
 private:
     Function* currentFunc;
-    stack<Constant> operandStack;
-    Frame frame; 
+    Frame* currentFrame; 
+    int instructionPtr;
 public:
     Interpreter(Function* mainFunc);
 };
