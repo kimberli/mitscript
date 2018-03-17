@@ -4,7 +4,7 @@
 
 class PrettyPrinter
 {
-  public:
+public:
     PrettyPrinter()
         : indent_(0)
     {
@@ -97,7 +97,7 @@ class PrettyPrinter
         assert(indent_ == old_indent);
     }
 
-  private:
+private:
     void indent()
     {
         ++indent_;
@@ -390,6 +390,6 @@ class PrettyPrinter
         }
     }
 
-  private:
+private:
     size_t indent_;
 };
