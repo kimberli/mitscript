@@ -4,4 +4,4 @@
 
 using namespace std;
 
-Interpreter::Interpreter(Function* currentFunc): currentFunc(currentFunc) {};
+Interpreter::Interpreter(Function* mainFunc): currentFunc(mainFunc) {};
