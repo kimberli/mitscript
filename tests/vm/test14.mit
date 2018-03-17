@@ -1,0 +1,14 @@
+
+x = {};
+f = fun(hi) {
+    print(hi);
+    y = "abc";
+    x[y] = {};
+    x[y][hi] = 4;
+    print(x);
+};
+g = fun() {
+    print(x.abc);
+};
+f("abc");
+g();

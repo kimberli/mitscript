@@ -1,0 +1,11 @@
+x = {};
+f = fun(hi) {
+    print(hi);
+    x[hi] = 2;
+    print(x);
+};
+g = fun() {
+    print(x.abc);
+};
+f("abc");
+g();

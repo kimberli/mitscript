@@ -1,0 +1,61 @@
+person = fun(name, age, student) {
+    if (student) {
+        this = {
+            name: name;
+            age: age;
+            student: student;
+            getGrade: fun() {
+                return age / 10;
+            };
+        };
+        return this;
+        print("nothing");
+    } else {
+        this = {
+            name: name;
+            age: age;
+            student: student;
+            getGrade: fun() {
+                return -age;
+            };
+        };
+        return this;
+    }
+};
+
+db = {
+    alice: person("Alice", 32, true);
+    bob: person("Bob B.", 12, false);
+    cathy: person("Cathy", -200, false);
+    size: fun() {
+        return 3;
+    };
+};
+
+database = db;
+
+print(database.alice);
+print(database.bob);
+print(database.cathy);
+
+addGrades = fun(name1, name2, name3) {
+    global db;
+    total = 0;
+    p1 = db[name1];
+    p2 = db[name2];
+    p3 = db[name3];
+    total = total + p1.getGrade(); 
+    total = total + p2.getGrade(); 
+    total = total + p3.getGrade(); 
+
+    sum = fun(a, b, c) {
+        print("counting " + db.size() + " elements");
+        return a + b + c;
+    };
+
+    ans = sum(p1.getGrade(), p2.getGrade(), p3.getGrade());
+    print(ans == total);
+    return ans;
+};
+
+print("total grades: " + addGrades("alice", "bob", "cathy")); 

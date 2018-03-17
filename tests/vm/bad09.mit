@@ -1,0 +1,5 @@
+x = fun(a, b) {
+    return a / b;
+};
+
+x(3, 0);
