@@ -2,6 +2,7 @@
 #include "../parser/lexer.h"
 #include <iostream>
 #include "prettyprinter.h"
+#include "compiler.h"
 
 using namespace std;
 
@@ -29,7 +30,9 @@ int main(int argc, char** argv)
     }
 
     // TODO: traverse the AST and create a Function
-    Function* rootFunc;
+    BytecodeCompiler* c = new BytecodeCompiler();
+    output->accept(*c);
+    Function* rootFunc = c->getBytecode();
 
     std::shared_ptr<Function> func(rootFunc);
 

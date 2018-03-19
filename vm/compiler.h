@@ -36,6 +36,11 @@ public:
         expr.accept(*this);
         return ret;
     }
+    
+    Function* getBytecode() {
+        Function* f;
+        return f;
+    }
 
     void visit(Block& exp) {
 
@@ -66,7 +71,7 @@ public:
         iList.push_back(*i); 
         ret = iList;
     }
-    void visit(Function& exp) {
+    void visit(FunctionExpr& exp) {
 
     }
     void visit(BinaryExpr& exp) {
