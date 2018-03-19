@@ -74,7 +74,7 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Block*& out, const char* messa
 %type<block_type> Program
 %type<block_type> StatementList Block
 %type<stmt_type> Statement Assignment CallStatement Global IfStatement WhileLoop Return
-%type<expr_type> Expression Function Boolean Record Constant
+%type<expr_type> Expression FunctionExpr Boolean Record ConstantExpr
 %type<expr_list_type> ExpressionList ExpressionListHead
 %type<id_list_type> ArgsList ArgsListHead
 %type<expr_type> Conjunction BoolUnit Predicate Arithmetic Product Unit PosUnit Lhs Call
@@ -152,13 +152,13 @@ T_RETURN Expression ';' {
 }
 
 Expression:
-Function
+FunctionExpr
 | Boolean
 | Record
 
-Function:
+FunctionExpr:
 T_FUN '(' ArgsList ')' Block {
-    $$ = new Function(*$3, *$5);
+    $$ = new FunctionExpr(*$3, *$5);
 }
 
 ArgsList:
@@ -254,7 +254,7 @@ PosUnit {
 
 PosUnit:
 Lhs
-| Constant
+| ConstantExpr
 | Call
 | '(' Boolean ')' {
     $$ = $2;
@@ -311,7 +311,7 @@ T_ID {
     $$ = new Identifier(*$1);
 }
 
-Constant:
+ConstantExpr:
 T_INT {
     $$ = new IntConst($1);
 }

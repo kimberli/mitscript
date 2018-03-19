@@ -77,7 +77,7 @@ class PrettyPrinter : public Visitor {
         exp.expr.accept(*this);
         cout << ";\n";
     };
-    void visit(Function& exp) override {
+    void visit(FunctionExpr& exp) override {
         cout << "fun(";
         for (auto it = exp.args.begin(), end = exp.args.end(); it != end; it++) {
             if (it != exp.args.begin()) cout << ", ";

@@ -47,7 +47,7 @@ class Expression : public AST_node {
 class Statement: public AST_node {
 };
 
-class Constant: public Expression {
+class ConstantExpr: public Expression {
 };
 
 class Block: public Expression {
@@ -118,11 +118,11 @@ public:
     }
 };
 
-class Function: public Expression {
+class FunctionExpr: public Expression {
 public:
     vector<Identifier*> args;
     Block& body;
-    Function(vector<Identifier*> args, Block& body): args(args), body(body) {};
+    FunctionExpr(vector<Identifier*> args, Block& body): args(args), body(body) {};
     void accept(Visitor& v) override {
         v.visit(*this);
     }
@@ -198,7 +198,7 @@ public:
     }
 };
 
-class IntConst: public Constant{
+class IntConst: public ConstantExpr {
 public:
     int val;
     IntConst(int val): val(val) {};
@@ -207,7 +207,7 @@ public:
     }
 };
 
-class StrConst: public Constant {
+class StrConst: public ConstantExpr {
 public:
     string val;
     StrConst(string val): val(val) {};
@@ -216,7 +216,7 @@ public:
     }
 };
 
-class BoolConst: public Constant {
+class BoolConst: public ConstantExpr {
 public:
     bool val;
     BoolConst(bool val): val(val) {};
@@ -225,7 +225,7 @@ public:
     }
 };
 
-class NoneConst: public Constant {
+class NoneConst: public ConstantExpr {
 public:
     void accept(Visitor& v) override {
         v.visit(*this);
