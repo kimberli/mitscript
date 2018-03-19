@@ -11,9 +11,7 @@ using namespace std;
 
 class Interpreter {
 private:
-    Function* currFunc;
-    Frame* currFrame; 
-    Instruction* instructionPtr;
+    stack<Frame*>* frames; 
     void executeStep();
     bool finished;
 public:

@@ -1,2 +1,7 @@
 bc-parser
 interpreter
+compiler
+bc-lexer.cpp
+bc-lexer.h
+bc-parser.cpp
+bc-parser.h

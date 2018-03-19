@@ -1,5 +1,8 @@
-interpreter: main.cpp interpreter.cpp bc-parser
-	g++ -g -std=c++1y main.cpp interpreter.cpp bc-parser.cpp bc-lexer.cpp -o interpreter
+compiler: compiler-main.cpp
+	g++ -g -std=c++1y compiler-main.cpp ../parser/parser.cpp ../parser/lexer.cpp -o compiler
+
+interpreter: interpreter-main.cpp interpreter.cpp bc-parser
+	g++ -g -std=c++1y interpreter-main.cpp interpreter.cpp bc-parser.cpp bc-lexer.cpp -o interpreter
 
 bc-parser: bc-parser.cpp bc-lexer.cpp bc-parser-driver.cpp
 	g++ -g -std=c++1y bc-parser-driver.cpp bc-parser.cpp bc-lexer.cpp -o bc-parser
@@ -11,4 +14,4 @@ bc-lexer.cpp: bc-lexer.lex
 	flex -P bc --outfile=bc-lexer.cpp --header-file=bc-lexer.h bc-lexer.lex
 
 clean: 
-	rm -f bc-lexer.cpp bc-lexer.h bc-parser.cpp bc-parser.h bc-parser.output bc-parser *.exe
+	rm -f bc-lexer.cpp bc-lexer.h bc-parser.cpp bc-parser.h bc-parser.output bc-parser interpreter compiler *.exe

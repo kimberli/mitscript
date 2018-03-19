@@ -11,7 +11,7 @@ class CallStatement;
 class IfStatement;
 class WhileLoop;
 class Return;
-class Function;
+class FunctionExpr;
 class BinaryExpr;
 class UnaryExpr;
 class FieldDeref;
@@ -33,7 +33,7 @@ public:
     virtual void visit(IfStatement& exp) = 0;
     virtual void visit(WhileLoop& exp) = 0;
     virtual void visit(Return& exp) = 0;
-    virtual void visit(Function& exp) = 0;
+    virtual void visit(FunctionExpr& exp) = 0;
     virtual void visit(BinaryExpr& exp) = 0;
     virtual void visit(UnaryExpr& exp) = 0;
     virtual void visit(FieldDeref& exp) = 0;

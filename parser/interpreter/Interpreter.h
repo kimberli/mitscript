@@ -171,8 +171,8 @@ class Interpreter : public Visitor {
         returned = true;
     };
 
-    void visit(Function& exp) override {
-        LOG(2, "Visiting Function");
+    void visit(FunctionExpr& exp) override {
+        LOG(2, "Visiting FunctionExpr");
         rval = new FuncValue(*currentFrame, exp.args, exp.body);
     };
 
