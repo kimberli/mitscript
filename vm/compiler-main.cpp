@@ -24,12 +24,11 @@ int main(int argc, char** argv)
 
     Block* output;
     int rvalue = yyparse(scanner, output);
-    if(rvalue == 1){
-        cout<<"Parsing failed"<<endl;
+    if (rvalue == 1) {
+        cout << "Parsing MITScript failed" << endl;
         return 1;
     }
 
-    // TODO: traverse the AST and create a Function
     BytecodeCompiler* c = new BytecodeCompiler();
     output->accept(*c);
     Function* rootFunc = c->getBytecode();

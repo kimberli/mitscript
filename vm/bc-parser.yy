@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#undef YY_DECL
 #define YY_DECL int bclex (BCSTYPE* yylval, BCLTYPE * yylloc, yyscan_t yyscanner)
 #ifndef FLEX_SCANNER 
 #include "bc-lexer.h"
