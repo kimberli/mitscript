@@ -12,7 +12,7 @@ using namespace std;
 class Interpreter {
 private:
     Function* currFunc;
-    Frame* currFrame; 
+    stack<Frame*>* frames; 
     Instruction* instructionPtr;
     void executeStep();
     bool finished;

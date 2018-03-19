@@ -1,12 +1,14 @@
 #include "frame.h"
 #include "instructions.h"
 #include "interpreter.h"
+#include <stack>
 #include "types.h"
 
 using namespace std;
 
 Interpreter::Interpreter(Function* mainFunc): currFunc(mainFunc) {
-    currFrame = new Frame();
+    frames = new stack<Frame*>();
+    frames->push(new Frame());
     instructionPtr = &mainFunc->instructions.front();
     finished = false;
 };
