@@ -1,0 +1,6 @@
+x = fun() {
+  y = {};
+  return y;
+};
+z = x();
+print(z);
