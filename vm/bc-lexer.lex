@@ -119,7 +119,7 @@ comment      ("//"[^\n]*)
 "if"  { return T_if; }
 "dup" { return T_dup; }
 "swap" { return T_swap; }
-"pop" {return T_swap; }
+"pop" {return T_pop; }
 
 {Operator} {  return yytext[0]; }
 
