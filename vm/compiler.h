@@ -1,40 +1,29 @@
 # include "../parser/AST.h"
 # include "../parser/Visitor.h"
 # include "instructions.h"
+# include "types.h"
 
 # include <memory>
 # include <functional>
+
 using namespace std;
 
-class Block;
-class Global;
-class Assignment;
-class CallStatement;
-class IfStatement;
-class WhileLoop;
-class Return;
-class Function;
-class BinaryExpr;
-class UnaryExpr;
-class FieldDeref;
-class IndexExpr;
-class Call;
-class Record;
-class Identifier;
-class IntConst;
-class StrConst;
-class BoolConst;
-class NoneConst;
-
 class BytecodeCompiler : public Visitor {
-public:
-    // Holder for code that has already been generated
-    InstructionList ret;
+public: // Holder for code that has already been generated
+    InstructionList instr;
+    // Holder for a function 
+    Function f;
 
     // Helper to return stored value
-    InstructionList evaluate(AST_node& expr) {
+    InstructionList evalInstructions(AST_node& expr) {
         expr.accept(*this);
-        return ret;
+        return instr;
+    }
+
+    // Helper to return a function 
+    Function evalFunc(AST_node& expr) {
+        expr.accept(*this);
+        return f;
     }
     
     Function* getBytecode() {
@@ -63,13 +52,13 @@ public:
     void visit(Return& exp) {
         // get the code to evalute the expression and leave it 
         // on the top of the stack
-        InstructionList iList = evaluate(exp);
+        InstructionList iList = evalInstructions(exp);
         // add a return instruciton 
         std::experimental::optional<int32_t> arg0;
         Operation op = Operation::Call;
         Instruction* i = new Instruction(op, arg0);
         iList.push_back(*i); 
-        ret = iList;
+        instr = iList;
     }
     void visit(FunctionExpr& exp) {
 

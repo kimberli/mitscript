@@ -3,6 +3,7 @@
 #include <iostream>
 #include "prettyprinter.h"
 #include "compiler.h"
+#include "cfg.h"
 
 using namespace std;
 
