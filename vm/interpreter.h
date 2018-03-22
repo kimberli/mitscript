@@ -11,6 +11,7 @@ using namespace std;
 
 class Interpreter {
 private:
+    Frame* globalFrame;
     stack<Frame*>* frames; 
     void executeStep();
     bool finished;
