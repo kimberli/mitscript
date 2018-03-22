@@ -94,6 +94,102 @@ void Interpreter::executeStep() {
                 globalFrame->localVars[globalVar] = value;
                 break;
             }
+        case Operation::AllocRecord:
+            {
+                break;
+            }
+        case Operation::FieldLoad:
+            {
+                break;
+            }
+        case Operation::FieldStore:
+            {
+                break;
+            }
+        case Operation::IndexLoad:
+            {
+                break;
+            }
+        case Operation::IndexStore:
+            {
+                break;
+            }
+        case Operation::AllocClosure:
+            {
+                break;
+            }
+        case Operation::Call:
+            {
+                break;
+            }
+        case Operation::Return:
+            {
+                break;
+            }
+        case Operation::Add:
+            {
+                break;
+            }
+        case Operation::Sub:
+            {
+                break;
+            }
+        case Operation::Mul:
+            {
+                break;
+            }
+        case Operation::Div:
+            {
+                break;
+            }
+        case Operation::Neg:
+            {
+                break;
+            }
+        case Operation::Gt:
+            {
+                break;
+            }
+        case Operation::Geq:
+            {
+                break;
+            }
+        case Operation::Eq:
+            {
+                break;
+            }
+        case Operation::And:
+            {
+                break;
+            }
+        case Operation::Or:
+            {
+                break;
+            }
+        case Operation::Not:
+            {
+                break;
+            }
+        case Operation::Goto:
+            {
+                break;
+            }
+        case Operation::If:
+            {
+                break;
+            }
+        case Operation::Dup:
+            {
+                break;
+            }
+        case Operation::Swap:
+            {
+                break;
+            }
+        case Operation::Pop:
+            {
+                break;
+            }
     }
     frame->instructionPtr++;
 };
