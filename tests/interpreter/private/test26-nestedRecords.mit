@@ -1,0 +1,7 @@
+record1 = {a:5;b:6;c:{};};
+record2 = record1.c;
+record2.d = 8;
+print("All should print 8");
+print(record1.c.d);
+print(record1["c"].d);
+print(record1.c["d"]);

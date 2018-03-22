@@ -1,0 +1,7 @@
+y = 4;
+if (y > 7) {
+	z = 9;
+}
+print("should throw an Uninitialized Variable Exception");
+x = z + y;
+print("Can't print this: " + x);

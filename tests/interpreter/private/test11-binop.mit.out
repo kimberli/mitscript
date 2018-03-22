@@ -1,0 +1,39 @@
+Should print: 1hi
+1hi
+Should print: 2
+2
+Should print: hi1
+hi1
+Should print: 3
+3
+Should print: 9
+9
+Should print: {hello:9 }
+{hello:9 }
+Should print: FUNCTION
+FUNCTION
+Should print: True
+true
+true
+true
+true
+true
+true
+true
+true
+true
+true
+true
+true
+true
+true
+Should print: False
+false
+false
+false
+false
+false
+false
+false
+false
+false

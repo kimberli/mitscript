@@ -1,0 +1,2 @@
+should throw an Uninitialized Variable Exception
+UninitializedVariableException: z
