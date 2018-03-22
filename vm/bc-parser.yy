@@ -323,9 +323,9 @@ Instruction:
 {
 	$$ = new Instruction(Operation::IndexStore, { });
 }
-| T_alloc_closure
+| T_alloc_closure T_int
 {
-	$$ = new Instruction(Operation::AllocClosure, { });	
+	$$ = new Instruction(Operation::AllocClosure, safe_unsigned_cast($2));	
 }
 | T_call
 {

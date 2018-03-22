@@ -258,7 +258,8 @@ private:
         }
         case Operation::AllocClosure:
         {
-            os << "alloc_closure";
+            os << "alloc_closure" 
+ 	       << "\t" << inst.operand0.value();
 
             break;
         }
