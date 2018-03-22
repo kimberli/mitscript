@@ -9,7 +9,12 @@
 
 struct Value 
 {
+    virtual ~Value() { }
+};
 
+struct ValuePtr: public Value {
+    Value* ptr;
+    ValuePtr(Value* ptr): ptr(ptr) {}
 };
 
 struct Constant: public Value

@@ -1,3 +1,4 @@
+#include "exception.h"
 #include "frame.h"
 #include "instructions.h"
 #include "interpreter.h"
@@ -43,7 +44,7 @@ void Interpreter::executeStep() {
         case Operation::StoreLocal: 
             {
 		string localVar = frame->func->local_vars_[inst->operand0.value()];
-		Constant value = frame->operandStack.top();
+		Value value = frame->operandStack.top();
 		frame->operandStack.pop();
 		frame->localVars[localVar] = value;
                 break;
@@ -65,14 +66,19 @@ void Interpreter::executeStep() {
         case Operation::PushReference: 
             {
 		string localRef = frame->func->local_reference_vars_[inst->operand0.value()];
-		frame->operandStack.push(frame->localRefs[localRef]);
+		frame->operandStack.push(*(new ValuePtr(frame->localRefs[localRef])));
                 break;
             }
         case Operation::LoadReference: 
             {
-		Value* ref = frame->operandStack.top();
+		Value* ref = &frame->operandStack.top();
+		auto valuePtr = dynamic_cast<ValuePtr*>(ref);
+		if (valuePtr == NULL) {
+		    throw RuntimeException("Not a reference");
+		}
+		Value* ptr = valuePtr->ptr;
 		frame->operandStack.pop();
-		frame->operandStack.push(*ref);
+		frame->operandStack.push(*ptr);
                 break;
             }
         case Operation::StoreReference: 
