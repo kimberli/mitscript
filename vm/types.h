@@ -7,7 +7,12 @@
 #include <memory>
 #include <cstdint>
 
-struct Constant
+struct Value 
+{
+
+};
+
+struct Constant: public Value
 {
     virtual ~Constant() { }
 };
@@ -56,7 +61,7 @@ struct Boolean : public Constant
     virtual ~Boolean() { }
 };
 
-struct Function 
+struct Function : public Value
 {
     // List of functions defined within this function (but not functions defined inside of nested functions)
     std::vector<std::shared_ptr<Function>> functions_;
@@ -82,4 +87,10 @@ struct Function
     std::vector<std::string> names_;
 
     InstructionList instructions;
+    
+    Function(std::vector<std::shared_ptr<Function>> functions_, std::vector<std::shared_ptr<Constant>> constants_, uint32_t parameter_count_,
+	     std::vector<std::string> local_vars_, std::vector<std::string> local_reference_vars_, std::vector<std::string> free_vars_,
+	     std::vector<std::string> names_, InstructionList instructions): functions_(functions_), constants_(constants_), 
+	     parameter_count_(parameter_count_), local_vars_(local_vars_), local_reference_vars_(local_reference_vars_),
+	     free_vars_(free_vars_), names_(names_), instructions(instructions) {}
 };

@@ -9,9 +9,9 @@ using namespace std;
 
 class Frame {
 public:
-    map<string, Constant> localVars;
-    map<string, Constant*> localRefs;
-    stack<Constant> operandStack;
+    map<string, Value> localVars;
+    map<string, Value*> localRefs;
+    stack<Value> operandStack;
     Instruction* instructionPtr;
     Function* func;
 };
