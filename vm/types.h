@@ -92,10 +92,23 @@ struct Function : public Value
     std::vector<std::string> names_;
 
     InstructionList instructions;
+
+    Function() {};
     
-    Function(std::vector<std::shared_ptr<Function>> functions_, std::vector<std::shared_ptr<Constant>> constants_, uint32_t parameter_count_,
-	     std::vector<std::string> local_vars_, std::vector<std::string> local_reference_vars_, std::vector<std::string> free_vars_,
-	     std::vector<std::string> names_, InstructionList instructions): functions_(functions_), constants_(constants_), 
-	     parameter_count_(parameter_count_), local_vars_(local_vars_), local_reference_vars_(local_reference_vars_),
-	     free_vars_(free_vars_), names_(names_), instructions(instructions) {}
+    Function(std::vector<std::shared_ptr<Function>> functions_,
+            std::vector<std::shared_ptr<Constant>> constants_,
+            uint32_t parameter_count_,
+	        std::vector<std::string> local_vars_,
+            std::vector<std::string> local_reference_vars_,
+            std::vector<std::string> free_vars_,
+	        std::vector<std::string> names_,
+            InstructionList instructions):
+        functions_(functions_),
+        constants_(constants_),
+	    parameter_count_(parameter_count_),
+        local_vars_(local_vars_),
+        local_reference_vars_(local_reference_vars_),
+	    free_vars_(free_vars_),
+        names_(names_),
+        instructions(instructions) {}
 };
