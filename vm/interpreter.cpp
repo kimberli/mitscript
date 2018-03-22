@@ -27,66 +27,71 @@ void Interpreter::executeStep() {
     switch (inst->operation) {
         case Operation::LoadConst: 
             {
-		frame->operandStack.push(*frame->func->constants_[inst->operand0.value()]);
+                frame->operandStack.push(
+                        *frame->func->constants_[inst->operand0.value()]
+                        );
                 break;
             }
         case Operation::LoadFunc: 
             {
-		frame->operandStack.push(*frame->func->functions_[inst->operand0.value()]);
+                frame->operandStack.push(
+                        *frame->func->functions_[inst->operand0.value()]
+                        );
                 break;
             }
         case Operation::LoadLocal: 
             {
-		string localVar = frame->func->local_vars_[inst->operand0.value()];
-		frame->operandStack.push(frame->localVars[localVar]);
+                string localVar = frame->func->local_vars_[inst->operand0.value()];
+                frame->operandStack.push(frame->localVars[localVar]);
                 break;
             }
         case Operation::StoreLocal: 
             {
-		string localVar = frame->func->local_vars_[inst->operand0.value()];
-		Value value = frame->operandStack.top();
-		frame->operandStack.pop();
-		frame->localVars[localVar] = value;
+                string localVar = frame->func->local_vars_[inst->operand0.value()];
+                Value value = frame->operandStack.top();
+                frame->operandStack.pop();
+                frame->localVars[localVar] = value;
                 break;
             }
         case Operation::LoadGlobal: 
             {
-		string globalVar = frame->func->names_[inst->operand0.value()];
-		frame->operandStack.push(globalFrame->localVars[globalVar]);
+                string globalVar = frame->func->names_[inst->operand0.value()];
+                frame->operandStack.push(globalFrame->localVars[globalVar]);
                 break;
             }
         case Operation::StoreGlobal: 
             {
-		string globalVar = frame->func->names_[inst->operand0.value()];
-		Value value = frame->operandStack.top();
-		frame->operandStack.pop();
-		globalFrame->localVars[globalVar] = value;
+                string globalVar = frame->func->names_[inst->operand0.value()];
+                Value value = frame->operandStack.top();
+                frame->operandStack.pop();
+                globalFrame->localVars[globalVar] = value;
                 break;
             }
         case Operation::PushReference: 
             {
-		string localRef = frame->func->local_reference_vars_[inst->operand0.value()];
-		frame->operandStack.push(*(new ValuePtr(frame->localRefs[localRef])));
+                string localRef = frame->func->
+                    local_reference_vars_[inst->operand0.value()];
+                frame->operandStack.push(*(new ValuePtr(frame->localRefs[localRef])));
                 break;
             }
         case Operation::LoadReference: 
             {
-		Value* ref = &frame->operandStack.top();
-		auto valuePtr = dynamic_cast<ValuePtr*>(ref);
-		if (valuePtr == NULL) {
-		    throw RuntimeException("Not a reference");
-		}
-		Value* ptr = valuePtr->ptr;
-		frame->operandStack.pop();
-		frame->operandStack.push(*ptr);
+                Value* ref = &frame->operandStack.top();
+                auto valuePtr = dynamic_cast<ValuePtr*>(ref);
+                if (valuePtr == NULL) {
+                    throw RuntimeException("Not a reference");
+                }
+                Value* ptr = valuePtr->ptr;
+                frame->operandStack.pop();
+                frame->operandStack.push(*ptr);
                 break;
             }
         case Operation::StoreReference: 
             {
-		string globalVar = frame->func->names_[inst->operand0.value()];
-		Value value = frame->operandStack.top();
-		frame->operandStack.pop();
-		globalFrame->localVars[globalVar] = value;
+                string globalVar = frame->func->names_[inst->operand0.value()];
+                Value value = frame->operandStack.top();
+                frame->operandStack.pop();
+                globalFrame->localVars[globalVar] = value;
                 break;
             }
     }
