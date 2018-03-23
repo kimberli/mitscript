@@ -70,35 +70,41 @@ void Interpreter::executeStep() {
         case Operation::LoadReference:
             {
                 Value* ref = frame->opStackPop().get();
-                auto valuePtr = dynamic_cast<ValuePtr*>(ref);
-                if (valuePtr == NULL) {
-                    throw RuntimeException("Not a reference");
-                }
-                auto ptr = valuePtr->ptr;
-                frame->operandStack.push(ptr);
+                auto valuePtr = ref->cast<ValuePtr>();
+                frame->operandStack.push(valuePtr->ptr);
                 break;
             }
         case Operation::StoreReference:
             {
                 auto value = frame->opStackPop();
                 Value* ref = frame->opStackPop().get();
-				auto valuePtr = dynamic_cast<ValuePtr*>(ref);
-				if (valuePtr == NULL) {
-					throw RuntimeException("Not a reference");
-				}
-				*valuePtr->ptr = *value.get();
+				auto valuePtr = ref->cast<ValuePtr>();
+				*valuePtr->ptr.get() = *value.get();
                 break;
             }
         case Operation::AllocRecord:
             {
+				frame->operandStack.push(
+						std::make_shared<Record>());
                 break;
             }
         case Operation::FieldLoad:
             {
+				auto record = frame->opStackPop()->cast<Record>();
+				string field = frame->func.names_[inst->operand0.value()];
+				auto it = record->value.find(field);
+				if (it == record->value.end()) {
+					record->value[field] = std::make_shared<None>();
+				}
+				frame->operandStack.push(record->value[field]);
                 break;
             }
         case Operation::FieldStore:
             {
+				auto value = frame->opStackPop();
+				auto record = frame->opStackPop()->cast<Record>();
+				string field = frame->func.names_[inst->operand0.value()];
+				record->value[field] = value;
                 break;
             }
         case Operation::IndexLoad:
@@ -160,7 +166,7 @@ void Interpreter::executeStep() {
                 bool rightE = right->cast<Boolean>()->value;
                 bool leftE = left->cast<Boolean>()->value;
                 frame->operandStack.push(
-                        std::make_shared<Boolean>(new Boolean(leftE && rightE)));
+                        std::make_shared<Boolean>(leftE && rightE));
                 break;
             }
         case Operation::Or:
@@ -170,7 +176,7 @@ void Interpreter::executeStep() {
                 bool rightE = right->cast<Boolean>()->value;
                 bool leftE = left->cast<Boolean>()->value;
                 frame->operandStack.push(
-                        std::make_shared<Boolean>(new Boolean(leftE || rightE)));
+                        std::make_shared<Boolean>(leftE || rightE));
                 break;
             }
         case Operation::Not:
@@ -178,7 +184,7 @@ void Interpreter::executeStep() {
                 Value* top = frame->opStackPop().get();
                 bool e = top->cast<Boolean>()->value;
                 frame->operandStack.push(
-                        std::make_shared<Boolean>(new Boolean(!e)));
+                        std::make_shared<Boolean>(!e));
                 break;
             }
         case Operation::Goto:

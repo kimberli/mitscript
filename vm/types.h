@@ -107,10 +107,11 @@ struct Boolean : public Constant
 
 struct Record : public Constant
 {
-    Record(){
-		values = *(new map<string, Value*>());
+    Record() {
+		value = *(new map<string, std::shared_ptr<Value>>());
 	}
-	map<string, Value*> values;
+    Record(map<string, std::shared_ptr<Value>> value): value(value) {}
+	map<string, std::shared_ptr<Value>> value;
 
     virtual ~Record() { }
 
