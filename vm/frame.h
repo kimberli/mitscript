@@ -16,4 +16,18 @@ public:
     Function& func;
 
     Frame(Instruction* ip, Function& func): instructionPtr(ip), func(func) {};
+
+    void moveToInstruction(int offset) {
+        // TODO: check for illegal offsets
+        instructionPtr += offset;
+    }
+
+    std::shared_ptr<Value> opStackPop() {
+        if (operandStack.empty()) {
+            throw InsufficientStackException("pop from empty stack");
+        }
+        std::shared_ptr<Value> top = operandStack.top();
+        operandStack.pop();
+        return top;
+    }
 };

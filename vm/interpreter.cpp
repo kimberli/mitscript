@@ -19,9 +19,6 @@ Interpreter::Interpreter(Function* mainFunc) {
 void Interpreter::executeStep() {
     // executes a single instruction and updates state of interpreter
     Frame* frame = frames->top();
-    if (frame->instructionPtr == &frame->func.instructions.back()) {
-        finished = true;
-    }
     Instruction* inst = frame->instructionPtr;
     switch (inst->operation) {
         case Operation::LoadConst:
@@ -45,8 +42,7 @@ void Interpreter::executeStep() {
         case Operation::StoreLocal:
             {
                 string localVar = frame->func.local_vars_[inst->operand0.value()];
-                auto value = frame->operandStack.top();
-                frame->operandStack.pop();
+                auto value = frame->opStackPop();
                 frame->localVars[localVar] = value;
                 break;
             }
@@ -59,8 +55,7 @@ void Interpreter::executeStep() {
         case Operation::StoreGlobal:
             {
                 string globalVar = frame->func.names_[inst->operand0.value()];
-                auto value = frame->operandStack.top();
-                frame->operandStack.pop();
+                auto value = frame->opStackPop();
                 globalFrame->localVars[globalVar] = value;
                 break;
             }
@@ -74,26 +69,23 @@ void Interpreter::executeStep() {
             }
         case Operation::LoadReference:
             {
-                Value* ref = frame->operandStack.top().get();
+                Value* ref = frame->opStackPop().get();
                 auto valuePtr = dynamic_cast<ValuePtr*>(ref);
                 if (valuePtr == NULL) {
                     throw RuntimeException("Not a reference");
                 }
                 auto ptr = valuePtr->ptr;
-                frame->operandStack.pop();
                 frame->operandStack.push(ptr);
                 break;
             }
         case Operation::StoreReference:
             {
-                auto value = frame->operandStack.top();
-                frame->operandStack.pop();
-                Value* ref = frame->operandStack.top().get();
+                auto value = frame->opStackPop();
+                Value* ref = frame->opStackPop().get();
 				auto valuePtr = dynamic_cast<ValuePtr*>(ref);
 				if (valuePtr == NULL) {
 					throw RuntimeException("Not a reference");
 				}
-                frame->operandStack.pop();
 				*valuePtr->ptr = *value.get();
                 break;
             }
@@ -163,53 +155,83 @@ void Interpreter::executeStep() {
             }
         case Operation::And:
             {
+                Value* right = frame->opStackPop().get();
+                Value* left = frame->opStackPop().get();
+                bool rightE = right->cast<Boolean>()->value;
+                bool leftE = left->cast<Boolean>()->value;
+                frame->operandStack.push(
+                        std::make_shared<Boolean>(new Boolean(leftE && rightE)));
                 break;
             }
         case Operation::Or:
             {
+                Value* right = frame->opStackPop().get();
+                Value* left = frame->opStackPop().get();
+                bool rightE = right->cast<Boolean>()->value;
+                bool leftE = left->cast<Boolean>()->value;
+                frame->operandStack.push(
+                        std::make_shared<Boolean>(new Boolean(leftE || rightE)));
                 break;
             }
         case Operation::Not:
             {
+                Value* top = frame->opStackPop().get();
+                bool e = top->cast<Boolean>()->value;
+                frame->operandStack.push(
+                        std::make_shared<Boolean>(new Boolean(!e)));
                 break;
             }
         case Operation::Goto:
             {
+                // move to offset - 1 since we increment at the end
+                int offset = inst->operand0.value();
+                frame->moveToInstruction(offset - 1);
                 break;
             }
         case Operation::If:
             {
-                Value* top = frame->operandStack.top().get();
-                frame->operandStack.pop();
+                Value* top = frame->opStackPop().get();
                 auto e = top->cast<Boolean>();
                 if (e->value) {
                     // move to offset - 1 since we increment at the end
                     int offset = inst->operand0.value();
-                    frame->instructionPtr = frame->instructionPtr + offset - 1;
+                    frame->moveToInstruction(offset - 1);
                 }
                 break;
             }
         case Operation::Dup:
             {
-                auto top = frame->operandStack.top();
+                // TODO make this less inefficient
+                auto top = frame->opStackPop();
+                frame->operandStack.push(top);
                 frame->operandStack.push(top);
                 break;
             }
         case Operation::Swap:
             {
-                auto top = frame->operandStack.top();
-                auto next = frame->operandStack.top();
-                frame->operandStack.pop();
-                frame->operandStack.pop();
+                auto top = frame->opStackPop();
+                auto next = frame->opStackPop();
                 frame->operandStack.push(top);
                 frame->operandStack.push(next);
                 break;
             }
         case Operation::Pop:
             {
-                frame->operandStack.pop();
+                frame->opStackPop();
                 break;
             }
+    }
+
+    if (frame->instructionPtr == &globalFrame->func.instructions.back()) {
+        // last instruction of the whole program
+        finished = true;
+        return;
+    }
+    if (frame->instructionPtr == &frame->func.instructions.back()) {
+        // last instruction of current function
+        // TODO destruct current frame
+        frames->pop();
+        frame = frames->top();
     }
     frame->instructionPtr++;
 };
