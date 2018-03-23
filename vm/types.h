@@ -2,12 +2,13 @@
 
 #include "instructions.h"
 
+#include <cstdint>
+#include <map>
+#include <memory>
 #include <string>
 #include <vector>
-#include <memory>
-#include <cstdint>
 
-struct Value 
+struct Value
 {
     virtual ~Value() { }
 };
@@ -29,7 +30,7 @@ struct None : public Constant
 
 struct Integer : public Constant
 {
-    Integer(int32_t value) 
+    Integer(int32_t value)
     : value(value)
     {
 
@@ -55,7 +56,7 @@ struct String : public Constant
 
 struct Boolean : public Constant
 {
-    Boolean(bool value) 
+    Boolean(bool value)
     : value(value)
     {
 
@@ -64,6 +65,14 @@ struct Boolean : public Constant
     bool value;
 
     virtual ~Boolean() { }
+};
+
+struct Record : public Constant
+{
+    Record(){}
+	map<string, Value*> values;
+
+    virtual ~Record() { }
 };
 
 struct Function : public Value
@@ -94,7 +103,7 @@ struct Function : public Value
     InstructionList instructions;
 
     Function() {};
-    
+
     Function(std::vector<std::shared_ptr<Function>> functions_,
             std::vector<std::shared_ptr<Constant>> constants_,
             uint32_t parameter_count_,

@@ -24,28 +24,25 @@ void Interpreter::executeStep() {
     }
     Instruction* inst = frame->instructionPtr;
     switch (inst->operation) {
-        case Operation::LoadConst: 
+        case Operation::LoadConst:
             {
                 auto constant = frame->func.constants_[inst->operand0.value()];
                 frame->operandStack.push(constant);
                 break;
             }
-            
-        case Operation::LoadFunc: 
+        case Operation::LoadFunc:
             {
                 auto func = frame->func.functions_[inst->operand0.value()];
                 frame->operandStack.push(func);
                 break;
             }
-
-        case Operation::LoadLocal: 
+        case Operation::LoadLocal:
             {
                 string localVar = frame->func.local_vars_[inst->operand0.value()];
                 frame->operandStack.push(frame->localVars[localVar]);
                 break;
             }
-
-        case Operation::StoreLocal: 
+        case Operation::StoreLocal:
             {
                 string localVar = frame->func.local_vars_[inst->operand0.value()];
                 auto value = frame->operandStack.top();
@@ -53,15 +50,13 @@ void Interpreter::executeStep() {
                 frame->localVars[localVar] = value;
                 break;
             }
-            
-        case Operation::LoadGlobal: 
+        case Operation::LoadGlobal:
             {
                 string globalVar = frame->func.names_[inst->operand0.value()];
                 frame->operandStack.push(globalFrame->localVars[globalVar]);
                 break;
             }
-
-        case Operation::StoreGlobal: 
+        case Operation::StoreGlobal:
             {
                 string globalVar = frame->func.names_[inst->operand0.value()];
                 auto value = frame->operandStack.top();
@@ -69,8 +64,7 @@ void Interpreter::executeStep() {
                 globalFrame->localVars[globalVar] = value;
                 break;
             }
-            
-        case Operation::PushReference: 
+        case Operation::PushReference:
             {
                 string localRef = frame->func.
                     local_reference_vars_[inst->operand0.value()];
@@ -78,8 +72,7 @@ void Interpreter::executeStep() {
                 frame->operandStack.push(valuePtr);
                 break;
             }
-
-        case Operation::LoadReference: 
+        case Operation::LoadReference:
             {
                 Value* ref = frame->operandStack.top().get();
                 auto valuePtr = dynamic_cast<ValuePtr*>(ref);
@@ -91,17 +84,19 @@ void Interpreter::executeStep() {
                 frame->operandStack.push(ptr);
                 break;
             }
-
-        case Operation::StoreReference: 
+        case Operation::StoreReference:
             {
-                // TODO: fix
-                string globalVar = frame->func.names_[inst->operand0.value()];
                 auto value = frame->operandStack.top();
                 frame->operandStack.pop();
-                globalFrame->localVars[globalVar] = value;
+                Value* ref = frame->operandStack.top().get();
+				auto valuePtr = dynamic_cast<ValuePtr*>(ref);
+				if (valuePtr == NULL) {
+					throw RuntimeException("Not a reference");
+				}
+                frame->operandStack.pop();
+				*valuePtr->ptr = *value.get();
                 break;
             }
-
         case Operation::AllocRecord:
             {
                 break;

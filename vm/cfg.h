@@ -8,24 +8,24 @@ class AST_node;
 
 class CFG {
     // TODO: how to represent a function
-public: 
+public:
     // two kinds of blocks: one outgoing epsilon edge,
-    // two edges (one true, one false) 
+    // two edges (one true, one false)
     bool hasEpsOutput;
     CFG& epsOut;
     CFG& trueOut;
     CFG& falseOut;
     // content of this block
     AST_node& bb;
-    // constants 
+    // constants
     std::vector<Constant*> c;
 };
 
 class CFGBuilder : public Visitor {
-private: 
+private:
     // stores a mapping of function names defined in the program
-    // to their cfg representation 
-    std::unordered_map<std::string, CFG> functions; 
+    // to their cfg representation
+    std::unordered_map<std::string, CFG> functions;
     // cfg for the main program
     CFG main;
     // temp storage for return vals
@@ -44,7 +44,7 @@ public:
     void visit(FieldDeref& exp) override {}
     void visit(IndexExpr& exp) override {}
     void visit(Call& exp) override {}
-    void visit(Record& exp) override {}
+    void visit(RecordExpr& exp) override {}
     void visit(Identifier& exp) override {}
     void visit(IntConst& exp) override {}
     void visit(StrConst& exp) override {}
