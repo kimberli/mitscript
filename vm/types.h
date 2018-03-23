@@ -141,8 +141,10 @@ struct Record : public Constant
 	string toString() {
 		string res = "{";
 		for (auto x: value) {
-
+			res += x.first + ":" + x.second.toString() + " ";
 		}
+		res += "}";
+		return res;
 	}
 };
 
@@ -196,4 +198,8 @@ struct Function : public Value
     string type() {
         return "Function";
     }
+
+	string toString() {
+		return "FUNCTION";
+	}
 };
