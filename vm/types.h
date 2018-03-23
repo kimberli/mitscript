@@ -37,7 +37,7 @@ struct ValuePtr: public Value {
 struct Constant: public Value
 {
     virtual ~Constant() { }
-
+	virtual string toString() = 0;
     static const string typeS;
 };
 
@@ -49,6 +49,10 @@ struct None : public Constant
     string type() {
         return "None";
     }
+
+	string toString() {
+		return "None";
+	}
 };
 
 struct Integer : public Constant
@@ -67,6 +71,10 @@ struct Integer : public Constant
     string type() {
         return "Integer";
     }
+
+	string toString() {
+		return to_string(value);
+	}
 };
 
 struct String : public Constant
@@ -85,6 +93,10 @@ struct String : public Constant
     string type() {
         return "String";
     }
+
+	string toString() {
+		return value;
+	}
 };
 
 struct Boolean : public Constant
@@ -103,6 +115,12 @@ struct Boolean : public Constant
     string type() {
         return "Boolean";
     }
+	string toString() {
+		if (value) {
+			return "True";
+		}
+		return "False";
+	}
 };
 
 struct Record : public Constant
@@ -119,6 +137,13 @@ struct Record : public Constant
     string type() {
         return "Record";
     }
+
+	string toString() {
+		string res = "{";
+		for (auto x: value) {
+
+		}
+	}
 };
 
 struct Function : public Value
