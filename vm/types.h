@@ -13,6 +13,8 @@ struct Value
 {
     virtual ~Value() { }
     virtual string type() = 0;
+    virtual string toString() = 0;
+    virtual bool equals(shared_ptr<Value> other) = 0;
 
     template <typename T>
     T* cast() {
@@ -28,6 +30,8 @@ struct ValuePtr: public Value {
     std::shared_ptr<Value> ptr;
     ValuePtr(std::shared_ptr<Value> ptr): ptr(ptr) {}
 
+    string toString();
+    bool equals(shared_ptr<Value> other);
     static const string typeS;
     string type() {
         return "ValuePtr";
@@ -37,22 +41,20 @@ struct ValuePtr: public Value {
 struct Constant: public Value
 {
     virtual ~Constant() { }
-	virtual string toString() = 0;
+    virtual bool equals(shared_ptr<Value> other) = 0;
+
     static const string typeS;
 };
 
 struct None : public Constant
 {
     virtual ~None() { }
-
+    string toString();
+    bool equals(shared_ptr<Value> other);
     static const string typeS;
     string type() {
         return "None";
     }
-
-	string toString() {
-		return "None";
-	}
 };
 
 struct Integer : public Constant
@@ -66,15 +68,12 @@ struct Integer : public Constant
     int32_t value;
 
     virtual ~Integer() { }
-
+    string toString();
+    bool equals(shared_ptr<Value> other);
     static const string typeS;
     string type() {
         return "Integer";
     }
-
-	string toString() {
-		return to_string(value);
-	}
 };
 
 struct String : public Constant
@@ -88,15 +87,12 @@ struct String : public Constant
     std::string value;
 
     virtual ~String() { }
-
+    string toString();
+    bool equals(shared_ptr<Value> other);
     static const string typeS;
     string type() {
         return "String";
     }
-
-	string toString() {
-		return value;
-	}
 };
 
 struct Boolean : public Constant
@@ -110,17 +106,12 @@ struct Boolean : public Constant
     bool value;
 
     virtual ~Boolean() { }
-
+    string toString();
+    bool equals(shared_ptr<Value> other);
     static const string typeS;
     string type() {
         return "Boolean";
     }
-	string toString() {
-		if (value) {
-			return "True";
-		}
-		return "False";
-	}
 };
 
 struct Record : public Constant
@@ -132,20 +123,12 @@ struct Record : public Constant
 	map<string, std::shared_ptr<Value>> value;
 
     virtual ~Record() { }
-
+    string toString();
+    bool equals(shared_ptr<Value> other);
     static const string typeS;
     string type() {
         return "Record";
     }
-
-	string toString() {
-		string res = "{";
-		for (auto x: value) {
-			res += x.first + ":" + x.second.toString() + " ";
-		}
-		res += "}";
-		return res;
-	}
 };
 
 struct Function : public Value
@@ -194,12 +177,10 @@ struct Function : public Value
         names_(names_),
         instructions(instructions) {}
 
+    string toString();
+    bool equals(shared_ptr<Value> other);
     static const string typeS;
     string type() {
         return "Function";
     }
-
-	string toString() {
-		return "FUNCTION";
-	}
 };
