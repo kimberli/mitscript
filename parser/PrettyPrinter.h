@@ -119,7 +119,7 @@ class PrettyPrinter : public Visitor {
         }
         cout << ")";
     };
-    void visit(Record& exp) override {
+    void visit(RecordExpr& exp) override {
         cout << "{\n";
         tab_count++;
         for (auto &r : exp.record) {

@@ -54,7 +54,7 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Block*& out, const char* messa
 	Statement* stmt_type;
     Expression* expr_type;
     Block* block_type;
-    Record* record_type;
+    RecordExpr* record_type;
     Identifier* id_type;
     vector<Expression*>* expr_list_type;
     vector<Identifier*>* id_list_type;
@@ -74,7 +74,7 @@ int yyerror(YYLTYPE * yylloc, yyscan_t yyscanner, Block*& out, const char* messa
 %type<block_type> Program
 %type<block_type> StatementList Block
 %type<stmt_type> Statement Assignment CallStatement Global IfStatement WhileLoop Return
-%type<expr_type> Expression FunctionExpr Boolean Record ConstantExpr
+%type<expr_type> Expression FunctionExpr Boolean RecordExpr ConstantExpr
 %type<expr_list_type> ExpressionList ExpressionListHead
 %type<id_list_type> ArgsList ArgsListHead
 %type<expr_type> Conjunction BoolUnit Predicate Arithmetic Product Unit PosUnit Lhs Call
@@ -154,7 +154,7 @@ T_RETURN Expression ';' {
 Expression:
 FunctionExpr
 | Boolean
-| Record
+| RecordExpr
 
 FunctionExpr:
 T_FUN '(' ArgsList ')' Block {
@@ -293,14 +293,14 @@ ExpressionListHead:
     $1->push_back($2);
 }
 
-Record:
+RecordExpr:
 '{' RecordList '}' {
     $$ = $2;
 }
 
 RecordList:
 %empty {
-    $$ = new Record();
+    $$ = new RecordExpr();
 }
 | RecordList Name ':' Expression ';' {
     $1->record.insert(make_pair($2, $4));

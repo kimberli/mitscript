@@ -17,7 +17,7 @@ class UnaryExpr;
 class FieldDeref;
 class IndexExpr;
 class Call;
-class Record;
+class RecordExpr;
 class Identifier;
 class IntConst;
 class StrConst;
@@ -39,7 +39,7 @@ public:
     virtual void visit(FieldDeref& exp) = 0;
     virtual void visit(IndexExpr& exp) = 0;
     virtual void visit(Call& exp) = 0;
-    virtual void visit(Record& exp) = 0;
+    virtual void visit(RecordExpr& exp) = 0;
     virtual void visit(Identifier& exp) = 0;
     virtual void visit(IntConst& exp) = 0;
     virtual void visit(StrConst& exp) = 0;
