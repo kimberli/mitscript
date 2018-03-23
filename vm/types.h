@@ -69,7 +69,9 @@ struct Boolean : public Constant
 
 struct Record : public Constant
 {
-    Record(){}
+    Record(){
+		values = *(new map<string, Value*>());
+	}
 	map<string, Value*> values;
 
     virtual ~Record() { }
