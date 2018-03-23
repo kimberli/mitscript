@@ -179,6 +179,14 @@ void Interpreter::executeStep() {
             }
         case Operation::If:
             {
+                Value* top = frame->operandStack.top().get();
+                frame->operandStack.pop();
+                auto e = top->cast<Boolean>();
+                if (e->value) {
+                    // move to offset - 1 since we increment at the end
+                    int offset = inst->operand0.value();
+                    frame->instructionPtr = frame->instructionPtr + offset - 1;
+                }
                 break;
             }
         case Operation::Dup:

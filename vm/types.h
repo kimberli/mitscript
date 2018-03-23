@@ -1,5 +1,6 @@
 #pragma once
 
+#include "exception.h"
 #include "instructions.h"
 
 #include <cstdint>
@@ -11,21 +12,43 @@
 struct Value
 {
     virtual ~Value() { }
+    virtual string type() = 0;
+
+    template <typename T>
+    T* cast() {
+        auto val = dynamic_cast<T*>(this);
+        if (val == NULL) {
+            throw IllegalCastException("cannot cast type " + this->type() + " to " + T::typeS);
+        }
+        return val;
+    }
 };
 
 struct ValuePtr: public Value {
     std::shared_ptr<Value> ptr;
     ValuePtr(std::shared_ptr<Value> ptr): ptr(ptr) {}
+
+    static const string typeS;
+    string type() {
+        return "ValuePtr";
+    }
 };
 
 struct Constant: public Value
 {
     virtual ~Constant() { }
+
+    static const string typeS;
 };
 
 struct None : public Constant
 {
     virtual ~None() { }
+
+    static const string typeS;
+    string type() {
+        return "None";
+    }
 };
 
 struct Integer : public Constant
@@ -39,6 +62,11 @@ struct Integer : public Constant
     int32_t value;
 
     virtual ~Integer() { }
+
+    static const string typeS;
+    string type() {
+        return "Integer";
+    }
 };
 
 struct String : public Constant
@@ -52,6 +80,11 @@ struct String : public Constant
     std::string value;
 
     virtual ~String() { }
+
+    static const string typeS;
+    string type() {
+        return "String";
+    }
 };
 
 struct Boolean : public Constant
@@ -65,6 +98,11 @@ struct Boolean : public Constant
     bool value;
 
     virtual ~Boolean() { }
+
+    static const string typeS;
+    string type() {
+        return "Boolean";
+    }
 };
 
 struct Record : public Constant
@@ -75,6 +113,11 @@ struct Record : public Constant
 	map<string, Value*> values;
 
     virtual ~Record() { }
+
+    static const string typeS;
+    string type() {
+        return "Record";
+    }
 };
 
 struct Function : public Value
@@ -122,4 +165,9 @@ struct Function : public Value
 	    free_vars_(free_vars_),
         names_(names_),
         instructions(instructions) {}
+
+    static const string typeS;
+    string type() {
+        return "Function";
+    }
 };
