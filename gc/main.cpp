@@ -1,11 +1,10 @@
-
-#include "types.h"
+#include "vm/types.h"
 #include "timerclass.h"
 #include <cstdlib>
 
 using namespace std;
 
-void allocateObjects(int N,  CollectedHeap& heap, vector<string>& names, vector<Value*>& rootset) {
+void allocate_objects(int N,  CollectedHeap& heap, vector<string>& names, vector<Value*>& rootset) {
 	// The loop below allocates a large number of objects and connects them together in a semi-random manner, 
 	// adding some subset of them to the rootset.
 	Record* r = heap.allocate<Record>();
@@ -39,7 +38,6 @@ void allocateObjects(int N,  CollectedHeap& heap, vector<string>& names, vector<
 /*
 This is a simple randomized tester for your garbage collector which can serve as a basic sanity check 
 and can be helpful when debugging.
-
 */
 int main(int argc, char** argv) {
 
@@ -74,11 +72,9 @@ int main(int argc, char** argv) {
 	vector<Value*> rootset;
 	
 
-	
 	int N = 100000;
 	
-	allocateObjects(N, heap, names, rootset);
-
+	allocate_objects(N, heap, names, rootset);
 
 	timer.stop().print("After allocation"); // stops the timer and prints the current time.
 

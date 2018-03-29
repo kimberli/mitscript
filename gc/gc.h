@@ -42,7 +42,9 @@ public:
 	your VM could be using some extra memory that is not managed by the garbage collector, so 
 	make sure you account for this.
 	*/
-	CollectedHeap(int maxmem) {
+	CollectedHeap(int maxmem) 
+	{
+	
 	}
 
 
@@ -51,8 +53,9 @@ public:
 	This is different from the size of the heap, which should also be tracked
 	by the garbage collector.
 	*/
-	int getSize() {
-		return size;
+	int count() 
+	{
+	
 	}
 
 	/*
@@ -61,7 +64,9 @@ public:
 	it can be deallocated later.	
 	*/
 	template<typename T>
-	T* allocate() {
+	T* allocate() 
+	{
+	
 	}
 
 
@@ -70,7 +75,9 @@ public:
 	takes one parameter. Useful when allocating Integer or String objects.
 	*/
 	template<typename T, typename ARG>
-	T* allocate(ARG a) {
+	T* allocate(ARG a) 
+	{
+	
 	}
 
 	/*
@@ -79,19 +86,15 @@ public:
 	*/
 
 
-
-
 	/*
 	This is the method that is called by the follow(...) method of a Collectable object. This 
 	is how a Collectable object lets the garbage collector know about other Collectable otjects pointed to 
 	by itself.
 	*/
-	inline void markSuccessors(Collectable* next) {
+	inline void markSuccessors(Collectable* next) 
+	{
+	
 	}
-
-
-
-
 
 	/*
 	The gc method should be called by your VM (or by other methods in CollectedHeap) 
@@ -104,12 +107,11 @@ public:
 	
 	*/
 	template<typename ITERATOR>
-	void gc(ITERATOR begin, ITERATOR end) {
+	void gc(ITERATOR begin, ITERATOR end) 
+	{
+	
+
 	}
-
-
-
-
 };
 
 

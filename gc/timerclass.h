@@ -1,7 +1,4 @@
-#ifndef TIMERCLASS_H_
-#define TIMERCLASS_H_
-
-
+#pragma once
 
 #include <string>
 #include <iostream>
