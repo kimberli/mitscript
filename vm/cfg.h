@@ -20,7 +20,7 @@ public:
     BB(bool epsOutput, InstructionList instr);
     // represents a single node in the CFG 
     // two kinds of blocks: one outgoing epsilon edge,
-    // two edges (one true, one false) 
+    // two edges (one true, one false)
     bool hasEpsOutput;
     bbptr_t epsOut;
     bbptr_t trueOut;
@@ -120,7 +120,7 @@ public:
     void visit(FieldDeref& exp) override {}
     void visit(IndexExpr& exp) override {}
     void visit(Call& exp) override {}
-    void visit(Record& exp) override {}
+    void visit(RecordExpr& exp) override {}
     void visit(Identifier& exp) override;
     void visit(IntConst& exp) override;
     void visit(StrConst& exp) override;

@@ -181,7 +181,7 @@ public:
     }
 };
 
-class Record: public Expression {
+class RecordExpr: public Expression {
 public:
     map<Identifier*, Expression*> record;
     void accept(Visitor& v) override {

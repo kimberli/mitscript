@@ -361,7 +361,7 @@ class Interpreter : public Visitor {
         currentFrame = currentFrame->callerFrame;
     };
 
-    void visit(Record& exp) override {
+    void visit(RecordExpr& exp) override {
         LOG(2, "Visiting Record");
         RecordValue* val = new RecordValue();
         for (auto &r : exp.record) {

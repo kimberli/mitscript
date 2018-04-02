@@ -1,35 +1,65 @@
 #pragma once
 
+#include "exception.h"
 #include "instructions.h"
 
+#include <cstdint>
+#include <map>
+#include <memory>
 #include <string>
 #include <vector>
-#include <memory>
-#include <cstdint>
 
-struct Value 
+struct Value
 {
     virtual ~Value() { }
+    virtual string type() = 0;
+    virtual string toString() = 0;
+    virtual bool equals(shared_ptr<Value> other) = 0;
+
+    template <typename T>
+    T* cast() {
+        auto val = dynamic_cast<T*>(this);
+        if (val == NULL) {
+            throw IllegalCastException("cannot cast type " + this->type() + " to " + T::typeS);
+        }
+        return val;
+    }
 };
 
 struct ValuePtr: public Value {
-    Value* ptr;
-    ValuePtr(Value* ptr): ptr(ptr) {}
+    std::shared_ptr<Value> ptr;
+    ValuePtr(std::shared_ptr<Value> ptr): ptr(ptr) {}
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
+    static const string typeS;
+    string type() {
+        return "ValuePtr";
+    }
 };
 
 struct Constant: public Value
 {
     virtual ~Constant() { }
+    virtual bool equals(shared_ptr<Value> other) = 0;
+
+    static const string typeS;
 };
 
 struct None : public Constant
 {
     virtual ~None() { }
+    string toString();
+    bool equals(shared_ptr<Value> other);
+    static const string typeS;
+    string type() {
+        return "None";
+    }
 };
 
 struct Integer : public Constant
 {
-    Integer(int32_t value) 
+    Integer(int32_t value)
     : value(value)
     {
 
@@ -38,6 +68,12 @@ struct Integer : public Constant
     int32_t value;
 
     virtual ~Integer() { }
+    string toString();
+    bool equals(shared_ptr<Value> other);
+    static const string typeS;
+    string type() {
+        return "Integer";
+    }
 };
 
 struct String : public Constant
@@ -51,11 +87,17 @@ struct String : public Constant
     std::string value;
 
     virtual ~String() { }
+    string toString();
+    bool equals(shared_ptr<Value> other);
+    static const string typeS;
+    string type() {
+        return "String";
+    }
 };
 
 struct Boolean : public Constant
 {
-    Boolean(bool value) 
+    Boolean(bool value)
     : value(value)
     {
 
@@ -64,6 +106,29 @@ struct Boolean : public Constant
     bool value;
 
     virtual ~Boolean() { }
+    string toString();
+    bool equals(shared_ptr<Value> other);
+    static const string typeS;
+    string type() {
+        return "Boolean";
+    }
+};
+
+struct Record : public Constant
+{
+    Record() {
+		value = *(new map<string, std::shared_ptr<Value>>());
+	}
+    Record(map<string, std::shared_ptr<Value>> value): value(value) {}
+	map<string, std::shared_ptr<Value>> value;
+
+    virtual ~Record() { }
+    string toString();
+    bool equals(shared_ptr<Value> other);
+    static const string typeS;
+    string type() {
+        return "Record";
+    }
 };
 
 struct Function : public Value
@@ -94,7 +159,7 @@ struct Function : public Value
     InstructionList instructions;
 
     Function() {};
-    
+
     Function(std::vector<std::shared_ptr<Function>> functions_,
             std::vector<std::shared_ptr<Constant>> constants_,
             uint32_t parameter_count_,
@@ -111,4 +176,11 @@ struct Function : public Value
 	    free_vars_(free_vars_),
         names_(names_),
         instructions(instructions) {}
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
+    static const string typeS;
+    string type() {
+        return "Function";
+    }
 };

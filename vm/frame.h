@@ -9,9 +9,25 @@ using namespace std;
 
 class Frame {
 public:
-    map<string, Value> localVars;
-    map<string, Value*> localRefs;
-    stack<Value> operandStack;
+    map<string, std::shared_ptr<Value>> localVars;
+    map<string, std::shared_ptr<ValuePtr>> localRefs;
+    stack<std::shared_ptr<Value>> operandStack;
     Instruction* instructionPtr;
-    Function* func;
+    Function& func;
+
+    Frame(Instruction* ip, Function& func): instructionPtr(ip), func(func) {};
+
+    void moveToInstruction(int offset) {
+        // TODO: check for illegal offsets
+        instructionPtr += offset;
+    }
+
+    std::shared_ptr<Value> opStackPop() {
+        if (operandStack.empty()) {
+            throw InsufficientStackException("pop from empty stack");
+        }
+        std::shared_ptr<Value> top = operandStack.top();
+        operandStack.pop();
+        return top;
+    }
 };
