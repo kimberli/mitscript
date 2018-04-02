@@ -1,7 +1,7 @@
-
 #include <unordered_map>
 
 #include "../parser/Visitor.h"
+#include "../parser/AST.h"
 #include "instructions.h"
 #include "types.h"
 
@@ -12,21 +12,25 @@ class CFG;
 //typedef std::shared_ptr<Function> funcptr_t;
 typedef std::shared_ptr<Constant> constptr_t;
 typedef std::shared_ptr<CFG> cfgptr_t;
+typedef std::shared_ptr<BB> bbptr_t;
+typedef std::experimental::optional<int32_t> optint_t;
 
 class BB {
-    // represents a single node in the CFG 
 public: 
+    BB(bool epsOutput, InstructionList instr);
+    // represents a single node in the CFG 
     // two kinds of blocks: one outgoing epsilon edge,
     // two edges (one true, one false) 
     bool hasEpsOutput;
-    BB& epsOut;
-    BB& trueOut;
-    BB& falseOut;
+    bbptr_t epsOut;
+    bbptr_t trueOut;
+    bbptr_t falseOut;
     // content of this block; a list of statements
     InstructionList instructions;
 };
 
 class CFG {
+public:
     // very similar data structure to the eventual bytecode function,
     // but we store a CFG representation instead of bytecode.
 
@@ -47,14 +51,29 @@ class CFG {
 
 class CFGBuilder : public Visitor {
 private: 
-    // stores a mapping of function names defined in the program
-    // to their cfg representation 
-    //std::unordered_map<std::string, CFG> functions; 
     // Visiting each node adds to the CFG 
     // should return the single entrance point to the CFG 
     // and the single exit point
-    BB retEnter;
-    BB retExit;
+    bbptr_t retEnter;
+    bbptr_t retExit;
+    // helper that adds an instruction to the latest BB w/o creating a new one
+    // for use when combining statements, etc
+    void appendInstr(Instruction instr);
+    
+    // stores the CFG data structure corresponding to the 
+    // function we are currently building
+    cfgptr_t curFunc;
+
+    // same as defined in lecture
+    int allocConstant(constptr_t c);
+
+    // helper that takes in a constant pointer, takes care of allocation
+    // and creating the appropriate bb. 
+    void loadConstant(constptr_t c);
+
+    // takes care of writing assignments
+    void write(Expression* lhs, Value* rhs);
+
 public:
     // make a cfg for each statement 
     // chain together exits and entrances in seq
@@ -96,16 +115,15 @@ public:
 
     void visit(FunctionExpr& exp) override {}
 
-    void visit(BinaryExpr& exp) override {}
-
-    void visit(UnaryExpr& exp) override {}
+    void visit(BinaryExpr& exp) override {};
+    void visit(UnaryExpr& exp) override;
     void visit(FieldDeref& exp) override {}
     void visit(IndexExpr& exp) override {}
     void visit(Call& exp) override {}
     void visit(Record& exp) override {}
-    void visit(Identifier& exp) override {}
-    void visit(IntConst& exp) override {}
-    void visit(StrConst& exp) override {}
-    void visit(BoolConst& exp) override {}
-    void visit(NoneConst& exp) override {}
+    void visit(Identifier& exp) override;
+    void visit(IntConst& exp) override;
+    void visit(StrConst& exp) override;
+    void visit(BoolConst& exp) override;
+    void visit(NoneConst& exp) override;
 };
