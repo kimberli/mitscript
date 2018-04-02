@@ -36,26 +36,21 @@ class PrettyPrinter
 
             for (size_t i = 0; i < function.functions_.size(); ++i)
             {
-                if (i != 0)
-                {
-                    os << ",\n";
-                }
-
                 print(*function.functions_[i], os);
 
                 if (i != (function.functions_.size() - 1))
                 {
-                    print_indent(os) << ",";
+                    os << ",\n";
                 }
             }
 
             unindent();
-            
+
             os <<"\n";
             print_indent(os) << "],\n";
         }
 
-      
+
         {
             print_indent(os) << "constants = [";
 
@@ -142,7 +137,7 @@ class PrettyPrinter
         }
         else if (const auto *value = dynamic_cast<const Boolean *>(&constant))
         {
-            os << (value->value ? "true" : "false"); 
+            os << (value->value ? "true" : "false");
         }
         else if (const auto *value = dynamic_cast<const Integer *>(&constant))
         {
@@ -257,14 +252,15 @@ class PrettyPrinter
         }
         case Operation::AllocClosure:
         {
-            os << "alloc_closure" 
- 	       << "\t" << inst.operand0.value();
+            os << "alloc_closure"
+               << "\t" << inst.operand0.value();
 
             break;
         }
         case Operation::Call:
         {
-            os << "call";
+            os << "call"
+               << "\t" << inst.operand0.value();
 
             break;
         }
@@ -349,7 +345,7 @@ class PrettyPrinter
         }
         case Operation::If:
         {
-            os << "if"    
+            os << "if"
             << "\t" << inst.operand0.value();
 
             break;
@@ -357,22 +353,22 @@ class PrettyPrinter
         case Operation::Dup:
         {
             os << "dup";
-            
+
             break;
         }
         case Operation::Swap:
         {
             os << "swap";
-            
+
             break;
         }
         case Operation::Pop:
         {
             os << "pop";
-            
+
             break;
         }
-        
+
         default:
             assert(false && "Unhandled Operation");
         }
