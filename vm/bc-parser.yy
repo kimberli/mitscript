@@ -3,14 +3,14 @@
 #include <iostream>
 #include <string>
 #define YY_DECL int bclex (BCSTYPE* yylval, BCLTYPE * yylloc, yyscan_t yyscanner)
-#ifndef FLEX_SCANNER 
+#ifndef FLEX_SCANNER
 #include "bc-lexer.h"
-#endif 
+#endif
 
 using namespace std;
 
 //The macro below is used by bison for error reporting
-//it comes from stacck overflow 
+//it comes from stacck overflow
 //http://stackoverflow.com/questions/656703/how-does-flex-support-bison-location-exactly
 #define YY_USER_ACTION \
     yylloc->first_line = yylloc->last_line; \
@@ -40,7 +40,7 @@ uint32_t safe_unsigned_cast(int64_t value);
 %define api.pure full
 %parse-param {yyscan_t yyscanner} {Function*& out}
 %lex-param {yyscan_t yyscanner}
-%locations 
+%locations
 %define parse.error verbose
 
 %code provides{
@@ -57,16 +57,16 @@ int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* me
 	vector<shared_ptr<Function>>*   funclist;
 
     vector<string>* identlist;
-	
+
 	Instruction* inst;
 	vector<Instruction>* instlist;
-	
+
 
     Constant* constant;
     vector<shared_ptr<Constant>>* constantlist;
 }
 
-//Below is where you define your tokens and their types. 
+//Below is where you define your tokens and their types.
 //for example, we have defined for you a T_int token, with type intconst
 //the type is the name of a field from the union above
 
@@ -155,7 +155,7 @@ Function:
   T_local_ref_vars '='  '[' IdentListStar ']'    ','
   T_free_vars '=' '[' IdentListStar ']'          ','
   T_names     '=' '[' IdentListStar ']'          ','
-  T_instructions '=' '[' InstructionList ']' 
+  T_instructions '=' '[' InstructionList ']'
   '}'
 {
 	$$ = new Function{*$6, *$12, safe_unsigned_cast($17), *$22, *$28, *$34, *$40, *$46};
@@ -164,7 +164,7 @@ Function:
 }
 
 FunctionListStar:
-  %empty { $$ = new vector<shared_ptr<Function>>(); } 
+  %empty { $$ = new vector<shared_ptr<Function>>(); }
 | FunctionListPlus
 {
 	$$ = $1;
@@ -174,22 +174,22 @@ FunctionListPlus:
 Function
 {
 	auto list = new vector<shared_ptr<Function>>();
-  
+
   	list->insert(list->begin(), std::shared_ptr<Function>($1));
-	
+
 	$$ = list;
 }
-| Function ',' FunctionListPlus 
+| Function ',' FunctionListPlus
 {
      auto list = $3;
 
      list->insert(list->begin(), std::shared_ptr<Function>($1));
-	 
+
 	 $$ = list;
 }
 
 IdentListStar:
-  %empty { $$ = new vector<string>(); } 
+  %empty { $$ = new vector<string>(); }
 | IdentListPlus
 {
 	$$ = $1;
@@ -197,25 +197,25 @@ IdentListStar:
 
 IdentListPlus:
 T_ident
-{	
+{
 	auto list = new vector<string>();
-	
+
 	list->insert(list->begin(), *$1);
 	delete $1;
-	
+
 	$$ = list;
 }
 | T_ident ',' IdentListPlus
 {
 	auto list = $3;
-	
+
 	list->insert(list->begin(), *$1);
 	delete $1;
-	
+
 	$$ = list;
 }
 
-Constant : 
+Constant :
   T_none
 {
 	$$ = new None();
@@ -228,34 +228,34 @@ Constant :
 {
 	$$ = new Boolean(false);
 }
-|  T_string 
+|  T_string
 {
 	$$ = new String(*$1);
 
 	delete $1;
 }
-| T_int 
+| T_int
 {
-	$$ = new Integer{$1};
+	$$ = new Integer{safe_cast($1)};
 }
 
 ConstantListStar:
-%empty { $$ = new vector<shared_ptr<Constant> >(); } 
+%empty { $$ = new vector<shared_ptr<Constant> >(); }
 | ConstantListPlus
-{	
+{
 	$$ = $1;
 }
 
 ConstantListPlus:
-Constant 
+Constant
 {
 	auto list = new vector<shared_ptr<Constant>>();
 
 	list->insert(list->begin(), std::shared_ptr<Constant>($1));
-	
+
 	$$ = list;
 }
-| Constant ',' ConstantListPlus 
+| Constant ',' ConstantListPlus
 {
 	auto list = $3;
 
@@ -264,7 +264,7 @@ Constant
 	$$ = list;
 }
 
-Instruction:	
+Instruction:
   T_load_const T_int
 {
 	$$ = new Instruction(Operation::LoadConst, safe_unsigned_cast($2));
@@ -324,83 +324,83 @@ Instruction:
 }
 | T_alloc_closure T_int
 {
-	$$ = new Instruction(Operation::AllocClosure, safe_unsigned_cast($2));	
+	$$ = new Instruction(Operation::AllocClosure, safe_unsigned_cast($2));
 }
-| T_call
+| T_call T_int
 {
-	$$ = new Instruction(Operation::Call, { });	
+	$$ = new Instruction(Operation::Call, safe_unsigned_cast($2));
 }
 | T_return
 {
-	$$ = new Instruction(Operation::Return, { });	
+	$$ = new Instruction(Operation::Return, { });
 }
 | T_add
 {
-	$$ = new Instruction(Operation::Add, { });	
+	$$ = new Instruction(Operation::Add, { });
 }
 | T_sub
 {
-	$$ = new Instruction(Operation::Sub, { });	
+	$$ = new Instruction(Operation::Sub, { });
 }
 | T_mul
 {
-	$$ = new Instruction(Operation::Mul, { });	
+	$$ = new Instruction(Operation::Mul, { });
 }
 | T_div
 {
-	$$ = new Instruction(Operation::Div, { });	
+	$$ = new Instruction(Operation::Div, { });
 }
 | T_neg
 {
-	$$ = new Instruction(Operation::Neg, { });	
+	$$ = new Instruction(Operation::Neg, { });
 }
 | T_gt
 {
-	$$ = new Instruction(Operation::Gt, { });	
+	$$ = new Instruction(Operation::Gt, { });
 }
 | T_geq
 {
-	$$ = new Instruction(Operation::Geq, { });	
+	$$ = new Instruction(Operation::Geq, { });
 }
 | T_eq
 {
-	$$ = new Instruction(Operation::Eq, { });	
+	$$ = new Instruction(Operation::Eq, { });
 }
 | T_and
 {
-	$$ = new Instruction(Operation::And, { });	
+	$$ = new Instruction(Operation::And, { });
 }
 | T_or
 {
-	$$ = new Instruction(Operation::Or, { });	
+	$$ = new Instruction(Operation::Or, { });
 }
 | T_not
 {
-	$$ = new Instruction(Operation::Not, { });	
+	$$ = new Instruction(Operation::Not, { });
 }
 | T_goto T_int
 {
-	$$ = new Instruction(Operation::Goto, safe_cast($2));	
+	$$ = new Instruction(Operation::Goto, safe_cast($2));
 }
 | T_if T_int
 {
-	$$ = new Instruction(Operation::If, safe_cast($2));	
+	$$ = new Instruction(Operation::If, safe_cast($2));
 }
 | T_dup
 {
-	$$ = new Instruction(Operation::Dup, { });	
+	$$ = new Instruction(Operation::Dup, { });
 }
 | T_swap
 {
-	$$ = new Instruction(Operation::Swap, { });	
+	$$ = new Instruction(Operation::Swap, { });
 }
 | T_pop
 {
-	$$ = new Instruction(Operation::Pop, { });	
+	$$ = new Instruction(Operation::Pop, { });
 }
 
 InstructionList:
-  %empty { $$ = new vector<Instruction>(); } 
+  %empty { $$ = new vector<Instruction>(); }
 | Instruction InstructionList
 {
 	auto list = $2;
@@ -420,7 +420,7 @@ int yyerror(BCLTYPE * yylloc, void* p, Function*& out, const char*  msg){
 }
 
 int32_t safe_cast(int64_t value)
-{	
+{
 	int32_t new_value = (int32_t) value;
 
 	assert(new_value == value);
@@ -430,7 +430,7 @@ int32_t safe_cast(int64_t value)
 
 
 uint32_t safe_unsigned_cast(int64_t value)
-{	
+{
 	int32_t new_value = (uint32_t) value;
 
 	assert(new_value == value);
