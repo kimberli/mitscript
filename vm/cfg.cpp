@@ -5,8 +5,9 @@ BB::BB(bool epsOutput, InstructionList instr) {
     instructions = instr;
 }
 
-void CFGBuilder::appendInstr(Instruction instr) {
-    retExit->instructions.push_back(instr);
+InstructionList CFGBuilder::getInstructions(AST_node& expr) {
+    expr.accept(*this);
+    return retInstr;
 }
 
 int CFGBuilder::allocConstant(constptr_t c) {
@@ -22,9 +23,7 @@ void CFGBuilder::loadConstant(constptr_t c) {
     Instruction loadconst = Instruction(Operation::LoadConst, op0);
     InstructionList instr;
     instr.push_back(loadconst);
-    bbptr_t b = std::make_shared<BB>(BB(true, instr));
-    retEnter = b;
-    retExit = b;
+    retInstr = instr;
 }
 
 void CFGBuilder::write(Expression* lhs, Value* rhs) {
@@ -45,54 +44,64 @@ void CFGBuilder::write(Expression* lhs, Value* rhs) {
     }
 }
 
-//void CFGBuilder::visit(BinaryExpr& exp) {
-//    InstructionList instr;
-//    Operation op; 
-//    optint_t noArg0;
-//    // eval the operands in the correct order
-//    exp.left.accept(*this);
-//    exp.right.accept(*this);
-//    // choose the correct instruction
-//    switch (exp.op) {
-//        case Or: 
-//            op = Operation::Or;
-//            break;
-//        case And: 
-//            op = Operation::And;
-//            break;
-//        case Lt: 
-//            break;
-//        case Gt: 
-//            op = Operation::Gt;
-//            break;
-//        case Lt_eq: 
-//            break;
-//        case Gt_eq: 
-//            op = Operation::Geq;
-//            break;
-//        case Eq_eq: 
-//            op = Operation::Eq;
-//            break;
-//        case Plus: 
-//            op = Operation::Add;
-//            break;
-//        case Minus:
-//            op = Operation::Sub;
-//            break;
-//        case Times: 
-//            op = Operation::Mul;
-//            break;
-//        case Divide:
-//            op = Operation::Div;
-//            break;
-//    }
-//}
-//
+void CFGBuilder::visit(BinaryExpr& exp) {
+    InstructionList iList = getInstructions(exp.left);
+    InstructionList evalR = getInstructions(exp.right);
+    // concatenate two vecs
+    iList.insert(iList.end(), evalR.begin(), evalR.end());
+    Operation op; 
+    optint_t noArg0;
+    Instruction swapOp = Instruction(Operation::Swap, noArg0);
+    // choose the correct instruction
+    switch (exp.op) {
+        case Or: 
+            op = Operation::Or;
+            break;
+        case And: 
+            op = Operation::And;
+            break;
+        case Lt: 
+            // no lt instr provided, so first switch op order.
+            iList.push_back(swapOp);
+            op = Operation::Gt;
+            break;
+        case Gt: 
+            op = Operation::Gt;
+            break;
+        case Lt_eq: 
+            // same logic as for lt
+            iList.push_back(swapOp);
+            op = Operation::Geq;
+            break;
+        case Gt_eq: 
+            op = Operation::Geq;
+            break;
+        case Eq_eq: 
+            op = Operation::Eq;
+            break;
+        case Plus: 
+            op = Operation::Add;
+            break;
+        case Minus:
+            op = Operation::Sub;
+            break;
+        case Times: 
+            op = Operation::Mul;
+            break;
+        case Divide:
+            op = Operation::Div;
+            break;
+    }
+    Instruction instr = Instruction(op, noArg0);
+    iList.push_back(instr);
+    retInstr = iList;
+}
+
+
 void CFGBuilder::visit(UnaryExpr& exp) {
+    InstructionList iList = getInstructions(exp);
     Operation op;
     optint_t noArg0;
-    // eval the operand
-    exp.expr.accept(*this);
     // choose the correct instruction
     switch (exp.op) {
         case Not: 
@@ -104,7 +113,8 @@ void CFGBuilder::visit(UnaryExpr& exp) {
     }
     Instruction instr = Instruction(op, noArg0);
     // add the new instruction to the same basic block
-    appendInstr(instr);
+    iList.push_back(instr);
+    retInstr = iList;
 }
 
 void CFGBuilder::visit(Identifier& exp) {

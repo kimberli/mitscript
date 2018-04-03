@@ -51,14 +51,18 @@ public:
 
 class CFGBuilder : public Visitor {
 private: 
-    // Visiting each node adds to the CFG 
-    // should return the single entrance point to the CFG 
-    // and the single exit point
+    // Invariant: visiting a statement or a block should return a CFG with
+    // a single endpoint and a single exitpoint, to be deposited 
+    // below 
     bbptr_t retEnter;
     bbptr_t retExit;
+    // Visiting anything else should return a list of instructions. 
+    InstructionList retInstr;
+    InstructionList getInstructions(AST_node& expr);
+
     // helper that adds an instruction to the latest BB w/o creating a new one
     // for use when combining statements, etc
-    void appendInstr(Instruction instr);
+    // void appendInstr(Instruction instr);
     
     // stores the CFG data structure corresponding to the 
     // function we are currently building
@@ -115,7 +119,7 @@ public:
 
     void visit(FunctionExpr& exp) override {}
 
-    void visit(BinaryExpr& exp) override {};
+    void visit(BinaryExpr& exp) override;
     void visit(UnaryExpr& exp) override;
     void visit(FieldDeref& exp) override {}
     void visit(IndexExpr& exp) override {}
