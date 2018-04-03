@@ -60,6 +60,7 @@ private:
     // below 
     bbptr_t retEnter;
     bbptr_t retExit;
+
     // Visiting anything else should return a list of instructions. 
     InstructionList retInstr;
     InstructionList getInstructions(AST_node& expr);
@@ -113,7 +114,7 @@ public:
     // return starting block entrance and endpoint exit
     void visit(WhileLoop& exp) override {}
 
-    void visit(Return& exp) override {}
+    void visit(Return& exp) override;
 
     void visit(FunctionExpr& exp) override {}
 

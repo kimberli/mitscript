@@ -28,10 +28,10 @@ void CFGBuilder::loadConstant(constptr_t c) {
     int constIdx = allocConstant(c);
     // make the LoadConst instruction
     optint_t op0 = optint_t(constIdx);
-    Instruction loadconst = Instruction(Operation::LoadConst, op0);
-    InstructionList instr;
-    instr.push_back(loadconst);
-    retInstr = instr;
+    Instruction* instr = new Instruction(Operation::LoadConst, op0);
+    InstructionList iList;
+    iList.push_back(*instr);
+    retInstr = iList;
 }
 
 InstructionList CFGBuilder::getWriteInstr(Expression* lhs) {
@@ -91,6 +91,17 @@ void CFGBuilder::visit(Assignment& exp) {
     retExit = ret;
 }
 
+void CFGBuilder::visit(Return& exp) {
+    // generate instructions for the return val 
+    InstructionList iList = getInstructions(exp.expr);
+    optint_t noArg0; 
+    Operation op = Operation::Return;
+    Instruction* instr = new Instruction(op, noArg0);
+    iList.push_back(*instr);
+    // leave the instructions 
+    retInstr = iList;
+}
+
 void CFGBuilder::visit(BinaryExpr& exp) {
     InstructionList iList = getInstructions(exp.left);
     InstructionList evalR = getInstructions(exp.right);
@@ -139,8 +150,8 @@ void CFGBuilder::visit(BinaryExpr& exp) {
             op = Operation::Div;
             break;
     }
-    Instruction instr = Instruction(op, noArg0);
-    iList.push_back(instr);
+    Instruction* instr = new Instruction(op, noArg0);
+    iList.push_back(*instr);
     retInstr = iList;
 }
 
@@ -158,9 +169,9 @@ void CFGBuilder::visit(UnaryExpr& exp) {
             op = Operation::Neg;
             break;
     }
-    Instruction instr = Instruction(op, noArg0);
+    Instruction* instr = new Instruction(op, noArg0);
     // add the new instruction to the same basic block
-    iList.push_back(instr);
+    iList.push_back(*instr);
     retInstr = iList;
 }
 
