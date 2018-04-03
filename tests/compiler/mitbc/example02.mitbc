@@ -1,0 +1,109 @@
+function
+{
+  functions =
+  [
+    function
+    {
+      functions = [],
+      constants = [],
+      parameter_count = 1,
+      local_vars = [],
+      local_ref_vars = [],
+      free_vars = [],
+      names = [],
+      instructions =
+      [
+      ]
+    },
+    function
+    {
+      functions = [],
+      constants = [],
+      parameter_count = 0,
+      local_vars = [],
+      local_ref_vars = [],
+      free_vars = [],
+      names = [],
+      instructions =
+      [
+      ]
+    },
+    function
+    {
+      functions = [],
+      constants = [],
+      parameter_count = 1,
+      local_vars = [],
+      local_ref_vars = [],
+      free_vars = [],
+      names = [],
+      instructions =
+      [
+      ]
+    },
+    function
+    {
+      functions =
+      [
+        function
+        {
+          functions = [],
+          constants = [],
+          parameter_count = 1,
+          local_vars = [z],
+          local_ref_vars = [],
+          free_vars = [y],
+          names = [x],
+          instructions =
+          [
+            load_global 0
+            push_ref  0
+            load_ref
+            add
+            load_local  0
+            add
+            return
+          ]
+        }
+      ],
+      constants = [None],
+      parameter_count = 1,
+      local_vars = [y, g],
+      local_ref_vars = [y],
+      free_vars = [],
+      names = [],
+      instructions =
+      [
+        load_func 0
+        push_ref  0
+        alloc_closure 1
+        store_local 1
+        load_const  0
+        return
+      ]
+    }
+  ],
+  constants = [1],
+  parameter_count = 0,
+  local_vars = [],
+  local_ref_vars = [],
+  free_vars = [],
+  names = [x, f, print, input, intcast],
+  instructions =
+  [
+    load_func 0
+    alloc_closure 0
+    store_global  2
+    load_func 1
+    alloc_closure 0
+    store_global  3
+    load_func 2
+    alloc_closure 0
+    store_global  4
+    load_const  0
+    store_global  0
+    load_func 3
+    alloc_closure 0
+    store_global  1
+  ]
+}

@@ -108,7 +108,7 @@ enum class Operation
     // Mnemonic:    alloc_closure m
     // Operand 0:   the number of free variable references passed to the closure
     // Operand i  (0 < i <= m) : free variable argument (m - i). Argument (m - i) maps to position (m - i)
-    // Operand n=m+1 : closure
+    // Operand n=m+1 : function
     // Stack:       S :: operand n :: ... :: operand 3 :: operand 2 :: operand 1 => S :: closure
     AllocClosure,
 
