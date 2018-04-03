@@ -96,21 +96,46 @@ void CFGBuilder::visit(Assignment& exp) {
 }
 
 void CFGBuilder::visit(IfStatement& exp) {
-    // generate a t-f bb for the test expression 
-    // generate an eps bb for the if statement
-    // generate an eps bb for the else statement
-    // generate an epty bb for the endpoint
-    // connect the test t transition to the if entrance
-    // connect if entrance to the endpoint
-    // connect the test f transition to the else entrance
-    // connect the else exit to the endpoint
-    // return entrance to the test expression, endpoint exit
-
     // generate a t-f bb for the condition 
     InstructionList conditionList = getInstructions(exp.condition);
     bbptr_t cond = std::make_shared<BB>(BB(false, conditionList));
 
-    
+    // generate a graph for the then block
+    exp.thenBlock.accept(*this);
+    bbptr_t thenEnter = retEnter;
+    bbptr_t thenExit = retExit;
+
+    // generate empty bb for the endpoint
+    InstructionList endList;
+    bbptr_t end = std::make_shared<BB>(BB(true, endList));
+
+    // connect condition true to then entrance
+    cond->trueOut = thenEnter;
+
+    // connect then exit to the exit
+    thenExit->epsOut = end;
+
+    // handle the else block 
+    if (exp.elseBlock) {
+        // generate a graph for the else block
+        exp.elseBlock->accept(*this);
+        bbptr_t elseEnter = retEnter;
+        bbptr_t elseExit = retExit;
+
+        // connect condition false to else entrance
+        cond->falseOut = elseEnter;
+
+        // connect else exit to end
+        elseExit->epsOut = end;
+
+    } else {
+        // connect condition false directly to end
+        cond->falseOut = end;
+    }
+        
+    // return entrance and exit
+    retEnter = cond; 
+    retExit = end;
 }
 
 void CFGBuilder::visit(WhileLoop& exp) {
