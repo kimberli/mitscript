@@ -4,6 +4,7 @@
 #include "prettyprinter.h"
 #include "compiler.h"
 #include "cfg.h"
+#include "cfgtofunc.h"
 
 using namespace std;
 
@@ -30,15 +31,15 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    BytecodeCompiler* c = new BytecodeCompiler();
-    output->accept(*c);
-    Function* rootFunc = c->getBytecode();
+    CFGBuilder* builder = new CFGBuilder();
+    output->accept(*builder);
+    cfgptr_t rootCFG = builder->curFunc;
 
-    std::shared_ptr<Function> func(rootFunc);
+    std::shared_ptr<Function> rootFunc = CFGToFunc(rootCFG);
 
     PrettyPrinter printer;
 
-    printer.print(*func, std::cout);
+    printer.print(*rootFunc, std::cout);
 
     return 0;
 }

@@ -5,6 +5,14 @@ BB::BB(bool epsOutput, InstructionList instr) {
     instructions = instr;
 }
 
+CFG::CFG() {
+    parameter_count = 0;
+}
+
+CFGBuilder::CFGBuilder() {
+    curFunc = std::make_shared<CFG>(CFG());
+}
+
 InstructionList CFGBuilder::getInstructions(AST_node& expr) {
     expr.accept(*this);
     return retInstr;
@@ -46,10 +54,11 @@ InstructionList CFGBuilder::getWriteInstr(Expression* lhs) {
 }
 
 void CFGBuilder::visit(Block& exp) {
+    std::cout << "visiting a block" << std::endl;
     // make a cfg for each statement in the list. 
     // every statement returns a cfg with a single entrance and exit, 
-    // so we can merge entrances and exits in this rule. 
-    // return the first enter and the last exit
+    // so we can just chain them together. 
+    // TODO: we can actually squish them down into a single basic block. 
     bbptr_t entrance = nullptr;
     bbptr_t exit = nullptr;
     for (Statement* s : exp.stmts) {
@@ -58,15 +67,15 @@ void CFGBuilder::visit(Block& exp) {
             // establish the entrance 
             entrance = retEnter;
         } else {
-            // merge entrance into the last bb 
-            InstructionList lastInstr = exit->instructions;
-            InstructionList curInstr = retEnter->instructions;
-            lastInstr.insert(lastInstr.end(), curInstr.begin(), curInstr.end());
+            // Add the new block to the end of the chain 
+            exit->epsOut = retEnter;
         }
         exit = retExit;
     }
     retEnter = entrance;
     retExit = exit;
+    // set the just created block as the entrypoint of the cur func 
+    curFunc->codeEntry = entrance;
 }
 
 void CFGBuilder::visit(Assignment& exp) {

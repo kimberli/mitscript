@@ -1,4 +1,7 @@
+#pragma once 
+
 #include <unordered_map>
+#include <iostream>
 
 #include "../parser/Visitor.h"
 #include "../parser/AST.h"
@@ -33,6 +36,7 @@ class CFG {
 public:
     // very similar data structure to the eventual bytecode function,
     // but we store a CFG representation instead of bytecode.
+    CFG();
 
     // CFG rep of internal functions
     std::vector<cfgptr_t> functions_;
@@ -41,12 +45,12 @@ public:
     std::vector<constptr_t> constants_;
     uint32_t parameter_count;
     std::vector<std::string> local_vars_;
-    std::vector<std::string> local_reference_vars;
+    std::vector<std::string> local_reference_vars_;
     std::vector<std::string> free_vars_;
     std::vector<std::string> names_;
 
     // This is the entry point of the corresponding graph
-    BB code_entry;
+    bbptr_t codeEntry;
 };
 
 class CFGBuilder : public Visitor {
@@ -60,14 +64,6 @@ private:
     InstructionList retInstr;
     InstructionList getInstructions(AST_node& expr);
 
-    // helper that adds an instruction to the latest BB w/o creating a new one
-    // for use when combining statements, etc
-    // void appendInstr(Instruction instr);
-    
-    // stores the CFG data structure corresponding to the 
-    // function we are currently building
-    cfgptr_t curFunc;
-
     // same as defined in lecture
     int allocConstant(constptr_t c);
 
@@ -79,6 +75,11 @@ private:
     InstructionList getWriteInstr(Expression* lhs);
 
 public:
+    CFGBuilder();
+    // stores the CFG data structure corresponding to the 
+    // function we are currently building
+    cfgptr_t curFunc;
+
     void visit(Block& exp) override;
     
     // ???

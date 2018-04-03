@@ -1,5 +1,5 @@
-compiler: compiler-main.cpp compiler.h cfg.cpp
-	g++ -g -std=c++1y compiler-main.cpp cfg.cpp types.cpp ../parser/parser.cpp ../parser/lexer.cpp -o compiler
+compiler: compiler-main.cpp compiler.h cfg.cpp cfgtofunc.cpp
+	g++ -g -std=c++1y compiler-main.cpp cfg.cpp types.cpp cfgtofunc.cpp ../parser/parser.cpp ../parser/lexer.cpp -o compiler
 
 interpreter: interpreter-main.cpp interpreter.cpp bc-parser
 	g++ -g -std=c++1y interpreter-main.cpp interpreter.cpp types.cpp bc-parser.cpp bc-lexer.cpp ../parser/parser.cpp ../parser/lexer.cpp -o interpreter
