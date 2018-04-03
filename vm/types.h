@@ -41,7 +41,6 @@ struct ValuePtr: public Value {
 struct Constant: public Value
 {
     virtual ~Constant() { }
-    virtual bool equals(shared_ptr<Value> other) = 0;
 
     static const string typeS;
 };
@@ -59,11 +58,7 @@ struct None : public Constant
 
 struct Integer : public Constant
 {
-    Integer(int32_t value)
-    : value(value)
-    {
-
-    }
+    Integer(int32_t value) : value(value) {}
 
     int32_t value;
 
@@ -78,11 +73,7 @@ struct Integer : public Constant
 
 struct String : public Constant
 {
-    String(std::string value)
-    : value(value)
-    {
-
-    }
+    String(std::string value): value(value) {}
 
     std::string value;
 
@@ -97,11 +88,7 @@ struct String : public Constant
 
 struct Boolean : public Constant
 {
-    Boolean(bool value)
-    : value(value)
-    {
-
-    }
+    Boolean(bool value): value(value) {}
 
     bool value;
 
