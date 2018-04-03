@@ -76,19 +76,16 @@ private:
     void loadConstant(constptr_t c);
 
     // takes care of writing assignments
-    void write(Expression* lhs, Value* rhs);
+    InstructionList getWriteInstr(Expression* lhs);
 
 public:
-    // make a cfg for each statement 
-    // chain together exits and entrances in seq
-    // return the first enter and the last exit
-    void visit(Block& exp) override {}
+    void visit(Block& exp) override;
     
     // ???
     void visit(Global& exp) override {}
 
     // ???
-    void visit(Assignment& exp) override {}
+    void visit(Assignment& exp) override;
 
     // I guess just call a function?
     void visit(CallStatement& exp) override {}

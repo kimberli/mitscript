@@ -26,22 +26,60 @@ void CFGBuilder::loadConstant(constptr_t c) {
     retInstr = instr;
 }
 
-void CFGBuilder::write(Expression* lhs, Value* rhs) {
+InstructionList CFGBuilder::getWriteInstr(Expression* lhs) {
+    InstructionList iList;
     auto id = dynamic_cast<Identifier*>(lhs);
     if (id != NULL) {
         // TODO: use a symbol table to figure out how to assign vars.
-        return;
+        return iList;
     }
     auto fieldD = dynamic_cast<FieldDeref*>(lhs);
     if (fieldD != NULL) {
         // TODO: handle record writes
-        return;
+        return iList;
     }
     auto indexE = dynamic_cast<IndexExpr*>(lhs);
     if (indexE != NULL) {
         // TODO: handle record writes
-        return;
+        return iList;
     }
+}
+
+void CFGBuilder::visit(Block& exp) {
+    // make a cfg for each statement in the list. 
+    // every statement returns a cfg with a single entrance and exit, 
+    // so we can merge entrances and exits in this rule. 
+    // return the first enter and the last exit
+    bbptr_t entrance = nullptr;
+    bbptr_t exit = nullptr;
+    for (Statement* s : exp.stmts) {
+        s->accept(*this);
+        if (!entrance) {
+            // establish the entrance 
+            entrance = retEnter;
+        } else {
+            // merge entrance into the last bb 
+            InstructionList lastInstr = exit->instructions;
+            InstructionList curInstr = retEnter->instructions;
+            lastInstr.insert(lastInstr.end(), curInstr.begin(), curInstr.end());
+        }
+        exit = retExit;
+    }
+    retEnter = entrance;
+    retExit = exit;
+}
+
+void CFGBuilder::visit(Assignment& exp) {
+    // eval rhs 
+    InstructionList iList = getInstructions(exp.expr);
+    InstructionList write = getWriteInstr(&(exp.lhs));
+    // concat the two lists 
+    iList.insert(iList.end(), write.begin(), write.end());
+
+    // because this is a statement it should return a BB
+    bbptr_t ret = std::make_shared<BB>(BB(true, iList));
+    retEnter = ret;
+    retExit = ret;
 }
 
 void CFGBuilder::visit(BinaryExpr& exp) {
