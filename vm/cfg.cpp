@@ -91,6 +91,41 @@ void CFGBuilder::visit(Assignment& exp) {
     retExit = ret;
 }
 
+void CFGBuilder::visit(WhileLoop& exp) {
+    // empty bb as a starting point
+    InstructionList startList;
+    bbptr_t start = std::make_shared<BB>(BB(true, startList));
+
+    // empty bb as endpoint
+    InstructionList endList;
+    bbptr_t end = std::make_shared<BB>(BB(true, startList));
+
+    // make a T/F bb for the condition
+    InstructionList conditionList = getInstructions(exp.condition);
+    bbptrt_t cond = std::make_shared<BB>(BB(false, condtionList)); 
+
+    // make a graph for the body
+    exp.body.visit(*this);
+    bbptr_t bodyEnter = retEnter;
+    bbptr_t bodyExit = retExit;
+    
+    // connect starting block to expression block 
+    start->epsOut = cond; 
+
+    // connect the condition true output to the body entrance
+    cond->trueOut = bodyEnter;
+
+    // connect the condition condition false output to the end
+    cond->falseOut = end;
+
+    // connect the body exit to condition 
+    bodyExit->epsOut = cond; 
+
+    // return start and end 
+    retEnter = start;
+    retExit = end;
+}
+
 void CFGBuilder::visit(Return& exp) {
     // generate instructions for the return val 
     InstructionList iList = getInstructions(exp.expr);

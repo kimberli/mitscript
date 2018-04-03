@@ -103,16 +103,7 @@ public:
     // return entrance to the test expression, endpoint exit
     void visit(IfStatement& exp) override {}
 
-    // generate an empty bb for a starting block 
-    // connect starting block exit to expression bblock
-    // generate a t-f bb for the test expression
-    // generate an eps bb for the statement
-    // generate an empty bb for the endpoint
-    // connect the test t transition to the statement entrance
-    // connect the statement exit to the test expression entrance
-    // connect the test f transition to the endpoint
-    // return starting block entrance and endpoint exit
-    void visit(WhileLoop& exp) override {}
+    void visit(WhileLoop& exp) override;
 
     void visit(Return& exp) override;
 
