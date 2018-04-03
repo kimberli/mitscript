@@ -83,25 +83,14 @@ public:
 
     void visit(Block& exp) override;
     
-    // ???
-    void visit(Global& exp) override {}
+    void visit(Global& exp) override;
 
-    // ???
     void visit(Assignment& exp) override;
 
     // I guess just call a function?
     void visit(CallStatement& exp) override {}
 
-    // generate a t-f bb for the test expression 
-    // generate an eps bb for the if statement
-    // generate an eps bb for the else statement
-    // generate an epty bb for the endpoint
-    // connect the test t transition to the if entrance
-    // connect if entrance to the endpoint
-    // connect the test f transition to the else entrance
-    // connect the else exit to the endpoint
-    // return entrance to the test expression, endpoint exit
-    void visit(IfStatement& exp) override {}
+    void visit(IfStatement& exp) override;
 
     void visit(WhileLoop& exp) override;
 

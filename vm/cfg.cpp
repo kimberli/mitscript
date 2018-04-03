@@ -78,6 +78,10 @@ void CFGBuilder::visit(Block& exp) {
     curFunc->codeEntry = entrance;
 }
 
+void CFGBuilder::visit(Global& exp) {
+     // no-op
+}
+
 void CFGBuilder::visit(Assignment& exp) {
     // eval rhs 
     InstructionList iList = getInstructions(exp.expr);
@@ -91,6 +95,24 @@ void CFGBuilder::visit(Assignment& exp) {
     retExit = ret;
 }
 
+void CFGBuilder::visit(IfStatement& exp) {
+    // generate a t-f bb for the test expression 
+    // generate an eps bb for the if statement
+    // generate an eps bb for the else statement
+    // generate an epty bb for the endpoint
+    // connect the test t transition to the if entrance
+    // connect if entrance to the endpoint
+    // connect the test f transition to the else entrance
+    // connect the else exit to the endpoint
+    // return entrance to the test expression, endpoint exit
+
+    // generate a t-f bb for the condition 
+    InstructionList conditionList = getInstructions(exp.condition);
+    bbptr_t cond = std::make_shared<BB>(BB(false, conditionList));
+
+    
+}
+
 void CFGBuilder::visit(WhileLoop& exp) {
     // empty bb as a starting point
     InstructionList startList;
@@ -102,10 +124,10 @@ void CFGBuilder::visit(WhileLoop& exp) {
 
     // make a T/F bb for the condition
     InstructionList conditionList = getInstructions(exp.condition);
-    bbptrt_t cond = std::make_shared<BB>(BB(false, condtionList)); 
+    bbptr_t cond = std::make_shared<BB>(BB(false, conditionList)); 
 
     // make a graph for the body
-    exp.body.visit(*this);
+    exp.body.accept(*this);
     bbptr_t bodyEnter = retEnter;
     bbptr_t bodyExit = retExit;
     
