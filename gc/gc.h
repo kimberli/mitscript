@@ -8,7 +8,7 @@ class CollectedHeap;
 class Collectable {
 private:
 	//Any private fields you add to the Collectable class will be accessible by the CollectedHeap 
-	//(since it is declared as fiend below). You can think of these fields as the header for the object, 
+	//(since it is declared as friend below). You can think of these fields as the header for the object, 
 	//which will include metadata that is useful for the garbage collector.
 protected:
 	/*
