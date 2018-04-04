@@ -18,53 +18,52 @@ Interpreter::Interpreter(Function* mainFunc) {
 void Interpreter::executeStep() {
     // executes a single instruction and updates state of interpreter
     Frame* frame = frames->top();
-    Instruction* inst = &frame->func.instructions[frame->instructionIndex];
+    Instruction& inst = frame->getCurrInstruction();
     int newOffset = 1;
     // TODO: debugging only; remove this later
     cout << "executing instruction " << frame->instructionIndex << endl;
-    switch (inst->operation) {
+    switch (inst.operation) {
         case Operation::LoadConst:
             {
-                auto constant = frame->func.constants_[inst->operand0.value()];
+                auto constant = frame->getConstantByIndex(inst.operand0.value());
                 frame->opStackPush(constant);
                 break;
             }
         case Operation::LoadFunc:
             {
-                auto func = frame->func.functions_[inst->operand0.value()];
+                auto func = frame->getFunctionByIndex(inst.operand0.value());
                 frame->opStackPush(func);
                 break;
             }
         case Operation::LoadLocal:
             {
-                string localVar = frame->func.local_vars_[inst->operand0.value()];
+                string localVar = frame->getLocalVarByIndex(inst.operand0.value());
                 frame->opStackPush(frame->localVars[localVar]);
                 break;
             }
         case Operation::StoreLocal:
             {
-                string localVar = frame->func.local_vars_[inst->operand0.value()];
+                string localVar = frame->getLocalVarByIndex(inst.operand0.value());
                 auto value = frame->opStackPop();
                 frame->localVars[localVar] = value;
                 break;
             }
         case Operation::LoadGlobal:
             {
-                string globalVar = frame->func.names_[inst->operand0.value()];
+                string globalVar = frame->getNameByIndex(inst.operand0.value());
                 frame->opStackPush(globalFrame->localVars[globalVar]);
                 break;
             }
         case Operation::StoreGlobal:
             {
-                string globalVar = frame->func.names_[inst->operand0.value()];
+                string globalVar = frame->getNameByIndex(inst.operand0.value());
                 auto value = frame->opStackPop();
                 globalFrame->localVars[globalVar] = value;
                 break;
             }
         case Operation::PushReference:
             {
-                string localRef = frame->func.
-                    local_reference_vars_[inst->operand0.value()];
+                string localRef = frame->getRefVarByIndex(inst.operand0.value());
                 auto valuePtr = std::make_shared<ValuePtr>(frame->localRefs[localRef]);
                 frame->opStackPush(valuePtr);
                 break;
@@ -90,7 +89,7 @@ void Interpreter::executeStep() {
         case Operation::FieldLoad:
             {
 				auto record = frame->opStackPop().get()->cast<Record>();
-				string field = frame->func.names_[inst->operand0.value()];
+				string field = frame->getNameByIndex(inst.operand0.value());
                 if (record->value.count(field) == 0) {
                     record->value[field] = std::make_shared<None>();
                 }
@@ -101,7 +100,7 @@ void Interpreter::executeStep() {
             {
 				auto value = frame->opStackPop();
 				Record* record = frame->opStackPop().get()->cast<Record>();
-				string field = frame->func.names_[inst->operand0.value()];
+				string field = frame->getNameByIndex(inst.operand0.value());
 				record->value[field] = value;
                 break;
             }
@@ -233,14 +232,14 @@ void Interpreter::executeStep() {
             }
         case Operation::Goto:
             {
-                newOffset = inst->operand0.value();
+                newOffset = inst.operand0.value();
                 break;
             }
         case Operation::If:
             {
                 auto e = frame->opStackPop().get()->cast<Boolean>();
                 if (e->value) {
-                    newOffset = inst->operand0.value();
+                    newOffset = inst.operand0.value();
                 }
                 break;
             }
@@ -265,12 +264,12 @@ void Interpreter::executeStep() {
             }
     }
 
-    if (frame->instructionIndex + newOffset == globalFrame->func.instructions.size()) {
+    if (frame->instructionIndex + newOffset == globalFrame->numInstructions()) {
         // last instruction of the whole program
         finished = true;
         return;
     }
-    if (frame->instructionIndex + newOffset == frame->func.instructions.size()) {
+    if (frame->instructionIndex + newOffset == frame->numInstructions()) {
         // last instruction of current function
         // TODO destruct current frame
         frames->pop();
