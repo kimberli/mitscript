@@ -1,2 +1,0 @@
-bad_escapes = "\r";
-print(bad_escapes);
