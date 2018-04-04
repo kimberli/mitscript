@@ -9,11 +9,11 @@ using namespace std;
 
 class Frame {
     Function& func;
-
-public:
     map<string, std::shared_ptr<Value>> localVars;
     map<string, std::shared_ptr<ValuePtr>> localRefs;
     stack<std::shared_ptr<Value>> operandStack;
+
+public:
     int instructionIndex;
 
     Frame(int ix, Function& func): instructionIndex(ix), func(func) {};
@@ -69,6 +69,29 @@ public:
             throw RuntimeException("name " + std::to_string(index) + " out of bounds");
         }
         return func.local_reference_vars_[index];
+    }
+
+    // var map helpers
+    shared_ptr<Value> getLocalVar(string name) {
+        if (localVars.count(name) == 0) {
+            throw UninitializedVariableException(name + " is not initialized");
+        }
+        return localVars[name];
+    }
+
+    shared_ptr<ValuePtr> getRefVar(string name) {
+        if (localRefs.count(name) == 0) {
+            throw UninitializedVariableException(name + " is not initialized");
+        }
+        return localRefs[name];
+    }
+
+    void setLocalVar(string name, shared_ptr<Value> val) {
+        localVars[name] = val;
+    }
+
+    void setRefVar(string name, shared_ptr<ValuePtr> val) {
+        localRefs[name] = val;
     }
 
     // operand stack helpers

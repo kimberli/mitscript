@@ -38,34 +38,34 @@ void Interpreter::executeStep() {
             }
         case Operation::LoadLocal:
             {
-                string localVar = frame->getLocalVarByIndex(inst.operand0.value());
-                frame->opStackPush(frame->localVars[localVar]);
+                string localName = frame->getLocalVarByIndex(inst.operand0.value());
+                frame->opStackPush(frame->getLocalVar(localName));
                 break;
             }
         case Operation::StoreLocal:
             {
-                string localVar = frame->getLocalVarByIndex(inst.operand0.value());
+                string localName = frame->getLocalVarByIndex(inst.operand0.value());
                 auto value = frame->opStackPop();
-                frame->localVars[localVar] = value;
+                frame->setLocalVar(localName, value);
                 break;
             }
         case Operation::LoadGlobal:
             {
-                string globalVar = frame->getNameByIndex(inst.operand0.value());
-                frame->opStackPush(globalFrame->localVars[globalVar]);
+                string globalName = frame->getNameByIndex(inst.operand0.value());
+                frame->opStackPush(globalFrame->getLocalVar(globalName));
                 break;
             }
         case Operation::StoreGlobal:
             {
-                string globalVar = frame->getNameByIndex(inst.operand0.value());
+                string globalName = frame->getNameByIndex(inst.operand0.value());
                 auto value = frame->opStackPop();
-                globalFrame->localVars[globalVar] = value;
+                globalFrame->setLocalVar(globalName, value);
                 break;
             }
         case Operation::PushReference:
             {
-                string localRef = frame->getRefVarByIndex(inst.operand0.value());
-                auto valuePtr = std::make_shared<ValuePtr>(frame->localRefs[localRef]);
+                string refName = frame->getRefVarByIndex(inst.operand0.value());
+                auto valuePtr = std::make_shared<ValuePtr>(frame->getRefVar(refName));
                 frame->opStackPush(valuePtr);
                 break;
             }
