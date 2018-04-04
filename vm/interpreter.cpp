@@ -69,40 +69,37 @@ void Interpreter::executeStep() {
             }
         case Operation::LoadReference:
             {
-                Value* ref = frame->opStackPop().get();
-                auto valuePtr = ref->cast<ValuePtr>();
+                ValuePtr* valuePtr = frame->opStackPop().get()->cast<ValuePtr>();
                 frame->operandStack.push(valuePtr->ptr);
                 break;
             }
         case Operation::StoreReference:
             {
                 auto value = frame->opStackPop();
-                Value* ref = frame->opStackPop().get();
-				auto valuePtr = ref->cast<ValuePtr>();
+                ValuePtr* valuePtr = frame->opStackPop().get()->cast<ValuePtr>();
 				*valuePtr->ptr.get() = *value.get();
                 break;
             }
         case Operation::AllocRecord:
             {
 				frame->operandStack.push(
-						std::make_shared<Record>());
+					std::make_shared<Record>());
                 break;
             }
         case Operation::FieldLoad:
             {
-				auto record = frame->opStackPop()->cast<Record>();
+				auto record = frame->opStackPop().get()->cast<Record>();
 				string field = frame->func.names_[inst->operand0.value()];
-				auto it = record->value.find(field);
-				if (it == record->value.end()) {
-					record->value[field] = std::make_shared<None>();
-				}
+                if (record->value.count(field) == 0) {
+                    record->value[field] = std::make_shared<None>();
+                }
 				frame->operandStack.push(record->value[field]);
                 break;
             }
         case Operation::FieldStore:
             {
 				auto value = frame->opStackPop();
-				auto record = frame->opStackPop()->cast<Record>();
+				Record* record = frame->opStackPop().get()->cast<Record>();
 				string field = frame->func.names_[inst->operand0.value()];
 				record->value[field] = value;
                 break;
@@ -205,7 +202,10 @@ void Interpreter::executeStep() {
             }
         case Operation::Eq:
             {
-                // TODO: implement
+                shared_ptr<Value> right = frame->opStackPop();
+                Value* left = frame->opStackPop().get();
+                frame->operandStack.push(
+                        std::make_shared<Boolean>(left->equals(right)));
                 break;
             }
         case Operation::And:

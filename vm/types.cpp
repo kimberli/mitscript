@@ -15,7 +15,10 @@ string None::toString() {
     return "None";
 }
 bool None::equals(shared_ptr<Value> other) {
-    // TODO
+    auto otherV = dynamic_cast<None*>(other.get());
+    if (otherV == NULL) {
+        return false;
+    }
     return true;
 }
 
@@ -25,8 +28,11 @@ string Integer::toString() {
     return to_string(value);
 }
 bool Integer::equals(shared_ptr<Value> other) {
-    // TODO
-    return true;
+    auto otherV = dynamic_cast<Integer*>(other.get());
+    if (otherV == NULL) {
+        return false;
+    }
+    return this->value == otherV->value;
 }
 
 /* String */
@@ -35,8 +41,11 @@ string String::toString() {
     return value;
 }
 bool String::equals(shared_ptr<Value> other) {
-    // TODO
-    return true;
+    auto otherV = dynamic_cast<String*>(other.get());
+    if (otherV == NULL) {
+        return false;
+    }
+    return this->value.compare(otherV->value) == 0;
 }
 
 /* Boolean */
@@ -45,8 +54,11 @@ string Boolean::toString() {
     return value? "true" : "false";
 };
 bool Boolean::equals(shared_ptr<Value> other) {
-    // TODO
-    return true;
+    auto otherV = dynamic_cast<Boolean*>(other.get());
+    if (otherV == NULL) {
+        return false;
+    }
+    return this->value == otherV->value;
 }
 
 /* Record */
@@ -61,7 +73,6 @@ string Record::toString() {
 }
 bool Record::equals(shared_ptr<Value> other) {
     // TODO
-    return true;
 }
 
 /* Function */
@@ -71,5 +82,4 @@ string Function::toString() {
 }
 bool Function::equals(shared_ptr<Value> other) {
     // TODO
-    return true;
 }
