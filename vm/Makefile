@@ -1,8 +1,8 @@
 compiler: compiler-main.cpp compiler.h cfg.cpp cfgtofunc.cpp
-	g++ -g -std=c++1y compiler-main.cpp cfg.cpp types.cpp cfgtofunc.cpp ../parser/parser.cpp ../parser/lexer.cpp -o compiler
+	g++ -g -std=c++1y compiler-main.cpp cfg.cpp types.cpp cfgtofunc.cpp ../parser/parser.cpp ../parser/lexer.cpp -o mitscriptc
 
 interpreter: interpreter-main.cpp interpreter.cpp bc-parser
-	g++ -g -std=c++1y interpreter-main.cpp interpreter.cpp types.cpp bc-parser.cpp bc-lexer.cpp ../parser/parser.cpp ../parser/lexer.cpp -o interpreter
+	g++ -g -std=c++1y interpreter-main.cpp interpreter.cpp types.cpp bc-parser.cpp bc-lexer.cpp ../parser/parser.cpp ../parser/lexer.cpp -o mitscript
 
 bc-parser: bc-parser.cpp bc-lexer.cpp bc-parser-driver.cpp
 	g++ -g -std=c++1y types.cpp bc-parser-driver.cpp bc-parser.cpp bc-lexer.cpp -o bc-parser
@@ -14,4 +14,4 @@ bc-lexer.cpp: bc-lexer.lex
 	flex -P bc --outfile=bc-lexer.cpp --header-file=bc-lexer.h bc-lexer.lex
 
 clean: 
-	rm -f bc-lexer.cpp bc-lexer.h bc-parser.cpp bc-parser.h bc-parser.output bc-parser interpreter compiler *.exe
+	rm -f bc-lexer.cpp bc-lexer.h bc-parser.cpp bc-parser.h bc-parser.output bc-parser mitscript mitscriptc *.exe

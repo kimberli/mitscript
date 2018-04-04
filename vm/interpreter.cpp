@@ -89,6 +89,7 @@ void Interpreter::executeStep() {
             }
         case Operation::FieldLoad:
             {
+                // TODO: check for local var refs (not allowed)
 				auto record = frame->opStackPop().get()->cast<Record>();
 				string field = frame->getNameByIndex(inst.operand0.value());
                 if (record->value.count(field) == 0) {
@@ -99,6 +100,7 @@ void Interpreter::executeStep() {
             }
         case Operation::FieldStore:
             {
+                // TODO: check for local var refs (not allowed)
 				auto value = frame->opStackPop();
 				auto record = frame->opStackPop().get()->cast<Record>()->value;
 				string field = frame->getNameByIndex(inst.operand0.value());
@@ -107,10 +109,12 @@ void Interpreter::executeStep() {
             }
         case Operation::IndexLoad:
             {
+                // TODO: check for local var refs (not allowed)
                 break;
             }
         case Operation::IndexStore:
             {
+                // TODO: check for local var refs (not allowed)
                 break;
             }
         case Operation::AllocClosure:
@@ -273,7 +277,6 @@ void Interpreter::executeStep() {
     }
     if (frame->instructionIndex + newOffset == frame->numInstructions()) {
         // last instruction of current function
-        // TODO destruct current frame
         frames.pop();
         frame = frames.top();
     }

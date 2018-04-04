@@ -1,6 +1,6 @@
 #!/bin/bash
 ROOT=$(git rev-parse --show-toplevel)
-PROG=$ROOT/vm/interpreter
+PROG=$ROOT/vm/mitscript
 TOTAL=0
 SUCCESS=0
 RED='\033[0;31m'
