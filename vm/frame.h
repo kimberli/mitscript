@@ -20,7 +20,7 @@ public:
     void moveToInstruction(int offset) {
         int newOffset = instructionIndex + offset;
         if (newOffset < 0 || newOffset >= func.instructions.size()) {
-            throw RuntimeException("instruction " + std::to_string(newOffset) + " out of bounds");
+            throw RuntimeException("instruction " + std::to_string(instructionIndex + newOffset) + " out of bounds");
         }
         instructionIndex += offset;
     }
