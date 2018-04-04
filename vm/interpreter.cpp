@@ -131,10 +131,10 @@ void Interpreter::executeStep() {
             }
         case Operation::Add:
             {
-                Value* right = frame->opStackPop().get();
-                Value* left = frame->opStackPop().get();
+                auto right = frame->opStackPop();
+                auto left = frame->opStackPop();
                 // try adding integers if left is an int
-                auto leftInt = dynamic_cast<Integer*>(left);
+                auto leftInt = dynamic_cast<Integer*>(left.get());
                 if (leftInt != NULL) {
                     int leftI = leftInt->value;
                     int rightI = right->cast<Integer>()->value;
@@ -143,13 +143,13 @@ void Interpreter::executeStep() {
                     break;
                 }
                 // try adding strings if left or right is a string
-                auto leftStr = dynamic_cast<String*>(left);
+                auto leftStr = dynamic_cast<String*>(left.get());
                 if (leftStr != NULL) {
                     frame->opStackPush(
                         std::make_shared<String>(leftStr->value + right->toString()));
                     break;
                 }
-                auto rightStr = dynamic_cast<String*>(right);
+                auto rightStr = dynamic_cast<String*>(right.get());
                 if (rightStr != NULL) {
                     frame->opStackPush(
                         std::make_shared<String>(left->toString() + rightStr->value));
@@ -177,6 +177,9 @@ void Interpreter::executeStep() {
             {
                 int right = frame->opStackPop().get()->cast<Integer>()->value;
                 int left = frame->opStackPop().get()->cast<Integer>()->value;
+                if (right == 0) {
+                    throw IllegalArithmeticException("cannot divide by 0");
+                }
                 frame->opStackPush(
                         std::make_shared<Integer>(left / right));
                 break;
