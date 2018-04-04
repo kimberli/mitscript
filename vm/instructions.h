@@ -59,7 +59,7 @@ enum class Operation
     LoadReference,
 
     // Description: loads the value of a reference onto the operand stack
-    // Mnemonic:    load_ref
+    // Mnemonic:    store_ref
     // Operand 0:   N/A
     // Operand 1:   value to store
     // Operand 2:   reference to store to
