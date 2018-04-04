@@ -1,0 +1,15 @@
+function
+{
+	functions =
+	[],
+	constants = [None, 1],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [x, f],
+	instructions = 
+	[
+		goto -1
+	]
+}

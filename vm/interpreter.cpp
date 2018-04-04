@@ -9,8 +9,7 @@ using namespace std;
 
 Interpreter::Interpreter(Function* mainFunc) {
     frames = new stack<Frame*>();
-    Instruction* ip = &mainFunc->instructions.front();
-    Frame* frame = new Frame(ip, *mainFunc);
+    Frame* frame = new Frame(0, *mainFunc);
     globalFrame = frame;
     frames->push(frame);
     finished = false;
@@ -19,7 +18,10 @@ Interpreter::Interpreter(Function* mainFunc) {
 void Interpreter::executeStep() {
     // executes a single instruction and updates state of interpreter
     Frame* frame = frames->top();
-    Instruction* inst = frame->instructionPtr;
+    Instruction* inst = &frame->func.instructions[frame->instructionIndex];
+    int newOffset = 1;
+    // TODO: debugging only; remove this later
+    cout << "executing instruction " << frame->instructionIndex << endl;
     switch (inst->operation) {
         case Operation::LoadConst:
             {
@@ -82,8 +84,7 @@ void Interpreter::executeStep() {
             }
         case Operation::AllocRecord:
             {
-				frame->opStackPush(
-					std::make_shared<Record>());
+				frame->opStackPush(std::make_shared<Record>());
                 break;
             }
         case Operation::FieldLoad:
@@ -126,7 +127,6 @@ void Interpreter::executeStep() {
             }
         case Operation::Add:
             {
-                // TODO double-check operand order
                 Value* right = frame->opStackPop().get();
                 Value* left = frame->opStackPop().get();
                 // try adding integers if left is an int
@@ -233,19 +233,14 @@ void Interpreter::executeStep() {
             }
         case Operation::Goto:
             {
-                // move to offset - 1 since we increment at the end
-                // TODO: error handling for out of bounds instructions
-                int offset = inst->operand0.value();
-                frame->moveToInstruction(offset - 1);
+                newOffset = inst->operand0.value();
                 break;
             }
         case Operation::If:
             {
                 auto e = frame->opStackPop().get()->cast<Boolean>();
                 if (e->value) {
-                    // move to offset - 1 since we increment at the end
-                    int offset = inst->operand0.value();
-                    frame->moveToInstruction(offset - 1);
+                    newOffset = inst->operand0.value();
                 }
                 break;
             }
@@ -270,18 +265,18 @@ void Interpreter::executeStep() {
             }
     }
 
-    if (frame->instructionPtr == &globalFrame->func.instructions.back()) {
+    if (frame->instructionIndex + newOffset == globalFrame->func.instructions.size()) {
         // last instruction of the whole program
         finished = true;
         return;
     }
-    if (frame->instructionPtr == &frame->func.instructions.back()) {
+    if (frame->instructionIndex + newOffset == frame->func.instructions.size()) {
         // last instruction of current function
         // TODO destruct current frame
         frames->pop();
         frame = frames->top();
     }
-    frame->instructionPtr++;
+    frame->moveToInstruction(newOffset);
 };
 
 void Interpreter::run() {

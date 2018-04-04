@@ -12,14 +12,17 @@ public:
     map<string, std::shared_ptr<Value>> localVars;
     map<string, std::shared_ptr<ValuePtr>> localRefs;
     stack<std::shared_ptr<Value>> operandStack;
-    Instruction* instructionPtr;
+    int instructionIndex;
     Function& func;
 
-    Frame(Instruction* ip, Function& func): instructionPtr(ip), func(func) {};
+    Frame(int ix, Function& func): instructionIndex(ix), func(func) {};
 
     void moveToInstruction(int offset) {
-        // TODO: check for illegal offsets
-        instructionPtr += offset;
+        int newOffset = instructionIndex + offset;
+        if (newOffset < 0 || newOffset >= func.instructions.size()) {
+            throw RuntimeException("instruction " + std::to_string(newOffset) + " out of bounds");
+        }
+        instructionIndex += offset;
     }
 
     void opStackPush(std::shared_ptr<Value> val) {
