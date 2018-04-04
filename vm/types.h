@@ -27,6 +27,11 @@ struct Value
     }
 };
 
+struct Constant: public Value
+{
+    virtual ~Constant() {};
+};
+
 struct ValuePtr: public Value {
     std::shared_ptr<Value> ptr;
 
@@ -40,11 +45,6 @@ struct ValuePtr: public Value {
 
     string toString();
     bool equals(shared_ptr<Value> other);
-};
-
-struct Constant: public Value
-{
-    virtual ~Constant() {};
 };
 
 struct None : public Constant
@@ -179,4 +179,21 @@ struct Function : public Constant
     string type() {
         return "Function";
     }
+};
+
+struct Closure: public Constant {
+    vector<shared_ptr<ValuePtr>> refs;
+    shared_ptr<Function> func;
+
+    Closure(vector<shared_ptr<ValuePtr>> refs, shared_ptr<Function> func):
+        refs(refs), func(func) {};
+    virtual ~Closure() {};
+
+    static const string typeS;
+    string type() {
+        return "Closure";
+    }
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
 };

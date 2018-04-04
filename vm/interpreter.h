@@ -16,6 +16,6 @@ private:
     void executeStep();
     bool finished;
 public:
-    Interpreter(Function& mainFunc);
+    Interpreter(shared_ptr<Function> mainFunc);
     void run();
 };

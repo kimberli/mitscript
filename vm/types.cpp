@@ -83,3 +83,12 @@ string Function::toString() {
 bool Function::equals(shared_ptr<Value> other) {
     // TODO
 }
+
+/* Closure */
+const string Closure::typeS = "Closure";
+string Closure::toString() {
+    throw RuntimeException("can't cast Closure to String");
+}
+bool Closure::equals(shared_ptr<Value> other) {
+    throw RuntimeException("can't call equals on Closure");
+}

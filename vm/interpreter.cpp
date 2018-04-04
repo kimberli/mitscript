@@ -9,8 +9,8 @@
 
 using namespace std;
 
-Interpreter::Interpreter(Function& mainFunc) {
-    shared_ptr<Frame> frame = std::make_shared<Frame>(Frame(0, mainFunc));
+Interpreter::Interpreter(shared_ptr<Function> mainFunc) {
+    shared_ptr<Frame> frame = std::make_shared<Frame>(Frame(mainFunc));
     globalFrame = frame;
     frames.push(frame);
     finished = false;
@@ -131,14 +131,71 @@ void Interpreter::executeStep() {
             }
         case Operation::AllocClosure:
             {
+                // read num free vars, ref vars, and function off the stack
+                int numFreeVars = inst.operand0.value();
+                vector<shared_ptr<ValuePtr>> refList;
+                for (int i = 0; i < numFreeVars; i++) {
+                    auto top = frame->opStackPop();
+                    auto value = dynamic_pointer_cast<ValuePtr>(top);
+                    if (value == NULL) {
+                        throw RuntimeException("free variable in closure alloc is not a reference");
+                    }
+                    refList.push_back(value);
+                }
+                auto func = dynamic_pointer_cast<Function>(frame->opStackPop());
+                if (func == NULL) {
+                    throw RuntimeException("expected Function on operand stack for closure alloc");
+                }
+
+                // push new closure onto the stack
+                frame->opStackPush(make_shared<Closure>(refList, func));
                 break;
             }
         case Operation::Call:
             {
+                // read num arguments, argument values, and closure off the stack
+                int numArgs = inst.operand0.value();
+                vector<shared_ptr<Constant>> argsList;
+                for (int i = 0; i < numArgs; i++) {
+                    auto top = frame->opStackPop();
+                    auto value = dynamic_pointer_cast<Constant>(top);
+                    if (value == NULL) {
+                        throw RuntimeException("call argument is not a constant");
+                    }
+                    argsList.push_back(value);
+                }
+                auto clos = dynamic_pointer_cast<Closure>(frame->opStackPop());
+                if (clos == NULL) {
+                    throw RuntimeException("expected Closure on operand stack for function call");
+                }
+
+                if (numArgs != clos->func->parameter_count_) {
+                    throw RuntimeException("mismatched arguments in function call");
+                }
+
+                // process local refs and local vars
+                LocalVarMap localVars;
+                LocalRefMap localRefs;
+                for (int i = 0; i < clos->refs.size(); i++) {
+                    string free_var = clos->func->free_vars_[i];
+                    localRefs[free_var] = clos->refs[i];
+                }
+                for (int i = 0; i < numArgs; i++) {
+                    string arg = clos->func->local_vars_[i];
+                    localVars[arg] = argsList[i];
+                }
+                shared_ptr<Frame> frame = make_shared<Frame>(Frame(clos->func, localVars, localRefs));
+                frames.push(frame);
                 break;
             }
         case Operation::Return:
             {
+                // take return val from top of stack & discard current frame
+                auto returnVal = frame->opStackPeek();
+                frames.pop();
+                frame = frames.top();
+                // push return val to top of new parent frame
+                frame->opStackPush(returnVal);
                 break;
             }
         case Operation::Add:

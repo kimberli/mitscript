@@ -7,29 +7,35 @@
 
 using namespace std;
 
+// TODO: change these to vectors
+typedef map<string, std::shared_ptr<Constant>> LocalVarMap;
+typedef map<string, std::shared_ptr<ValuePtr>> LocalRefMap;
+
 class Frame {
-    Function& func;
-    map<string, std::shared_ptr<Constant>> localVars;
-    map<string, std::shared_ptr<ValuePtr>> localRefs;
-    stack<std::shared_ptr<Value>> operandStack;
+    std::shared_ptr<Function> func;
+    LocalVarMap localVars;
+    LocalRefMap localRefs;
 
 public:
-    int instructionIndex;
+    stack<std::shared_ptr<Value>> opStack;
+    int instructionIndex = 0;
 
-    Frame(int ix, Function& func): instructionIndex(ix), func(func) {};
+    Frame(std::shared_ptr<Function> func): func(func) {};
+    Frame(std::shared_ptr<Function> func, LocalVarMap& localVars, LocalRefMap& localRefs):
+        func(func), localVars(localVars), localRefs(localRefs) {};
 
     // instruction helpers
     int numInstructions() {
-        return func.instructions.size();
+        return func->instructions.size();
     }
 
     Instruction& getCurrInstruction() {
-        return func.instructions[instructionIndex];
+        return func->instructions[instructionIndex];
     }
 
     void moveToInstruction(int offset) {
         int newOffset = instructionIndex + offset;
-        if (newOffset < 0 || newOffset >= func.instructions.size()) {
+        if (newOffset < 0 || newOffset >= func->instructions.size()) {
             throw RuntimeException("instruction " + std::to_string(instructionIndex + newOffset) + " out of bounds");
         }
         instructionIndex += offset;
@@ -37,38 +43,38 @@ public:
 
     // function value helpers
     shared_ptr<Constant> getConstantByIndex(int index) {
-        if (index < 0 || index >= func.constants_.size()) {
+        if (index < 0 || index >= func->constants_.size()) {
             throw RuntimeException("constant " + std::to_string(index) + " out of bounds");
         }
-        return func.constants_[index];
+        return func->constants_[index];
     }
 
     shared_ptr<Function> getFunctionByIndex(int index) {
-        if (index < 0 || index >= func.functions_.size()) {
+        if (index < 0 || index >= func->functions_.size()) {
             throw RuntimeException("function " + std::to_string(index) + " out of bounds");
         }
-        return func.functions_[index];
+        return func->functions_[index];
     }
 
     string getLocalVarByIndex(int index) {
-        if (index < 0 || index >= func.local_vars_.size()) {
+        if (index < 0 || index >= func->local_vars_.size()) {
             throw RuntimeException("local var " + std::to_string(index) + " out of bounds");
         }
-        return func.local_vars_[index];
+        return func->local_vars_[index];
     }
 
     string getNameByIndex(int index) {
-        if (index < 0 || index >= func.names_.size()) {
+        if (index < 0 || index >= func->names_.size()) {
             throw RuntimeException("name " + std::to_string(index) + " out of bounds");
         }
-        return func.names_[index];
+        return func->names_[index];
     }
 
     string getRefVarByIndex(int index) {
-        if (index < 0 || index >= func.local_reference_vars_.size()) {
+        if (index < 0 || index >= func->local_reference_vars_.size()) {
             throw RuntimeException("name " + std::to_string(index) + " out of bounds");
         }
-        return func.local_reference_vars_[index];
+        return func->local_reference_vars_[index];
     }
 
     // var map helpers
@@ -96,19 +102,19 @@ public:
 
     // operand stack helpers
     void opStackPush(std::shared_ptr<Value> val) {
-        operandStack.push(val);
+        opStack.push(val);
     }
 
     std::shared_ptr<Value> opStackPeek() {
-        return operandStack.top();
+        return opStack.top();
     }
 
     std::shared_ptr<Value> opStackPop() {
-        if (operandStack.empty()) {
+        if (opStack.empty()) {
             throw InsufficientStackException("pop from empty stack");
         }
-        std::shared_ptr<Value> top = operandStack.top();
-        operandStack.pop();
+        std::shared_ptr<Value> top = opStack.top();
+        opStack.pop();
         return top;
     }
 };
