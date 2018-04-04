@@ -33,9 +33,9 @@ struct Constant: public Value
 };
 
 struct ValuePtr: public Value {
-    std::shared_ptr<Value> ptr;
+    shared_ptr<Value> ptr;
 
-    ValuePtr(std::shared_ptr<Value> ptr): ptr(ptr) {};
+    ValuePtr(shared_ptr<Value> ptr): ptr(ptr) {};
     virtual ~ValuePtr() {};
 
     static const string typeS;
@@ -78,9 +78,9 @@ struct Integer : public Constant
 
 struct String : public Constant
 {
-    std::string value;
+    string value;
 
-    String(std::string value): value(value) {};
+    String(string value): value(value) {};
     virtual ~String() {};
     
     static const string typeS;
@@ -112,10 +112,10 @@ struct Boolean : public Constant
 struct Record : public Constant
 {
     Record() {
-		value = *(new map<string, std::shared_ptr<Value>>());
+		value = *(new map<string, shared_ptr<Value>>());
 	}
-    Record(map<string, std::shared_ptr<Value>> value): value(value) {}
-	map<string, std::shared_ptr<Value>> value;
+    Record(map<string, shared_ptr<Value>> value): value(value) {}
+	map<string, shared_ptr<Value>> value;
 
     virtual ~Record() {}
     string toString();
@@ -129,10 +129,10 @@ struct Record : public Constant
 struct Function : public Constant
 {
     // List of functions defined within this function (but not functions defined inside of nested functions)
-    std::vector<std::shared_ptr<Function>> functions_;
+    vector<shared_ptr<Function>> functions_;
 
     // List of constants used by the instructions within this function (but not nested functions)
-    std::vector<std::shared_ptr<Constant>> constants_;
+    vector<shared_ptr<Constant>> constants_;
 
     // The number of parameters to the function
     uint32_t parameter_count_;
@@ -140,29 +140,29 @@ struct Function : public Constant
     // List of local variables
     // The first parameter_count_ variables are the function's parameters
     // in their order as given in the paraemter list
-    std::vector<std::string> local_vars_;
+    vector<string> local_vars_;
 
     // List of local variables accessed by reference (LocalReference)
-    std::vector<std::string> local_reference_vars_;
+    vector<string> local_reference_vars_;
 
     // List of the names of non-global and non-local variables accessed by the function
-    std::vector<std::string> free_vars_;
+    vector<string> free_vars_;
 
     // List of global variable and field names used inside the function
-    std::vector<std::string> names_;
+    vector<string> names_;
 
     InstructionList instructions;
 
     Function() {};
     virtual ~Function() {};
 
-    Function(std::vector<std::shared_ptr<Function>> functions_,
-            std::vector<std::shared_ptr<Constant>> constants_,
+    Function(vector<shared_ptr<Function>> functions_,
+            vector<shared_ptr<Constant>> constants_,
             uint32_t parameter_count_,
-	        std::vector<std::string> local_vars_,
-            std::vector<std::string> local_reference_vars_,
-            std::vector<std::string> free_vars_,
-	        std::vector<std::string> names_,
+	        vector<string> local_vars_,
+            vector<string> local_reference_vars_,
+            vector<string> free_vars_,
+	        vector<string> names_,
             InstructionList instructions):
         functions_(functions_),
         constants_(constants_),

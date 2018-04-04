@@ -10,7 +10,7 @@
 using namespace std;
 
 Interpreter::Interpreter(shared_ptr<Function> mainFunc) {
-    shared_ptr<Frame> frame = std::make_shared<Frame>(Frame(mainFunc));
+    shared_ptr<Frame> frame = make_shared<Frame>(Frame(mainFunc));
     globalFrame = frame;
     frames.push(frame);
     finished = false;
@@ -21,8 +21,7 @@ void Interpreter::executeStep() {
     shared_ptr<Frame> frame = frames.top();
     Instruction& inst = frame->getCurrInstruction();
     int newOffset = 1;
-    DEBUG("executing instruction " + std::to_string(frame->instructionIndex));
-    // TODO: remove .get() in shared_ptr calls
+    DEBUG("executing instruction " + to_string(frame->instructionIndex));
     switch (inst.operation) {
         case Operation::LoadConst:
             {
@@ -71,7 +70,7 @@ void Interpreter::executeStep() {
         case Operation::PushReference:
             {
                 string refName = frame->getRefVarByIndex(inst.operand0.value());
-                auto valuePtr = std::make_shared<ValuePtr>(frame->getRefVar(refName));
+                auto valuePtr = make_shared<ValuePtr>(frame->getRefVar(refName));
                 frame->opStackPush(valuePtr);
                 break;
             }
@@ -91,21 +90,21 @@ void Interpreter::executeStep() {
                 if (valuePtr == NULL) {
                     throw RuntimeException("cannot store non-value ptr as ref var");
                 }
-				*valuePtr.get()->ptr = *value.get();
+				*valuePtr->ptr = *value;
                 break;
             }
         case Operation::AllocRecord:
             {
-				frame->opStackPush(std::make_shared<Record>());
+				frame->opStackPush(make_shared<Record>());
                 break;
             }
         case Operation::FieldLoad:
             {
                 // TODO: check for local var refs (not allowed)
-				auto record = frame->opStackPop().get()->cast<Record>();
+				auto record = frame->opStackPop()->cast<Record>();
 				string field = frame->getNameByIndex(inst.operand0.value());
                 if (record->value.count(field) == 0) {
-                    record->value[field] = std::make_shared<None>();
+                    record->value[field] = make_shared<None>();
                 }
 				frame->opStackPush(record->value[field]);
                 break;
@@ -114,7 +113,7 @@ void Interpreter::executeStep() {
             {
                 // TODO: check for local var refs (not allowed)
 				auto value = frame->opStackPop();
-				auto record = frame->opStackPop().get()->cast<Record>()->value;
+				auto record = frame->opStackPop()->cast<Record>()->value;
 				string field = frame->getNameByIndex(inst.operand0.value());
 				record[field] = value;
                 break;
@@ -208,103 +207,103 @@ void Interpreter::executeStep() {
                     int leftI = leftInt->value;
                     int rightI = right->cast<Integer>()->value;
                     frame->opStackPush(
-                        std::make_shared<Integer>(leftI + rightI));
+                        make_shared<Integer>(leftI + rightI));
                     break;
                 }
                 // try adding strings if left or right is a string
                 auto leftStr = dynamic_cast<String*>(left.get());
                 if (leftStr != NULL) {
                     frame->opStackPush(
-                        std::make_shared<String>(leftStr->value + right->toString()));
+                        make_shared<String>(leftStr->value + right->toString()));
                     break;
                 }
                 auto rightStr = dynamic_cast<String*>(right.get());
                 if (rightStr != NULL) {
                     frame->opStackPush(
-                        std::make_shared<String>(left->toString() + rightStr->value));
+                        make_shared<String>(left->toString() + rightStr->value));
                     break;
                 }
                 break;
             }
         case Operation::Sub:
             {
-                int right = frame->opStackPop().get()->cast<Integer>()->value;
-                int left = frame->opStackPop().get()->cast<Integer>()->value;
+                int right = frame->opStackPop()->cast<Integer>()->value;
+                int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        std::make_shared<Integer>(left - right));
+                        make_shared<Integer>(left - right));
                 break;
             }
         case Operation::Mul:
             {
-                int right = frame->opStackPop().get()->cast<Integer>()->value;
-                int left = frame->opStackPop().get()->cast<Integer>()->value;
+                int right = frame->opStackPop()->cast<Integer>()->value;
+                int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        std::make_shared<Integer>(left * right));
+                        make_shared<Integer>(left * right));
                 break;
             }
         case Operation::Div:
             {
-                int right = frame->opStackPop().get()->cast<Integer>()->value;
-                int left = frame->opStackPop().get()->cast<Integer>()->value;
+                int right = frame->opStackPop()->cast<Integer>()->value;
+                int left = frame->opStackPop()->cast<Integer>()->value;
                 if (right == 0) {
                     throw IllegalArithmeticException("cannot divide by 0");
                 }
                 frame->opStackPush(
-                        std::make_shared<Integer>(left / right));
+                        make_shared<Integer>(left / right));
                 break;
             }
         case Operation::Neg:
             {
-                int top = frame->opStackPop().get()->cast<Integer>()->value;
+                int top = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        std::make_shared<Integer>(-top));
+                        make_shared<Integer>(-top));
                 break;
             }
         case Operation::Gt:
             {
-                int right = frame->opStackPop().get()->cast<Integer>()->value;
-                int left = frame->opStackPop().get()->cast<Integer>()->value;
+                int right = frame->opStackPop()->cast<Integer>()->value;
+                int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        std::make_shared<Boolean>(left > right));
+                        make_shared<Boolean>(left > right));
                 break;
             }
         case Operation::Geq:
             {
-                int right = frame->opStackPop().get()->cast<Integer>()->value;
-                int left = frame->opStackPop().get()->cast<Integer>()->value;
+                int right = frame->opStackPop()->cast<Integer>()->value;
+                int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        std::make_shared<Boolean>(left >= right));
+                        make_shared<Boolean>(left >= right));
                 break;
             }
         case Operation::Eq:
             {
                 shared_ptr<Value> right = frame->opStackPop();
-                Value* left = frame->opStackPop().get();
+                auto left = frame->opStackPop();
                 frame->opStackPush(
-                        std::make_shared<Boolean>(left->equals(right)));
+                        make_shared<Boolean>(left->equals(right)));
                 break;
             }
         case Operation::And:
             {
-                bool right = frame->opStackPop().get()->cast<Boolean>()->value;
-                bool left = frame->opStackPop().get()->cast<Boolean>()->value;
+                bool right = frame->opStackPop()->cast<Boolean>()->value;
+                bool left = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
-                        std::make_shared<Boolean>(left && right));
+                        make_shared<Boolean>(left && right));
                 break;
             }
         case Operation::Or:
             {
-                bool right = frame->opStackPop().get()->cast<Boolean>()->value;
-                bool left = frame->opStackPop().get()->cast<Boolean>()->value;
+                bool right = frame->opStackPop()->cast<Boolean>()->value;
+                bool left = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
-                        std::make_shared<Boolean>(left || right));
+                        make_shared<Boolean>(left || right));
                 break;
             }
         case Operation::Not:
             {
-                bool top = frame->opStackPop().get()->cast<Boolean>()->value;
+                bool top = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
-                        std::make_shared<Boolean>(!top));
+                        make_shared<Boolean>(!top));
                 break;
             }
         case Operation::Goto:
@@ -315,7 +314,7 @@ void Interpreter::executeStep() {
             }
         case Operation::If:
             {
-                auto e = frame->opStackPop().get()->cast<Boolean>();
+                auto e = frame->opStackPop()->cast<Boolean>();
                 if (e->value) {
                     newOffset = inst.operand0.value();
                 }
