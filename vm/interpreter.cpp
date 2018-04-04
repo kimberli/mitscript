@@ -268,6 +268,8 @@ void Interpreter::executeStep() {
                 frame->opStackPop();
                 break;
             }
+        default:
+            throw RuntimeException("should never get here - invalid instruction");
     }
 
     if (frame->instructionIndex + newOffset == globalFrame->numInstructions()) {
