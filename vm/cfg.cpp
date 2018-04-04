@@ -257,6 +257,23 @@ void CFGBuilder::visit(UnaryExpr& exp) {
     retInstr = iList;
 }
 
+void CFGBuilder::visit(RecordExpr& exp) {
+    InstructionList iList;
+    // instr to allocate the record
+    optint_t noArg0;
+    Instruction* alloc = new Instruction(Operation::AllocRecord, noArg0);
+    iList.push_back(alloc);
+    // pop the record from the stack to start clean
+    //Instruction* pop = new Instruction(Operation::Pop, noArg0);
+    //iList.push_back(pop)
+
+    // TODO
+    // for each field, load the record (what is the index into the constants array???) 
+    // eval the value to store and leave on the stack
+    // call the write function which handles record writing?
+    // repeat 
+}
+
 void CFGBuilder::visit(Identifier& exp) {
     // TODO: use a symbol table to figure out how to load variables. 
 }
