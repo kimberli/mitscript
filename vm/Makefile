@@ -1,3 +1,5 @@
+all: compiler interpreter
+
 compiler: compiler-main.cpp compiler.h cfg.cpp cfgtofunc.cpp
 	g++ -g -std=c++1y compiler-main.cpp cfg.cpp types.cpp cfgtofunc.cpp ../parser/parser.cpp ../parser/lexer.cpp -o mitscriptc
 
