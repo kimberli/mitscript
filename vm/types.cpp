@@ -1,7 +1,5 @@
 #include "types.h"
 
-const string Constant::typeS = "Constant";
-
 /* ValuePtr */
 const string ValuePtr::typeS = "ValuePtr";
 string ValuePtr::toString() {
@@ -18,6 +16,7 @@ string None::toString() {
 }
 bool None::equals(shared_ptr<Value> other) {
     // TODO
+    return true;
 }
 
 /* Integer */
@@ -27,6 +26,7 @@ string Integer::toString() {
 }
 bool Integer::equals(shared_ptr<Value> other) {
     // TODO
+    return true;
 }
 
 /* String */
@@ -36,6 +36,7 @@ string String::toString() {
 }
 bool String::equals(shared_ptr<Value> other) {
     // TODO
+    return true;
 }
 
 /* Boolean */
@@ -45,6 +46,7 @@ string Boolean::toString() {
 };
 bool Boolean::equals(shared_ptr<Value> other) {
     // TODO
+    return true;
 }
 
 /* Record */
@@ -59,6 +61,7 @@ string Record::toString() {
 }
 bool Record::equals(shared_ptr<Value> other) {
     // TODO
+    return true;
 }
 
 /* Function */
@@ -68,4 +71,5 @@ string Function::toString() {
 }
 bool Function::equals(shared_ptr<Value> other) {
     // TODO
+    return true;
 }

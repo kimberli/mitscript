@@ -5,7 +5,7 @@ interpreter: interpreter-main.cpp interpreter.cpp bc-parser
 	g++ -g -std=c++1y interpreter-main.cpp interpreter.cpp types.cpp bc-parser.cpp bc-lexer.cpp ../parser/parser.cpp ../parser/lexer.cpp -o interpreter
 
 bc-parser: bc-parser.cpp bc-lexer.cpp bc-parser-driver.cpp
-	g++ -g -std=c++1y bc-parser-driver.cpp bc-parser.cpp bc-lexer.cpp -o bc-parser
+	g++ -g -std=c++1y types.cpp bc-parser-driver.cpp bc-parser.cpp bc-lexer.cpp -o bc-parser
 
 bc-parser.cpp: bc-parser.yy
 	bison -Dapi.prefix={bc} --output=bc-parser.cpp --defines=bc-parser.h bc-parser.yy

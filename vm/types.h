@@ -11,8 +11,9 @@
 
 struct Value
 {
-    virtual ~Value() { }
+    virtual ~Value() {};
     virtual string type() = 0;
+
     virtual string toString() = 0;
     virtual bool equals(shared_ptr<Value> other) = 0;
 
@@ -28,77 +29,84 @@ struct Value
 
 struct ValuePtr: public Value {
     std::shared_ptr<Value> ptr;
-    ValuePtr(std::shared_ptr<Value> ptr): ptr(ptr) {}
 
-    string toString();
-    bool equals(shared_ptr<Value> other);
+    ValuePtr(std::shared_ptr<Value> ptr): ptr(ptr) {};
+    virtual ~ValuePtr() {};
+
     static const string typeS;
     string type() {
         return "ValuePtr";
     }
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
 };
 
 struct Constant: public Value
 {
-    virtual ~Constant() { }
-
-    static const string typeS;
+    virtual ~Constant() {};
 };
 
 struct None : public Constant
 {
-    virtual ~None() { }
-    string toString();
-    bool equals(shared_ptr<Value> other);
+    virtual ~None() {}
+
     static const string typeS;
     string type() {
         return "None";
     }
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
 };
 
 struct Integer : public Constant
 {
-    Integer(int32_t value) : value(value) {}
-
     int32_t value;
 
-    virtual ~Integer() { }
-    string toString();
-    bool equals(shared_ptr<Value> other);
+    Integer(int32_t value) : value(value) {}
+    virtual ~Integer() {}
+
     static const string typeS;
     string type() {
         return "Integer";
     }
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
 };
 
 struct String : public Constant
 {
-    String(std::string value): value(value) {}
-
     std::string value;
 
-    virtual ~String() { }
-    string toString();
-    bool equals(shared_ptr<Value> other);
+    String(std::string value): value(value) {};
+    virtual ~String() {};
+    
     static const string typeS;
     string type() {
         return "String";
     }
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
 };
 
 struct Boolean : public Constant
 {
-    Boolean(bool value): value(value) {}
-
     bool value;
 
-    virtual ~Boolean() { }
-    string toString();
-    bool equals(shared_ptr<Value> other);
+    Boolean(bool value): value(value) {};
+    virtual ~Boolean() {};
+
     static const string typeS;
     string type() {
         return "Boolean";
     }
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
+
 };
 
 struct Record : public Constant
@@ -109,7 +117,7 @@ struct Record : public Constant
     Record(map<string, std::shared_ptr<Value>> value): value(value) {}
 	map<string, std::shared_ptr<Value>> value;
 
-    virtual ~Record() { }
+    virtual ~Record() {}
     string toString();
     bool equals(shared_ptr<Value> other);
     static const string typeS;
@@ -146,6 +154,7 @@ struct Function : public Value
     InstructionList instructions;
 
     Function() {};
+    virtual ~Function() {};
 
     Function(std::vector<std::shared_ptr<Function>> functions_,
             std::vector<std::shared_ptr<Constant>> constants_,
