@@ -9,7 +9,7 @@ using namespace std;
 
 class Frame {
     Function& func;
-    map<string, std::shared_ptr<Value>> localVars;
+    map<string, std::shared_ptr<Constant>> localVars;
     map<string, std::shared_ptr<ValuePtr>> localRefs;
     stack<std::shared_ptr<Value>> operandStack;
 
@@ -72,7 +72,7 @@ public:
     }
 
     // var map helpers
-    shared_ptr<Value> getLocalVar(string name) {
+    shared_ptr<Constant> getLocalVar(string name) {
         if (localVars.count(name) == 0) {
             throw UninitializedVariableException(name + " is not initialized");
         }
@@ -86,7 +86,7 @@ public:
         return localRefs[name];
     }
 
-    void setLocalVar(string name, shared_ptr<Value> val) {
+    void setLocalVar(string name, shared_ptr<Constant> val) {
         localVars[name] = val;
     }
 

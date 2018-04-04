@@ -126,7 +126,7 @@ struct Record : public Constant
     }
 };
 
-struct Function : public Value
+struct Function : public Constant
 {
     // List of functions defined within this function (but not functions defined inside of nested functions)
     std::vector<std::shared_ptr<Function>> functions_;

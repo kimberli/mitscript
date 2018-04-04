@@ -45,7 +45,10 @@ void Interpreter::executeStep() {
         case Operation::StoreLocal:
             {
                 string localName = frame->getLocalVarByIndex(inst.operand0.value());
-                auto value = frame->opStackPop();
+                auto value = dynamic_pointer_cast<Constant>(frame->opStackPop());
+                if (value == NULL) {
+                    throw RuntimeException("cannot store non-constant value as local var");
+                }
                 frame->setLocalVar(localName, value);
                 break;
             }
@@ -58,7 +61,10 @@ void Interpreter::executeStep() {
         case Operation::StoreGlobal:
             {
                 string globalName = frame->getNameByIndex(inst.operand0.value());
-                auto value = frame->opStackPop();
+                auto value = dynamic_pointer_cast<Constant>(frame->opStackPop());
+                if (value == NULL) {
+                    throw RuntimeException("cannot store non-constant value as global var");
+                }
                 globalFrame->setLocalVar(globalName, value);
                 break;
             }
@@ -71,15 +77,21 @@ void Interpreter::executeStep() {
             }
         case Operation::LoadReference:
             {
-                auto valuePtr = frame->opStackPop().get()->cast<ValuePtr>()->ptr;
+                auto valuePtr = dynamic_pointer_cast<ValuePtr>(frame->opStackPop());
+                if (valuePtr == NULL) {
+                    throw RuntimeException("cannot store non-value ptr as ref var");
+                }
                 frame->opStackPush(valuePtr);
                 break;
             }
         case Operation::StoreReference:
             {
                 auto value = frame->opStackPop();
-                auto valuePtr = frame->opStackPop().get()->cast<ValuePtr>()->ptr;
-				*valuePtr.get() = *value.get();
+                auto valuePtr = dynamic_pointer_cast<ValuePtr>(frame->opStackPop());
+                if (valuePtr == NULL) {
+                    throw RuntimeException("cannot store non-value ptr as ref var");
+                }
+				*valuePtr.get()->ptr = *value.get();
                 break;
             }
         case Operation::AllocRecord:
