@@ -22,6 +22,14 @@ public:
         instructionPtr += offset;
     }
 
+    void opStackPush(std::shared_ptr<Value> val) {
+        operandStack.push(val);
+    }
+
+    std::shared_ptr<Value> opStackPeek() {
+        return operandStack.top();
+    }
+
     std::shared_ptr<Value> opStackPop() {
         if (operandStack.empty()) {
             throw InsufficientStackException("pop from empty stack");

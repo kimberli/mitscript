@@ -24,19 +24,19 @@ void Interpreter::executeStep() {
         case Operation::LoadConst:
             {
                 auto constant = frame->func.constants_[inst->operand0.value()];
-                frame->operandStack.push(constant);
+                frame->opStackPush(constant);
                 break;
             }
         case Operation::LoadFunc:
             {
                 auto func = frame->func.functions_[inst->operand0.value()];
-                frame->operandStack.push(func);
+                frame->opStackPush(func);
                 break;
             }
         case Operation::LoadLocal:
             {
                 string localVar = frame->func.local_vars_[inst->operand0.value()];
-                frame->operandStack.push(frame->localVars[localVar]);
+                frame->opStackPush(frame->localVars[localVar]);
                 break;
             }
         case Operation::StoreLocal:
@@ -49,7 +49,7 @@ void Interpreter::executeStep() {
         case Operation::LoadGlobal:
             {
                 string globalVar = frame->func.names_[inst->operand0.value()];
-                frame->operandStack.push(globalFrame->localVars[globalVar]);
+                frame->opStackPush(globalFrame->localVars[globalVar]);
                 break;
             }
         case Operation::StoreGlobal:
@@ -64,13 +64,13 @@ void Interpreter::executeStep() {
                 string localRef = frame->func.
                     local_reference_vars_[inst->operand0.value()];
                 auto valuePtr = std::make_shared<ValuePtr>(frame->localRefs[localRef]);
-                frame->operandStack.push(valuePtr);
+                frame->opStackPush(valuePtr);
                 break;
             }
         case Operation::LoadReference:
             {
                 ValuePtr* valuePtr = frame->opStackPop().get()->cast<ValuePtr>();
-                frame->operandStack.push(valuePtr->ptr);
+                frame->opStackPush(valuePtr->ptr);
                 break;
             }
         case Operation::StoreReference:
@@ -82,7 +82,7 @@ void Interpreter::executeStep() {
             }
         case Operation::AllocRecord:
             {
-				frame->operandStack.push(
+				frame->opStackPush(
 					std::make_shared<Record>());
                 break;
             }
@@ -93,7 +93,7 @@ void Interpreter::executeStep() {
                 if (record->value.count(field) == 0) {
                     record->value[field] = std::make_shared<None>();
                 }
-				frame->operandStack.push(record->value[field]);
+				frame->opStackPush(record->value[field]);
                 break;
             }
         case Operation::FieldStore:
@@ -134,20 +134,20 @@ void Interpreter::executeStep() {
                 if (leftInt != NULL) {
                     int leftI = leftInt->value;
                     int rightI = right->cast<Integer>()->value;
-                    frame->operandStack.push(
+                    frame->opStackPush(
                         std::make_shared<Integer>(leftI + rightI));
                     break;
                 }
                 // try adding strings if left or right is a string
                 auto leftStr = dynamic_cast<String*>(left);
                 if (leftStr != NULL) {
-                    frame->operandStack.push(
+                    frame->opStackPush(
                         std::make_shared<String>(leftStr->value + right->toString()));
                     break;
                 }
                 auto rightStr = dynamic_cast<String*>(right);
                 if (rightStr != NULL) {
-                    frame->operandStack.push(
+                    frame->opStackPush(
                         std::make_shared<String>(left->toString() + rightStr->value));
                     break;
                 }
@@ -157,7 +157,7 @@ void Interpreter::executeStep() {
             {
                 int right = frame->opStackPop().get()->cast<Integer>()->value;
                 int left = frame->opStackPop().get()->cast<Integer>()->value;
-                frame->operandStack.push(
+                frame->opStackPush(
                         std::make_shared<Integer>(left - right));
                 break;
             }
@@ -165,7 +165,7 @@ void Interpreter::executeStep() {
             {
                 int right = frame->opStackPop().get()->cast<Integer>()->value;
                 int left = frame->opStackPop().get()->cast<Integer>()->value;
-                frame->operandStack.push(
+                frame->opStackPush(
                         std::make_shared<Integer>(left * right));
                 break;
             }
@@ -173,14 +173,14 @@ void Interpreter::executeStep() {
             {
                 int right = frame->opStackPop().get()->cast<Integer>()->value;
                 int left = frame->opStackPop().get()->cast<Integer>()->value;
-                frame->operandStack.push(
+                frame->opStackPush(
                         std::make_shared<Integer>(left / right));
                 break;
             }
         case Operation::Neg:
             {
                 int top = frame->opStackPop().get()->cast<Integer>()->value;
-                frame->operandStack.push(
+                frame->opStackPush(
                         std::make_shared<Integer>(-top));
                 break;
             }
@@ -188,7 +188,7 @@ void Interpreter::executeStep() {
             {
                 int right = frame->opStackPop().get()->cast<Integer>()->value;
                 int left = frame->opStackPop().get()->cast<Integer>()->value;
-                frame->operandStack.push(
+                frame->opStackPush(
                         std::make_shared<Boolean>(left > right));
                 break;
             }
@@ -196,7 +196,7 @@ void Interpreter::executeStep() {
             {
                 int right = frame->opStackPop().get()->cast<Integer>()->value;
                 int left = frame->opStackPop().get()->cast<Integer>()->value;
-                frame->operandStack.push(
+                frame->opStackPush(
                         std::make_shared<Boolean>(left >= right));
                 break;
             }
@@ -204,7 +204,7 @@ void Interpreter::executeStep() {
             {
                 shared_ptr<Value> right = frame->opStackPop();
                 Value* left = frame->opStackPop().get();
-                frame->operandStack.push(
+                frame->opStackPush(
                         std::make_shared<Boolean>(left->equals(right)));
                 break;
             }
@@ -212,7 +212,7 @@ void Interpreter::executeStep() {
             {
                 bool right = frame->opStackPop().get()->cast<Boolean>()->value;
                 bool left = frame->opStackPop().get()->cast<Boolean>()->value;
-                frame->operandStack.push(
+                frame->opStackPush(
                         std::make_shared<Boolean>(left && right));
                 break;
             }
@@ -220,14 +220,14 @@ void Interpreter::executeStep() {
             {
                 bool right = frame->opStackPop().get()->cast<Boolean>()->value;
                 bool left = frame->opStackPop().get()->cast<Boolean>()->value;
-                frame->operandStack.push(
+                frame->opStackPush(
                         std::make_shared<Boolean>(left || right));
                 break;
             }
         case Operation::Not:
             {
                 bool top = frame->opStackPop().get()->cast<Boolean>()->value;
-                frame->operandStack.push(
+                frame->opStackPush(
                         std::make_shared<Boolean>(!top));
                 break;
             }
@@ -251,18 +251,16 @@ void Interpreter::executeStep() {
             }
         case Operation::Dup:
             {
-                // TODO make this less inefficient
-                auto top = frame->opStackPop();
-                frame->operandStack.push(top);
-                frame->operandStack.push(top);
+                auto top = frame->opStackPeek();
+                frame->opStackPush(top);
                 break;
             }
         case Operation::Swap:
             {
                 auto top = frame->opStackPop();
                 auto next = frame->opStackPop();
-                frame->operandStack.push(top);
-                frame->operandStack.push(next);
+                frame->opStackPush(top);
+                frame->opStackPush(next);
                 break;
             }
         case Operation::Pop:
