@@ -10,6 +10,8 @@ function
 	names = [x, f],
 	instructions = 
 	[
-		goto -1
+        load_const 0
+		goto 3
+        load_const 1
 	]
 }

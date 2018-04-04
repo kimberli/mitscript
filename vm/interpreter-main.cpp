@@ -67,7 +67,7 @@ int main(int argc, char** argv) {
 
     std::shared_ptr<Function> func(bc_output);
   
-    Interpreter* intp = new Interpreter(bc_output); 
+    Interpreter* intp = new Interpreter(*bc_output);
     try {
         intp->run();
     } catch (InterpreterException& exception) {

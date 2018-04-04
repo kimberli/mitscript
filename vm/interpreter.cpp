@@ -5,23 +5,24 @@
 #include "types.h"
 #include <stack>
 
+#define DEBUG(msg) { if (1) cout << msg << endl; }
+
 using namespace std;
 
-Interpreter::Interpreter(Function* mainFunc) {
-    frames = new stack<Frame*>();
-    Frame* frame = new Frame(0, *mainFunc);
+Interpreter::Interpreter(Function& mainFunc) {
+    shared_ptr<Frame> frame = std::make_shared<Frame>(Frame(0, mainFunc));
     globalFrame = frame;
-    frames->push(frame);
+    frames.push(frame);
     finished = false;
 };
 
 void Interpreter::executeStep() {
     // executes a single instruction and updates state of interpreter
-    Frame* frame = frames->top();
+    shared_ptr<Frame> frame = frames.top();
     Instruction& inst = frame->getCurrInstruction();
     int newOffset = 1;
-    // TODO: debugging only; remove this later
-    cout << "executing instruction " << frame->instructionIndex << endl;
+    DEBUG("executing instruction " + std::to_string(frame->instructionIndex));
+    // TODO: remove .get() in shared_ptr calls
     switch (inst.operation) {
         case Operation::LoadConst:
             {
@@ -70,15 +71,15 @@ void Interpreter::executeStep() {
             }
         case Operation::LoadReference:
             {
-                ValuePtr* valuePtr = frame->opStackPop().get()->cast<ValuePtr>();
-                frame->opStackPush(valuePtr->ptr);
+                auto valuePtr = frame->opStackPop().get()->cast<ValuePtr>()->ptr;
+                frame->opStackPush(valuePtr);
                 break;
             }
         case Operation::StoreReference:
             {
                 auto value = frame->opStackPop();
-                ValuePtr* valuePtr = frame->opStackPop().get()->cast<ValuePtr>();
-				*valuePtr->ptr.get() = *value.get();
+                auto valuePtr = frame->opStackPop().get()->cast<ValuePtr>()->ptr;
+				*valuePtr.get() = *value.get();
                 break;
             }
         case Operation::AllocRecord:
@@ -99,9 +100,9 @@ void Interpreter::executeStep() {
         case Operation::FieldStore:
             {
 				auto value = frame->opStackPop();
-				Record* record = frame->opStackPop().get()->cast<Record>();
+				auto record = frame->opStackPop().get()->cast<Record>()->value;
 				string field = frame->getNameByIndex(inst.operand0.value());
-				record->value[field] = value;
+				record[field] = value;
                 break;
             }
         case Operation::IndexLoad:
@@ -232,6 +233,7 @@ void Interpreter::executeStep() {
             }
         case Operation::Goto:
             {
+                // TODO: throw an exception when trying to go to nonexistent last index of instructions?
                 newOffset = inst.operand0.value();
                 break;
             }
@@ -272,8 +274,8 @@ void Interpreter::executeStep() {
     if (frame->instructionIndex + newOffset == frame->numInstructions()) {
         // last instruction of current function
         // TODO destruct current frame
-        frames->pop();
-        frame = frames->top();
+        frames.pop();
+        frame = frames.top();
     }
     frame->moveToInstruction(newOffset);
 };
@@ -283,4 +285,5 @@ void Interpreter::run() {
     while (!finished) {
         executeStep();
     }
+    DEBUG("program finished");
 };
