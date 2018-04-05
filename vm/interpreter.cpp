@@ -121,11 +121,21 @@ void Interpreter::executeStep() {
         case Operation::IndexLoad:
             {
                 // TODO: check for local var refs (not allowed)
+				auto record = frame->opStackPop()->cast<Record>();
+				string index = frame->getConstantByIndex(inst.operand0.value()).get()->toString();
+                if (record->value.count(index) == 0) {
+                    record->value[index] = make_shared<None>();
+                }
+				frame->opStackPush(record->value[index]);
                 break;
             }
         case Operation::IndexStore:
             {
                 // TODO: check for local var refs (not allowed)
+				auto value = frame->opStackPop();
+				auto record = frame->opStackPop()->cast<Record>()->value;
+				string index = frame->getConstantByIndex(inst.operand0.value()).get()->toString();
+				record[index] = value;
                 break;
             }
         case Operation::AllocClosure:
