@@ -1,7 +1,7 @@
 all: compiler interpreter
 
-compiler: compiler-main.cpp compiler.h cfg.cpp cfgtofunc.cpp
-	g++ -g -std=c++1y compiler-main.cpp cfg.cpp types.cpp cfgtofunc.cpp ../parser/parser.cpp ../parser/lexer.cpp -o mitscriptc
+compiler: compiler-main.cpp compiler.h cfg.cpp cfgtofunc.cpp symboltable.cpp
+	g++ -g -std=c++1y compiler-main.cpp cfg.cpp types.cpp cfgtofunc.cpp symboltable.cpp ../parser/parser.cpp ../parser/lexer.cpp -o mitscriptc
 
 interpreter: interpreter-main.cpp interpreter.cpp bc-parser
 	g++ -g -std=c++1y interpreter-main.cpp interpreter.cpp types.cpp bc-parser.cpp bc-lexer.cpp ../parser/parser.cpp ../parser/lexer.cpp -o mitscript
