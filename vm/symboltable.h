@@ -4,32 +4,30 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <set>
+#include <algorithm>
+#include <iterator>
 
 #include "../parser/Visitor.h" 
 #include "../parser/AST.h"
 
-enum class Descriptor; 
-class SymbolTable;
+typedef std::set<std::string> nameset_t;
 
-typedef std::shared_ptr<SymbolTable> stptr_t;
-typedef std::vector<Descriptor> descvec_t;
-
-enum class Descriptor {
-    Global, 
-    Local, 
-    Reference
-};
-
-class SymbolTable {
+struct SymbolTable {
 public: 
-    stptr_t parent; 
-    map<std::string, descvec_t> vars;
+    nameset_t global;
+    nameset_t local;
+    nameset_t free;
+    SymbolTable(nameset_t global, nameset_t local, nameset_t free): global(global), local(local), free(free) {};
 };
 
 class SymbolTableBuilder : public Visitor {
 private: 
-    stptr_t table;
+    nameset_t global;
+    nameset_t local;
+    nameset_t referenced;
 public:
+    SymbolTable eval(Expression& exp);
     virtual void visit(Block& exp) override;
     virtual void visit(Global& exp) override;
     virtual void visit(Assignment& exp) override;
