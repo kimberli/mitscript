@@ -1,0 +1,17 @@
+function
+{
+	functions =
+	[],
+	constants = [None, 1],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [x, f],
+	instructions = 
+	[
+        load_const 0
+		goto 3
+        load_const 1
+	]
+}

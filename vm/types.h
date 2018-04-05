@@ -11,8 +11,9 @@
 
 struct Value
 {
-    virtual ~Value() { }
+    virtual ~Value() {};
     virtual string type() = 0;
+
     virtual string toString() = 0;
     virtual bool equals(shared_ptr<Value> other) = 0;
 
@@ -26,103 +27,97 @@ struct Value
     }
 };
 
-struct ValuePtr: public Value {
-    std::shared_ptr<Value> ptr;
-    ValuePtr(std::shared_ptr<Value> ptr): ptr(ptr) {}
+struct Constant: public Value
+{
+    virtual ~Constant() {};
+};
 
-    string toString();
-    bool equals(shared_ptr<Value> other);
+struct ValuePtr: public Value {
+    shared_ptr<Value> ptr;
+
+    ValuePtr(shared_ptr<Value> ptr): ptr(ptr) {};
+    virtual ~ValuePtr() {};
+
     static const string typeS;
     string type() {
         return "ValuePtr";
     }
-};
 
-struct Constant: public Value
-{
-    virtual ~Constant() { }
-    virtual bool equals(shared_ptr<Value> other) = 0;
-
-    static const string typeS;
+    string toString();
+    bool equals(shared_ptr<Value> other);
 };
 
 struct None : public Constant
 {
-    virtual ~None() { }
-    string toString();
-    bool equals(shared_ptr<Value> other);
+    virtual ~None() {}
+
     static const string typeS;
     string type() {
         return "None";
     }
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
 };
 
 struct Integer : public Constant
 {
-    Integer(int32_t value)
-    : value(value)
-    {
-
-    }
-
     int32_t value;
 
-    virtual ~Integer() { }
-    string toString();
-    bool equals(shared_ptr<Value> other);
+    Integer(int32_t value) : value(value) {}
+    virtual ~Integer() {}
+
     static const string typeS;
     string type() {
         return "Integer";
     }
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
 };
 
 struct String : public Constant
 {
-    String(std::string value)
-    : value(value)
-    {
+    string value;
 
-    }
-
-    std::string value;
-
-    virtual ~String() { }
-    string toString();
-    bool equals(shared_ptr<Value> other);
+    String(string value): value(value) {};
+    virtual ~String() {};
+    
     static const string typeS;
     string type() {
         return "String";
     }
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
 };
 
 struct Boolean : public Constant
 {
-    Boolean(bool value)
-    : value(value)
-    {
-
-    }
-
     bool value;
 
-    virtual ~Boolean() { }
-    string toString();
-    bool equals(shared_ptr<Value> other);
+    Boolean(bool value): value(value) {};
+    virtual ~Boolean() {};
+
     static const string typeS;
     string type() {
         return "Boolean";
     }
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
+
 };
 
 struct Record : public Constant
 {
     Record() {
-		value = *(new map<string, std::shared_ptr<Value>>());
+		value = *(new map<string, shared_ptr<Value>>());
 	}
-    Record(map<string, std::shared_ptr<Value>> value): value(value) {}
-	map<string, std::shared_ptr<Value>> value;
+    Record(map<string, shared_ptr<Value>> value): value(value) {}
+	map<string, shared_ptr<Value>> value;
 
-    virtual ~Record() { }
+    virtual ~Record() {}
     string toString();
     bool equals(shared_ptr<Value> other);
     static const string typeS;
@@ -131,13 +126,13 @@ struct Record : public Constant
     }
 };
 
-struct Function : public Value
+struct Function : public Constant
 {
     // List of functions defined within this function (but not functions defined inside of nested functions)
-    std::vector<std::shared_ptr<Function>> functions_;
+    vector<shared_ptr<Function>> functions_;
 
     // List of constants used by the instructions within this function (but not nested functions)
-    std::vector<std::shared_ptr<Constant>> constants_;
+    vector<shared_ptr<Constant>> constants_;
 
     // The number of parameters to the function
     uint32_t parameter_count_;
@@ -145,28 +140,29 @@ struct Function : public Value
     // List of local variables
     // The first parameter_count_ variables are the function's parameters
     // in their order as given in the paraemter list
-    std::vector<std::string> local_vars_;
+    vector<string> local_vars_;
 
     // List of local variables accessed by reference (LocalReference)
-    std::vector<std::string> local_reference_vars_;
+    vector<string> local_reference_vars_;
 
     // List of the names of non-global and non-local variables accessed by the function
-    std::vector<std::string> free_vars_;
+    vector<string> free_vars_;
 
     // List of global variable and field names used inside the function
-    std::vector<std::string> names_;
+    vector<string> names_;
 
     InstructionList instructions;
 
     Function() {};
+    virtual ~Function() {};
 
-    Function(std::vector<std::shared_ptr<Function>> functions_,
-            std::vector<std::shared_ptr<Constant>> constants_,
+    Function(vector<shared_ptr<Function>> functions_,
+            vector<shared_ptr<Constant>> constants_,
             uint32_t parameter_count_,
-	        std::vector<std::string> local_vars_,
-            std::vector<std::string> local_reference_vars_,
-            std::vector<std::string> free_vars_,
-	        std::vector<std::string> names_,
+	        vector<string> local_vars_,
+            vector<string> local_reference_vars_,
+            vector<string> free_vars_,
+	        vector<string> names_,
             InstructionList instructions):
         functions_(functions_),
         constants_(constants_),
@@ -183,4 +179,21 @@ struct Function : public Value
     string type() {
         return "Function";
     }
+};
+
+struct Closure: public Constant {
+    vector<shared_ptr<ValuePtr>> refs;
+    shared_ptr<Function> func;
+
+    Closure(vector<shared_ptr<ValuePtr>> refs, shared_ptr<Function> func):
+        refs(refs), func(func) {};
+    virtual ~Closure() {};
+
+    static const string typeS;
+    string type() {
+        return "Closure";
+    }
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
 };

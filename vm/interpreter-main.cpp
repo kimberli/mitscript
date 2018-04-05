@@ -65,10 +65,15 @@ int main(int argc, char** argv) {
         }
     }
 
-    std::shared_ptr<Function> func(bc_output);
+    shared_ptr<Function> func(bc_output);
   
-    Interpreter* intp = new Interpreter(bc_output); 
-    intp->run();
+    Interpreter* intp = new Interpreter(func);
+    try {
+        intp->run();
+    } catch (InterpreterException& exception) {
+        cout << exception.toString() << endl;
+        return 1;
+    }
 
     return 0;
 }

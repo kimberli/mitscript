@@ -11,11 +11,11 @@ using namespace std;
 
 class Interpreter {
 private:
-    Frame* globalFrame;
-    stack<Frame*>* frames; 
+    shared_ptr<Frame> globalFrame;
+    stack<shared_ptr<Frame>> frames;
     void executeStep();
     bool finished;
 public:
-    Interpreter(Function* mainFunc);
+    Interpreter(shared_ptr<Function> mainFunc);
     void run();
 };
