@@ -5,6 +5,24 @@
  */
 #include "symboltable.h" 
 
+VarDesc SymbolTable::resolve(std::string varName, stptr_t table) {
+    // returns descriptor for a variable by moving up the stack 
+    
+    stptr_t curTable = table;
+
+    while (table) {
+        std::map<std::string, VarDesc> frameVars = table->vars;
+        std::map<std::string, VarDesc>::iterator it = frameVars.find(varName);
+        if (it != frameVars.end()) {
+            return it->second;
+        }
+        curTable = curTable->parent;
+    }
+
+    // we did not find the var; this is an error. 
+    assert(false);
+}
+
 stvec_t SymbolTableBuilder::eval(Expression& exp) {
     // create global symbol table
     stptr_t globalTable;

@@ -32,8 +32,10 @@ struct VarDesc {
 };
 
 struct SymbolTable {
+public:
     std::map<std::string, VarDesc> vars;
     stptr_t parent;
+    static VarDesc resolve(std::string varName, stptr_t table);
 };
 
 class SymbolTableBuilder : public Visitor {
