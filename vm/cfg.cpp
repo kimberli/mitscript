@@ -144,7 +144,7 @@ InstructionList CFGBuilder::getWriteInstr(Expression* lhs) {
                 optint_t i = optint_t(d->index + curFunc->local_reference_vars_.size());
                 optint_t noArg0;
                 Instruction* pushRefInstr = new Instruction(Operation::PushReference, i);
-                // the stack is now S :: value :: ref, but we weed 
+                // the stack is now S :: value :: ref, but we need 
                 // S :: ref :: value, so add a swap instr. 
                 Instruction* swapInstr = new Instruction(Operation::Swap, noArg0);
                 Instruction* storeRefInstr = new Instruction(Operation::StoreReference, noArg0);
@@ -158,13 +158,33 @@ InstructionList CFGBuilder::getWriteInstr(Expression* lhs) {
 
     auto fieldD = dynamic_cast<FieldDeref*>(lhs);
     if (fieldD != NULL) {
-        // TODO: handle record writes
+        // load the record
+        iList = getInstructions(fieldD->base);
+        // allocate a name 
+        int i = allocName(fieldD->field.name);
+        // we need to swap the order: we want s :: record :: value
+        Instruction* swapInstr = new Instruction(Operation::Swap, optint_t());
+        iList.push_back(*swapInstr);
+        // FieldStore instruction
+        Instruction* storeInstr = new Instruction(Operation::FieldStore, optint_t(i));
+        iList.push_back(*storeInstr);
         return iList;
     }
 
     auto indexE = dynamic_cast<IndexExpr*>(lhs);
     if (indexE != NULL) {
-        // TODO: handle record writes
+        Instruction* swap = new Instruction(Operation::Swap, optint_t());
+        // we need S :: record :: index :: value, so we need 2 swaps
+        // load the record 
+        iList = getInstructions(indexE->base);
+        iList.push_back(*swap);
+        // load the index
+        InstructionList idxInstr = getInstructions(indexE->index);
+        iList.insert(iList.end(), idxInstr.begin(), idxInstr.end());
+        iList.push_back(*swap);
+        // store
+        Instruction* store = new Instruction(Operation::IndexStore, optint_t());
+        iList.push_back(*store);
         return iList;
     }
 }
