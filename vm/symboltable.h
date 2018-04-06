@@ -24,17 +24,24 @@ typedef std::set<std::string> nameset_t;
 typedef std::shared_ptr<SymbolTable> stptr_t;
 typedef std::vector<std::shared_ptr<SymbolTable>> stvec_t;
 
+enum VarType {
+    GLOBAL,
+    LOCAL, 
+    FREE
+};
+
 struct VarDesc {
-    bool isGlobal;
-    bool isLocalRef;
-    VarDesc(): isGlobal(false), isLocalRef(false) {};
-    VarDesc(bool isGlobal, bool isLocalRef): isGlobal(isGlobal), isLocalRef(isLocalRef) {};
+    VarType type;
+    bool isReferenced;
+    VarDesc(): type(LOCAL), isReferenced(false) {};
+    VarDesc(VarType type): type(type), isReferenced(false) {};
 };
 
 struct SymbolTable {
 public:
     std::map<std::string, VarDesc> vars;
     stptr_t parent;
+    nameset_t referenced;
     static VarDesc resolve(std::string varName, stptr_t table);
 };
 
@@ -47,7 +54,7 @@ private:
     stptr_t curTable;
 public:
     stvec_t eval(Expression& exp);
-    void markLocalRef(std::string varName, stptr_t child, bool isLocalScope);
+    VarDesc markLocalRef(std::string varName, stptr_t child);
     virtual void visit(Block& exp) override;
     virtual void visit(Global& exp) override;
     virtual void visit(Assignment& exp) override;

@@ -6,7 +6,7 @@
 #include "symboltable.h" 
 
 VarDesc SymbolTable::resolve(std::string varName, stptr_t table) {
-    // returns descriptor for a variable by moving up the stack 
+    // returns descriptor for a variable
     
     stptr_t curTable = table;
 
@@ -29,10 +29,9 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
     tables.push_back(globalTable);
 
     // add names for the builtin functions
-    VarDesc globalD = VarDesc(true, false);
-    globalTable->vars["print"] = globalD;
-    globalTable->vars["input"] = globalD;
-    globalTable->vars["intcast"] = globalD;
+    globalTable->vars["print"] = VarDesc(GLOBAL);
+    globalTable->vars["input"] = VarDesc(GLOBAL);
+    globalTable->vars["intcast"] = VarDesc(GLOBAL);
 
     // run the visitor
     exp.accept(*this);
@@ -40,19 +39,34 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
     // since this is the global frame, all vars are global. 
     VarDesc d;
     for (std::string var : local) {
-        d = VarDesc(true, false);
+        d = VarDesc(GLOBAL);
         globalTable->vars[var] = d;
     }
     for (std::string var : global) {
-        d = VarDesc(true, false);
+        d = VarDesc(GLOBAL);
         globalTable->vars[var] = d;
+    }
+
+    // post-processing: for each frame, for each referenced var, 
+    // make an entry for global or free and mark parents. 
+    for (stptr_t t : tables) {
+        for (std::string var : t->referenced) {
+            if (t->vars.count(var) == 0) { // it's not defined already
+                VarDesc d = markLocalRef(var, t->parent);
+                if (d.type == GLOBAL) {
+                    t->vars[var] = VarDesc(GLOBAL);
+                } else {
+                    t->vars[var] = VarDesc(FREE);
+                }
+            }
+        }
     }
     
     // now return the list of tables
     return tables;
 }
 
-void SymbolTableBuilder::markLocalRef(std::string varName, stptr_t child, bool isLocalScope) {
+VarDesc SymbolTableBuilder::markLocalRef(std::string varName, stptr_t child) {
     if (!child) {
         assert (false); // undefined var  
     }
@@ -60,14 +74,11 @@ void SymbolTableBuilder::markLocalRef(std::string varName, stptr_t child, bool i
     std::map<std::string, VarDesc> frameVars = child->vars;
     std::map<std::string, VarDesc>::iterator it = frameVars.find(varName);
     if (it != frameVars.end()) {
-        if (isLocalScope) {
-            return; // it is in the local scope
-        } else {
-            VarDesc d = it->second;
-            d.isLocalRef = true;
-        }
+        VarDesc d = it->second;
+        d.isReferenced = true;
+        return d;
     } else {
-        markLocalRef(varName, child->parent, false);
+        markLocalRef(varName, child->parent);
     }
 }
 
@@ -145,21 +156,19 @@ void SymbolTableBuilder::visit(FunctionExpr& exp) {
     exp.body.accept(*this);
 
     // for each var, add a map entry
-    VarDesc d = VarDesc(false, false); // holder
+    VarDesc d;
     for (std::string var : local) {
-        d = VarDesc(false, false);
+        d = VarDesc(LOCAL);
         funcTable->vars[var] = d;
     }
     for (std::string var : global) {
-        d = VarDesc(true, false);
+        d = VarDesc(GLOBAL);
         funcTable->vars[var] = d;
     }
     
 
-    // for each referenced var, mark as referenced where appropriate
-    for (std::string var : referenced) {
-        markLocalRef(var, funcTable, true);
-    }
+    // store the referenced vars
+    funcTable->referenced = referenced;
 
     // put the old ones back 
     global = parentGlobals;
