@@ -12,18 +12,28 @@
 #include <set>
 #include <algorithm>
 #include <iterator>
+#include <cassert>
 
 #include "../parser/Visitor.h" 
 #include "../parser/AST.h"
 
+// have the eval return a list of symbol tables that correspond to all functions
+struct SymbolTable;
+
 typedef std::set<std::string> nameset_t;
+typedef std::shared_ptr<SymbolTable> stptr_t;
+typedef std::vector<std::shared_ptr<SymbolTable>> stvec_t;
+
+struct VarDesc {
+    bool isGlobal;
+    bool isLocalRef;
+    VarDesc(): isGlobal(false), isLocalRef(false) {};
+    VarDesc(bool isGlobal, bool isLocalRef): isGlobal(isGlobal), isLocalRef(isLocalRef) {};
+};
 
 struct SymbolTable {
-public: 
-    nameset_t global;
-    nameset_t local;
-    nameset_t free;
-    SymbolTable(nameset_t global, nameset_t local, nameset_t free): global(global), local(local), free(free) {};
+    std::map<std::string, VarDesc> vars;
+    stptr_t parent;
 };
 
 class SymbolTableBuilder : public Visitor {
@@ -31,8 +41,11 @@ private:
     nameset_t global;
     nameset_t local;
     nameset_t referenced;
+    stvec_t tables;
+    stptr_t curTable;
 public:
-    SymbolTable eval(Expression& exp);
+    stvec_t eval(Expression& exp);
+    void markLocalRef(std::string varName, stptr_t child, bool isLocalScope);
     virtual void visit(Block& exp) override;
     virtual void visit(Global& exp) override;
     virtual void visit(Assignment& exp) override;

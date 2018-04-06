@@ -5,22 +5,52 @@
  */
 #include "symboltable.h" 
 
-SymbolTable SymbolTableBuilder::eval(Expression& exp) {
-    // clear out the containers
-    global.clear();
-    local.clear();
-    referenced.clear();
+stvec_t SymbolTableBuilder::eval(Expression& exp) {
+    // create global symbol table
+    stptr_t globalTable;
+    tables.push_back(globalTable);
+
+    // add names for the builtin functions
+    VarDesc globalD = VarDesc(true, false);
+    globalTable->vars["print"] = globalD;
+    globalTable->vars["input"] = globalD;
+    globalTable->vars["intcast"] = globalD;
+
     // run the visitor
     exp.accept(*this);
-    
-    nameset_t temp;
-    nameset_t free;
-    // temp = referenced - global 
-    std::set_difference(referenced.begin(), referenced.end(), global.begin(), global.end(), std::inserter(temp, temp.begin()));
-    // free = temp - local
-    std::set_difference(temp.begin(), temp.end(), local.begin(), local.end(), std::inserter(free, free.begin()));
 
-    return SymbolTable(global, local, free);
+    // since this is the global frame, all vars are global. 
+    VarDesc d;
+    for (std::string var : local) {
+        d = VarDesc(true, false);
+        globalTable->vars[var] = d;
+    }
+    for (std::string var : global) {
+        d = VarDesc(true, false);
+        globalTable->vars[var] = d;
+    }
+    
+    // now return the list of tables
+    return tables;
+}
+
+void SymbolTableBuilder::markLocalRef(std::string varName, stptr_t child, bool isLocalScope) {
+    if (!child) {
+        assert (false); // undefined var  
+    }
+
+    std::map<std::string, VarDesc> frameVars = child->vars;
+    std::map<std::string, VarDesc>::iterator it = frameVars.find(varName);
+    if (it != frameVars.end()) {
+        if (isLocalScope) {
+            return; // it is in the local scope
+        } else {
+            VarDesc d = it->second;
+            d.isLocalRef = true;
+        }
+    } else {
+        markLocalRef(varName, child->parent, false);
+    }
 }
 
 void SymbolTableBuilder::visit(Block& exp) {
@@ -71,7 +101,55 @@ void SymbolTableBuilder::visit(Return& exp) {
 }
 
 void SymbolTableBuilder::visit(FunctionExpr& exp) {
-    // no-op
+    // make the symbol table for the func and push to the list
+    stptr_t funcTable = std::make_shared<SymbolTable>(SymbolTable());
+    tables.push_back(funcTable);
+
+    // mark parent
+    funcTable->parent = curTable;
+    curTable = funcTable;
+
+    // save the sets of the parent
+    nameset_t parentGlobals = global;
+    nameset_t parentLocals = local;
+    nameset_t parentReferenced = referenced;
+    
+    // reset sets 
+    global.clear();
+    local.clear();
+    referenced.clear();
+    
+    // args are local vars
+    for (Identifier* arg : exp.args) {
+        local.insert(arg->name);
+    }
+    // recurse on body
+    exp.body.accept(*this);
+
+    // for each var, add a map entry
+    VarDesc d = VarDesc(false, false); // holder
+    for (std::string var : local) {
+        d = VarDesc(false, false);
+        funcTable->vars[var] = d;
+    }
+    for (std::string var : global) {
+        d = VarDesc(true, false);
+        funcTable->vars[var] = d;
+    }
+    
+
+    // for each referenced var, mark as referenced where appropriate
+    for (std::string var : referenced) {
+        markLocalRef(var, funcTable, true);
+    }
+
+    // put the old ones back 
+    global = parentGlobals;
+    local = parentLocals;
+    referenced = parentReferenced;
+
+    // reset the curTable pointer
+    curTable = funcTable->parent;
 }
 
 void SymbolTableBuilder::visit(BinaryExpr& exp) {
