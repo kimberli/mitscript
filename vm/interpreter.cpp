@@ -20,6 +20,22 @@ Interpreter::Interpreter(shared_ptr<Function> mainFunc) {
     globalFrame = frame;
     frames.push(frame);
     finished = false;
+
+	vector<shared_ptr<Function>> functions_;
+    vector<shared_ptr<Constant>> constants_;
+	vector<string> args0 ;
+	vector<string> args1 = { string("s") };
+    vector<string> local_reference_vars_;
+    vector<string> free_vars_;
+	vector<string> names_;
+    InstructionList instructions;
+	vector<shared_ptr<Function>> frameFuncs;
+	// add native functions at the beginning of functions array
+	frameFuncs.push_back(make_shared<PrintNativeFunction>(*(new PrintNativeFunction(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions))));
+	frameFuncs.push_back(make_shared<InputNativeFunction>(*(new InputNativeFunction(functions_, constants_, 0, args0, local_reference_vars_, free_vars_, names_, instructions))));
+	frameFuncs.push_back(make_shared<IntcastNativeFunction>(*(new IntcastNativeFunction(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions))));
+	frameFuncs.insert(frameFuncs.end(), frame.get()->func.get()->functions_.begin(), frame.get()->func.get()->functions_.end());
+	frame.get()->func.get()->functions_ = frameFuncs;
 };
 
 void Interpreter::executeStep() {
@@ -200,7 +216,15 @@ void Interpreter::executeStep() {
                     localVars[arg] = argsList[i];
                 }
                 shared_ptr<Frame> frame = make_shared<Frame>(Frame(clos->func, localVars, localRefs));
-                frames.push(frame);
+				auto nativeFunc = dynamic_cast<NativeFunction*>(clos->func.get());
+				if (nativeFunc != NULL) {
+					shared_ptr<Constant> val = nativeFunc->evalNativeFunction(*frame.get());
+					if (dynamic_cast<None*>(val.get()) != NULL) {
+						frame->opStackPush(val);
+					}
+				} else {
+               		frames.push(frame);
+				}
                 break;
             }
         case Operation::Return:

@@ -9,10 +9,13 @@
 #include "instructions.h"
 
 #include <cstdint>
+#include <iostream>
 #include <map>
 #include <memory>
 #include <string>
 #include <vector>
+
+class Frame;
 
 struct Value {
     // Abstract class for program values that can be stored on a frame's
@@ -95,7 +98,7 @@ struct String : public Constant {
 
     String(string value): value(value) {};
     virtual ~String() {};
-    
+
     static const string typeS;
     string type() {
         return "String";
@@ -186,7 +189,7 @@ struct Function : public Constant {
         local_reference_vars_(local_reference_vars_),
 	    free_vars_(free_vars_),
         names_(names_),
-        instructions(instructions) {}
+        instructions(instructions) {};
 
     string toString();
     bool equals(shared_ptr<Value> other);
@@ -217,4 +220,72 @@ struct Closure: public Constant {
 
     string toString();
     bool equals(shared_ptr<Value> other);
+};
+
+class NativeFunction : public Function {
+public:
+    NativeFunction(vector<shared_ptr<Function>> functions_,
+            vector<shared_ptr<Constant>> constants_,
+            uint32_t parameter_count_,
+	        vector<string> local_vars_,
+            vector<string> local_reference_vars_,
+            vector<string> free_vars_,
+	        vector<string> names_,
+            InstructionList instructions):
+			Function(functions_, constants_, parameter_count_,
+					 local_vars_, local_reference_vars_, free_vars_,
+					 names_, instructions) {};
+    virtual shared_ptr<Constant> evalNativeFunction(Frame& currentFrame) = 0;
+};
+
+class PrintNativeFunction : public NativeFunction {
+public:
+    PrintNativeFunction(vector<shared_ptr<Function>> functions_,
+            vector<shared_ptr<Constant>> constants_,
+            uint32_t parameter_count_,
+	        vector<string> local_vars_,
+            vector<string> local_reference_vars_,
+            vector<string> free_vars_,
+	        vector<string> names_,
+            InstructionList instructions):
+			NativeFunction(functions_, constants_, parameter_count_,
+					 local_vars_, local_reference_vars_, free_vars_,
+					 names_, instructions) {};
+
+
+   shared_ptr<Constant> evalNativeFunction(Frame& currentFrame);
+};
+
+class InputNativeFunction : public NativeFunction {
+public:
+    InputNativeFunction(vector<shared_ptr<Function>> functions_,
+            vector<shared_ptr<Constant>> constants_,
+            uint32_t parameter_count_,
+	        vector<string> local_vars_,
+            vector<string> local_reference_vars_,
+            vector<string> free_vars_,
+	        vector<string> names_,
+            InstructionList instructions):
+			NativeFunction(functions_, constants_, parameter_count_,
+					 local_vars_, local_reference_vars_, free_vars_,
+					 names_, instructions) {};
+
+    shared_ptr<Constant> evalNativeFunction(Frame& currentFrame);
+};
+
+class IntcastNativeFunction : public NativeFunction {
+public:
+    IntcastNativeFunction(vector<shared_ptr<Function>> functions_,
+            vector<shared_ptr<Constant>> constants_,
+            uint32_t parameter_count_,
+	        vector<string> local_vars_,
+            vector<string> local_reference_vars_,
+            vector<string> free_vars_,
+	        vector<string> names_,
+            InstructionList instructions):
+			NativeFunction(functions_, constants_, parameter_count_,
+					 local_vars_, local_reference_vars_, free_vars_,
+					 names_, instructions) {};
+
+    shared_ptr<Constant> evalNativeFunction(Frame& currentFrame);
 };
