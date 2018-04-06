@@ -324,6 +324,59 @@ void CFGBuilder::visit(Return& exp) {
 }
 
 void CFGBuilder::visit(FunctionExpr& exp) {
+    // This is a function DECLARATION 
+
+    // 1) create a new function to add to functions list 
+
+    // get the new symbolTable
+    stCounter += 1; 
+    curTable = symbolTable.at(stCounter);
+
+    // 2) make the new function object 
+    curFunc = std::make_shared<CFG>(CFG());
+    curFunc->parameter_count = 0;
+
+    // generate a symbol table 
+    SymbolTableBuilder stb = SymbolTableBuilder();
+    symbolTable = stb.eval(exp);
+    curTable = symbolTable.at(0);
+
+    // load up curFunc with vars from symbol table
+    for (std::map<std::string, desc_t>::iterator it = curTable->vars.begin(); it != curTable->vars.end(); it ++) {
+        std::string varName = it->first;
+        desc_t d = it->second;
+        switch (d->type) {
+            case GLOBAL: 
+                d->index = curFunc->names_.size();
+                curFunc->names_.push_back(varName);
+                break;
+            case LOCAL: 
+                d->index = curFunc->local_vars_.size();
+                curFunc->local_vars_.push_back(varName);
+                if (d->isReferenced) {
+                    curFunc->local_reference_vars_.push_back(varName);
+                }
+                break;
+            case FREE: 
+                d->index = curFunc->free_vars_.size();
+                curFunc->free_vars_.push_back(varName); 
+        }
+    }
+
+    // run this visitor
+    exp.accept(*this);
+
+    // return the function. 
+    return curFunc;
+
+    // load that function
+
+    // allocate a new closure 
+    
+    // leave the closure on the stack 
+
+
+
     // Symbol Table maintenance 
     stCounter += 1;
     curTable = symbolTable.at(stCounter);
