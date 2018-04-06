@@ -13,6 +13,7 @@
 #include "../parser/AST.h"
 #include "instructions.h"
 #include "types.h"
+#include "symboltable.h"
 
 class AST_node;
 class BB;
@@ -80,16 +81,31 @@ private:
 
     // same as defined in lecture
     int allocConstant(constptr_t c);
+    // similarly to above, adds a new name to name list.
+    int allocName(std::string name);
 
     // helper that takes in a constant pointer, takes care of allocation
     // and creating the appropriate bb
     void loadConstant(constptr_t c);
 
-    // takes care of writing assignments
+    // helper for performing assignments
     InstructionList getWriteInstr(Expression* lhs);
+
+    // helper for getting instructions to load diff var types
+    InstructionList getLoadVarInstr(std::string varName);
+
+    // symbol table for this graph 
+    stvec_t symbolTable;
+    stptr_t curTable;
+    // keep track of which funtion we are on (matches functions to frames)
+    int stCounter = 0;
 
 public:
     CFGBuilder();
+
+    // evaluate
+    cfgptr_t evaluate(Expression& exp);
+
     // stores the CFG data structure corresponding to the 
     // function we are currently building
     cfgptr_t curFunc;
@@ -108,12 +124,12 @@ public:
 
     void visit(Return& exp) override;
 
-    void visit(FunctionExpr& exp) override {}
+    void visit(FunctionExpr& exp) override; 
 
     void visit(BinaryExpr& exp) override;
     void visit(UnaryExpr& exp) override;
-    void visit(FieldDeref& exp) override {}
-    void visit(IndexExpr& exp) override {}
+    void visit(FieldDeref& exp) override;
+    void visit(IndexExpr& exp) override;
     void visit(Call& exp) override {}
     void visit(RecordExpr& exp) override;
     void visit(Identifier& exp) override;

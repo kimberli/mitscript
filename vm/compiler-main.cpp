@@ -39,8 +39,9 @@ int main(int argc, char** argv)
     }
 
     CFGBuilder* builder = new CFGBuilder();
-    output->accept(*builder);
-    cfgptr_t rootCFG = builder->curFunc;
+    cfgptr_t rootCFG = builder->evaluate(*output);
+
+    cout << "Got root" << endl;
 
     std::shared_ptr<Function> rootFunc = CFGToFunc(rootCFG);
 
