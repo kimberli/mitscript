@@ -379,7 +379,30 @@ void CFGBuilder::visit(UnaryExpr& exp) {
             break;
     }
     Instruction* instr = new Instruction(op, noArg0);
-    // add the new instruction to the same basic block
+    iList.push_back(*instr);
+    retInstr = iList;
+}
+
+void CFGBuilder::visit(FieldDeref& exp) {
+    // get instructions to load the record 
+    InstructionList iList = getInstructions(exp.base);
+    // add the field to the names list
+    int i = allocName(exp.field.name);
+    // compose instruction 
+    Instruction* instr = new Instruction(Operation::FieldLoad, optint_t(i));
+    iList.push_back(*instr);
+    retInstr = iList;
+}
+
+void CFGBuilder::visit(IndexExpr& exp) {
+    // load the record 
+    InstructionList iList = getInstructions(exp.base);
+    // eval the index 
+    InstructionList idxInstr = getInstructions(exp.index);
+    // concat 
+    iList.insert(iList.end(), idxInstr.begin(), idxInstr.end());
+    // instruction
+    Instruction* instr = new Instruction(Operation::IndexLoad, optint_t());
     iList.push_back(*instr);
     retInstr = iList;
 }

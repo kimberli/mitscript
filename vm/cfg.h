@@ -128,8 +128,8 @@ public:
 
     void visit(BinaryExpr& exp) override;
     void visit(UnaryExpr& exp) override;
-    void visit(FieldDeref& exp) override {}
-    void visit(IndexExpr& exp) override {}
+    void visit(FieldDeref& exp) override;
+    void visit(IndexExpr& exp) override;
     void visit(Call& exp) override {}
     void visit(RecordExpr& exp) override;
     void visit(Identifier& exp) override;
