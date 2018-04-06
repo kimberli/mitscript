@@ -43,6 +43,7 @@ cfgptr_t CFGBuilder::evaluate(Expression& exp) {
                 d->index = curFunc->local_vars_.size();
                 curFunc->local_vars_.push_back(varName);
                 if (d->isReferenced) {
+                    d->refIndex = curFunc->local_reference_vars_.size();
                     curFunc->local_reference_vars_.push_back(varName);
                 }
                 break;
@@ -324,67 +325,88 @@ void CFGBuilder::visit(Return& exp) {
 }
 
 void CFGBuilder::visit(FunctionExpr& exp) {
-    // This is a function DECLARATION 
-
-    // 1) create a new function to add to functions list 
-
-    // get the new symbolTable
+    // 1) get the corresponding symbol table
     stCounter += 1; 
-    curTable = symbolTable.at(stCounter);
+    stptr_t childTable = symbolTable.at(stCounter);
 
     // 2) make the new function object 
-    curFunc = std::make_shared<CFG>(CFG());
-    curFunc->parameter_count = 0;
+    cfgptr_t childFunc = std::make_shared<CFG>(CFG());
+    childFunc->parameter_count = exp.args.size();
 
-    // generate a symbol table 
-    SymbolTableBuilder stb = SymbolTableBuilder();
-    symbolTable = stb.eval(exp);
-    curTable = symbolTable.at(0);
-
-    // load up curFunc with vars from symbol table
-    for (std::map<std::string, desc_t>::iterator it = curTable->vars.begin(); it != curTable->vars.end(); it ++) {
+    // load up childFunc with vars from symbol table
+    for (std::map<std::string, desc_t>::iterator it = childTable->vars.begin(); it != curTable->vars.end(); it ++) {
         std::string varName = it->first;
         desc_t d = it->second;
         switch (d->type) {
             case GLOBAL: 
-                d->index = curFunc->names_.size();
+                d->index = childFunc->names_.size();
                 curFunc->names_.push_back(varName);
                 break;
             case LOCAL: 
-                d->index = curFunc->local_vars_.size();
+                d->index = childFunc->local_vars_.size();
                 curFunc->local_vars_.push_back(varName);
                 if (d->isReferenced) {
-                    curFunc->local_reference_vars_.push_back(varName);
+                    d->refIndex = childFunc->local_reference_vars_.size();
+                    childFunc->local_reference_vars_.push_back(varName);
                 }
                 break;
             case FREE: 
-                d->index = curFunc->free_vars_.size();
+                d->index = childFunc->free_vars_.size();
                 curFunc->free_vars_.push_back(varName); 
+                break;
         }
     }
 
-    // run this visitor
-    exp.accept(*this);
+    // 3) install the child's state and run
+    cfgptr_t parentFunc = curFunc;
+    curFunc = childFunc; 
+    stptr_t parentTable = curTable;
+    curTable = childTable;
+    // run
+    exp.body.accept(*this);
+    curFunc->codeEntry = retEnter;
+    // reinstall parent state
+    curFunc = parentFunc;
+    curTable = parentTable;
 
-    // return the function. 
-    return curFunc;
+    // 4) add the function to the function list with an index. 
+    int childFuncIdx = curFunc->functions_.size();
+    curFunc->functions_.push_back(childFunc);
 
+    // 5) load the recently created function onto the op stack
+    InstructionList iList; 
     // load that function
+    Instruction* loadF = new Instruction(Operation::LoadFunc, optint_t(childFuncIdx));
+    iList.push_back(*loadF);
 
-    // allocate a new closure 
+    // 6) load refs to all the child's free vars. 
+    for (std::string var : childFunc->free_vars_) {
+        // get that var's description in the parent
+        desc_t d = curTable->vars.at(var);
+        int i;
+        // can push a ref to a local ref var or a free var 
+        if (d->type==LOCAL && d->isReferenced) {
+            // instructions for ref variables
+            int i = d->refIndex;
+        } else if (d->type==FREE) {
+            // instructions for free variables
+            int i = d->index + curFunc->local_reference_vars_.size();
+        } else {
+            // this is an error, there is probably a bug. 
+            assert(false);
+        }
+        Instruction* push = new Instruction(Operation::PushReference, optint_t(i));
+        iList.push_back(*push);
+    }
     
-    // leave the closure on the stack 
+    // 7) allocate the closure 
+    int numRefs = childFunc->free_vars_.size();
+    Instruction* allocC = new Instruction(Operation::AllocClosure, optint_t(numRefs));
+    iList.push_back(*allocC);
 
+    // 8) phew 
+    retInstr = iList;
 
-
-    // Symbol Table maintenance 
-    stCounter += 1;
-    curTable = symbolTable.at(stCounter);
-    
-    // TODO: all the logic to build the function 
-
-    // reset the symbol table pointer
-    curTable = curTable->parent;
 }
 
 void CFGBuilder::visit(BinaryExpr& exp) {
@@ -394,7 +416,7 @@ void CFGBuilder::visit(BinaryExpr& exp) {
     iList.insert(iList.end(), evalR.begin(), evalR.end());
     Operation op; 
     optint_t noArg0;
-    Instruction swapOp = Instruction(Operation::Swap, noArg0);
+    Instruction* swapOp = new Instruction(Operation::Swap, noArg0);
     // choose the correct instruction
     switch (exp.op) {
         case Or: 
@@ -405,7 +427,7 @@ void CFGBuilder::visit(BinaryExpr& exp) {
             break;
         case Lt: 
             // no lt instr provided, so first switch op order.
-            iList.push_back(swapOp);
+            iList.push_back(*swapOp);
             op = Operation::Gt;
             break;
         case Gt: 
@@ -413,7 +435,7 @@ void CFGBuilder::visit(BinaryExpr& exp) {
             break;
         case Lt_eq: 
             // same logic as for lt
-            iList.push_back(swapOp);
+            iList.push_back(*swapOp);
             op = Operation::Geq;
             break;
         case Gt_eq: 
