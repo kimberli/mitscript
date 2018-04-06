@@ -10,8 +10,6 @@
 #include <iostream>
 #include "prettyprinter.h"
 #include "compiler.h"
-#include "cfg.h"
-#include "cfgtofunc.h"
 
 using namespace std;
 
@@ -38,12 +36,10 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    CFGBuilder* builder = new CFGBuilder();
-    cfgptr_t rootCFG = builder->evaluate(*output);
+    BytecodeCompiler* bc = new BytecodeCompiler();
+    output->accept(*bc);
 
-    cout << "Got root" << endl;
-
-    std::shared_ptr<Function> rootFunc = CFGToFunc(rootCFG);
+    std::shared_ptr<Function> rootFunc = bc->retFunc;
 
     PrettyPrinter printer;
 
