@@ -19,7 +19,6 @@ CFGBuilder::CFGBuilder() {
 }
 
 cfgptr_t CFGBuilder::evaluate(Expression& exp) {
-    std::cout << "Running" << std::endl;
     // set current function 
     // TODO: LOAD BUILT-INS
     curFunc = std::make_shared<CFG>(CFG());
@@ -191,7 +190,6 @@ InstructionList CFGBuilder::getWriteInstr(Expression* lhs) {
 }
 
 void CFGBuilder::visit(Block& exp) {
-    std::cout << "visiting a block" << std::endl;
     // make a cfg for each statement in the list. 
     // every statement returns a cfg with a single entrance and exit, 
     // so we can just chain them together. 
@@ -334,17 +332,17 @@ void CFGBuilder::visit(FunctionExpr& exp) {
     childFunc->parameter_count = exp.args.size();
 
     // load up childFunc with vars from symbol table
-    for (std::map<std::string, desc_t>::iterator it = childTable->vars.begin(); it != curTable->vars.end(); it ++) {
+    for (std::map<std::string, desc_t>::iterator it = childTable->vars.begin(); it != childTable->vars.end(); it ++) {
         std::string varName = it->first;
         desc_t d = it->second;
         switch (d->type) {
             case GLOBAL: 
                 d->index = childFunc->names_.size();
-                curFunc->names_.push_back(varName);
+                childFunc->names_.push_back(varName);
                 break;
             case LOCAL: 
                 d->index = childFunc->local_vars_.size();
-                curFunc->local_vars_.push_back(varName);
+                childFunc->local_vars_.push_back(varName);
                 if (d->isReferenced) {
                     d->refIndex = childFunc->local_reference_vars_.size();
                     childFunc->local_reference_vars_.push_back(varName);
@@ -352,7 +350,7 @@ void CFGBuilder::visit(FunctionExpr& exp) {
                 break;
             case FREE: 
                 d->index = childFunc->free_vars_.size();
-                curFunc->free_vars_.push_back(varName); 
+                childFunc->free_vars_.push_back(varName); 
                 break;
         }
     }
@@ -364,6 +362,8 @@ void CFGBuilder::visit(FunctionExpr& exp) {
     curTable = childTable;
     // run
     exp.body.accept(*this);
+    // TODO when we switch to instructions 
+    // ADD A RETURN STATEMENT IF THERE IS NOT ONE ALREADY
     curFunc->codeEntry = retEnter;
     // reinstall parent state
     curFunc = parentFunc;
@@ -503,6 +503,10 @@ void CFGBuilder::visit(IndexExpr& exp) {
     Instruction* instr = new Instruction(Operation::IndexLoad, optint_t());
     iList.push_back(*instr);
     retInstr = iList;
+}
+
+void CFGBuilder::visit(Call& exp) {
+    
 }
 
 void CFGBuilder::visit(RecordExpr& exp) {

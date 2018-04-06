@@ -33,6 +33,9 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
     globalTable->vars["input"] = std::make_shared<VarDesc>(VarDesc(GLOBAL));
     globalTable->vars["intcast"] = std::make_shared<VarDesc>(VarDesc(GLOBAL));
 
+    // install the global frame
+    curTable = globalTable;
+
     // run the visitor
     exp.accept(*this);
 
@@ -51,7 +54,7 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
     // make an entry for global or free and mark parents. 
     for (stptr_t t : tables) {
         for (std::string var : t->referenced) {
-            if (t->vars.count(var) == 0) { // it's not defined already
+            if (t->vars.count(var) == 0) { // it's not defined in cur frame
                 desc_t d = markLocalRef(var, t->parent);
                 if (d->type == GLOBAL) {
                     t->vars[var] = std::make_shared<VarDesc>(VarDesc(GLOBAL));
@@ -158,14 +161,15 @@ void SymbolTableBuilder::visit(FunctionExpr& exp) {
     // for each var, add a map entry
     desc_t d;
     for (std::string var : local) {
+        std::cout << var << std::endl;
         d = std::make_shared<VarDesc>(VarDesc(LOCAL));
         funcTable->vars[var] = d;
     }
     for (std::string var : global) {
+        std::cout << var << std::endl;
         d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
         funcTable->vars[var] = d;
     }
-    
 
     // store the referenced vars
     funcTable->referenced = referenced;
