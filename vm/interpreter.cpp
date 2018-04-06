@@ -234,6 +234,7 @@ void Interpreter::executeStep() {
                 frames.pop();
                 frame = frames.top();
                 // push return val to top of new parent frame
+				newOffset = 0;
                 frame->opStackPush(returnVal);
                 break;
             }

@@ -58,8 +58,8 @@ enum class Operation
     // Stack:       S :: operand 1 => S :: value_of(operand 1)
     LoadReference,
 
-    // Description: loads the value of a reference onto the operand stack
-    // Mnemonic:    load_ref
+    // Description: store value into reference
+    // Mnemonic:    store_ref
     // Operand 0:   N/A
     // Operand 1:   value to store
     // Operand 2:   reference to store to
