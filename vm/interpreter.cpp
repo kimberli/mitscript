@@ -215,15 +215,15 @@ void Interpreter::executeStep() {
                     string arg = clos->func->local_vars_[i];
                     localVars[arg] = argsList[i];
                 }
-                shared_ptr<Frame> frame = make_shared<Frame>(Frame(clos->func, localVars, localRefs));
+                shared_ptr<Frame> newFrame = make_shared<Frame>(Frame(clos->func, localVars, localRefs));
 				auto nativeFunc = dynamic_cast<NativeFunction*>(clos->func.get());
 				if (nativeFunc != NULL) {
-					shared_ptr<Constant> val = nativeFunc->evalNativeFunction(*frame.get());
-					if (dynamic_cast<None*>(val.get()) != NULL) {
+					shared_ptr<Constant> val = nativeFunc->evalNativeFunction(*newFrame.get());
+					if (dynamic_cast<None*>(val.get()) == NULL) {
 						frame->opStackPush(val);
 					}
 				} else {
-               		frames.push(frame);
+               		frames.push(newFrame);
 				}
                 break;
             }
