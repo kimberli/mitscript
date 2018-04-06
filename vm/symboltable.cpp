@@ -5,14 +5,14 @@
  */
 #include "symboltable.h" 
 
-VarDesc SymbolTable::resolve(std::string varName, stptr_t table) {
+desc_t SymbolTable::resolve(std::string varName, stptr_t table) {
     // returns descriptor for a variable
     
     stptr_t curTable = table;
 
     while (table) {
-        std::map<std::string, VarDesc> frameVars = table->vars;
-        std::map<std::string, VarDesc>::iterator it = frameVars.find(varName);
+        std::map<std::string, desc_t> frameVars = table->vars;
+        std::map<std::string, desc_t>::iterator it = frameVars.find(varName);
         if (it != frameVars.end()) {
             return it->second;
         }
@@ -29,21 +29,21 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
     tables.push_back(globalTable);
 
     // add names for the builtin functions
-    globalTable->vars["print"] = VarDesc(GLOBAL);
-    globalTable->vars["input"] = VarDesc(GLOBAL);
-    globalTable->vars["intcast"] = VarDesc(GLOBAL);
+    globalTable->vars["print"] = std::make_shared<VarDesc>(VarDesc(GLOBAL));
+    globalTable->vars["input"] = std::make_shared<VarDesc>(VarDesc(GLOBAL));
+    globalTable->vars["intcast"] = std::make_shared<VarDesc>(VarDesc(GLOBAL));
 
     // run the visitor
     exp.accept(*this);
 
     // since this is the global frame, all vars are global. 
-    VarDesc d;
+    desc_t d;
     for (std::string var : local) {
-        d = VarDesc(GLOBAL);
+        d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
         globalTable->vars[var] = d;
     }
     for (std::string var : global) {
-        d = VarDesc(GLOBAL);
+        d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
         globalTable->vars[var] = d;
     }
 
@@ -52,11 +52,11 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
     for (stptr_t t : tables) {
         for (std::string var : t->referenced) {
             if (t->vars.count(var) == 0) { // it's not defined already
-                VarDesc d = markLocalRef(var, t->parent);
-                if (d.type == GLOBAL) {
-                    t->vars[var] = VarDesc(GLOBAL);
+                desc_t d = markLocalRef(var, t->parent);
+                if (d->type == GLOBAL) {
+                    t->vars[var] = std::make_shared<VarDesc>(VarDesc(GLOBAL));
                 } else {
-                    t->vars[var] = VarDesc(FREE);
+                    t->vars[var] = std::make_shared<VarDesc>(VarDesc(FREE));
                 }
             }
         }
@@ -66,16 +66,16 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
     return tables;
 }
 
-VarDesc SymbolTableBuilder::markLocalRef(std::string varName, stptr_t child) {
+desc_t SymbolTableBuilder::markLocalRef(std::string varName, stptr_t child) {
     if (!child) {
         assert (false); // undefined var  
     }
 
-    std::map<std::string, VarDesc> frameVars = child->vars;
-    std::map<std::string, VarDesc>::iterator it = frameVars.find(varName);
+    std::map<std::string, desc_t> frameVars = child->vars;
+    std::map<std::string, desc_t>::iterator it = frameVars.find(varName);
     if (it != frameVars.end()) {
-        VarDesc d = it->second;
-        d.isReferenced = true;
+        desc_t d = it->second;
+        d->isReferenced = true;
         return d;
     } else {
         markLocalRef(varName, child->parent);
@@ -156,13 +156,13 @@ void SymbolTableBuilder::visit(FunctionExpr& exp) {
     exp.body.accept(*this);
 
     // for each var, add a map entry
-    VarDesc d;
+    desc_t d;
     for (std::string var : local) {
-        d = VarDesc(LOCAL);
+        d = std::make_shared<VarDesc>(VarDesc(LOCAL));
         funcTable->vars[var] = d;
     }
     for (std::string var : global) {
-        d = VarDesc(GLOBAL);
+        d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
         funcTable->vars[var] = d;
     }
     

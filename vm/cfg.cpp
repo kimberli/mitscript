@@ -26,30 +26,28 @@ cfgptr_t CFGBuilder::evaluate(Expression& exp) {
     curFunc->parameter_count = 0;
 
     // generate a symbol table 
-    std::cout << "Making st" << std::endl;
     SymbolTableBuilder stb = SymbolTableBuilder();
     symbolTable = stb.eval(exp);
     curTable = symbolTable.at(0);
 
-    std::cout << "Loading st into global frame " << std::endl;
     // load up curFunc with vars from symbol table
-    for (std::map<std::string, VarDesc>::iterator it = curTable->vars.begin(); it != curTable->vars.end(); it ++) {
+    for (std::map<std::string, desc_t>::iterator it = curTable->vars.begin(); it != curTable->vars.end(); it ++) {
         std::string varName = it->first;
-        VarDesc d = it->second;
-        switch (d.type) {
+        desc_t d = it->second;
+        switch (d->type) {
             case GLOBAL: 
-                d.index = curFunc->names_.size();
+                d->index = curFunc->names_.size();
                 curFunc->names_.push_back(varName);
                 break;
             case LOCAL: 
-                d.index = curFunc->local_vars_.size();
+                d->index = curFunc->local_vars_.size();
                 curFunc->local_vars_.push_back(varName);
-                if (d.isReferenced) {
+                if (d->isReferenced) {
                     curFunc->local_reference_vars_.push_back(varName);
                 }
                 break;
             case FREE: 
-                d.index = curFunc->free_vars_.size();
+                d->index = curFunc->free_vars_.size();
                 curFunc->free_vars_.push_back(varName); 
         }
     }
@@ -67,8 +65,14 @@ InstructionList CFGBuilder::getInstructions(AST_node& expr) {
 }
 
 int CFGBuilder::allocConstant(constptr_t c) {
+    int i = curFunc->constants_.size();
     curFunc->constants_.push_back(c);
-    int i = curFunc->constants_.size() -1;
+    return i;
+}
+
+int CFGBuilder::allocName(std::string name) {
+    int i = curFunc->names_.size();
+    curFunc->names_.push_back(name);
     return i;
 }
 
@@ -82,18 +86,82 @@ void CFGBuilder::loadConstant(constptr_t c) {
     retInstr = iList;
 }
 
-InstructionList CFGBuilder::getWriteInstr(Expression* lhs) {
+InstructionList CFGBuilder::getLoadVarInstr(std::string varName) {
+    desc_t d = curTable->vars.at(varName);
     InstructionList iList;
+    switch (d->type) {
+        case GLOBAL: {
+            // use load_global 
+            optint_t i = optint_t(d->index);
+            Instruction* instr = new Instruction(Operation::LoadGlobal, i);
+            iList.push_back(*instr);
+            return iList;
+        }
+        case LOCAL: {
+            optint_t i = optint_t(d->index);
+            Instruction* instr = new Instruction(Operation::LoadLocal, i);
+            iList.push_back(*instr);
+            return iList;
+        }
+        case FREE: 
+            // recall d.index is an index into the free vars, so we have to 
+            // jump over local ref vars. 
+            optint_t i = optint_t(d->index + curFunc->local_reference_vars_.size());
+            optint_t noArg0;
+            Instruction* pushRefInstr = new Instruction(Operation::PushReference, i);
+            Instruction* loadRefInstr = new Instruction(Operation::LoadReference, noArg0);
+            iList.push_back(*pushRefInstr);
+            iList.push_back(*loadRefInstr);
+            return iList;
+    }
+}
+
+InstructionList CFGBuilder::getWriteInstr(Expression* lhs) {
+    // the value is ALREADY ON THE STACK. 
+    InstructionList iList;
+
     auto id = dynamic_cast<Identifier*>(lhs);
     if (id != NULL) {
-        // TODO: use a symbol table to figure out how to assign vars.
-        return iList;
+        // use var load
+        desc_t d = curTable->vars.at(id->name);
+        InstructionList iList;
+        switch (d->type) {
+            case GLOBAL: {
+                optint_t i = optint_t(d->index);
+                Instruction* instr = new Instruction(Operation::StoreGlobal, i);
+                iList.push_back(*instr);
+                return iList;
+            }
+            case LOCAL: {
+                optint_t i = optint_t(d->index);
+                Instruction* instr = new Instruction(Operation::StoreLocal, i);
+                iList.push_back(*instr);
+                return iList;
+            }
+            case FREE: {
+                // recall d.index is an index into the free vars, so we have to 
+                // jump over local ref vars. 
+                optint_t i = optint_t(d->index + curFunc->local_reference_vars_.size());
+                optint_t noArg0;
+                Instruction* pushRefInstr = new Instruction(Operation::PushReference, i);
+                // the stack is now S :: value :: ref, but we weed 
+                // S :: ref :: value, so add a swap instr. 
+                Instruction* swapInstr = new Instruction(Operation::Swap, noArg0);
+                Instruction* storeRefInstr = new Instruction(Operation::StoreReference, noArg0);
+                iList.push_back(*pushRefInstr);
+                iList.push_back(*swapInstr);
+                iList.push_back(*storeRefInstr);
+                return iList;
+            }
+        }
     }
+
     auto fieldD = dynamic_cast<FieldDeref*>(lhs);
     if (fieldD != NULL) {
         // TODO: handle record writes
         return iList;
     }
+
     auto indexE = dynamic_cast<IndexExpr*>(lhs);
     if (indexE != NULL) {
         // TODO: handle record writes
@@ -317,39 +385,33 @@ void CFGBuilder::visit(UnaryExpr& exp) {
 }
 
 void CFGBuilder::visit(RecordExpr& exp) {
-//    InstructionList iList;
-//    // instr to allocate the record
-//    optint_t noArg0;
-//    Instruction* alloc = new Instruction(Operation::AllocRecord, noArg0);
-//    iList.push_back(alloc);
-//    // pop the record from the stack to start clean
-//    //Instruction* pop = new Instruction(Operation::Pop, noArg0);
-//    //iList.push_back(pop)
-//
-//    // TODO
-//    // for each field, load the record (what is the index into the constants array???) 
-//    // eval the value to store and leave on the stack
-//    // call the write function which handles record writing?
-//    // repeat 
+    // should leave the filled-out record at the top of the stack.
+    InstructionList iList;
+    // instr to allocate the record
+    optint_t noArg0;
+    Instruction* alloc = new Instruction(Operation::AllocRecord, noArg0);
+    iList.push_back(*alloc);
+
+    for (std::map<Identifier*, Expression*>::iterator it = exp.record.begin(); it != exp.record.end(); it ++) {
+        // dup instruction 
+        Instruction* dup = new Instruction(Operation::Dup, noArg0);
+        iList.push_back(*dup);
+        // eval the value and add those instructions
+        InstructionList value = getInstructions(*(it->second));
+        iList.insert(iList.end(), value.begin(), value.end());
+        // add the name to the names array
+        std::string field = it->first->name;
+        int i = allocName(field);
+        // compose the instruction 
+        Instruction* store = new Instruction(Operation::FieldStore, optint_t(i));
+        iList.push_back(*store);
+    }
+    // leave the instructions 
+    retInstr = iList;
 }
 
 void CFGBuilder::visit(Identifier& exp) {
-    VarDesc d = curTable->vars.at(exp.name);
-    InstructionList iList;
-    switch (d.type) {
-        case GLOBAL: {
-            // use load_global 
-            optint_t i = optint_t(d.index);
-            Instruction* instr = new Instruction(Operation::LoadGlobal, i);
-            iList.push_back(*instr);
-            retInstr = iList;
-            break;
-        }
-        case LOCAL:     
-            break;
-        case FREE: 
-            break;
-    }
+    retInstr = getLoadVarInstr(exp.name);
 }
 
 void CFGBuilder::visit(IntConst& exp) {

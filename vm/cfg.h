@@ -81,13 +81,18 @@ private:
 
     // same as defined in lecture
     int allocConstant(constptr_t c);
+    // similarly to above, adds a new name to name list.
+    int allocName(std::string name);
 
     // helper that takes in a constant pointer, takes care of allocation
     // and creating the appropriate bb
     void loadConstant(constptr_t c);
 
-    // takes care of writing assignments
+    // helper for performing assignments
     InstructionList getWriteInstr(Expression* lhs);
+
+    // helper for getting instructions to load diff var types
+    InstructionList getLoadVarInstr(std::string varName);
 
     // symbol table for this graph 
     stvec_t symbolTable;

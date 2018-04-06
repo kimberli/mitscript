@@ -19,10 +19,12 @@
 
 // have the eval return a list of symbol tables that correspond to all functions
 struct SymbolTable;
+struct VarDesc;
 
 typedef std::set<std::string> nameset_t;
 typedef std::shared_ptr<SymbolTable> stptr_t;
 typedef std::vector<std::shared_ptr<SymbolTable>> stvec_t;
+typedef std::shared_ptr<VarDesc> desc_t;
 
 enum VarType {
     GLOBAL,
@@ -33,17 +35,18 @@ enum VarType {
 struct VarDesc {
     VarType type;
     bool isReferenced;
-    int index;
+    int32_t index;
+    int32_t refIndex;
     VarDesc(): type(LOCAL), isReferenced(false) {};
     VarDesc(VarType type): type(type), isReferenced(false) {};
 };
 
 struct SymbolTable {
 public:
-    std::map<std::string, VarDesc> vars;
+    std::map<std::string, desc_t> vars;
     stptr_t parent;
     nameset_t referenced;
-    static VarDesc resolve(std::string varName, stptr_t table);
+    static desc_t resolve(std::string varName, stptr_t table);
 };
 
 class SymbolTableBuilder : public Visitor {
@@ -55,7 +58,7 @@ private:
     stptr_t curTable;
 public:
     stvec_t eval(Expression& exp);
-    VarDesc markLocalRef(std::string varName, stptr_t child);
+    desc_t markLocalRef(std::string varName, stptr_t child);
     virtual void visit(Block& exp) override;
     virtual void visit(Global& exp) override;
     virtual void visit(Assignment& exp) override;
