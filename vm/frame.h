@@ -19,12 +19,19 @@ typedef map<string, std::shared_ptr<Constant>> LocalVarMap;
 typedef map<string, std::shared_ptr<ValuePtr>> LocalRefMap;
 
 class Frame {
+    // Class representing a stack frame in interpreter execution
+
+    // function that the frame is for
     std::shared_ptr<Function> func;
+    // map of local variable names to values
     LocalVarMap localVars;
+    // map of local reference variable names to values
     LocalRefMap localRefs;
 
 public:
+    // operand stack
     stack<std::shared_ptr<Value>> opStack;
+    // index of current instruction in func's instructions list
     int instructionIndex = 0;
 
     Frame(std::shared_ptr<Function> func): func(func) {};

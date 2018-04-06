@@ -17,6 +17,8 @@ class InterpreterException : public exception {
 };
 
 class UninitializedVariableException: public InterpreterException {
+    // Thrown when code attempts to read from a variable that hasn't
+    // been initialized
     public:
 	    UninitializedVariableException(string message):
             InterpreterException(message) {};
@@ -26,6 +28,7 @@ class UninitializedVariableException: public InterpreterException {
 };
 
 class IllegalCastException : public InterpreterException {
+    // Thrown when an operation is made on a value of the wrong type
     public:
 	    IllegalCastException(string message):
             InterpreterException(message) {};
@@ -35,6 +38,7 @@ class IllegalCastException : public InterpreterException {
 };
 
 class IllegalArithmeticException : public InterpreterException {
+    // Thrown when code attempts to divide by zero
     public:
 	    IllegalArithmeticException(string message):
             InterpreterException(message) {};
@@ -43,18 +47,21 @@ class IllegalArithmeticException : public InterpreterException {
         };
 };
 
-class RuntimeException : public InterpreterException {
-    public:
-	    RuntimeException(string message): InterpreterException(message) {};
-        string toString() {
-            return "RuntimeException: " + message;
-        };
-};
-
 class InsufficientStackException : public InterpreterException {
+    // Thrown when a bytecode instruction is called without sufficient
+    // operands on the stack
     public:
 	    InsufficientStackException(string message): InterpreterException(message) {};
         string toString() {
             return "InsufficientStackException: " + message;
+        };
+};
+
+class RuntimeException : public InterpreterException {
+    // General catch-all exception
+    public:
+	    RuntimeException(string message): InterpreterException(message) {};
+        string toString() {
+            return "RuntimeException: " + message;
         };
 };

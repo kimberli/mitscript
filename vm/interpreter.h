@@ -2,7 +2,7 @@
  * interpreter.h
  *
  * Defines an Interpreter object which can be used to step through
- * bytecode instructions
+ * bytecode instructions and store interpreter state
  */
 #pragma once
 
@@ -16,12 +16,13 @@ using namespace std;
 #define LOG(msg) { if (true) std::cerr << msg << endl; }
 
 class Interpreter {
+    // class used to handle interpreter state
 private:
-    shared_ptr<Frame> globalFrame;
-    stack<shared_ptr<Frame>> frames;
-    void executeStep();
-    bool finished;
+    shared_ptr<Frame> globalFrame;  // root function frame
+    stack<shared_ptr<Frame>> frames;  // stack of frames
+    void executeStep();  // execute a single next instruction
+    bool finished;  // true when the program has terminated
 public:
     Interpreter(shared_ptr<Function> mainFunc);
-    void run();
+    void run();  // executes all instructions until termination
 };

@@ -14,14 +14,21 @@
 #include <string>
 #include <vector>
 
-struct Value
-{
+struct Value {
+    // Abstract class for program values that can be stored on a frame's
+    // operand stack
     virtual ~Value() {};
+
+    // instance function that returns type of value as a string
     virtual string type() = 0;
 
+    // instance function that returns printable representation of this value's data
     virtual string toString() = 0;
+    // instance function to determine whether this value is equal to another one
     virtual bool equals(shared_ptr<Value> other) = 0;
 
+    // helper function to dynamically cast value to a specific subclass type
+    // and raise an IllegalCastException if the cast fails
     template <typename T>
     T* cast() {
         auto val = dynamic_cast<T*>(this);
@@ -32,12 +39,13 @@ struct Value
     }
 };
 
-struct Constant: public Value
-{
+struct Constant: public Value {
+    // Abstract class for constant program values
     virtual ~Constant() {};
 };
 
 struct ValuePtr: public Value {
+    // Class for reference variables
     shared_ptr<Value> ptr;
 
     ValuePtr(shared_ptr<Value> ptr): ptr(ptr) {};
@@ -52,8 +60,8 @@ struct ValuePtr: public Value {
     bool equals(shared_ptr<Value> other);
 };
 
-struct None : public Constant
-{
+struct None : public Constant {
+    // Class for None type
     virtual ~None() {}
 
     static const string typeS;
@@ -65,8 +73,8 @@ struct None : public Constant
     bool equals(shared_ptr<Value> other);
 };
 
-struct Integer : public Constant
-{
+struct Integer : public Constant {
+    // Class for integer type
     int32_t value;
 
     Integer(int32_t value) : value(value) {}
@@ -81,8 +89,8 @@ struct Integer : public Constant
     bool equals(shared_ptr<Value> other);
 };
 
-struct String : public Constant
-{
+struct String : public Constant {
+    // Class for string type
     string value;
 
     String(string value): value(value) {};
@@ -97,8 +105,8 @@ struct String : public Constant
     bool equals(shared_ptr<Value> other);
 };
 
-struct Boolean : public Constant
-{
+struct Boolean : public Constant{
+    // Class for boolean type
     bool value;
 
     Boolean(bool value): value(value) {};
@@ -114,13 +122,14 @@ struct Boolean : public Constant
 
 };
 
-struct Record : public Constant
-{
+struct Record : public Constant {
+    // Class for record type (note that this is mutable)
+	map<string, shared_ptr<Value>> value;
+
     Record() {
 		value = *(new map<string, shared_ptr<Value>>());
 	}
     Record(map<string, shared_ptr<Value>> value): value(value) {}
-	map<string, shared_ptr<Value>> value;
 
     virtual ~Record() {}
     string toString();
@@ -131,29 +140,30 @@ struct Record : public Constant
     }
 };
 
-struct Function : public Constant
-{
-    // List of functions defined within this function (but not functions defined inside of nested functions)
+struct Function : public Constant {
+    // Class for function type; produced by bytecode compiler
+
+    // functions defined within this function (but not inside nested functions)
     vector<shared_ptr<Function>> functions_;
 
-    // List of constants used by the instructions within this function (but not nested functions)
+    // constants used by the instructions within this function (but not inside nested functions)
     vector<shared_ptr<Constant>> constants_;
 
-    // The number of parameters to the function
+    // number of parameters to the function
     uint32_t parameter_count_;
 
-    // List of local variables
-    // The first parameter_count_ variables are the function's parameters
+    // list of local variables
+    // note: the first parameter_count_ variables are the function's parameters
     // in their order as given in the paraemter list
     vector<string> local_vars_;
 
-    // List of local variables accessed by reference (LocalReference)
+    // list of local variables accessed by reference (LocalReference)
     vector<string> local_reference_vars_;
 
-    // List of the names of non-global and non-local variables accessed by the function
+    // list of the names of non-global and non-local variables accessed by the function
     vector<string> free_vars_;
 
-    // List of global variable and field names used inside the function
+    // list of global variable and field names used inside the function
     vector<string> names_;
 
     InstructionList instructions;
@@ -187,7 +197,13 @@ struct Function : public Constant
 };
 
 struct Closure: public Constant {
+    // Class for closure type
+
+    // list of reference variables, in the same order as listed in the function's
+    // free_vars_ list
     vector<shared_ptr<ValuePtr>> refs;
+
+    // function that the closure is for
     shared_ptr<Function> func;
 
     Closure(vector<shared_ptr<ValuePtr>> refs, shared_ptr<Function> func):
