@@ -113,7 +113,7 @@ public:
     void visit(Block& exp) override;
     void visit(Global& exp) override;
     void visit(Assignment& exp) override;
-    void visit(CallStatement& exp) override {} // TODO;
+    void visit(CallStatement& exp) override;
     void visit(IfStatement& exp) override;
     void visit(WhileLoop& exp) override;
     void visit(Return& exp) override;

@@ -230,6 +230,13 @@ void CFGBuilder::visit(Assignment& exp) {
     retExit = ret;
 }
 
+void CFGBuilder::visit(CallStatement& exp) {
+    InstructionList iList = getInstructions(exp.call);
+    bbptr_t ret = std::make_shared<BB>(BB(true, iList));
+    retEnter = ret;
+    retExit = ret;
+}
+
 void CFGBuilder::visit(IfStatement& exp) {
     // generate a t-f bb for the condition 
     InstructionList conditionList = getInstructions(exp.condition);
@@ -506,7 +513,20 @@ void CFGBuilder::visit(IndexExpr& exp) {
 }
 
 void CFGBuilder::visit(Call& exp) {
-    
+    // load the closure
+    InstructionList iList = getInstructions(exp.target);
+    // push the args in reverse order
+    for (vector<Expression*>::reverse_iterator i = exp.args.rbegin(); i != exp.args.rend(); ++i) {
+        Expression* arg = *i;
+        arg->accept(*this);
+        InstructionList loadArg = retInstr;
+        iList.insert(iList.end(), loadArg.begin(), loadArg.end());
+    }
+
+    int numArgs = exp.args.size();
+    Instruction* call = new Instruction(Operation::Call, optint_t(numArgs));
+    iList.push_back(*call);
+    retInstr = iList;
 }
 
 void CFGBuilder::visit(RecordExpr& exp) {
