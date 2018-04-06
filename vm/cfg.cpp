@@ -316,8 +316,11 @@ void CFGBuilder::visit(Return& exp) {
     Operation op = Operation::Return;
     Instruction* instr = new Instruction(op, noArg0);
     iList.push_back(*instr);
-    // leave the instructions 
-    retInstr = iList;
+
+    // leave the instructions as a BB
+    bbptr_t ret = std::make_shared<BB>(BB(true, iList));
+    retEnter = ret;
+    retExit = ret;
 }
 
 void CFGBuilder::visit(FunctionExpr& exp) {
