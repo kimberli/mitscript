@@ -1,3 +1,8 @@
+/*
+ * symboltable.h
+ *
+ * Defines a visitor that takes charge of figuring out scoping descriptors
+ */
 #pragma once
 
 #include <memory>

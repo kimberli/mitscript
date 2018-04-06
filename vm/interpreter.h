@@ -1,3 +1,9 @@
+/*
+ * interpreter.h
+ *
+ * Defines an Interpreter object which can be used to step through
+ * bytecode instructions
+ */
 #pragma once
 
 #include "types.h"

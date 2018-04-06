@@ -1,3 +1,12 @@
+/*
+ * interpreter-main.cpp
+ *
+ * Main file used to make the MITScript interpreter
+ * The interpreter has two capabilities:
+ * 1) with the -b flag, it reads in bytecode and executes it
+ * 2) with the -s flag, it reads in MITScript source, compiles it to bytecode, and
+ *    executes the resulting bytecode
+ */
 #include "../parser/parser.h"
 #include "../parser/lexer.h"
 #include "bc-parser.h"

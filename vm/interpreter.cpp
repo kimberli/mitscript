@@ -1,3 +1,9 @@
+/*
+ * interpreter.cpp
+ *
+ * Implements an Interpreter object which can be used to step through
+ * bytecode instructions
+ */
 #include "exception.h"
 #include "frame.h"
 #include "instructions.h"

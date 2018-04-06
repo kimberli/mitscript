@@ -1,3 +1,9 @@
+/*
+ * prettyprinter.h
+ *
+ * Defines a PrettyPrinter class that takes in a bytecode object (as a root
+ * Function node) and prints it out in human-readable bytecode format
+ */
 #include "assert.h"
 #include "types.h"
 #include <memory>

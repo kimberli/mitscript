@@ -1,3 +1,8 @@
+/*
+ * bc-lexer.lex
+ *
+ * Defines the bytecode lexer; compiled with flex
+ */
 
 %{
 

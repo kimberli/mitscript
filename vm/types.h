@@ -1,3 +1,8 @@
+/*
+ * types.h
+ *
+ * Defines the Value, Constant, and Function types used in the interpreter
+ */
 #pragma once
 
 #include "exception.h"

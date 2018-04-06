@@ -1,3 +1,10 @@
+/*
+ * frame.h
+ *
+ * Defines the Frame class used in the interpreter which stores information
+ * about the current function, instruction location, local variables and
+ * reference variables, as well as the operand stack.
+ */
 #pragma once
 
 #include "types.h"

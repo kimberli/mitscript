@@ -1,3 +1,8 @@
+/*
+ * symboltable.cpp
+ *
+ * Implements a visitor that takes charge of figuring out scoping descriptors
+ */
 #include "symboltable.h" 
 
 SymbolTable SymbolTableBuilder::eval(Expression& exp) {

@@ -1,3 +1,9 @@
+/*
+ * cfg.cpp
+ *
+ * Implements the basic block (BB) data structure, as well as classes for the CFG
+ * and CFGBuilder.
+ */
 #include "cfg.h"
 
 BB::BB(bool epsOutput, InstructionList instr) {

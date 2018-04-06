@@ -1,3 +1,8 @@
+/*
+ * exception.h
+ *
+ * Defines InterpreterExceptions raised during bytecode runtime
+ */
 #pragma once
 
 #include <string>

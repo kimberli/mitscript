@@ -1,3 +1,9 @@
+/*
+ * cfg.h
+ *
+ * Defines the basic block (BB) data structure, as well as classes for the CFG
+ * and CFGBuilder.
+ */
 #pragma once 
 
 #include <unordered_map>
@@ -19,23 +25,28 @@ typedef std::shared_ptr<BB> bbptr_t;
 typedef std::experimental::optional<int32_t> optint_t;
 
 class BB {
+    /*
+     * Basic block that represents a single node in the CFG
+     *
+     * There are two kinds of blocks: one with a single outgoing epsilon edge,
+     * and one with two outgoing edges for a branch node (one for the true
+     * condition, and one for the false condition)
+     */
 public: 
     BB(bool epsOutput, InstructionList instr);
-    // represents a single node in the CFG 
-    // two kinds of blocks: one outgoing epsilon edge,
-    // two edges (one true, one false)
     bool hasEpsOutput;
-    bbptr_t epsOut;
-    bbptr_t trueOut;
-    bbptr_t falseOut;
-    // content of this block; a list of statements
-    InstructionList instructions;
+    bbptr_t epsOut;  // null if this block has two outgoing edges
+    bbptr_t trueOut;  // null if this block has one outgoing edge
+    bbptr_t falseOut;  // null if this block has one outgoing edge
+    InstructionList instructions;  // block content: list of statements
 };
 
 class CFG {
+    /*
+     * Data structure that almost exactly matches Function in types.h,
+     * but stores a BB pointer instead of a list of bytecode instructions
+     */
 public:
-    // very similar data structure to the eventual bytecode function,
-    // but we store a CFG representation instead of bytecode.
     CFG();
 
     // CFG rep of internal functions
@@ -54,14 +65,16 @@ public:
 };
 
 class CFGBuilder : public Visitor {
+    /*
+     * Visitor that converts the AST to a CFG
+     */
 private: 
     // Invariant: visiting a statement or a block should return a CFG with
-    // a single endpoint and a single exitpoint, to be deposited 
-    // below 
+    // a single endpoint and a single exitpoint, to be stored below
     bbptr_t retEnter;
     bbptr_t retExit;
 
-    // Visiting anything else should return a list of instructions. 
+    // Visiting anything else should return a list of instructions
     InstructionList retInstr;
     InstructionList getInstructions(AST_node& expr);
 
@@ -69,7 +82,7 @@ private:
     int allocConstant(constptr_t c);
 
     // helper that takes in a constant pointer, takes care of allocation
-    // and creating the appropriate bb. 
+    // and creating the appropriate bb
     void loadConstant(constptr_t c);
 
     // takes care of writing assignments
@@ -87,7 +100,6 @@ public:
 
     void visit(Assignment& exp) override;
 
-    // I guess just call a function?
     void visit(CallStatement& exp) override {}
 
     void visit(IfStatement& exp) override;

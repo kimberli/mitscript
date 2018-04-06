@@ -1,3 +1,9 @@
+/*
+ * bc-parser.yy
+ *
+ * Defines the bytecode parser; compiled with bison
+ * Generates AST nodes as defined in types.h
+ */
 %code requires{
 
 #include <iostream>

@@ -1,3 +1,9 @@
+/*
+ * compiler.h
+ *
+ * Defines a visitor that visits AST nodes generated in MITScript parsing
+ * and outputs a root Function
+ */
 # include "../parser/AST.h"
 # include "../parser/Visitor.h"
 # include "instructions.h"

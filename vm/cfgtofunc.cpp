@@ -1,3 +1,9 @@
+/*
+ * cfgtofunc.cpp
+ *
+ * Implements a function that converts a CFG data structure to a Function
+ * object (as defined in types.h)
+ */
 #include "cfgtofunc.h"
 
 std::shared_ptr<Function> CFGToFunc(cfgptr_t cfg) {
