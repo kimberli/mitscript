@@ -16,7 +16,49 @@ CFG::CFG() {
 }
 
 CFGBuilder::CFGBuilder() {
+}
+
+cfgptr_t CFGBuilder::evaluate(Expression& exp) {
+    std::cout << "Running" << std::endl;
+    // set current function 
+    // TODO: LOAD BUILT-INS
     curFunc = std::make_shared<CFG>(CFG());
+    curFunc->parameter_count = 0;
+
+    // generate a symbol table 
+    std::cout << "Making st" << std::endl;
+    SymbolTableBuilder stb = SymbolTableBuilder();
+    symbolTable = stb.eval(exp);
+    curTable = symbolTable.at(0);
+
+    std::cout << "Loading st into global frame " << std::endl;
+    // load up curFunc with vars from symbol table
+    for (std::map<std::string, VarDesc>::iterator it = curTable->vars.begin(); it != curTable->vars.end(); it ++) {
+        std::string varName = it->first;
+        VarDesc d = it->second;
+        switch (d.type) {
+            case GLOBAL: 
+                d.index = curFunc->names_.size();
+                curFunc->names_.push_back(varName);
+                break;
+            case LOCAL: 
+                d.index = curFunc->local_vars_.size();
+                curFunc->local_vars_.push_back(varName);
+                if (d.isReferenced) {
+                    curFunc->local_reference_vars_.push_back(varName);
+                }
+                break;
+            case FREE: 
+                d.index = curFunc->free_vars_.size();
+                curFunc->free_vars_.push_back(varName); 
+        }
+    }
+
+    // run this visitor
+    exp.accept(*this);
+
+    // return the function. 
+    return curFunc;
 }
 
 InstructionList CFGBuilder::getInstructions(AST_node& expr) {
@@ -190,6 +232,17 @@ void CFGBuilder::visit(Return& exp) {
     retInstr = iList;
 }
 
+void CFGBuilder::visit(FunctionExpr& exp) {
+    // Symbol Table maintenance 
+    stCounter += 1;
+    curTable = symbolTable.at(stCounter);
+    
+    // TODO: all the logic to build the function 
+
+    // reset the symbol table pointer
+    curTable = curTable->parent;
+}
+
 void CFGBuilder::visit(BinaryExpr& exp) {
     InstructionList iList = getInstructions(exp.left);
     InstructionList evalR = getInstructions(exp.right);
@@ -281,7 +334,22 @@ void CFGBuilder::visit(RecordExpr& exp) {
 }
 
 void CFGBuilder::visit(Identifier& exp) {
-    // TODO: use a symbol table to figure out how to load variables. 
+    VarDesc d = curTable->vars.at(exp.name);
+    InstructionList iList;
+    switch (d.type) {
+        case GLOBAL: {
+            // use load_global 
+            optint_t i = optint_t(d.index);
+            Instruction* instr = new Instruction(Operation::LoadGlobal, i);
+            iList.push_back(*instr);
+            retInstr = iList;
+            break;
+        }
+        case LOCAL:     
+            break;
+        case FREE: 
+            break;
+    }
 }
 
 void CFGBuilder::visit(IntConst& exp) {

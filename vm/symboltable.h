@@ -33,6 +33,7 @@ enum VarType {
 struct VarDesc {
     VarType type;
     bool isReferenced;
+    int index;
     VarDesc(): type(LOCAL), isReferenced(false) {};
     VarDesc(VarType type): type(type), isReferenced(false) {};
 };

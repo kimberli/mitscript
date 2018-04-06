@@ -25,7 +25,7 @@ VarDesc SymbolTable::resolve(std::string varName, stptr_t table) {
 
 stvec_t SymbolTableBuilder::eval(Expression& exp) {
     // create global symbol table
-    stptr_t globalTable;
+    stptr_t globalTable = std::make_shared<SymbolTable>(SymbolTable());
     tables.push_back(globalTable);
 
     // add names for the builtin functions

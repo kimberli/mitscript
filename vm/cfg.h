@@ -13,6 +13,7 @@
 #include "../parser/AST.h"
 #include "instructions.h"
 #include "types.h"
+#include "symboltable.h"
 
 class AST_node;
 class BB;
@@ -88,8 +89,18 @@ private:
     // takes care of writing assignments
     InstructionList getWriteInstr(Expression* lhs);
 
+    // symbol table for this graph 
+    stvec_t symbolTable;
+    stptr_t curTable;
+    // keep track of which funtion we are on (matches functions to frames)
+    int stCounter = 0;
+
 public:
     CFGBuilder();
+
+    // evaluate
+    cfgptr_t evaluate(Expression& exp);
+
     // stores the CFG data structure corresponding to the 
     // function we are currently building
     cfgptr_t curFunc;
@@ -108,7 +119,7 @@ public:
 
     void visit(Return& exp) override;
 
-    void visit(FunctionExpr& exp) override {}
+    void visit(FunctionExpr& exp) override; 
 
     void visit(BinaryExpr& exp) override;
     void visit(UnaryExpr& exp) override;
