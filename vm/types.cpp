@@ -4,7 +4,9 @@
  * Implements the Value, Constant, and Function types used in the interpreter
  */
 #include "types.h"
+#include "frame.h"
 
+#define DEBUG(msg) { if (1) cout << msg << endl; }
 /* ValuePtr */
 const string ValuePtr::typeS = "ValuePtr";
 string ValuePtr::toString() {
@@ -97,3 +99,38 @@ string Closure::toString() {
 bool Closure::equals(shared_ptr<Value> other) {
     throw RuntimeException("can't call equals on Closure");
 }
+
+/* Native functions */
+shared_ptr<Constant> PrintNativeFunction::evalNativeFunction(Frame& currentFrame) {
+	DEBUG("evalNativeFunction: print");
+    string arg = local_vars_[0];
+    Constant* val = currentFrame.getLocalVar(arg).get();
+    cout << val->toString() << endl;
+    return make_shared<None>();
+};
+
+shared_ptr<Constant> InputNativeFunction::evalNativeFunction(Frame& currentFrame) {
+	DEBUG("evalNativeFunction: input");
+    string input;
+    getline(cin, input);
+    return make_shared<String>(input);
+};
+
+shared_ptr<Constant> IntcastNativeFunction::evalNativeFunction(Frame& currentFrame) {
+	DEBUG("evalNativeFunction: intcast");
+    string arg = local_vars_[0];
+    Constant* val = currentFrame.getLocalVar(arg).get();
+	auto intVal = dynamic_cast<Integer*>(val);
+    if (intVal != NULL) {
+        return make_shared<Integer>(intVal->value);
+    }
+    auto strVal = val->cast<String>();
+    if (strVal->value == "0") {
+        return make_shared<Integer>(0);
+    }
+    int result = atoi(strVal->value.c_str());
+    if (result == 0) {
+        throw IllegalCastException("cannot convert value " + strVal->value + " to IntValue");
+    }
+    return make_shared<Integer>(result);
+};
