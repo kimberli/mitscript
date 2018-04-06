@@ -65,5 +65,9 @@ function
       load_local  0
       neg
       store_local 1
+
+	  load_global 0
+	  load_local 1
+	  call 1
     ]
 }

@@ -15,4 +15,9 @@ executing instruction 13
 executing instruction 14
 executing instruction 15
 executing instruction 16
+executing instruction 17
+executing instruction 18
+executing instruction 19
+evalNativeFunction: print
+-3
 program finished

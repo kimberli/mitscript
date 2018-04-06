@@ -42,7 +42,7 @@ function
             ]
         }
     ],
-    constants = [1, 2],
+    constants = [3, 2],
     parameter_count = 0,
     local_vars = [x, y, z],
     local_ref_vars = [],
@@ -68,5 +68,8 @@ function
       load_local  1
       add
       store_local 2
+	  load_global 0
+	  load_local 2
+      call 1
     ]
 }
