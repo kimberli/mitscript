@@ -4,7 +4,7 @@ compiler: compiler-main.cpp compiler.h compiler.cpp symboltable.cpp
 	g++ -g -std=c++1y compiler-main.cpp compiler.cpp types.cpp symboltable.cpp ../parser/parser.cpp ../parser/lexer.cpp -o mitscriptc
 
 interpreter: interpreter-main.cpp interpreter.cpp bc-parser
-	g++ -g -std=c++1y interpreter-main.cpp interpreter.cpp types.cpp bc-parser.cpp bc-lexer.cpp ../parser/parser.cpp ../parser/lexer.cpp -o mitscript
+	g++ -g -std=c++1y interpreter-main.cpp interpreter.cpp types.cpp compiler.cpp symboltable.cpp bc-parser.cpp bc-lexer.cpp ../parser/parser.cpp ../parser/lexer.cpp -o mitscript
 
 bc-parser: bc-parser.cpp bc-lexer.cpp bc-parser-driver.cpp
 	g++ -g -std=c++1y types.cpp bc-parser-driver.cpp bc-parser.cpp bc-lexer.cpp -o bc-parser

@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
     }
 
     FILE* infile;
-    Function* bc_output;
+    funcptr_t bc_output;
     int file_type = 0;
     int rvalue = 0;
 
@@ -60,23 +60,23 @@ int main(int argc, char** argv) {
             cout<<"Parsing MITScript failed"<<endl;
             return 1;
         }
-        BytecodeCompiler* c = new BytecodeCompiler();
-        output->accept(*c);
-        bc_output = c->getBytecode();
+        BytecodeCompiler* bc = new BytecodeCompiler();
+        output->accept(*bc);
+        bc_output = bc->evaluate(*output);
     } else if (file_type == BYTECODE) {
         // parse bytecode, set bc_output
+        Function* output;
         void* scanner;
         bclex_init(&scanner);
         bcset_in(infile, scanner);
-        if (bcparse(scanner, bc_output) == 1) {
+        if (bcparse(scanner, output) == 1) {
             cout << "Parsing bytecode failed" << endl;
             return 1;
         }
+        funcptr_t bc_output(output);
     }
-
-    shared_ptr<Function> func(bc_output);
   
-    Interpreter* intp = new Interpreter(func);
+    Interpreter* intp = new Interpreter(bc_output);
     try {
         intp->run();
     } catch (InterpreterException& exception) {
