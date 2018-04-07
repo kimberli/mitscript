@@ -20,6 +20,9 @@ InstructionList BytecodeCompiler::addInstructions(AST_node& expr) {
     return retInstr;
 }
 
+
+// TODO: These could be more efficient,
+// we could definitely have a static value for None.
 int BytecodeCompiler::allocConstant(constptr_t c) {
     int i = retFunc->constants_.size();
     retFunc->constants_.push_back(c);
@@ -44,39 +47,8 @@ void BytecodeCompiler::loadConstant(constptr_t c) {
 void BytecodeCompiler::addWriteInstructions(Expression* lhs) {
     auto id = dynamic_cast<Identifier*>(lhs);
     if (id != NULL) {
-        // TODO: use a symbol table to figure out how to assign vars.
         // use var load
-        desc_t d = curTable->vars.at(id->name);
-        InstructionList iList;
-        switch (d->type) {
-            case GLOBAL: {
-                optint_t i = optint_t(d->index);
-                Instruction* instr = new Instruction(Operation::StoreGlobal, i);
-                retFunc->instructions.push_back(*instr);
-                return;
-            }
-            case LOCAL: {
-                optint_t i = optint_t(d->index);
-                Instruction* instr = new Instruction(Operation::StoreLocal, i);
-                retFunc->instructions.push_back(*instr);
-                return;
-            }
-            case FREE: {
-                // recall d.index is an index into the free vars, so we have to 
-                // jump over local ref vars. 
-                optint_t i = optint_t(d->index + retFunc->local_reference_vars_.size());
-                optint_t noArg0;
-                Instruction* pushRefInstr = new Instruction(Operation::PushReference, i);
-                // the stack is now S :: value :: ref, but we need 
-                // S :: ref :: value, so add a swap instr. 
-                Instruction* swapInstr = new Instruction(Operation::Swap, noArg0);
-                Instruction* storeRefInstr = new Instruction(Operation::StoreReference, noArg0);
-                retFunc->instructions.push_back(*pushRefInstr);
-                retFunc->instructions.push_back(*swapInstr);
-                retFunc->instructions.push_back(*storeRefInstr);
-                return;
-            }
-        }
+        addWriteVarInstructions(id->name);
     }
     auto fieldD = dynamic_cast<FieldDeref*>(lhs);
     if (fieldD != NULL) {
@@ -94,7 +66,6 @@ void BytecodeCompiler::addWriteInstructions(Expression* lhs) {
     }
     auto indexE = dynamic_cast<IndexExpr*>(lhs);
     if (indexE != NULL) {
-        // TODO: handle record writes
         Instruction* swap = new Instruction(Operation::Swap, optint_t());
         // we need S :: record :: index :: value, so we need 2 swaps
         // load the record 
@@ -108,6 +79,78 @@ void BytecodeCompiler::addWriteInstructions(Expression* lhs) {
         retFunc->instructions.push_back(*store);
         return;
     }
+}
+
+void BytecodeCompiler::addWriteVarInstructions(std::string varName) {
+    desc_t d = curTable->vars.at(varName);
+    InstructionList iList;
+    switch (d->type) {
+        case GLOBAL: {
+            optint_t i = optint_t(d->index);
+            Instruction* instr = new Instruction(Operation::StoreGlobal, i);
+            retFunc->instructions.push_back(*instr);
+            return;
+        }
+        case LOCAL: {
+            optint_t i = optint_t(d->index);
+            Instruction* instr = new Instruction(Operation::StoreLocal, i);
+            retFunc->instructions.push_back(*instr);
+            return;
+        }
+        case FREE: {
+            // recall d.index is an index into the free vars, so we have to 
+            // jump over local ref vars. 
+            optint_t i = optint_t(d->index + retFunc->local_reference_vars_.size());
+            optint_t noArg0;
+            Instruction* pushRefInstr = new Instruction(Operation::PushReference, i);
+            // the stack is now S :: value :: ref, but we need 
+            // S :: ref :: value, so add a swap instr. 
+            Instruction* swapInstr = new Instruction(Operation::Swap, noArg0);
+            Instruction* storeRefInstr = new Instruction(Operation::StoreReference, noArg0);
+            retFunc->instructions.push_back(*pushRefInstr);
+            retFunc->instructions.push_back(*swapInstr);
+            retFunc->instructions.push_back(*storeRefInstr);
+            return;
+        }
+    }
+}
+
+void BytecodeCompiler::loadBuiltIns() {
+    // for each func, create a func /w right amount of args, 
+    // add to the curent frame, 
+    // then generate code to load globally
+    // print
+    funcptr_t printFunc = std::make_shared<Function>(Function());
+    printFunc->parameter_count_ = 1;
+    int printIdx = retFunc->functions_.size();
+    retFunc->functions_.push_back(printFunc);
+    Instruction* loadPrint = new Instruction(Operation::LoadFunc, optint_t(printIdx));
+    Instruction* allocPrint = new Instruction(Operation::AllocClosure, optint_t(0));
+    retFunc->instructions.push_back(*loadPrint);
+    retFunc->instructions.push_back(*allocPrint);
+    addWriteVarInstructions("print");
+    
+    // intcast
+    funcptr_t intcastFunc = std::make_shared<Function>(Function());
+    intcastFunc->parameter_count_ = 1;
+    int intcastIdx = retFunc->functions_.size();
+    retFunc->functions_.push_back(intcastFunc);
+    Instruction* loadIntcast = new Instruction(Operation::LoadFunc, optint_t(intcastIdx));
+    Instruction* allocIntcast = new Instruction(Operation::AllocClosure, optint_t(0));
+    retFunc->instructions.push_back(*loadIntcast);
+    retFunc->instructions.push_back(*allocIntcast);
+    addWriteVarInstructions("intcast");
+    
+    // input 
+    funcptr_t inputFunc = std::make_shared<Function>(Function());
+    inputFunc->parameter_count_ = 0;
+    int inputIdx = retFunc->functions_.size();
+    retFunc->functions_.push_back(inputFunc);
+    Instruction* loadInp = new Instruction(Operation::LoadFunc, optint_t(inputIdx));
+    Instruction* allocInp = new Instruction(Operation::AllocClosure, optint_t(0));
+    retFunc->instructions.push_back(*loadInp);
+    retFunc->instructions.push_back(*allocInp);
+    addWriteVarInstructions("input");
 }
 
 funcptr_t BytecodeCompiler::evaluate(Expression& exp) {
@@ -143,6 +186,9 @@ funcptr_t BytecodeCompiler::evaluate(Expression& exp) {
                 retFunc->free_vars_.push_back(varName); 
         }
     }
+
+    // load built-in functions
+    loadBuiltIns();
 
     // run this visitor
     exp.accept(*this);
@@ -223,11 +269,17 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
     retFunc = childFunc; 
     stptr_t parentTable = curTable;
     curTable = childTable;
+
     // run
     exp.body.accept(*this);
-    // TODO when we switch to instructions 
-    // ADD A RETURN STATEMENT IF THERE IS NOT ONE ALREADY
-
+    // if there is no explicit return statement, add a return None
+    if (retFunc->instructions.back().operation != Operation::Return) {
+        // add a return None
+        constptr_t n = std::make_shared<None>(None());
+        loadConstant(n);
+        Instruction* ret = new Instruction(Operation::Return, optint_t());
+        retFunc->instructions.push_back(*ret);
+    }
     // reinstall parent state
     retFunc = parentFunc;
     curTable = parentTable;

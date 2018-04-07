@@ -41,6 +41,11 @@ private:
 
     // takes care of writing assignments
     void addWriteInstructions(Expression* lhs);
+    // writes variables (does not handle records)
+    void addWriteVarInstructions(std::string varName);
+
+    // helper to load builtins to a scope
+    void loadBuiltIns();
 
     // Symbol Table state
     stvec_t symbolTables;
