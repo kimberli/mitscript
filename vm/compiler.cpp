@@ -16,7 +16,7 @@ funcptr_t BytecodeCompiler::getFunction(AST_node& expr) {
 
 void BytecodeCompiler::addInstructions(AST_node& expr) {
     expr.accept(*this);
-    retFunc->instructions.insert(retFunc->instructions.end(), retInstr.begin(), retInstr.end());
+    //retFunc->instructions.insert(retFunc->instructions.end(), retInstr.begin(), retInstr.end());
 }
 
 
@@ -448,8 +448,8 @@ void BytecodeCompiler::visit(Call& exp) {
     // push the args in order
     for (Expression* arg : exp.args) {
         arg->accept(*this);
-        InstructionList loadArg = retInstr;
-        retFunc->instructions.insert(retFunc->instructions.end(), loadArg.begin(), loadArg.end());
+        //InstructionList loadArg = retInstr;
+        //retFunc->instructions.insert(retFunc->instructions.end(), loadArg.begin(), loadArg.end());
     }
 
     int numArgs = exp.args.size();
