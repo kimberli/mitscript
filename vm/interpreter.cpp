@@ -11,8 +11,6 @@
 #include "types.h"
 #include <stack>
 
-#define DEBUG(msg) { if (1) cout << msg << endl; }
-
 using namespace std;
 
 Interpreter::Interpreter(shared_ptr<Function> mainFunc) {
@@ -402,5 +400,5 @@ void Interpreter::run() {
     while (!finished) {
         executeStep();
     }
-    DEBUG("program finished");
+    LOG("program finished");
 };

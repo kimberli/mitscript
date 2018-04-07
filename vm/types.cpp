@@ -6,7 +6,6 @@
 #include "types.h"
 #include "frame.h"
 
-#define DEBUG(msg) { if (1) cout << msg << endl; }
 /* ValuePtr */
 const string ValuePtr::typeS = "ValuePtr";
 string ValuePtr::toString() {
@@ -102,7 +101,6 @@ bool Closure::equals(shared_ptr<Value> other) {
 
 /* Native functions */
 shared_ptr<Constant> PrintNativeFunction::evalNativeFunction(Frame& currentFrame) {
-	DEBUG("evalNativeFunction: print");
     string arg = local_vars_[0];
     Constant* val = currentFrame.getLocalVar(arg).get();
     cout << val->toString() << endl;
@@ -110,14 +108,12 @@ shared_ptr<Constant> PrintNativeFunction::evalNativeFunction(Frame& currentFrame
 };
 
 shared_ptr<Constant> InputNativeFunction::evalNativeFunction(Frame& currentFrame) {
-	DEBUG("evalNativeFunction: input");
     string input;
     getline(cin, input);
     return make_shared<String>(input);
 };
 
 shared_ptr<Constant> IntcastNativeFunction::evalNativeFunction(Frame& currentFrame) {
-	DEBUG("evalNativeFunction: intcast");
     string arg = local_vars_[0];
     Constant* val = currentFrame.getLocalVar(arg).get();
 	auto intVal = dynamic_cast<Integer*>(val);
