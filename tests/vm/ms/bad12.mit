@@ -1,0 +1,7 @@
+xyz = fun(hello) {
+    while(true + "hi") {
+        print(hello);
+    }
+};
+
+xyz(-1249);

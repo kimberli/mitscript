@@ -1,0 +1,10 @@
+x = fun(hi2) {
+};
+
+y = fun(hi) {
+//    print(hi);
+    x(hi);
+    return hi;
+};
+
+print(y("-2"));

@@ -1,0 +1,8 @@
+x = 5;
+y = fun() {
+	z = 5;
+	return z + 2;
+};
+print("should throw an Uninitialized Variable Exception");
+x = z + x;
+print("Can't print this: " + x);

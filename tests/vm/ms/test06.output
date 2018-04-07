@@ -1,0 +1,2 @@
+a1
+UninitializedVariableException: c is not initialized

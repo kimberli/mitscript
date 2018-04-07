@@ -1,0 +1,6 @@
+name_f = fun() {
+    k = {};
+    x = y;
+};
+
+hi = name_f();

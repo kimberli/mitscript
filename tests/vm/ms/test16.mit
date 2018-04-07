@@ -1,0 +1,99 @@
+print(" test arithmetic ops");
+print(-4 + 1);
+print(-4 - 1);
+print(-4 * 1);
+print(-4 / 1);
+print(-1042120 / 10000);
+
+print(2 * 2 * 2 * -2);
+
+print(" test equality");
+a = 5;
+print(5 == a);
+print(-5 == a);
+print((5 - a) == 0);
+
+print(false == false);
+print(false == (3 < 0));
+print((false == 3) == 0);
+
+print(None == None);
+print(None == 0);
+print(None == "");
+
+a = {x: a; y: "hello"; z: {xyz: true; j: {};}; x: a * a;};
+AAA = a;
+print(a == AAA);
+b = {x: a; y: "hello"; z: {xyz: true; j: {};};};
+print(a == b);
+
+f = fun(a, b, c) {
+    print(a + b + c);
+};
+g = f;
+h = fun(a, b, c) {
+    print(a + b + c);
+};
+print(f == g);
+print(h == g);
+
+print(" test comparison");
+print(3 < 1000);
+print(3 <= 3);
+print(-3 >= -3);
+print(40 > 100);
+
+print(" test string casting");
+a = -400;
+b = false;
+c = AAA;
+d = fun() {
+    print("hi");
+};
+e = None;
+
+print("hi " + a);
+print("hi " + b);
+print("hi " + c);
+print("hi " + d);
+print("hi " + e);
+
+print(" test native");
+print(intcast("0"));
+print(intcast("-23910   hello"));
+print(intcast("    00001;"));
+
+print(" test reassigning native");
+
+debug = 2;
+oldprint = print;
+print = fun(lvl, s) {
+    global debug;
+    if (lvl > debug) {
+        oldprint("log [" + lvl + "] " + s);
+    }
+};
+
+logStuff = fun() {
+    oldprint("starting at debug lvl " + debug);
+    print(1, "hello");
+    print(3, "PRINT ME");
+
+    setLogOn = fun() {
+        debug = 0;
+        global debug;
+        oldprint("setting debug lvl to " + debug);
+    };
+
+
+    global debug;
+    if (debug == 0) {
+        print(1, "DONEEEE");
+        return None;
+    }
+    setLogOn();
+    logStuff();
+};
+
+
+logStuff();

@@ -1,0 +1,9 @@
+x = 3;
+y = fun(){
+	if (x > 5){
+        z = 2;
+	}
+	return z;
+};
+print("Should return None, not error:");
+print(y());
