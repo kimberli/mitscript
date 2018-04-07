@@ -14,8 +14,9 @@ funcptr_t BytecodeCompiler::getFunction(AST_node& expr) {
     return retFunc;
 }
 
-InstructionList BytecodeCompiler::getInstructions(AST_node& expr) {
+InstructionList BytecodeCompiler::addInstructions(AST_node& expr) {
     expr.accept(*this);
+    retFunc->instructions.insert(retFunc->instructions.end(), retInstr.begin(), retInstr.end());
     return retInstr;
 }
 
@@ -29,7 +30,7 @@ void BytecodeCompiler::loadConstant(constptr_t c) {
     retFunc->instructions.push_back(*instr);
 }
 
-void BytecodeCompiler::getWriteInstr(Expression* lhs) {
+void BytecodeCompiler::addWriteInstructions(Expression* lhs) {
     auto id = dynamic_cast<Identifier*>(lhs);
     if (id != NULL) {
         // TODO: use a symbol table to figure out how to assign vars.
@@ -49,14 +50,15 @@ void BytecodeCompiler::getWriteInstr(Expression* lhs) {
 
 void BytecodeCompiler::visit(Block& exp) {
     for (Statement* s : exp.stmts) {
-        s->accept(*this);
-        // add instruction to retFunc
+        addInstructions(*s);
     }
 }
 void BytecodeCompiler::visit(Global& exp) {
     // no-op
 }
 void BytecodeCompiler::visit(Assignment& exp) {
+    addInstructions(exp.expr);
+    addWriteInstructions(&exp.lhs);
 }
 void BytecodeCompiler::visit(CallStatement& exp) {
 }
