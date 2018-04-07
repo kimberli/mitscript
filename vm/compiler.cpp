@@ -14,10 +14,9 @@ funcptr_t BytecodeCompiler::getFunction(AST_node& expr) {
     return retFunc;
 }
 
-InstructionList BytecodeCompiler::addInstructions(AST_node& expr) {
+void BytecodeCompiler::addInstructions(AST_node& expr) {
     expr.accept(*this);
     retFunc->instructions.insert(retFunc->instructions.end(), retInstr.begin(), retInstr.end());
-    return retInstr;
 }
 
 
@@ -218,11 +217,48 @@ void BytecodeCompiler::visit(CallStatement& exp) {
 }
 
 void BytecodeCompiler::visit(IfStatement& exp) {
+    // add instructions for evaluating the condition
+    addInstructions(exp.condition);
 
+    int startSize = retFunc->instructions.size();
+    // add in the else block first
+    addInstructions(*exp.elseBlock);
+    int elseSize = retFunc->instructions.size();
+    // calculate offset needed to skip else block and insert If instruction before it
+    int offsetElse = elseSize - startSize;
+    InstructionList::iterator elsePos = retFunc->instructions.begin() + startSize;
+    Instruction* ifInstr = new Instruction(Operation::If, offsetElse);
+    retFunc->instructions.insert(elsePos, *ifInstr);
+    LOG("added " + to_string(offsetElse) + " else instructions");
+
+    // increment the count to the new end of the else block
+    elseSize++;
+    // add in the then block
+    addInstructions(exp.thenBlock);
+    int thenSize = retFunc->instructions.size();
+    int offsetThen = thenSize - elseSize;
+    // calculate offset needed to skip then block and insert Goto instruction before it
+    InstructionList::iterator thenPos = retFunc->instructions.begin() + elseSize;
+    Instruction* gotoInstr = new Instruction(Operation::Goto, offsetThen);
+    retFunc->instructions.insert(thenPos, *gotoInstr);
+    LOG("added " + to_string(offsetThen) + " then instructions");
 }
 
 void BytecodeCompiler::visit(WhileLoop& exp) {
-
+    // add instructions for evaluating the condition
+    addInstructions(exp.condition);
+    int startSize = retFunc->instructions.size();
+    // add in the body instructions
+    addInstructions(exp.body);
+    int bodySize = retFunc->instructions.size();
+    int offsetBody = bodySize - startSize;
+    // insert goto before the body
+    InstructionList::iterator bodyPos = retFunc->instructions.begin() + startSize;
+    Instruction* gotoInstr = new Instruction(Operation::Goto, offsetBody);
+    retFunc->instructions.insert(bodyPos, *gotoInstr);
+    // insert if after the body
+    Instruction* ifInstr = new Instruction(Operation::If, -offsetBody);
+    retFunc->instructions.push_back(*ifInstr);
 }
 
 void BytecodeCompiler::visit(Return& exp) {

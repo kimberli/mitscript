@@ -28,7 +28,7 @@ class BytecodeCompiler : public Visitor {
 private: 
     InstructionList retInstr;  // expressions update this
 
-    InstructionList addInstructions(AST_node& expr);
+    void addInstructions(AST_node& expr);
     funcptr_t getFunction(AST_node& expr);
 
     // same as defined in lecture
