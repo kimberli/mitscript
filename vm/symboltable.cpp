@@ -4,6 +4,7 @@
  * Implements a visitor that takes charge of figuring out scoping descriptors
  */
 #include "symboltable.h" 
+#include "exception.h"
 
 desc_t SymbolTable::resolve(std::string varName, stptr_t table) {
     // returns descriptor for a variable
@@ -20,7 +21,7 @@ desc_t SymbolTable::resolve(std::string varName, stptr_t table) {
     }
 
     // we did not find the var; this is an error. 
-    assert(false);
+    throw UninitializedVariableException(varName + " is not initialized");
 }
 
 stvec_t SymbolTableBuilder::eval(Expression& exp) {
@@ -71,7 +72,7 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
 
 desc_t SymbolTableBuilder::markLocalRef(std::string varName, stptr_t child) {
     if (!child) {
-        assert (false); // undefined var  
+        throw UninitializedVariableException(varName + " is not initialized");
     }
 
     std::map<std::string, desc_t> frameVars = child->vars;
