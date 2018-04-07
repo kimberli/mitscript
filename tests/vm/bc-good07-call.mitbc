@@ -4,6 +4,45 @@ function
   [
     function
     {
+        functions = [],
+        constants = [],
+        parameter_count = 1,
+        local_vars = [],
+        local_ref_vars = [],
+        free_vars = [],
+        names = [],
+        instructions =
+        [
+        ]
+    },
+    function
+    {
+        functions = [],
+        constants = [],
+        parameter_count = 0,
+        local_vars = [],
+        local_ref_vars = [],
+        free_vars = [],
+        names = [],
+        instructions =
+        [
+        ]
+    },
+    function
+    {
+        functions = [],
+        constants = [],
+        parameter_count = 1,
+        local_vars = [],
+        local_ref_vars = [],
+        free_vars = [],
+        names = [],
+        instructions =
+        [
+        ]
+    },
+    function
+    {
       functions =[
         function
          {
@@ -59,10 +98,10 @@ function
     load_func 0
     alloc_closure 0
     store_global  0
-    load_func 0
+    load_func 1
     alloc_closure 0
     store_global  1
-    load_func 1
+    load_func 2
     alloc_closure 0
     store_global  2
 
