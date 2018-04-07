@@ -1,10 +1,10 @@
 #!/bin/bash
 ROOT=$(git rev-parse --show-toplevel)
 DIR=$ROOT/tests/vm/ms/
-PROG="${ROOT}/vm/mitscriptc"
+PROG="${ROOT}/vm/mitscript -s"
 TEST_FILE_EXT=".mit"
-TARGET_FILE_EXT=".mitbc"
-THIS_FILE="test_compiler.sh"
+TARGET_FILE_EXT=".output"
+THIS_FILE="test_entire_interpreter.sh"
 
 TOTAL=0
 SUCCESS=0
@@ -13,7 +13,7 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "Testing compiler from MITScript to bytecode...\n"
+echo -e "Testing interpreter from MITScript to program output...\n"
 
 run_test() {
     filename=$1
