@@ -11,12 +11,18 @@ SUCCESS=0
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
+HAS_EXT=true
 NC='\033[0m' # No Color
 
 echo -e "Testing compiler from MITScript to bytecode...\n"
 
 run_test() {
     filename=$1
+    if [[ !$filename == $TEST_FILE_EXT ]]; then
+        filename="$filename$TEST_FILE_EXT"
+        HAS_EXT=false
+    fi
+
     echo "==== TEST - $(basename $filename) ===="
     TOTAL=$((TOTAL+1))
     $PROG $filename > tmp.out
@@ -24,6 +30,9 @@ run_test() {
     if [ ! -e $target ]; then
         echo -e "Target file $target not found"
         echo -e "${RED}Test Failed${NC}\n"
+        echo "GOT:"
+        cat tmp.out
+        echo ""
         return 1
     else
         if diff tmp.out $target; then
@@ -43,17 +52,23 @@ if [ -n "$1" ]; then
         echo "running without a test name will run all tests"
         exit 0
     else
-        if [ ! -e "${1}${TEST_FILE_EXT}" ]; then
-            echo "Test file ${1}${TEST_FILE_EXT} not found"
+        if [ ! -e "${1}" ]; then
+            echo "Test file ${1} not found"
             exit 0
         fi
-        if run_test "${1}${TEST_FILE_EXT}"; then
+        if run_test $1; then
             rm tmp.out
         else
             echo -ne "${BLUE}IMPORTANT: if you believe the interpreter is in fact behaving correctly, do you want to update the ${TARGET_FILE_EXT} file? (Y/n):${NC} "
             read resp
             if [ "$resp" == "Y" ]; then
-                mv tmp.out "${1}${TARGET_FILE_EXT}"
+                if [ $HAS_EXT ]; then
+                    new_file=$(basename $1 $TEST_FILE_EXT)$TARGET_FILE_EXT
+                else
+                    new_file=${1}${TARGET_FILE_EXT}
+                fi
+                echo -e "\t${BLUE}writing new output to $new_file${NC}"
+                mv tmp.out $new_file
             else
                 rm tmp.out
             fi
