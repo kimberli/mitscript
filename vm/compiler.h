@@ -4,16 +4,14 @@
  * Defines a visitor that visits AST nodes generated in MITScript parsing
  * and outputs a root Function
  */
-# include "../parser/AST.h"
-# include "../parser/Visitor.h"
-# include "instructions.h"
-# include "types.h"
-# include "symboltable.h"
+#include "../parser/AST.h"
+#include "../parser/Visitor.h"
+#include "instructions.h"
+#include "types.h"
+#include "symboltable.h"
 
-# include <memory>
-# include <functional>
-
-#define LOG(msg) { if (true) std::cerr << msg << endl; }
+#include <memory>
+#include <functional>
 
 using namespace std;
 

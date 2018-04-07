@@ -13,8 +13,6 @@
 
 using namespace std;
 
-#define LOG(msg) { if (true) std::cerr << msg << endl; }
-
 class Interpreter {
     // class used to handle interpreter state
 private:

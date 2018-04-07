@@ -15,6 +15,8 @@
 #include <string>
 #include <vector>
 
+#define LOG(msg) { if (false) std::cerr << msg << endl; }
+
 class Frame;
 
 struct Value {
