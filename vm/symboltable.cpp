@@ -82,7 +82,7 @@ desc_t SymbolTableBuilder::markLocalRef(std::string varName, stptr_t child) {
         d->isReferenced = true;
         return d;
     } else {
-        markLocalRef(varName, child->parent);
+        return markLocalRef(varName, child->parent);
     }
 }
 
