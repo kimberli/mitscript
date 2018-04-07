@@ -43,7 +43,7 @@ void Interpreter::executeStep() {
     shared_ptr<Frame> frame = frames.top();
     Instruction& inst = frame->getCurrInstruction();
     int newOffset = 1;
-    DEBUG("executing instruction " + to_string(frame->instructionIndex));
+    LOG("executing instruction " + to_string(frame->instructionIndex));
     switch (inst.operation) {
         case Operation::LoadConst:
             {

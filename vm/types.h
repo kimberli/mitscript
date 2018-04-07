@@ -225,6 +225,7 @@ struct Closure: public Constant {
 };
 
 class NativeFunction : public Function {
+    // Abstract class for native functions
 public:
     NativeFunction(vector<shared_ptr<Function>> functions_,
             vector<shared_ptr<Constant>> constants_,
@@ -241,6 +242,7 @@ public:
 };
 
 class PrintNativeFunction : public NativeFunction {
+    // Class for print native function
 public:
     PrintNativeFunction(vector<shared_ptr<Function>> functions_,
             vector<shared_ptr<Constant>> constants_,
@@ -253,12 +255,11 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-
-
    shared_ptr<Constant> evalNativeFunction(Frame& currentFrame);
 };
 
 class InputNativeFunction : public NativeFunction {
+    // Class for input native function
 public:
     InputNativeFunction(vector<shared_ptr<Function>> functions_,
             vector<shared_ptr<Constant>> constants_,
@@ -271,11 +272,11 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-
     shared_ptr<Constant> evalNativeFunction(Frame& currentFrame);
 };
 
 class IntcastNativeFunction : public NativeFunction {
+    // Class for intcast native function
 public:
     IntcastNativeFunction(vector<shared_ptr<Function>> functions_,
             vector<shared_ptr<Constant>> constants_,
@@ -288,6 +289,5 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-
     shared_ptr<Constant> evalNativeFunction(Frame& currentFrame);
 };

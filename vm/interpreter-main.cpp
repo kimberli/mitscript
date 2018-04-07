@@ -61,7 +61,6 @@ int main(int argc, char** argv) {
             return 1;
         }
         BytecodeCompiler* bc = new BytecodeCompiler();
-        //output->accept(*bc);
         bc_output = bc->evaluate(*output);
     } else if (file_type == BYTECODE) {
         // parse bytecode, set bc_output
@@ -73,7 +72,7 @@ int main(int argc, char** argv) {
             cout << "Parsing bytecode failed" << endl;
             return 1;
         }
-        funcptr_t bc_output(output);
+        bc_output = make_shared<Function>(*output);
     }
   
     Interpreter* intp = new Interpreter(bc_output);
