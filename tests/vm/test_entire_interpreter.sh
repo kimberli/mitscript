@@ -16,11 +16,8 @@ NC='\033[0m' # No Color
 echo -e "Testing interpreter from MITScript to program output...\n"
 
 run_test() {
+    # filename is the filename of the test with the appropriate file ext
     filename=$1
-    if [[ !$filename == $TEST_FILE_EXT ]]; then
-        filename="$filename$TEST_FILE_EXT"
-        HAS_EXT=false
-    fi
 
     echo "==== TEST - $(basename $filename) ===="
     TOTAL=$((TOTAL+1))
@@ -51,21 +48,22 @@ if [ -n "$1" ]; then
         echo "running without a test name will run all tests"
         exit 0
     else
-        if [ ! -e "${1}" ]; then
-            echo "Test file ${1} not found"
+        filename=$1
+        if ! [[ $filename =~ $TEST_FILE_EXT ]]; then
+            echo "sub"
+            filename="$filename$TEST_FILE_EXT"
+        fi
+        if [ ! -e $filename ]; then
+            echo "Test file $filename not found"
             exit 0
         fi
-        if run_test $1; then
+        if run_test $filename; then
             rm tmp.out
         else
             echo -ne "${BLUE}IMPORTANT: if you believe the interpreter is in fact behaving correctly, do you want to update the ${TARGET_FILE_EXT} file? (Y/n):${NC} "
             read resp
             if [ "$resp" == "Y" ]; then
-                if [ $HAS_EXT ]; then
-                    new_file=$(basename $1 $TEST_FILE_EXT)$TARGET_FILE_EXT
-                else
-                    new_file=${1}${TARGET_FILE_EXT}
-                fi
+                new_file=$(basename $filename $TEST_FILE_EXT)$TARGET_FILE_EXT
                 echo -e "\t${BLUE}writing new output to $new_file${NC}"
                 mv tmp.out $new_file
             else
