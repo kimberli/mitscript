@@ -18,6 +18,10 @@ echo -e "Testing compiler from MITScript to bytecode...\n"
 run_test() {
     # filename is the filename of the test with the appropriate file ext
     filename=$1
+    
+    if [[ $filename =~ "parse" ]]; then
+        TARGET_FILE_EXT=".output"
+    fi
 
     echo "==== TEST - $(basename $filename) ===="
     TOTAL=$((TOTAL+1))
@@ -59,6 +63,10 @@ if [ -n "$1" ]; then
             count=$((count+1))
         done
         for filename in *${filepattern}; do
+            if [ ! -f $filename ]; then
+                echo "No files found"
+                exit 0
+            fi
             if run_test $filename; then
                 rm tmp.out
             else
