@@ -370,7 +370,7 @@ void BytecodeCompiler::visit(BinaryExpr& exp) {
 }
 
 void BytecodeCompiler::visit(UnaryExpr& exp) {
-    addInstructions(exp);
+    addInstructions(exp.expr);
     Operation op;
     optint_t noArg0;
     // choose the correct instruction
