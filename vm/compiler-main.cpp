@@ -37,9 +37,8 @@ int main(int argc, char** argv)
     }
 
     BytecodeCompiler* bc = new BytecodeCompiler();
-    output->accept(*bc);
 
-    std::shared_ptr<Function> rootFunc = bc->retFunc;
+    funcptr_t rootFunc = bc->evaluate(*output);
 
     PrettyPrinter printer;
 

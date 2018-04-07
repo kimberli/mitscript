@@ -8,6 +8,7 @@
 # include "../parser/Visitor.h"
 # include "instructions.h"
 # include "types.h"
+# include "symboltable.h"
 
 # include <memory>
 # include <functional>
@@ -32,6 +33,7 @@ private:
 
     // same as defined in lecture
     int allocConstant(constptr_t c);
+    int allocName(std::string name);
 
     // helper that takes in a constant pointer, takes care of allocation
     // and creating the appropriate bb
@@ -40,7 +42,13 @@ private:
     // takes care of writing assignments
     void addWriteInstructions(Expression* lhs);
 
+    // Symbol Table state
+    stvec_t symbolTables;
+    stptr_t curTable;
+    int stCounter = 0;
+
 public:
+    funcptr_t evaluate(Expression& exp); // entrypoint of the visitor
     funcptr_t retFunc;  // statements update this
 
     void visit(Block& exp) override;
