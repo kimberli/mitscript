@@ -161,12 +161,10 @@ void SymbolTableBuilder::visit(FunctionExpr& exp) {
     // for each var, add a map entry
     desc_t d;
     for (std::string var : local) {
-        std::cout << var << std::endl;
         d = std::make_shared<VarDesc>(VarDesc(LOCAL));
         funcTable->vars[var] = d;
     }
     for (std::string var : global) {
-        std::cout << var << std::endl;
         d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
         funcTable->vars[var] = d;
     }

@@ -273,7 +273,7 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
     // run
     exp.body.accept(*this);
     // if there is no explicit return statement, add a return None
-    if (retFunc->instructions.back().operation != Operation::Return) {
+    if (retFunc->instructions.size()>0 && retFunc->instructions.back().operation != Operation::Return) {
         // add a return None
         constptr_t n = std::make_shared<None>(None());
         loadConstant(n);
