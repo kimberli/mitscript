@@ -357,9 +357,8 @@ void BytecodeCompiler::visit(IndexExpr& exp) {
 void BytecodeCompiler::visit(Call& exp) {
     // load the closure
     addInstructions(exp.target);
-    // push the args in reverse order
-    for (vector<Expression*>::reverse_iterator i = exp.args.rbegin(); i != exp.args.rend(); ++i) {
-        Expression* arg = *i;
+    // push the args in order
+    for (Expression* arg : exp.args) {
         arg->accept(*this);
         InstructionList loadArg = retInstr;
         retFunc->instructions.insert(retFunc->instructions.end(), loadArg.begin(), loadArg.end());
