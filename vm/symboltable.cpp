@@ -6,24 +6,6 @@
 #include "symboltable.h" 
 #include "exception.h"
 
-desc_t SymbolTable::resolve(std::string varName, stptr_t table) {
-    // returns descriptor for a variable
-    
-    stptr_t curTable = table;
-
-    while (table) {
-        std::map<std::string, desc_t> frameVars = table->vars;
-        std::map<std::string, desc_t>::iterator it = frameVars.find(varName);
-        if (it != frameVars.end()) {
-            return it->second;
-        }
-        curTable = curTable->parent;
-    }
-
-    // we did not find the var; this is an error. 
-    throw UninitializedVariableException(varName + " is not initialized");
-}
-
 stvec_t SymbolTableBuilder::eval(Expression& exp) {
     // create global symbol table
     stptr_t globalTable = std::make_shared<SymbolTable>(SymbolTable());
@@ -31,8 +13,11 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
 
     // add names for the builtin functions
     globalTable->vars["print"] = std::make_shared<VarDesc>(VarDesc(GLOBAL));
+    allGlobals.insert("print");
     globalTable->vars["input"] = std::make_shared<VarDesc>(VarDesc(GLOBAL));
+    allGlobals.insert("input");
     globalTable->vars["intcast"] = std::make_shared<VarDesc>(VarDesc(GLOBAL));
+    allGlobals.insert("intcast");
 
     // install the global frame
     curTable = globalTable;
@@ -45,10 +30,21 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
     for (std::string var : local) {
         d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
         globalTable->vars[var] = d;
+        allGlobals.insert(var);
     }
     for (std::string var : global) {
         d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
         globalTable->vars[var] = d;
+        allGlobals.insert(var);
+    }
+    for (std::string var : referenced) {
+        // either it was declared global in another scope, or it's undefined.
+        if (allGlobals.find(var) != allGlobals.end()) { 
+            desc_t d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
+            globalTable->vars[var] = d;
+        } else {
+            throw UninitializedVariableException(var + " is not initialized");
+        }
     }
 
     // post-processing: for each frame, for each referenced var, 
@@ -72,6 +68,13 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
 
 desc_t SymbolTableBuilder::markLocalRef(std::string varName, stptr_t child) {
     if (!child) {
+        // we already looked the global frame
+        // there is another option: a global var was declared not in the 
+        // global frame, so check that. 
+        //if (allGlobals.find(varName) != allGlobals.end()) {
+        //    desc_t d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
+        //    return d;
+        //}
         throw UninitializedVariableException(varName + " is not initialized");
     }
 
@@ -94,6 +97,7 @@ void SymbolTableBuilder::visit(Block& exp) {
 
 void SymbolTableBuilder::visit(Global& exp) {
     global.insert(exp.name.name);
+    allGlobals.insert(exp.name.name);
 }
 
 void SymbolTableBuilder::visit(Assignment& exp) {

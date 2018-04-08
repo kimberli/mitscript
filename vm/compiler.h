@@ -4,6 +4,9 @@
  * Defines a visitor that visits AST nodes generated in MITScript parsing
  * and outputs a root Function
  */
+
+# pragma once
+
 #include "../parser/AST.h"
 #include "../parser/Visitor.h"
 #include "instructions.h"
@@ -12,6 +15,7 @@
 
 #include <memory>
 #include <functional>
+#include <cassert>
 
 using namespace std;
 

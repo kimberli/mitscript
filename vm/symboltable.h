@@ -10,9 +10,7 @@
 #include <string>
 #include <vector>
 #include <set>
-#include <algorithm>
 #include <iterator>
-#include <cassert>
 
 #include "../parser/Visitor.h" 
 #include "../parser/AST.h"
@@ -46,7 +44,6 @@ public:
     std::map<std::string, desc_t> vars;
     stptr_t parent;
     nameset_t referenced;
-    static desc_t resolve(std::string varName, stptr_t table);
 };
 
 class SymbolTableBuilder : public Visitor {
@@ -54,6 +51,7 @@ private:
     nameset_t global;
     nameset_t local;
     nameset_t referenced;
+    nameset_t allGlobals;
     stvec_t tables;
     stptr_t curTable;
 public:

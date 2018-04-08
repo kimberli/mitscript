@@ -6,9 +6,6 @@
  */
 #include "compiler.h"
 
-# include <memory>
-# include <functional>
-
 funcptr_t BytecodeCompiler::getFunction(AST_node& expr) {
     expr.accept(*this);
     return retFunc;

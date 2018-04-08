@@ -25,7 +25,7 @@ run_test() {
 
     echo "==== TEST - $(basename $filename) ===="
     TOTAL=$((TOTAL+1))
-    $PROG $filename 
+    $PROG $filename > tmp.txt
     if [[ $? -eq 139 ]]; then
         echo -e "${RED}Test Failed${NC}\n"
         return 1
