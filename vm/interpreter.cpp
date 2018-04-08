@@ -29,11 +29,9 @@ Interpreter::Interpreter(shared_ptr<Function> mainFunc) {
     InstructionList instructions;
 	vector<shared_ptr<Function>> frameFuncs;
 	// add native functions at the beginning of functions array
-	frameFuncs.push_back(make_shared<PrintNativeFunction>(*(new PrintNativeFunction(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions))));
-	frameFuncs.push_back(make_shared<InputNativeFunction>(*(new InputNativeFunction(functions_, constants_, 0, args0, local_reference_vars_, free_vars_, names_, instructions))));
-	frameFuncs.push_back(make_shared<IntcastNativeFunction>(*(new IntcastNativeFunction(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions))));
-	frameFuncs.insert(frameFuncs.end(), frame.get()->func.get()->functions_.begin(), frame.get()->func.get()->functions_.end());
-	frame.get()->func.get()->functions_ = frameFuncs;
+	frame.get()->func.get()->functions_[0] = make_shared<PrintNativeFunction>(*(new PrintNativeFunction(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions)));
+	frame.get()->func.get()->functions_[1] = make_shared<InputNativeFunction>(*(new InputNativeFunction(functions_, constants_, 0, args0, local_reference_vars_, free_vars_, names_, instructions)));
+	frame.get()->func.get()->functions_[2] = make_shared<IntcastNativeFunction>(*(new IntcastNativeFunction(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions)));
 };
 
 void Interpreter::executeStep() {
