@@ -4,6 +4,45 @@ function
 	[
 		function
 		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions =
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions =
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions =
+			[
+			]
+		},
+		function
+		{
 			functions =
 			[
 				function
@@ -15,7 +54,7 @@ function
 					local_ref_vars = [],
 					free_vars = [y],
 					names = [x],
-					instructions = 
+					instructions =
 					[
 						load_global	0
 						push_ref	0
@@ -33,7 +72,7 @@ function
 			local_ref_vars = [y],
 			free_vars = [],
 			names = [],
-			instructions = 
+			instructions =
 			[
 				load_func	0
 				push_ref	0
@@ -50,7 +89,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [x, f],
-	instructions = 
+	instructions =
 	[
 		load_const	1
 		store_global	0

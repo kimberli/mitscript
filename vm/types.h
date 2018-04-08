@@ -155,7 +155,7 @@ struct Function : public Constant {
     vector<shared_ptr<Constant>> constants_;
 
     // number of parameters to the function
-    uint32_t parameter_count_;
+    int32_t parameter_count_;
 
     // list of local variables
     // note: the first parameter_count_ variables are the function's parameters
@@ -178,7 +178,7 @@ struct Function : public Constant {
 
     Function(vector<shared_ptr<Function>> functions_,
             vector<shared_ptr<Constant>> constants_,
-            uint32_t parameter_count_,
+            int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
             vector<string> free_vars_,
@@ -229,7 +229,7 @@ class NativeFunction : public Function {
 public:
     NativeFunction(vector<shared_ptr<Function>> functions_,
             vector<shared_ptr<Constant>> constants_,
-            uint32_t parameter_count_,
+            int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
             vector<string> free_vars_,
@@ -246,7 +246,7 @@ class PrintNativeFunction : public NativeFunction {
 public:
     PrintNativeFunction(vector<shared_ptr<Function>> functions_,
             vector<shared_ptr<Constant>> constants_,
-            uint32_t parameter_count_,
+            int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
             vector<string> free_vars_,
@@ -263,7 +263,7 @@ class InputNativeFunction : public NativeFunction {
 public:
     InputNativeFunction(vector<shared_ptr<Function>> functions_,
             vector<shared_ptr<Constant>> constants_,
-            uint32_t parameter_count_,
+            int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
             vector<string> free_vars_,
@@ -280,7 +280,7 @@ class IntcastNativeFunction : public NativeFunction {
 public:
     IntcastNativeFunction(vector<shared_ptr<Function>> functions_,
             vector<shared_ptr<Constant>> constants_,
-            uint32_t parameter_count_,
+            int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
             vector<string> free_vars_,

@@ -165,7 +165,7 @@ Function:
   T_instructions '=' '[' InstructionList ']'
   '}'
 {
-	$$ = new Function{*$6, *$12, safe_unsigned_cast($17), *$22, *$28, *$34, *$40, *$46};
+	$$ = new Function{*$6, *$12, safe_cast($17), *$22, *$28, *$34, *$40, *$46};
 
     out = $$;
 }
@@ -274,32 +274,32 @@ Constant
 Instruction:
   T_load_const T_int
 {
-	$$ = new Instruction(Operation::LoadConst, safe_unsigned_cast($2));
+	$$ = new Instruction(Operation::LoadConst, safe_cast($2));
 }
 | T_load_func T_int
 {
-	$$ = new Instruction(Operation::LoadFunc, safe_unsigned_cast($2));
+	$$ = new Instruction(Operation::LoadFunc, safe_cast($2));
 }
 
 | T_load_local T_int
 {
-	$$ = new Instruction(Operation::LoadLocal, safe_unsigned_cast($2));
+	$$ = new Instruction(Operation::LoadLocal, safe_cast($2));
 }
 | T_store_local T_int
 {
-	$$ = new Instruction(Operation::StoreLocal, safe_unsigned_cast($2));
+	$$ = new Instruction(Operation::StoreLocal, safe_cast($2));
 }
 | T_load_global T_int
 {
-	$$ = new Instruction(Operation::LoadGlobal, safe_unsigned_cast($2));
+	$$ = new Instruction(Operation::LoadGlobal, safe_cast($2));
 }
 | T_store_global T_int
 {
-	$$ = new Instruction(Operation::StoreGlobal, safe_unsigned_cast($2));
+	$$ = new Instruction(Operation::StoreGlobal, safe_cast($2));
 }
 | T_push_ref T_int
 {
-	$$ = new Instruction(Operation::PushReference, safe_unsigned_cast($2));
+	$$ = new Instruction(Operation::PushReference, safe_cast($2));
 }
 | T_load_ref
 {
@@ -315,11 +315,11 @@ Instruction:
 }
 | T_field_load T_int
 {
-	$$ = new Instruction(Operation::FieldLoad, safe_unsigned_cast($2));
+	$$ = new Instruction(Operation::FieldLoad, safe_cast($2));
 }
 | T_field_store T_int
 {
-	$$ = new Instruction(Operation::FieldStore, safe_unsigned_cast($2));
+	$$ = new Instruction(Operation::FieldStore, safe_cast($2));
 }
 | T_index_load
 {
@@ -331,11 +331,11 @@ Instruction:
 }
 | T_alloc_closure T_int
 {
-	$$ = new Instruction(Operation::AllocClosure, safe_unsigned_cast($2));
+	$$ = new Instruction(Operation::AllocClosure, safe_cast($2));
 }
 | T_call T_int
 {
-	$$ = new Instruction(Operation::Call, safe_unsigned_cast($2));
+	$$ = new Instruction(Operation::Call, safe_cast($2));
 }
 | T_return
 {
