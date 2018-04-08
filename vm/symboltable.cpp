@@ -35,14 +35,14 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
     for (std::string var : global) {
         d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
         globalTable->vars[var] = d;
-        allGlobals.insert(var);
+    }
+    // takes care of global vars that were declared global in other scopes
+    for (std::string var : allGlobals) {
+        d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
+        globalTable->vars[var] = d;
     }
     for (std::string var : referenced) {
-        // either it was declared global in another scope, or it's undefined.
-        if (allGlobals.find(var) != allGlobals.end()) { 
-            desc_t d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
-            globalTable->vars[var] = d;
-        } else {
+        if (globalTable->vars.count(var) == 0) { // it's not defined 
             throw UninitializedVariableException(var + " is not initialized");
         }
     }
@@ -67,14 +67,11 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
 }
 
 desc_t SymbolTableBuilder::markLocalRef(std::string varName, stptr_t child) {
+    // function to perform reference chasing 
+    // given a pointer to a child and a varName, returns the appropriate
+    // VarDesc, while keeping track of metadata like which parent vars 
+    // were referenced
     if (!child) {
-        // we already looked the global frame
-        // there is another option: a global var was declared not in the 
-        // global frame, so check that. 
-        //if (allGlobals.find(varName) != allGlobals.end()) {
-        //    desc_t d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
-        //    return d;
-        //}
         throw UninitializedVariableException(varName + " is not initialized");
     }
 
@@ -85,7 +82,18 @@ desc_t SymbolTableBuilder::markLocalRef(std::string varName, stptr_t child) {
         d->isReferenced = true;
         return d;
     } else {
-        return markLocalRef(varName, child->parent);
+        // this means we are in a situation like childchild -> child ->parent
+        // where there is sthg referenced in childchild that is in a more
+        // distance ancestor, and we are currently at child. 
+        // If we find the var and it is NOT global, this frame 
+        // must contain a free variable to link childhild to parent
+        desc_t retD = markLocalRef(varName, child->parent);
+        if (retD->type != GLOBAL) {
+            desc_t d = std::make_shared<VarDesc>(VarDesc(FREE));
+            d->isReferenced = true;
+            child->vars[varName] = d;
+        }
+        return retD;
     }
 }
 

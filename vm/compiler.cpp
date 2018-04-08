@@ -308,7 +308,9 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
     // run
     exp.body.accept(*this);
     // if there is no explicit return statement, add a return None
-    if (retFunc->instructions.size()>0 && retFunc->instructions.back().operation != Operation::Return) {
+    bool noInstr = retFunc->instructions.size() == 0;
+    bool noRet = retFunc->instructions.size()>0 && retFunc->instructions.back().operation != Operation::Return;
+    if (noInstr || noRet) {
         // add a return None
         constptr_t n = std::make_shared<None>(None());
         loadConstant(n);
@@ -463,6 +465,7 @@ void BytecodeCompiler::visit(RecordExpr& exp) {
     retFunc->instructions.push_back(*alloc);
 
     for (std::map<Identifier*, Expression*>::iterator it = exp.record.begin(); it != exp.record.end(); it ++) {
+        std::cout << it->first->name << std::endl;
         // dup instruction 
         Instruction* dup = new Instruction(Operation::Dup, noArg0);
         retFunc->instructions.push_back(*dup);
