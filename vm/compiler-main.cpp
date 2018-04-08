@@ -38,11 +38,14 @@ int main(int argc, char** argv)
 
     BytecodeCompiler* bc = new BytecodeCompiler();
 
-    funcptr_t rootFunc = bc->evaluate(*output);
-
-    PrettyPrinter printer;
-
-    printer.print(*rootFunc, std::cout);
+    try {
+        funcptr_t rootFunc = bc->evaluate(*output);
+        PrettyPrinter printer;
+        printer.print(*rootFunc, std::cout);
+    } catch (InterpreterException& exception) {
+        cout << exception.toString() << endl;
+        return 1;
+    }
 
     return 0;
 }
