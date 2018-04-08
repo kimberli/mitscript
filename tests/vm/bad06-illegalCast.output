@@ -1,1 +1,1 @@
-IllegalCastException: cannot cast type StrValue to RecordValue
+IllegalCastException: cannot cast type String to Record
