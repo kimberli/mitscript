@@ -115,7 +115,6 @@ void BytecodeCompiler::loadBuiltIns() {
     // for each func, create a func /w right amount of args, 
     // add to the curent frame, 
     // then generate code to load globally
-    // print
     funcptr_t printFunc = std::make_shared<Function>(Function());
     printFunc->parameter_count_ = 1;
     int printIdx = retFunc->functions_.size();

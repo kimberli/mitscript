@@ -48,10 +48,13 @@ public:
 
 class SymbolTableBuilder : public Visitor {
 private: 
+    // per-function vars
     nameset_t global;
     nameset_t local;
     nameset_t referenced;
-    nameset_t allGlobals;
+
+    // persistent vars
+    nameset_t sneakyGlobals; // globals not declared in global frame
     stvec_t tables;
     stptr_t curTable;
 public:

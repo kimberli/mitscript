@@ -13,11 +13,8 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
 
     // add names for the builtin functions
     globalTable->vars["print"] = std::make_shared<VarDesc>(VarDesc(GLOBAL));
-    allGlobals.insert("print");
     globalTable->vars["input"] = std::make_shared<VarDesc>(VarDesc(GLOBAL));
-    allGlobals.insert("input");
     globalTable->vars["intcast"] = std::make_shared<VarDesc>(VarDesc(GLOBAL));
-    allGlobals.insert("intcast");
 
     // install the global frame
     curTable = globalTable;
@@ -30,14 +27,13 @@ stvec_t SymbolTableBuilder::eval(Expression& exp) {
     for (std::string var : local) {
         d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
         globalTable->vars[var] = d;
-        allGlobals.insert(var);
     }
     for (std::string var : global) {
         d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
         globalTable->vars[var] = d;
     }
     // takes care of global vars that were declared global in other scopes
-    for (std::string var : allGlobals) {
+    for (std::string var : sneakyGlobals) {
         d = std::make_shared<VarDesc>(VarDesc(GLOBAL));
         globalTable->vars[var] = d;
     }
@@ -105,7 +101,7 @@ void SymbolTableBuilder::visit(Block& exp) {
 
 void SymbolTableBuilder::visit(Global& exp) {
     global.insert(exp.name.name);
-    allGlobals.insert(exp.name.name);
+    sneakyGlobals.insert(exp.name.name);
 }
 
 void SymbolTableBuilder::visit(Assignment& exp) {
