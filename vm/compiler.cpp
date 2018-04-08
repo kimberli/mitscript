@@ -222,7 +222,9 @@ void BytecodeCompiler::visit(IfStatement& exp) {
 
     int startSize = retFunc->instructions.size();
     // add in the else block first
-    addInstructions(*exp.elseBlock);
+    if (exp.elseBlock) {
+        addInstructions(*(exp.elseBlock));
+    }
     int elseSize = retFunc->instructions.size();
     // calculate offset needed to skip else block and insert If instruction before it
     int offsetElse = elseSize - startSize;
