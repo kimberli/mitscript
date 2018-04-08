@@ -125,17 +125,6 @@ void BytecodeCompiler::loadBuiltIns() {
     retFunc->instructions.push_back(*allocPrint);
     addWriteVarInstructions("print");
     
-    // intcast
-    funcptr_t intcastFunc = std::make_shared<Function>(Function());
-    intcastFunc->parameter_count_ = 1;
-    int intcastIdx = retFunc->functions_.size();
-    retFunc->functions_.push_back(intcastFunc);
-    Instruction* loadIntcast = new Instruction(Operation::LoadFunc, optint_t(intcastIdx));
-    Instruction* allocIntcast = new Instruction(Operation::AllocClosure, optint_t(0));
-    retFunc->instructions.push_back(*loadIntcast);
-    retFunc->instructions.push_back(*allocIntcast);
-    addWriteVarInstructions("intcast");
-    
     // input 
     funcptr_t inputFunc = std::make_shared<Function>(Function());
     inputFunc->parameter_count_ = 0;
@@ -146,6 +135,17 @@ void BytecodeCompiler::loadBuiltIns() {
     retFunc->instructions.push_back(*loadInp);
     retFunc->instructions.push_back(*allocInp);
     addWriteVarInstructions("input");
+
+    // intcast
+    funcptr_t intcastFunc = std::make_shared<Function>(Function());
+    intcastFunc->parameter_count_ = 1;
+    int intcastIdx = retFunc->functions_.size();
+    retFunc->functions_.push_back(intcastFunc);
+    Instruction* loadIntcast = new Instruction(Operation::LoadFunc, optint_t(intcastIdx));
+    Instruction* allocIntcast = new Instruction(Operation::AllocClosure, optint_t(0));
+    retFunc->instructions.push_back(*loadIntcast);
+    retFunc->instructions.push_back(*allocIntcast);
+    addWriteVarInstructions("intcast");
 }
 
 funcptr_t BytecodeCompiler::evaluate(Expression& exp) {
