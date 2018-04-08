@@ -120,6 +120,9 @@ public:
     }
 
     std::shared_ptr<Value> opStackPeek() {
+        if (opStack.empty()) {
+            throw InsufficientStackException("peek at empty stack");
+        }
         return opStack.top();
     }
 
