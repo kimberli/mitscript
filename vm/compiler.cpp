@@ -313,15 +313,11 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
     // run
     exp.body.accept(*this);
     // if there is no explicit return statement, add a return None
-    bool noInstr = retFunc->instructions.size() == 0;
-    bool noRet = retFunc->instructions.size()>0 && retFunc->instructions.back().operation != Operation::Return;
-    if (noInstr || noRet) {
-        // add a return None
-        constptr_t n = std::make_shared<None>(None());
-        loadConstant(n);
-        Instruction* ret = new Instruction(Operation::Return, optint_t());
-        retFunc->instructions.push_back(*ret);
-    }
+    // add a return None
+    constptr_t n = std::make_shared<None>(None());
+    loadConstant(n);
+    Instruction* ret = new Instruction(Operation::Return, optint_t());
+    retFunc->instructions.push_back(*ret);
     // reinstall parent state
     retFunc = parentFunc;
     curTable = parentTable;
@@ -342,10 +338,10 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
         // can push a ref to a local ref var or a free var 
         if (d->type==LOCAL && d->isReferenced) {
             // instructions for ref variables
-            int i = d->refIndex;
+            i = d->refIndex;
         } else if (d->type==FREE) {
             // instructions for free variables
-            int i = d->index + retFunc->local_reference_vars_.size();
+            i = d->index + retFunc->local_reference_vars_.size();
         } else {
             // this is an error, there is probably a bug. 
             assert(false);
