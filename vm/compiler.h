@@ -49,6 +49,9 @@ private:
     // helper to load builtins to a scope
     void loadBuiltIns();
 
+    // helper to move funcs from st to function
+    void putVarInFunc(std::string& varName, stptr_t table, funcptr_t func);
+
     // Symbol Table state
     stvec_t symbolTables;
     stptr_t curTable;

@@ -255,6 +255,28 @@ void BytecodeCompiler::visit(Return& exp) {
     retFunc->instructions.push_back(*instr);
 }
 
+void BytecodeCompiler::putVarInFunc(std::string& varName, stptr_t table, funcptr_t func) {
+    desc_t d = table->vars.at(varName);
+    switch (d->type) {
+        case GLOBAL: 
+            d->index = func->names_.size();
+            func->names_.push_back(varName);
+            break;
+        case LOCAL: 
+            d->index = func->local_vars_.size();
+            func->local_vars_.push_back(varName);
+            if (d->isReferenced) {
+                d->refIndex = func->local_reference_vars_.size();
+                func->local_reference_vars_.push_back(varName);
+            }
+            break;
+        case FREE: 
+            d->index = func->free_vars_.size();
+            func->free_vars_.push_back(varName); 
+            break;
+    }
+}
+
 void BytecodeCompiler::visit(FunctionExpr& exp) {
     // 1) get the corresponding symbol table
     stCounter += 1; 
@@ -265,26 +287,19 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
     childFunc->parameter_count_ = exp.args.size();
 
     // load up childFunc with vars from symbol table
+    // start with args in order 
+    std::set<std::string> argNames;
+    for (Identifier* arg : exp.args) {
+        std::string argName = arg->name;
+        argNames.insert(argName);
+        putVarInFunc(argName, childTable, childFunc);
+    }
+
     for (std::map<std::string, desc_t>::iterator it = childTable->vars.begin(); it != childTable->vars.end(); it ++) {
         std::string varName = it->first;
-        desc_t d = it->second;
-        switch (d->type) {
-            case GLOBAL: 
-                d->index = childFunc->names_.size();
-                childFunc->names_.push_back(varName);
-                break;
-            case LOCAL: 
-                d->index = childFunc->local_vars_.size();
-                childFunc->local_vars_.push_back(varName);
-                if (d->isReferenced) {
-                    d->refIndex = childFunc->local_reference_vars_.size();
-                    childFunc->local_reference_vars_.push_back(varName);
-                }
-                break;
-            case FREE: 
-                d->index = childFunc->free_vars_.size();
-                childFunc->free_vars_.push_back(varName); 
-                break;
+        bool isArg = argNames.find(varName) != argNames.end();
+        if (!isArg) {
+            putVarInFunc(varName, childTable, childFunc);
         }
     }
 
