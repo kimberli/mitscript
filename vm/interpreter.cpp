@@ -88,7 +88,7 @@ void Interpreter::executeStep() {
         case Operation::PushReference:
             {
                 string refName = frame->getRefVarByIndex(inst.operand0.value());
-                auto valuePtr = make_shared<ValuePtr>(frame->getRefVar(refName));
+                auto valuePtr = frame->getRefVar(refName);
                 frame->opStackPush(valuePtr);
                 break;
             }
@@ -98,7 +98,7 @@ void Interpreter::executeStep() {
                 if (valuePtr == NULL) {
                     throw RuntimeException("cannot store non-value ptr as ref var");
                 }
-                frame->opStackPush(valuePtr);
+                frame->opStackPush(valuePtr.get()->ptr);
                 break;
             }
         case Operation::StoreReference:

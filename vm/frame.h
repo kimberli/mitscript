@@ -85,10 +85,13 @@ public:
     }
 
     string getRefVarByIndex(int index) {
-        if (index < 0 || index >= func->local_reference_vars_.size()) {
+        if (index < 0 || index >= (func->local_reference_vars_.size() + func->free_vars_.size())) {
             throw RuntimeException("name " + std::to_string(index) + " out of bounds");
         }
-        return func->local_reference_vars_[index];
+		if (index < func->local_reference_vars_.size()) {
+        	return func->local_reference_vars_[index];
+		}
+		return func->free_vars_[index - func->local_reference_vars_.size()];
     }
 
     // var map helpers
@@ -108,6 +111,7 @@ public:
 
     void setLocalVar(string name, shared_ptr<Constant> val) {
         localVars[name] = val;
+		localRefs[name] = make_shared<ValuePtr>(localVars[name]);
     }
 
     void setRefVar(string name, shared_ptr<ValuePtr> val) {
