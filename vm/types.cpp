@@ -79,24 +79,28 @@ string Record::toString() {
 }
 bool Record::equals(shared_ptr<Value> other) {
     // TODO
+    throw RuntimeException("unimplemented");
 }
 
 /* Function */
 const string Function::typeS = "Function";
 string Function::toString() {
+    // TODO: do we ever use this?
     return "FUNCTION";
 }
 bool Function::equals(shared_ptr<Value> other) {
     // TODO
+    throw RuntimeException("unimplemented");
 }
 
 /* Closure */
 const string Closure::typeS = "Closure";
 string Closure::toString() {
-    throw RuntimeException("can't cast Closure to String");
+    return "FUNCTION";
 }
 bool Closure::equals(shared_ptr<Value> other) {
-    throw RuntimeException("can't call equals on Closure");
+    // TODO
+    throw RuntimeException("unimplemented");
 }
 
 /* Native functions */
