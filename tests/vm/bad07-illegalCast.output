@@ -1,1 +1,1 @@
-IllegalCastException: cannot cast type StrValue to BoolValue
+IllegalCastException: cannot cast type String to Boolean
