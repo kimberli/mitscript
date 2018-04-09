@@ -80,8 +80,8 @@ function
 		alloc_closure	0
 		store_global	3
 		load_global	3
-		load_const	1
 		load_const	0
+		load_const	1
 		call	2
 	]
 }

@@ -9,6 +9,7 @@
 #include "instructions.h"
 #include "interpreter.h"
 #include "types.h"
+#include <algorithm>
 #include <stack>
 
 using namespace std;
@@ -191,6 +192,7 @@ void Interpreter::executeStep() {
                     }
                     argsList.push_back(value);
                 }
+				std::reverse(argsList.begin(), argsList.end());
                 auto clos = dynamic_pointer_cast<Closure>(frame->opStackPop());
                 if (clos == NULL) {
                     throw RuntimeException("expected Closure on operand stack for function call");
