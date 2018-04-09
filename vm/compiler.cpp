@@ -239,10 +239,11 @@ void BytecodeCompiler::visit(WhileLoop& exp) {
     // add in the body instructions
     addInstructions(exp.body);
     int bodySize = retFunc->instructions.size();
-    int offsetBody = bodySize - startSize;
+    int offsetBody = bodySize - startSize;  
     // insert goto before the body
     InstructionList::iterator bodyPos = retFunc->instructions.begin() + startSize;
-    Instruction* gotoInstr = new Instruction(Operation::Goto, offsetBody);
+    // w/o the +1, you end up on the last line of the body
+    Instruction* gotoInstr = new Instruction(Operation::Goto, offsetBody + 1);
     retFunc->instructions.insert(bodyPos, *gotoInstr);
     // insert if after the body
     Instruction* ifInstr = new Instruction(Operation::If, -offsetBody);
