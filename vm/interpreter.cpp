@@ -209,6 +209,10 @@ void Interpreter::executeStep() {
                     string free_var = clos->func->free_vars_[i];
                     localRefs[free_var] = clos->refs[i];
                 }
+				for (int i = 0; i < clos->func->local_vars_.size(); i++) {
+                    string arg = clos->func->local_vars_[i];
+					localVars[arg] = make_shared<None>();
+				}
                 for (int i = 0; i < numArgs; i++) {
                     string arg = clos->func->local_vars_[i];
                     localVars[arg] = argsList[i];
