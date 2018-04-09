@@ -1,2 +1,2 @@
 This should print
-IllegalCastException: Uninitialized to Bool
+IllegalCastException: cannot cast type Integer to Boolean
