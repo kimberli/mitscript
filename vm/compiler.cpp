@@ -212,14 +212,15 @@ void BytecodeCompiler::visit(IfStatement& exp) {
     }
     int elseSize = retFunc->instructions.size();
     // calculate offset needed to skip else block and insert If instruction before it
+
+    // increment the count to the new end of the else block
+    elseSize++;
     int offsetElse = elseSize - startSize;
     InstructionList::iterator elsePos = retFunc->instructions.begin() + startSize;
     Instruction* ifInstr = new Instruction(Operation::If, offsetElse);
     retFunc->instructions.insert(elsePos, *ifInstr);
     LOG("added " + to_string(offsetElse) + " else instructions");
 
-    // increment the count to the new end of the else block
-    elseSize++;
     // add in the then block
     addInstructions(exp.thenBlock);
     int thenSize = retFunc->instructions.size();
@@ -453,7 +454,6 @@ void BytecodeCompiler::visit(RecordExpr& exp) {
     retFunc->instructions.push_back(*alloc);
 
     for (std::map<Identifier*, Expression*>::iterator it = exp.record.begin(); it != exp.record.end(); it ++) {
-        std::cout << it->first->name << std::endl;
         // dup instruction 
         Instruction* dup = new Instruction(Operation::Dup, noArg0);
         retFunc->instructions.push_back(*dup);
