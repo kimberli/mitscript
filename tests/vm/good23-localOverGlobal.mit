@@ -1,0 +1,8 @@
+x = "global";
+
+f = fun() {
+    x = "local";
+    print(x);
+};
+
+f();

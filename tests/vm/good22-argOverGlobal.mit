@@ -1,0 +1,5 @@
+x = "global";
+f = fun(x) {
+    print(x);
+};
+f("arg");

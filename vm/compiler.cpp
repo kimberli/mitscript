@@ -234,19 +234,25 @@ void BytecodeCompiler::visit(IfStatement& exp) {
 
 void BytecodeCompiler::visit(WhileLoop& exp) {
     // add instructions for evaluating the condition
-    addInstructions(exp.condition);
-    int startSize = retFunc->instructions.size();
-    // add in the body instructions
+    int startsize = retFunc->instructions.size();
+     
+    // add the body 
     addInstructions(exp.body);
-    int bodySize = retFunc->instructions.size();
-    int offsetBody = bodySize - startSize;  
-    // insert goto before the body
-    InstructionList::iterator bodyPos = retFunc->instructions.begin() + startSize;
-    // w/o the +1, you end up on the last line of the body
-    Instruction* gotoInstr = new Instruction(Operation::Goto, offsetBody + 1);
-    retFunc->instructions.insert(bodyPos, *gotoInstr);
-    // insert if after the body
-    Instruction* ifInstr = new Instruction(Operation::If, -offsetBody);
+    int endBody = retFunc->instructions.size();
+
+    // insert the goto to skip to the condition 
+    int bodySize = endBody - startsize;
+    InstructionList::iterator startPos = retFunc->instructions.begin() + startsize; 
+    Instruction* goInstr = new Instruction(Operation::Goto, optint_t(bodySize + 1));
+    retFunc->instructions.insert(startPos, *goInstr);
+
+     // add the condition 
+    addInstructions(exp.condition);
+    int endCondition = retFunc->instructions.size();
+    
+    int conditionAndBodySize = endCondition-startsize-1; // -1 for the goto
+    // add the if which takes you back to the start of the body
+    Instruction* ifInstr = new Instruction(Operation::If, optint_t(-conditionAndBodySize));
     retFunc->instructions.push_back(*ifInstr);
 }
 

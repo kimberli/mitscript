@@ -1,0 +1,7 @@
+f = fun() {
+    if (false) {
+        x = 1;
+    }
+    print(x);
+};
+f();
