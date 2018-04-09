@@ -94,19 +94,8 @@ void BytecodeCompiler::addWriteVarInstructions(std::string varName) {
             return;
         }
         case FREE: {
-            // recall d.index is an index into the free vars, so we have to 
-            // jump over local ref vars. 
-            optint_t i = optint_t(d->index + retFunc->local_reference_vars_.size());
-            optint_t noArg0;
-            Instruction* pushRefInstr = new Instruction(Operation::PushReference, i);
-            // the stack is now S :: value :: ref, but we need 
-            // S :: ref :: value, so add a swap instr. 
-            Instruction* swapInstr = new Instruction(Operation::Swap, noArg0);
-            Instruction* storeRefInstr = new Instruction(Operation::StoreReference, noArg0);
-            retFunc->instructions.push_back(*pushRefInstr);
-            retFunc->instructions.push_back(*swapInstr);
-            retFunc->instructions.push_back(*storeRefInstr);
-            return;
+            // you cannot write to free vars
+            throw UninitializedVariableException(varName + " is not initialized");
         }
     }
 }
