@@ -217,7 +217,7 @@ void BytecodeCompiler::visit(IfStatement& exp) {
     elseSize++;
     int offsetElse = elseSize - startSize;
     InstructionList::iterator elsePos = retFunc->instructions.begin() + startSize;
-    Instruction* ifInstr = new Instruction(Operation::If, offsetElse);
+    Instruction* ifInstr = new Instruction(Operation::If, offsetElse + 1);
     retFunc->instructions.insert(elsePos, *ifInstr);
     LOG("added " + to_string(offsetElse) + " else instructions");
 
@@ -227,7 +227,7 @@ void BytecodeCompiler::visit(IfStatement& exp) {
     int offsetThen = thenSize - elseSize;
     // calculate offset needed to skip then block and insert Goto instruction before it
     InstructionList::iterator thenPos = retFunc->instructions.begin() + elseSize;
-    Instruction* gotoInstr = new Instruction(Operation::Goto, offsetThen);
+    Instruction* gotoInstr = new Instruction(Operation::Goto, offsetThen + 1);
     retFunc->instructions.insert(thenPos, *gotoInstr);
     LOG("added " + to_string(offsetThen) + " then instructions");
 }
