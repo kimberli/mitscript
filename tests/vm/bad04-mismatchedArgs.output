@@ -1,1 +1,1 @@
-RuntimeException: mismatched arguments in function call
+RuntimeException: expected 2 arguments, got 1
