@@ -65,7 +65,7 @@ void Interpreter::executeStep() {
                 string localName = frame->getLocalVarByIndex(inst.operand0.value());
                 auto value = dynamic_pointer_cast<Constant>(frame->opStackPop());
                 if (value == NULL) {
-                    throw RuntimeException("cannot store non-constant value as local var");
+                    throw RuntimeException("expected Constant on the stack for StoreLocal");
                 }
                 frame->setLocalVar(localName, value);
                 break;
@@ -81,7 +81,7 @@ void Interpreter::executeStep() {
                 string globalName = frame->getNameByIndex(inst.operand0.value());
                 auto value = dynamic_pointer_cast<Constant>(frame->opStackPop());
                 if (value == NULL) {
-                    throw RuntimeException("cannot store non-constant value as global var");
+                    throw RuntimeException("expected Constant on the stack for StoreGlobal");
                 }
                 globalFrame->setLocalVar(globalName, value);
                 break;
@@ -97,7 +97,7 @@ void Interpreter::executeStep() {
             {
                 auto valuePtr = dynamic_pointer_cast<ValuePtr>(frame->opStackPop());
                 if (valuePtr == NULL) {
-                    throw RuntimeException("cannot store non-value ptr as ref var");
+                    throw RuntimeException("expected ValuePtr on the stack for LoadReference");
                 }
                 frame->opStackPush(valuePtr.get()->ptr);
                 break;
@@ -107,7 +107,7 @@ void Interpreter::executeStep() {
                 auto value = frame->opStackPop();
                 auto valuePtr = dynamic_pointer_cast<ValuePtr>(frame->opStackPop());
                 if (valuePtr == NULL) {
-                    throw RuntimeException("cannot store non-value ptr as ref var");
+                    throw RuntimeException("expected ValuePtr on the stack for StoreReference");
                 }
 				*valuePtr->ptr = *value;
                 break;
@@ -119,8 +119,7 @@ void Interpreter::executeStep() {
             }
         case Operation::FieldLoad:
             {
-                // TODO: check for local var refs (not allowed)
-				auto record = frame->opStackPop()->cast<Record>();
+				Record* record = frame->opStackPop()->cast<Record>();
 				string field = frame->getNameByIndex(inst.operand0.value());
                 if (record->value.count(field) == 0) {
                     record->value[field] = make_shared<None>();
@@ -130,18 +129,19 @@ void Interpreter::executeStep() {
             }
         case Operation::FieldStore:
             {
-                // TODO: check for local var refs (not allowed)
-				auto value = frame->opStackPop();
-				auto record = frame->opStackPop()->cast<Record>()->value;
+				auto value = dynamic_pointer_cast<Constant>(frame->opStackPop());
+                if (value == NULL) {
+                    throw RuntimeException("expected Constant on the stack for FieldStore");
+                }
+				Record* record = frame->opStackPop()->cast<Record>();
 				string field = frame->getNameByIndex(inst.operand0.value());
-				record[field] = value;
+				record->value[field] = value;
                 break;
             }
         case Operation::IndexLoad:
             {
-                // TODO: check for local var refs (not allowed)
-				string index = frame->opStackPop().get()->toString();
-				auto record = frame->opStackPop()->cast<Record>();
+				string index = frame->opStackPop()->toString();
+				Record* record = frame->opStackPop()->cast<Record>();
                 if (record->value.count(index) == 0) {
                     record->value[index] = make_shared<None>();
                 }
@@ -150,11 +150,10 @@ void Interpreter::executeStep() {
             }
         case Operation::IndexStore:
             {
-                // TODO: check for local var refs (not allowed)
-				string index = frame->opStackPop().get()->toString();
+				string index = frame->opStackPop()->toString();
 				auto value = frame->opStackPop();
-				auto record = frame->opStackPop()->cast<Record>()->value;
-				record[index] = value;
+				Record* record = frame->opStackPop()->cast<Record>();
+				record->value[index] = value;
                 break;
             }
         case Operation::AllocClosure:
