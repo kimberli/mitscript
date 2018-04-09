@@ -1,0 +1,5 @@
+r = {x: 1;};
+r.y = 2;
+
+print(r.x);
+print(r.y);
