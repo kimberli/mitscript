@@ -1,0 +1,9 @@
+Cons = fun() {
+    this = {
+        val: 1;
+        to_string: fun() {print(this.val);};    
+    };
+};
+
+Cons();
+print("Success!");
