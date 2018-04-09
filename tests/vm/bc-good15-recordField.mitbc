@@ -42,12 +42,12 @@ function
             ]
         }
     ],
-    constants = [1, 2],
+    constants = [-1, true, "blah blah 123xyz", None],
     parameter_count = 0,
-    local_vars = [x, y, z],
+    local_vars = [x, y],
     local_ref_vars = [],
     free_vars = [],
-    names = [input, intcast, print],
+    names = [input, intcast, print, field1, Field2],
     instructions =
     [
       load_func 0
@@ -58,13 +58,31 @@ function
       store_global  0
       load_func 2
       alloc_closure 0
-      store_global 1
+      store_global  1
+
+      alloc_record
+      store_local 0
+
+      load_local 0
+      load_const 0
+      field_store 3
+
+      load_local 0
+      load_const 2
+      field_store 4
 
       load_global 2
-      load_const 1
+      load_local 0
       call 1
+
       load_global 2
-      load_const 0
+      load_local 0
+      field_load 3
+      call 1
+
+      load_global 2
+      load_local 0
+      field_load 4
       call 1
     ]
 }

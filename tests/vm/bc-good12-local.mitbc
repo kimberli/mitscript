@@ -42,7 +42,7 @@ function
             ]
         }
     ],
-    constants = [1, 2],
+    constants = [-1, true, "blah blah 123xyz", None],
     parameter_count = 0,
     local_vars = [x, y, z],
     local_ref_vars = [],
@@ -58,13 +58,30 @@ function
       store_global  0
       load_func 2
       alloc_closure 0
-      store_global 1
+      store_global  1
+
+      load_global 2
+      load_const 0
+      store_local 0
+      load_local 0
+      call 1
 
       load_global 2
       load_const 1
+      store_local 0
+      load_local 0
       call 1
+
       load_global 2
-      load_const 0
+      load_const 2
+      store_local 2
+      load_local 2
+      call 1
+
+      load_global 2
+      load_const 3
+      store_local 1
+      load_local 1
       call 1
     ]
 }
