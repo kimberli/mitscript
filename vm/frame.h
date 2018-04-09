@@ -36,7 +36,8 @@ public:
 
     Frame(std::shared_ptr<Function> func): func(func) {};
     Frame(std::shared_ptr<Function> func, LocalVarMap& localVars, LocalRefMap& localRefs):
-        func(func), localVars(localVars), localRefs(localRefs) {};
+        func(func), localVars(localVars), localRefs(localRefs) {
+	};
 
     // instruction helpers
     int numInstructions() {

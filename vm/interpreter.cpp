@@ -212,6 +212,7 @@ void Interpreter::executeStep() {
                 for (int i = 0; i < numArgs; i++) {
                     string arg = clos->func->local_vars_[i];
                     localVars[arg] = argsList[i];
+					localRefs[arg] = make_shared<ValuePtr>(localVars[arg]);
                 }
                 shared_ptr<Frame> newFrame = make_shared<Frame>(Frame(clos->func, localVars, localRefs));
 				auto nativeFunc = dynamic_cast<NativeFunction*>(clos->func.get());
