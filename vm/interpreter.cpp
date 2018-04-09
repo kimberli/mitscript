@@ -241,15 +241,6 @@ void Interpreter::executeStep() {
             {
                 auto right = frame->opStackPop();
                 auto left = frame->opStackPop();
-                // try adding integers if left is an int
-                auto leftInt = dynamic_cast<Integer*>(left.get());
-                if (leftInt != NULL) {
-                    int leftI = leftInt->value;
-                    int rightI = right->cast<Integer>()->value;
-                    frame->opStackPush(
-                        make_shared<Integer>(leftI + rightI));
-                    break;
-                }
                 // try adding strings if left or right is a string
                 auto leftStr = dynamic_cast<String*>(left.get());
                 if (leftStr != NULL) {
@@ -261,6 +252,15 @@ void Interpreter::executeStep() {
                 if (rightStr != NULL) {
                     frame->opStackPush(
                         make_shared<String>(left->toString() + rightStr->value));
+                    break;
+                }
+                // try adding integers if left is an int
+                auto leftInt = dynamic_cast<Integer*>(left.get());
+                if (leftInt != NULL) {
+                    int leftI = leftInt->value;
+                    int rightI = right->cast<Integer>()->value;
+                    frame->opStackPush(
+                        make_shared<Integer>(leftI + rightI));
                     break;
                 }
                 break;
