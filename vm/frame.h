@@ -111,7 +111,12 @@ public:
     }
 
     void setLocalVar(string name, shared_ptr<Constant> val) {
-        localVars[name] = val;
+        if (localRefs.count(name) != 0) {
+			localVars[name] = val;
+			*(localRefs[name].get()->ptr) = *(val.get());
+		} else {
+			localVars[name] = val;
+		}
 		localRefs[name] = make_shared<ValuePtr>(localVars[name]);
     }
 
