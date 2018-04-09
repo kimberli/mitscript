@@ -382,7 +382,7 @@ void Interpreter::executeStep() {
             throw RuntimeException("should never get here - invalid instruction");
     }
 
-    if (frame->instructionIndex + newOffset == globalFrame->numInstructions()) {
+    if (frames.size() == 1 && frame->instructionIndex + newOffset == frame->numInstructions()) {
         // last instruction of the whole program
         finished = true;
         return;
