@@ -165,13 +165,13 @@ void Interpreter::executeStep() {
                     auto top = frame->opStackPop();
                     auto value = dynamic_pointer_cast<ValuePtr>(top);
                     if (value == NULL) {
-                        throw RuntimeException("free variable in closure alloc is not a reference");
+                        throw RuntimeException("expected ValuePtr on the stack for AllocClosure");
                     }
                     refList.push_back(value);
                 }
                 auto func = dynamic_pointer_cast<Function>(frame->opStackPop());
                 if (func == NULL) {
-                    throw RuntimeException("expected Function on operand stack for closure alloc");
+                    throw RuntimeException("expected Function on the stack for AllocClosure");
                 }
 
                 // push new closure onto the stack
@@ -187,7 +187,7 @@ void Interpreter::executeStep() {
                     auto top = frame->opStackPop();
                     auto value = dynamic_pointer_cast<Constant>(top);
                     if (value == NULL) {
-                        throw RuntimeException("call argument is not a constant");
+                        throw RuntimeException("expected Constant on the stack for Call");
                     }
                     argsList.push_back(value);
                 }
@@ -198,7 +198,7 @@ void Interpreter::executeStep() {
                 }
 
                 if (numArgs != clos->func->parameter_count_) {
-                    throw RuntimeException("mismatched arguments in function call");
+                    throw RuntimeException("expected " + to_string(clos->func->parameter_count_) + " arguments, got " + to_string(numArgs));
                 }
 
                 // process local refs and local vars
@@ -351,7 +351,6 @@ void Interpreter::executeStep() {
             }
         case Operation::Goto:
             {
-                // TODO: throw an exception when trying to go to nonexistent last index of instructions?
                 newOffset = inst.operand0.value();
                 break;
             }
