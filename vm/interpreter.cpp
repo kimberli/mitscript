@@ -256,6 +256,10 @@ void Interpreter::executeStep() {
                 // take return val from top of stack & discard current frame
                 auto returnVal = frame->opStackPeek();
                 frames.pop();
+                if (frames.size() == 0) {
+                    finished = true;
+                    return;
+                }
                 frame = frames.top();
                 // push return val to top of new parent frame
                 frame->opStackPush(returnVal);
