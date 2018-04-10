@@ -58,10 +58,10 @@ string Frame::getRefVarByIndex(int index) {
 
 // var map helpers
 shared_ptr<Constant> Frame::getLocalVar(string name) {
-    if (localVars.count(name) == 0) {
+    if (localRefs.count(name) == 0) {
         throw UninitializedVariableException(name + " is not initialized");
     }
-    return localVars[name];
+    return localRefs[name].get()->ptr;
 }
 
 shared_ptr<ValuePtr> Frame::getRefVar(string name) {
@@ -73,12 +73,11 @@ shared_ptr<ValuePtr> Frame::getRefVar(string name) {
 
 void Frame::setLocalVar(string name, shared_ptr<Constant> val) {
     if (localRefs.count(name) != 0) {
-        localVars[name] = val;
-        *(localRefs[name].get()->ptr) = *(val.get());
+        localRefs[name]->ptr.reset(val.get());
     } else {
         localVars[name] = val;
+        localRefs[name] = make_shared<ValuePtr>(localVars[name]);
     }
-    localRefs[name] = make_shared<ValuePtr>(localVars[name]);
 }
 
 void Frame::setRefVar(string name, shared_ptr<ValuePtr> val) {
