@@ -1,0 +1,3873 @@
+, FlagSet::empty() // ADC AL, imm8
+, FlagSet::empty() // ADC AX, imm16
+, FlagSet::empty() // ADC EAX, imm32
+, FlagSet::empty() // ADC m16, imm16
+, FlagSet::empty() // ADC m16, imm8
+, FlagSet::empty() // ADC m16, r16
+, FlagSet::empty() // ADC m32, imm32
+, FlagSet::empty() // ADC m32, imm8
+, FlagSet::empty() // ADC m32, r32
+, FlagSet::empty() // ADC m64, imm32
+, FlagSet::empty() // ADC m64, imm8
+, FlagSet::empty() // ADC m64, r64
+, FlagSet::empty() // ADC m8, imm8
+, FlagSet::empty() // ADC m8, r8
+, FlagSet::empty() // ADC m8, rh
+, FlagSet::empty() // ADC r16, imm16
+, FlagSet::empty() // ADC r16, imm8
+, FlagSet::empty() // ADC r16, m16
+, FlagSet::empty() // ADC r16, r16
+, FlagSet::empty() // ADC r16, r16
+, FlagSet::empty() // ADC r32, imm32
+, FlagSet::empty() // ADC r32, imm8
+, FlagSet::empty() // ADC r32, m32
+, FlagSet::empty() // ADC r32, r32
+, FlagSet::empty() // ADC r32, r32
+, FlagSet::empty() // ADC r64, imm32
+, FlagSet::empty() // ADC r64, imm8
+, FlagSet::empty() // ADC r64, m64
+, FlagSet::empty() // ADC r64, r64
+, FlagSet::empty() // ADC r64, r64
+, FlagSet::empty() // ADC r8, imm8
+, FlagSet::empty() // ADC r8, m8
+, FlagSet::empty() // ADC r8, r8
+, FlagSet::empty() // ADC r8, r8
+, FlagSet::empty() // ADC r8, rh
+, FlagSet::empty() // ADC r8, rh
+, FlagSet::empty() // ADC RAX, imm32
+, FlagSet::empty() // ADC rh, imm8
+, FlagSet::empty() // ADC rh, m8
+, FlagSet::empty() // ADC rh, r8
+, FlagSet::empty() // ADC rh, r8
+, FlagSet::empty() // ADC rh, rh
+, FlagSet::empty() // ADC rh, rh
+, FlagSet::empty() // ADD AL, imm8
+, FlagSet::empty() // ADD AX, imm16
+, FlagSet::empty() // ADD EAX, imm32
+, FlagSet::empty() // ADD m16, imm16
+, FlagSet::empty() // ADD m16, imm8
+, FlagSet::empty() // ADD m16, r16
+, FlagSet::empty() // ADD m32, imm32
+, FlagSet::empty() // ADD m32, imm8
+, FlagSet::empty() // ADD m32, r32
+, FlagSet::empty() // ADD m64, imm32
+, FlagSet::empty() // ADD m64, imm8
+, FlagSet::empty() // ADD m64, r64
+, FlagSet::empty() // ADD m8, imm8
+, FlagSet::empty() // ADD m8, r8
+, FlagSet::empty() // ADD m8, rh
+, FlagSet::empty() // ADD r16, imm16
+, FlagSet::empty() // ADD r16, imm8
+, FlagSet::empty() // ADD r16, m16
+, FlagSet::empty() // ADD r16, r16
+, FlagSet::empty() // ADD r16, r16
+, FlagSet::empty() // ADD r32, imm32
+, FlagSet::empty() // ADD r32, imm8
+, FlagSet::empty() // ADD r32, m32
+, FlagSet::empty() // ADD r32, r32
+, FlagSet::empty() // ADD r32, r32
+, FlagSet::empty() // ADD r64, imm32
+, FlagSet::empty() // ADD r64, imm8
+, FlagSet::empty() // ADD r64, m64
+, FlagSet::empty() // ADD r64, r64
+, FlagSet::empty() // ADD r64, r64
+, FlagSet::empty() // ADD r8, imm8
+, FlagSet::empty() // ADD r8, m8
+, FlagSet::empty() // ADD r8, r8
+, FlagSet::empty() // ADD r8, r8
+, FlagSet::empty() // ADD r8, rh
+, FlagSet::empty() // ADD r8, rh
+, FlagSet::empty() // ADD RAX, imm32
+, FlagSet::empty() // ADD rh, imm8
+, FlagSet::empty() // ADD rh, m8
+, FlagSet::empty() // ADD rh, r8
+, FlagSet::empty() // ADD rh, r8
+, FlagSet::empty() // ADD rh, rh
+, FlagSet::empty() // ADD rh, rh
+, FlagSet::empty()+Flag::SSE2 // ADDPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // ADDPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // ADDPS xmm, m128
+, FlagSet::empty()+Flag::SSE // ADDPS xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // ADDSD xmm, m64
+, FlagSet::empty()+Flag::SSE2 // ADDSD xmm, xmm
+, FlagSet::empty()+Flag::SSE // ADDSS xmm, m32
+, FlagSet::empty()+Flag::SSE // ADDSS xmm, xmm
+, FlagSet::empty()+Flag::PNI // ADDSUBPD xmm, m128
+, FlagSet::empty()+Flag::PNI // ADDSUBPD xmm, xmm
+, FlagSet::empty()+Flag::PNI // ADDSUBPS xmm, m128
+, FlagSet::empty()+Flag::PNI // ADDSUBPS xmm, xmm
+, FlagSet::empty()+Flag::AES // AESDEC xmm, m128
+, FlagSet::empty()+Flag::AES // AESDEC xmm, xmm
+, FlagSet::empty()+Flag::AES // AESDECLAST xmm, m128
+, FlagSet::empty()+Flag::AES // AESDECLAST xmm, xmm
+, FlagSet::empty()+Flag::AES // AESENC xmm, m128
+, FlagSet::empty()+Flag::AES // AESENC xmm, xmm
+, FlagSet::empty()+Flag::AES // AESENCLAST xmm, m128
+, FlagSet::empty()+Flag::AES // AESENCLAST xmm, xmm
+, FlagSet::empty()+Flag::AES // AESIMC xmm, m128
+, FlagSet::empty()+Flag::AES // AESIMC xmm, xmm
+, FlagSet::empty()+Flag::AES // AESKEYGENASSIST xmm, m128, imm8
+, FlagSet::empty()+Flag::AES // AESKEYGENASSIST xmm, xmm, imm8
+, FlagSet::empty() // AND AL, imm8
+, FlagSet::empty() // AND AX, imm16
+, FlagSet::empty() // AND EAX, imm32
+, FlagSet::empty() // AND m16, imm16
+, FlagSet::empty() // AND m16, imm8
+, FlagSet::empty() // AND m16, r16
+, FlagSet::empty() // AND m32, imm32
+, FlagSet::empty() // AND m32, imm8
+, FlagSet::empty() // AND m32, r32
+, FlagSet::empty() // AND m64, imm32
+, FlagSet::empty() // AND m64, imm8
+, FlagSet::empty() // AND m64, r64
+, FlagSet::empty() // AND m8, imm8
+, FlagSet::empty() // AND m8, r8
+, FlagSet::empty() // AND m8, rh
+, FlagSet::empty() // AND r16, imm16
+, FlagSet::empty() // AND r16, imm8
+, FlagSet::empty() // AND r16, m16
+, FlagSet::empty() // AND r16, r16
+, FlagSet::empty() // AND r16, r16
+, FlagSet::empty() // AND r32, imm32
+, FlagSet::empty() // AND r32, imm8
+, FlagSet::empty() // AND r32, m32
+, FlagSet::empty() // AND r32, r32
+, FlagSet::empty() // AND r32, r32
+, FlagSet::empty() // AND r64, imm32
+, FlagSet::empty() // AND r64, imm8
+, FlagSet::empty() // AND r64, m64
+, FlagSet::empty() // AND r64, r64
+, FlagSet::empty() // AND r64, r64
+, FlagSet::empty() // AND r8, imm8
+, FlagSet::empty() // AND r8, m8
+, FlagSet::empty() // AND r8, r8
+, FlagSet::empty() // AND r8, r8
+, FlagSet::empty() // AND r8, rh
+, FlagSet::empty() // AND r8, rh
+, FlagSet::empty() // AND RAX, imm32
+, FlagSet::empty() // AND rh, imm8
+, FlagSet::empty() // AND rh, m8
+, FlagSet::empty() // AND rh, r8
+, FlagSet::empty() // AND rh, r8
+, FlagSet::empty() // AND rh, rh
+, FlagSet::empty() // AND rh, rh
+, FlagSet::empty()+Flag::BMI1 // ANDN r32, r32, m32
+, FlagSet::empty()+Flag::BMI1 // ANDN r32, r32, r32
+, FlagSet::empty()+Flag::BMI1 // ANDN r64, r64, m64
+, FlagSet::empty()+Flag::BMI1 // ANDN r64, r64, r64
+, FlagSet::empty()+Flag::SSE2 // ANDNPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // ANDNPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // ANDNPS xmm, m128
+, FlagSet::empty()+Flag::SSE // ANDNPS xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // ANDPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // ANDPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // ANDPS xmm, m128
+, FlagSet::empty()+Flag::SSE // ANDPS xmm, xmm
+, FlagSet::empty()+Flag::BMI1 // BEXTR r32, m32, r32
+, FlagSet::empty()+Flag::BMI1 // BEXTR r32, r32, r32
+, FlagSet::empty()+Flag::BMI1 // BEXTR r64, m64, r64
+, FlagSet::empty()+Flag::BMI1 // BEXTR r64, r64, r64
+, FlagSet::empty()+Flag::SSE4_1 // BLENDPD xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE4_1 // BLENDPD xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // BLENDPS xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE4_1 // BLENDPS xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // BLENDVPD xmm, m128, <XMM0>
+, FlagSet::empty()+Flag::SSE4_1 // BLENDVPD xmm, xmm, <XMM0>
+, FlagSet::empty()+Flag::SSE4_1 // BLENDVPS xmm, m128, <XMM0>
+, FlagSet::empty()+Flag::SSE4_1 // BLENDVPS xmm, xmm, <XMM0>
+, FlagSet::empty()+Flag::BMI1 // BLSI r32, m32
+, FlagSet::empty()+Flag::BMI1 // BLSI r32, r32
+, FlagSet::empty()+Flag::BMI1 // BLSI r64, m64
+, FlagSet::empty()+Flag::BMI1 // BLSI r64, r64
+, FlagSet::empty()+Flag::BMI1 // BLSMSK r32, m32
+, FlagSet::empty()+Flag::BMI1 // BLSMSK r32, r32
+, FlagSet::empty()+Flag::BMI1 // BLSMSK r64, m64
+, FlagSet::empty()+Flag::BMI1 // BLSMSK r64, r64
+, FlagSet::empty()+Flag::BMI1 // BLSR r32, m32
+, FlagSet::empty()+Flag::BMI1 // BLSR r32, r32
+, FlagSet::empty()+Flag::BMI1 // BLSR r64, m64
+, FlagSet::empty()+Flag::BMI1 // BLSR r64, r64
+, FlagSet::empty() // BSF r16, m16
+, FlagSet::empty() // BSF r16, r16
+, FlagSet::empty() // BSF r32, m32
+, FlagSet::empty() // BSF r32, r32
+, FlagSet::empty() // BSF r64, m64
+, FlagSet::empty() // BSF r64, r64
+, FlagSet::empty() // BSR r16, m16
+, FlagSet::empty() // BSR r16, r16
+, FlagSet::empty() // BSR r32, m32
+, FlagSet::empty() // BSR r32, r32
+, FlagSet::empty() // BSR r64, m64
+, FlagSet::empty() // BSR r64, r64
+, FlagSet::empty() // BSWAP r32
+, FlagSet::empty() // BSWAP r64
+, FlagSet::empty() // BT m16, imm8
+, FlagSet::empty() // BT m16, r16
+, FlagSet::empty() // BT m32, imm8
+, FlagSet::empty() // BT m32, r32
+, FlagSet::empty() // BT m64, imm8
+, FlagSet::empty() // BT m64, r64
+, FlagSet::empty() // BT r16, imm8
+, FlagSet::empty() // BT r16, r16
+, FlagSet::empty() // BT r32, imm8
+, FlagSet::empty() // BT r32, r32
+, FlagSet::empty() // BT r64, imm8
+, FlagSet::empty() // BT r64, r64
+, FlagSet::empty() // BTC m16, imm8
+, FlagSet::empty() // BTC m16, r16
+, FlagSet::empty() // BTC m32, imm8
+, FlagSet::empty() // BTC m32, r32
+, FlagSet::empty() // BTC m64, imm8
+, FlagSet::empty() // BTC m64, r64
+, FlagSet::empty() // BTC r16, imm8
+, FlagSet::empty() // BTC r16, r16
+, FlagSet::empty() // BTC r32, imm8
+, FlagSet::empty() // BTC r32, r32
+, FlagSet::empty() // BTC r64, imm8
+, FlagSet::empty() // BTC r64, r64
+, FlagSet::empty() // BTR m16, imm8
+, FlagSet::empty() // BTR m16, r16
+, FlagSet::empty() // BTR m32, imm8
+, FlagSet::empty() // BTR m32, r32
+, FlagSet::empty() // BTR m64, imm8
+, FlagSet::empty() // BTR m64, r64
+, FlagSet::empty() // BTR r16, imm8
+, FlagSet::empty() // BTR r16, r16
+, FlagSet::empty() // BTR r32, imm8
+, FlagSet::empty() // BTR r32, r32
+, FlagSet::empty() // BTR r64, imm8
+, FlagSet::empty() // BTR r64, r64
+, FlagSet::empty() // BTS m16, imm8
+, FlagSet::empty() // BTS m16, r16
+, FlagSet::empty() // BTS m32, imm8
+, FlagSet::empty() // BTS m32, r32
+, FlagSet::empty() // BTS m64, imm8
+, FlagSet::empty() // BTS m64, r64
+, FlagSet::empty() // BTS r16, imm8
+, FlagSet::empty() // BTS r16, r16
+, FlagSet::empty() // BTS r32, imm8
+, FlagSet::empty() // BTS r32, r32
+, FlagSet::empty() // BTS r64, imm8
+, FlagSet::empty() // BTS r64, r64
+, FlagSet::empty()+Flag::BMI2 // BZHI r32, m32, r32
+, FlagSet::empty()+Flag::BMI2 // BZHI r32, r32, r32
+, FlagSet::empty()+Flag::BMI2 // BZHI r64, m64, r64
+, FlagSet::empty()+Flag::BMI2 // BZHI r64, r64, r64
+, FlagSet::empty() // CALL m16:16
+, FlagSet::empty() // CALL m16:32
+, FlagSet::empty() // CALL m16:64
+, FlagSet::empty() // CALL label32
+, FlagSet::empty() // CALL m64
+, FlagSet::empty() // CALL r64
+, FlagSet::empty() // CALL rel32
+, FlagSet::empty() // CBW 
+, FlagSet::empty() // CDQ 
+, FlagSet::empty() // CDQE 
+, FlagSet::empty() // CLC 
+, FlagSet::empty() // CLD 
+, FlagSet::empty()+Flag::CLFLUSH // CLFLUSH m8
+, FlagSet::empty() // CLI 
+, FlagSet::empty() // CMC 
+, FlagSet::empty()+Flag::CMOV // CMOVA r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVA r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVA r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVA r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVA r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVA r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVAE r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVAE r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVAE r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVAE r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVAE r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVAE r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVB r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVB r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVB r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVB r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVB r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVB r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVBE r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVBE r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVBE r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVBE r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVBE r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVBE r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVC r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVC r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVC r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVC r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVC r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVC r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVE r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVE r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVE r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVE r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVE r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVE r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVG r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVG r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVG r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVG r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVG r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVG r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVGE r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVGE r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVGE r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVGE r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVGE r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVGE r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVL r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVL r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVL r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVL r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVL r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVL r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVLE r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVLE r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVLE r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVLE r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVLE r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVLE r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNA r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNA r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNA r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNA r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNA r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNA r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNAE r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNAE r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNAE r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNAE r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNAE r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNAE r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNB r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNB r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNB r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNB r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNB r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNB r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNBE r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNBE r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNBE r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNBE r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNBE r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNBE r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNC r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNC r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNC r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNC r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNC r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNC r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNE r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNE r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNE r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNE r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNE r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNE r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNG r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNG r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNG r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNG r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNG r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNG r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNGE r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNGE r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNGE r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNGE r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNGE r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNGE r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNL r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNL r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNL r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNL r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNL r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNL r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNLE r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNLE r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNLE r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNLE r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNLE r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNLE r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNO r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNO r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNO r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNO r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNO r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNO r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNP r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNP r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNP r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNP r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNP r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNP r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNS r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNS r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNS r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNS r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNS r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNS r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVNZ r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVNZ r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVNZ r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVNZ r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVNZ r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVNZ r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVO r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVO r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVO r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVO r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVO r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVO r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVP r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVP r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVP r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVP r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVP r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVP r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVPE r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVPE r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVPE r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVPE r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVPE r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVPE r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVPO r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVPO r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVPO r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVPO r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVPO r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVPO r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVS r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVS r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVS r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVS r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVS r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVS r64, r64
+, FlagSet::empty()+Flag::CMOV // CMOVZ r16, m16
+, FlagSet::empty()+Flag::CMOV // CMOVZ r16, r16
+, FlagSet::empty()+Flag::CMOV // CMOVZ r32, m32
+, FlagSet::empty()+Flag::CMOV // CMOVZ r32, r32
+, FlagSet::empty()+Flag::CMOV // CMOVZ r64, m64
+, FlagSet::empty()+Flag::CMOV // CMOVZ r64, r64
+, FlagSet::empty() // CMP AL, imm8
+, FlagSet::empty() // CMP AX, imm16
+, FlagSet::empty() // CMP EAX, imm32
+, FlagSet::empty() // CMP m16, imm16
+, FlagSet::empty() // CMP m16, imm8
+, FlagSet::empty() // CMP m16, r16
+, FlagSet::empty() // CMP m32, imm32
+, FlagSet::empty() // CMP m32, imm8
+, FlagSet::empty() // CMP m32, r32
+, FlagSet::empty() // CMP m64, imm32
+, FlagSet::empty() // CMP m64, imm8
+, FlagSet::empty() // CMP m64, r64
+, FlagSet::empty() // CMP m8, imm8
+, FlagSet::empty() // CMP m8, r8
+, FlagSet::empty() // CMP m8, rh
+, FlagSet::empty() // CMP r16, imm16
+, FlagSet::empty() // CMP r16, imm8
+, FlagSet::empty() // CMP r16, m16
+, FlagSet::empty() // CMP r16, r16
+, FlagSet::empty() // CMP r16, r16
+, FlagSet::empty() // CMP r32, imm32
+, FlagSet::empty() // CMP r32, imm8
+, FlagSet::empty() // CMP r32, m32
+, FlagSet::empty() // CMP r32, r32
+, FlagSet::empty() // CMP r32, r32
+, FlagSet::empty() // CMP r64, imm32
+, FlagSet::empty() // CMP r64, imm8
+, FlagSet::empty() // CMP r64, m64
+, FlagSet::empty() // CMP r64, r64
+, FlagSet::empty() // CMP r64, r64
+, FlagSet::empty() // CMP r8, imm8
+, FlagSet::empty() // CMP r8, m8
+, FlagSet::empty() // CMP r8, r8
+, FlagSet::empty() // CMP r8, r8
+, FlagSet::empty() // CMP r8, rh
+, FlagSet::empty() // CMP r8, rh
+, FlagSet::empty() // CMP RAX, imm32
+, FlagSet::empty() // CMP rh, imm8
+, FlagSet::empty() // CMP rh, m8
+, FlagSet::empty() // CMP rh, r8
+, FlagSet::empty() // CMP rh, r8
+, FlagSet::empty() // CMP rh, rh
+, FlagSet::empty() // CMP rh, rh
+, FlagSet::empty()+Flag::SSE2 // CMPPD xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE2 // CMPPD xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE // CMPPS xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE // CMPPS xmm, xmm, imm8
+, FlagSet::empty() // CMPS m16, m16
+, FlagSet::empty() // CMPS m32, m32
+, FlagSet::empty() // CMPS m64, m64
+, FlagSet::empty() // CMPS m8, m8
+, FlagSet::empty() // CMPSB 
+, FlagSet::empty() // CMPSD 
+, FlagSet::empty()+Flag::SSE2 // CMPSD xmm, m64, imm8
+, FlagSet::empty()+Flag::SSE2 // CMPSD xmm, xmm, imm8
+, FlagSet::empty() // CMPSQ 
+, FlagSet::empty()+Flag::SSE // CMPSS xmm, m32, imm8
+, FlagSet::empty()+Flag::SSE // CMPSS xmm, xmm, imm8
+, FlagSet::empty() // CMPSW 
+, FlagSet::empty() // CMPXCHG m16, r16
+, FlagSet::empty() // CMPXCHG m32, r32
+, FlagSet::empty() // CMPXCHG m64, r64
+, FlagSet::empty() // CMPXCHG m8, r8
+, FlagSet::empty() // CMPXCHG m8, rh
+, FlagSet::empty() // CMPXCHG r16, r16
+, FlagSet::empty() // CMPXCHG r32, r32
+, FlagSet::empty() // CMPXCHG r64, r64
+, FlagSet::empty() // CMPXCHG r8, r8
+, FlagSet::empty() // CMPXCHG r8, rh
+, FlagSet::empty() // CMPXCHG rh, r8
+, FlagSet::empty() // CMPXCHG rh, rh
+, FlagSet::empty()+Flag::CX16 // CMPXCHG16B m128
+, FlagSet::empty()+Flag::CX8 // CMPXCHG8B m64
+, FlagSet::empty()+Flag::SSE2 // COMISD xmm, m64
+, FlagSet::empty()+Flag::SSE2 // COMISD xmm, xmm
+, FlagSet::empty()+Flag::SSE // COMISS xmm, m32
+, FlagSet::empty()+Flag::SSE // COMISS xmm, xmm
+, FlagSet::empty() // CPUID 
+, FlagSet::empty() // CQO 
+, FlagSet::empty() // CRC32 r32, m16
+, FlagSet::empty() // CRC32 r32, m32
+, FlagSet::empty() // CRC32 r32, m8
+, FlagSet::empty() // CRC32 r32, r16
+, FlagSet::empty() // CRC32 r32, r32
+, FlagSet::empty() // CRC32 r32, r8
+, FlagSet::empty() // CRC32 r32, rh
+, FlagSet::empty() // CRC32 r64, m64
+, FlagSet::empty() // CRC32 r64, m8
+, FlagSet::empty() // CRC32 r64, r64
+, FlagSet::empty() // CRC32 r64, r8
+, FlagSet::empty()+Flag::SSE2 // CVTDQ2PD xmm, m64
+, FlagSet::empty()+Flag::SSE2 // CVTDQ2PD xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // CVTDQ2PS xmm, m128
+, FlagSet::empty()+Flag::SSE2 // CVTDQ2PS xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // CVTPD2DQ xmm, m128
+, FlagSet::empty()+Flag::SSE2 // CVTPD2DQ xmm, xmm
+, FlagSet::empty() // CVTPD2PI mm, m128
+, FlagSet::empty() // CVTPD2PI mm, xmm
+, FlagSet::empty()+Flag::SSE2 // CVTPD2PS xmm, m128
+, FlagSet::empty()+Flag::SSE2 // CVTPD2PS xmm, xmm
+, FlagSet::empty() // CVTPI2PD xmm, m64
+, FlagSet::empty() // CVTPI2PD xmm, mm
+, FlagSet::empty() // CVTPI2PS xmm, m64
+, FlagSet::empty() // CVTPI2PS xmm, mm
+, FlagSet::empty()+Flag::SSE2 // CVTPS2DQ xmm, m128
+, FlagSet::empty()+Flag::SSE2 // CVTPS2DQ xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // CVTPS2PD xmm, m64
+, FlagSet::empty()+Flag::SSE2 // CVTPS2PD xmm, xmm
+, FlagSet::empty() // CVTPS2PI mm, m64
+, FlagSet::empty() // CVTPS2PI mm, xmm
+, FlagSet::empty()+Flag::SSE2 // CVTSD2SI r32, m64
+, FlagSet::empty()+Flag::SSE2 // CVTSD2SI r32, xmm
+, FlagSet::empty()+Flag::SSE2 // CVTSD2SI r64, m64
+, FlagSet::empty()+Flag::SSE2 // CVTSD2SI r64, xmm
+, FlagSet::empty()+Flag::SSE2 // CVTSD2SS xmm, m64
+, FlagSet::empty()+Flag::SSE2 // CVTSD2SS xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // CVTSI2SD xmm, m32
+, FlagSet::empty()+Flag::SSE2 // CVTSI2SD xmm, m64
+, FlagSet::empty()+Flag::SSE2 // CVTSI2SD xmm, r32
+, FlagSet::empty()+Flag::SSE2 // CVTSI2SD xmm, r64
+, FlagSet::empty()+Flag::SSE // CVTSI2SS xmm, m32
+, FlagSet::empty()+Flag::SSE // CVTSI2SS xmm, m64
+, FlagSet::empty()+Flag::SSE // CVTSI2SS xmm, r32
+, FlagSet::empty()+Flag::SSE // CVTSI2SS xmm, r64
+, FlagSet::empty()+Flag::SSE2 // CVTSS2SD xmm, m32
+, FlagSet::empty()+Flag::SSE2 // CVTSS2SD xmm, xmm
+, FlagSet::empty()+Flag::SSE // CVTSS2SI r32, m32
+, FlagSet::empty()+Flag::SSE // CVTSS2SI r32, xmm
+, FlagSet::empty()+Flag::SSE // CVTSS2SI r64, m32
+, FlagSet::empty()+Flag::SSE // CVTSS2SI r64, xmm
+, FlagSet::empty()+Flag::SSE2 // CVTTPD2DQ xmm, m128
+, FlagSet::empty()+Flag::SSE2 // CVTTPD2DQ xmm, xmm
+, FlagSet::empty() // CVTTPD2PI mm, m128
+, FlagSet::empty() // CVTTPD2PI mm, xmm
+, FlagSet::empty()+Flag::SSE2 // CVTTPS2DQ xmm, m128
+, FlagSet::empty()+Flag::SSE2 // CVTTPS2DQ xmm, xmm
+, FlagSet::empty() // CVTTPS2PI mm, m64
+, FlagSet::empty() // CVTTPS2PI mm, xmm
+, FlagSet::empty()+Flag::SSE2 // CVTTSD2SI r32, m64
+, FlagSet::empty()+Flag::SSE2 // CVTTSD2SI r32, xmm
+, FlagSet::empty()+Flag::SSE2 // CVTTSD2SI r64, m64
+, FlagSet::empty()+Flag::SSE2 // CVTTSD2SI r64, xmm
+, FlagSet::empty()+Flag::SSE // CVTTSS2SI r32, m32
+, FlagSet::empty()+Flag::SSE // CVTTSS2SI r32, xmm
+, FlagSet::empty()+Flag::SSE // CVTTSS2SI r64, m32
+, FlagSet::empty()+Flag::SSE // CVTTSS2SI r64, xmm
+, FlagSet::empty() // CWD 
+, FlagSet::empty() // CWDE 
+, FlagSet::empty() // DEC m16
+, FlagSet::empty() // DEC m32
+, FlagSet::empty() // DEC m64
+, FlagSet::empty() // DEC m8
+, FlagSet::empty() // DEC r16
+, FlagSet::empty() // DEC r32
+, FlagSet::empty() // DEC r64
+, FlagSet::empty() // DEC r8
+, FlagSet::empty() // DEC rh
+, FlagSet::empty() // DIV m16
+, FlagSet::empty() // DIV m32
+, FlagSet::empty() // DIV m64
+, FlagSet::empty() // DIV m8
+, FlagSet::empty() // DIV r16
+, FlagSet::empty() // DIV r32
+, FlagSet::empty() // DIV r64
+, FlagSet::empty() // DIV r8
+, FlagSet::empty() // DIV rh
+, FlagSet::empty()+Flag::SSE2 // DIVPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // DIVPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // DIVPS xmm, m128
+, FlagSet::empty()+Flag::SSE // DIVPS xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // DIVSD xmm, m64
+, FlagSet::empty()+Flag::SSE2 // DIVSD xmm, xmm
+, FlagSet::empty()+Flag::SSE // DIVSS xmm, m32
+, FlagSet::empty()+Flag::SSE // DIVSS xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // DPPD xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE4_1 // DPPD xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // DPPS xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE4_1 // DPPS xmm, xmm, imm8
+, FlagSet::empty() // EMMS 
+, FlagSet::empty() // ENTER imm8, imm16
+, FlagSet::empty() // ENTER 1, imm16
+, FlagSet::empty() // ENTER 0, imm16
+, FlagSet::empty()+Flag::SSE4_1 // EXTRACTPS m32, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // EXTRACTPS r32, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // EXTRACTPS r64, xmm, imm8
+, FlagSet::empty()+Flag::FPU // F2XM1 
+, FlagSet::empty()+Flag::FPU // FABS 
+, FlagSet::empty()+Flag::FPU // FADD m32fp
+, FlagSet::empty()+Flag::FPU // FADD m64fp
+, FlagSet::empty()+Flag::FPU // FADD ST(i), ST
+, FlagSet::empty()+Flag::FPU // FADD ST, ST(i)
+, FlagSet::empty()+Flag::FPU // FADDP 
+, FlagSet::empty()+Flag::FPU // FADDP ST(i), ST
+, FlagSet::empty()+Flag::FPU // FBLD m80bcd
+, FlagSet::empty()+Flag::FPU // FBSTP m80bcd
+, FlagSet::empty()+Flag::FPU // FCHS 
+, FlagSet::empty()+Flag::FPU // FCLEX 
+, FlagSet::empty()+Flag::FPU+Flag::CMOV // FCMOVB ST, ST(i)
+, FlagSet::empty()+Flag::FPU+Flag::CMOV // FCMOVBE ST, ST(i)
+, FlagSet::empty()+Flag::FPU+Flag::CMOV // FCMOVE ST, ST(i)
+, FlagSet::empty()+Flag::FPU+Flag::CMOV // FCMOVNB ST, ST(i)
+, FlagSet::empty()+Flag::FPU+Flag::CMOV // FCMOVNBE ST, ST(i)
+, FlagSet::empty()+Flag::FPU+Flag::CMOV // FCMOVNE ST, ST(i)
+, FlagSet::empty()+Flag::FPU+Flag::CMOV // FCMOVNU ST, ST(i)
+, FlagSet::empty()+Flag::FPU+Flag::CMOV // FCMOVU ST, ST(i)
+, FlagSet::empty()+Flag::FPU // FCOM 
+, FlagSet::empty()+Flag::FPU // FCOM m32fp
+, FlagSet::empty()+Flag::FPU // FCOM m64fp
+, FlagSet::empty()+Flag::FPU // FCOM ST(i)
+, FlagSet::empty()+Flag::FPU // FCOMI ST, ST(i)
+, FlagSet::empty()+Flag::FPU // FCOMIP ST, ST(i)
+, FlagSet::empty()+Flag::FPU // FCOMP 
+, FlagSet::empty()+Flag::FPU // FCOMP m32fp
+, FlagSet::empty()+Flag::FPU // FCOMP m64fp
+, FlagSet::empty()+Flag::FPU // FCOMP ST(i)
+, FlagSet::empty()+Flag::FPU // FCOMPP 
+, FlagSet::empty()+Flag::FPU // FCOS 
+, FlagSet::empty()+Flag::FPU // FDECSTP 
+, FlagSet::empty()+Flag::FPU // FDIV m32fp
+, FlagSet::empty()+Flag::FPU // FDIV m64fp
+, FlagSet::empty()+Flag::FPU // FDIV ST(i), ST
+, FlagSet::empty()+Flag::FPU // FDIV ST, ST(i)
+, FlagSet::empty()+Flag::FPU // FDIVP 
+, FlagSet::empty()+Flag::FPU // FDIVP ST(i), ST
+, FlagSet::empty()+Flag::FPU // FDIVR m32fp
+, FlagSet::empty()+Flag::FPU // FDIVR m64fp
+, FlagSet::empty()+Flag::FPU // FDIVR ST(i), ST
+, FlagSet::empty()+Flag::FPU // FDIVR ST, ST(i)
+, FlagSet::empty()+Flag::FPU // FDIVRP 
+, FlagSet::empty()+Flag::FPU // FDIVRP ST(i), ST
+, FlagSet::empty()+Flag::FPU // FFREE ST(i)
+, FlagSet::empty()+Flag::FPU // FIADD m16int
+, FlagSet::empty()+Flag::FPU // FIADD m32int
+, FlagSet::empty()+Flag::FPU // FICOM m16int
+, FlagSet::empty()+Flag::FPU // FICOM m32int
+, FlagSet::empty()+Flag::FPU // FICOMP m16int
+, FlagSet::empty()+Flag::FPU // FICOMP m32int
+, FlagSet::empty()+Flag::FPU // FIDIV m16int
+, FlagSet::empty()+Flag::FPU // FIDIV m32int
+, FlagSet::empty()+Flag::FPU // FIDIVR m16int
+, FlagSet::empty()+Flag::FPU // FIDIVR m32int
+, FlagSet::empty()+Flag::FPU // FILD m16int
+, FlagSet::empty()+Flag::FPU // FILD m32int
+, FlagSet::empty()+Flag::FPU // FILD m64int
+, FlagSet::empty()+Flag::FPU // FIMUL m16int
+, FlagSet::empty()+Flag::FPU // FIMUL m32int
+, FlagSet::empty()+Flag::FPU // FINCSTP 
+, FlagSet::empty()+Flag::FPU // FINIT 
+, FlagSet::empty()+Flag::FPU // FIST m16int
+, FlagSet::empty()+Flag::FPU // FIST m32int
+, FlagSet::empty()+Flag::FPU // FISTP m16int
+, FlagSet::empty()+Flag::FPU // FISTP m32int
+, FlagSet::empty()+Flag::FPU // FISTP m64int
+, FlagSet::empty()+Flag::FPU // FISTTP m16int
+, FlagSet::empty()+Flag::FPU // FISTTP m32int
+, FlagSet::empty()+Flag::FPU // FISTTP m64int
+, FlagSet::empty()+Flag::FPU // FISUB m16int
+, FlagSet::empty()+Flag::FPU // FISUB m32int
+, FlagSet::empty()+Flag::FPU // FISUBR m16int
+, FlagSet::empty()+Flag::FPU // FISUBR m32int
+, FlagSet::empty()+Flag::FPU // FLD m32fp
+, FlagSet::empty()+Flag::FPU // FLD m64fp
+, FlagSet::empty()+Flag::FPU // FLD m80fp
+, FlagSet::empty()+Flag::FPU // FLD ST(i)
+, FlagSet::empty()+Flag::FPU // FLD1 
+, FlagSet::empty()+Flag::FPU // FLDCW m2byte
+, FlagSet::empty()+Flag::FPU // FLDENV m28byte
+, FlagSet::empty()+Flag::FPU // FLDL2E 
+, FlagSet::empty()+Flag::FPU // FLDL2T 
+, FlagSet::empty()+Flag::FPU // FLDLG2 
+, FlagSet::empty()+Flag::FPU // FLDLN2 
+, FlagSet::empty()+Flag::FPU // FLDPI 
+, FlagSet::empty()+Flag::FPU // FLDZ 
+, FlagSet::empty()+Flag::FPU // FMUL m32fp
+, FlagSet::empty()+Flag::FPU // FMUL m64fp
+, FlagSet::empty()+Flag::FPU // FMUL ST(i), ST
+, FlagSet::empty()+Flag::FPU // FMUL ST, ST(i)
+, FlagSet::empty()+Flag::FPU // FMULP 
+, FlagSet::empty()+Flag::FPU // FMULP ST(i), ST
+, FlagSet::empty()+Flag::FPU // FNCLEX 
+, FlagSet::empty()+Flag::FPU // FNINIT 
+, FlagSet::empty()+Flag::FPU // FNOP 
+, FlagSet::empty()+Flag::FPU // FNSAVE m108byte
+, FlagSet::empty()+Flag::FPU // FNSTCW m2byte
+, FlagSet::empty()+Flag::FPU // FNSTENV m28byte
+, FlagSet::empty()+Flag::FPU // FNSTSW AX
+, FlagSet::empty()+Flag::FPU // FNSTSW m2byte
+, FlagSet::empty()+Flag::FPU // FPATAN 
+, FlagSet::empty()+Flag::FPU // FPREM 
+, FlagSet::empty()+Flag::FPU // FPREM1 
+, FlagSet::empty()+Flag::FPU // FPTAN 
+, FlagSet::empty()+Flag::FPU // FRNDINT 
+, FlagSet::empty()+Flag::FPU // FRSTOR m108byte
+, FlagSet::empty()+Flag::FPU // FSAVE m108byte
+, FlagSet::empty()+Flag::FPU // FSCALE 
+, FlagSet::empty()+Flag::FPU // FSIN 
+, FlagSet::empty()+Flag::FPU // FSINCOS 
+, FlagSet::empty()+Flag::FPU // FSQRT 
+, FlagSet::empty()+Flag::FPU // FST m32fp
+, FlagSet::empty()+Flag::FPU // FST m64fp
+, FlagSet::empty()+Flag::FPU // FST ST(i)
+, FlagSet::empty()+Flag::FPU // FSTCW m2byte
+, FlagSet::empty()+Flag::FPU // FSTENV m28byte
+, FlagSet::empty()+Flag::FPU // FSTP m32fp
+, FlagSet::empty()+Flag::FPU // FSTP m64fp
+, FlagSet::empty()+Flag::FPU // FSTP m80fp
+, FlagSet::empty()+Flag::FPU // FSTP ST(i)
+, FlagSet::empty()+Flag::FPU // FSTSW AX
+, FlagSet::empty()+Flag::FPU // FSTSW m2byte
+, FlagSet::empty()+Flag::FPU // FSUB m32fp
+, FlagSet::empty()+Flag::FPU // FSUB m64fp
+, FlagSet::empty()+Flag::FPU // FSUB ST(i), ST
+, FlagSet::empty()+Flag::FPU // FSUB ST, ST(i)
+, FlagSet::empty()+Flag::FPU // FSUBP 
+, FlagSet::empty()+Flag::FPU // FSUBP ST(i), ST
+, FlagSet::empty()+Flag::FPU // FSUBR m32fp
+, FlagSet::empty()+Flag::FPU // FSUBR m64fp
+, FlagSet::empty()+Flag::FPU // FSUBR ST(i), ST
+, FlagSet::empty()+Flag::FPU // FSUBR ST, ST(i)
+, FlagSet::empty()+Flag::FPU // FSUBRP 
+, FlagSet::empty() // FSUBRP ST(i), ST
+, FlagSet::empty()+Flag::FPU // FTST 
+, FlagSet::empty()+Flag::FPU // FUCOM 
+, FlagSet::empty()+Flag::FPU // FUCOM ST(i)
+, FlagSet::empty()+Flag::FPU // FUCOMI ST, ST(i)
+, FlagSet::empty()+Flag::FPU // FUCOMIP ST, ST(i)
+, FlagSet::empty()+Flag::FPU // FUCOMP 
+, FlagSet::empty()+Flag::FPU // FUCOMP ST(i)
+, FlagSet::empty()+Flag::FPU // FUCOMPP 
+, FlagSet::empty()+Flag::FPU // FWAIT 
+, FlagSet::empty()+Flag::FPU // FXAM 
+, FlagSet::empty()+Flag::FPU // FXCH 
+, FlagSet::empty()+Flag::FPU // FXCH ST(i)
+, FlagSet::empty()+Flag::FPU+Flag::FXSR // FXRSTOR m512byte
+, FlagSet::empty()+Flag::FPU+Flag::FXSR // FXRSTOR64 m512byte
+, FlagSet::empty()+Flag::FPU+Flag::FXSR // FXSAVE m512byte
+, FlagSet::empty()+Flag::FPU+Flag::FXSR // FXSAVE64 m512byte
+, FlagSet::empty()+Flag::FPU // FXTRACT 
+, FlagSet::empty()+Flag::FPU // FYL2X 
+, FlagSet::empty()+Flag::FPU // FYL2XP1 
+, FlagSet::empty()+Flag::PNI // HADDPD xmm, m128
+, FlagSet::empty()+Flag::PNI // HADDPD xmm, xmm
+, FlagSet::empty()+Flag::PNI // HADDPS xmm, m128
+, FlagSet::empty()+Flag::PNI // HADDPS xmm, xmm
+, FlagSet::empty()+Flag::PNI // HSUBPD xmm, m128
+, FlagSet::empty()+Flag::PNI // HSUBPD xmm, xmm
+, FlagSet::empty()+Flag::PNI // HSUBPS xmm, m128
+, FlagSet::empty()+Flag::PNI // HSUBPS xmm, xmm
+, FlagSet::empty() // IDIV m16
+, FlagSet::empty() // IDIV m32
+, FlagSet::empty() // IDIV m64
+, FlagSet::empty() // IDIV m8
+, FlagSet::empty() // IDIV r16
+, FlagSet::empty() // IDIV r32
+, FlagSet::empty() // IDIV r64
+, FlagSet::empty() // IDIV r8
+, FlagSet::empty() // IDIV rh
+, FlagSet::empty() // IMUL m16
+, FlagSet::empty() // IMUL m32
+, FlagSet::empty() // IMUL m64
+, FlagSet::empty() // IMUL m8
+, FlagSet::empty() // IMUL r16
+, FlagSet::empty() // IMUL r16, m16
+, FlagSet::empty() // IMUL r16, m16, imm16
+, FlagSet::empty() // IMUL r16, m16, imm8
+, FlagSet::empty() // IMUL r16, r16
+, FlagSet::empty() // IMUL r16, r16, imm16
+, FlagSet::empty() // IMUL r16, r16, imm8
+, FlagSet::empty() // IMUL r32
+, FlagSet::empty() // IMUL r32, m32
+, FlagSet::empty() // IMUL r32, m32, imm32
+, FlagSet::empty() // IMUL r32, m32, imm8
+, FlagSet::empty() // IMUL r32, r32
+, FlagSet::empty() // IMUL r32, r32, imm32
+, FlagSet::empty() // IMUL r32, r32, imm8
+, FlagSet::empty() // IMUL r64
+, FlagSet::empty() // IMUL r64, m64
+, FlagSet::empty() // IMUL r64, m64, imm32
+, FlagSet::empty() // IMUL r64, m64, imm8
+, FlagSet::empty() // IMUL r64, r64
+, FlagSet::empty() // IMUL r64, r64, imm32
+, FlagSet::empty() // IMUL r64, r64, imm8
+, FlagSet::empty() // IMUL r8
+, FlagSet::empty() // IMUL rh
+, FlagSet::empty() // IN AL, DX
+, FlagSet::empty() // IN AL, imm8
+, FlagSet::empty() // IN AX, DX
+, FlagSet::empty() // IN AX, imm8
+, FlagSet::empty() // IN EAX, DX
+, FlagSet::empty() // IN EAX, imm8
+, FlagSet::empty() // INC m16
+, FlagSet::empty() // INC m32
+, FlagSet::empty() // INC m64
+, FlagSet::empty() // INC m8
+, FlagSet::empty() // INC r16
+, FlagSet::empty() // INC r32
+, FlagSet::empty() // INC r64
+, FlagSet::empty() // INC r8
+, FlagSet::empty() // INC rh
+, FlagSet::empty() // INS m16, DX
+, FlagSet::empty() // INS m32, DX
+, FlagSet::empty() // INS m8, DX
+, FlagSet::empty() // INSB 
+, FlagSet::empty() // INSD 
+, FlagSet::empty()+Flag::SSE4_1 // INSERTPS xmm, m32, imm8
+, FlagSet::empty()+Flag::SSE4_1 // INSERTPS xmm, xmm, imm8
+, FlagSet::empty() // INSW 
+, FlagSet::empty() // INT imm8
+, FlagSet::empty() // INT 3
+, FlagSet::empty()+Flag::INVPCID // INVPCID r64, m128
+, FlagSet::empty() // IRET 
+, FlagSet::empty() // IRETD 
+, FlagSet::empty() // IRETQ 
+, FlagSet::empty() // JA label8
+, FlagSet::empty() // JA label32
+, FlagSet::empty() // JA label8, hint
+, FlagSet::empty() // JA label32, hint
+, FlagSet::empty() // JA rel32
+, FlagSet::empty() // JA rel32, hint
+, FlagSet::empty() // JA rel8
+, FlagSet::empty() // JA rel8, hint
+, FlagSet::empty() // JAE label8
+, FlagSet::empty() // JAE label32
+, FlagSet::empty() // JAE label8, hint
+, FlagSet::empty() // JAE label32, hint
+, FlagSet::empty() // JAE rel32
+, FlagSet::empty() // JAE rel32, hint
+, FlagSet::empty() // JAE rel8
+, FlagSet::empty() // JAE rel8, hint
+, FlagSet::empty() // JB label8
+, FlagSet::empty() // JB label32
+, FlagSet::empty() // JB label8, hint
+, FlagSet::empty() // JB label32, hint
+, FlagSet::empty() // JB rel32
+, FlagSet::empty() // JB rel32, hint
+, FlagSet::empty() // JB rel8
+, FlagSet::empty() // JB rel8, hint
+, FlagSet::empty() // JBE label8
+, FlagSet::empty() // JBE label32
+, FlagSet::empty() // JBE label8, hint
+, FlagSet::empty() // JBE label32, hint
+, FlagSet::empty() // JBE rel32
+, FlagSet::empty() // JBE rel32, hint
+, FlagSet::empty() // JBE rel8
+, FlagSet::empty() // JBE rel8, hint
+, FlagSet::empty() // JC label8
+, FlagSet::empty() // JC label32
+, FlagSet::empty() // JC label8, hint
+, FlagSet::empty() // JC label32, hint
+, FlagSet::empty() // JC rel32
+, FlagSet::empty() // JC rel32, hint
+, FlagSet::empty() // JC rel8
+, FlagSet::empty() // JC rel8, hint
+, FlagSet::empty() // JE label8
+, FlagSet::empty() // JE label32
+, FlagSet::empty() // JE label8, hint
+, FlagSet::empty() // JE label32, hint
+, FlagSet::empty() // JE rel32
+, FlagSet::empty() // JE rel32, hint
+, FlagSet::empty() // JE rel8
+, FlagSet::empty() // JE rel8, hint
+, FlagSet::empty() // JECXZ label8
+, FlagSet::empty() // JECXZ label8, hint
+, FlagSet::empty() // JECXZ rel8
+, FlagSet::empty() // JECXZ rel8, hint
+, FlagSet::empty() // JG label8
+, FlagSet::empty() // JG label32
+, FlagSet::empty() // JG label8, hint
+, FlagSet::empty() // JG label32, hint
+, FlagSet::empty() // JG rel32
+, FlagSet::empty() // JG rel32, hint
+, FlagSet::empty() // JG rel8
+, FlagSet::empty() // JG rel8, hint
+, FlagSet::empty() // JGE label8
+, FlagSet::empty() // JGE label32
+, FlagSet::empty() // JGE label8, hint
+, FlagSet::empty() // JGE label32, hint
+, FlagSet::empty() // JGE rel32
+, FlagSet::empty() // JGE rel32, hint
+, FlagSet::empty() // JGE rel8
+, FlagSet::empty() // JGE rel8, hint
+, FlagSet::empty() // JL label8
+, FlagSet::empty() // JL label32
+, FlagSet::empty() // JL label8, hint
+, FlagSet::empty() // JL label32, hint
+, FlagSet::empty() // JL rel32
+, FlagSet::empty() // JL rel32, hint
+, FlagSet::empty() // JL rel8
+, FlagSet::empty() // JL rel8, hint
+, FlagSet::empty() // JLE label8
+, FlagSet::empty() // JLE label32
+, FlagSet::empty() // JLE label8, hint
+, FlagSet::empty() // JLE label32, hint
+, FlagSet::empty() // JLE rel32
+, FlagSet::empty() // JLE rel32, hint
+, FlagSet::empty() // JLE rel8
+, FlagSet::empty() // JLE rel8, hint
+, FlagSet::empty() // JMP m16:16
+, FlagSet::empty() // JMP m16:32
+, FlagSet::empty() // JMP m16:64
+, FlagSet::empty() // JMP label8
+, FlagSet::empty() // JMP label32
+, FlagSet::empty() // JMP m64
+, FlagSet::empty() // JMP r64
+, FlagSet::empty() // JMP rel32
+, FlagSet::empty() // JMP rel8
+, FlagSet::empty() // JNA label8
+, FlagSet::empty() // JNA label32
+, FlagSet::empty() // JNA label8, hint
+, FlagSet::empty() // JNA label32, hint
+, FlagSet::empty() // JNA rel32
+, FlagSet::empty() // JNA rel32, hint
+, FlagSet::empty() // JNA rel8
+, FlagSet::empty() // JNA rel8, hint
+, FlagSet::empty() // JNAE label8
+, FlagSet::empty() // JNAE label32
+, FlagSet::empty() // JNAE label8, hint
+, FlagSet::empty() // JNAE label32, hint
+, FlagSet::empty() // JNAE rel32
+, FlagSet::empty() // JNAE rel32, hint
+, FlagSet::empty() // JNAE rel8
+, FlagSet::empty() // JNAE rel8, hint
+, FlagSet::empty() // JNB label8
+, FlagSet::empty() // JNB label32
+, FlagSet::empty() // JNB label8, hint
+, FlagSet::empty() // JNB label32, hint
+, FlagSet::empty() // JNB rel32
+, FlagSet::empty() // JNB rel32, hint
+, FlagSet::empty() // JNB rel8
+, FlagSet::empty() // JNB rel8, hint
+, FlagSet::empty() // JNBE label8
+, FlagSet::empty() // JNBE label32
+, FlagSet::empty() // JNBE label8, hint
+, FlagSet::empty() // JNBE label32, hint
+, FlagSet::empty() // JNBE rel32
+, FlagSet::empty() // JNBE rel32, hint
+, FlagSet::empty() // JNBE rel8
+, FlagSet::empty() // JNBE rel8, hint
+, FlagSet::empty() // JNC label8
+, FlagSet::empty() // JNC label32
+, FlagSet::empty() // JNC label8, hint
+, FlagSet::empty() // JNC label32, hint
+, FlagSet::empty() // JNC rel32
+, FlagSet::empty() // JNC rel32, hint
+, FlagSet::empty() // JNC rel8
+, FlagSet::empty() // JNC rel8, hint
+, FlagSet::empty() // JNE label8
+, FlagSet::empty() // JNE label32
+, FlagSet::empty() // JNE label8, hint
+, FlagSet::empty() // JNE label32, hint
+, FlagSet::empty() // JNE rel32
+, FlagSet::empty() // JNE rel32, hint
+, FlagSet::empty() // JNE rel8
+, FlagSet::empty() // JNE rel8, hint
+, FlagSet::empty() // JNG label8
+, FlagSet::empty() // JNG label32
+, FlagSet::empty() // JNG label8, hint
+, FlagSet::empty() // JNG label32, hint
+, FlagSet::empty() // JNG rel32
+, FlagSet::empty() // JNG rel32, hint
+, FlagSet::empty() // JNG rel8
+, FlagSet::empty() // JNG rel8, hint
+, FlagSet::empty() // JNGE label8
+, FlagSet::empty() // JNGE label32
+, FlagSet::empty() // JNGE label8, hint
+, FlagSet::empty() // JNGE label32, hint
+, FlagSet::empty() // JNGE rel32
+, FlagSet::empty() // JNGE rel32, hint
+, FlagSet::empty() // JNGE rel8
+, FlagSet::empty() // JNGE rel8, hint
+, FlagSet::empty() // JNL label8
+, FlagSet::empty() // JNL label32
+, FlagSet::empty() // JNL label8, hint
+, FlagSet::empty() // JNL label32, hint
+, FlagSet::empty() // JNL rel32
+, FlagSet::empty() // JNL rel32, hint
+, FlagSet::empty() // JNL rel8
+, FlagSet::empty() // JNL rel8, hint
+, FlagSet::empty() // JNLE label8
+, FlagSet::empty() // JNLE label32
+, FlagSet::empty() // JNLE label8, hint
+, FlagSet::empty() // JNLE label32, hint
+, FlagSet::empty() // JNLE rel32
+, FlagSet::empty() // JNLE rel32, hint
+, FlagSet::empty() // JNLE rel8
+, FlagSet::empty() // JNLE rel8, hint
+, FlagSet::empty() // JNO label8
+, FlagSet::empty() // JNO label32
+, FlagSet::empty() // JNO label8, hint
+, FlagSet::empty() // JNO label32, hint
+, FlagSet::empty() // JNO rel32
+, FlagSet::empty() // JNO rel32, hint
+, FlagSet::empty() // JNO rel8
+, FlagSet::empty() // JNO rel8, hint
+, FlagSet::empty() // JNP label8
+, FlagSet::empty() // JNP label32
+, FlagSet::empty() // JNP label8, hint
+, FlagSet::empty() // JNP label32, hint
+, FlagSet::empty() // JNP rel32
+, FlagSet::empty() // JNP rel32, hint
+, FlagSet::empty() // JNP rel8
+, FlagSet::empty() // JNP rel8, hint
+, FlagSet::empty() // JNS label8
+, FlagSet::empty() // JNS label32
+, FlagSet::empty() // JNS label8, hint
+, FlagSet::empty() // JNS label32, hint
+, FlagSet::empty() // JNS rel32
+, FlagSet::empty() // JNS rel32, hint
+, FlagSet::empty() // JNS rel8
+, FlagSet::empty() // JNS rel8, hint
+, FlagSet::empty() // JNZ label8
+, FlagSet::empty() // JNZ label32
+, FlagSet::empty() // JNZ label8, hint
+, FlagSet::empty() // JNZ label32, hint
+, FlagSet::empty() // JNZ rel32
+, FlagSet::empty() // JNZ rel32, hint
+, FlagSet::empty() // JNZ rel8
+, FlagSet::empty() // JNZ rel8, hint
+, FlagSet::empty() // JO label8
+, FlagSet::empty() // JO label32
+, FlagSet::empty() // JO label8, hint
+, FlagSet::empty() // JO label32, hint
+, FlagSet::empty() // JO rel32
+, FlagSet::empty() // JO rel32, hint
+, FlagSet::empty() // JO rel8
+, FlagSet::empty() // JO rel8, hint
+, FlagSet::empty() // JP label8
+, FlagSet::empty() // JP label32
+, FlagSet::empty() // JP label8, hint
+, FlagSet::empty() // JP label32, hint
+, FlagSet::empty() // JP rel32
+, FlagSet::empty() // JP rel32, hint
+, FlagSet::empty() // JP rel8
+, FlagSet::empty() // JP rel8, hint
+, FlagSet::empty() // JPE label8
+, FlagSet::empty() // JPE label32
+, FlagSet::empty() // JPE label8, hint
+, FlagSet::empty() // JPE label32, hint
+, FlagSet::empty() // JPE rel32
+, FlagSet::empty() // JPE rel32, hint
+, FlagSet::empty() // JPE rel8
+, FlagSet::empty() // JPE rel8, hint
+, FlagSet::empty() // JPO label8
+, FlagSet::empty() // JPO label32
+, FlagSet::empty() // JPO label8, hint
+, FlagSet::empty() // JPO label32, hint
+, FlagSet::empty() // JPO rel32
+, FlagSet::empty() // JPO rel32, hint
+, FlagSet::empty() // JPO rel8
+, FlagSet::empty() // JPO rel8, hint
+, FlagSet::empty() // JRCXZ label8
+, FlagSet::empty() // JRCXZ label8, hint
+, FlagSet::empty() // JRCXZ rel8
+, FlagSet::empty() // JRCXZ rel8, hint
+, FlagSet::empty() // JS label8
+, FlagSet::empty() // JS label32
+, FlagSet::empty() // JS label8, hint
+, FlagSet::empty() // JS label32, hint
+, FlagSet::empty() // JS rel32
+, FlagSet::empty() // JS rel32, hint
+, FlagSet::empty() // JS rel8
+, FlagSet::empty() // JS rel8, hint
+, FlagSet::empty() // JZ label8
+, FlagSet::empty() // JZ label32
+, FlagSet::empty() // JZ label8, hint
+, FlagSet::empty() // JZ label32, hint
+, FlagSet::empty() // JZ rel32
+, FlagSet::empty() // JZ rel32, hint
+, FlagSet::empty() // JZ rel8
+, FlagSet::empty() // JZ rel8, hint
+, FlagSet::empty()+Flag::LAHF_LM // LAHF 
+, FlagSet::empty() // LAR r16, m16
+, FlagSet::empty() // LAR r16, r16
+, FlagSet::empty() // LAR r32, m16
+, FlagSet::empty() // LAR r32, r32
+, FlagSet::empty() // LAR r64, m16
+, FlagSet::empty() // LAR r64, r32
+, FlagSet::empty()+Flag::PNI // LDDQU xmm, m128
+, FlagSet::empty()+Flag::SSE // LDMXCSR m32
+, FlagSet::empty() // LEA r16, m16
+, FlagSet::empty() // LEA r16, m32
+, FlagSet::empty() // LEA r16, m64
+, FlagSet::empty() // LEA r32, m16
+, FlagSet::empty() // LEA r32, m32
+, FlagSet::empty() // LEA r32, m64
+, FlagSet::empty() // LEA r64, m16
+, FlagSet::empty() // LEA r64, m32
+, FlagSet::empty() // LEA r64, m64
+, FlagSet::empty() // LEAVE 
+, FlagSet::empty() // LEAVE p66
+, FlagSet::empty() // LFENCE 
+, FlagSet::empty() // LFS r16, m16:16
+, FlagSet::empty() // LFS r32, m16:32
+, FlagSet::empty() // LFS r64, m16:64
+, FlagSet::empty() // LGS r16, m16:16
+, FlagSet::empty() // LGS r32, m16:32
+, FlagSet::empty() // LGS r64, m16:64
+, FlagSet::empty() // LOCK 
+, FlagSet::empty() // LODS m16
+, FlagSet::empty() // LODS m32
+, FlagSet::empty() // LODS m64
+, FlagSet::empty() // LODS m8
+, FlagSet::empty() // LODSB 
+, FlagSet::empty() // LODSD 
+, FlagSet::empty() // LODSQ 
+, FlagSet::empty() // LODSW 
+, FlagSet::empty() // LOOP label8
+, FlagSet::empty() // LOOP rel8
+, FlagSet::empty() // LOOPE label8
+, FlagSet::empty() // LOOPE rel8
+, FlagSet::empty() // LOOPNE label8
+, FlagSet::empty() // LOOPNE rel8
+, FlagSet::empty() // LSL r16, m16
+, FlagSet::empty() // LSL r16, r16
+, FlagSet::empty() // LSL r32, m16
+, FlagSet::empty() // LSL r32, r32
+, FlagSet::empty() // LSL r64, m16
+, FlagSet::empty() // LSL r64, r32
+, FlagSet::empty() // LSS r16, m16:16
+, FlagSet::empty() // LSS r32, m16:32
+, FlagSet::empty() // LSS r64, m16:64
+, FlagSet::empty()+Flag::BMI1 // LZCNT r16, m16
+, FlagSet::empty()+Flag::BMI1 // LZCNT r16, r16
+, FlagSet::empty()+Flag::BMI1 // LZCNT r32, m32
+, FlagSet::empty()+Flag::BMI1 // LZCNT r32, r32
+, FlagSet::empty()+Flag::BMI1 // LZCNT r64, m64
+, FlagSet::empty()+Flag::BMI1 // LZCNT r64, r64
+, FlagSet::empty()+Flag::SSE2 // MASKMOVDQU xmm, xmm
+, FlagSet::empty() // MASKMOVQ mm, mm
+, FlagSet::empty()+Flag::SSE2 // MAXPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // MAXPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // MAXPS xmm, m128
+, FlagSet::empty()+Flag::SSE // MAXPS xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // MAXSD xmm, m64
+, FlagSet::empty()+Flag::SSE2 // MAXSD xmm, xmm
+, FlagSet::empty()+Flag::SSE // MAXSS xmm, m32
+, FlagSet::empty()+Flag::SSE // MAXSS xmm, xmm
+, FlagSet::empty() // MFENCE 
+, FlagSet::empty()+Flag::SSE2 // MINPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // MINPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // MINPS xmm, m128
+, FlagSet::empty()+Flag::SSE // MINPS xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // MINSD xmm, m64
+, FlagSet::empty()+Flag::SSE2 // MINSD xmm, xmm
+, FlagSet::empty()+Flag::SSE // MINSS xmm, m32
+, FlagSet::empty()+Flag::SSE // MINSS xmm, xmm
+, FlagSet::empty()+Flag::MONITOR // MONITOR 
+, FlagSet::empty() // MOV AL, moffs8
+, FlagSet::empty() // MOV AL, moffs8, pw
+, FlagSet::empty() // MOV AX, moffs16
+, FlagSet::empty() // MOV EAX, moffs32
+, FlagSet::empty() // MOV m16, imm16
+, FlagSet::empty() // MOV m16, r16
+, FlagSet::empty() // MOV m16, Sreg
+, FlagSet::empty() // MOV m32, imm32
+, FlagSet::empty() // MOV m32, r32
+, FlagSet::empty() // MOV m64, imm32
+, FlagSet::empty() // MOV m64, r64
+, FlagSet::empty() // MOV m64, Sreg
+, FlagSet::empty() // MOV m8, imm8
+, FlagSet::empty() // MOV m8, r8
+, FlagSet::empty() // MOV m8, rh
+, FlagSet::empty() // MOV moffs16, AX
+, FlagSet::empty() // MOV moffs32, EAX
+, FlagSet::empty() // MOV moffs64, RAX
+, FlagSet::empty() // MOV moffs8, AL
+, FlagSet::empty() // MOV moffs8, AL, pw
+, FlagSet::empty() // MOV r16, imm16
+, FlagSet::empty() // MOV r16, imm16
+, FlagSet::empty() // MOV r16, m16
+, FlagSet::empty() // MOV r16, r16
+, FlagSet::empty() // MOV r16, r16
+, FlagSet::empty() // MOV r16, Sreg
+, FlagSet::empty() // MOV r32, imm32
+, FlagSet::empty() // MOV r32, imm32
+, FlagSet::empty() // MOV r32, m32
+, FlagSet::empty() // MOV r32, r32
+, FlagSet::empty() // MOV r32, r32
+, FlagSet::empty() // MOV r64, imm32
+, FlagSet::empty() // MOV r64, imm64
+, FlagSet::empty() // MOV r64, m64
+, FlagSet::empty() // MOV r64, r64
+, FlagSet::empty() // MOV r64, r64
+, FlagSet::empty() // MOV r64, Sreg
+, FlagSet::empty() // MOV r8, imm8
+, FlagSet::empty() // MOV r8, imm8
+, FlagSet::empty() // MOV r8, m8
+, FlagSet::empty() // MOV r8, r8
+, FlagSet::empty() // MOV r8, r8
+, FlagSet::empty() // MOV r8, rh
+, FlagSet::empty() // MOV r8, rh
+, FlagSet::empty() // MOV RAX, moffs64
+, FlagSet::empty() // MOV rh, imm8
+, FlagSet::empty() // MOV rh, imm8
+, FlagSet::empty() // MOV rh, m8
+, FlagSet::empty() // MOV rh, r8
+, FlagSet::empty() // MOV rh, r8
+, FlagSet::empty() // MOV rh, rh
+, FlagSet::empty() // MOV rh, rh
+, FlagSet::empty() // MOV Sreg, m16
+, FlagSet::empty() // MOV Sreg, m64
+, FlagSet::empty() // MOV Sreg, r16
+, FlagSet::empty() // MOV Sreg, r64
+, FlagSet::empty()+Flag::SSE2 // MOVAPD m128, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVAPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // MOVAPD xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVAPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // MOVAPS m128, xmm
+, FlagSet::empty()+Flag::SSE // MOVAPS xmm, m128
+, FlagSet::empty()+Flag::SSE // MOVAPS xmm, xmm
+, FlagSet::empty()+Flag::SSE // MOVAPS xmm, xmm
+, FlagSet::empty()+Flag::MOVBE // MOVBE m16, r16
+, FlagSet::empty()+Flag::MOVBE // MOVBE m32, r32
+, FlagSet::empty()+Flag::MOVBE // MOVBE m64, r64
+, FlagSet::empty()+Flag::MOVBE // MOVBE r16, m16
+, FlagSet::empty()+Flag::MOVBE // MOVBE r32, m32
+, FlagSet::empty()+Flag::MOVBE // MOVBE r64, m64
+, FlagSet::empty()+Flag::MMX // MOVD m32, mm
+, FlagSet::empty()+Flag::SSE2 // MOVD m32, xmm
+, FlagSet::empty()+Flag::MMX // MOVD mm, m32
+, FlagSet::empty()+Flag::MMX // MOVD mm, r32
+, FlagSet::empty()+Flag::MMX // MOVD r32, mm
+, FlagSet::empty()+Flag::SSE2 // MOVD r32, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVD xmm, m32
+, FlagSet::empty()+Flag::SSE2 // MOVD xmm, r32
+, FlagSet::empty()+Flag::PNI // MOVDDUP xmm, m64
+, FlagSet::empty()+Flag::PNI // MOVDDUP xmm, xmm
+, FlagSet::empty()+Flag::MMX // MOVDQ2Q mm, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVDQA m128, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVDQA xmm, m128
+, FlagSet::empty()+Flag::SSE2 // MOVDQA xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVDQA xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVDQU m128, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVDQU xmm, m128
+, FlagSet::empty()+Flag::SSE2 // MOVDQU xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVDQU xmm, xmm
+, FlagSet::empty()+Flag::SSE // MOVHLPS xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVHPD m64, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVHPD xmm, m64
+, FlagSet::empty()+Flag::SSE // MOVHPS m64, xmm
+, FlagSet::empty()+Flag::SSE // MOVHPS xmm, m64
+, FlagSet::empty()+Flag::SSE // MOVLHPS xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVLPD m64, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVLPD xmm, m64
+, FlagSet::empty()+Flag::SSE // MOVLPS m64, xmm
+, FlagSet::empty()+Flag::SSE // MOVLPS xmm, m64
+, FlagSet::empty()+Flag::SSE2 // MOVMSKPD r32, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVMSKPD r64, xmm
+, FlagSet::empty()+Flag::SSE // MOVMSKPS r32, xmm
+, FlagSet::empty()+Flag::SSE // MOVMSKPS r64, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVNTDQ m128, xmm
+, FlagSet::empty()+Flag::AVX // MOVNTDQ m256, ymm
+, FlagSet::empty()+Flag::SSE4_1 // MOVNTDQA xmm, m128
+, FlagSet::empty() // MOVNTI m32, r32
+, FlagSet::empty() // MOVNTI m64, r64
+, FlagSet::empty()+Flag::SSE2 // MOVNTPD m128, xmm
+, FlagSet::empty()+Flag::SSE // MOVNTPS m128, xmm
+, FlagSet::empty() // MOVNTQ m64, mm
+, FlagSet::empty()+Flag::MMX // MOVQ m64, mm
+, FlagSet::empty()+Flag::MMX // MOVQ m64, mm
+, FlagSet::empty()+Flag::SSE2 // MOVQ m64, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVQ m64, xmm
+, FlagSet::empty()+Flag::MMX // MOVQ mm, m64
+, FlagSet::empty()+Flag::MMX // MOVQ mm, m64
+, FlagSet::empty()+Flag::MMX // MOVQ mm, mm
+, FlagSet::empty()+Flag::MMX // MOVQ mm, mm
+, FlagSet::empty()+Flag::MMX // MOVQ mm, r64
+, FlagSet::empty()+Flag::MMX // MOVQ r64, mm
+, FlagSet::empty()+Flag::SSE2 // MOVQ r64, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVQ xmm, m64
+, FlagSet::empty()+Flag::SSE2 // MOVQ xmm, m64
+, FlagSet::empty()+Flag::SSE2 // MOVQ xmm, r64
+, FlagSet::empty()+Flag::SSE2 // MOVQ xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVQ xmm, xmm
+, FlagSet::empty()+Flag::MMX // MOVQ2DQ xmm, mm
+, FlagSet::empty() // MOVS m16, m16
+, FlagSet::empty() // MOVS m32, m32
+, FlagSet::empty() // MOVS m64, m64
+, FlagSet::empty() // MOVS m8, m8
+, FlagSet::empty() // MOVSB 
+, FlagSet::empty() // MOVSD 
+, FlagSet::empty()+Flag::SSE2 // MOVSD m64, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVSD xmm, m64
+, FlagSet::empty()+Flag::SSE2 // MOVSD xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVSD xmm, xmm
+, FlagSet::empty()+Flag::PNI // MOVSHDUP xmm, m128
+, FlagSet::empty()+Flag::PNI // MOVSHDUP xmm, xmm
+, FlagSet::empty()+Flag::PNI // MOVSLDUP xmm, m128
+, FlagSet::empty()+Flag::PNI // MOVSLDUP xmm, xmm
+, FlagSet::empty() // MOVSQ 
+, FlagSet::empty()+Flag::SSE // MOVSS m32, xmm
+, FlagSet::empty()+Flag::SSE // MOVSS xmm, m32
+, FlagSet::empty()+Flag::SSE // MOVSS xmm, xmm
+, FlagSet::empty()+Flag::SSE // MOVSS xmm, xmm
+, FlagSet::empty() // MOVSW 
+, FlagSet::empty() // MOVSX r16, m8
+, FlagSet::empty() // MOVSX r16, r8
+, FlagSet::empty() // MOVSX r16, rh
+, FlagSet::empty() // MOVSX r32, m16
+, FlagSet::empty() // MOVSX r32, m8
+, FlagSet::empty() // MOVSX r32, r16
+, FlagSet::empty() // MOVSX r32, r8
+, FlagSet::empty() // MOVSX r32, rh
+, FlagSet::empty() // MOVSX r64, m16
+, FlagSet::empty() // MOVSX r64, m8
+, FlagSet::empty() // MOVSX r64, r16
+, FlagSet::empty() // MOVSX r64, r8
+, FlagSet::empty() // MOVSXD r64, m32
+, FlagSet::empty() // MOVSXD r64, r32
+, FlagSet::empty()+Flag::SSE2 // MOVUPD m128, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVUPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // MOVUPD xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // MOVUPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // MOVUPS m128, xmm
+, FlagSet::empty()+Flag::SSE // MOVUPS xmm, m128
+, FlagSet::empty()+Flag::SSE // MOVUPS xmm, xmm
+, FlagSet::empty()+Flag::SSE // MOVUPS xmm, xmm
+, FlagSet::empty() // MOVZX r16, m8
+, FlagSet::empty() // MOVZX r16, r8
+, FlagSet::empty() // MOVZX r16, rh
+, FlagSet::empty() // MOVZX r32, m16
+, FlagSet::empty() // MOVZX r32, m8
+, FlagSet::empty() // MOVZX r32, r16
+, FlagSet::empty() // MOVZX r32, r8
+, FlagSet::empty() // MOVZX r32, rh
+, FlagSet::empty() // MOVZX r64, m16
+, FlagSet::empty() // MOVZX r64, m8
+, FlagSet::empty() // MOVZX r64, r16
+, FlagSet::empty() // MOVZX r64, r8
+, FlagSet::empty()+Flag::SSE4_1 // MPSADBW xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE4_1 // MPSADBW xmm, xmm, imm8
+, FlagSet::empty() // MUL m16
+, FlagSet::empty() // MUL m32
+, FlagSet::empty() // MUL m64
+, FlagSet::empty() // MUL m8
+, FlagSet::empty() // MUL r16
+, FlagSet::empty() // MUL r32
+, FlagSet::empty() // MUL r64
+, FlagSet::empty() // MUL r8
+, FlagSet::empty() // MUL rh
+, FlagSet::empty()+Flag::SSE2 // MULPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // MULPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // MULPS xmm, m128
+, FlagSet::empty()+Flag::SSE // MULPS xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // MULSD xmm, m64
+, FlagSet::empty()+Flag::SSE2 // MULSD xmm, xmm
+, FlagSet::empty()+Flag::SSE // MULSS xmm, m32
+, FlagSet::empty()+Flag::SSE // MULSS xmm, xmm
+, FlagSet::empty()+Flag::BMI2 // MULX r32, r32, m32
+, FlagSet::empty()+Flag::BMI2 // MULX r32, r32, r32
+, FlagSet::empty()+Flag::BMI2 // MULX r64, r64, m64
+, FlagSet::empty()+Flag::BMI2 // MULX r64, r64, r64
+, FlagSet::empty()+Flag::MONITOR // MWAIT 
+, FlagSet::empty() // NEG m16
+, FlagSet::empty() // NEG m32
+, FlagSet::empty() // NEG m64
+, FlagSet::empty() // NEG m8
+, FlagSet::empty() // NEG r16
+, FlagSet::empty() // NEG r32
+, FlagSet::empty() // NEG r64
+, FlagSet::empty() // NEG r8
+, FlagSet::empty() // NEG rh
+, FlagSet::empty() // NOP 
+, FlagSet::empty()+Flag::NOPL // NOP m16
+, FlagSet::empty()+Flag::NOPL // NOP m32
+, FlagSet::empty()+Flag::NOPL // NOP r16
+, FlagSet::empty()+Flag::NOPL // NOP r32
+, FlagSet::empty() // NOT m16
+, FlagSet::empty() // NOT m32
+, FlagSet::empty() // NOT m64
+, FlagSet::empty() // NOT m8
+, FlagSet::empty() // NOT r16
+, FlagSet::empty() // NOT r32
+, FlagSet::empty() // NOT r64
+, FlagSet::empty() // NOT r8
+, FlagSet::empty() // NOT rh
+, FlagSet::empty() // OR AL, imm8
+, FlagSet::empty() // OR AX, imm16
+, FlagSet::empty() // OR EAX, imm32
+, FlagSet::empty() // OR m16, imm16
+, FlagSet::empty() // OR m16, imm8
+, FlagSet::empty() // OR m16, r16
+, FlagSet::empty() // OR m32, imm32
+, FlagSet::empty() // OR m32, imm8
+, FlagSet::empty() // OR m32, r32
+, FlagSet::empty() // OR m64, imm32
+, FlagSet::empty() // OR m64, imm8
+, FlagSet::empty() // OR m64, r64
+, FlagSet::empty() // OR m8, imm8
+, FlagSet::empty() // OR m8, r8
+, FlagSet::empty() // OR m8, rh
+, FlagSet::empty() // OR r16, imm16
+, FlagSet::empty() // OR r16, imm8
+, FlagSet::empty() // OR r16, m16
+, FlagSet::empty() // OR r16, r16
+, FlagSet::empty() // OR r16, r16
+, FlagSet::empty() // OR r32, imm32
+, FlagSet::empty() // OR r32, imm8
+, FlagSet::empty() // OR r32, m32
+, FlagSet::empty() // OR r32, r32
+, FlagSet::empty() // OR r32, r32
+, FlagSet::empty() // OR r64, imm32
+, FlagSet::empty() // OR r64, imm8
+, FlagSet::empty() // OR r64, m64
+, FlagSet::empty() // OR r64, r64
+, FlagSet::empty() // OR r64, r64
+, FlagSet::empty() // OR r8, imm8
+, FlagSet::empty() // OR r8, m8
+, FlagSet::empty() // OR r8, r8
+, FlagSet::empty() // OR r8, r8
+, FlagSet::empty() // OR r8, rh
+, FlagSet::empty() // OR r8, rh
+, FlagSet::empty() // OR RAX, imm32
+, FlagSet::empty() // OR rh, imm8
+, FlagSet::empty() // OR rh, m8
+, FlagSet::empty() // OR rh, r8
+, FlagSet::empty() // OR rh, r8
+, FlagSet::empty() // OR rh, rh
+, FlagSet::empty() // OR rh, rh
+, FlagSet::empty()+Flag::SSE2 // ORPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // ORPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // ORPS xmm, m128
+, FlagSet::empty()+Flag::SSE // ORPS xmm, xmm
+, FlagSet::empty() // OUT DX, AL
+, FlagSet::empty() // OUT DX, AX
+, FlagSet::empty() // OUT DX, EAX
+, FlagSet::empty() // OUT imm8, AL
+, FlagSet::empty() // OUT imm8, AX
+, FlagSet::empty() // OUT imm8, EAX
+, FlagSet::empty() // OUTS DX, m16
+, FlagSet::empty() // OUTS DX, m32
+, FlagSet::empty() // OUTS DX, m8
+, FlagSet::empty() // OUTSB 
+, FlagSet::empty() // OUTSD 
+, FlagSet::empty() // OUTSW 
+, FlagSet::empty()+Flag::SSSE3 // PABSB mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PABSB mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PABSB xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PABSB xmm, xmm
+, FlagSet::empty()+Flag::SSSE3 // PABSD mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PABSD mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PABSD xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PABSD xmm, xmm
+, FlagSet::empty()+Flag::SSSE3 // PABSW mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PABSW mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PABSW xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PABSW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PACKSSDW mm, m64
+, FlagSet::empty()+Flag::MMX // PACKSSDW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PACKSSDW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PACKSSDW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PACKSSWB mm, m64
+, FlagSet::empty()+Flag::MMX // PACKSSWB mm, mm
+, FlagSet::empty()+Flag::SSE2 // PACKSSWB xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PACKSSWB xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PACKUSDW xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PACKUSDW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PACKUSWB mm, m64
+, FlagSet::empty()+Flag::MMX // PACKUSWB mm, mm
+, FlagSet::empty()+Flag::SSE2 // PACKUSWB xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PACKUSWB xmm, xmm
+, FlagSet::empty()+Flag::MMX // PADDB mm, m64
+, FlagSet::empty()+Flag::MMX // PADDB mm, mm
+, FlagSet::empty()+Flag::SSE2 // PADDB xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PADDB xmm, xmm
+, FlagSet::empty()+Flag::MMX // PADDD mm, m64
+, FlagSet::empty()+Flag::MMX // PADDD mm, mm
+, FlagSet::empty()+Flag::SSE2 // PADDD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PADDD xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // PADDQ mm, m64
+, FlagSet::empty()+Flag::SSE2 // PADDQ mm, mm
+, FlagSet::empty()+Flag::SSE2 // PADDQ xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PADDQ xmm, xmm
+, FlagSet::empty()+Flag::MMX // PADDSB mm, m64
+, FlagSet::empty()+Flag::MMX // PADDSB mm, mm
+, FlagSet::empty()+Flag::SSE2 // PADDSB xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PADDSB xmm, xmm
+, FlagSet::empty()+Flag::MMX // PADDSW mm, m64
+, FlagSet::empty()+Flag::MMX // PADDSW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PADDSW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PADDSW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PADDUSB mm, m64
+, FlagSet::empty()+Flag::MMX // PADDUSB mm, mm
+, FlagSet::empty()+Flag::SSE2 // PADDUSB xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PADDUSB xmm, xmm
+, FlagSet::empty()+Flag::MMX // PADDUSW mm, m64
+, FlagSet::empty()+Flag::MMX // PADDUSW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PADDUSW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PADDUSW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PADDW mm, m64
+, FlagSet::empty()+Flag::MMX // PADDW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PADDW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PADDW xmm, xmm
+, FlagSet::empty()+Flag::SSSE3 // PALIGNR mm, m64, imm8
+, FlagSet::empty()+Flag::SSSE3 // PALIGNR mm, mm, imm8
+, FlagSet::empty()+Flag::SSSE3 // PALIGNR xmm, m128, imm8
+, FlagSet::empty()+Flag::SSSE3 // PALIGNR xmm, xmm, imm8
+, FlagSet::empty()+Flag::MMX // PAND mm, m64
+, FlagSet::empty()+Flag::MMX // PAND mm, mm
+, FlagSet::empty()+Flag::SSE2 // PAND xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PAND xmm, xmm
+, FlagSet::empty()+Flag::MMX // PANDN mm, m64
+, FlagSet::empty()+Flag::MMX // PANDN mm, mm
+, FlagSet::empty()+Flag::SSE2 // PANDN xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PANDN xmm, xmm
+, FlagSet::empty() // PAUSE 
+, FlagSet::empty()+Flag::SSE // PAVGB mm, m64
+, FlagSet::empty()+Flag::SSE // PAVGB mm, mm
+, FlagSet::empty()+Flag::SSE2 // PAVGB xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PAVGB xmm, xmm
+, FlagSet::empty()+Flag::SSE // PAVGW mm, m64
+, FlagSet::empty()+Flag::SSE // PAVGW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PAVGW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PAVGW xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PBLENDVB xmm, m128, <XMM0>
+, FlagSet::empty()+Flag::SSE4_1 // PBLENDVB xmm, xmm, <XMM0>
+, FlagSet::empty()+Flag::SSE4_1 // PBLENDW xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE4_1 // PBLENDW xmm, xmm, imm8
+, FlagSet::empty()+Flag::PCLMULQDQ // PCLMULQDQ xmm, m128, imm8
+, FlagSet::empty()+Flag::PCLMULQDQ // PCLMULQDQ xmm, xmm, imm8
+, FlagSet::empty()+Flag::MMX // PCMPEQB mm, m64
+, FlagSet::empty()+Flag::MMX // PCMPEQB mm, mm
+, FlagSet::empty()+Flag::SSE2 // PCMPEQB xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PCMPEQB xmm, xmm
+, FlagSet::empty()+Flag::MMX // PCMPEQD mm, m64
+, FlagSet::empty()+Flag::MMX // PCMPEQD mm, mm
+, FlagSet::empty()+Flag::SSE2 // PCMPEQD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PCMPEQD xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PCMPEQQ xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PCMPEQQ xmm, xmm
+, FlagSet::empty()+Flag::MMX // PCMPEQW mm, m64
+, FlagSet::empty()+Flag::MMX // PCMPEQW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PCMPEQW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PCMPEQW xmm, xmm
+, FlagSet::empty()+Flag::SSE4_2 // PCMPESTRI xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE4_2 // PCMPESTRI xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_2 // PCMPESTRM xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE4_2 // PCMPESTRM xmm, xmm, imm8
+, FlagSet::empty()+Flag::MMX // PCMPGTB mm, m64
+, FlagSet::empty()+Flag::MMX // PCMPGTB mm, mm
+, FlagSet::empty()+Flag::SSE2 // PCMPGTB xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PCMPGTB xmm, xmm
+, FlagSet::empty()+Flag::MMX // PCMPGTD mm, m64
+, FlagSet::empty()+Flag::MMX // PCMPGTD mm, mm
+, FlagSet::empty()+Flag::SSE2 // PCMPGTD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PCMPGTD xmm, xmm
+, FlagSet::empty()+Flag::SSE4_2 // PCMPGTQ xmm, m128
+, FlagSet::empty()+Flag::SSE4_2 // PCMPGTQ xmm, xmm
+, FlagSet::empty()+Flag::MMX // PCMPGTW mm, m64
+, FlagSet::empty()+Flag::MMX // PCMPGTW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PCMPGTW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PCMPGTW xmm, xmm
+, FlagSet::empty()+Flag::SSE4_2 // PCMPISTRI xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE4_2 // PCMPISTRI xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_2 // PCMPISTRM xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE4_2 // PCMPISTRM xmm, xmm, imm8
+, FlagSet::empty()+Flag::BMI2 // PDEP r32, r32, m32
+, FlagSet::empty()+Flag::BMI2 // PDEP r32, r32, r32
+, FlagSet::empty()+Flag::BMI2 // PDEP r64, r64, m64
+, FlagSet::empty()+Flag::BMI2 // PDEP r64, r64, r64
+, FlagSet::empty()+Flag::BMI2 // PEXT r32, r32, m32
+, FlagSet::empty()+Flag::BMI2 // PEXT r32, r32, r32
+, FlagSet::empty()+Flag::BMI2 // PEXT r64, r64, m64
+, FlagSet::empty()+Flag::BMI2 // PEXT r64, r64, r64
+, FlagSet::empty()+Flag::SSE4_1 // PEXTRB m8, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // PEXTRB r32, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // PEXTRB r64, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // PEXTRD m32, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // PEXTRD r32, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // PEXTRQ m64, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // PEXTRQ r64, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // PEXTRW m16, xmm, imm8
+, FlagSet::empty()+Flag::SSE // PEXTRW r32, mm, imm8
+, FlagSet::empty()+Flag::SSE2 // PEXTRW r32, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // PEXTRW r32, xmm, imm8
+, FlagSet::empty()+Flag::SSE // PEXTRW r64, mm, imm8
+, FlagSet::empty()+Flag::SSE2 // PEXTRW r64, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // PEXTRW r64, xmm, imm8
+, FlagSet::empty()+Flag::SSSE3 // PHADDD mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PHADDD mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PHADDD xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PHADDD xmm, xmm
+, FlagSet::empty()+Flag::SSSE3 // PHADDSW mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PHADDSW mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PHADDSW xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PHADDSW xmm, xmm
+, FlagSet::empty()+Flag::SSSE3 // PHADDW mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PHADDW mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PHADDW xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PHADDW xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PHMINPOSUW xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PHMINPOSUW xmm, xmm
+, FlagSet::empty()+Flag::SSSE3 // PHSUBD mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PHSUBD mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PHSUBD xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PHSUBD xmm, xmm
+, FlagSet::empty()+Flag::SSSE3 // PHSUBSW mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PHSUBSW mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PHSUBSW xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PHSUBSW xmm, xmm
+, FlagSet::empty()+Flag::SSSE3 // PHSUBW mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PHSUBW mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PHSUBW xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PHSUBW xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PINSRB xmm, m8, imm8
+, FlagSet::empty()+Flag::SSE4_1 // PINSRB xmm, r32, imm8
+, FlagSet::empty()+Flag::SSE4_1 // PINSRD xmm, m32, imm8
+, FlagSet::empty()+Flag::SSE4_1 // PINSRD xmm, r32, imm8
+, FlagSet::empty()+Flag::SSE // PINSRW mm, m16, imm8
+, FlagSet::empty()+Flag::SSE // PINSRW mm, r32, imm8
+, FlagSet::empty()+Flag::SSE2 // PINSRW xmm, m16, imm8
+, FlagSet::empty()+Flag::SSE2 // PINSRW xmm, r32, imm8
+, FlagSet::empty()+Flag::MMX+Flag::SSSE3 // PMADDUBSW mm, m64
+, FlagSet::empty()+Flag::MMX+Flag::SSSE3 // PMADDUBSW mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PMADDUBSW xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PMADDUBSW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PMADDWD mm, m64
+, FlagSet::empty()+Flag::MMX // PMADDWD mm, mm
+, FlagSet::empty()+Flag::SSE2 // PMADDWD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PMADDWD xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMAXSB xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PMAXSB xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMAXSD xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PMAXSD xmm, xmm
+, FlagSet::empty()+Flag::SSE // PMAXSW mm, m64
+, FlagSet::empty()+Flag::SSE // PMAXSW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PMAXSW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PMAXSW xmm, xmm
+, FlagSet::empty()+Flag::SSE // PMAXUB mm, m64
+, FlagSet::empty()+Flag::SSE // PMAXUB mm, mm
+, FlagSet::empty()+Flag::SSE2 // PMAXUB xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PMAXUB xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMAXUD xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PMAXUD xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMAXUW xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PMAXUW xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMINSB xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PMINSB xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMINSD xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PMINSD xmm, xmm
+, FlagSet::empty()+Flag::SSE // PMINSW mm, m64
+, FlagSet::empty()+Flag::SSE // PMINSW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PMINSW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PMINSW xmm, xmm
+, FlagSet::empty()+Flag::SSE // PMINUB mm, m64
+, FlagSet::empty()+Flag::SSE // PMINUB mm, mm
+, FlagSet::empty()+Flag::SSE2 // PMINUB xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PMINUB xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMINUD xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PMINUD xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMINUW xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PMINUW xmm, xmm
+, FlagSet::empty()+Flag::SSE // PMOVMSKB r32, mm
+, FlagSet::empty()+Flag::SSE2 // PMOVMSKB r32, xmm
+, FlagSet::empty()+Flag::SSE // PMOVMSKB r64, mm
+, FlagSet::empty()+Flag::SSE2 // PMOVMSKB r64, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMOVSXBD xmm, m32
+, FlagSet::empty()+Flag::SSE4_1 // PMOVSXBD xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMOVSXBQ xmm, m16
+, FlagSet::empty()+Flag::SSE4_1 // PMOVSXBQ xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMOVSXBW xmm, m64
+, FlagSet::empty()+Flag::SSE4_1 // PMOVSXBW xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMOVSXDQ xmm, m64
+, FlagSet::empty()+Flag::SSE4_1 // PMOVSXDQ xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMOVSXWD xmm, m64
+, FlagSet::empty()+Flag::SSE4_1 // PMOVSXWD xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMOVSXWQ xmm, m32
+, FlagSet::empty()+Flag::SSE4_1 // PMOVSXWQ xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMOVZXBD xmm, m32
+, FlagSet::empty()+Flag::SSE4_1 // PMOVZXBD xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMOVZXBQ xmm, m16
+, FlagSet::empty()+Flag::SSE4_1 // PMOVZXBQ xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMOVZXBW xmm, m64
+, FlagSet::empty()+Flag::SSE4_1 // PMOVZXBW xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMOVZXDQ xmm, m64
+, FlagSet::empty()+Flag::SSE4_1 // PMOVZXDQ xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMOVZXWD xmm, m64
+, FlagSet::empty()+Flag::SSE4_1 // PMOVZXWD xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMOVZXWQ xmm, m32
+, FlagSet::empty()+Flag::SSE4_1 // PMOVZXWQ xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMULDQ xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PMULDQ xmm, xmm
+, FlagSet::empty()+Flag::SSSE3 // PMULHRSW mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PMULHRSW mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PMULHRSW xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PMULHRSW xmm, xmm
+, FlagSet::empty()+Flag::SSE // PMULHUW mm, m64
+, FlagSet::empty()+Flag::SSE // PMULHUW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PMULHUW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PMULHUW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PMULHW mm, m64
+, FlagSet::empty()+Flag::MMX // PMULHW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PMULHW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PMULHW xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PMULLD xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PMULLD xmm, xmm
+, FlagSet::empty()+Flag::MMX // PMULLW mm, m64
+, FlagSet::empty()+Flag::MMX // PMULLW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PMULLW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PMULLW xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // PMULUDQ mm, m64
+, FlagSet::empty()+Flag::SSE2 // PMULUDQ mm, mm
+, FlagSet::empty()+Flag::SSE2 // PMULUDQ xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PMULUDQ xmm, xmm
+, FlagSet::empty() // POP FS
+, FlagSet::empty() // POP FS, p66
+, FlagSet::empty() // POP GS
+, FlagSet::empty() // POP GS, p66
+, FlagSet::empty() // POP m16
+, FlagSet::empty() // POP m64
+, FlagSet::empty() // POP r16
+, FlagSet::empty() // POP r16
+, FlagSet::empty() // POP r64
+, FlagSet::empty() // POP r64
+, FlagSet::empty()+Flag::POPCNT // POPCNT r16, m16
+, FlagSet::empty()+Flag::POPCNT // POPCNT r16, r16
+, FlagSet::empty()+Flag::POPCNT // POPCNT r32, m32
+, FlagSet::empty()+Flag::POPCNT // POPCNT r32, r32
+, FlagSet::empty()+Flag::POPCNT // POPCNT r64, m64
+, FlagSet::empty()+Flag::POPCNT // POPCNT r64, r64
+, FlagSet::empty() // POPF 
+, FlagSet::empty() // POPFQ 
+, FlagSet::empty()+Flag::MMX // POR mm, m64
+, FlagSet::empty()+Flag::MMX // POR mm, mm
+, FlagSet::empty()+Flag::SSE2 // POR xmm, m128
+, FlagSet::empty()+Flag::SSE2 // POR xmm, xmm
+, FlagSet::empty() // PREFETCHNTA m8
+, FlagSet::empty() // PREFETCHT0 m8
+, FlagSet::empty() // PREFETCHT1 m8
+, FlagSet::empty() // PREFETCHT2 m8
+, FlagSet::empty()+Flag::SSE // PSADBW mm, m64
+, FlagSet::empty()+Flag::SSE // PSADBW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSADBW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSADBW xmm, xmm
+, FlagSet::empty()+Flag::SSSE3 // PSHUFB mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PSHUFB mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PSHUFB xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PSHUFB xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // PSHUFD xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE2 // PSHUFD xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE2 // PSHUFHW xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE2 // PSHUFHW xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE2 // PSHUFLW xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE2 // PSHUFLW xmm, xmm, imm8
+, FlagSet::empty() // PSHUFW mm, m64, imm8
+, FlagSet::empty() // PSHUFW mm, mm, imm8
+, FlagSet::empty()+Flag::SSSE3 // PSIGNB mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PSIGNB mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PSIGNB xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PSIGNB xmm, xmm
+, FlagSet::empty()+Flag::SSSE3 // PSIGND mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PSIGND mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PSIGND xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PSIGND xmm, xmm
+, FlagSet::empty()+Flag::SSSE3 // PSIGNW mm, m64
+, FlagSet::empty()+Flag::SSSE3 // PSIGNW mm, mm
+, FlagSet::empty()+Flag::SSSE3 // PSIGNW xmm, m128
+, FlagSet::empty()+Flag::SSSE3 // PSIGNW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PSLLD mm, imm8
+, FlagSet::empty()+Flag::MMX // PSLLD mm, m64
+, FlagSet::empty()+Flag::MMX // PSLLD mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSLLD xmm, imm8
+, FlagSet::empty()+Flag::SSE2 // PSLLD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSLLD xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // PSLLDQ xmm, imm8
+, FlagSet::empty()+Flag::MMX // PSLLQ mm, imm8
+, FlagSet::empty()+Flag::MMX // PSLLQ mm, m64
+, FlagSet::empty()+Flag::MMX // PSLLQ mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSLLQ xmm, imm8
+, FlagSet::empty()+Flag::SSE2 // PSLLQ xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSLLQ xmm, xmm
+, FlagSet::empty()+Flag::MMX // PSLLW mm, imm8
+, FlagSet::empty()+Flag::MMX // PSLLW mm, m64
+, FlagSet::empty()+Flag::MMX // PSLLW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSLLW xmm, imm8
+, FlagSet::empty()+Flag::SSE2 // PSLLW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSLLW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PSRAD mm, imm8
+, FlagSet::empty()+Flag::MMX // PSRAD mm, m64
+, FlagSet::empty()+Flag::MMX // PSRAD mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSRAD xmm, imm8
+, FlagSet::empty()+Flag::SSE2 // PSRAD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSRAD xmm, xmm
+, FlagSet::empty()+Flag::MMX // PSRAW mm, imm8
+, FlagSet::empty()+Flag::MMX // PSRAW mm, m64
+, FlagSet::empty()+Flag::MMX // PSRAW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSRAW xmm, imm8
+, FlagSet::empty()+Flag::SSE2 // PSRAW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSRAW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PSRLD mm, imm8
+, FlagSet::empty()+Flag::MMX // PSRLD mm, m64
+, FlagSet::empty()+Flag::MMX // PSRLD mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSRLD xmm, imm8
+, FlagSet::empty()+Flag::SSE2 // PSRLD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSRLD xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // PSRLDQ xmm, imm8
+, FlagSet::empty()+Flag::MMX // PSRLQ mm, imm8
+, FlagSet::empty()+Flag::MMX // PSRLQ mm, m64
+, FlagSet::empty()+Flag::MMX // PSRLQ mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSRLQ xmm, imm8
+, FlagSet::empty()+Flag::SSE2 // PSRLQ xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSRLQ xmm, xmm
+, FlagSet::empty()+Flag::MMX // PSRLW mm, imm8
+, FlagSet::empty()+Flag::MMX // PSRLW mm, m64
+, FlagSet::empty()+Flag::MMX // PSRLW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSRLW xmm, imm8
+, FlagSet::empty()+Flag::SSE2 // PSRLW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSRLW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PSUBB mm, m64
+, FlagSet::empty()+Flag::MMX // PSUBB mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSUBB xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSUBB xmm, xmm
+, FlagSet::empty()+Flag::MMX // PSUBD mm, m64
+, FlagSet::empty()+Flag::MMX // PSUBD mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSUBD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSUBD xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // PSUBQ mm, m64
+, FlagSet::empty()+Flag::SSE2 // PSUBQ mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSUBQ xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSUBQ xmm, xmm
+, FlagSet::empty()+Flag::MMX // PSUBSB mm, m64
+, FlagSet::empty()+Flag::MMX // PSUBSB mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSUBSB xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSUBSB xmm, xmm
+, FlagSet::empty()+Flag::MMX // PSUBSW mm, m64
+, FlagSet::empty()+Flag::MMX // PSUBSW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSUBSW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSUBSW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PSUBUSB mm, m64
+, FlagSet::empty()+Flag::MMX // PSUBUSB mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSUBUSB xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSUBUSB xmm, xmm
+, FlagSet::empty()+Flag::MMX // PSUBUSW mm, m64
+, FlagSet::empty()+Flag::MMX // PSUBUSW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSUBUSW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSUBUSW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PSUBW mm, m64
+, FlagSet::empty()+Flag::MMX // PSUBW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PSUBW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PSUBW xmm, xmm
+, FlagSet::empty()+Flag::SSE4_1 // PTEST xmm, m128
+, FlagSet::empty()+Flag::SSE4_1 // PTEST xmm, xmm
+, FlagSet::empty()+Flag::MMX // PUNPCKHBW mm, m64
+, FlagSet::empty()+Flag::MMX // PUNPCKHBW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PUNPCKHBW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PUNPCKHBW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PUNPCKHDQ mm, m64
+, FlagSet::empty()+Flag::MMX // PUNPCKHDQ mm, mm
+, FlagSet::empty()+Flag::SSE2 // PUNPCKHDQ xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PUNPCKHDQ xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // PUNPCKHQDQ xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PUNPCKHQDQ xmm, xmm
+, FlagSet::empty()+Flag::MMX // PUNPCKHWD mm, m64
+, FlagSet::empty()+Flag::MMX // PUNPCKHWD mm, mm
+, FlagSet::empty()+Flag::SSE2 // PUNPCKHWD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PUNPCKHWD xmm, xmm
+, FlagSet::empty()+Flag::MMX // PUNPCKLBW mm, m32
+, FlagSet::empty()+Flag::MMX // PUNPCKLBW mm, mm
+, FlagSet::empty()+Flag::SSE2 // PUNPCKLBW xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PUNPCKLBW xmm, xmm
+, FlagSet::empty()+Flag::MMX // PUNPCKLDQ mm, m32
+, FlagSet::empty()+Flag::MMX // PUNPCKLDQ mm, mm
+, FlagSet::empty()+Flag::SSE2 // PUNPCKLDQ xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PUNPCKLDQ xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // PUNPCKLQDQ xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PUNPCKLQDQ xmm, xmm
+, FlagSet::empty()+Flag::MMX // PUNPCKLWD mm, m32
+, FlagSet::empty()+Flag::MMX // PUNPCKLWD mm, mm
+, FlagSet::empty()+Flag::SSE2 // PUNPCKLWD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PUNPCKLWD xmm, xmm
+, FlagSet::empty() // PUSH FS
+, FlagSet::empty() // PUSH GS
+, FlagSet::empty() // PUSH m16
+, FlagSet::empty() // PUSH m64
+, FlagSet::empty() // PUSH r16
+, FlagSet::empty() // PUSH r16
+, FlagSet::empty() // PUSH r64
+, FlagSet::empty() // PUSH r64
+, FlagSet::empty() // PUSHF 
+, FlagSet::empty() // PUSHFQ 
+, FlagSet::empty() // PUSHQ imm16
+, FlagSet::empty() // PUSHQ imm32
+, FlagSet::empty() // PUSHQ imm8
+, FlagSet::empty() // PUSHW imm16
+, FlagSet::empty() // PUSHW imm8
+, FlagSet::empty()+Flag::MMX // PXOR mm, m64
+, FlagSet::empty()+Flag::MMX // PXOR mm, mm
+, FlagSet::empty()+Flag::SSE2 // PXOR xmm, m128
+, FlagSet::empty()+Flag::SSE2 // PXOR xmm, xmm
+, FlagSet::empty() // RCL m16, CL
+, FlagSet::empty() // RCL m16, imm8
+, FlagSet::empty() // RCL m16, 1
+, FlagSet::empty() // RCL m32, CL
+, FlagSet::empty() // RCL m32, imm8
+, FlagSet::empty() // RCL m32, 1
+, FlagSet::empty() // RCL m64, CL
+, FlagSet::empty() // RCL m64, imm8
+, FlagSet::empty() // RCL m64, 1
+, FlagSet::empty() // RCL m8, CL
+, FlagSet::empty() // RCL m8, imm8
+, FlagSet::empty() // RCL m8, 1
+, FlagSet::empty() // RCL r16, CL
+, FlagSet::empty() // RCL r16, imm8
+, FlagSet::empty() // RCL r16, 1
+, FlagSet::empty() // RCL r32, CL
+, FlagSet::empty() // RCL r32, imm8
+, FlagSet::empty() // RCL r32, 1
+, FlagSet::empty() // RCL r64, CL
+, FlagSet::empty() // RCL r64, imm8
+, FlagSet::empty() // RCL r64, 1
+, FlagSet::empty() // RCL r8, CL
+, FlagSet::empty() // RCL r8, imm8
+, FlagSet::empty() // RCL r8, 1
+, FlagSet::empty() // RCL rh, CL
+, FlagSet::empty() // RCL rh, imm8
+, FlagSet::empty() // RCL rh, 1
+, FlagSet::empty()+Flag::SSE // RCPPS xmm, m128
+, FlagSet::empty()+Flag::SSE // RCPPS xmm, xmm
+, FlagSet::empty()+Flag::SSE // RCPSS xmm, m32
+, FlagSet::empty()+Flag::SSE // RCPSS xmm, xmm
+, FlagSet::empty() // RCR m16, CL
+, FlagSet::empty() // RCR m16, imm8
+, FlagSet::empty() // RCR m16, 1
+, FlagSet::empty() // RCR m32, CL
+, FlagSet::empty() // RCR m32, imm8
+, FlagSet::empty() // RCR m32, 1
+, FlagSet::empty() // RCR m64, CL
+, FlagSet::empty() // RCR m64, imm8
+, FlagSet::empty() // RCR m64, 1
+, FlagSet::empty() // RCR m8, CL
+, FlagSet::empty() // RCR m8, imm8
+, FlagSet::empty() // RCR m8, 1
+, FlagSet::empty() // RCR r16, CL
+, FlagSet::empty() // RCR r16, imm8
+, FlagSet::empty() // RCR r16, 1
+, FlagSet::empty() // RCR r32, CL
+, FlagSet::empty() // RCR r32, imm8
+, FlagSet::empty() // RCR r32, 1
+, FlagSet::empty() // RCR r64, CL
+, FlagSet::empty() // RCR r64, imm8
+, FlagSet::empty() // RCR r64, 1
+, FlagSet::empty() // RCR r8, CL
+, FlagSet::empty() // RCR r8, imm8
+, FlagSet::empty() // RCR r8, 1
+, FlagSet::empty() // RCR rh, CL
+, FlagSet::empty() // RCR rh, imm8
+, FlagSet::empty() // RCR rh, 1
+, FlagSet::empty()+Flag::FSGSBASE // RDFSBASE r32
+, FlagSet::empty()+Flag::FSGSBASE // RDFSBASE r64
+, FlagSet::empty()+Flag::FSGSBASE // RDGSBASE r32
+, FlagSet::empty()+Flag::FSGSBASE // RDGSBASE r64
+, FlagSet::empty()+Flag::RDRAND // RDRAND r16
+, FlagSet::empty()+Flag::RDRAND // RDRAND r32
+, FlagSet::empty()+Flag::RDRAND // RDRAND r64
+, FlagSet::empty()+Flag::REP_GOOD // REP_INS m16, DX
+, FlagSet::empty()+Flag::REP_GOOD // REP_INS m32, DX
+, FlagSet::empty()+Flag::REP_GOOD // REP_INS m64, DX
+, FlagSet::empty()+Flag::REP_GOOD // REP_INS m8, DX
+, FlagSet::empty()+Flag::REP_GOOD // REP_INS m8, DX
+, FlagSet::empty()+Flag::REP_GOOD // REP_LODS AL
+, FlagSet::empty()+Flag::REP_GOOD // REP_LODS AL
+, FlagSet::empty()+Flag::REP_GOOD // REP_LODS AX
+, FlagSet::empty()+Flag::REP_GOOD // REP_LODS EAX
+, FlagSet::empty()+Flag::REP_GOOD // REP_LODS RAX
+, FlagSet::empty()+Flag::REP_GOOD // REP_MOVS m16, m16
+, FlagSet::empty()+Flag::REP_GOOD // REP_MOVS m32, m32
+, FlagSet::empty()+Flag::REP_GOOD // REP_MOVS m64, m64
+, FlagSet::empty()+Flag::REP_GOOD // REP_MOVS m8, m8
+, FlagSet::empty()+Flag::REP_GOOD // REP_MOVS m8, m8
+, FlagSet::empty()+Flag::REP_GOOD // REP_OUTS DX, m16
+, FlagSet::empty()+Flag::REP_GOOD // REP_OUTS DX, m32
+, FlagSet::empty()+Flag::REP_GOOD // REP_OUTS DX, m64
+, FlagSet::empty()+Flag::REP_GOOD // REP_OUTS DX, m8
+, FlagSet::empty()+Flag::REP_GOOD // REP_OUTS DX, m8
+, FlagSet::empty()+Flag::REP_GOOD // REP_STOS m16
+, FlagSet::empty()+Flag::REP_GOOD // REP_STOS m32
+, FlagSet::empty()+Flag::REP_GOOD // REP_STOS m64
+, FlagSet::empty()+Flag::REP_GOOD // REP_STOS m8
+, FlagSet::empty()+Flag::REP_GOOD // REP_STOS m8
+, FlagSet::empty()+Flag::REP_GOOD // REPE_CMPS m16, m16
+, FlagSet::empty()+Flag::REP_GOOD // REPE_CMPS m32, m32
+, FlagSet::empty()+Flag::REP_GOOD // REPE_CMPS m64, m64
+, FlagSet::empty()+Flag::REP_GOOD // REPE_CMPS m8, m8
+, FlagSet::empty()+Flag::REP_GOOD // REPE_CMPS m8, m8
+, FlagSet::empty()+Flag::REP_GOOD // REPE_SCAS m16
+, FlagSet::empty()+Flag::REP_GOOD // REPE_SCAS m32
+, FlagSet::empty()+Flag::REP_GOOD // REPE_SCAS m64
+, FlagSet::empty()+Flag::REP_GOOD // REPE_SCAS m8
+, FlagSet::empty()+Flag::REP_GOOD // REPE_SCAS m8
+, FlagSet::empty()+Flag::REP_GOOD // REPNE_CMPS m16, m16
+, FlagSet::empty()+Flag::REP_GOOD // REPNE_CMPS m32, m32
+, FlagSet::empty()+Flag::REP_GOOD // REPNE_CMPS m64, m64
+, FlagSet::empty()+Flag::REP_GOOD // REPNE_CMPS m8, m8
+, FlagSet::empty()+Flag::REP_GOOD // REPNE_CMPS m8, m8
+, FlagSet::empty()+Flag::REP_GOOD // REPNE_SCAS m16
+, FlagSet::empty()+Flag::REP_GOOD // REPNE_SCAS m32
+, FlagSet::empty()+Flag::REP_GOOD // REPNE_SCAS m64
+, FlagSet::empty()+Flag::REP_GOOD // REPNE_SCAS m8
+, FlagSet::empty()+Flag::REP_GOOD // REPNE_SCAS m8
+, FlagSet::empty() // RET 
+, FlagSet::empty() // RET far
+, FlagSet::empty() // RET imm16
+, FlagSet::empty() // RET imm16, far
+, FlagSet::empty() // ROL m16, CL
+, FlagSet::empty() // ROL m16, imm8
+, FlagSet::empty() // ROL m16, 1
+, FlagSet::empty() // ROL m32, CL
+, FlagSet::empty() // ROL m32, imm8
+, FlagSet::empty() // ROL m32, 1
+, FlagSet::empty() // ROL m64, CL
+, FlagSet::empty() // ROL m64, imm8
+, FlagSet::empty() // ROL m64, 1
+, FlagSet::empty() // ROL m8, CL
+, FlagSet::empty() // ROL m8, imm8
+, FlagSet::empty() // ROL m8, 1
+, FlagSet::empty() // ROL r16, CL
+, FlagSet::empty() // ROL r16, imm8
+, FlagSet::empty() // ROL r16, 1
+, FlagSet::empty() // ROL r32, CL
+, FlagSet::empty() // ROL r32, imm8
+, FlagSet::empty() // ROL r32, 1
+, FlagSet::empty() // ROL r64, CL
+, FlagSet::empty() // ROL r64, imm8
+, FlagSet::empty() // ROL r64, 1
+, FlagSet::empty() // ROL r8, CL
+, FlagSet::empty() // ROL r8, imm8
+, FlagSet::empty() // ROL r8, 1
+, FlagSet::empty() // ROL rh, CL
+, FlagSet::empty() // ROL rh, imm8
+, FlagSet::empty() // ROL rh, 1
+, FlagSet::empty() // ROR m16, CL
+, FlagSet::empty() // ROR m16, imm8
+, FlagSet::empty() // ROR m16, 1
+, FlagSet::empty() // ROR m32, CL
+, FlagSet::empty() // ROR m32, imm8
+, FlagSet::empty() // ROR m32, 1
+, FlagSet::empty() // ROR m64, CL
+, FlagSet::empty() // ROR m64, imm8
+, FlagSet::empty() // ROR m64, 1
+, FlagSet::empty() // ROR m8, CL
+, FlagSet::empty() // ROR m8, imm8
+, FlagSet::empty() // ROR m8, 1
+, FlagSet::empty() // ROR r16, CL
+, FlagSet::empty() // ROR r16, imm8
+, FlagSet::empty() // ROR r16, 1
+, FlagSet::empty() // ROR r32, CL
+, FlagSet::empty() // ROR r32, imm8
+, FlagSet::empty() // ROR r32, 1
+, FlagSet::empty() // ROR r64, CL
+, FlagSet::empty() // ROR r64, imm8
+, FlagSet::empty() // ROR r64, 1
+, FlagSet::empty() // ROR r8, CL
+, FlagSet::empty() // ROR r8, imm8
+, FlagSet::empty() // ROR r8, 1
+, FlagSet::empty() // ROR rh, CL
+, FlagSet::empty() // ROR rh, imm8
+, FlagSet::empty() // ROR rh, 1
+, FlagSet::empty()+Flag::BMI2 // RORX r32, m32, imm8
+, FlagSet::empty()+Flag::BMI2 // RORX r32, r32, imm8
+, FlagSet::empty()+Flag::BMI2 // RORX r64, m64, imm8
+, FlagSet::empty()+Flag::BMI2 // RORX r64, r64, imm8
+, FlagSet::empty()+Flag::SSE4_1 // ROUNDPD xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE4_1 // ROUNDPD xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // ROUNDPS xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE4_1 // ROUNDPS xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // ROUNDSD xmm, m64, imm8
+, FlagSet::empty()+Flag::SSE4_1 // ROUNDSD xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE4_1 // ROUNDSS xmm, m32, imm8
+, FlagSet::empty()+Flag::SSE4_1 // ROUNDSS xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE // RSQRTPS xmm, m128
+, FlagSet::empty()+Flag::SSE // RSQRTPS xmm, xmm
+, FlagSet::empty()+Flag::SSE // RSQRTSS xmm, m32
+, FlagSet::empty()+Flag::SSE // RSQRTSS xmm, xmm
+, FlagSet::empty()+Flag::LAHF_LM // SAHF 
+, FlagSet::empty() // SAL m16, CL
+, FlagSet::empty() // SAL m16, imm8
+, FlagSet::empty() // SAL m16, 1
+, FlagSet::empty() // SAL m32, CL
+, FlagSet::empty() // SAL m32, imm8
+, FlagSet::empty() // SAL m32, 1
+, FlagSet::empty() // SAL m64, CL
+, FlagSet::empty() // SAL m64, imm8
+, FlagSet::empty() // SAL m64, 1
+, FlagSet::empty() // SAL m8, CL
+, FlagSet::empty() // SAL m8, imm8
+, FlagSet::empty() // SAL m8, 1
+, FlagSet::empty() // SAL r16, CL
+, FlagSet::empty() // SAL r16, imm8
+, FlagSet::empty() // SAL r16, 1
+, FlagSet::empty() // SAL r32, CL
+, FlagSet::empty() // SAL r32, imm8
+, FlagSet::empty() // SAL r32, 1
+, FlagSet::empty() // SAL r64, CL
+, FlagSet::empty() // SAL r64, imm8
+, FlagSet::empty() // SAL r64, 1
+, FlagSet::empty() // SAL r8, CL
+, FlagSet::empty() // SAL r8, imm8
+, FlagSet::empty() // SAL r8, 1
+, FlagSet::empty() // SAL rh, CL
+, FlagSet::empty() // SAL rh, imm8
+, FlagSet::empty() // SAL rh, 1
+, FlagSet::empty() // SAR m16, CL
+, FlagSet::empty() // SAR m16, imm8
+, FlagSet::empty() // SAR m16, 1
+, FlagSet::empty() // SAR m32, CL
+, FlagSet::empty() // SAR m32, imm8
+, FlagSet::empty() // SAR m32, 1
+, FlagSet::empty() // SAR m64, CL
+, FlagSet::empty() // SAR m64, imm8
+, FlagSet::empty() // SAR m64, 1
+, FlagSet::empty() // SAR m8, CL
+, FlagSet::empty() // SAR m8, imm8
+, FlagSet::empty() // SAR m8, 1
+, FlagSet::empty() // SAR r16, CL
+, FlagSet::empty() // SAR r16, imm8
+, FlagSet::empty() // SAR r16, 1
+, FlagSet::empty() // SAR r32, CL
+, FlagSet::empty() // SAR r32, imm8
+, FlagSet::empty() // SAR r32, 1
+, FlagSet::empty() // SAR r64, CL
+, FlagSet::empty() // SAR r64, imm8
+, FlagSet::empty() // SAR r64, 1
+, FlagSet::empty() // SAR r8, CL
+, FlagSet::empty() // SAR r8, imm8
+, FlagSet::empty() // SAR r8, 1
+, FlagSet::empty() // SAR rh, CL
+, FlagSet::empty() // SAR rh, imm8
+, FlagSet::empty() // SAR rh, 1
+, FlagSet::empty()+Flag::BMI2 // SARX r32, m32, r32
+, FlagSet::empty()+Flag::BMI2 // SARX r32, r32, r32
+, FlagSet::empty()+Flag::BMI2 // SARX r64, m64, r64
+, FlagSet::empty()+Flag::BMI2 // SARX r64, r64, r64
+, FlagSet::empty() // SBB AL, imm8
+, FlagSet::empty() // SBB AX, imm16
+, FlagSet::empty() // SBB EAX, imm32
+, FlagSet::empty() // SBB m16, imm16
+, FlagSet::empty() // SBB m16, imm8
+, FlagSet::empty() // SBB m16, r16
+, FlagSet::empty() // SBB m32, imm32
+, FlagSet::empty() // SBB m32, imm8
+, FlagSet::empty() // SBB m32, r32
+, FlagSet::empty() // SBB m64, imm32
+, FlagSet::empty() // SBB m64, imm8
+, FlagSet::empty() // SBB m64, r64
+, FlagSet::empty() // SBB m8, imm8
+, FlagSet::empty() // SBB m8, r8
+, FlagSet::empty() // SBB m8, rh
+, FlagSet::empty() // SBB r16, imm16
+, FlagSet::empty() // SBB r16, imm8
+, FlagSet::empty() // SBB r16, m16
+, FlagSet::empty() // SBB r16, r16
+, FlagSet::empty() // SBB r16, r16
+, FlagSet::empty() // SBB r32, imm32
+, FlagSet::empty() // SBB r32, imm8
+, FlagSet::empty() // SBB r32, m32
+, FlagSet::empty() // SBB r32, r32
+, FlagSet::empty() // SBB r32, r32
+, FlagSet::empty() // SBB r64, imm32
+, FlagSet::empty() // SBB r64, imm8
+, FlagSet::empty() // SBB r64, m64
+, FlagSet::empty() // SBB r64, r64
+, FlagSet::empty() // SBB r64, r64
+, FlagSet::empty() // SBB r8, imm8
+, FlagSet::empty() // SBB r8, m8
+, FlagSet::empty() // SBB r8, r8
+, FlagSet::empty() // SBB r8, r8
+, FlagSet::empty() // SBB r8, rh
+, FlagSet::empty() // SBB r8, rh
+, FlagSet::empty() // SBB RAX, imm32
+, FlagSet::empty() // SBB rh, imm8
+, FlagSet::empty() // SBB rh, m8
+, FlagSet::empty() // SBB rh, r8
+, FlagSet::empty() // SBB rh, r8
+, FlagSet::empty() // SBB rh, rh
+, FlagSet::empty() // SBB rh, rh
+, FlagSet::empty() // SCAS m16
+, FlagSet::empty() // SCAS m32
+, FlagSet::empty() // SCAS m64
+, FlagSet::empty() // SCAS m8
+, FlagSet::empty() // SCASB 
+, FlagSet::empty() // SCASD 
+, FlagSet::empty() // SCASQ 
+, FlagSet::empty() // SCASW 
+, FlagSet::empty() // SETA m8
+, FlagSet::empty() // SETA r8
+, FlagSet::empty() // SETA rh
+, FlagSet::empty() // SETAE m8
+, FlagSet::empty() // SETAE r8
+, FlagSet::empty() // SETAE rh
+, FlagSet::empty() // SETB m8
+, FlagSet::empty() // SETB r8
+, FlagSet::empty() // SETB rh
+, FlagSet::empty() // SETBE m8
+, FlagSet::empty() // SETBE r8
+, FlagSet::empty() // SETBE rh
+, FlagSet::empty() // SETC m8
+, FlagSet::empty() // SETC r8
+, FlagSet::empty() // SETC rh
+, FlagSet::empty() // SETE m8
+, FlagSet::empty() // SETE r8
+, FlagSet::empty() // SETE rh
+, FlagSet::empty() // SETG m8
+, FlagSet::empty() // SETG r8
+, FlagSet::empty() // SETG rh
+, FlagSet::empty() // SETGE m8
+, FlagSet::empty() // SETGE r8
+, FlagSet::empty() // SETGE rh
+, FlagSet::empty() // SETL m8
+, FlagSet::empty() // SETL r8
+, FlagSet::empty() // SETL rh
+, FlagSet::empty() // SETLE m8
+, FlagSet::empty() // SETLE r8
+, FlagSet::empty() // SETLE rh
+, FlagSet::empty() // SETNA m8
+, FlagSet::empty() // SETNA r8
+, FlagSet::empty() // SETNA rh
+, FlagSet::empty() // SETNAE m8
+, FlagSet::empty() // SETNAE r8
+, FlagSet::empty() // SETNAE rh
+, FlagSet::empty() // SETNB m8
+, FlagSet::empty() // SETNB r8
+, FlagSet::empty() // SETNB rh
+, FlagSet::empty() // SETNBE m8
+, FlagSet::empty() // SETNBE r8
+, FlagSet::empty() // SETNBE rh
+, FlagSet::empty() // SETNC m8
+, FlagSet::empty() // SETNC r8
+, FlagSet::empty() // SETNC rh
+, FlagSet::empty() // SETNE m8
+, FlagSet::empty() // SETNE r8
+, FlagSet::empty() // SETNE rh
+, FlagSet::empty() // SETNG m8
+, FlagSet::empty() // SETNG r8
+, FlagSet::empty() // SETNG rh
+, FlagSet::empty() // SETNGE m8
+, FlagSet::empty() // SETNGE r8
+, FlagSet::empty() // SETNGE rh
+, FlagSet::empty() // SETNL m8
+, FlagSet::empty() // SETNL r8
+, FlagSet::empty() // SETNL rh
+, FlagSet::empty() // SETNLE m8
+, FlagSet::empty() // SETNLE r8
+, FlagSet::empty() // SETNLE rh
+, FlagSet::empty() // SETNO m8
+, FlagSet::empty() // SETNO r8
+, FlagSet::empty() // SETNO rh
+, FlagSet::empty() // SETNP m8
+, FlagSet::empty() // SETNP r8
+, FlagSet::empty() // SETNP rh
+, FlagSet::empty() // SETNS m8
+, FlagSet::empty() // SETNS r8
+, FlagSet::empty() // SETNS rh
+, FlagSet::empty() // SETNZ m8
+, FlagSet::empty() // SETNZ r8
+, FlagSet::empty() // SETNZ rh
+, FlagSet::empty() // SETO m8
+, FlagSet::empty() // SETO r8
+, FlagSet::empty() // SETO rh
+, FlagSet::empty() // SETP m8
+, FlagSet::empty() // SETP r8
+, FlagSet::empty() // SETP rh
+, FlagSet::empty() // SETPE m8
+, FlagSet::empty() // SETPE r8
+, FlagSet::empty() // SETPE rh
+, FlagSet::empty() // SETPO m8
+, FlagSet::empty() // SETPO r8
+, FlagSet::empty() // SETPO rh
+, FlagSet::empty() // SETS m8
+, FlagSet::empty() // SETS r8
+, FlagSet::empty() // SETS rh
+, FlagSet::empty() // SETZ m8
+, FlagSet::empty() // SETZ r8
+, FlagSet::empty() // SETZ rh
+, FlagSet::empty() // SFENCE 
+, FlagSet::empty() // SHL m16, CL
+, FlagSet::empty() // SHL m16, imm8
+, FlagSet::empty() // SHL m16, 1
+, FlagSet::empty() // SHL m32, CL
+, FlagSet::empty() // SHL m32, imm8
+, FlagSet::empty() // SHL m32, 1
+, FlagSet::empty() // SHL m64, CL
+, FlagSet::empty() // SHL m64, imm8
+, FlagSet::empty() // SHL m64, 1
+, FlagSet::empty() // SHL m8, CL
+, FlagSet::empty() // SHL m8, imm8
+, FlagSet::empty() // SHL m8, 1
+, FlagSet::empty() // SHL r16, CL
+, FlagSet::empty() // SHL r16, imm8
+, FlagSet::empty() // SHL r16, 1
+, FlagSet::empty() // SHL r32, CL
+, FlagSet::empty() // SHL r32, imm8
+, FlagSet::empty() // SHL r32, 1
+, FlagSet::empty() // SHL r64, CL
+, FlagSet::empty() // SHL r64, imm8
+, FlagSet::empty() // SHL r64, 1
+, FlagSet::empty() // SHL r8, CL
+, FlagSet::empty() // SHL r8, imm8
+, FlagSet::empty() // SHL r8, 1
+, FlagSet::empty() // SHL rh, CL
+, FlagSet::empty() // SHL rh, imm8
+, FlagSet::empty() // SHL rh, 1
+, FlagSet::empty() // SHLD m16, r16, CL
+, FlagSet::empty() // SHLD m16, r16, imm8
+, FlagSet::empty() // SHLD m32, r32, CL
+, FlagSet::empty() // SHLD m32, r32, imm8
+, FlagSet::empty() // SHLD m64, r64, CL
+, FlagSet::empty() // SHLD m64, r64, imm8
+, FlagSet::empty() // SHLD r16, r16, CL
+, FlagSet::empty() // SHLD r16, r16, imm8
+, FlagSet::empty() // SHLD r32, r32, CL
+, FlagSet::empty() // SHLD r32, r32, imm8
+, FlagSet::empty() // SHLD r64, r64, CL
+, FlagSet::empty() // SHLD r64, r64, imm8
+, FlagSet::empty()+Flag::BMI2 // SHLX r32, m32, r32
+, FlagSet::empty()+Flag::BMI2 // SHLX r32, r32, r32
+, FlagSet::empty()+Flag::BMI2 // SHLX r64, m64, r64
+, FlagSet::empty()+Flag::BMI2 // SHLX r64, r64, r64
+, FlagSet::empty() // SHR m16, CL
+, FlagSet::empty() // SHR m16, imm8
+, FlagSet::empty() // SHR m16, 1
+, FlagSet::empty() // SHR m32, CL
+, FlagSet::empty() // SHR m32, imm8
+, FlagSet::empty() // SHR m32, 1
+, FlagSet::empty() // SHR m64, CL
+, FlagSet::empty() // SHR m64, imm8
+, FlagSet::empty() // SHR m64, 1
+, FlagSet::empty() // SHR m8, CL
+, FlagSet::empty() // SHR m8, imm8
+, FlagSet::empty() // SHR m8, 1
+, FlagSet::empty() // SHR r16, CL
+, FlagSet::empty() // SHR r16, imm8
+, FlagSet::empty() // SHR r16, 1
+, FlagSet::empty() // SHR r32, CL
+, FlagSet::empty() // SHR r32, imm8
+, FlagSet::empty() // SHR r32, 1
+, FlagSet::empty() // SHR r64, CL
+, FlagSet::empty() // SHR r64, imm8
+, FlagSet::empty() // SHR r64, 1
+, FlagSet::empty() // SHR r8, CL
+, FlagSet::empty() // SHR r8, imm8
+, FlagSet::empty() // SHR r8, 1
+, FlagSet::empty() // SHR rh, CL
+, FlagSet::empty() // SHR rh, imm8
+, FlagSet::empty() // SHR rh, 1
+, FlagSet::empty() // SHRD m16, r16, CL
+, FlagSet::empty() // SHRD m16, r16, imm8
+, FlagSet::empty() // SHRD m32, r32, CL
+, FlagSet::empty() // SHRD m32, r32, imm8
+, FlagSet::empty() // SHRD m64, r64, CL
+, FlagSet::empty() // SHRD m64, r64, imm8
+, FlagSet::empty() // SHRD r16, r16, CL
+, FlagSet::empty() // SHRD r16, r16, imm8
+, FlagSet::empty() // SHRD r32, r32, CL
+, FlagSet::empty() // SHRD r32, r32, imm8
+, FlagSet::empty() // SHRD r64, r64, CL
+, FlagSet::empty() // SHRD r64, r64, imm8
+, FlagSet::empty()+Flag::BMI2 // SHRX r32, m32, r32
+, FlagSet::empty()+Flag::BMI2 // SHRX r32, r32, r32
+, FlagSet::empty()+Flag::BMI2 // SHRX r64, m64, r64
+, FlagSet::empty()+Flag::BMI2 // SHRX r64, r64, r64
+, FlagSet::empty()+Flag::SSE2 // SHUFPD xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE2 // SHUFPD xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE // SHUFPS xmm, m128, imm8
+, FlagSet::empty()+Flag::SSE // SHUFPS xmm, xmm, imm8
+, FlagSet::empty()+Flag::SSE2 // SQRTPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // SQRTPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // SQRTPS xmm, m128
+, FlagSet::empty()+Flag::SSE // SQRTPS xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // SQRTSD xmm, m64
+, FlagSet::empty()+Flag::SSE2 // SQRTSD xmm, xmm
+, FlagSet::empty()+Flag::SSE // SQRTSS xmm, m32
+, FlagSet::empty()+Flag::SSE // SQRTSS xmm, xmm
+, FlagSet::empty() // STC 
+, FlagSet::empty() // STD 
+, FlagSet::empty() // STI 
+, FlagSet::empty()+Flag::SSE // STMXCSR m32
+, FlagSet::empty() // STOS m16
+, FlagSet::empty() // STOS m32
+, FlagSet::empty() // STOS m64
+, FlagSet::empty() // STOS m8
+, FlagSet::empty() // STOSB 
+, FlagSet::empty() // STOSD 
+, FlagSet::empty() // STOSQ 
+, FlagSet::empty() // STOSW 
+, FlagSet::empty() // SUB AL, imm8
+, FlagSet::empty() // SUB AX, imm16
+, FlagSet::empty() // SUB EAX, imm32
+, FlagSet::empty() // SUB m16, imm16
+, FlagSet::empty() // SUB m16, imm8
+, FlagSet::empty() // SUB m16, r16
+, FlagSet::empty() // SUB m32, imm32
+, FlagSet::empty() // SUB m32, imm8
+, FlagSet::empty() // SUB m32, r32
+, FlagSet::empty() // SUB m64, imm32
+, FlagSet::empty() // SUB m64, imm8
+, FlagSet::empty() // SUB m64, r64
+, FlagSet::empty() // SUB m8, imm8
+, FlagSet::empty() // SUB m8, r8
+, FlagSet::empty() // SUB m8, rh
+, FlagSet::empty() // SUB r16, imm16
+, FlagSet::empty() // SUB r16, imm8
+, FlagSet::empty() // SUB r16, m16
+, FlagSet::empty() // SUB r16, r16
+, FlagSet::empty() // SUB r16, r16
+, FlagSet::empty() // SUB r32, imm32
+, FlagSet::empty() // SUB r32, imm8
+, FlagSet::empty() // SUB r32, m32
+, FlagSet::empty() // SUB r32, r32
+, FlagSet::empty() // SUB r32, r32
+, FlagSet::empty() // SUB r64, imm32
+, FlagSet::empty() // SUB r64, imm8
+, FlagSet::empty() // SUB r64, m64
+, FlagSet::empty() // SUB r64, r64
+, FlagSet::empty() // SUB r64, r64
+, FlagSet::empty() // SUB r8, imm8
+, FlagSet::empty() // SUB r8, m8
+, FlagSet::empty() // SUB r8, r8
+, FlagSet::empty() // SUB r8, r8
+, FlagSet::empty() // SUB r8, rh
+, FlagSet::empty() // SUB r8, rh
+, FlagSet::empty() // SUB RAX, imm32
+, FlagSet::empty() // SUB rh, imm8
+, FlagSet::empty() // SUB rh, m8
+, FlagSet::empty() // SUB rh, r8
+, FlagSet::empty() // SUB rh, r8
+, FlagSet::empty() // SUB rh, rh
+, FlagSet::empty() // SUB rh, rh
+, FlagSet::empty()+Flag::SSE2 // SUBPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // SUBPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // SUBPS xmm, m128
+, FlagSet::empty()+Flag::SSE // SUBPS xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // SUBSD xmm, m64
+, FlagSet::empty()+Flag::SSE2 // SUBSD xmm, xmm
+, FlagSet::empty()+Flag::SSE // SUBSS xmm, m32
+, FlagSet::empty()+Flag::SSE // SUBSS xmm, xmm
+, FlagSet::empty() // SWAPGS 
+, FlagSet::empty()+Flag::SYSCALL // SYSCALL 
+, FlagSet::empty()+Flag::SEP // SYSENTER 
+, FlagSet::empty()+Flag::SEP // SYSEXIT 
+, FlagSet::empty()+Flag::SEP // SYSEXIT pw
+, FlagSet::empty()+Flag::SYSCALL // SYSRET 
+, FlagSet::empty()+Flag::SYSCALL // SYSRET pw
+, FlagSet::empty() // TEST AL, imm8
+, FlagSet::empty() // TEST AX, imm16
+, FlagSet::empty() // TEST EAX, imm32
+, FlagSet::empty() // TEST m16, imm16
+, FlagSet::empty() // TEST m16, r16
+, FlagSet::empty() // TEST m32, imm32
+, FlagSet::empty() // TEST m32, r32
+, FlagSet::empty() // TEST m64, imm32
+, FlagSet::empty() // TEST m64, r64
+, FlagSet::empty() // TEST m8, imm8
+, FlagSet::empty() // TEST m8, r8
+, FlagSet::empty() // TEST m8, rh
+, FlagSet::empty() // TEST r16, imm16
+, FlagSet::empty() // TEST r16, r16
+, FlagSet::empty() // TEST r32, imm32
+, FlagSet::empty() // TEST r32, r32
+, FlagSet::empty() // TEST r64, imm32
+, FlagSet::empty() // TEST r64, r64
+, FlagSet::empty() // TEST r8, imm8
+, FlagSet::empty() // TEST r8, r8
+, FlagSet::empty() // TEST r8, rh
+, FlagSet::empty() // TEST RAX, imm32
+, FlagSet::empty() // TEST rh, imm8
+, FlagSet::empty() // TEST rh, r8
+, FlagSet::empty() // TEST rh, rh
+, FlagSet::empty()+Flag::BMI1 // TZCNT r16, m16
+, FlagSet::empty()+Flag::BMI1 // TZCNT r16, r16
+, FlagSet::empty()+Flag::BMI1 // TZCNT r32, m32
+, FlagSet::empty()+Flag::BMI1 // TZCNT r32, r32
+, FlagSet::empty()+Flag::BMI1 // TZCNT r64, m64
+, FlagSet::empty()+Flag::BMI1 // TZCNT r64, r64
+, FlagSet::empty()+Flag::SSE2 // UCOMISD xmm, m64
+, FlagSet::empty()+Flag::SSE2 // UCOMISD xmm, xmm
+, FlagSet::empty()+Flag::SSE // UCOMISS xmm, m32
+, FlagSet::empty()+Flag::SSE // UCOMISS xmm, xmm
+, FlagSet::empty() // UD2 
+, FlagSet::empty()+Flag::SSE2 // UNPCKHPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // UNPCKHPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // UNPCKHPS xmm, m128
+, FlagSet::empty()+Flag::SSE // UNPCKHPS xmm, xmm
+, FlagSet::empty()+Flag::SSE2 // UNPCKLPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // UNPCKLPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // UNPCKLPS xmm, m128
+, FlagSet::empty()+Flag::SSE // UNPCKLPS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VADDPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VADDPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VADDPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VADDPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VADDPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VADDPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VADDPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VADDPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VADDSD xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VADDSD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VADDSS xmm, xmm, m32
+, FlagSet::empty()+Flag::AVX // VADDSS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VADDSUBPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VADDSUBPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VADDSUBPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VADDSUBPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VADDSUBPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VADDSUBPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VADDSUBPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VADDSUBPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AES+Flag::AVX // VAESDEC xmm, xmm, m128
+, FlagSet::empty()+Flag::AES+Flag::AVX // VAESDEC xmm, xmm, xmm
+, FlagSet::empty()+Flag::AES+Flag::AVX // VAESDECLAST xmm, xmm, m128
+, FlagSet::empty()+Flag::AES+Flag::AVX // VAESDECLAST xmm, xmm, xmm
+, FlagSet::empty()+Flag::AES+Flag::AVX // VAESENC xmm, xmm, m128
+, FlagSet::empty()+Flag::AES+Flag::AVX // VAESENC xmm, xmm, xmm
+, FlagSet::empty()+Flag::AES+Flag::AVX // VAESENCLAST xmm, xmm, m128
+, FlagSet::empty()+Flag::AES+Flag::AVX // VAESENCLAST xmm, xmm, xmm
+, FlagSet::empty()+Flag::AES+Flag::AVX // VAESIMC xmm, m128
+, FlagSet::empty()+Flag::AES+Flag::AVX // VAESIMC xmm, xmm
+, FlagSet::empty()+Flag::AES+Flag::AVX // VAESKEYGENASSIST xmm, m128, imm8
+, FlagSet::empty()+Flag::AES+Flag::AVX // VAESKEYGENASSIST xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VANDNPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VANDNPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VANDNPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VANDNPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VANDNPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VANDNPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VANDNPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VANDNPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VANDPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VANDPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VANDPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VANDPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VANDPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VANDPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VANDPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VANDPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VBLENDPD xmm, xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VBLENDPD xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VBLENDPD ymm, ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX // VBLENDPD ymm, ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VBLENDPS xmm, xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VBLENDPS xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VBLENDPS ymm, ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX // VBLENDPS ymm, ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VBLENDVPD xmm, xmm, m128, xmm
+, FlagSet::empty()+Flag::AVX // VBLENDVPD xmm, xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VBLENDVPD ymm, ymm, m256, ymm
+, FlagSet::empty()+Flag::AVX // VBLENDVPD ymm, ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VBLENDVPS xmm, xmm, m128, xmm
+, FlagSet::empty()+Flag::AVX // VBLENDVPS xmm, xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VBLENDVPS ymm, ymm, m256, ymm
+, FlagSet::empty()+Flag::AVX // VBLENDVPS ymm, ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VBROADCASTF128 ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VBROADCASTI128 ymm, m128
+, FlagSet::empty()+Flag::AVX // VBROADCASTSD ymm, m64
+, FlagSet::empty()+Flag::AVX2 // VBROADCASTSD ymm, xmm
+, FlagSet::empty()+Flag::AVX // VBROADCASTSS xmm, m32
+, FlagSet::empty()+Flag::AVX2 // VBROADCASTSS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VBROADCASTSS ymm, m32
+, FlagSet::empty()+Flag::AVX2 // VBROADCASTSS ymm, xmm
+, FlagSet::empty()+Flag::AVX // VCMPPD xmm, xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VCMPPD xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VCMPPD ymm, ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX // VCMPPD ymm, ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VCMPPS xmm, xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VCMPPS xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VCMPPS ymm, ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX // VCMPPS ymm, ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VCMPSD xmm, xmm, m64, imm8
+, FlagSet::empty()+Flag::AVX // VCMPSD xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VCMPSS xmm, xmm, m32, imm8
+, FlagSet::empty()+Flag::AVX // VCMPSS xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VCOMISD xmm, m64
+, FlagSet::empty()+Flag::AVX // VCOMISD xmm, xmm
+, FlagSet::empty()+Flag::AVX // VCOMISS xmm, m32
+, FlagSet::empty()+Flag::AVX // VCOMISS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VCVTDQ2PD xmm, m64
+, FlagSet::empty()+Flag::AVX // VCVTDQ2PD xmm, xmm
+, FlagSet::empty()+Flag::AVX // VCVTDQ2PD ymm, m128
+, FlagSet::empty()+Flag::AVX // VCVTDQ2PD ymm, ymm
+, FlagSet::empty()+Flag::AVX // VCVTDQ2PS xmm, m128
+, FlagSet::empty()+Flag::AVX // VCVTDQ2PS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VCVTDQ2PS ymm, m256
+, FlagSet::empty()+Flag::AVX // VCVTDQ2PS ymm, ymm
+, FlagSet::empty()+Flag::AVX // VCVTPD2DQ xmm, m128
+, FlagSet::empty()+Flag::AVX // VCVTPD2DQ xmm, m256
+, FlagSet::empty()+Flag::AVX // VCVTPD2DQ xmm, xmm
+, FlagSet::empty()+Flag::AVX // VCVTPD2DQ xmm, ymm
+, FlagSet::empty()+Flag::AVX // VCVTPD2PS xmm, m128
+, FlagSet::empty()+Flag::AVX // VCVTPD2PS xmm, m256
+, FlagSet::empty()+Flag::AVX // VCVTPD2PS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VCVTPD2PS xmm, ymm
+, FlagSet::empty()+Flag::F16C // VCVTPH2PS xmm, m64
+, FlagSet::empty()+Flag::F16C // VCVTPH2PS xmm, xmm
+, FlagSet::empty()+Flag::F16C // VCVTPH2PS ymm, m128
+, FlagSet::empty()+Flag::F16C // VCVTPH2PS ymm, xmm
+, FlagSet::empty()+Flag::AVX // VCVTPS2DQ xmm, m128
+, FlagSet::empty()+Flag::AVX // VCVTPS2DQ xmm, xmm
+, FlagSet::empty()+Flag::AVX // VCVTPS2DQ ymm, m256
+, FlagSet::empty()+Flag::AVX // VCVTPS2DQ ymm, ymm
+, FlagSet::empty()+Flag::AVX // VCVTPS2PD xmm, m64
+, FlagSet::empty()+Flag::AVX // VCVTPS2PD xmm, xmm
+, FlagSet::empty()+Flag::AVX // VCVTPS2PD ymm, m128
+, FlagSet::empty()+Flag::AVX // VCVTPS2PD ymm, xmm
+, FlagSet::empty()+Flag::F16C // VCVTPS2PH m128, ymm, imm8
+, FlagSet::empty()+Flag::F16C // VCVTPS2PH m64, xmm, imm8
+, FlagSet::empty()+Flag::F16C // VCVTPS2PH xmm, xmm, imm8
+, FlagSet::empty()+Flag::F16C // VCVTPS2PH xmm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VCVTSD2SI r32, m64
+, FlagSet::empty()+Flag::AVX // VCVTSD2SI r32, xmm
+, FlagSet::empty()+Flag::AVX // VCVTSD2SI r64, m64
+, FlagSet::empty()+Flag::AVX // VCVTSD2SI r64, xmm
+, FlagSet::empty()+Flag::AVX // VCVTSD2SS xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VCVTSD2SS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VCVTSI2SD xmm, xmm, m32
+, FlagSet::empty()+Flag::AVX // VCVTSI2SD xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VCVTSI2SD xmm, xmm, r32
+, FlagSet::empty()+Flag::AVX // VCVTSI2SD xmm, xmm, r64
+, FlagSet::empty()+Flag::AVX // VCVTSI2SS xmm, xmm, m32
+, FlagSet::empty()+Flag::AVX // VCVTSI2SS xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VCVTSI2SS xmm, xmm, r32
+, FlagSet::empty()+Flag::AVX // VCVTSI2SS xmm, xmm, r64
+, FlagSet::empty()+Flag::AVX // VCVTSS2SD xmm, xmm, m32
+, FlagSet::empty()+Flag::AVX // VCVTSS2SD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VCVTSS2SI r32, m32
+, FlagSet::empty()+Flag::AVX // VCVTSS2SI r32, xmm
+, FlagSet::empty()+Flag::AVX // VCVTSS2SI r64, m32
+, FlagSet::empty()+Flag::AVX // VCVTSS2SI r64, xmm
+, FlagSet::empty()+Flag::AVX // VCVTTPD2DQ xmm, m128
+, FlagSet::empty()+Flag::AVX // VCVTTPD2DQ xmm, m256
+, FlagSet::empty()+Flag::AVX // VCVTTPD2DQ xmm, xmm
+, FlagSet::empty()+Flag::AVX // VCVTTPD2DQ xmm, ymm
+, FlagSet::empty()+Flag::AVX // VCVTTPS2DQ xmm, m128
+, FlagSet::empty()+Flag::AVX // VCVTTPS2DQ xmm, xmm
+, FlagSet::empty()+Flag::AVX // VCVTTPS2DQ ymm, m256
+, FlagSet::empty()+Flag::AVX // VCVTTPS2DQ ymm, ymm
+, FlagSet::empty()+Flag::AVX // VCVTTSD2SI r32, m64
+, FlagSet::empty()+Flag::AVX // VCVTTSD2SI r32, xmm
+, FlagSet::empty()+Flag::AVX // VCVTTSD2SI r64, m64
+, FlagSet::empty()+Flag::AVX // VCVTTSD2SI r64, xmm
+, FlagSet::empty()+Flag::AVX // VCVTTSS2SI r32, m32
+, FlagSet::empty()+Flag::AVX // VCVTTSS2SI r32, xmm
+, FlagSet::empty()+Flag::AVX // VCVTTSS2SI r64, m32
+, FlagSet::empty()+Flag::AVX // VCVTTSS2SI r64, xmm
+, FlagSet::empty()+Flag::AVX // VDIVPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VDIVPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VDIVPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VDIVPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VDIVPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VDIVPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VDIVPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VDIVPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VDIVSD xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VDIVSD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VDIVSS xmm, xmm, m32
+, FlagSet::empty()+Flag::AVX // VDIVSS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VDPPD xmm, xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VDPPD xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VDPPS xmm, xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VDPPS xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VDPPS ymm, ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX // VDPPS ymm, ymm, ymm, imm8
+, FlagSet::empty() // VERR m16
+, FlagSet::empty() // VERR r16
+, FlagSet::empty() // VERW m16
+, FlagSet::empty() // VERW r16
+, FlagSet::empty()+Flag::AVX // VEXTRACTF128 m128, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VEXTRACTF128 xmm, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VEXTRACTI128 m128, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VEXTRACTI128 xmm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VEXTRACTPS m32, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VEXTRACTPS r32, xmm, imm8
+, FlagSet::empty()+Flag::FMA // VFMADD132PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMADD132PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADD132PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMADD132PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMADD132PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMADD132PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADD132PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMADD132PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMADD132SD xmm, xmm, m64
+, FlagSet::empty()+Flag::FMA // VFMADD132SD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADD132SS xmm, xmm, m32
+, FlagSet::empty()+Flag::FMA // VFMADD132SS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADD213PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMADD213PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADD213PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMADD213PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMADD213PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMADD213PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADD213PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMADD213PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMADD213SD xmm, xmm, m64
+, FlagSet::empty()+Flag::FMA // VFMADD213SD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADD213SS xmm, xmm, m32
+, FlagSet::empty()+Flag::FMA // VFMADD213SS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADD231PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMADD231PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADD231PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMADD231PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMADD231PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMADD231PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADD231PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMADD231PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMADD231SD xmm, xmm, m64
+, FlagSet::empty()+Flag::FMA // VFMADD231SD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADD231SS xmm, xmm, m32
+, FlagSet::empty()+Flag::FMA // VFMADD231SS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADDSUB132PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMADDSUB132PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADDSUB132PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMADDSUB132PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMADDSUB132PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMADDSUB132PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADDSUB132PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMADDSUB132PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMADDSUB213PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMADDSUB213PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADDSUB213PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMADDSUB213PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMADDSUB213PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMADDSUB213PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADDSUB213PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMADDSUB213PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMADDSUB231PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMADDSUB231PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADDSUB231PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMADDSUB231PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMADDSUB231PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMADDSUB231PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMADDSUB231PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMADDSUB231PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMSUB132PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMSUB132PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUB132PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMSUB132PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMSUB132PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMSUB132PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUB132PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMSUB132PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMSUB132SD xmm, xmm, m64
+, FlagSet::empty()+Flag::FMA // VFMSUB132SD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUB132SS xmm, xmm, m32
+, FlagSet::empty()+Flag::FMA // VFMSUB132SS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUB213PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMSUB213PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUB213PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMSUB213PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMSUB213PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMSUB213PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUB213PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMSUB213PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMSUB213SD xmm, xmm, m64
+, FlagSet::empty()+Flag::FMA // VFMSUB213SD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUB213SS xmm, xmm, m32
+, FlagSet::empty()+Flag::FMA // VFMSUB213SS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUB231PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMSUB231PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUB231PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMSUB231PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMSUB231PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMSUB231PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUB231PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMSUB231PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMSUB231SD xmm, xmm, m64
+, FlagSet::empty()+Flag::FMA // VFMSUB231SD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUB231SS xmm, xmm, m32
+, FlagSet::empty()+Flag::FMA // VFMSUB231SS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUBADD132PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMSUBADD132PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUBADD132PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMSUBADD132PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMSUBADD132PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMSUBADD132PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUBADD132PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMSUBADD132PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMSUBADD213PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMSUBADD213PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUBADD213PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMSUBADD213PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMSUBADD213PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMSUBADD213PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUBADD213PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMSUBADD213PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMSUBADD231PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMSUBADD231PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUBADD231PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMSUBADD231PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFMSUBADD231PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFMSUBADD231PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFMSUBADD231PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFMSUBADD231PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFNMADD132PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFNMADD132PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMADD132PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFNMADD132PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFNMADD132PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFNMADD132PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMADD132PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFNMADD132PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFNMADD132SD xmm, xmm, m64
+, FlagSet::empty()+Flag::FMA // VFNMADD132SD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMADD132SS xmm, xmm, m32
+, FlagSet::empty()+Flag::FMA // VFNMADD132SS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMADD213PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFNMADD213PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMADD213PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFNMADD213PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFNMADD213PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFNMADD213PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMADD213PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFNMADD213PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFNMADD213SD xmm, xmm, m64
+, FlagSet::empty()+Flag::FMA // VFNMADD213SD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMADD213SS xmm, xmm, m32
+, FlagSet::empty()+Flag::FMA // VFNMADD213SS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMADD231PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFNMADD231PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMADD231PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFNMADD231PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFNMADD231PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFNMADD231PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMADD231PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFNMADD231PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFNMADD231SD xmm, xmm, m64
+, FlagSet::empty()+Flag::FMA // VFNMADD231SD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMADD231SS xmm, xmm, m32
+, FlagSet::empty()+Flag::FMA // VFNMADD231SS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMSUB132PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFNMSUB132PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMSUB132PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFNMSUB132PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFNMSUB132PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFNMSUB132PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMSUB132PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFNMSUB132PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFNMSUB132SD xmm, xmm, m64
+, FlagSet::empty()+Flag::FMA // VFNMSUB132SD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMSUB132SS xmm, xmm, m32
+, FlagSet::empty()+Flag::FMA // VFNMSUB132SS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMSUB213PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFNMSUB213PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMSUB213PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFNMSUB213PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFNMSUB213PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFNMSUB213PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMSUB213PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFNMSUB213PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFNMSUB213SD xmm, xmm, m64
+, FlagSet::empty()+Flag::FMA // VFNMSUB213SD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMSUB213SS xmm, xmm, m32
+, FlagSet::empty()+Flag::FMA // VFNMSUB213SS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMSUB231PD xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFNMSUB231PD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMSUB231PD ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFNMSUB231PD ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFNMSUB231PS xmm, xmm, m128
+, FlagSet::empty()+Flag::FMA // VFNMSUB231PS xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMSUB231PS ymm, ymm, m256
+, FlagSet::empty()+Flag::FMA // VFNMSUB231PS ymm, ymm, ymm
+, FlagSet::empty()+Flag::FMA // VFNMSUB231SD xmm, xmm, m64
+, FlagSet::empty()+Flag::FMA // VFNMSUB231SD xmm, xmm, xmm
+, FlagSet::empty()+Flag::FMA // VFNMSUB231SS xmm, xmm, m32
+, FlagSet::empty()+Flag::FMA // VFNMSUB231SS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VGATHERDPD xmm, m32, xmm
+, FlagSet::empty()+Flag::AVX2 // VGATHERDPD ymm, m32, ymm
+, FlagSet::empty()+Flag::AVX2 // VGATHERDPS xmm, m32, xmm
+, FlagSet::empty()+Flag::AVX2 // VGATHERDPS ymm, m32, ymm
+, FlagSet::empty()+Flag::AVX2 // VGATHERQPD xmm, m64, xmm
+, FlagSet::empty()+Flag::AVX2 // VGATHERQPD ymm, m64, ymm
+, FlagSet::empty()+Flag::AVX2 // VGATHERQPS xmm, m64, xmm
+, FlagSet::empty()+Flag::AVX2 // VGATHERQPS xmm, m64, xmm
+, FlagSet::empty()+Flag::AVX // VHADDPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VHADDPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VHADDPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VHADDPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VHADDPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VHADDPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VHADDPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VHADDPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VHSUBPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VHSUBPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VHSUBPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VHSUBPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VHSUBPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VHSUBPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VHSUBPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VHSUBPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VINSERTF128 ymm, ymm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VINSERTF128 ymm, ymm, xmm, imm8
+, FlagSet::empty()+Flag::AVX2 // VINSERTI128 ymm, ymm, m128, imm8
+, FlagSet::empty()+Flag::AVX2 // VINSERTI128 ymm, ymm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VINSERTPS xmm, xmm, m32, imm8
+, FlagSet::empty()+Flag::AVX // VINSERTPS xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VLDDQU xmm, m128
+, FlagSet::empty()+Flag::AVX // VLDDQU ymm, m256
+, FlagSet::empty()+Flag::AVX // VLDMXCSR m32
+, FlagSet::empty()+Flag::AVX // VMASKMOVDQU xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMASKMOVPD m128, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMASKMOVPD m256, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMASKMOVPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VMASKMOVPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VMASKMOVPS m128, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMASKMOVPS m256, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMASKMOVPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VMASKMOVPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VMAXPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VMAXPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMAXPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VMAXPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMAXPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VMAXPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMAXPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VMAXPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMAXSD xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VMAXSD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMAXSS xmm, xmm, m32
+, FlagSet::empty()+Flag::AVX // VMAXSS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMINPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VMINPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMINPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VMINPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMINPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VMINPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMINPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VMINPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMINSD xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VMINSD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMINSS xmm, xmm, m32
+, FlagSet::empty()+Flag::AVX // VMINSS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVAPD m128, xmm
+, FlagSet::empty()+Flag::AVX // VMOVAPD m256, ymm
+, FlagSet::empty()+Flag::AVX // VMOVAPD xmm, m128
+, FlagSet::empty()+Flag::AVX // VMOVAPD xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVAPD xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVAPD ymm, m256
+, FlagSet::empty()+Flag::AVX // VMOVAPD ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVAPD ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVAPS m128, xmm
+, FlagSet::empty()+Flag::AVX // VMOVAPS m256, ymm
+, FlagSet::empty()+Flag::AVX // VMOVAPS xmm, m128
+, FlagSet::empty()+Flag::AVX // VMOVAPS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVAPS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVAPS ymm, m256
+, FlagSet::empty()+Flag::AVX // VMOVAPS ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVAPS ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVD m32, xmm
+, FlagSet::empty()+Flag::AVX // VMOVD r32, xmm
+, FlagSet::empty()+Flag::AVX // VMOVD xmm, m32
+, FlagSet::empty()+Flag::AVX // VMOVD xmm, r32
+, FlagSet::empty()+Flag::AVX // VMOVDDUP xmm, m64
+, FlagSet::empty()+Flag::AVX // VMOVDDUP xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVDDUP ymm, m256
+, FlagSet::empty()+Flag::AVX // VMOVDDUP ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVDQA m128, xmm
+, FlagSet::empty()+Flag::AVX // VMOVDQA m256, ymm
+, FlagSet::empty()+Flag::AVX // VMOVDQA xmm, m128
+, FlagSet::empty()+Flag::AVX // VMOVDQA xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVDQA xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVDQA ymm, m256
+, FlagSet::empty()+Flag::AVX // VMOVDQA ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVDQA ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVDQU m128, xmm
+, FlagSet::empty()+Flag::AVX // VMOVDQU m256, ymm
+, FlagSet::empty()+Flag::AVX // VMOVDQU xmm, m128
+, FlagSet::empty()+Flag::AVX // VMOVDQU xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVDQU xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVDQU ymm, m256
+, FlagSet::empty()+Flag::AVX // VMOVDQU ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVDQU ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVHLPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVHPD m64, xmm
+, FlagSet::empty()+Flag::AVX // VMOVHPD xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VMOVHPS m64, xmm
+, FlagSet::empty()+Flag::AVX // VMOVHPS xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VMOVLHPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVLPD m64, xmm
+, FlagSet::empty()+Flag::AVX // VMOVLPD xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VMOVLPS m64, xmm
+, FlagSet::empty()+Flag::AVX // VMOVLPS xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VMOVMSKPD r32, xmm
+, FlagSet::empty()+Flag::AVX // VMOVMSKPD r32, ymm
+, FlagSet::empty()+Flag::AVX // VMOVMSKPD r64, xmm
+, FlagSet::empty()+Flag::AVX // VMOVMSKPD r64, ymm
+, FlagSet::empty()+Flag::AVX // VMOVMSKPS r32, xmm
+, FlagSet::empty()+Flag::AVX // VMOVMSKPS r32, ymm
+, FlagSet::empty()+Flag::AVX // VMOVMSKPS r64, xmm
+, FlagSet::empty()+Flag::AVX // VMOVMSKPS r64, ymm
+, FlagSet::empty()+Flag::AVX // VMOVNTDQ m128, xmm
+, FlagSet::empty()+Flag::AVX // VMOVNTDQA xmm, m128
+, FlagSet::empty()+Flag::AVX2 // VMOVNTDQA ymm, m256
+, FlagSet::empty()+Flag::AVX // VMOVNTPD m128, xmm
+, FlagSet::empty()+Flag::AVX // VMOVNTPD m256, ymm
+, FlagSet::empty()+Flag::AVX // VMOVNTPS m128, xmm
+, FlagSet::empty()+Flag::AVX // VMOVNTPS m256, ymm
+, FlagSet::empty()+Flag::AVX // VMOVQ m64, xmm
+, FlagSet::empty()+Flag::AVX // VMOVQ m64, xmm
+, FlagSet::empty()+Flag::AVX // VMOVQ r64, xmm
+, FlagSet::empty()+Flag::AVX // VMOVQ xmm, m64
+, FlagSet::empty()+Flag::AVX // VMOVQ xmm, m64
+, FlagSet::empty()+Flag::AVX // VMOVQ xmm, r64
+, FlagSet::empty()+Flag::AVX // VMOVQ xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVQ xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVSD m64, xmm
+, FlagSet::empty()+Flag::AVX // VMOVSD xmm, m64
+, FlagSet::empty()+Flag::AVX // VMOVSD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVSD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVSHDUP xmm, m128
+, FlagSet::empty()+Flag::AVX // VMOVSHDUP xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVSHDUP ymm, m256
+, FlagSet::empty()+Flag::AVX // VMOVSHDUP ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVSLDUP xmm, m128
+, FlagSet::empty()+Flag::AVX // VMOVSLDUP xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVSLDUP ymm, m256
+, FlagSet::empty()+Flag::AVX // VMOVSLDUP ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVSS m32, xmm
+, FlagSet::empty()+Flag::AVX // VMOVSS xmm, m32
+, FlagSet::empty()+Flag::AVX // VMOVSS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVSS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVUPD m128, xmm
+, FlagSet::empty()+Flag::AVX // VMOVUPD m256, ymm
+, FlagSet::empty()+Flag::AVX // VMOVUPD xmm, m128
+, FlagSet::empty()+Flag::AVX // VMOVUPD xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVUPD xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVUPD ymm, m256
+, FlagSet::empty()+Flag::AVX // VMOVUPD ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVUPD ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVUPS m128, xmm
+, FlagSet::empty()+Flag::AVX // VMOVUPS m256, ymm
+, FlagSet::empty()+Flag::AVX // VMOVUPS xmm, m128
+, FlagSet::empty()+Flag::AVX // VMOVUPS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVUPS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMOVUPS ymm, m256
+, FlagSet::empty()+Flag::AVX // VMOVUPS ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMOVUPS ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMPSADBW xmm, xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VMPSADBW xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX2 // VMPSADBW ymm, ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX2 // VMPSADBW ymm, ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VMULPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VMULPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMULPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VMULPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMULPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VMULPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMULPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VMULPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VMULSD xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VMULSD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VMULSS xmm, xmm, m32
+, FlagSet::empty()+Flag::AVX // VMULSS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VORPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VORPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VORPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VORPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VORPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VORPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VORPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VORPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPABSB xmm, m128
+, FlagSet::empty()+Flag::AVX // VPABSB xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPABSB ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPABSB ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPABSD xmm, m128
+, FlagSet::empty()+Flag::AVX // VPABSD xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPABSD ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPABSD ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPABSW xmm, m128
+, FlagSet::empty()+Flag::AVX // VPABSW xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPABSW ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPABSW ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPACKSSDW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPACKSSDW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPACKSSDW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPACKSSDW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPACKSSWB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPACKSSWB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPACKSSWB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPACKSSWB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPACKUSDW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPACKUSDW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPACKUSDW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPACKUSDW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPACKUSWB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPACKUSWB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPACKUSWB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPACKUSWB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPADDB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPADDB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPADDB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPADDB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPADDD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPADDD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPADDD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPADDD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPADDQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPADDQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPADDQ ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPADDQ ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPADDSB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPADDSB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPADDSB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPADDSB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPADDSW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPADDSW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPADDSW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPADDSW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPADDUSB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPADDUSB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPADDUSB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPADDUSB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPADDUSW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPADDUSW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPADDUSW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPADDUSW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPADDW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPADDW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPADDW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPADDW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPALIGNR xmm, xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VPALIGNR xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPALIGNR ymm, ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX2 // VPALIGNR ymm, ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VPAND xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPAND xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPAND ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPAND ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPANDN xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPANDN xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPANDN ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPANDN ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPAVGB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPAVGB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPAVGB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPAVGB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPAVGW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPAVGW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPAVGW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPAVGW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX2 // VPBLENDD xmm, xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX2 // VPBLENDD xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPBLENDD ymm, ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX2 // VPBLENDD ymm, ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VPBLENDVB xmm, xmm, m128, xmm
+, FlagSet::empty()+Flag::AVX // VPBLENDVB xmm, xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPBLENDVB ymm, ymm, m256, ymm
+, FlagSet::empty()+Flag::AVX2 // VPBLENDVB ymm, ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPBLENDW xmm, xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VPBLENDW xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPBLENDW ymm, ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX2 // VPBLENDW ymm, ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTB xmm, m8
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTB xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTB ymm, m8
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTB ymm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTD xmm, m32
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTD xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTD ymm, m32
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTD ymm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTQ xmm, m64
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTQ xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTQ ymm, m64
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTQ ymm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTW xmm, m16
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTW xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTW ymm, m16
+, FlagSet::empty()+Flag::AVX2 // VPBROADCASTW ymm, xmm
+, FlagSet::empty()+Flag::PCLMULQDQ+Flag::AVX // VPCLMULQDQ xmm, xmm, m128, imm8
+, FlagSet::empty()+Flag::PCLMULQDQ+Flag::AVX // VPCLMULQDQ xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPCMPEQB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPCMPEQB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPCMPEQB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPCMPEQB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPCMPEQD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPCMPEQD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPCMPEQD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPCMPEQD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPCMPEQQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPCMPEQQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPCMPEQQ ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPCMPEQQ ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPCMPEQW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPCMPEQW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPCMPEQW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPCMPEQW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPCMPESTRI xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VPCMPESTRI xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPCMPESTRM xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VPCMPESTRM xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPCMPGTB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPCMPGTB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPCMPGTB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPCMPGTB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPCMPGTD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPCMPGTD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPCMPGTD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPCMPGTD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPCMPGTQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPCMPGTQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPCMPGTQ ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPCMPGTQ ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPCMPGTW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPCMPGTW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPCMPGTW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPCMPGTW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPCMPISTRI xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VPCMPISTRI xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPCMPISTRM xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VPCMPISTRM xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPERM2F128 ymm, ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX // VPERM2F128 ymm, ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPERM2I128 ymm, ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX2 // VPERM2I128 ymm, ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPERMD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPERMD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPERMILPD xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VPERMILPD xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPERMILPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPERMILPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VPERMILPD ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX // VPERMILPD ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VPERMILPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VPERMILPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPERMILPS xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VPERMILPS xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPERMILPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPERMILPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VPERMILPS ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX // VPERMILPS ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VPERMILPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VPERMILPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX2 // VPERMPD ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX2 // VPERMPD ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPERMPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPERMPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX2 // VPERMQ ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX2 // VPERMQ ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VPEXTRB m8, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPEXTRB r32, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPEXTRB r64, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPEXTRD m32, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPEXTRD r32, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPEXTRQ m64, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPEXTRQ r64, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPEXTRW m16, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPEXTRW r32, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPEXTRW r32, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPEXTRW r64, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPEXTRW r64, xmm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPGATHERDD xmm, m32, xmm
+, FlagSet::empty()+Flag::AVX2 // VPGATHERDD ymm, m32, ymm
+, FlagSet::empty()+Flag::AVX2 // VPGATHERDQ xmm, m32, xmm
+, FlagSet::empty()+Flag::AVX2 // VPGATHERDQ ymm, m32, ymm
+, FlagSet::empty()+Flag::AVX2 // VPGATHERQD xmm, m64, xmm
+, FlagSet::empty()+Flag::AVX2 // VPGATHERQD xmm, m64, xmm
+, FlagSet::empty()+Flag::AVX2 // VPGATHERQQ xmm, m64, xmm
+, FlagSet::empty()+Flag::AVX2 // VPGATHERQQ ymm, m64, ymm
+, FlagSet::empty()+Flag::AVX // VPHADDD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPHADDD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPHADDD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPHADDD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPHADDSW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPHADDSW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPHADDSW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPHADDSW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPHADDW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPHADDW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPHADDW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPHADDW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPHMINPOSUW xmm, m128
+, FlagSet::empty()+Flag::AVX // VPHMINPOSUW xmm, xmm
+, FlagSet::empty()+Flag::AVX // VPHSUBD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPHSUBD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPHSUBD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPHSUBD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPHSUBSW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPHSUBSW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPHSUBSW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPHSUBSW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPHSUBW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPHSUBW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPHSUBW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPHSUBW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPINSRB xmm, xmm, m8, imm8
+, FlagSet::empty()+Flag::AVX // VPINSRB xmm, xmm, r32, imm8
+, FlagSet::empty()+Flag::AVX // VPINSRD xmm, xmm, m32, imm8
+, FlagSet::empty()+Flag::AVX // VPINSRD xmm, xmm, r32, imm8
+, FlagSet::empty()+Flag::AVX // VPINSRQ xmm, xmm, m64, imm8
+, FlagSet::empty()+Flag::AVX // VPINSRQ xmm, xmm, r64, imm8
+, FlagSet::empty()+Flag::AVX // VPINSRW xmm, xmm, m16, imm8
+, FlagSet::empty()+Flag::AVX // VPINSRW xmm, xmm, r32, imm8
+, FlagSet::empty()+Flag::AVX // VPMADDUBSW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMADDUBSW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMADDUBSW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMADDUBSW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMADDWD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMADDWD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMADDWD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMADDWD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX2 // VPMASKMOVD m128, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMASKMOVD m256, ymm, ymm
+, FlagSet::empty()+Flag::AVX2 // VPMASKMOVD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX2 // VPMASKMOVD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMASKMOVQ m128, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMASKMOVQ m256, ymm, ymm
+, FlagSet::empty()+Flag::AVX2 // VPMASKMOVQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX2 // VPMASKMOVQ ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VPMAXSB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMAXSB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMAXSB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMAXSB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMAXSD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMAXSD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMAXSD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMAXSD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMAXSW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMAXSW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMAXSW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMAXSW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMAXUB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMAXUB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMAXUB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMAXUB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMAXUD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMAXUD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMAXUD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMAXUD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMAXUW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMAXUW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMAXUW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMAXUW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMINSB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMINSB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMINSB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMINSB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMINSD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMINSD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMINSD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMINSD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMINSW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMINSW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VPMINUB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMINUB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMINUB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMINUB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMINUD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMINUD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMINUD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMINUD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMINUW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMINUW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMINUW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMINUW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMOVMSKB r32, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVMSKB r32, ymm
+, FlagSet::empty()+Flag::AVX // VPMOVMSKB r64, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVMSKB r64, ymm
+, FlagSet::empty()+Flag::AVX // VPMOVSXBD xmm, m32
+, FlagSet::empty()+Flag::AVX // VPMOVSXBD xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVSXBD ymm, m64
+, FlagSet::empty()+Flag::AVX2 // VPMOVSXBD ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPMOVSXBQ xmm, m16
+, FlagSet::empty()+Flag::AVX // VPMOVSXBQ xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVSXBQ ymm, m32
+, FlagSet::empty()+Flag::AVX2 // VPMOVSXBQ ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPMOVSXBW xmm, m64
+, FlagSet::empty()+Flag::AVX // VPMOVSXBW xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVSXBW ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPMOVSXBW ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPMOVSXDQ xmm, m64
+, FlagSet::empty()+Flag::AVX // VPMOVSXDQ xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVSXDQ ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPMOVSXDQ ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPMOVSXWD xmm, m64
+, FlagSet::empty()+Flag::AVX // VPMOVSXWD xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVSXWD ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPMOVSXWD ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPMOVSXWQ xmm, m32
+, FlagSet::empty()+Flag::AVX // VPMOVSXWQ xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVSXWQ ymm, m64
+, FlagSet::empty()+Flag::AVX2 // VPMOVSXWQ ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPMOVZXBD xmm, m32
+, FlagSet::empty()+Flag::AVX // VPMOVZXBD xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVZXBD ymm, m64
+, FlagSet::empty()+Flag::AVX2 // VPMOVZXBD ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPMOVZXBQ xmm, m16
+, FlagSet::empty()+Flag::AVX // VPMOVZXBQ xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVZXBQ ymm, m32
+, FlagSet::empty()+Flag::AVX2 // VPMOVZXBQ ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPMOVZXBW xmm, m64
+, FlagSet::empty()+Flag::AVX // VPMOVZXBW xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVZXBW ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPMOVZXBW ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPMOVZXDQ xmm, m64
+, FlagSet::empty()+Flag::AVX // VPMOVZXDQ xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVZXDQ ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPMOVZXDQ ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPMOVZXWD xmm, m64
+, FlagSet::empty()+Flag::AVX // VPMOVZXWD xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVZXWD ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPMOVZXWD ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPMOVZXWQ xmm, m32
+, FlagSet::empty()+Flag::AVX // VPMOVZXWQ xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMOVZXWQ ymm, m64
+, FlagSet::empty()+Flag::AVX2 // VPMOVZXWQ ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPMULDQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMULDQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMULDQ ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMULDQ ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMULHRSW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMULHRSW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMULHRSW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMULHRSW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMULHUW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMULHUW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMULHUW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMULHUW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMULHW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMULHW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMULHW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMULHW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMULLD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMULLD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMULLD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMULLD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMULLW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMULLW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMULLW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMULLW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPMULUDQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPMULUDQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPMULUDQ ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPMULUDQ ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPOR xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPOR xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPOR ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPOR ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPSADBW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSADBW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSADBW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSADBW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPSHUFB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSHUFB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSHUFB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSHUFB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPSHUFD xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VPSHUFD xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSHUFD ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSHUFD ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VPSHUFHW xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VPSHUFHW xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSHUFHW ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSHUFHW ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VPSHUFLW xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VPSHUFLW xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSHUFLW ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSHUFLW ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VPSIGNB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSIGNB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VPSIGND xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSIGND xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VPSIGNW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSIGNW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VPSLLD xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPSLLD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSLLD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSLLD ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSLLD ymm, ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPSLLD ymm, ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPSLLDQ xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSLLDQ ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VPSLLQ xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPSLLQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSLLQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSLLQ ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSLLQ ymm, ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPSLLQ ymm, ymm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSLLVD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX2 // VPSLLVD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSLLVD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSLLVD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX2 // VPSLLVQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX2 // VPSLLVQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSLLVQ ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSLLVQ ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPSLLW xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPSLLW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSLLW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSLLW ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSLLW ymm, ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPSLLW ymm, ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPSRAD xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPSRAD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSRAD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSRAD ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSRAD ymm, ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPSRAD ymm, ymm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSRAVD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX2 // VPSRAVD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSRAVD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSRAVD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPSRAW xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPSRAW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSRAW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSRAW ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSRAW ymm, ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPSRAW ymm, ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPSRLD xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPSRLD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSRLD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSRLD ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSRLD ymm, ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPSRLD ymm, ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPSRLDQ xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSRLDQ ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VPSRLQ xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPSRLQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSRLQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSRLQ ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSRLQ ymm, ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPSRLQ ymm, ymm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSRLVD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX2 // VPSRLVD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSRLVD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSRLVD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX2 // VPSRLVQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX2 // VPSRLVQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSRLVQ ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSRLVQ ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPSRLW xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VPSRLW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSRLW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSRLW ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX2 // VPSRLW ymm, ymm, m128
+, FlagSet::empty()+Flag::AVX2 // VPSRLW ymm, ymm, xmm
+, FlagSet::empty()+Flag::AVX // VPSUBB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSUBB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSUBB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSUBB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPSUBD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSUBD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSUBD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSUBD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPSUBQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSUBQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSUBQ ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSUBQ ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPSUBSB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSUBSB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSUBSB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSUBSB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPSUBSW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSUBSW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSUBSW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSUBSW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPSUBUSB xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSUBUSB xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSUBUSB ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSUBUSB ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPSUBUSW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSUBUSW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSUBUSW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSUBUSW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPSUBW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPSUBW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPSUBW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPSUBW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPTEST xmm, m128
+, FlagSet::empty()+Flag::AVX // VPTEST xmm, xmm
+, FlagSet::empty()+Flag::AVX // VPTEST ymm, m256
+, FlagSet::empty()+Flag::AVX // VPTEST ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPUNPCKHBW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPUNPCKHBW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKHBW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKHBW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPUNPCKHDQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPUNPCKHDQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKHDQ ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKHDQ ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPUNPCKHQDQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPUNPCKHQDQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKHQDQ ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKHQDQ ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPUNPCKHWD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPUNPCKHWD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKHWD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKHWD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPUNPCKLBW xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPUNPCKLBW xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKLBW ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKLBW ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPUNPCKLDQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPUNPCKLDQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKLDQ ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKLDQ ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPUNPCKLQDQ xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPUNPCKLQDQ xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKLQDQ ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKLQDQ ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPUNPCKLWD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPUNPCKLWD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKLWD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPUNPCKLWD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VPXOR xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VPXOR xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX2 // VPXOR ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX2 // VPXOR ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VRCPPS xmm, m128
+, FlagSet::empty()+Flag::AVX // VRCPPS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VRCPPS ymm, m256
+, FlagSet::empty()+Flag::AVX // VRCPPS ymm, ymm
+, FlagSet::empty()+Flag::AVX // VRCPSS xmm, xmm, m32
+, FlagSet::empty()+Flag::AVX // VRCPSS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VROUNDPD xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VROUNDPD xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VROUNDPD ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX // VROUNDPD ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VROUNDPS xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VROUNDPS xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VROUNDPS ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX // VROUNDPS ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VROUNDSD xmm, xmm, m64, imm8
+, FlagSet::empty()+Flag::AVX // VROUNDSD xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VROUNDSS xmm, xmm, m32, imm8
+, FlagSet::empty()+Flag::AVX // VROUNDSS xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VRSQRTPS xmm, m128
+, FlagSet::empty()+Flag::AVX // VRSQRTPS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VRSQRTPS ymm, m256
+, FlagSet::empty()+Flag::AVX // VRSQRTPS ymm, ymm
+, FlagSet::empty()+Flag::AVX // VRSQRTSS xmm, xmm, m32
+, FlagSet::empty()+Flag::AVX // VRSQRTSS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VSHUFPD xmm, xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VSHUFPD xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VSHUFPD ymm, ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX // VSHUFPD ymm, ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VSHUFPS xmm, xmm, m128, imm8
+, FlagSet::empty()+Flag::AVX // VSHUFPS xmm, xmm, xmm, imm8
+, FlagSet::empty()+Flag::AVX // VSHUFPS ymm, ymm, m256, imm8
+, FlagSet::empty()+Flag::AVX // VSHUFPS ymm, ymm, ymm, imm8
+, FlagSet::empty()+Flag::AVX // VSQRTPD xmm, m128
+, FlagSet::empty()+Flag::AVX // VSQRTPD xmm, xmm
+, FlagSet::empty()+Flag::AVX // VSQRTPD ymm, m256
+, FlagSet::empty()+Flag::AVX // VSQRTPD ymm, ymm
+, FlagSet::empty()+Flag::AVX // VSQRTPS xmm, m128
+, FlagSet::empty()+Flag::AVX // VSQRTPS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VSQRTPS ymm, m256
+, FlagSet::empty()+Flag::AVX // VSQRTPS ymm, ymm
+, FlagSet::empty()+Flag::AVX // VSQRTSD xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VSQRTSD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VSQRTSS xmm, xmm, m32
+, FlagSet::empty()+Flag::AVX // VSQRTSS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VSTMXCSR m32
+, FlagSet::empty()+Flag::AVX // VSUBPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VSUBPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VSUBPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VSUBPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VSUBPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VSUBPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VSUBPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VSUBPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VSUBSD xmm, xmm, m64
+, FlagSet::empty()+Flag::AVX // VSUBSD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VSUBSS xmm, xmm, m32
+, FlagSet::empty()+Flag::AVX // VSUBSS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VTESTPD xmm, m128
+, FlagSet::empty()+Flag::AVX // VTESTPD xmm, xmm
+, FlagSet::empty()+Flag::AVX // VTESTPD ymm, m256
+, FlagSet::empty()+Flag::AVX // VTESTPD ymm, ymm
+, FlagSet::empty()+Flag::AVX // VTESTPS xmm, m128
+, FlagSet::empty()+Flag::AVX // VTESTPS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VTESTPS ymm, m256
+, FlagSet::empty()+Flag::AVX // VTESTPS ymm, ymm
+, FlagSet::empty()+Flag::AVX // VUCOMISD xmm, m64
+, FlagSet::empty()+Flag::AVX // VUCOMISD xmm, xmm
+, FlagSet::empty()+Flag::AVX // VUCOMISS xmm, m32
+, FlagSet::empty()+Flag::AVX // VUCOMISS xmm, xmm
+, FlagSet::empty()+Flag::AVX // VUNPCKHPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VUNPCKHPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VUNPCKHPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VUNPCKHPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VUNPCKHPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VUNPCKHPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VUNPCKHPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VUNPCKHPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VUNPCKLPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VUNPCKLPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VUNPCKLPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VUNPCKLPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VUNPCKLPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VUNPCKLPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VUNPCKLPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VUNPCKLPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VXORPD xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VXORPD xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VXORPD ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VXORPD ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VXORPS xmm, xmm, m128
+, FlagSet::empty()+Flag::AVX // VXORPS xmm, xmm, xmm
+, FlagSet::empty()+Flag::AVX // VXORPS ymm, ymm, m256
+, FlagSet::empty()+Flag::AVX // VXORPS ymm, ymm, ymm
+, FlagSet::empty()+Flag::AVX // VZEROALL 
+, FlagSet::empty()+Flag::AVX // VZEROUPPER 
+, FlagSet::empty()+Flag::FPU // WAIT 
+, FlagSet::empty()+Flag::FSGSBASE // WRFSBASE r32
+, FlagSet::empty()+Flag::FSGSBASE // WRFSBASE r64
+, FlagSet::empty()+Flag::FSGSBASE // WRGSBASE r32
+, FlagSet::empty()+Flag::FSGSBASE // WRGSBASE r64
+, FlagSet::empty()+Flag::RTM // XABORT imm8
+, FlagSet::empty()+Flag::HLE // XACQUIRE 
+, FlagSet::empty() // XADD m16, r16
+, FlagSet::empty() // XADD m32, r32
+, FlagSet::empty() // XADD m64, r64
+, FlagSet::empty() // XADD m8, r8
+, FlagSet::empty() // XADD m8, rh
+, FlagSet::empty() // XADD r16, r16
+, FlagSet::empty() // XADD r32, r32
+, FlagSet::empty() // XADD r64, r64
+, FlagSet::empty() // XADD r8, r8
+, FlagSet::empty() // XADD r8, rh
+, FlagSet::empty() // XADD rh, r8
+, FlagSet::empty() // XADD rh, rh
+, FlagSet::empty()+Flag::RTM // XBEGIN label32
+, FlagSet::empty()+Flag::RTM // XBEGIN rel32
+, FlagSet::empty() // XCHG AX, r16
+, FlagSet::empty() // XCHG EAX, r32
+, FlagSet::empty() // XCHG m16, r16
+, FlagSet::empty() // XCHG m32, r32
+, FlagSet::empty() // XCHG m64, r64
+, FlagSet::empty() // XCHG m8, r8
+, FlagSet::empty() // XCHG m8, rh
+, FlagSet::empty() // XCHG r16, AX
+, FlagSet::empty() // XCHG r16, m16
+, FlagSet::empty() // XCHG r16, r16
+, FlagSet::empty() // XCHG r16, r16
+, FlagSet::empty() // XCHG r32, EAX
+, FlagSet::empty() // XCHG r32, m32
+, FlagSet::empty() // XCHG r32, r32
+, FlagSet::empty() // XCHG r32, r32
+, FlagSet::empty() // XCHG r64, m64
+, FlagSet::empty() // XCHG r64, r64
+, FlagSet::empty() // XCHG r64, r64
+, FlagSet::empty() // XCHG r64, RAX
+, FlagSet::empty() // XCHG r8, m8
+, FlagSet::empty() // XCHG r8, r8
+, FlagSet::empty() // XCHG r8, r8
+, FlagSet::empty() // XCHG r8, rh
+, FlagSet::empty() // XCHG r8, rh
+, FlagSet::empty() // XCHG RAX, r64
+, FlagSet::empty() // XCHG rh, m8
+, FlagSet::empty() // XCHG rh, r8
+, FlagSet::empty() // XCHG rh, r8
+, FlagSet::empty() // XCHG rh, rh
+, FlagSet::empty() // XCHG rh, rh
+, FlagSet::empty()+Flag::RTM // XEND 
+, FlagSet::empty()+Flag::XSAVE // XGETBV 
+, FlagSet::empty() // XLAT m8
+, FlagSet::empty() // XLATB 
+, FlagSet::empty() // XLATB 
+, FlagSet::empty() // XOR AL, imm8
+, FlagSet::empty() // XOR AX, imm16
+, FlagSet::empty() // XOR EAX, imm32
+, FlagSet::empty() // XOR m16, imm16
+, FlagSet::empty() // XOR m16, imm8
+, FlagSet::empty() // XOR m16, r16
+, FlagSet::empty() // XOR m32, imm32
+, FlagSet::empty() // XOR m32, imm8
+, FlagSet::empty() // XOR m32, r32
+, FlagSet::empty() // XOR m64, imm32
+, FlagSet::empty() // XOR m64, imm8
+, FlagSet::empty() // XOR m64, r64
+, FlagSet::empty() // XOR m8, imm8
+, FlagSet::empty() // XOR m8, r8
+, FlagSet::empty() // XOR m8, rh
+, FlagSet::empty() // XOR r16, imm16
+, FlagSet::empty() // XOR r16, imm8
+, FlagSet::empty() // XOR r16, m16
+, FlagSet::empty() // XOR r16, r16
+, FlagSet::empty() // XOR r16, r16
+, FlagSet::empty() // XOR r32, imm32
+, FlagSet::empty() // XOR r32, imm8
+, FlagSet::empty() // XOR r32, m32
+, FlagSet::empty() // XOR r32, r32
+, FlagSet::empty() // XOR r32, r32
+, FlagSet::empty() // XOR r64, imm32
+, FlagSet::empty() // XOR r64, imm8
+, FlagSet::empty() // XOR r64, m64
+, FlagSet::empty() // XOR r64, r64
+, FlagSet::empty() // XOR r64, r64
+, FlagSet::empty() // XOR r8, imm8
+, FlagSet::empty() // XOR r8, m8
+, FlagSet::empty() // XOR r8, r8
+, FlagSet::empty() // XOR r8, r8
+, FlagSet::empty() // XOR r8, rh
+, FlagSet::empty() // XOR r8, rh
+, FlagSet::empty() // XOR RAX, imm32
+, FlagSet::empty() // XOR rh, imm8
+, FlagSet::empty() // XOR rh, m8
+, FlagSet::empty() // XOR rh, r8
+, FlagSet::empty() // XOR rh, r8
+, FlagSet::empty() // XOR rh, rh
+, FlagSet::empty() // XOR rh, rh
+, FlagSet::empty()+Flag::SSE2 // XORPD xmm, m128
+, FlagSet::empty()+Flag::SSE2 // XORPD xmm, xmm
+, FlagSet::empty()+Flag::SSE // XORPS xmm, m128
+, FlagSet::empty()+Flag::SSE // XORPS xmm, xmm
+, FlagSet::empty()+Flag::HLE // XRELEASE 
+, FlagSet::empty()+Flag::XSAVE // XRSTOR m16
+, FlagSet::empty()+Flag::XSAVE // XRSTOR m32
+, FlagSet::empty()+Flag::XSAVE // XRSTOR m64
+, FlagSet::empty()+Flag::XSAVE // XRSTOR64 m16
+, FlagSet::empty()+Flag::XSAVE // XRSTOR64 m32
+, FlagSet::empty()+Flag::XSAVE // XRSTOR64 m64
+, FlagSet::empty()+Flag::XSAVE // XSAVE m16
+, FlagSet::empty()+Flag::XSAVE // XSAVE m32
+, FlagSet::empty()+Flag::XSAVE // XSAVE m64
+, FlagSet::empty()+Flag::XSAVE // XSAVE64 m16
+, FlagSet::empty()+Flag::XSAVE // XSAVE64 m32
+, FlagSet::empty()+Flag::XSAVE // XSAVE64 m64
+, FlagSet::empty()+Flag::XSAVEOPT // XSAVEOPT m16
+, FlagSet::empty()+Flag::XSAVEOPT // XSAVEOPT m32
+, FlagSet::empty()+Flag::XSAVEOPT // XSAVEOPT m64
+, FlagSet::empty()+Flag::XSAVEOPT // XSAVEOPT64 m16
+, FlagSet::empty()+Flag::XSAVEOPT // XSAVEOPT64 m32
+, FlagSet::empty()+Flag::XSAVEOPT // XSAVEOPT64 m64
+, FlagSet::empty()+Flag::RTM // XTEST 

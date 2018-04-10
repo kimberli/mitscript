@@ -1,0 +1,3873 @@
+, RegSet::empty()+Constants::eflags_cf() // ADC AL, imm8
+, RegSet::empty()+Constants::eflags_cf() // ADC AX, imm16
+, RegSet::empty()+Constants::eflags_cf() // ADC EAX, imm32
+, RegSet::empty()+Constants::eflags_cf() // ADC m16, imm16
+, RegSet::empty()+Constants::eflags_cf() // ADC m16, imm8
+, RegSet::empty()+Constants::eflags_cf() // ADC m16, r16
+, RegSet::empty()+Constants::eflags_cf() // ADC m32, imm32
+, RegSet::empty()+Constants::eflags_cf() // ADC m32, imm8
+, RegSet::empty()+Constants::eflags_cf() // ADC m32, r32
+, RegSet::empty()+Constants::eflags_cf() // ADC m64, imm32
+, RegSet::empty()+Constants::eflags_cf() // ADC m64, imm8
+, RegSet::empty()+Constants::eflags_cf() // ADC m64, r64
+, RegSet::empty()+Constants::eflags_cf() // ADC m8, imm8
+, RegSet::empty()+Constants::eflags_cf() // ADC m8, r8
+, RegSet::empty()+Constants::eflags_cf() // ADC m8, rh
+, RegSet::empty()+Constants::eflags_cf() // ADC r16, imm16
+, RegSet::empty()+Constants::eflags_cf() // ADC r16, imm8
+, RegSet::empty()+Constants::eflags_cf() // ADC r16, m16
+, RegSet::empty()+Constants::eflags_cf() // ADC r16, r16
+, RegSet::empty()+Constants::eflags_cf() // ADC r16, r16
+, RegSet::empty()+Constants::eflags_cf() // ADC r32, imm32
+, RegSet::empty()+Constants::eflags_cf() // ADC r32, imm8
+, RegSet::empty()+Constants::eflags_cf() // ADC r32, m32
+, RegSet::empty()+Constants::eflags_cf() // ADC r32, r32
+, RegSet::empty()+Constants::eflags_cf() // ADC r32, r32
+, RegSet::empty()+Constants::eflags_cf() // ADC r64, imm32
+, RegSet::empty()+Constants::eflags_cf() // ADC r64, imm8
+, RegSet::empty()+Constants::eflags_cf() // ADC r64, m64
+, RegSet::empty()+Constants::eflags_cf() // ADC r64, r64
+, RegSet::empty()+Constants::eflags_cf() // ADC r64, r64
+, RegSet::empty()+Constants::eflags_cf() // ADC r8, imm8
+, RegSet::empty()+Constants::eflags_cf() // ADC r8, m8
+, RegSet::empty()+Constants::eflags_cf() // ADC r8, r8
+, RegSet::empty()+Constants::eflags_cf() // ADC r8, r8
+, RegSet::empty()+Constants::eflags_cf() // ADC r8, rh
+, RegSet::empty()+Constants::eflags_cf() // ADC r8, rh
+, RegSet::empty()+Constants::eflags_cf() // ADC RAX, imm32
+, RegSet::empty()+Constants::eflags_cf() // ADC rh, imm8
+, RegSet::empty()+Constants::eflags_cf() // ADC rh, m8
+, RegSet::empty()+Constants::eflags_cf() // ADC rh, r8
+, RegSet::empty()+Constants::eflags_cf() // ADC rh, r8
+, RegSet::empty()+Constants::eflags_cf() // ADC rh, rh
+, RegSet::empty()+Constants::eflags_cf() // ADC rh, rh
+, RegSet::empty() // ADD AL, imm8
+, RegSet::empty() // ADD AX, imm16
+, RegSet::empty() // ADD EAX, imm32
+, RegSet::empty() // ADD m16, imm16
+, RegSet::empty() // ADD m16, imm8
+, RegSet::empty() // ADD m16, r16
+, RegSet::empty() // ADD m32, imm32
+, RegSet::empty() // ADD m32, imm8
+, RegSet::empty() // ADD m32, r32
+, RegSet::empty() // ADD m64, imm32
+, RegSet::empty() // ADD m64, imm8
+, RegSet::empty() // ADD m64, r64
+, RegSet::empty() // ADD m8, imm8
+, RegSet::empty() // ADD m8, r8
+, RegSet::empty() // ADD m8, rh
+, RegSet::empty() // ADD r16, imm16
+, RegSet::empty() // ADD r16, imm8
+, RegSet::empty() // ADD r16, m16
+, RegSet::empty() // ADD r16, r16
+, RegSet::empty() // ADD r16, r16
+, RegSet::empty() // ADD r32, imm32
+, RegSet::empty() // ADD r32, imm8
+, RegSet::empty() // ADD r32, m32
+, RegSet::empty() // ADD r32, r32
+, RegSet::empty() // ADD r32, r32
+, RegSet::empty() // ADD r64, imm32
+, RegSet::empty() // ADD r64, imm8
+, RegSet::empty() // ADD r64, m64
+, RegSet::empty() // ADD r64, r64
+, RegSet::empty() // ADD r64, r64
+, RegSet::empty() // ADD r8, imm8
+, RegSet::empty() // ADD r8, m8
+, RegSet::empty() // ADD r8, r8
+, RegSet::empty() // ADD r8, r8
+, RegSet::empty() // ADD r8, rh
+, RegSet::empty() // ADD r8, rh
+, RegSet::empty() // ADD RAX, imm32
+, RegSet::empty() // ADD rh, imm8
+, RegSet::empty() // ADD rh, m8
+, RegSet::empty() // ADD rh, r8
+, RegSet::empty() // ADD rh, r8
+, RegSet::empty() // ADD rh, rh
+, RegSet::empty() // ADD rh, rh
+, RegSet::empty() // ADDPD xmm, m128
+, RegSet::empty() // ADDPD xmm, xmm
+, RegSet::empty() // ADDPS xmm, m128
+, RegSet::empty() // ADDPS xmm, xmm
+, RegSet::empty() // ADDSD xmm, m64
+, RegSet::empty() // ADDSD xmm, xmm
+, RegSet::empty() // ADDSS xmm, m32
+, RegSet::empty() // ADDSS xmm, xmm
+, RegSet::empty() // ADDSUBPD xmm, m128
+, RegSet::empty() // ADDSUBPD xmm, xmm
+, RegSet::empty() // ADDSUBPS xmm, m128
+, RegSet::empty() // ADDSUBPS xmm, xmm
+, RegSet::empty() // AESDEC xmm, m128
+, RegSet::empty() // AESDEC xmm, xmm
+, RegSet::empty() // AESDECLAST xmm, m128
+, RegSet::empty() // AESDECLAST xmm, xmm
+, RegSet::empty() // AESENC xmm, m128
+, RegSet::empty() // AESENC xmm, xmm
+, RegSet::empty() // AESENCLAST xmm, m128
+, RegSet::empty() // AESENCLAST xmm, xmm
+, RegSet::empty() // AESIMC xmm, m128
+, RegSet::empty() // AESIMC xmm, xmm
+, RegSet::empty() // AESKEYGENASSIST xmm, m128, imm8
+, RegSet::empty() // AESKEYGENASSIST xmm, xmm, imm8
+, RegSet::empty() // AND AL, imm8
+, RegSet::empty() // AND AX, imm16
+, RegSet::empty() // AND EAX, imm32
+, RegSet::empty() // AND m16, imm16
+, RegSet::empty() // AND m16, imm8
+, RegSet::empty() // AND m16, r16
+, RegSet::empty() // AND m32, imm32
+, RegSet::empty() // AND m32, imm8
+, RegSet::empty() // AND m32, r32
+, RegSet::empty() // AND m64, imm32
+, RegSet::empty() // AND m64, imm8
+, RegSet::empty() // AND m64, r64
+, RegSet::empty() // AND m8, imm8
+, RegSet::empty() // AND m8, r8
+, RegSet::empty() // AND m8, rh
+, RegSet::empty() // AND r16, imm16
+, RegSet::empty() // AND r16, imm8
+, RegSet::empty() // AND r16, m16
+, RegSet::empty() // AND r16, r16
+, RegSet::empty() // AND r16, r16
+, RegSet::empty() // AND r32, imm32
+, RegSet::empty() // AND r32, imm8
+, RegSet::empty() // AND r32, m32
+, RegSet::empty() // AND r32, r32
+, RegSet::empty() // AND r32, r32
+, RegSet::empty() // AND r64, imm32
+, RegSet::empty() // AND r64, imm8
+, RegSet::empty() // AND r64, m64
+, RegSet::empty() // AND r64, r64
+, RegSet::empty() // AND r64, r64
+, RegSet::empty() // AND r8, imm8
+, RegSet::empty() // AND r8, m8
+, RegSet::empty() // AND r8, r8
+, RegSet::empty() // AND r8, r8
+, RegSet::empty() // AND r8, rh
+, RegSet::empty() // AND r8, rh
+, RegSet::empty() // AND RAX, imm32
+, RegSet::empty() // AND rh, imm8
+, RegSet::empty() // AND rh, m8
+, RegSet::empty() // AND rh, r8
+, RegSet::empty() // AND rh, r8
+, RegSet::empty() // AND rh, rh
+, RegSet::empty() // AND rh, rh
+, RegSet::empty() // ANDN r32, r32, m32
+, RegSet::empty() // ANDN r32, r32, r32
+, RegSet::empty() // ANDN r64, r64, m64
+, RegSet::empty() // ANDN r64, r64, r64
+, RegSet::empty() // ANDNPD xmm, m128
+, RegSet::empty() // ANDNPD xmm, xmm
+, RegSet::empty() // ANDNPS xmm, m128
+, RegSet::empty() // ANDNPS xmm, xmm
+, RegSet::empty() // ANDPD xmm, m128
+, RegSet::empty() // ANDPD xmm, xmm
+, RegSet::empty() // ANDPS xmm, m128
+, RegSet::empty() // ANDPS xmm, xmm
+, RegSet::empty() // BEXTR r32, m32, r32
+, RegSet::empty() // BEXTR r32, r32, r32
+, RegSet::empty() // BEXTR r64, m64, r64
+, RegSet::empty() // BEXTR r64, r64, r64
+, RegSet::empty() // BLENDPD xmm, m128, imm8
+, RegSet::empty() // BLENDPD xmm, xmm, imm8
+, RegSet::empty() // BLENDPS xmm, m128, imm8
+, RegSet::empty() // BLENDPS xmm, xmm, imm8
+, RegSet::empty() // BLENDVPD xmm, m128, <XMM0>
+, RegSet::empty() // BLENDVPD xmm, xmm, <XMM0>
+, RegSet::empty() // BLENDVPS xmm, m128, <XMM0>
+, RegSet::empty() // BLENDVPS xmm, xmm, <XMM0>
+, RegSet::empty() // BLSI r32, m32
+, RegSet::empty() // BLSI r32, r32
+, RegSet::empty() // BLSI r64, m64
+, RegSet::empty() // BLSI r64, r64
+, RegSet::empty() // BLSMSK r32, m32
+, RegSet::empty() // BLSMSK r32, r32
+, RegSet::empty() // BLSMSK r64, m64
+, RegSet::empty() // BLSMSK r64, r64
+, RegSet::empty() // BLSR r32, m32
+, RegSet::empty() // BLSR r32, r32
+, RegSet::empty() // BLSR r64, m64
+, RegSet::empty() // BLSR r64, r64
+, RegSet::empty() // BSF r16, m16
+, RegSet::empty() // BSF r16, r16
+, RegSet::empty() // BSF r32, m32
+, RegSet::empty() // BSF r32, r32
+, RegSet::empty() // BSF r64, m64
+, RegSet::empty() // BSF r64, r64
+, RegSet::empty() // BSR r16, m16
+, RegSet::empty() // BSR r16, r16
+, RegSet::empty() // BSR r32, m32
+, RegSet::empty() // BSR r32, r32
+, RegSet::empty() // BSR r64, m64
+, RegSet::empty() // BSR r64, r64
+, RegSet::empty() // BSWAP r32
+, RegSet::empty() // BSWAP r64
+, RegSet::empty() // BT m16, imm8
+, RegSet::empty() // BT m16, r16
+, RegSet::empty() // BT m32, imm8
+, RegSet::empty() // BT m32, r32
+, RegSet::empty() // BT m64, imm8
+, RegSet::empty() // BT m64, r64
+, RegSet::empty() // BT r16, imm8
+, RegSet::empty() // BT r16, r16
+, RegSet::empty() // BT r32, imm8
+, RegSet::empty() // BT r32, r32
+, RegSet::empty() // BT r64, imm8
+, RegSet::empty() // BT r64, r64
+, RegSet::empty() // BTC m16, imm8
+, RegSet::empty() // BTC m16, r16
+, RegSet::empty() // BTC m32, imm8
+, RegSet::empty() // BTC m32, r32
+, RegSet::empty() // BTC m64, imm8
+, RegSet::empty() // BTC m64, r64
+, RegSet::empty() // BTC r16, imm8
+, RegSet::empty() // BTC r16, r16
+, RegSet::empty() // BTC r32, imm8
+, RegSet::empty() // BTC r32, r32
+, RegSet::empty() // BTC r64, imm8
+, RegSet::empty() // BTC r64, r64
+, RegSet::empty() // BTR m16, imm8
+, RegSet::empty() // BTR m16, r16
+, RegSet::empty() // BTR m32, imm8
+, RegSet::empty() // BTR m32, r32
+, RegSet::empty() // BTR m64, imm8
+, RegSet::empty() // BTR m64, r64
+, RegSet::empty() // BTR r16, imm8
+, RegSet::empty() // BTR r16, r16
+, RegSet::empty() // BTR r32, imm8
+, RegSet::empty() // BTR r32, r32
+, RegSet::empty() // BTR r64, imm8
+, RegSet::empty() // BTR r64, r64
+, RegSet::empty() // BTS m16, imm8
+, RegSet::empty() // BTS m16, r16
+, RegSet::empty() // BTS m32, imm8
+, RegSet::empty() // BTS m32, r32
+, RegSet::empty() // BTS m64, imm8
+, RegSet::empty() // BTS m64, r64
+, RegSet::empty() // BTS r16, imm8
+, RegSet::empty() // BTS r16, r16
+, RegSet::empty() // BTS r32, imm8
+, RegSet::empty() // BTS r32, r32
+, RegSet::empty() // BTS r64, imm8
+, RegSet::empty() // BTS r64, r64
+, RegSet::empty() // BZHI r32, m32, r32
+, RegSet::empty() // BZHI r32, r32, r32
+, RegSet::empty() // BZHI r64, m64, r64
+, RegSet::empty() // BZHI r64, r64, r64
+, RegSet::empty()+Constants::rdi()+Constants::rsi()+Constants::rdx()+Constants::rcx()+Constants::r8()+Constants::r9()+Constants::rax()+Constants::xmm0()+Constants::xmm1()+Constants::xmm2()+Constants::xmm3()+Constants::xmm4()+Constants::xmm5()+Constants::xmm6()+Constants::xmm7() // CALL m16:16
+, RegSet::empty()+Constants::rdi()+Constants::rsi()+Constants::rdx()+Constants::rcx()+Constants::r8()+Constants::r9()+Constants::rax()+Constants::xmm0()+Constants::xmm1()+Constants::xmm2()+Constants::xmm3()+Constants::xmm4()+Constants::xmm5()+Constants::xmm6()+Constants::xmm7() // CALL m16:32
+, RegSet::empty()+Constants::rdi()+Constants::rsi()+Constants::rdx()+Constants::rcx()+Constants::r8()+Constants::r9()+Constants::rax()+Constants::xmm0()+Constants::xmm1()+Constants::xmm2()+Constants::xmm3()+Constants::xmm4()+Constants::xmm5()+Constants::xmm6()+Constants::xmm7() // CALL m16:64
+, RegSet::empty()+Constants::rdi()+Constants::rsi()+Constants::rdx()+Constants::rcx()+Constants::r8()+Constants::r9()+Constants::rax()+Constants::xmm0()+Constants::xmm1()+Constants::xmm2()+Constants::xmm3()+Constants::xmm4()+Constants::xmm5()+Constants::xmm6()+Constants::xmm7() // CALL label32
+, RegSet::empty()+Constants::rdi()+Constants::rsi()+Constants::rdx()+Constants::rcx()+Constants::r8()+Constants::r9()+Constants::rax()+Constants::xmm0()+Constants::xmm1()+Constants::xmm2()+Constants::xmm3()+Constants::xmm4()+Constants::xmm5()+Constants::xmm6()+Constants::xmm7() // CALL m64
+, RegSet::empty()+Constants::rdi()+Constants::rsi()+Constants::rdx()+Constants::rcx()+Constants::r8()+Constants::r9()+Constants::rax()+Constants::xmm0()+Constants::xmm1()+Constants::xmm2()+Constants::xmm3()+Constants::xmm4()+Constants::xmm5()+Constants::xmm6()+Constants::xmm7() // CALL r64
+, RegSet::empty()+Constants::rdi()+Constants::rsi()+Constants::rdx()+Constants::rcx()+Constants::r8()+Constants::r9()+Constants::rax()+Constants::xmm0()+Constants::xmm1()+Constants::xmm2()+Constants::xmm3()+Constants::xmm4()+Constants::xmm5()+Constants::xmm6()+Constants::xmm7() // CALL rel32
+, RegSet::empty()+Constants::al() // CBW 
+, RegSet::empty()+Constants::eax() // CDQ 
+, RegSet::empty()+Constants::eax() // CDQE 
+, RegSet::empty() // CLC 
+, RegSet::empty() // CLD 
+, RegSet::empty() // CLFLUSH m8
+, RegSet::empty()+Constants::eflags_vm()+Constants::eflags_iopl()+Constants::eflags_vip() // CLI 
+, RegSet::empty()+Constants::eflags_cf() // CMC 
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVA r16, m16
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVA r16, r16
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVA r32, m32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVA r32, r32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVA r64, m64
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVA r64, r64
+, RegSet::empty()+Constants::eflags_cf() // CMOVAE r16, m16
+, RegSet::empty()+Constants::eflags_cf() // CMOVAE r16, r16
+, RegSet::empty()+Constants::eflags_cf() // CMOVAE r32, m32
+, RegSet::empty()+Constants::eflags_cf() // CMOVAE r32, r32
+, RegSet::empty()+Constants::eflags_cf() // CMOVAE r64, m64
+, RegSet::empty()+Constants::eflags_cf() // CMOVAE r64, r64
+, RegSet::empty()+Constants::eflags_cf() // CMOVB r16, m16
+, RegSet::empty()+Constants::eflags_cf() // CMOVB r16, r16
+, RegSet::empty()+Constants::eflags_cf() // CMOVB r32, m32
+, RegSet::empty()+Constants::eflags_cf() // CMOVB r32, r32
+, RegSet::empty()+Constants::eflags_cf() // CMOVB r64, m64
+, RegSet::empty()+Constants::eflags_cf() // CMOVB r64, r64
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVBE r16, m16
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVBE r16, r16
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVBE r32, m32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVBE r32, r32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVBE r64, m64
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVBE r64, r64
+, RegSet::empty()+Constants::eflags_cf() // CMOVC r16, m16
+, RegSet::empty()+Constants::eflags_cf() // CMOVC r16, r16
+, RegSet::empty()+Constants::eflags_cf() // CMOVC r32, m32
+, RegSet::empty()+Constants::eflags_cf() // CMOVC r32, r32
+, RegSet::empty()+Constants::eflags_cf() // CMOVC r64, m64
+, RegSet::empty()+Constants::eflags_cf() // CMOVC r64, r64
+, RegSet::empty()+Constants::eflags_zf() // CMOVE r16, m16
+, RegSet::empty()+Constants::eflags_zf() // CMOVE r16, r16
+, RegSet::empty()+Constants::eflags_zf() // CMOVE r32, m32
+, RegSet::empty()+Constants::eflags_zf() // CMOVE r32, r32
+, RegSet::empty()+Constants::eflags_zf() // CMOVE r64, m64
+, RegSet::empty()+Constants::eflags_zf() // CMOVE r64, r64
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVG r16, m16
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVG r16, r16
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVG r32, m32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVG r32, r32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVG r64, m64
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVG r64, r64
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVGE r16, m16
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVGE r16, r16
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVGE r32, m32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVGE r32, r32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVGE r64, m64
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVGE r64, r64
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVL r16, m16
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVL r16, r16
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVL r32, m32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVL r32, r32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVL r64, m64
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVL r64, r64
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVLE r16, m16
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVLE r16, r16
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVLE r32, m32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVLE r32, r32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVLE r64, m64
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVLE r64, r64
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVNA r16, m16
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVNA r16, r16
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVNA r32, m32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVNA r32, r32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVNA r64, m64
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVNA r64, r64
+, RegSet::empty()+Constants::eflags_cf() // CMOVNAE r16, m16
+, RegSet::empty()+Constants::eflags_cf() // CMOVNAE r16, r16
+, RegSet::empty()+Constants::eflags_cf() // CMOVNAE r32, m32
+, RegSet::empty()+Constants::eflags_cf() // CMOVNAE r32, r32
+, RegSet::empty()+Constants::eflags_cf() // CMOVNAE r64, m64
+, RegSet::empty()+Constants::eflags_cf() // CMOVNAE r64, r64
+, RegSet::empty()+Constants::eflags_cf() // CMOVNB r16, m16
+, RegSet::empty()+Constants::eflags_cf() // CMOVNB r16, r16
+, RegSet::empty()+Constants::eflags_cf() // CMOVNB r32, m32
+, RegSet::empty()+Constants::eflags_cf() // CMOVNB r32, r32
+, RegSet::empty()+Constants::eflags_cf() // CMOVNB r64, m64
+, RegSet::empty()+Constants::eflags_cf() // CMOVNB r64, r64
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVNBE r16, m16
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVNBE r16, r16
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVNBE r32, m32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVNBE r32, r32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVNBE r64, m64
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // CMOVNBE r64, r64
+, RegSet::empty()+Constants::eflags_cf() // CMOVNC r16, m16
+, RegSet::empty()+Constants::eflags_cf() // CMOVNC r16, r16
+, RegSet::empty()+Constants::eflags_cf() // CMOVNC r32, m32
+, RegSet::empty()+Constants::eflags_cf() // CMOVNC r32, r32
+, RegSet::empty()+Constants::eflags_cf() // CMOVNC r64, m64
+, RegSet::empty()+Constants::eflags_cf() // CMOVNC r64, r64
+, RegSet::empty()+Constants::eflags_zf() // CMOVNE r16, m16
+, RegSet::empty()+Constants::eflags_zf() // CMOVNE r16, r16
+, RegSet::empty()+Constants::eflags_zf() // CMOVNE r32, m32
+, RegSet::empty()+Constants::eflags_zf() // CMOVNE r32, r32
+, RegSet::empty()+Constants::eflags_zf() // CMOVNE r64, m64
+, RegSet::empty()+Constants::eflags_zf() // CMOVNE r64, r64
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNG r16, m16
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNG r16, r16
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNG r32, m32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNG r32, r32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNG r64, m64
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNG r64, r64
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNGE r16, m16
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNGE r16, r16
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNGE r32, m32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNGE r32, r32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNGE r64, m64
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNGE r64, r64
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNL r16, m16
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNL r16, r16
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNL r32, m32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNL r32, r32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNL r64, m64
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNL r64, r64
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNLE r16, m16
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNLE r16, r16
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNLE r32, m32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNLE r32, r32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNLE r64, m64
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // CMOVNLE r64, r64
+, RegSet::empty()+Constants::eflags_of() // CMOVNO r16, m16
+, RegSet::empty()+Constants::eflags_of() // CMOVNO r16, r16
+, RegSet::empty()+Constants::eflags_of() // CMOVNO r32, m32
+, RegSet::empty()+Constants::eflags_of() // CMOVNO r32, r32
+, RegSet::empty()+Constants::eflags_of() // CMOVNO r64, m64
+, RegSet::empty()+Constants::eflags_of() // CMOVNO r64, r64
+, RegSet::empty()+Constants::eflags_pf() // CMOVNP r16, m16
+, RegSet::empty()+Constants::eflags_pf() // CMOVNP r16, r16
+, RegSet::empty()+Constants::eflags_pf() // CMOVNP r32, m32
+, RegSet::empty()+Constants::eflags_pf() // CMOVNP r32, r32
+, RegSet::empty()+Constants::eflags_pf() // CMOVNP r64, m64
+, RegSet::empty()+Constants::eflags_pf() // CMOVNP r64, r64
+, RegSet::empty()+Constants::eflags_sf() // CMOVNS r16, m16
+, RegSet::empty()+Constants::eflags_sf() // CMOVNS r16, r16
+, RegSet::empty()+Constants::eflags_sf() // CMOVNS r32, m32
+, RegSet::empty()+Constants::eflags_sf() // CMOVNS r32, r32
+, RegSet::empty()+Constants::eflags_sf() // CMOVNS r64, m64
+, RegSet::empty()+Constants::eflags_sf() // CMOVNS r64, r64
+, RegSet::empty()+Constants::eflags_zf() // CMOVNZ r16, m16
+, RegSet::empty()+Constants::eflags_zf() // CMOVNZ r16, r16
+, RegSet::empty()+Constants::eflags_zf() // CMOVNZ r32, m32
+, RegSet::empty()+Constants::eflags_zf() // CMOVNZ r32, r32
+, RegSet::empty()+Constants::eflags_zf() // CMOVNZ r64, m64
+, RegSet::empty()+Constants::eflags_zf() // CMOVNZ r64, r64
+, RegSet::empty()+Constants::eflags_of() // CMOVO r16, m16
+, RegSet::empty()+Constants::eflags_of() // CMOVO r16, r16
+, RegSet::empty()+Constants::eflags_of() // CMOVO r32, m32
+, RegSet::empty()+Constants::eflags_of() // CMOVO r32, r32
+, RegSet::empty()+Constants::eflags_of() // CMOVO r64, m64
+, RegSet::empty()+Constants::eflags_of() // CMOVO r64, r64
+, RegSet::empty()+Constants::eflags_pf() // CMOVP r16, m16
+, RegSet::empty()+Constants::eflags_pf() // CMOVP r16, r16
+, RegSet::empty()+Constants::eflags_pf() // CMOVP r32, m32
+, RegSet::empty()+Constants::eflags_pf() // CMOVP r32, r32
+, RegSet::empty()+Constants::eflags_pf() // CMOVP r64, m64
+, RegSet::empty()+Constants::eflags_pf() // CMOVP r64, r64
+, RegSet::empty()+Constants::eflags_pf() // CMOVPE r16, m16
+, RegSet::empty()+Constants::eflags_pf() // CMOVPE r16, r16
+, RegSet::empty()+Constants::eflags_pf() // CMOVPE r32, m32
+, RegSet::empty()+Constants::eflags_pf() // CMOVPE r32, r32
+, RegSet::empty()+Constants::eflags_pf() // CMOVPE r64, m64
+, RegSet::empty()+Constants::eflags_pf() // CMOVPE r64, r64
+, RegSet::empty()+Constants::eflags_pf() // CMOVPO r16, m16
+, RegSet::empty()+Constants::eflags_pf() // CMOVPO r16, r16
+, RegSet::empty()+Constants::eflags_pf() // CMOVPO r32, m32
+, RegSet::empty()+Constants::eflags_pf() // CMOVPO r32, r32
+, RegSet::empty()+Constants::eflags_pf() // CMOVPO r64, m64
+, RegSet::empty()+Constants::eflags_pf() // CMOVPO r64, r64
+, RegSet::empty()+Constants::eflags_sf() // CMOVS r16, m16
+, RegSet::empty()+Constants::eflags_sf() // CMOVS r16, r16
+, RegSet::empty()+Constants::eflags_sf() // CMOVS r32, m32
+, RegSet::empty()+Constants::eflags_sf() // CMOVS r32, r32
+, RegSet::empty()+Constants::eflags_sf() // CMOVS r64, m64
+, RegSet::empty()+Constants::eflags_sf() // CMOVS r64, r64
+, RegSet::empty()+Constants::eflags_zf() // CMOVZ r16, m16
+, RegSet::empty()+Constants::eflags_zf() // CMOVZ r16, r16
+, RegSet::empty()+Constants::eflags_zf() // CMOVZ r32, m32
+, RegSet::empty()+Constants::eflags_zf() // CMOVZ r32, r32
+, RegSet::empty()+Constants::eflags_zf() // CMOVZ r64, m64
+, RegSet::empty()+Constants::eflags_zf() // CMOVZ r64, r64
+, RegSet::empty() // CMP AL, imm8
+, RegSet::empty() // CMP AX, imm16
+, RegSet::empty() // CMP EAX, imm32
+, RegSet::empty() // CMP m16, imm16
+, RegSet::empty() // CMP m16, imm8
+, RegSet::empty() // CMP m16, r16
+, RegSet::empty() // CMP m32, imm32
+, RegSet::empty() // CMP m32, imm8
+, RegSet::empty() // CMP m32, r32
+, RegSet::empty() // CMP m64, imm32
+, RegSet::empty() // CMP m64, imm8
+, RegSet::empty() // CMP m64, r64
+, RegSet::empty() // CMP m8, imm8
+, RegSet::empty() // CMP m8, r8
+, RegSet::empty() // CMP m8, rh
+, RegSet::empty() // CMP r16, imm16
+, RegSet::empty() // CMP r16, imm8
+, RegSet::empty() // CMP r16, m16
+, RegSet::empty() // CMP r16, r16
+, RegSet::empty() // CMP r16, r16
+, RegSet::empty() // CMP r32, imm32
+, RegSet::empty() // CMP r32, imm8
+, RegSet::empty() // CMP r32, m32
+, RegSet::empty() // CMP r32, r32
+, RegSet::empty() // CMP r32, r32
+, RegSet::empty() // CMP r64, imm32
+, RegSet::empty() // CMP r64, imm8
+, RegSet::empty() // CMP r64, m64
+, RegSet::empty() // CMP r64, r64
+, RegSet::empty() // CMP r64, r64
+, RegSet::empty() // CMP r8, imm8
+, RegSet::empty() // CMP r8, m8
+, RegSet::empty() // CMP r8, r8
+, RegSet::empty() // CMP r8, r8
+, RegSet::empty() // CMP r8, rh
+, RegSet::empty() // CMP r8, rh
+, RegSet::empty() // CMP RAX, imm32
+, RegSet::empty() // CMP rh, imm8
+, RegSet::empty() // CMP rh, m8
+, RegSet::empty() // CMP rh, r8
+, RegSet::empty() // CMP rh, r8
+, RegSet::empty() // CMP rh, rh
+, RegSet::empty() // CMP rh, rh
+, RegSet::empty() // CMPPD xmm, m128, imm8
+, RegSet::empty() // CMPPD xmm, xmm, imm8
+, RegSet::empty() // CMPPS xmm, m128, imm8
+, RegSet::empty() // CMPPS xmm, xmm, imm8
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // CMPS m16, m16
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // CMPS m32, m32
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // CMPS m64, m64
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // CMPS m8, m8
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // CMPSB 
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // CMPSD 
+, RegSet::empty() // CMPSD xmm, m64, imm8
+, RegSet::empty() // CMPSD xmm, xmm, imm8
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // CMPSQ 
+, RegSet::empty() // CMPSS xmm, m32, imm8
+, RegSet::empty() // CMPSS xmm, xmm, imm8
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // CMPSW 
+, RegSet::empty()+Constants::ax() // CMPXCHG m16, r16
+, RegSet::empty()+Constants::eax() // CMPXCHG m32, r32
+, RegSet::empty()+Constants::rax() // CMPXCHG m64, r64
+, RegSet::empty()+Constants::al() // CMPXCHG m8, r8
+, RegSet::empty()+Constants::al() // CMPXCHG m8, rh
+, RegSet::empty()+Constants::ax() // CMPXCHG r16, r16
+, RegSet::empty()+Constants::eax() // CMPXCHG r32, r32
+, RegSet::empty()+Constants::rax() // CMPXCHG r64, r64
+, RegSet::empty()+Constants::al() // CMPXCHG r8, r8
+, RegSet::empty()+Constants::al() // CMPXCHG r8, rh
+, RegSet::empty()+Constants::al() // CMPXCHG rh, r8
+, RegSet::empty()+Constants::al() // CMPXCHG rh, rh
+, RegSet::empty()+Constants::rax()+Constants::rdx() // CMPXCHG16B m128
+, RegSet::empty()+Constants::eax()+Constants::edx() // CMPXCHG8B m64
+, RegSet::empty() // COMISD xmm, m64
+, RegSet::empty() // COMISD xmm, xmm
+, RegSet::empty() // COMISS xmm, m32
+, RegSet::empty() // COMISS xmm, xmm
+, RegSet::empty()+Constants::eax()+Constants::ecx() // CPUID 
+, RegSet::empty()+Constants::rax() // CQO 
+, RegSet::empty() // CRC32 r32, m16
+, RegSet::empty() // CRC32 r32, m32
+, RegSet::empty() // CRC32 r32, m8
+, RegSet::empty() // CRC32 r32, r16
+, RegSet::empty() // CRC32 r32, r32
+, RegSet::empty() // CRC32 r32, r8
+, RegSet::empty() // CRC32 r32, rh
+, RegSet::empty() // CRC32 r64, m64
+, RegSet::empty() // CRC32 r64, m8
+, RegSet::empty() // CRC32 r64, r64
+, RegSet::empty() // CRC32 r64, r8
+, RegSet::empty() // CVTDQ2PD xmm, m64
+, RegSet::empty() // CVTDQ2PD xmm, xmm
+, RegSet::empty() // CVTDQ2PS xmm, m128
+, RegSet::empty() // CVTDQ2PS xmm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPD2DQ xmm, m128
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPD2DQ xmm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPD2PI mm, m128
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPD2PI mm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPD2PS xmm, m128
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPD2PS xmm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPI2PD xmm, m64
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPI2PD xmm, mm
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPI2PS xmm, m64
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPI2PS xmm, mm
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPS2DQ xmm, m128
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPS2DQ xmm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPS2PD xmm, m64
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPS2PD xmm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPS2PI mm, m64
+, RegSet::empty()+Constants::mxcsr_rc() // CVTPS2PI mm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSD2SI r32, m64
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSD2SI r32, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSD2SI r64, m64
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSD2SI r64, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSD2SS xmm, m64
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSD2SS xmm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSI2SD xmm, m32
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSI2SD xmm, m64
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSI2SD xmm, r32
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSI2SD xmm, r64
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSI2SS xmm, m32
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSI2SS xmm, m64
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSI2SS xmm, r32
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSI2SS xmm, r64
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSS2SD xmm, m32
+, RegSet::empty()+Constants::mxcsr_rc() // CVTSS2SD xmm, xmm
+, RegSet::empty() // CVTSS2SI r32, m32
+, RegSet::empty() // CVTSS2SI r32, xmm
+, RegSet::empty() // CVTSS2SI r64, m32
+, RegSet::empty() // CVTSS2SI r64, xmm
+, RegSet::empty() // CVTTPD2DQ xmm, m128
+, RegSet::empty() // CVTTPD2DQ xmm, xmm
+, RegSet::empty() // CVTTPD2PI mm, m128
+, RegSet::empty() // CVTTPD2PI mm, xmm
+, RegSet::empty() // CVTTPS2DQ xmm, m128
+, RegSet::empty() // CVTTPS2DQ xmm, xmm
+, RegSet::empty() // CVTTPS2PI mm, m64
+, RegSet::empty() // CVTTPS2PI mm, xmm
+, RegSet::empty() // CVTTSD2SI r32, m64
+, RegSet::empty() // CVTTSD2SI r32, xmm
+, RegSet::empty() // CVTTSD2SI r64, m64
+, RegSet::empty() // CVTTSD2SI r64, xmm
+, RegSet::empty() // CVTTSS2SI r32, m32
+, RegSet::empty() // CVTTSS2SI r32, xmm
+, RegSet::empty() // CVTTSS2SI r64, m32
+, RegSet::empty() // CVTTSS2SI r64, xmm
+, RegSet::empty()+Constants::ax() // CWD 
+, RegSet::empty()+Constants::ax() // CWDE 
+, RegSet::empty() // DEC m16
+, RegSet::empty() // DEC m32
+, RegSet::empty() // DEC m64
+, RegSet::empty() // DEC m8
+, RegSet::empty() // DEC r16
+, RegSet::empty() // DEC r32
+, RegSet::empty() // DEC r64
+, RegSet::empty() // DEC r8
+, RegSet::empty() // DEC rh
+, RegSet::empty()+Constants::ax()+Constants::dx() // DIV m16
+, RegSet::empty()+Constants::eax()+Constants::edx() // DIV m32
+, RegSet::empty()+Constants::rax()+Constants::rdx() // DIV m64
+, RegSet::empty()+Constants::ax() // DIV m8
+, RegSet::empty()+Constants::ax()+Constants::dx() // DIV r16
+, RegSet::empty()+Constants::eax()+Constants::edx() // DIV r32
+, RegSet::empty()+Constants::rax()+Constants::rdx() // DIV r64
+, RegSet::empty()+Constants::ax() // DIV r8
+, RegSet::empty()+Constants::ax() // DIV rh
+, RegSet::empty() // DIVPD xmm, m128
+, RegSet::empty() // DIVPD xmm, xmm
+, RegSet::empty() // DIVPS xmm, m128
+, RegSet::empty() // DIVPS xmm, xmm
+, RegSet::empty() // DIVSD xmm, m64
+, RegSet::empty() // DIVSD xmm, xmm
+, RegSet::empty() // DIVSS xmm, m32
+, RegSet::empty() // DIVSS xmm, xmm
+, RegSet::empty() // DPPD xmm, m128, imm8
+, RegSet::empty() // DPPD xmm, xmm, imm8
+, RegSet::empty() // DPPS xmm, m128, imm8
+, RegSet::empty() // DPPS xmm, xmm, imm8
+, RegSet::empty() // EMMS 
+, RegSet::universe() // ENTER imm8, imm16
+, RegSet::universe() // ENTER 1, imm16
+, RegSet::universe() // ENTER 0, imm16
+, RegSet::empty() // EXTRACTPS m32, xmm, imm8
+, RegSet::empty() // EXTRACTPS r32, xmm, imm8
+, RegSet::empty() // EXTRACTPS r64, xmm, imm8
+, RegSet::empty()+Constants::st0() // F2XM1 
+, RegSet::empty()+Constants::st0() // FABS 
+, RegSet::empty()+Constants::st0() // FADD m32fp
+, RegSet::empty()+Constants::st0() // FADD m64fp
+, RegSet::empty() // FADD ST(i), ST
+, RegSet::empty() // FADD ST, ST(i)
+, RegSet::empty()+Constants::st0()+Constants::st1() // FADDP 
+, RegSet::empty() // FADDP ST(i), ST
+, RegSet::empty() // FBLD m80bcd
+, RegSet::empty()+Constants::st0() // FBSTP m80bcd
+, RegSet::empty()+Constants::st0() // FCHS 
+, RegSet::empty() // FCLEX 
+, RegSet::empty()+Constants::eflags_cf() // FCMOVB ST, ST(i)
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // FCMOVBE ST, ST(i)
+, RegSet::empty()+Constants::eflags_zf() // FCMOVE ST, ST(i)
+, RegSet::empty()+Constants::eflags_cf() // FCMOVNB ST, ST(i)
+, RegSet::empty()+Constants::eflags_cf() // FCMOVNBE ST, ST(i)
+, RegSet::empty()+Constants::eflags_zf() // FCMOVNE ST, ST(i)
+, RegSet::empty()+Constants::eflags_pf() // FCMOVNU ST, ST(i)
+, RegSet::empty()+Constants::eflags_pf() // FCMOVU ST, ST(i)
+, RegSet::empty()+Constants::st0()+Constants::st1() // FCOM 
+, RegSet::empty()+Constants::st0() // FCOM m32fp
+, RegSet::empty()+Constants::st0() // FCOM m64fp
+, RegSet::empty()+Constants::st0() // FCOM ST(i)
+, RegSet::empty() // FCOMI ST, ST(i)
+, RegSet::empty() // FCOMIP ST, ST(i)
+, RegSet::empty()+Constants::st0()+Constants::st1() // FCOMP 
+, RegSet::empty()+Constants::st0() // FCOMP m32fp
+, RegSet::empty()+Constants::st0() // FCOMP m64fp
+, RegSet::empty()+Constants::st0() // FCOMP ST(i)
+, RegSet::empty()+Constants::st0()+Constants::st1() // FCOMPP 
+, RegSet::empty()+Constants::st0() // FCOS 
+, RegSet::empty()+Constants::fpu_status_top() // FDECSTP 
+, RegSet::empty()+Constants::st0() // FDIV m32fp
+, RegSet::empty()+Constants::st0() // FDIV m64fp
+, RegSet::empty() // FDIV ST(i), ST
+, RegSet::empty() // FDIV ST, ST(i)
+, RegSet::empty()+Constants::st0()+Constants::st1() // FDIVP 
+, RegSet::empty() // FDIVP ST(i), ST
+, RegSet::empty()+Constants::st0() // FDIVR m32fp
+, RegSet::empty()+Constants::st0() // FDIVR m64fp
+, RegSet::empty() // FDIVR ST(i), ST
+, RegSet::empty() // FDIVR ST, ST(i)
+, RegSet::empty()+Constants::st0()+Constants::st1() // FDIVRP 
+, RegSet::empty() // FDIVRP ST(i), ST
+, RegSet::empty() // FFREE ST(i)
+, RegSet::empty()+Constants::st0() // FIADD m16int
+, RegSet::empty()+Constants::st0() // FIADD m32int
+, RegSet::empty()+Constants::st0() // FICOM m16int
+, RegSet::empty()+Constants::st0() // FICOM m32int
+, RegSet::empty()+Constants::st0() // FICOMP m16int
+, RegSet::empty()+Constants::st0() // FICOMP m32int
+, RegSet::empty()+Constants::st0() // FIDIV m16int
+, RegSet::empty()+Constants::st0() // FIDIV m32int
+, RegSet::empty()+Constants::st0() // FIDIVR m16int
+, RegSet::empty()+Constants::st0() // FIDIVR m32int
+, RegSet::empty() // FILD m16int
+, RegSet::empty() // FILD m32int
+, RegSet::empty() // FILD m64int
+, RegSet::empty()+Constants::st0() // FIMUL m16int
+, RegSet::empty()+Constants::st0() // FIMUL m32int
+, RegSet::empty()+Constants::fpu_status_top() // FINCSTP 
+, RegSet::empty() // FINIT 
+, RegSet::empty()+Constants::st0() // FIST m16int
+, RegSet::empty()+Constants::st0() // FIST m32int
+, RegSet::empty()+Constants::st0() // FISTP m16int
+, RegSet::empty()+Constants::st0() // FISTP m32int
+, RegSet::empty()+Constants::st0() // FISTP m64int
+, RegSet::empty()+Constants::st0() // FISTTP m16int
+, RegSet::empty()+Constants::st0() // FISTTP m32int
+, RegSet::empty()+Constants::st0() // FISTTP m64int
+, RegSet::empty()+Constants::st0() // FISUB m16int
+, RegSet::empty()+Constants::st0() // FISUB m32int
+, RegSet::empty()+Constants::st0() // FISUBR m16int
+, RegSet::empty()+Constants::st0() // FISUBR m32int
+, RegSet::empty() // FLD m32fp
+, RegSet::empty() // FLD m64fp
+, RegSet::empty() // FLD m80fp
+, RegSet::empty() // FLD ST(i)
+, RegSet::empty() // FLD1 
+, RegSet::empty() // FLDCW m2byte
+, RegSet::empty() // FLDENV m28byte
+, RegSet::empty() // FLDL2E 
+, RegSet::empty() // FLDL2T 
+, RegSet::empty() // FLDLG2 
+, RegSet::empty() // FLDLN2 
+, RegSet::empty() // FLDPI 
+, RegSet::empty() // FLDZ 
+, RegSet::empty()+Constants::st0() // FMUL m32fp
+, RegSet::empty()+Constants::st0() // FMUL m64fp
+, RegSet::empty() // FMUL ST(i), ST
+, RegSet::empty() // FMUL ST, ST(i)
+, RegSet::empty()+Constants::st0()+Constants::st1() // FMULP 
+, RegSet::empty() // FMULP ST(i), ST
+, RegSet::empty() // FNCLEX 
+, RegSet::empty() // FNINIT 
+, RegSet::empty() // FNOP 
+, RegSet::empty()+Constants::st0()+Constants::st1()+Constants::st2()+Constants::st3()+Constants::st4()+Constants::st5()+Constants::st6()+Constants::st7()+Constants::fpu_status_ie()+Constants::fpu_status_de()+Constants::fpu_status_ze()+Constants::fpu_status_oe()+Constants::fpu_status_ue()+Constants::fpu_status_pe()+Constants::fpu_status_sf()+Constants::fpu_status_es()+Constants::fpu_status_c0()+Constants::fpu_status_c1()+Constants::fpu_status_c2()+Constants::fpu_status_top()+Constants::fpu_status_c3()+Constants::fpu_status_b()+Constants::fpu_data()+Constants::fpu_instruction()+Constants::fpu_opcode() // FNSAVE m108byte
+, RegSet::empty() // FNSTCW m2byte
+, RegSet::empty() // FNSTENV m28byte
+, RegSet::empty() // FNSTSW AX
+, RegSet::empty() // FNSTSW m2byte
+, RegSet::empty()+Constants::st0()+Constants::st1() // FPATAN 
+, RegSet::empty()+Constants::st0()+Constants::st1() // FPREM 
+, RegSet::empty()+Constants::st0()+Constants::st1() // FPREM1 
+, RegSet::empty()+Constants::st0() // FPTAN 
+, RegSet::empty()+Constants::st0() // FRNDINT 
+, RegSet::empty() // FRSTOR m108byte
+, RegSet::empty()+Constants::st0()+Constants::st1()+Constants::st2()+Constants::st3()+Constants::st4()+Constants::st5()+Constants::st6()+Constants::st7()+Constants::fpu_status_ie()+Constants::fpu_status_de()+Constants::fpu_status_ze()+Constants::fpu_status_oe()+Constants::fpu_status_ue()+Constants::fpu_status_pe()+Constants::fpu_status_sf()+Constants::fpu_status_es()+Constants::fpu_status_c0()+Constants::fpu_status_c1()+Constants::fpu_status_c2()+Constants::fpu_status_top()+Constants::fpu_status_c3()+Constants::fpu_status_b()+Constants::fpu_data()+Constants::fpu_instruction()+Constants::fpu_opcode() // FSAVE m108byte
+, RegSet::empty()+Constants::st0()+Constants::st1() // FSCALE 
+, RegSet::empty()+Constants::st0() // FSIN 
+, RegSet::empty()+Constants::st0() // FSINCOS 
+, RegSet::empty()+Constants::st0() // FSQRT 
+, RegSet::empty()+Constants::st0() // FST m32fp
+, RegSet::empty()+Constants::st0() // FST m64fp
+, RegSet::empty()+Constants::st0() // FST ST(i)
+, RegSet::empty() // FSTCW m2byte
+, RegSet::empty() // FSTENV m28byte
+, RegSet::empty()+Constants::st0() // FSTP m32fp
+, RegSet::empty()+Constants::st0() // FSTP m64fp
+, RegSet::empty()+Constants::st0() // FSTP m80fp
+, RegSet::empty()+Constants::st0() // FSTP ST(i)
+, RegSet::empty() // FSTSW AX
+, RegSet::empty() // FSTSW m2byte
+, RegSet::empty()+Constants::st0() // FSUB m32fp
+, RegSet::empty()+Constants::st0() // FSUB m64fp
+, RegSet::empty() // FSUB ST(i), ST
+, RegSet::empty() // FSUB ST, ST(i)
+, RegSet::empty()+Constants::st0()+Constants::st1() // FSUBP 
+, RegSet::empty() // FSUBP ST(i), ST
+, RegSet::empty()+Constants::st0() // FSUBR m32fp
+, RegSet::empty()+Constants::st0() // FSUBR m64fp
+, RegSet::empty() // FSUBR ST(i), ST
+, RegSet::empty() // FSUBR ST, ST(i)
+, RegSet::empty()+Constants::st0()+Constants::st1() // FSUBRP 
+, RegSet::empty() // FSUBRP ST(i), ST
+, RegSet::empty()+Constants::st0() // FTST 
+, RegSet::empty()+Constants::st0()+Constants::st1() // FUCOM 
+, RegSet::empty()+Constants::st0() // FUCOM ST(i)
+, RegSet::empty() // FUCOMI ST, ST(i)
+, RegSet::empty() // FUCOMIP ST, ST(i)
+, RegSet::empty()+Constants::st0()+Constants::st1() // FUCOMP 
+, RegSet::empty()+Constants::st0() // FUCOMP ST(i)
+, RegSet::empty()+Constants::st0()+Constants::st1() // FUCOMPP 
+, RegSet::empty() // FWAIT 
+, RegSet::empty()+Constants::st0() // FXAM 
+, RegSet::empty()+Constants::st0()+Constants::st1() // FXCH 
+, RegSet::empty()+Constants::st0() // FXCH ST(i)
+, RegSet::empty() // FXRSTOR m512byte
+, RegSet::empty() // FXRSTOR64 m512byte
+, RegSet::empty()+Constants::st0()+Constants::st1()+Constants::st2()+Constants::st3()+Constants::st4()+Constants::st5()+Constants::st6()+Constants::st7()+Constants::mm0()+Constants::mm1()+Constants::mm2()+Constants::mm3()+Constants::mm4()+Constants::mm5()+Constants::mm6()+Constants::mm7()+Constants::xmm0()+Constants::xmm1()+Constants::xmm2()+Constants::xmm3()+Constants::xmm4()+Constants::xmm5()+Constants::xmm6()+Constants::xmm7()+Constants::xmm8()+Constants::xmm9()+Constants::xmm10()+Constants::xmm11()+Constants::xmm12()+Constants::xmm13()+Constants::xmm14()+Constants::xmm15()+Constants::mxcsr_ie()+Constants::mxcsr_de()+Constants::mxcsr_ze()+Constants::mxcsr_oe()+Constants::mxcsr_ue()+Constants::mxcsr_pe()+Constants::mxcsr_daz()+Constants::mxcsr_im()+Constants::mxcsr_dm()+Constants::mxcsr_zm()+Constants::mxcsr_om()+Constants::mxcsr_um()+Constants::mxcsr_pm()+Constants::mxcsr_rc()+Constants::mxcsr_fz()+Constants::cs()+Constants::ds() // FXSAVE m512byte
+, RegSet::empty()+Constants::st0()+Constants::st1()+Constants::st2()+Constants::st3()+Constants::st4()+Constants::st5()+Constants::st6()+Constants::st7()+Constants::mm0()+Constants::mm1()+Constants::mm2()+Constants::mm3()+Constants::mm4()+Constants::mm5()+Constants::mm6()+Constants::mm7()+Constants::xmm0()+Constants::xmm1()+Constants::xmm2()+Constants::xmm3()+Constants::xmm4()+Constants::xmm5()+Constants::xmm6()+Constants::xmm7()+Constants::xmm8()+Constants::xmm9()+Constants::xmm10()+Constants::xmm11()+Constants::xmm12()+Constants::xmm13()+Constants::xmm14()+Constants::xmm15()+Constants::mxcsr_ie()+Constants::mxcsr_de()+Constants::mxcsr_ze()+Constants::mxcsr_oe()+Constants::mxcsr_ue()+Constants::mxcsr_pe()+Constants::mxcsr_daz()+Constants::mxcsr_im()+Constants::mxcsr_dm()+Constants::mxcsr_zm()+Constants::mxcsr_om()+Constants::mxcsr_um()+Constants::mxcsr_pm()+Constants::mxcsr_rc()+Constants::mxcsr_fz() // FXSAVE64 m512byte
+, RegSet::empty()+Constants::st0() // FXTRACT 
+, RegSet::empty()+Constants::st0()+Constants::st1() // FYL2X 
+, RegSet::empty()+Constants::st0()+Constants::st1() // FYL2XP1 
+, RegSet::empty() // HADDPD xmm, m128
+, RegSet::empty() // HADDPD xmm, xmm
+, RegSet::empty() // HADDPS xmm, m128
+, RegSet::empty() // HADDPS xmm, xmm
+, RegSet::empty() // HSUBPD xmm, m128
+, RegSet::empty() // HSUBPD xmm, xmm
+, RegSet::empty() // HSUBPS xmm, m128
+, RegSet::empty() // HSUBPS xmm, xmm
+, RegSet::empty()+Constants::ax()+Constants::dx() // IDIV m16
+, RegSet::empty()+Constants::eax()+Constants::edx() // IDIV m32
+, RegSet::empty()+Constants::rax()+Constants::rdx() // IDIV m64
+, RegSet::empty()+Constants::ax() // IDIV m8
+, RegSet::empty()+Constants::ax()+Constants::dx() // IDIV r16
+, RegSet::empty()+Constants::eax()+Constants::edx() // IDIV r32
+, RegSet::empty()+Constants::rax()+Constants::rdx() // IDIV r64
+, RegSet::empty()+Constants::ax() // IDIV r8
+, RegSet::empty()+Constants::ax() // IDIV rh
+, RegSet::empty()+Constants::ax() // IMUL m16
+, RegSet::empty()+Constants::eax() // IMUL m32
+, RegSet::empty()+Constants::rax() // IMUL m64
+, RegSet::empty()+Constants::al() // IMUL m8
+, RegSet::empty()+Constants::ax() // IMUL r16
+, RegSet::empty() // IMUL r16, m16
+, RegSet::empty() // IMUL r16, m16, imm16
+, RegSet::empty() // IMUL r16, m16, imm8
+, RegSet::empty() // IMUL r16, r16
+, RegSet::empty() // IMUL r16, r16, imm16
+, RegSet::empty() // IMUL r16, r16, imm8
+, RegSet::empty()+Constants::eax() // IMUL r32
+, RegSet::empty() // IMUL r32, m32
+, RegSet::empty() // IMUL r32, m32, imm32
+, RegSet::empty() // IMUL r32, m32, imm8
+, RegSet::empty() // IMUL r32, r32
+, RegSet::empty() // IMUL r32, r32, imm32
+, RegSet::empty() // IMUL r32, r32, imm8
+, RegSet::empty()+Constants::rax() // IMUL r64
+, RegSet::empty() // IMUL r64, m64
+, RegSet::empty() // IMUL r64, m64, imm32
+, RegSet::empty() // IMUL r64, m64, imm8
+, RegSet::empty() // IMUL r64, r64
+, RegSet::empty() // IMUL r64, r64, imm32
+, RegSet::empty() // IMUL r64, r64, imm8
+, RegSet::empty()+Constants::al() // IMUL r8
+, RegSet::empty()+Constants::al() // IMUL rh
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm() // IN AL, DX
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm() // IN AL, imm8
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm() // IN AX, DX
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm() // IN AX, imm8
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm() // IN EAX, DX
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm() // IN EAX, imm8
+, RegSet::empty() // INC m16
+, RegSet::empty() // INC m32
+, RegSet::empty() // INC m64
+, RegSet::empty() // INC m8
+, RegSet::empty() // INC r16
+, RegSet::empty() // INC r32
+, RegSet::empty() // INC r64
+, RegSet::empty() // INC r8
+, RegSet::empty() // INC rh
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rdi() // INS m16, DX
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rdi() // INS m32, DX
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rdi() // INS m8, DX
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::dx()+Constants::rdi() // INSB 
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::dx()+Constants::rdi() // INSD 
+, RegSet::empty() // INSERTPS xmm, m32, imm8
+, RegSet::empty() // INSERTPS xmm, xmm, imm8
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::dx()+Constants::rdi() // INSW 
+, RegSet::universe() // INT imm8
+, RegSet::universe() // INT 3
+, RegSet::empty() // INVPCID r64, m128
+, RegSet::universe() // IRET 
+, RegSet::universe() // IRETD 
+, RegSet::universe() // IRETQ 
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JA label8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JA label32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JA label8, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JA label32, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JA rel32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JA rel32, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JA rel8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JA rel8, hint
+, RegSet::empty()+Constants::eflags_cf() // JAE label8
+, RegSet::empty()+Constants::eflags_cf() // JAE label32
+, RegSet::empty()+Constants::eflags_cf() // JAE label8, hint
+, RegSet::empty()+Constants::eflags_cf() // JAE label32, hint
+, RegSet::empty()+Constants::eflags_cf() // JAE rel32
+, RegSet::empty()+Constants::eflags_cf() // JAE rel32, hint
+, RegSet::empty()+Constants::eflags_cf() // JAE rel8
+, RegSet::empty()+Constants::eflags_cf() // JAE rel8, hint
+, RegSet::empty()+Constants::eflags_cf() // JB label8
+, RegSet::empty()+Constants::eflags_cf() // JB label32
+, RegSet::empty()+Constants::eflags_cf() // JB label8, hint
+, RegSet::empty()+Constants::eflags_cf() // JB label32, hint
+, RegSet::empty()+Constants::eflags_cf() // JB rel32
+, RegSet::empty()+Constants::eflags_cf() // JB rel32, hint
+, RegSet::empty()+Constants::eflags_cf() // JB rel8
+, RegSet::empty()+Constants::eflags_cf() // JB rel8, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JBE label8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JBE label32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JBE label8, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JBE label32, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JBE rel32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JBE rel32, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JBE rel8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JBE rel8, hint
+, RegSet::empty()+Constants::eflags_cf() // JC label8
+, RegSet::empty()+Constants::eflags_cf() // JC label32
+, RegSet::empty()+Constants::eflags_cf() // JC label8, hint
+, RegSet::empty()+Constants::eflags_cf() // JC label32, hint
+, RegSet::empty()+Constants::eflags_cf() // JC rel32
+, RegSet::empty()+Constants::eflags_cf() // JC rel32, hint
+, RegSet::empty()+Constants::eflags_cf() // JC rel8
+, RegSet::empty()+Constants::eflags_cf() // JC rel8, hint
+, RegSet::empty()+Constants::eflags_zf() // JE label8
+, RegSet::empty()+Constants::eflags_zf() // JE label32
+, RegSet::empty()+Constants::eflags_zf() // JE label8, hint
+, RegSet::empty()+Constants::eflags_zf() // JE label32, hint
+, RegSet::empty()+Constants::eflags_zf() // JE rel32
+, RegSet::empty()+Constants::eflags_zf() // JE rel32, hint
+, RegSet::empty()+Constants::eflags_zf() // JE rel8
+, RegSet::empty()+Constants::eflags_zf() // JE rel8, hint
+, RegSet::empty()+Constants::ecx() // JECXZ label8
+, RegSet::empty()+Constants::ecx() // JECXZ label8, hint
+, RegSet::empty()+Constants::ecx() // JECXZ rel8
+, RegSet::empty()+Constants::ecx() // JECXZ rel8, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JG label8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JG label32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JG label8, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JG label32, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JG rel32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JG rel32, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JG rel8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JG rel8, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JGE label8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JGE label32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JGE label8, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JGE label32, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JGE rel32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JGE rel32, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JGE rel8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JGE rel8, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JL label8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JL label32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JL label8, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JL label32, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JL rel32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JL rel32, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JL rel8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JL rel8, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JLE label8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JLE label32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JLE label8, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JLE label32, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JLE rel32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JLE rel32, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JLE rel8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JLE rel8, hint
+, RegSet::universe() // JMP m16:16
+, RegSet::universe() // JMP m16:32
+, RegSet::universe() // JMP m16:64
+, RegSet::empty() // JMP label8
+, RegSet::empty() // JMP label32
+, RegSet::empty() // JMP m64
+, RegSet::empty() // JMP r64
+, RegSet::empty() // JMP rel32
+, RegSet::empty() // JMP rel8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNA label8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNA label32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNA label8, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNA label32, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNA rel32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNA rel32, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNA rel8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNA rel8, hint
+, RegSet::empty()+Constants::eflags_cf() // JNAE label8
+, RegSet::empty()+Constants::eflags_cf() // JNAE label32
+, RegSet::empty()+Constants::eflags_cf() // JNAE label8, hint
+, RegSet::empty()+Constants::eflags_cf() // JNAE label32, hint
+, RegSet::empty()+Constants::eflags_cf() // JNAE rel32
+, RegSet::empty()+Constants::eflags_cf() // JNAE rel32, hint
+, RegSet::empty()+Constants::eflags_cf() // JNAE rel8
+, RegSet::empty()+Constants::eflags_cf() // JNAE rel8, hint
+, RegSet::empty()+Constants::eflags_cf() // JNB label8
+, RegSet::empty()+Constants::eflags_cf() // JNB label32
+, RegSet::empty()+Constants::eflags_cf() // JNB label8, hint
+, RegSet::empty()+Constants::eflags_cf() // JNB label32, hint
+, RegSet::empty()+Constants::eflags_cf() // JNB rel32
+, RegSet::empty()+Constants::eflags_cf() // JNB rel32, hint
+, RegSet::empty()+Constants::eflags_cf() // JNB rel8
+, RegSet::empty()+Constants::eflags_cf() // JNB rel8, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNBE label8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNBE label32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNBE label8, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNBE label32, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNBE rel32
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNBE rel32, hint
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNBE rel8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // JNBE rel8, hint
+, RegSet::empty()+Constants::eflags_cf() // JNC label8
+, RegSet::empty()+Constants::eflags_cf() // JNC label32
+, RegSet::empty()+Constants::eflags_cf() // JNC label8, hint
+, RegSet::empty()+Constants::eflags_cf() // JNC label32, hint
+, RegSet::empty()+Constants::eflags_cf() // JNC rel32
+, RegSet::empty()+Constants::eflags_cf() // JNC rel32, hint
+, RegSet::empty()+Constants::eflags_cf() // JNC rel8
+, RegSet::empty()+Constants::eflags_cf() // JNC rel8, hint
+, RegSet::empty()+Constants::eflags_zf() // JNE label8
+, RegSet::empty()+Constants::eflags_zf() // JNE label32
+, RegSet::empty()+Constants::eflags_zf() // JNE label8, hint
+, RegSet::empty()+Constants::eflags_zf() // JNE label32, hint
+, RegSet::empty()+Constants::eflags_zf() // JNE rel32
+, RegSet::empty()+Constants::eflags_zf() // JNE rel32, hint
+, RegSet::empty()+Constants::eflags_zf() // JNE rel8
+, RegSet::empty()+Constants::eflags_zf() // JNE rel8, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNG label8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNG label32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNG label8, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNG label32, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNG rel32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNG rel32, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNG rel8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNG rel8, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNGE label8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNGE label32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNGE label8, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNGE label32, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNGE rel32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNGE rel32, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNGE rel8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNGE rel8, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNL label8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNL label32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNL label8, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNL label32, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNL rel32
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNL rel32, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNL rel8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // JNL rel8, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNLE label8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNLE label32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNLE label8, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNLE label32, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNLE rel32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNLE rel32, hint
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNLE rel8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // JNLE rel8, hint
+, RegSet::empty()+Constants::eflags_of() // JNO label8
+, RegSet::empty()+Constants::eflags_of() // JNO label32
+, RegSet::empty()+Constants::eflags_of() // JNO label8, hint
+, RegSet::empty()+Constants::eflags_of() // JNO label32, hint
+, RegSet::empty()+Constants::eflags_of() // JNO rel32
+, RegSet::empty()+Constants::eflags_of() // JNO rel32, hint
+, RegSet::empty()+Constants::eflags_of() // JNO rel8
+, RegSet::empty()+Constants::eflags_of() // JNO rel8, hint
+, RegSet::empty()+Constants::eflags_pf() // JNP label8
+, RegSet::empty()+Constants::eflags_pf() // JNP label32
+, RegSet::empty()+Constants::eflags_pf() // JNP label8, hint
+, RegSet::empty()+Constants::eflags_pf() // JNP label32, hint
+, RegSet::empty()+Constants::eflags_pf() // JNP rel32
+, RegSet::empty()+Constants::eflags_pf() // JNP rel32, hint
+, RegSet::empty()+Constants::eflags_pf() // JNP rel8
+, RegSet::empty()+Constants::eflags_pf() // JNP rel8, hint
+, RegSet::empty()+Constants::eflags_sf() // JNS label8
+, RegSet::empty()+Constants::eflags_sf() // JNS label32
+, RegSet::empty()+Constants::eflags_sf() // JNS label8, hint
+, RegSet::empty()+Constants::eflags_sf() // JNS label32, hint
+, RegSet::empty()+Constants::eflags_sf() // JNS rel32
+, RegSet::empty()+Constants::eflags_sf() // JNS rel32, hint
+, RegSet::empty()+Constants::eflags_sf() // JNS rel8
+, RegSet::empty()+Constants::eflags_sf() // JNS rel8, hint
+, RegSet::empty()+Constants::eflags_zf() // JNZ label8
+, RegSet::empty()+Constants::eflags_zf() // JNZ label32
+, RegSet::empty()+Constants::eflags_zf() // JNZ label8, hint
+, RegSet::empty()+Constants::eflags_zf() // JNZ label32, hint
+, RegSet::empty()+Constants::eflags_zf() // JNZ rel32
+, RegSet::empty()+Constants::eflags_zf() // JNZ rel32, hint
+, RegSet::empty()+Constants::eflags_zf() // JNZ rel8
+, RegSet::empty()+Constants::eflags_zf() // JNZ rel8, hint
+, RegSet::empty()+Constants::eflags_of() // JO label8
+, RegSet::empty()+Constants::eflags_of() // JO label32
+, RegSet::empty()+Constants::eflags_of() // JO label8, hint
+, RegSet::empty()+Constants::eflags_of() // JO label32, hint
+, RegSet::empty()+Constants::eflags_of() // JO rel32
+, RegSet::empty()+Constants::eflags_of() // JO rel32, hint
+, RegSet::empty()+Constants::eflags_of() // JO rel8
+, RegSet::empty()+Constants::eflags_of() // JO rel8, hint
+, RegSet::empty()+Constants::eflags_pf() // JP label8
+, RegSet::empty()+Constants::eflags_pf() // JP label32
+, RegSet::empty()+Constants::eflags_pf() // JP label8, hint
+, RegSet::empty()+Constants::eflags_pf() // JP label32, hint
+, RegSet::empty()+Constants::eflags_pf() // JP rel32
+, RegSet::empty()+Constants::eflags_pf() // JP rel32, hint
+, RegSet::empty()+Constants::eflags_pf() // JP rel8
+, RegSet::empty()+Constants::eflags_pf() // JP rel8, hint
+, RegSet::empty()+Constants::eflags_pf() // JPE label8
+, RegSet::empty()+Constants::eflags_pf() // JPE label32
+, RegSet::empty()+Constants::eflags_pf() // JPE label8, hint
+, RegSet::empty()+Constants::eflags_pf() // JPE label32, hint
+, RegSet::empty()+Constants::eflags_pf() // JPE rel32
+, RegSet::empty()+Constants::eflags_pf() // JPE rel32, hint
+, RegSet::empty()+Constants::eflags_pf() // JPE rel8
+, RegSet::empty()+Constants::eflags_pf() // JPE rel8, hint
+, RegSet::empty()+Constants::eflags_pf() // JPO label8
+, RegSet::empty()+Constants::eflags_pf() // JPO label32
+, RegSet::empty()+Constants::eflags_pf() // JPO label8, hint
+, RegSet::empty()+Constants::eflags_pf() // JPO label32, hint
+, RegSet::empty()+Constants::eflags_pf() // JPO rel32
+, RegSet::empty()+Constants::eflags_pf() // JPO rel32, hint
+, RegSet::empty()+Constants::eflags_pf() // JPO rel8
+, RegSet::empty()+Constants::eflags_pf() // JPO rel8, hint
+, RegSet::empty()+Constants::rcx() // JRCXZ label8
+, RegSet::empty()+Constants::rcx() // JRCXZ label8, hint
+, RegSet::empty()+Constants::rcx() // JRCXZ rel8
+, RegSet::empty()+Constants::rcx() // JRCXZ rel8, hint
+, RegSet::empty()+Constants::eflags_sf() // JS label8
+, RegSet::empty()+Constants::eflags_sf() // JS label32
+, RegSet::empty()+Constants::eflags_sf() // JS label8, hint
+, RegSet::empty()+Constants::eflags_sf() // JS label32, hint
+, RegSet::empty()+Constants::eflags_sf() // JS rel32
+, RegSet::empty()+Constants::eflags_sf() // JS rel32, hint
+, RegSet::empty()+Constants::eflags_sf() // JS rel8
+, RegSet::empty()+Constants::eflags_sf() // JS rel8, hint
+, RegSet::empty()+Constants::eflags_zf() // JZ label8
+, RegSet::empty()+Constants::eflags_zf() // JZ label32
+, RegSet::empty()+Constants::eflags_zf() // JZ label8, hint
+, RegSet::empty()+Constants::eflags_zf() // JZ label32, hint
+, RegSet::empty()+Constants::eflags_zf() // JZ rel32
+, RegSet::empty()+Constants::eflags_zf() // JZ rel32, hint
+, RegSet::empty()+Constants::eflags_zf() // JZ rel8
+, RegSet::empty()+Constants::eflags_zf() // JZ rel8, hint
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_zf()+Constants::eflags_pf()+Constants::eflags_af()+Constants::eflags_cf() // LAHF 
+, RegSet::empty() // LAR r16, m16
+, RegSet::empty() // LAR r16, r16
+, RegSet::empty() // LAR r32, m16
+, RegSet::empty() // LAR r32, r32
+, RegSet::empty() // LAR r64, m16
+, RegSet::empty() // LAR r64, r32
+, RegSet::empty() // LDDQU xmm, m128
+, RegSet::empty() // LDMXCSR m32
+, RegSet::empty() // LEA r16, m16
+, RegSet::empty() // LEA r16, m32
+, RegSet::empty() // LEA r16, m64
+, RegSet::empty() // LEA r32, m16
+, RegSet::empty() // LEA r32, m32
+, RegSet::empty() // LEA r32, m64
+, RegSet::empty() // LEA r64, m16
+, RegSet::empty() // LEA r64, m32
+, RegSet::empty() // LEA r64, m64
+, RegSet::empty() // LEAVE 
+, RegSet::empty() // LEAVE p66
+, RegSet::empty() // LFENCE 
+, RegSet::empty() // LFS r16, m16:16
+, RegSet::empty() // LFS r32, m16:32
+, RegSet::empty() // LFS r64, m16:64
+, RegSet::empty() // LGS r16, m16:16
+, RegSet::empty() // LGS r32, m16:32
+, RegSet::empty() // LGS r64, m16:64
+, RegSet::empty() // LOCK 
+, RegSet::empty()+Constants::eflags_df()+Constants::si()+Constants::rsi() // LODS m16
+, RegSet::empty()+Constants::eflags_df()+Constants::si()+Constants::rsi() // LODS m32
+, RegSet::empty()+Constants::eflags_df()+Constants::si()+Constants::rsi() // LODS m64
+, RegSet::empty()+Constants::eflags_df()+Constants::si()+Constants::rsi() // LODS m8
+, RegSet::empty()+Constants::eflags_df()+Constants::si()+Constants::rsi() // LODSB 
+, RegSet::empty()+Constants::eflags_df()+Constants::si()+Constants::rsi() // LODSD 
+, RegSet::empty()+Constants::eflags_df()+Constants::si()+Constants::rsi() // LODSQ 
+, RegSet::empty()+Constants::eflags_df()+Constants::si()+Constants::rsi() // LODSW 
+, RegSet::empty()+Constants::rcx()+Constants::eflags_zf() // LOOP label8
+, RegSet::empty()+Constants::rcx()+Constants::eflags_zf() // LOOP rel8
+, RegSet::empty()+Constants::rcx()+Constants::eflags_zf() // LOOPE label8
+, RegSet::empty()+Constants::rcx()+Constants::eflags_zf() // LOOPE rel8
+, RegSet::empty()+Constants::rcx()+Constants::eflags_zf() // LOOPNE label8
+, RegSet::empty()+Constants::rcx()+Constants::eflags_zf() // LOOPNE rel8
+, RegSet::empty() // LSL r16, m16
+, RegSet::empty() // LSL r16, r16
+, RegSet::empty() // LSL r32, m16
+, RegSet::empty() // LSL r32, r32
+, RegSet::empty() // LSL r64, m16
+, RegSet::empty() // LSL r64, r32
+, RegSet::empty() // LSS r16, m16:16
+, RegSet::empty() // LSS r32, m16:32
+, RegSet::empty() // LSS r64, m16:64
+, RegSet::empty() // LZCNT r16, m16
+, RegSet::empty() // LZCNT r16, r16
+, RegSet::empty() // LZCNT r32, m32
+, RegSet::empty() // LZCNT r32, r32
+, RegSet::empty() // LZCNT r64, m64
+, RegSet::empty() // LZCNT r64, r64
+, RegSet::empty() // MASKMOVDQU xmm, xmm
+, RegSet::empty() // MASKMOVQ mm, mm
+, RegSet::empty() // MAXPD xmm, m128
+, RegSet::empty() // MAXPD xmm, xmm
+, RegSet::empty() // MAXPS xmm, m128
+, RegSet::empty() // MAXPS xmm, xmm
+, RegSet::empty() // MAXSD xmm, m64
+, RegSet::empty() // MAXSD xmm, xmm
+, RegSet::empty() // MAXSS xmm, m32
+, RegSet::empty() // MAXSS xmm, xmm
+, RegSet::empty() // MFENCE 
+, RegSet::empty() // MINPD xmm, m128
+, RegSet::empty() // MINPD xmm, xmm
+, RegSet::empty() // MINPS xmm, m128
+, RegSet::empty() // MINPS xmm, xmm
+, RegSet::empty() // MINSD xmm, m64
+, RegSet::empty() // MINSD xmm, xmm
+, RegSet::empty() // MINSS xmm, m32
+, RegSet::empty() // MINSS xmm, xmm
+, RegSet::empty() // MONITOR 
+, RegSet::empty() // MOV AL, moffs8
+, RegSet::empty() // MOV AL, moffs8, pw
+, RegSet::empty() // MOV AX, moffs16
+, RegSet::empty() // MOV EAX, moffs32
+, RegSet::empty() // MOV m16, imm16
+, RegSet::empty() // MOV m16, r16
+, RegSet::empty() // MOV m16, Sreg
+, RegSet::empty() // MOV m32, imm32
+, RegSet::empty() // MOV m32, r32
+, RegSet::empty() // MOV m64, imm32
+, RegSet::empty() // MOV m64, r64
+, RegSet::empty() // MOV m64, Sreg
+, RegSet::empty() // MOV m8, imm8
+, RegSet::empty() // MOV m8, r8
+, RegSet::empty() // MOV m8, rh
+, RegSet::empty() // MOV moffs16, AX
+, RegSet::empty() // MOV moffs32, EAX
+, RegSet::empty() // MOV moffs64, RAX
+, RegSet::empty() // MOV moffs8, AL
+, RegSet::empty() // MOV moffs8, AL, pw
+, RegSet::empty() // MOV r16, imm16
+, RegSet::empty() // MOV r16, imm16
+, RegSet::empty() // MOV r16, m16
+, RegSet::empty() // MOV r16, r16
+, RegSet::empty() // MOV r16, r16
+, RegSet::empty() // MOV r16, Sreg
+, RegSet::empty() // MOV r32, imm32
+, RegSet::empty() // MOV r32, imm32
+, RegSet::empty() // MOV r32, m32
+, RegSet::empty() // MOV r32, r32
+, RegSet::empty() // MOV r32, r32
+, RegSet::empty() // MOV r64, imm32
+, RegSet::empty() // MOV r64, imm64
+, RegSet::empty() // MOV r64, m64
+, RegSet::empty() // MOV r64, r64
+, RegSet::empty() // MOV r64, r64
+, RegSet::empty() // MOV r64, Sreg
+, RegSet::empty() // MOV r8, imm8
+, RegSet::empty() // MOV r8, imm8
+, RegSet::empty() // MOV r8, m8
+, RegSet::empty() // MOV r8, r8
+, RegSet::empty() // MOV r8, r8
+, RegSet::empty() // MOV r8, rh
+, RegSet::empty() // MOV r8, rh
+, RegSet::empty() // MOV RAX, moffs64
+, RegSet::empty() // MOV rh, imm8
+, RegSet::empty() // MOV rh, imm8
+, RegSet::empty() // MOV rh, m8
+, RegSet::empty() // MOV rh, r8
+, RegSet::empty() // MOV rh, r8
+, RegSet::empty() // MOV rh, rh
+, RegSet::empty() // MOV rh, rh
+, RegSet::empty() // MOV Sreg, m16
+, RegSet::empty() // MOV Sreg, m64
+, RegSet::empty() // MOV Sreg, r16
+, RegSet::empty() // MOV Sreg, r64
+, RegSet::empty() // MOVAPD m128, xmm
+, RegSet::empty() // MOVAPD xmm, m128
+, RegSet::empty() // MOVAPD xmm, xmm
+, RegSet::empty() // MOVAPD xmm, xmm
+, RegSet::empty() // MOVAPS m128, xmm
+, RegSet::empty() // MOVAPS xmm, m128
+, RegSet::empty() // MOVAPS xmm, xmm
+, RegSet::empty() // MOVAPS xmm, xmm
+, RegSet::empty() // MOVBE m16, r16
+, RegSet::empty() // MOVBE m32, r32
+, RegSet::empty() // MOVBE m64, r64
+, RegSet::empty() // MOVBE r16, m16
+, RegSet::empty() // MOVBE r32, m32
+, RegSet::empty() // MOVBE r64, m64
+, RegSet::empty() // MOVD m32, mm
+, RegSet::empty() // MOVD m32, xmm
+, RegSet::empty() // MOVD mm, m32
+, RegSet::empty() // MOVD mm, r32
+, RegSet::empty() // MOVD r32, mm
+, RegSet::empty() // MOVD r32, xmm
+, RegSet::empty() // MOVD xmm, m32
+, RegSet::empty() // MOVD xmm, r32
+, RegSet::empty() // MOVDDUP xmm, m64
+, RegSet::empty() // MOVDDUP xmm, xmm
+, RegSet::empty() // MOVDQ2Q mm, xmm
+, RegSet::empty() // MOVDQA m128, xmm
+, RegSet::empty() // MOVDQA xmm, m128
+, RegSet::empty() // MOVDQA xmm, xmm
+, RegSet::empty() // MOVDQA xmm, xmm
+, RegSet::empty() // MOVDQU m128, xmm
+, RegSet::empty() // MOVDQU xmm, m128
+, RegSet::empty() // MOVDQU xmm, xmm
+, RegSet::empty() // MOVDQU xmm, xmm
+, RegSet::empty() // MOVHLPS xmm, xmm
+, RegSet::empty() // MOVHPD m64, xmm
+, RegSet::empty() // MOVHPD xmm, m64
+, RegSet::empty() // MOVHPS m64, xmm
+, RegSet::empty() // MOVHPS xmm, m64
+, RegSet::empty() // MOVLHPS xmm, xmm
+, RegSet::empty() // MOVLPD m64, xmm
+, RegSet::empty() // MOVLPD xmm, m64
+, RegSet::empty() // MOVLPS m64, xmm
+, RegSet::empty() // MOVLPS xmm, m64
+, RegSet::empty() // MOVMSKPD r32, xmm
+, RegSet::empty() // MOVMSKPD r64, xmm
+, RegSet::empty() // MOVMSKPS r32, xmm
+, RegSet::empty() // MOVMSKPS r64, xmm
+, RegSet::empty() // MOVNTDQ m128, xmm
+, RegSet::empty() // MOVNTDQ m256, ymm
+, RegSet::empty() // MOVNTDQA xmm, m128
+, RegSet::empty() // MOVNTI m32, r32
+, RegSet::empty() // MOVNTI m64, r64
+, RegSet::empty() // MOVNTPD m128, xmm
+, RegSet::empty() // MOVNTPS m128, xmm
+, RegSet::empty() // MOVNTQ m64, mm
+, RegSet::empty() // MOVQ m64, mm
+, RegSet::empty() // MOVQ m64, mm
+, RegSet::empty() // MOVQ m64, xmm
+, RegSet::empty() // MOVQ m64, xmm
+, RegSet::empty() // MOVQ mm, m64
+, RegSet::empty() // MOVQ mm, m64
+, RegSet::empty() // MOVQ mm, mm
+, RegSet::empty() // MOVQ mm, mm
+, RegSet::empty() // MOVQ mm, r64
+, RegSet::empty() // MOVQ r64, mm
+, RegSet::empty() // MOVQ r64, xmm
+, RegSet::empty() // MOVQ xmm, m64
+, RegSet::empty() // MOVQ xmm, m64
+, RegSet::empty() // MOVQ xmm, r64
+, RegSet::empty() // MOVQ xmm, xmm
+, RegSet::empty() // MOVQ xmm, xmm
+, RegSet::empty() // MOVQ2DQ xmm, mm
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // MOVS m16, m16
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // MOVS m32, m32
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // MOVS m64, m64
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // MOVS m8, m8
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // MOVSB 
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // MOVSD 
+, RegSet::empty() // MOVSD m64, xmm
+, RegSet::empty() // MOVSD xmm, m64
+, RegSet::empty() // MOVSD xmm, xmm
+, RegSet::empty() // MOVSD xmm, xmm
+, RegSet::empty() // MOVSHDUP xmm, m128
+, RegSet::empty() // MOVSHDUP xmm, xmm
+, RegSet::empty() // MOVSLDUP xmm, m128
+, RegSet::empty() // MOVSLDUP xmm, xmm
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // MOVSQ 
+, RegSet::empty() // MOVSS m32, xmm
+, RegSet::empty() // MOVSS xmm, m32
+, RegSet::empty() // MOVSS xmm, xmm
+, RegSet::empty() // MOVSS xmm, xmm
+, RegSet::empty()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // MOVSW 
+, RegSet::empty() // MOVSX r16, m8
+, RegSet::empty() // MOVSX r16, r8
+, RegSet::empty() // MOVSX r16, rh
+, RegSet::empty() // MOVSX r32, m16
+, RegSet::empty() // MOVSX r32, m8
+, RegSet::empty() // MOVSX r32, r16
+, RegSet::empty() // MOVSX r32, r8
+, RegSet::empty() // MOVSX r32, rh
+, RegSet::empty() // MOVSX r64, m16
+, RegSet::empty() // MOVSX r64, m8
+, RegSet::empty() // MOVSX r64, r16
+, RegSet::empty() // MOVSX r64, r8
+, RegSet::empty() // MOVSXD r64, m32
+, RegSet::empty() // MOVSXD r64, r32
+, RegSet::empty() // MOVUPD m128, xmm
+, RegSet::empty() // MOVUPD xmm, m128
+, RegSet::empty() // MOVUPD xmm, xmm
+, RegSet::empty() // MOVUPD xmm, xmm
+, RegSet::empty() // MOVUPS m128, xmm
+, RegSet::empty() // MOVUPS xmm, m128
+, RegSet::empty() // MOVUPS xmm, xmm
+, RegSet::empty() // MOVUPS xmm, xmm
+, RegSet::empty() // MOVZX r16, m8
+, RegSet::empty() // MOVZX r16, r8
+, RegSet::empty() // MOVZX r16, rh
+, RegSet::empty() // MOVZX r32, m16
+, RegSet::empty() // MOVZX r32, m8
+, RegSet::empty() // MOVZX r32, r16
+, RegSet::empty() // MOVZX r32, r8
+, RegSet::empty() // MOVZX r32, rh
+, RegSet::empty() // MOVZX r64, m16
+, RegSet::empty() // MOVZX r64, m8
+, RegSet::empty() // MOVZX r64, r16
+, RegSet::empty() // MOVZX r64, r8
+, RegSet::empty() // MPSADBW xmm, m128, imm8
+, RegSet::empty() // MPSADBW xmm, xmm, imm8
+, RegSet::empty()+Constants::ax() // MUL m16
+, RegSet::empty()+Constants::eax() // MUL m32
+, RegSet::empty()+Constants::rax() // MUL m64
+, RegSet::empty()+Constants::al() // MUL m8
+, RegSet::empty()+Constants::ax() // MUL r16
+, RegSet::empty()+Constants::eax() // MUL r32
+, RegSet::empty()+Constants::rax() // MUL r64
+, RegSet::empty()+Constants::al() // MUL r8
+, RegSet::empty()+Constants::al() // MUL rh
+, RegSet::empty() // MULPD xmm, m128
+, RegSet::empty() // MULPD xmm, xmm
+, RegSet::empty() // MULPS xmm, m128
+, RegSet::empty() // MULPS xmm, xmm
+, RegSet::empty() // MULSD xmm, m64
+, RegSet::empty() // MULSD xmm, xmm
+, RegSet::empty() // MULSS xmm, m32
+, RegSet::empty() // MULSS xmm, xmm
+, RegSet::empty()+Constants::edx() // MULX r32, r32, m32
+, RegSet::empty()+Constants::edx() // MULX r32, r32, r32
+, RegSet::empty()+Constants::rdx() // MULX r64, r64, m64
+, RegSet::empty()+Constants::rdx() // MULX r64, r64, r64
+, RegSet::empty()+Constants::eax()+Constants::ecx() // MWAIT 
+, RegSet::empty() // NEG m16
+, RegSet::empty() // NEG m32
+, RegSet::empty() // NEG m64
+, RegSet::empty() // NEG m8
+, RegSet::empty() // NEG r16
+, RegSet::empty() // NEG r32
+, RegSet::empty() // NEG r64
+, RegSet::empty() // NEG r8
+, RegSet::empty() // NEG rh
+, RegSet::empty() // NOP 
+, RegSet::empty() // NOP m16
+, RegSet::empty() // NOP m32
+, RegSet::empty() // NOP r16
+, RegSet::empty() // NOP r32
+, RegSet::empty() // NOT m16
+, RegSet::empty() // NOT m32
+, RegSet::empty() // NOT m64
+, RegSet::empty() // NOT m8
+, RegSet::empty() // NOT r16
+, RegSet::empty() // NOT r32
+, RegSet::empty() // NOT r64
+, RegSet::empty() // NOT r8
+, RegSet::empty() // NOT rh
+, RegSet::empty() // OR AL, imm8
+, RegSet::empty() // OR AX, imm16
+, RegSet::empty() // OR EAX, imm32
+, RegSet::empty() // OR m16, imm16
+, RegSet::empty() // OR m16, imm8
+, RegSet::empty() // OR m16, r16
+, RegSet::empty() // OR m32, imm32
+, RegSet::empty() // OR m32, imm8
+, RegSet::empty() // OR m32, r32
+, RegSet::empty() // OR m64, imm32
+, RegSet::empty() // OR m64, imm8
+, RegSet::empty() // OR m64, r64
+, RegSet::empty() // OR m8, imm8
+, RegSet::empty() // OR m8, r8
+, RegSet::empty() // OR m8, rh
+, RegSet::empty() // OR r16, imm16
+, RegSet::empty() // OR r16, imm8
+, RegSet::empty() // OR r16, m16
+, RegSet::empty() // OR r16, r16
+, RegSet::empty() // OR r16, r16
+, RegSet::empty() // OR r32, imm32
+, RegSet::empty() // OR r32, imm8
+, RegSet::empty() // OR r32, m32
+, RegSet::empty() // OR r32, r32
+, RegSet::empty() // OR r32, r32
+, RegSet::empty() // OR r64, imm32
+, RegSet::empty() // OR r64, imm8
+, RegSet::empty() // OR r64, m64
+, RegSet::empty() // OR r64, r64
+, RegSet::empty() // OR r64, r64
+, RegSet::empty() // OR r8, imm8
+, RegSet::empty() // OR r8, m8
+, RegSet::empty() // OR r8, r8
+, RegSet::empty() // OR r8, r8
+, RegSet::empty() // OR r8, rh
+, RegSet::empty() // OR r8, rh
+, RegSet::empty() // OR RAX, imm32
+, RegSet::empty() // OR rh, imm8
+, RegSet::empty() // OR rh, m8
+, RegSet::empty() // OR rh, r8
+, RegSet::empty() // OR rh, r8
+, RegSet::empty() // OR rh, rh
+, RegSet::empty() // OR rh, rh
+, RegSet::empty() // ORPD xmm, m128
+, RegSet::empty() // ORPD xmm, xmm
+, RegSet::empty() // ORPS xmm, m128
+, RegSet::empty() // ORPS xmm, xmm
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm() // OUT DX, AL
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm() // OUT DX, AX
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm() // OUT DX, EAX
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm() // OUT imm8, AL
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm() // OUT imm8, AX
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm() // OUT imm8, EAX
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rsi() // OUTS DX, m16
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rsi() // OUTS DX, m32
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rsi() // OUTS DX, m8
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::dx()+Constants::rsi() // OUTSB 
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::dx()+Constants::rsi() // OUTSD 
+, RegSet::empty()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::dx()+Constants::rsi() // OUTSW 
+, RegSet::empty() // PABSB mm, m64
+, RegSet::empty() // PABSB mm, mm
+, RegSet::empty() // PABSB xmm, m128
+, RegSet::empty() // PABSB xmm, xmm
+, RegSet::empty() // PABSD mm, m64
+, RegSet::empty() // PABSD mm, mm
+, RegSet::empty() // PABSD xmm, m128
+, RegSet::empty() // PABSD xmm, xmm
+, RegSet::empty() // PABSW mm, m64
+, RegSet::empty() // PABSW mm, mm
+, RegSet::empty() // PABSW xmm, m128
+, RegSet::empty() // PABSW xmm, xmm
+, RegSet::empty() // PACKSSDW mm, m64
+, RegSet::empty() // PACKSSDW mm, mm
+, RegSet::empty() // PACKSSDW xmm, m128
+, RegSet::empty() // PACKSSDW xmm, xmm
+, RegSet::empty() // PACKSSWB mm, m64
+, RegSet::empty() // PACKSSWB mm, mm
+, RegSet::empty() // PACKSSWB xmm, m128
+, RegSet::empty() // PACKSSWB xmm, xmm
+, RegSet::empty() // PACKUSDW xmm, m128
+, RegSet::empty() // PACKUSDW xmm, xmm
+, RegSet::empty() // PACKUSWB mm, m64
+, RegSet::empty() // PACKUSWB mm, mm
+, RegSet::empty() // PACKUSWB xmm, m128
+, RegSet::empty() // PACKUSWB xmm, xmm
+, RegSet::empty() // PADDB mm, m64
+, RegSet::empty() // PADDB mm, mm
+, RegSet::empty() // PADDB xmm, m128
+, RegSet::empty() // PADDB xmm, xmm
+, RegSet::empty() // PADDD mm, m64
+, RegSet::empty() // PADDD mm, mm
+, RegSet::empty() // PADDD xmm, m128
+, RegSet::empty() // PADDD xmm, xmm
+, RegSet::empty() // PADDQ mm, m64
+, RegSet::empty() // PADDQ mm, mm
+, RegSet::empty() // PADDQ xmm, m128
+, RegSet::empty() // PADDQ xmm, xmm
+, RegSet::empty() // PADDSB mm, m64
+, RegSet::empty() // PADDSB mm, mm
+, RegSet::empty() // PADDSB xmm, m128
+, RegSet::empty() // PADDSB xmm, xmm
+, RegSet::empty() // PADDSW mm, m64
+, RegSet::empty() // PADDSW mm, mm
+, RegSet::empty() // PADDSW xmm, m128
+, RegSet::empty() // PADDSW xmm, xmm
+, RegSet::empty() // PADDUSB mm, m64
+, RegSet::empty() // PADDUSB mm, mm
+, RegSet::empty() // PADDUSB xmm, m128
+, RegSet::empty() // PADDUSB xmm, xmm
+, RegSet::empty() // PADDUSW mm, m64
+, RegSet::empty() // PADDUSW mm, mm
+, RegSet::empty() // PADDUSW xmm, m128
+, RegSet::empty() // PADDUSW xmm, xmm
+, RegSet::empty() // PADDW mm, m64
+, RegSet::empty() // PADDW mm, mm
+, RegSet::empty() // PADDW xmm, m128
+, RegSet::empty() // PADDW xmm, xmm
+, RegSet::empty() // PALIGNR mm, m64, imm8
+, RegSet::empty() // PALIGNR mm, mm, imm8
+, RegSet::empty() // PALIGNR xmm, m128, imm8
+, RegSet::empty() // PALIGNR xmm, xmm, imm8
+, RegSet::empty() // PAND mm, m64
+, RegSet::empty() // PAND mm, mm
+, RegSet::empty() // PAND xmm, m128
+, RegSet::empty() // PAND xmm, xmm
+, RegSet::empty() // PANDN mm, m64
+, RegSet::empty() // PANDN mm, mm
+, RegSet::empty() // PANDN xmm, m128
+, RegSet::empty() // PANDN xmm, xmm
+, RegSet::empty() // PAUSE 
+, RegSet::empty() // PAVGB mm, m64
+, RegSet::empty() // PAVGB mm, mm
+, RegSet::empty() // PAVGB xmm, m128
+, RegSet::empty() // PAVGB xmm, xmm
+, RegSet::empty() // PAVGW mm, m64
+, RegSet::empty() // PAVGW mm, mm
+, RegSet::empty() // PAVGW xmm, m128
+, RegSet::empty() // PAVGW xmm, xmm
+, RegSet::empty() // PBLENDVB xmm, m128, <XMM0>
+, RegSet::empty() // PBLENDVB xmm, xmm, <XMM0>
+, RegSet::empty() // PBLENDW xmm, m128, imm8
+, RegSet::empty() // PBLENDW xmm, xmm, imm8
+, RegSet::empty() // PCLMULQDQ xmm, m128, imm8
+, RegSet::empty() // PCLMULQDQ xmm, xmm, imm8
+, RegSet::empty() // PCMPEQB mm, m64
+, RegSet::empty() // PCMPEQB mm, mm
+, RegSet::empty() // PCMPEQB xmm, m128
+, RegSet::empty() // PCMPEQB xmm, xmm
+, RegSet::empty() // PCMPEQD mm, m64
+, RegSet::empty() // PCMPEQD mm, mm
+, RegSet::empty() // PCMPEQD xmm, m128
+, RegSet::empty() // PCMPEQD xmm, xmm
+, RegSet::empty() // PCMPEQQ xmm, m128
+, RegSet::empty() // PCMPEQQ xmm, xmm
+, RegSet::empty() // PCMPEQW mm, m64
+, RegSet::empty() // PCMPEQW mm, mm
+, RegSet::empty() // PCMPEQW xmm, m128
+, RegSet::empty() // PCMPEQW xmm, xmm
+, RegSet::empty()+Constants::eax()+Constants::edx() // PCMPESTRI xmm, m128, imm8
+, RegSet::empty()+Constants::eax()+Constants::edx() // PCMPESTRI xmm, xmm, imm8
+, RegSet::empty()+Constants::eax()+Constants::edx() // PCMPESTRM xmm, m128, imm8
+, RegSet::empty()+Constants::eax()+Constants::edx() // PCMPESTRM xmm, xmm, imm8
+, RegSet::empty() // PCMPGTB mm, m64
+, RegSet::empty() // PCMPGTB mm, mm
+, RegSet::empty() // PCMPGTB xmm, m128
+, RegSet::empty() // PCMPGTB xmm, xmm
+, RegSet::empty() // PCMPGTD mm, m64
+, RegSet::empty() // PCMPGTD mm, mm
+, RegSet::empty() // PCMPGTD xmm, m128
+, RegSet::empty() // PCMPGTD xmm, xmm
+, RegSet::empty() // PCMPGTQ xmm, m128
+, RegSet::empty() // PCMPGTQ xmm, xmm
+, RegSet::empty() // PCMPGTW mm, m64
+, RegSet::empty() // PCMPGTW mm, mm
+, RegSet::empty() // PCMPGTW xmm, m128
+, RegSet::empty() // PCMPGTW xmm, xmm
+, RegSet::empty() // PCMPISTRI xmm, m128, imm8
+, RegSet::empty() // PCMPISTRI xmm, xmm, imm8
+, RegSet::empty() // PCMPISTRM xmm, m128, imm8
+, RegSet::empty() // PCMPISTRM xmm, xmm, imm8
+, RegSet::empty() // PDEP r32, r32, m32
+, RegSet::empty() // PDEP r32, r32, r32
+, RegSet::empty() // PDEP r64, r64, m64
+, RegSet::empty() // PDEP r64, r64, r64
+, RegSet::empty() // PEXT r32, r32, m32
+, RegSet::empty() // PEXT r32, r32, r32
+, RegSet::empty() // PEXT r64, r64, m64
+, RegSet::empty() // PEXT r64, r64, r64
+, RegSet::empty() // PEXTRB m8, xmm, imm8
+, RegSet::empty() // PEXTRB r32, xmm, imm8
+, RegSet::empty() // PEXTRB r64, xmm, imm8
+, RegSet::empty() // PEXTRD m32, xmm, imm8
+, RegSet::empty() // PEXTRD r32, xmm, imm8
+, RegSet::empty() // PEXTRQ m64, xmm, imm8
+, RegSet::empty() // PEXTRQ r64, xmm, imm8
+, RegSet::empty() // PEXTRW m16, xmm, imm8
+, RegSet::empty() // PEXTRW r32, mm, imm8
+, RegSet::empty() // PEXTRW r32, xmm, imm8
+, RegSet::empty() // PEXTRW r32, xmm, imm8
+, RegSet::empty() // PEXTRW r64, mm, imm8
+, RegSet::empty() // PEXTRW r64, xmm, imm8
+, RegSet::empty() // PEXTRW r64, xmm, imm8
+, RegSet::empty() // PHADDD mm, m64
+, RegSet::empty() // PHADDD mm, mm
+, RegSet::empty() // PHADDD xmm, m128
+, RegSet::empty() // PHADDD xmm, xmm
+, RegSet::empty() // PHADDSW mm, m64
+, RegSet::empty() // PHADDSW mm, mm
+, RegSet::empty() // PHADDSW xmm, m128
+, RegSet::empty() // PHADDSW xmm, xmm
+, RegSet::empty() // PHADDW mm, m64
+, RegSet::empty() // PHADDW mm, mm
+, RegSet::empty() // PHADDW xmm, m128
+, RegSet::empty() // PHADDW xmm, xmm
+, RegSet::empty() // PHMINPOSUW xmm, m128
+, RegSet::empty() // PHMINPOSUW xmm, xmm
+, RegSet::empty() // PHSUBD mm, m64
+, RegSet::empty() // PHSUBD mm, mm
+, RegSet::empty() // PHSUBD xmm, m128
+, RegSet::empty() // PHSUBD xmm, xmm
+, RegSet::empty() // PHSUBSW mm, m64
+, RegSet::empty() // PHSUBSW mm, mm
+, RegSet::empty() // PHSUBSW xmm, m128
+, RegSet::empty() // PHSUBSW xmm, xmm
+, RegSet::empty() // PHSUBW mm, m64
+, RegSet::empty() // PHSUBW mm, mm
+, RegSet::empty() // PHSUBW xmm, m128
+, RegSet::empty() // PHSUBW xmm, xmm
+, RegSet::empty() // PINSRB xmm, m8, imm8
+, RegSet::empty() // PINSRB xmm, r32, imm8
+, RegSet::empty() // PINSRD xmm, m32, imm8
+, RegSet::empty() // PINSRD xmm, r32, imm8
+, RegSet::empty() // PINSRW mm, m16, imm8
+, RegSet::empty() // PINSRW mm, r32, imm8
+, RegSet::empty() // PINSRW xmm, m16, imm8
+, RegSet::empty() // PINSRW xmm, r32, imm8
+, RegSet::empty() // PMADDUBSW mm, m64
+, RegSet::empty() // PMADDUBSW mm, mm
+, RegSet::empty() // PMADDUBSW xmm, m128
+, RegSet::empty() // PMADDUBSW xmm, xmm
+, RegSet::empty() // PMADDWD mm, m64
+, RegSet::empty() // PMADDWD mm, mm
+, RegSet::empty() // PMADDWD xmm, m128
+, RegSet::empty() // PMADDWD xmm, xmm
+, RegSet::empty() // PMAXSB xmm, m128
+, RegSet::empty() // PMAXSB xmm, xmm
+, RegSet::empty() // PMAXSD xmm, m128
+, RegSet::empty() // PMAXSD xmm, xmm
+, RegSet::empty() // PMAXSW mm, m64
+, RegSet::empty() // PMAXSW mm, mm
+, RegSet::empty() // PMAXSW xmm, m128
+, RegSet::empty() // PMAXSW xmm, xmm
+, RegSet::empty() // PMAXUB mm, m64
+, RegSet::empty() // PMAXUB mm, mm
+, RegSet::empty() // PMAXUB xmm, m128
+, RegSet::empty() // PMAXUB xmm, xmm
+, RegSet::empty() // PMAXUD xmm, m128
+, RegSet::empty() // PMAXUD xmm, xmm
+, RegSet::empty() // PMAXUW xmm, m128
+, RegSet::empty() // PMAXUW xmm, xmm
+, RegSet::empty() // PMINSB xmm, m128
+, RegSet::empty() // PMINSB xmm, xmm
+, RegSet::empty() // PMINSD xmm, m128
+, RegSet::empty() // PMINSD xmm, xmm
+, RegSet::empty() // PMINSW mm, m64
+, RegSet::empty() // PMINSW mm, mm
+, RegSet::empty() // PMINSW xmm, m128
+, RegSet::empty() // PMINSW xmm, xmm
+, RegSet::empty() // PMINUB mm, m64
+, RegSet::empty() // PMINUB mm, mm
+, RegSet::empty() // PMINUB xmm, m128
+, RegSet::empty() // PMINUB xmm, xmm
+, RegSet::empty() // PMINUD xmm, m128
+, RegSet::empty() // PMINUD xmm, xmm
+, RegSet::empty() // PMINUW xmm, m128
+, RegSet::empty() // PMINUW xmm, xmm
+, RegSet::empty() // PMOVMSKB r32, mm
+, RegSet::empty() // PMOVMSKB r32, xmm
+, RegSet::empty() // PMOVMSKB r64, mm
+, RegSet::empty() // PMOVMSKB r64, xmm
+, RegSet::empty() // PMOVSXBD xmm, m32
+, RegSet::empty() // PMOVSXBD xmm, xmm
+, RegSet::empty() // PMOVSXBQ xmm, m16
+, RegSet::empty() // PMOVSXBQ xmm, xmm
+, RegSet::empty() // PMOVSXBW xmm, m64
+, RegSet::empty() // PMOVSXBW xmm, xmm
+, RegSet::empty() // PMOVSXDQ xmm, m64
+, RegSet::empty() // PMOVSXDQ xmm, xmm
+, RegSet::empty() // PMOVSXWD xmm, m64
+, RegSet::empty() // PMOVSXWD xmm, xmm
+, RegSet::empty() // PMOVSXWQ xmm, m32
+, RegSet::empty() // PMOVSXWQ xmm, xmm
+, RegSet::empty() // PMOVZXBD xmm, m32
+, RegSet::empty() // PMOVZXBD xmm, xmm
+, RegSet::empty() // PMOVZXBQ xmm, m16
+, RegSet::empty() // PMOVZXBQ xmm, xmm
+, RegSet::empty() // PMOVZXBW xmm, m64
+, RegSet::empty() // PMOVZXBW xmm, xmm
+, RegSet::empty() // PMOVZXDQ xmm, m64
+, RegSet::empty() // PMOVZXDQ xmm, xmm
+, RegSet::empty() // PMOVZXWD xmm, m64
+, RegSet::empty() // PMOVZXWD xmm, xmm
+, RegSet::empty() // PMOVZXWQ xmm, m32
+, RegSet::empty() // PMOVZXWQ xmm, xmm
+, RegSet::empty() // PMULDQ xmm, m128
+, RegSet::empty() // PMULDQ xmm, xmm
+, RegSet::empty() // PMULHRSW mm, m64
+, RegSet::empty() // PMULHRSW mm, mm
+, RegSet::empty() // PMULHRSW xmm, m128
+, RegSet::empty() // PMULHRSW xmm, xmm
+, RegSet::empty() // PMULHUW mm, m64
+, RegSet::empty() // PMULHUW mm, mm
+, RegSet::empty() // PMULHUW xmm, m128
+, RegSet::empty() // PMULHUW xmm, xmm
+, RegSet::empty() // PMULHW mm, m64
+, RegSet::empty() // PMULHW mm, mm
+, RegSet::empty() // PMULHW xmm, m128
+, RegSet::empty() // PMULHW xmm, xmm
+, RegSet::empty() // PMULLD xmm, m128
+, RegSet::empty() // PMULLD xmm, xmm
+, RegSet::empty() // PMULLW mm, m64
+, RegSet::empty() // PMULLW mm, mm
+, RegSet::empty() // PMULLW xmm, m128
+, RegSet::empty() // PMULLW xmm, xmm
+, RegSet::empty() // PMULUDQ mm, m64
+, RegSet::empty() // PMULUDQ mm, mm
+, RegSet::empty() // PMULUDQ xmm, m128
+, RegSet::empty() // PMULUDQ xmm, xmm
+, RegSet::empty()+Constants::rsp() // POP FS
+, RegSet::empty()+Constants::rsp() // POP FS, p66
+, RegSet::empty()+Constants::rsp() // POP GS
+, RegSet::empty()+Constants::rsp() // POP GS, p66
+, RegSet::empty()+Constants::rsp() // POP m16
+, RegSet::empty()+Constants::rsp() // POP m64
+, RegSet::empty()+Constants::rsp() // POP r16
+, RegSet::empty()+Constants::rsp() // POP r16
+, RegSet::empty()+Constants::rsp() // POP r64
+, RegSet::empty()+Constants::rsp() // POP r64
+, RegSet::empty() // POPCNT r16, m16
+, RegSet::empty() // POPCNT r16, r16
+, RegSet::empty() // POPCNT r32, m32
+, RegSet::empty() // POPCNT r32, r32
+, RegSet::empty() // POPCNT r64, m64
+, RegSet::empty() // POPCNT r64, r64
+, RegSet::empty()+Constants::rsp() // POPF 
+, RegSet::empty()+Constants::rsp() // POPFQ 
+, RegSet::empty() // POR mm, m64
+, RegSet::empty() // POR mm, mm
+, RegSet::empty() // POR xmm, m128
+, RegSet::empty() // POR xmm, xmm
+, RegSet::empty() // PREFETCHNTA m8
+, RegSet::empty() // PREFETCHT0 m8
+, RegSet::empty() // PREFETCHT1 m8
+, RegSet::empty() // PREFETCHT2 m8
+, RegSet::empty() // PSADBW mm, m64
+, RegSet::empty() // PSADBW mm, mm
+, RegSet::empty() // PSADBW xmm, m128
+, RegSet::empty() // PSADBW xmm, xmm
+, RegSet::empty() // PSHUFB mm, m64
+, RegSet::empty() // PSHUFB mm, mm
+, RegSet::empty() // PSHUFB xmm, m128
+, RegSet::empty() // PSHUFB xmm, xmm
+, RegSet::empty() // PSHUFD xmm, m128, imm8
+, RegSet::empty() // PSHUFD xmm, xmm, imm8
+, RegSet::empty() // PSHUFHW xmm, m128, imm8
+, RegSet::empty() // PSHUFHW xmm, xmm, imm8
+, RegSet::empty() // PSHUFLW xmm, m128, imm8
+, RegSet::empty() // PSHUFLW xmm, xmm, imm8
+, RegSet::empty() // PSHUFW mm, m64, imm8
+, RegSet::empty() // PSHUFW mm, mm, imm8
+, RegSet::empty() // PSIGNB mm, m64
+, RegSet::empty() // PSIGNB mm, mm
+, RegSet::empty() // PSIGNB xmm, m128
+, RegSet::empty() // PSIGNB xmm, xmm
+, RegSet::empty() // PSIGND mm, m64
+, RegSet::empty() // PSIGND mm, mm
+, RegSet::empty() // PSIGND xmm, m128
+, RegSet::empty() // PSIGND xmm, xmm
+, RegSet::empty() // PSIGNW mm, m64
+, RegSet::empty() // PSIGNW mm, mm
+, RegSet::empty() // PSIGNW xmm, m128
+, RegSet::empty() // PSIGNW xmm, xmm
+, RegSet::empty() // PSLLD mm, imm8
+, RegSet::empty() // PSLLD mm, m64
+, RegSet::empty() // PSLLD mm, mm
+, RegSet::empty() // PSLLD xmm, imm8
+, RegSet::empty() // PSLLD xmm, m128
+, RegSet::empty() // PSLLD xmm, xmm
+, RegSet::empty() // PSLLDQ xmm, imm8
+, RegSet::empty() // PSLLQ mm, imm8
+, RegSet::empty() // PSLLQ mm, m64
+, RegSet::empty() // PSLLQ mm, mm
+, RegSet::empty() // PSLLQ xmm, imm8
+, RegSet::empty() // PSLLQ xmm, m128
+, RegSet::empty() // PSLLQ xmm, xmm
+, RegSet::empty() // PSLLW mm, imm8
+, RegSet::empty() // PSLLW mm, m64
+, RegSet::empty() // PSLLW mm, mm
+, RegSet::empty() // PSLLW xmm, imm8
+, RegSet::empty() // PSLLW xmm, m128
+, RegSet::empty() // PSLLW xmm, xmm
+, RegSet::empty() // PSRAD mm, imm8
+, RegSet::empty() // PSRAD mm, m64
+, RegSet::empty() // PSRAD mm, mm
+, RegSet::empty() // PSRAD xmm, imm8
+, RegSet::empty() // PSRAD xmm, m128
+, RegSet::empty() // PSRAD xmm, xmm
+, RegSet::empty() // PSRAW mm, imm8
+, RegSet::empty() // PSRAW mm, m64
+, RegSet::empty() // PSRAW mm, mm
+, RegSet::empty() // PSRAW xmm, imm8
+, RegSet::empty() // PSRAW xmm, m128
+, RegSet::empty() // PSRAW xmm, xmm
+, RegSet::empty() // PSRLD mm, imm8
+, RegSet::empty() // PSRLD mm, m64
+, RegSet::empty() // PSRLD mm, mm
+, RegSet::empty() // PSRLD xmm, imm8
+, RegSet::empty() // PSRLD xmm, m128
+, RegSet::empty() // PSRLD xmm, xmm
+, RegSet::empty() // PSRLDQ xmm, imm8
+, RegSet::empty() // PSRLQ mm, imm8
+, RegSet::empty() // PSRLQ mm, m64
+, RegSet::empty() // PSRLQ mm, mm
+, RegSet::empty() // PSRLQ xmm, imm8
+, RegSet::empty() // PSRLQ xmm, m128
+, RegSet::empty() // PSRLQ xmm, xmm
+, RegSet::empty() // PSRLW mm, imm8
+, RegSet::empty() // PSRLW mm, m64
+, RegSet::empty() // PSRLW mm, mm
+, RegSet::empty() // PSRLW xmm, imm8
+, RegSet::empty() // PSRLW xmm, m128
+, RegSet::empty() // PSRLW xmm, xmm
+, RegSet::empty() // PSUBB mm, m64
+, RegSet::empty() // PSUBB mm, mm
+, RegSet::empty() // PSUBB xmm, m128
+, RegSet::empty() // PSUBB xmm, xmm
+, RegSet::empty() // PSUBD mm, m64
+, RegSet::empty() // PSUBD mm, mm
+, RegSet::empty() // PSUBD xmm, m128
+, RegSet::empty() // PSUBD xmm, xmm
+, RegSet::empty() // PSUBQ mm, m64
+, RegSet::empty() // PSUBQ mm, mm
+, RegSet::empty() // PSUBQ xmm, m128
+, RegSet::empty() // PSUBQ xmm, xmm
+, RegSet::empty() // PSUBSB mm, m64
+, RegSet::empty() // PSUBSB mm, mm
+, RegSet::empty() // PSUBSB xmm, m128
+, RegSet::empty() // PSUBSB xmm, xmm
+, RegSet::empty() // PSUBSW mm, m64
+, RegSet::empty() // PSUBSW mm, mm
+, RegSet::empty() // PSUBSW xmm, m128
+, RegSet::empty() // PSUBSW xmm, xmm
+, RegSet::empty() // PSUBUSB mm, m64
+, RegSet::empty() // PSUBUSB mm, mm
+, RegSet::empty() // PSUBUSB xmm, m128
+, RegSet::empty() // PSUBUSB xmm, xmm
+, RegSet::empty() // PSUBUSW mm, m64
+, RegSet::empty() // PSUBUSW mm, mm
+, RegSet::empty() // PSUBUSW xmm, m128
+, RegSet::empty() // PSUBUSW xmm, xmm
+, RegSet::empty() // PSUBW mm, m64
+, RegSet::empty() // PSUBW mm, mm
+, RegSet::empty() // PSUBW xmm, m128
+, RegSet::empty() // PSUBW xmm, xmm
+, RegSet::empty() // PTEST xmm, m128
+, RegSet::empty() // PTEST xmm, xmm
+, RegSet::empty() // PUNPCKHBW mm, m64
+, RegSet::empty() // PUNPCKHBW mm, mm
+, RegSet::empty() // PUNPCKHBW xmm, m128
+, RegSet::empty() // PUNPCKHBW xmm, xmm
+, RegSet::empty() // PUNPCKHDQ mm, m64
+, RegSet::empty() // PUNPCKHDQ mm, mm
+, RegSet::empty() // PUNPCKHDQ xmm, m128
+, RegSet::empty() // PUNPCKHDQ xmm, xmm
+, RegSet::empty() // PUNPCKHQDQ xmm, m128
+, RegSet::empty() // PUNPCKHQDQ xmm, xmm
+, RegSet::empty() // PUNPCKHWD mm, m64
+, RegSet::empty() // PUNPCKHWD mm, mm
+, RegSet::empty() // PUNPCKHWD xmm, m128
+, RegSet::empty() // PUNPCKHWD xmm, xmm
+, RegSet::empty() // PUNPCKLBW mm, m32
+, RegSet::empty() // PUNPCKLBW mm, mm
+, RegSet::empty() // PUNPCKLBW xmm, m128
+, RegSet::empty() // PUNPCKLBW xmm, xmm
+, RegSet::empty() // PUNPCKLDQ mm, m32
+, RegSet::empty() // PUNPCKLDQ mm, mm
+, RegSet::empty() // PUNPCKLDQ xmm, m128
+, RegSet::empty() // PUNPCKLDQ xmm, xmm
+, RegSet::empty() // PUNPCKLQDQ xmm, m128
+, RegSet::empty() // PUNPCKLQDQ xmm, xmm
+, RegSet::empty() // PUNPCKLWD mm, m32
+, RegSet::empty() // PUNPCKLWD mm, mm
+, RegSet::empty() // PUNPCKLWD xmm, m128
+, RegSet::empty() // PUNPCKLWD xmm, xmm
+, RegSet::empty()+Constants::rsp() // PUSH FS
+, RegSet::empty()+Constants::rsp() // PUSH GS
+, RegSet::empty()+Constants::rsp() // PUSH m16
+, RegSet::empty()+Constants::rsp() // PUSH m64
+, RegSet::empty()+Constants::rsp() // PUSH r16
+, RegSet::empty()+Constants::rsp() // PUSH r16
+, RegSet::empty()+Constants::rsp() // PUSH r64
+, RegSet::empty()+Constants::rsp() // PUSH r64
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_pf()+Constants::eflags_af()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_sf()+Constants::eflags_tf()+Constants::eflags_if()+Constants::eflags_df()+Constants::eflags_of()+Constants::eflags_iopl()+Constants::eflags_nt()+Constants::eflags_rf()+Constants::eflags_vm()+Constants::eflags_ac()+Constants::eflags_vif()+Constants::eflags_vip()+Constants::eflags_id()+Constants::rsp() // PUSHF 
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_pf()+Constants::eflags_af()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_sf()+Constants::eflags_tf()+Constants::eflags_if()+Constants::eflags_df()+Constants::eflags_of()+Constants::eflags_iopl()+Constants::eflags_nt()+Constants::eflags_rf()+Constants::eflags_vm()+Constants::eflags_ac()+Constants::eflags_vif()+Constants::eflags_vip()+Constants::eflags_id()+Constants::rsp() // PUSHFQ 
+, RegSet::empty()+Constants::rsp() // PUSHQ imm16
+, RegSet::empty()+Constants::rsp() // PUSHQ imm32
+, RegSet::empty()+Constants::rsp() // PUSHQ imm8
+, RegSet::empty()+Constants::rsp() // PUSHW imm16
+, RegSet::empty()+Constants::rsp() // PUSHW imm8
+, RegSet::empty() // PXOR mm, m64
+, RegSet::empty() // PXOR mm, mm
+, RegSet::empty() // PXOR xmm, m128
+, RegSet::empty() // PXOR xmm, xmm
+, RegSet::empty()+Constants::eflags_cf() // RCL m16, CL
+, RegSet::empty()+Constants::eflags_cf() // RCL m16, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCL m16, 1
+, RegSet::empty()+Constants::eflags_cf() // RCL m32, CL
+, RegSet::empty()+Constants::eflags_cf() // RCL m32, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCL m32, 1
+, RegSet::empty()+Constants::eflags_cf() // RCL m64, CL
+, RegSet::empty()+Constants::eflags_cf() // RCL m64, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCL m64, 1
+, RegSet::empty()+Constants::eflags_cf() // RCL m8, CL
+, RegSet::empty()+Constants::eflags_cf() // RCL m8, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCL m8, 1
+, RegSet::empty()+Constants::eflags_cf() // RCL r16, CL
+, RegSet::empty()+Constants::eflags_cf() // RCL r16, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCL r16, 1
+, RegSet::empty()+Constants::eflags_cf() // RCL r32, CL
+, RegSet::empty()+Constants::eflags_cf() // RCL r32, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCL r32, 1
+, RegSet::empty()+Constants::eflags_cf() // RCL r64, CL
+, RegSet::empty()+Constants::eflags_cf() // RCL r64, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCL r64, 1
+, RegSet::empty()+Constants::eflags_cf() // RCL r8, CL
+, RegSet::empty()+Constants::eflags_cf() // RCL r8, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCL r8, 1
+, RegSet::empty()+Constants::eflags_cf() // RCL rh, CL
+, RegSet::empty()+Constants::eflags_cf() // RCL rh, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCL rh, 1
+, RegSet::empty() // RCPPS xmm, m128
+, RegSet::empty() // RCPPS xmm, xmm
+, RegSet::empty() // RCPSS xmm, m32
+, RegSet::empty() // RCPSS xmm, xmm
+, RegSet::empty()+Constants::eflags_cf() // RCR m16, CL
+, RegSet::empty()+Constants::eflags_cf() // RCR m16, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCR m16, 1
+, RegSet::empty()+Constants::eflags_cf() // RCR m32, CL
+, RegSet::empty()+Constants::eflags_cf() // RCR m32, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCR m32, 1
+, RegSet::empty()+Constants::eflags_cf() // RCR m64, CL
+, RegSet::empty()+Constants::eflags_cf() // RCR m64, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCR m64, 1
+, RegSet::empty()+Constants::eflags_cf() // RCR m8, CL
+, RegSet::empty()+Constants::eflags_cf() // RCR m8, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCR m8, 1
+, RegSet::empty()+Constants::eflags_cf() // RCR r16, CL
+, RegSet::empty()+Constants::eflags_cf() // RCR r16, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCR r16, 1
+, RegSet::empty()+Constants::eflags_cf() // RCR r32, CL
+, RegSet::empty()+Constants::eflags_cf() // RCR r32, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCR r32, 1
+, RegSet::empty()+Constants::eflags_cf() // RCR r64, CL
+, RegSet::empty()+Constants::eflags_cf() // RCR r64, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCR r64, 1
+, RegSet::empty()+Constants::eflags_cf() // RCR r8, CL
+, RegSet::empty()+Constants::eflags_cf() // RCR r8, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCR r8, 1
+, RegSet::empty()+Constants::eflags_cf() // RCR rh, CL
+, RegSet::empty()+Constants::eflags_cf() // RCR rh, imm8
+, RegSet::empty()+Constants::eflags_cf() // RCR rh, 1
+, RegSet::empty() // RDFSBASE r32
+, RegSet::empty() // RDFSBASE r64
+, RegSet::empty() // RDGSBASE r32
+, RegSet::empty() // RDGSBASE r64
+, RegSet::empty() // RDRAND r16
+, RegSet::empty() // RDRAND r32
+, RegSet::empty() // RDRAND r64
+, RegSet::empty()+Constants::ecx()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rdi() // REP_INS m16, DX
+, RegSet::empty()+Constants::ecx()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rdi() // REP_INS m32, DX
+, RegSet::empty()+Constants::rcx()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rdi() // REP_INS m64, DX
+, RegSet::empty()+Constants::ecx()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rdi() // REP_INS m8, DX
+, RegSet::empty()+Constants::rcx()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rdi() // REP_INS m8, DX
+, RegSet::empty()+Constants::ecx()+Constants::eflags_df()+Constants::si()+Constants::rsi() // REP_LODS AL
+, RegSet::empty()+Constants::rcx()+Constants::eflags_df()+Constants::si()+Constants::rsi() // REP_LODS AL
+, RegSet::empty()+Constants::ecx()+Constants::eflags_df()+Constants::si()+Constants::rsi() // REP_LODS AX
+, RegSet::empty()+Constants::ecx()+Constants::eflags_df()+Constants::si()+Constants::rsi() // REP_LODS EAX
+, RegSet::empty()+Constants::rcx()+Constants::eflags_df()+Constants::si()+Constants::rsi() // REP_LODS RAX
+, RegSet::empty()+Constants::ecx()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REP_MOVS m16, m16
+, RegSet::empty()+Constants::ecx()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REP_MOVS m32, m32
+, RegSet::empty()+Constants::rcx()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REP_MOVS m64, m64
+, RegSet::empty()+Constants::ecx()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REP_MOVS m8, m8
+, RegSet::empty()+Constants::rcx()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REP_MOVS m8, m8
+, RegSet::empty()+Constants::ecx()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rsi() // REP_OUTS DX, m16
+, RegSet::empty()+Constants::ecx()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rsi() // REP_OUTS DX, m32
+, RegSet::empty()+Constants::rcx()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rsi() // REP_OUTS DX, m64
+, RegSet::empty()+Constants::ecx()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rsi() // REP_OUTS DX, m8
+, RegSet::empty()+Constants::rcx()+Constants::eflags_iopl()+Constants::eflags_vm()+Constants::eflags_df()+Constants::rsi() // REP_OUTS DX, m8
+, RegSet::empty()+Constants::ecx()+Constants::eflags_df()+Constants::rdi()+Constants::al() // REP_STOS m16
+, RegSet::empty()+Constants::ecx()+Constants::eflags_df()+Constants::rdi()+Constants::al() // REP_STOS m32
+, RegSet::empty()+Constants::rcx()+Constants::eflags_df()+Constants::rdi()+Constants::al() // REP_STOS m64
+, RegSet::empty()+Constants::ecx()+Constants::eflags_df()+Constants::rdi()+Constants::al() // REP_STOS m8
+, RegSet::empty()+Constants::rcx()+Constants::eflags_df()+Constants::rdi()+Constants::al() // REP_STOS m8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REPE_CMPS m16, m16
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REPE_CMPS m32, m32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REPE_CMPS m64, m64
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REPE_CMPS m8, m8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REPE_CMPS m8, m8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::rdi()+Constants::ax() // REPE_SCAS m16
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::rdi()+Constants::eax() // REPE_SCAS m32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::rdi()+Constants::rax() // REPE_SCAS m64
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::rdi()+Constants::al() // REPE_SCAS m8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::rdi()+Constants::al() // REPE_SCAS m8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REPNE_CMPS m16, m16
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REPNE_CMPS m32, m32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REPNE_CMPS m64, m64
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REPNE_CMPS m8, m8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::esi()+Constants::rsi()+Constants::edi()+Constants::rdi() // REPNE_CMPS m8, m8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::rdi()+Constants::ax() // REPNE_SCAS m16
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::rdi()+Constants::eax() // REPNE_SCAS m32
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::rdi()+Constants::rax() // REPNE_SCAS m64
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::rdi()+Constants::al() // REPNE_SCAS m8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_df()+Constants::rdi()+Constants::al() // REPNE_SCAS m8
+, RegSet::empty() // RET 
+, RegSet::universe() // RET far
+, RegSet::empty() // RET imm16
+, RegSet::universe() // RET imm16, far
+, RegSet::empty() // ROL m16, CL
+, RegSet::empty() // ROL m16, imm8
+, RegSet::empty() // ROL m16, 1
+, RegSet::empty() // ROL m32, CL
+, RegSet::empty() // ROL m32, imm8
+, RegSet::empty() // ROL m32, 1
+, RegSet::empty() // ROL m64, CL
+, RegSet::empty() // ROL m64, imm8
+, RegSet::empty() // ROL m64, 1
+, RegSet::empty() // ROL m8, CL
+, RegSet::empty() // ROL m8, imm8
+, RegSet::empty() // ROL m8, 1
+, RegSet::empty() // ROL r16, CL
+, RegSet::empty() // ROL r16, imm8
+, RegSet::empty() // ROL r16, 1
+, RegSet::empty() // ROL r32, CL
+, RegSet::empty() // ROL r32, imm8
+, RegSet::empty() // ROL r32, 1
+, RegSet::empty() // ROL r64, CL
+, RegSet::empty() // ROL r64, imm8
+, RegSet::empty() // ROL r64, 1
+, RegSet::empty() // ROL r8, CL
+, RegSet::empty() // ROL r8, imm8
+, RegSet::empty() // ROL r8, 1
+, RegSet::empty() // ROL rh, CL
+, RegSet::empty() // ROL rh, imm8
+, RegSet::empty() // ROL rh, 1
+, RegSet::empty() // ROR m16, CL
+, RegSet::empty() // ROR m16, imm8
+, RegSet::empty() // ROR m16, 1
+, RegSet::empty() // ROR m32, CL
+, RegSet::empty() // ROR m32, imm8
+, RegSet::empty() // ROR m32, 1
+, RegSet::empty() // ROR m64, CL
+, RegSet::empty() // ROR m64, imm8
+, RegSet::empty() // ROR m64, 1
+, RegSet::empty() // ROR m8, CL
+, RegSet::empty() // ROR m8, imm8
+, RegSet::empty() // ROR m8, 1
+, RegSet::empty() // ROR r16, CL
+, RegSet::empty() // ROR r16, imm8
+, RegSet::empty() // ROR r16, 1
+, RegSet::empty() // ROR r32, CL
+, RegSet::empty() // ROR r32, imm8
+, RegSet::empty() // ROR r32, 1
+, RegSet::empty() // ROR r64, CL
+, RegSet::empty() // ROR r64, imm8
+, RegSet::empty() // ROR r64, 1
+, RegSet::empty() // ROR r8, CL
+, RegSet::empty() // ROR r8, imm8
+, RegSet::empty() // ROR r8, 1
+, RegSet::empty() // ROR rh, CL
+, RegSet::empty() // ROR rh, imm8
+, RegSet::empty() // ROR rh, 1
+, RegSet::empty() // RORX r32, m32, imm8
+, RegSet::empty() // RORX r32, r32, imm8
+, RegSet::empty() // RORX r64, m64, imm8
+, RegSet::empty() // RORX r64, r64, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // ROUNDPD xmm, m128, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // ROUNDPD xmm, xmm, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // ROUNDPS xmm, m128, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // ROUNDPS xmm, xmm, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // ROUNDSD xmm, m64, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // ROUNDSD xmm, xmm, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // ROUNDSS xmm, m32, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // ROUNDSS xmm, xmm, imm8
+, RegSet::empty() // RSQRTPS xmm, m128
+, RegSet::empty() // RSQRTPS xmm, xmm
+, RegSet::empty() // RSQRTSS xmm, m32
+, RegSet::empty() // RSQRTSS xmm, xmm
+, RegSet::empty()+Constants::ah() // SAHF 
+, RegSet::empty() // SAL m16, CL
+, RegSet::empty() // SAL m16, imm8
+, RegSet::empty() // SAL m16, 1
+, RegSet::empty() // SAL m32, CL
+, RegSet::empty() // SAL m32, imm8
+, RegSet::empty() // SAL m32, 1
+, RegSet::empty() // SAL m64, CL
+, RegSet::empty() // SAL m64, imm8
+, RegSet::empty() // SAL m64, 1
+, RegSet::empty() // SAL m8, CL
+, RegSet::empty() // SAL m8, imm8
+, RegSet::empty() // SAL m8, 1
+, RegSet::empty() // SAL r16, CL
+, RegSet::empty() // SAL r16, imm8
+, RegSet::empty() // SAL r16, 1
+, RegSet::empty() // SAL r32, CL
+, RegSet::empty() // SAL r32, imm8
+, RegSet::empty() // SAL r32, 1
+, RegSet::empty() // SAL r64, CL
+, RegSet::empty() // SAL r64, imm8
+, RegSet::empty() // SAL r64, 1
+, RegSet::empty() // SAL r8, CL
+, RegSet::empty() // SAL r8, imm8
+, RegSet::empty() // SAL r8, 1
+, RegSet::empty() // SAL rh, CL
+, RegSet::empty() // SAL rh, imm8
+, RegSet::empty() // SAL rh, 1
+, RegSet::empty() // SAR m16, CL
+, RegSet::empty() // SAR m16, imm8
+, RegSet::empty() // SAR m16, 1
+, RegSet::empty() // SAR m32, CL
+, RegSet::empty() // SAR m32, imm8
+, RegSet::empty() // SAR m32, 1
+, RegSet::empty() // SAR m64, CL
+, RegSet::empty() // SAR m64, imm8
+, RegSet::empty() // SAR m64, 1
+, RegSet::empty() // SAR m8, CL
+, RegSet::empty() // SAR m8, imm8
+, RegSet::empty() // SAR m8, 1
+, RegSet::empty() // SAR r16, CL
+, RegSet::empty() // SAR r16, imm8
+, RegSet::empty() // SAR r16, 1
+, RegSet::empty() // SAR r32, CL
+, RegSet::empty() // SAR r32, imm8
+, RegSet::empty() // SAR r32, 1
+, RegSet::empty() // SAR r64, CL
+, RegSet::empty() // SAR r64, imm8
+, RegSet::empty() // SAR r64, 1
+, RegSet::empty() // SAR r8, CL
+, RegSet::empty() // SAR r8, imm8
+, RegSet::empty() // SAR r8, 1
+, RegSet::empty() // SAR rh, CL
+, RegSet::empty() // SAR rh, imm8
+, RegSet::empty() // SAR rh, 1
+, RegSet::empty() // SARX r32, m32, r32
+, RegSet::empty() // SARX r32, r32, r32
+, RegSet::empty() // SARX r64, m64, r64
+, RegSet::empty() // SARX r64, r64, r64
+, RegSet::empty()+Constants::eflags_cf() // SBB AL, imm8
+, RegSet::empty()+Constants::eflags_cf() // SBB AX, imm16
+, RegSet::empty()+Constants::eflags_cf() // SBB EAX, imm32
+, RegSet::empty()+Constants::eflags_cf() // SBB m16, imm16
+, RegSet::empty()+Constants::eflags_cf() // SBB m16, imm8
+, RegSet::empty()+Constants::eflags_cf() // SBB m16, r16
+, RegSet::empty()+Constants::eflags_cf() // SBB m32, imm32
+, RegSet::empty()+Constants::eflags_cf() // SBB m32, imm8
+, RegSet::empty()+Constants::eflags_cf() // SBB m32, r32
+, RegSet::empty()+Constants::eflags_cf() // SBB m64, imm32
+, RegSet::empty()+Constants::eflags_cf() // SBB m64, imm8
+, RegSet::empty()+Constants::eflags_cf() // SBB m64, r64
+, RegSet::empty()+Constants::eflags_cf() // SBB m8, imm8
+, RegSet::empty()+Constants::eflags_cf() // SBB m8, r8
+, RegSet::empty()+Constants::eflags_cf() // SBB m8, rh
+, RegSet::empty()+Constants::eflags_cf() // SBB r16, imm16
+, RegSet::empty()+Constants::eflags_cf() // SBB r16, imm8
+, RegSet::empty()+Constants::eflags_cf() // SBB r16, m16
+, RegSet::empty()+Constants::eflags_cf() // SBB r16, r16
+, RegSet::empty()+Constants::eflags_cf() // SBB r16, r16
+, RegSet::empty()+Constants::eflags_cf() // SBB r32, imm32
+, RegSet::empty()+Constants::eflags_cf() // SBB r32, imm8
+, RegSet::empty()+Constants::eflags_cf() // SBB r32, m32
+, RegSet::empty()+Constants::eflags_cf() // SBB r32, r32
+, RegSet::empty()+Constants::eflags_cf() // SBB r32, r32
+, RegSet::empty()+Constants::eflags_cf() // SBB r64, imm32
+, RegSet::empty()+Constants::eflags_cf() // SBB r64, imm8
+, RegSet::empty()+Constants::eflags_cf() // SBB r64, m64
+, RegSet::empty()+Constants::eflags_cf() // SBB r64, r64
+, RegSet::empty()+Constants::eflags_cf() // SBB r64, r64
+, RegSet::empty()+Constants::eflags_cf() // SBB r8, imm8
+, RegSet::empty()+Constants::eflags_cf() // SBB r8, m8
+, RegSet::empty()+Constants::eflags_cf() // SBB r8, r8
+, RegSet::empty()+Constants::eflags_cf() // SBB r8, r8
+, RegSet::empty()+Constants::eflags_cf() // SBB r8, rh
+, RegSet::empty()+Constants::eflags_cf() // SBB r8, rh
+, RegSet::empty()+Constants::eflags_cf() // SBB RAX, imm32
+, RegSet::empty()+Constants::eflags_cf() // SBB rh, imm8
+, RegSet::empty()+Constants::eflags_cf() // SBB rh, m8
+, RegSet::empty()+Constants::eflags_cf() // SBB rh, r8
+, RegSet::empty()+Constants::eflags_cf() // SBB rh, r8
+, RegSet::empty()+Constants::eflags_cf() // SBB rh, rh
+, RegSet::empty()+Constants::eflags_cf() // SBB rh, rh
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::ax() // SCAS m16
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::eax() // SCAS m32
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::rax() // SCAS m64
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::al() // SCAS m8
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::al() // SCASB 
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::eax() // SCASD 
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::rax() // SCASQ 
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::ax() // SCASW 
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // SETA m8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // SETA r8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // SETA rh
+, RegSet::empty()+Constants::eflags_cf() // SETAE m8
+, RegSet::empty()+Constants::eflags_cf() // SETAE r8
+, RegSet::empty()+Constants::eflags_cf() // SETAE rh
+, RegSet::empty()+Constants::eflags_cf() // SETB m8
+, RegSet::empty()+Constants::eflags_cf() // SETB r8
+, RegSet::empty()+Constants::eflags_cf() // SETB rh
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // SETBE m8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // SETBE r8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // SETBE rh
+, RegSet::empty()+Constants::eflags_cf() // SETC m8
+, RegSet::empty()+Constants::eflags_cf() // SETC r8
+, RegSet::empty()+Constants::eflags_cf() // SETC rh
+, RegSet::empty()+Constants::eflags_zf() // SETE m8
+, RegSet::empty()+Constants::eflags_zf() // SETE r8
+, RegSet::empty()+Constants::eflags_zf() // SETE rh
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // SETG m8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // SETG r8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // SETG rh
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // SETGE m8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // SETGE r8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // SETGE rh
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // SETL m8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // SETL r8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // SETL rh
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // SETLE m8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // SETLE r8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // SETLE rh
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // SETNA m8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // SETNA r8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // SETNA rh
+, RegSet::empty()+Constants::eflags_cf() // SETNAE m8
+, RegSet::empty()+Constants::eflags_cf() // SETNAE r8
+, RegSet::empty()+Constants::eflags_cf() // SETNAE rh
+, RegSet::empty()+Constants::eflags_cf() // SETNB m8
+, RegSet::empty()+Constants::eflags_cf() // SETNB r8
+, RegSet::empty()+Constants::eflags_cf() // SETNB rh
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // SETNBE m8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // SETNBE r8
+, RegSet::empty()+Constants::eflags_cf()+Constants::eflags_zf() // SETNBE rh
+, RegSet::empty()+Constants::eflags_cf() // SETNC m8
+, RegSet::empty()+Constants::eflags_cf() // SETNC r8
+, RegSet::empty()+Constants::eflags_cf() // SETNC rh
+, RegSet::empty()+Constants::eflags_zf() // SETNE m8
+, RegSet::empty()+Constants::eflags_zf() // SETNE r8
+, RegSet::empty()+Constants::eflags_zf() // SETNE rh
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // SETNG m8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // SETNG r8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // SETNG rh
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // SETNGE m8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // SETNGE r8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // SETNGE rh
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // SETNL m8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // SETNL r8
+, RegSet::empty()+Constants::eflags_sf()+Constants::eflags_of() // SETNL rh
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // SETNLE m8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // SETNLE r8
+, RegSet::empty()+Constants::eflags_zf()+Constants::eflags_sf()+Constants::eflags_of() // SETNLE rh
+, RegSet::empty()+Constants::eflags_of() // SETNO m8
+, RegSet::empty()+Constants::eflags_of() // SETNO r8
+, RegSet::empty()+Constants::eflags_of() // SETNO rh
+, RegSet::empty()+Constants::eflags_pf() // SETNP m8
+, RegSet::empty()+Constants::eflags_pf() // SETNP r8
+, RegSet::empty()+Constants::eflags_pf() // SETNP rh
+, RegSet::empty()+Constants::eflags_sf() // SETNS m8
+, RegSet::empty()+Constants::eflags_sf() // SETNS r8
+, RegSet::empty()+Constants::eflags_sf() // SETNS rh
+, RegSet::empty()+Constants::eflags_zf() // SETNZ m8
+, RegSet::empty()+Constants::eflags_zf() // SETNZ r8
+, RegSet::empty()+Constants::eflags_zf() // SETNZ rh
+, RegSet::empty()+Constants::eflags_of() // SETO m8
+, RegSet::empty()+Constants::eflags_of() // SETO r8
+, RegSet::empty()+Constants::eflags_of() // SETO rh
+, RegSet::empty()+Constants::eflags_pf() // SETP m8
+, RegSet::empty()+Constants::eflags_pf() // SETP r8
+, RegSet::empty()+Constants::eflags_pf() // SETP rh
+, RegSet::empty()+Constants::eflags_pf() // SETPE m8
+, RegSet::empty()+Constants::eflags_pf() // SETPE r8
+, RegSet::empty()+Constants::eflags_pf() // SETPE rh
+, RegSet::empty()+Constants::eflags_pf() // SETPO m8
+, RegSet::empty()+Constants::eflags_pf() // SETPO r8
+, RegSet::empty()+Constants::eflags_pf() // SETPO rh
+, RegSet::empty()+Constants::eflags_sf() // SETS m8
+, RegSet::empty()+Constants::eflags_sf() // SETS r8
+, RegSet::empty()+Constants::eflags_sf() // SETS rh
+, RegSet::empty()+Constants::eflags_zf() // SETZ m8
+, RegSet::empty()+Constants::eflags_zf() // SETZ r8
+, RegSet::empty()+Constants::eflags_zf() // SETZ rh
+, RegSet::empty() // SFENCE 
+, RegSet::empty() // SHL m16, CL
+, RegSet::empty() // SHL m16, imm8
+, RegSet::empty() // SHL m16, 1
+, RegSet::empty() // SHL m32, CL
+, RegSet::empty() // SHL m32, imm8
+, RegSet::empty() // SHL m32, 1
+, RegSet::empty() // SHL m64, CL
+, RegSet::empty() // SHL m64, imm8
+, RegSet::empty() // SHL m64, 1
+, RegSet::empty() // SHL m8, CL
+, RegSet::empty() // SHL m8, imm8
+, RegSet::empty() // SHL m8, 1
+, RegSet::empty() // SHL r16, CL
+, RegSet::empty() // SHL r16, imm8
+, RegSet::empty() // SHL r16, 1
+, RegSet::empty() // SHL r32, CL
+, RegSet::empty() // SHL r32, imm8
+, RegSet::empty() // SHL r32, 1
+, RegSet::empty() // SHL r64, CL
+, RegSet::empty() // SHL r64, imm8
+, RegSet::empty() // SHL r64, 1
+, RegSet::empty() // SHL r8, CL
+, RegSet::empty() // SHL r8, imm8
+, RegSet::empty() // SHL r8, 1
+, RegSet::empty() // SHL rh, CL
+, RegSet::empty() // SHL rh, imm8
+, RegSet::empty() // SHL rh, 1
+, RegSet::empty() // SHLD m16, r16, CL
+, RegSet::empty() // SHLD m16, r16, imm8
+, RegSet::empty() // SHLD m32, r32, CL
+, RegSet::empty() // SHLD m32, r32, imm8
+, RegSet::empty() // SHLD m64, r64, CL
+, RegSet::empty() // SHLD m64, r64, imm8
+, RegSet::empty() // SHLD r16, r16, CL
+, RegSet::empty() // SHLD r16, r16, imm8
+, RegSet::empty() // SHLD r32, r32, CL
+, RegSet::empty() // SHLD r32, r32, imm8
+, RegSet::empty() // SHLD r64, r64, CL
+, RegSet::empty() // SHLD r64, r64, imm8
+, RegSet::empty() // SHLX r32, m32, r32
+, RegSet::empty() // SHLX r32, r32, r32
+, RegSet::empty() // SHLX r64, m64, r64
+, RegSet::empty() // SHLX r64, r64, r64
+, RegSet::empty() // SHR m16, CL
+, RegSet::empty() // SHR m16, imm8
+, RegSet::empty() // SHR m16, 1
+, RegSet::empty() // SHR m32, CL
+, RegSet::empty() // SHR m32, imm8
+, RegSet::empty() // SHR m32, 1
+, RegSet::empty() // SHR m64, CL
+, RegSet::empty() // SHR m64, imm8
+, RegSet::empty() // SHR m64, 1
+, RegSet::empty() // SHR m8, CL
+, RegSet::empty() // SHR m8, imm8
+, RegSet::empty() // SHR m8, 1
+, RegSet::empty() // SHR r16, CL
+, RegSet::empty() // SHR r16, imm8
+, RegSet::empty() // SHR r16, 1
+, RegSet::empty() // SHR r32, CL
+, RegSet::empty() // SHR r32, imm8
+, RegSet::empty() // SHR r32, 1
+, RegSet::empty() // SHR r64, CL
+, RegSet::empty() // SHR r64, imm8
+, RegSet::empty() // SHR r64, 1
+, RegSet::empty() // SHR r8, CL
+, RegSet::empty() // SHR r8, imm8
+, RegSet::empty() // SHR r8, 1
+, RegSet::empty() // SHR rh, CL
+, RegSet::empty() // SHR rh, imm8
+, RegSet::empty() // SHR rh, 1
+, RegSet::empty() // SHRD m16, r16, CL
+, RegSet::empty() // SHRD m16, r16, imm8
+, RegSet::empty() // SHRD m32, r32, CL
+, RegSet::empty() // SHRD m32, r32, imm8
+, RegSet::empty() // SHRD m64, r64, CL
+, RegSet::empty() // SHRD m64, r64, imm8
+, RegSet::empty() // SHRD r16, r16, CL
+, RegSet::empty() // SHRD r16, r16, imm8
+, RegSet::empty() // SHRD r32, r32, CL
+, RegSet::empty() // SHRD r32, r32, imm8
+, RegSet::empty() // SHRD r64, r64, CL
+, RegSet::empty() // SHRD r64, r64, imm8
+, RegSet::empty() // SHRX r32, m32, r32
+, RegSet::empty() // SHRX r32, r32, r32
+, RegSet::empty() // SHRX r64, m64, r64
+, RegSet::empty() // SHRX r64, r64, r64
+, RegSet::empty() // SHUFPD xmm, m128, imm8
+, RegSet::empty() // SHUFPD xmm, xmm, imm8
+, RegSet::empty() // SHUFPS xmm, m128, imm8
+, RegSet::empty() // SHUFPS xmm, xmm, imm8
+, RegSet::empty() // SQRTPD xmm, m128
+, RegSet::empty() // SQRTPD xmm, xmm
+, RegSet::empty() // SQRTPS xmm, m128
+, RegSet::empty() // SQRTPS xmm, xmm
+, RegSet::empty() // SQRTSD xmm, m64
+, RegSet::empty() // SQRTSD xmm, xmm
+, RegSet::empty() // SQRTSS xmm, m32
+, RegSet::empty() // SQRTSS xmm, xmm
+, RegSet::empty() // STC 
+, RegSet::empty() // STD 
+, RegSet::empty()+Constants::eflags_vm()+Constants::eflags_iopl()+Constants::eflags_vip() // STI 
+, RegSet::empty()+Constants::mxcsr_ie()+Constants::mxcsr_de()+Constants::mxcsr_ze()+Constants::mxcsr_oe()+Constants::mxcsr_ue()+Constants::mxcsr_pe()+Constants::mxcsr_daz()+Constants::mxcsr_im()+Constants::mxcsr_dm()+Constants::mxcsr_zm()+Constants::mxcsr_om()+Constants::mxcsr_um()+Constants::mxcsr_pm()+Constants::mxcsr_rc()+Constants::mxcsr_fz() // STMXCSR m32
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::ax() // STOS m16
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::eax() // STOS m32
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::rax() // STOS m64
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::al() // STOS m8
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::al() // STOSB 
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::eax() // STOSD 
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::rax() // STOSQ 
+, RegSet::empty()+Constants::eflags_df()+Constants::rdi()+Constants::ax() // STOSW 
+, RegSet::empty() // SUB AL, imm8
+, RegSet::empty() // SUB AX, imm16
+, RegSet::empty() // SUB EAX, imm32
+, RegSet::empty() // SUB m16, imm16
+, RegSet::empty() // SUB m16, imm8
+, RegSet::empty() // SUB m16, r16
+, RegSet::empty() // SUB m32, imm32
+, RegSet::empty() // SUB m32, imm8
+, RegSet::empty() // SUB m32, r32
+, RegSet::empty() // SUB m64, imm32
+, RegSet::empty() // SUB m64, imm8
+, RegSet::empty() // SUB m64, r64
+, RegSet::empty() // SUB m8, imm8
+, RegSet::empty() // SUB m8, r8
+, RegSet::empty() // SUB m8, rh
+, RegSet::empty() // SUB r16, imm16
+, RegSet::empty() // SUB r16, imm8
+, RegSet::empty() // SUB r16, m16
+, RegSet::empty() // SUB r16, r16
+, RegSet::empty() // SUB r16, r16
+, RegSet::empty() // SUB r32, imm32
+, RegSet::empty() // SUB r32, imm8
+, RegSet::empty() // SUB r32, m32
+, RegSet::empty() // SUB r32, r32
+, RegSet::empty() // SUB r32, r32
+, RegSet::empty() // SUB r64, imm32
+, RegSet::empty() // SUB r64, imm8
+, RegSet::empty() // SUB r64, m64
+, RegSet::empty() // SUB r64, r64
+, RegSet::empty() // SUB r64, r64
+, RegSet::empty() // SUB r8, imm8
+, RegSet::empty() // SUB r8, m8
+, RegSet::empty() // SUB r8, r8
+, RegSet::empty() // SUB r8, r8
+, RegSet::empty() // SUB r8, rh
+, RegSet::empty() // SUB r8, rh
+, RegSet::empty() // SUB RAX, imm32
+, RegSet::empty() // SUB rh, imm8
+, RegSet::empty() // SUB rh, m8
+, RegSet::empty() // SUB rh, r8
+, RegSet::empty() // SUB rh, r8
+, RegSet::empty() // SUB rh, rh
+, RegSet::empty() // SUB rh, rh
+, RegSet::empty() // SUBPD xmm, m128
+, RegSet::empty() // SUBPD xmm, xmm
+, RegSet::empty() // SUBPS xmm, m128
+, RegSet::empty() // SUBPS xmm, xmm
+, RegSet::empty() // SUBSD xmm, m64
+, RegSet::empty() // SUBSD xmm, xmm
+, RegSet::empty() // SUBSS xmm, m32
+, RegSet::empty() // SUBSS xmm, xmm
+, RegSet::empty() // SWAPGS 
+, RegSet::universe() // SYSCALL 
+, RegSet::universe() // SYSENTER 
+, RegSet::universe() // SYSEXIT 
+, RegSet::universe() // SYSEXIT pw
+, RegSet::universe() // SYSRET 
+, RegSet::empty() // SYSRET pw
+, RegSet::empty() // TEST AL, imm8
+, RegSet::empty() // TEST AX, imm16
+, RegSet::empty() // TEST EAX, imm32
+, RegSet::empty() // TEST m16, imm16
+, RegSet::empty() // TEST m16, r16
+, RegSet::empty() // TEST m32, imm32
+, RegSet::empty() // TEST m32, r32
+, RegSet::empty() // TEST m64, imm32
+, RegSet::empty() // TEST m64, r64
+, RegSet::empty() // TEST m8, imm8
+, RegSet::empty() // TEST m8, r8
+, RegSet::empty() // TEST m8, rh
+, RegSet::empty() // TEST r16, imm16
+, RegSet::empty() // TEST r16, r16
+, RegSet::empty() // TEST r32, imm32
+, RegSet::empty() // TEST r32, r32
+, RegSet::empty() // TEST r64, imm32
+, RegSet::empty() // TEST r64, r64
+, RegSet::empty() // TEST r8, imm8
+, RegSet::empty() // TEST r8, r8
+, RegSet::empty() // TEST r8, rh
+, RegSet::empty() // TEST RAX, imm32
+, RegSet::empty() // TEST rh, imm8
+, RegSet::empty() // TEST rh, r8
+, RegSet::empty() // TEST rh, rh
+, RegSet::empty() // TZCNT r16, m16
+, RegSet::empty() // TZCNT r16, r16
+, RegSet::empty() // TZCNT r32, m32
+, RegSet::empty() // TZCNT r32, r32
+, RegSet::empty() // TZCNT r64, m64
+, RegSet::empty() // TZCNT r64, r64
+, RegSet::empty() // UCOMISD xmm, m64
+, RegSet::empty() // UCOMISD xmm, xmm
+, RegSet::empty() // UCOMISS xmm, m32
+, RegSet::empty() // UCOMISS xmm, xmm
+, RegSet::empty() // UD2 
+, RegSet::empty() // UNPCKHPD xmm, m128
+, RegSet::empty() // UNPCKHPD xmm, xmm
+, RegSet::empty() // UNPCKHPS xmm, m128
+, RegSet::empty() // UNPCKHPS xmm, xmm
+, RegSet::empty() // UNPCKLPD xmm, m128
+, RegSet::empty() // UNPCKLPD xmm, xmm
+, RegSet::empty() // UNPCKLPS xmm, m128
+, RegSet::empty() // UNPCKLPS xmm, xmm
+, RegSet::empty() // VADDPD xmm, xmm, m128
+, RegSet::empty() // VADDPD xmm, xmm, xmm
+, RegSet::empty() // VADDPD ymm, ymm, m256
+, RegSet::empty() // VADDPD ymm, ymm, ymm
+, RegSet::empty() // VADDPS xmm, xmm, m128
+, RegSet::empty() // VADDPS xmm, xmm, xmm
+, RegSet::empty() // VADDPS ymm, ymm, m256
+, RegSet::empty() // VADDPS ymm, ymm, ymm
+, RegSet::empty() // VADDSD xmm, xmm, m64
+, RegSet::empty() // VADDSD xmm, xmm, xmm
+, RegSet::empty() // VADDSS xmm, xmm, m32
+, RegSet::empty() // VADDSS xmm, xmm, xmm
+, RegSet::empty() // VADDSUBPD xmm, xmm, m128
+, RegSet::empty() // VADDSUBPD xmm, xmm, xmm
+, RegSet::empty() // VADDSUBPD ymm, ymm, m256
+, RegSet::empty() // VADDSUBPD ymm, ymm, ymm
+, RegSet::empty() // VADDSUBPS xmm, xmm, m128
+, RegSet::empty() // VADDSUBPS xmm, xmm, xmm
+, RegSet::empty() // VADDSUBPS ymm, ymm, m256
+, RegSet::empty() // VADDSUBPS ymm, ymm, ymm
+, RegSet::empty() // VAESDEC xmm, xmm, m128
+, RegSet::empty() // VAESDEC xmm, xmm, xmm
+, RegSet::empty() // VAESDECLAST xmm, xmm, m128
+, RegSet::empty() // VAESDECLAST xmm, xmm, xmm
+, RegSet::empty() // VAESENC xmm, xmm, m128
+, RegSet::empty() // VAESENC xmm, xmm, xmm
+, RegSet::empty() // VAESENCLAST xmm, xmm, m128
+, RegSet::empty() // VAESENCLAST xmm, xmm, xmm
+, RegSet::empty() // VAESIMC xmm, m128
+, RegSet::empty() // VAESIMC xmm, xmm
+, RegSet::empty() // VAESKEYGENASSIST xmm, m128, imm8
+, RegSet::empty() // VAESKEYGENASSIST xmm, xmm, imm8
+, RegSet::empty() // VANDNPD xmm, xmm, m128
+, RegSet::empty() // VANDNPD xmm, xmm, xmm
+, RegSet::empty() // VANDNPD ymm, ymm, m256
+, RegSet::empty() // VANDNPD ymm, ymm, ymm
+, RegSet::empty() // VANDNPS xmm, xmm, m128
+, RegSet::empty() // VANDNPS xmm, xmm, xmm
+, RegSet::empty() // VANDNPS ymm, ymm, m256
+, RegSet::empty() // VANDNPS ymm, ymm, ymm
+, RegSet::empty() // VANDPD xmm, xmm, m128
+, RegSet::empty() // VANDPD xmm, xmm, xmm
+, RegSet::empty() // VANDPD ymm, ymm, m256
+, RegSet::empty() // VANDPD ymm, ymm, ymm
+, RegSet::empty() // VANDPS xmm, xmm, m128
+, RegSet::empty() // VANDPS xmm, xmm, xmm
+, RegSet::empty() // VANDPS ymm, ymm, m256
+, RegSet::empty() // VANDPS ymm, ymm, ymm
+, RegSet::empty() // VBLENDPD xmm, xmm, m128, imm8
+, RegSet::empty() // VBLENDPD xmm, xmm, xmm, imm8
+, RegSet::empty() // VBLENDPD ymm, ymm, m256, imm8
+, RegSet::empty() // VBLENDPD ymm, ymm, ymm, imm8
+, RegSet::empty() // VBLENDPS xmm, xmm, m128, imm8
+, RegSet::empty() // VBLENDPS xmm, xmm, xmm, imm8
+, RegSet::empty() // VBLENDPS ymm, ymm, m256, imm8
+, RegSet::empty() // VBLENDPS ymm, ymm, ymm, imm8
+, RegSet::empty() // VBLENDVPD xmm, xmm, m128, xmm
+, RegSet::empty() // VBLENDVPD xmm, xmm, xmm, xmm
+, RegSet::empty() // VBLENDVPD ymm, ymm, m256, ymm
+, RegSet::empty() // VBLENDVPD ymm, ymm, ymm, ymm
+, RegSet::empty() // VBLENDVPS xmm, xmm, m128, xmm
+, RegSet::empty() // VBLENDVPS xmm, xmm, xmm, xmm
+, RegSet::empty() // VBLENDVPS ymm, ymm, m256, ymm
+, RegSet::empty() // VBLENDVPS ymm, ymm, ymm, ymm
+, RegSet::empty() // VBROADCASTF128 ymm, m128
+, RegSet::empty() // VBROADCASTI128 ymm, m128
+, RegSet::empty() // VBROADCASTSD ymm, m64
+, RegSet::empty() // VBROADCASTSD ymm, xmm
+, RegSet::empty() // VBROADCASTSS xmm, m32
+, RegSet::empty() // VBROADCASTSS xmm, xmm
+, RegSet::empty() // VBROADCASTSS ymm, m32
+, RegSet::empty() // VBROADCASTSS ymm, xmm
+, RegSet::empty() // VCMPPD xmm, xmm, m128, imm8
+, RegSet::empty() // VCMPPD xmm, xmm, xmm, imm8
+, RegSet::empty() // VCMPPD ymm, ymm, m256, imm8
+, RegSet::empty() // VCMPPD ymm, ymm, ymm, imm8
+, RegSet::empty() // VCMPPS xmm, xmm, m128, imm8
+, RegSet::empty() // VCMPPS xmm, xmm, xmm, imm8
+, RegSet::empty() // VCMPPS ymm, ymm, m256, imm8
+, RegSet::empty() // VCMPPS ymm, ymm, ymm, imm8
+, RegSet::empty() // VCMPSD xmm, xmm, m64, imm8
+, RegSet::empty() // VCMPSD xmm, xmm, xmm, imm8
+, RegSet::empty() // VCMPSS xmm, xmm, m32, imm8
+, RegSet::empty() // VCMPSS xmm, xmm, xmm, imm8
+, RegSet::empty() // VCOMISD xmm, m64
+, RegSet::empty() // VCOMISD xmm, xmm
+, RegSet::empty() // VCOMISS xmm, m32
+, RegSet::empty() // VCOMISS xmm, xmm
+, RegSet::empty() // VCVTDQ2PD xmm, m64
+, RegSet::empty() // VCVTDQ2PD xmm, xmm
+, RegSet::empty() // VCVTDQ2PD ymm, m128
+, RegSet::empty() // VCVTDQ2PD ymm, ymm
+, RegSet::empty() // VCVTDQ2PS xmm, m128
+, RegSet::empty() // VCVTDQ2PS xmm, xmm
+, RegSet::empty() // VCVTDQ2PS ymm, m256
+, RegSet::empty() // VCVTDQ2PS ymm, ymm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPD2DQ xmm, m128
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPD2DQ xmm, m256
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPD2DQ xmm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPD2DQ xmm, ymm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPD2PS xmm, m128
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPD2PS xmm, m256
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPD2PS xmm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPD2PS xmm, ymm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPH2PS xmm, m64
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPH2PS xmm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPH2PS ymm, m128
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPH2PS ymm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPS2DQ xmm, m128
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPS2DQ xmm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPS2DQ ymm, m256
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPS2DQ ymm, ymm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPS2PD xmm, m64
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPS2PD xmm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPS2PD ymm, m128
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPS2PD ymm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPS2PH m128, ymm, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPS2PH m64, xmm, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPS2PH xmm, xmm, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTPS2PH xmm, ymm, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSD2SI r32, m64
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSD2SI r32, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSD2SI r64, m64
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSD2SI r64, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSD2SS xmm, xmm, m64
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSD2SS xmm, xmm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSI2SD xmm, xmm, m32
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSI2SD xmm, xmm, m64
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSI2SD xmm, xmm, r32
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSI2SD xmm, xmm, r64
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSI2SS xmm, xmm, m32
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSI2SS xmm, xmm, m64
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSI2SS xmm, xmm, r32
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSI2SS xmm, xmm, r64
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSS2SD xmm, xmm, m32
+, RegSet::empty()+Constants::mxcsr_rc() // VCVTSS2SD xmm, xmm, xmm
+, RegSet::empty() // VCVTSS2SI r32, m32
+, RegSet::empty() // VCVTSS2SI r32, xmm
+, RegSet::empty() // VCVTSS2SI r64, m32
+, RegSet::empty() // VCVTSS2SI r64, xmm
+, RegSet::empty() // VCVTTPD2DQ xmm, m128
+, RegSet::empty() // VCVTTPD2DQ xmm, m256
+, RegSet::empty() // VCVTTPD2DQ xmm, xmm
+, RegSet::empty() // VCVTTPD2DQ xmm, ymm
+, RegSet::empty() // VCVTTPS2DQ xmm, m128
+, RegSet::empty() // VCVTTPS2DQ xmm, xmm
+, RegSet::empty() // VCVTTPS2DQ ymm, m256
+, RegSet::empty() // VCVTTPS2DQ ymm, ymm
+, RegSet::empty() // VCVTTSD2SI r32, m64
+, RegSet::empty() // VCVTTSD2SI r32, xmm
+, RegSet::empty() // VCVTTSD2SI r64, m64
+, RegSet::empty() // VCVTTSD2SI r64, xmm
+, RegSet::empty() // VCVTTSS2SI r32, m32
+, RegSet::empty() // VCVTTSS2SI r32, xmm
+, RegSet::empty() // VCVTTSS2SI r64, m32
+, RegSet::empty() // VCVTTSS2SI r64, xmm
+, RegSet::empty() // VDIVPD xmm, xmm, m128
+, RegSet::empty() // VDIVPD xmm, xmm, xmm
+, RegSet::empty() // VDIVPD ymm, ymm, m256
+, RegSet::empty() // VDIVPD ymm, ymm, ymm
+, RegSet::empty() // VDIVPS xmm, xmm, m128
+, RegSet::empty() // VDIVPS xmm, xmm, xmm
+, RegSet::empty() // VDIVPS ymm, ymm, m256
+, RegSet::empty() // VDIVPS ymm, ymm, ymm
+, RegSet::empty() // VDIVSD xmm, xmm, m64
+, RegSet::empty() // VDIVSD xmm, xmm, xmm
+, RegSet::empty() // VDIVSS xmm, xmm, m32
+, RegSet::empty() // VDIVSS xmm, xmm, xmm
+, RegSet::empty() // VDPPD xmm, xmm, m128, imm8
+, RegSet::empty() // VDPPD xmm, xmm, xmm, imm8
+, RegSet::empty() // VDPPS xmm, xmm, m128, imm8
+, RegSet::empty() // VDPPS xmm, xmm, xmm, imm8
+, RegSet::empty() // VDPPS ymm, ymm, m256, imm8
+, RegSet::empty() // VDPPS ymm, ymm, ymm, imm8
+, RegSet::empty() // VERR m16
+, RegSet::empty() // VERR r16
+, RegSet::empty() // VERW m16
+, RegSet::empty() // VERW r16
+, RegSet::empty() // VEXTRACTF128 m128, ymm, imm8
+, RegSet::empty() // VEXTRACTF128 xmm, ymm, imm8
+, RegSet::empty() // VEXTRACTI128 m128, ymm, imm8
+, RegSet::empty() // VEXTRACTI128 xmm, ymm, imm8
+, RegSet::empty() // VEXTRACTPS m32, xmm, imm8
+, RegSet::empty() // VEXTRACTPS r32, xmm, imm8
+, RegSet::empty() // VFMADD132PD xmm, xmm, m128
+, RegSet::empty() // VFMADD132PD xmm, xmm, xmm
+, RegSet::empty() // VFMADD132PD ymm, ymm, m256
+, RegSet::empty() // VFMADD132PD ymm, ymm, ymm
+, RegSet::empty() // VFMADD132PS xmm, xmm, m128
+, RegSet::empty() // VFMADD132PS xmm, xmm, xmm
+, RegSet::empty() // VFMADD132PS ymm, ymm, m256
+, RegSet::empty() // VFMADD132PS ymm, ymm, ymm
+, RegSet::empty() // VFMADD132SD xmm, xmm, m64
+, RegSet::empty() // VFMADD132SD xmm, xmm, xmm
+, RegSet::empty() // VFMADD132SS xmm, xmm, m32
+, RegSet::empty() // VFMADD132SS xmm, xmm, xmm
+, RegSet::empty() // VFMADD213PD xmm, xmm, m128
+, RegSet::empty() // VFMADD213PD xmm, xmm, xmm
+, RegSet::empty() // VFMADD213PD ymm, ymm, m256
+, RegSet::empty() // VFMADD213PD ymm, ymm, ymm
+, RegSet::empty() // VFMADD213PS xmm, xmm, m128
+, RegSet::empty() // VFMADD213PS xmm, xmm, xmm
+, RegSet::empty() // VFMADD213PS ymm, ymm, m256
+, RegSet::empty() // VFMADD213PS ymm, ymm, ymm
+, RegSet::empty() // VFMADD213SD xmm, xmm, m64
+, RegSet::empty() // VFMADD213SD xmm, xmm, xmm
+, RegSet::empty() // VFMADD213SS xmm, xmm, m32
+, RegSet::empty() // VFMADD213SS xmm, xmm, xmm
+, RegSet::empty() // VFMADD231PD xmm, xmm, m128
+, RegSet::empty() // VFMADD231PD xmm, xmm, xmm
+, RegSet::empty() // VFMADD231PD ymm, ymm, m256
+, RegSet::empty() // VFMADD231PD ymm, ymm, ymm
+, RegSet::empty() // VFMADD231PS xmm, xmm, m128
+, RegSet::empty() // VFMADD231PS xmm, xmm, xmm
+, RegSet::empty() // VFMADD231PS ymm, ymm, m256
+, RegSet::empty() // VFMADD231PS ymm, ymm, ymm
+, RegSet::empty() // VFMADD231SD xmm, xmm, m64
+, RegSet::empty() // VFMADD231SD xmm, xmm, xmm
+, RegSet::empty() // VFMADD231SS xmm, xmm, m32
+, RegSet::empty() // VFMADD231SS xmm, xmm, xmm
+, RegSet::empty() // VFMADDSUB132PD xmm, xmm, m128
+, RegSet::empty() // VFMADDSUB132PD xmm, xmm, xmm
+, RegSet::empty() // VFMADDSUB132PD ymm, ymm, m256
+, RegSet::empty() // VFMADDSUB132PD ymm, ymm, ymm
+, RegSet::empty() // VFMADDSUB132PS xmm, xmm, m128
+, RegSet::empty() // VFMADDSUB132PS xmm, xmm, xmm
+, RegSet::empty() // VFMADDSUB132PS ymm, ymm, m256
+, RegSet::empty() // VFMADDSUB132PS ymm, ymm, ymm
+, RegSet::empty() // VFMADDSUB213PD xmm, xmm, m128
+, RegSet::empty() // VFMADDSUB213PD xmm, xmm, xmm
+, RegSet::empty() // VFMADDSUB213PD ymm, ymm, m256
+, RegSet::empty() // VFMADDSUB213PD ymm, ymm, ymm
+, RegSet::empty() // VFMADDSUB213PS xmm, xmm, m128
+, RegSet::empty() // VFMADDSUB213PS xmm, xmm, xmm
+, RegSet::empty() // VFMADDSUB213PS ymm, ymm, m256
+, RegSet::empty() // VFMADDSUB213PS ymm, ymm, ymm
+, RegSet::empty() // VFMADDSUB231PD xmm, xmm, m128
+, RegSet::empty() // VFMADDSUB231PD xmm, xmm, xmm
+, RegSet::empty() // VFMADDSUB231PD ymm, ymm, m256
+, RegSet::empty() // VFMADDSUB231PD ymm, ymm, ymm
+, RegSet::empty() // VFMADDSUB231PS xmm, xmm, m128
+, RegSet::empty() // VFMADDSUB231PS xmm, xmm, xmm
+, RegSet::empty() // VFMADDSUB231PS ymm, ymm, m256
+, RegSet::empty() // VFMADDSUB231PS ymm, ymm, ymm
+, RegSet::empty() // VFMSUB132PD xmm, xmm, m128
+, RegSet::empty() // VFMSUB132PD xmm, xmm, xmm
+, RegSet::empty() // VFMSUB132PD ymm, ymm, m256
+, RegSet::empty() // VFMSUB132PD ymm, ymm, ymm
+, RegSet::empty() // VFMSUB132PS xmm, xmm, m128
+, RegSet::empty() // VFMSUB132PS xmm, xmm, xmm
+, RegSet::empty() // VFMSUB132PS ymm, ymm, m256
+, RegSet::empty() // VFMSUB132PS ymm, ymm, ymm
+, RegSet::empty() // VFMSUB132SD xmm, xmm, m64
+, RegSet::empty() // VFMSUB132SD xmm, xmm, xmm
+, RegSet::empty() // VFMSUB132SS xmm, xmm, m32
+, RegSet::empty() // VFMSUB132SS xmm, xmm, xmm
+, RegSet::empty() // VFMSUB213PD xmm, xmm, m128
+, RegSet::empty() // VFMSUB213PD xmm, xmm, xmm
+, RegSet::empty() // VFMSUB213PD ymm, ymm, m256
+, RegSet::empty() // VFMSUB213PD ymm, ymm, ymm
+, RegSet::empty() // VFMSUB213PS xmm, xmm, m128
+, RegSet::empty() // VFMSUB213PS xmm, xmm, xmm
+, RegSet::empty() // VFMSUB213PS ymm, ymm, m256
+, RegSet::empty() // VFMSUB213PS ymm, ymm, ymm
+, RegSet::empty() // VFMSUB213SD xmm, xmm, m64
+, RegSet::empty() // VFMSUB213SD xmm, xmm, xmm
+, RegSet::empty() // VFMSUB213SS xmm, xmm, m32
+, RegSet::empty() // VFMSUB213SS xmm, xmm, xmm
+, RegSet::empty() // VFMSUB231PD xmm, xmm, m128
+, RegSet::empty() // VFMSUB231PD xmm, xmm, xmm
+, RegSet::empty() // VFMSUB231PD ymm, ymm, m256
+, RegSet::empty() // VFMSUB231PD ymm, ymm, ymm
+, RegSet::empty() // VFMSUB231PS xmm, xmm, m128
+, RegSet::empty() // VFMSUB231PS xmm, xmm, xmm
+, RegSet::empty() // VFMSUB231PS ymm, ymm, m256
+, RegSet::empty() // VFMSUB231PS ymm, ymm, ymm
+, RegSet::empty() // VFMSUB231SD xmm, xmm, m64
+, RegSet::empty() // VFMSUB231SD xmm, xmm, xmm
+, RegSet::empty() // VFMSUB231SS xmm, xmm, m32
+, RegSet::empty() // VFMSUB231SS xmm, xmm, xmm
+, RegSet::empty() // VFMSUBADD132PD xmm, xmm, m128
+, RegSet::empty() // VFMSUBADD132PD xmm, xmm, xmm
+, RegSet::empty() // VFMSUBADD132PD ymm, ymm, m256
+, RegSet::empty() // VFMSUBADD132PD ymm, ymm, ymm
+, RegSet::empty() // VFMSUBADD132PS xmm, xmm, m128
+, RegSet::empty() // VFMSUBADD132PS xmm, xmm, xmm
+, RegSet::empty() // VFMSUBADD132PS ymm, ymm, m256
+, RegSet::empty() // VFMSUBADD132PS ymm, ymm, ymm
+, RegSet::empty() // VFMSUBADD213PD xmm, xmm, m128
+, RegSet::empty() // VFMSUBADD213PD xmm, xmm, xmm
+, RegSet::empty() // VFMSUBADD213PD ymm, ymm, m256
+, RegSet::empty() // VFMSUBADD213PD ymm, ymm, ymm
+, RegSet::empty() // VFMSUBADD213PS xmm, xmm, m128
+, RegSet::empty() // VFMSUBADD213PS xmm, xmm, xmm
+, RegSet::empty() // VFMSUBADD213PS ymm, ymm, m256
+, RegSet::empty() // VFMSUBADD213PS ymm, ymm, ymm
+, RegSet::empty() // VFMSUBADD231PD xmm, xmm, m128
+, RegSet::empty() // VFMSUBADD231PD xmm, xmm, xmm
+, RegSet::empty() // VFMSUBADD231PD ymm, ymm, m256
+, RegSet::empty() // VFMSUBADD231PD ymm, ymm, ymm
+, RegSet::empty() // VFMSUBADD231PS xmm, xmm, m128
+, RegSet::empty() // VFMSUBADD231PS xmm, xmm, xmm
+, RegSet::empty() // VFMSUBADD231PS ymm, ymm, m256
+, RegSet::empty() // VFMSUBADD231PS ymm, ymm, ymm
+, RegSet::empty() // VFNMADD132PD xmm, xmm, m128
+, RegSet::empty() // VFNMADD132PD xmm, xmm, xmm
+, RegSet::empty() // VFNMADD132PD ymm, ymm, m256
+, RegSet::empty() // VFNMADD132PD ymm, ymm, ymm
+, RegSet::empty() // VFNMADD132PS xmm, xmm, m128
+, RegSet::empty() // VFNMADD132PS xmm, xmm, xmm
+, RegSet::empty() // VFNMADD132PS ymm, ymm, m256
+, RegSet::empty() // VFNMADD132PS ymm, ymm, ymm
+, RegSet::empty() // VFNMADD132SD xmm, xmm, m64
+, RegSet::empty() // VFNMADD132SD xmm, xmm, xmm
+, RegSet::empty() // VFNMADD132SS xmm, xmm, m32
+, RegSet::empty() // VFNMADD132SS xmm, xmm, xmm
+, RegSet::empty() // VFNMADD213PD xmm, xmm, m128
+, RegSet::empty() // VFNMADD213PD xmm, xmm, xmm
+, RegSet::empty() // VFNMADD213PD ymm, ymm, m256
+, RegSet::empty() // VFNMADD213PD ymm, ymm, ymm
+, RegSet::empty() // VFNMADD213PS xmm, xmm, m128
+, RegSet::empty() // VFNMADD213PS xmm, xmm, xmm
+, RegSet::empty() // VFNMADD213PS ymm, ymm, m256
+, RegSet::empty() // VFNMADD213PS ymm, ymm, ymm
+, RegSet::empty() // VFNMADD213SD xmm, xmm, m64
+, RegSet::empty() // VFNMADD213SD xmm, xmm, xmm
+, RegSet::empty() // VFNMADD213SS xmm, xmm, m32
+, RegSet::empty() // VFNMADD213SS xmm, xmm, xmm
+, RegSet::empty() // VFNMADD231PD xmm, xmm, m128
+, RegSet::empty() // VFNMADD231PD xmm, xmm, xmm
+, RegSet::empty() // VFNMADD231PD ymm, ymm, m256
+, RegSet::empty() // VFNMADD231PD ymm, ymm, ymm
+, RegSet::empty() // VFNMADD231PS xmm, xmm, m128
+, RegSet::empty() // VFNMADD231PS xmm, xmm, xmm
+, RegSet::empty() // VFNMADD231PS ymm, ymm, m256
+, RegSet::empty() // VFNMADD231PS ymm, ymm, ymm
+, RegSet::empty() // VFNMADD231SD xmm, xmm, m64
+, RegSet::empty() // VFNMADD231SD xmm, xmm, xmm
+, RegSet::empty() // VFNMADD231SS xmm, xmm, m32
+, RegSet::empty() // VFNMADD231SS xmm, xmm, xmm
+, RegSet::empty() // VFNMSUB132PD xmm, xmm, m128
+, RegSet::empty() // VFNMSUB132PD xmm, xmm, xmm
+, RegSet::empty() // VFNMSUB132PD ymm, ymm, m256
+, RegSet::empty() // VFNMSUB132PD ymm, ymm, ymm
+, RegSet::empty() // VFNMSUB132PS xmm, xmm, m128
+, RegSet::empty() // VFNMSUB132PS xmm, xmm, xmm
+, RegSet::empty() // VFNMSUB132PS ymm, ymm, m256
+, RegSet::empty() // VFNMSUB132PS ymm, ymm, ymm
+, RegSet::empty() // VFNMSUB132SD xmm, xmm, m64
+, RegSet::empty() // VFNMSUB132SD xmm, xmm, xmm
+, RegSet::empty() // VFNMSUB132SS xmm, xmm, m32
+, RegSet::empty() // VFNMSUB132SS xmm, xmm, xmm
+, RegSet::empty() // VFNMSUB213PD xmm, xmm, m128
+, RegSet::empty() // VFNMSUB213PD xmm, xmm, xmm
+, RegSet::empty() // VFNMSUB213PD ymm, ymm, m256
+, RegSet::empty() // VFNMSUB213PD ymm, ymm, ymm
+, RegSet::empty() // VFNMSUB213PS xmm, xmm, m128
+, RegSet::empty() // VFNMSUB213PS xmm, xmm, xmm
+, RegSet::empty() // VFNMSUB213PS ymm, ymm, m256
+, RegSet::empty() // VFNMSUB213PS ymm, ymm, ymm
+, RegSet::empty() // VFNMSUB213SD xmm, xmm, m64
+, RegSet::empty() // VFNMSUB213SD xmm, xmm, xmm
+, RegSet::empty() // VFNMSUB213SS xmm, xmm, m32
+, RegSet::empty() // VFNMSUB213SS xmm, xmm, xmm
+, RegSet::empty() // VFNMSUB231PD xmm, xmm, m128
+, RegSet::empty() // VFNMSUB231PD xmm, xmm, xmm
+, RegSet::empty() // VFNMSUB231PD ymm, ymm, m256
+, RegSet::empty() // VFNMSUB231PD ymm, ymm, ymm
+, RegSet::empty() // VFNMSUB231PS xmm, xmm, m128
+, RegSet::empty() // VFNMSUB231PS xmm, xmm, xmm
+, RegSet::empty() // VFNMSUB231PS ymm, ymm, m256
+, RegSet::empty() // VFNMSUB231PS ymm, ymm, ymm
+, RegSet::empty() // VFNMSUB231SD xmm, xmm, m64
+, RegSet::empty() // VFNMSUB231SD xmm, xmm, xmm
+, RegSet::empty() // VFNMSUB231SS xmm, xmm, m32
+, RegSet::empty() // VFNMSUB231SS xmm, xmm, xmm
+, RegSet::empty() // VGATHERDPD xmm, m32, xmm
+, RegSet::empty() // VGATHERDPD ymm, m32, ymm
+, RegSet::empty() // VGATHERDPS xmm, m32, xmm
+, RegSet::empty() // VGATHERDPS ymm, m32, ymm
+, RegSet::empty() // VGATHERQPD xmm, m64, xmm
+, RegSet::empty() // VGATHERQPD ymm, m64, ymm
+, RegSet::empty() // VGATHERQPS xmm, m64, xmm
+, RegSet::empty() // VGATHERQPS xmm, m64, xmm
+, RegSet::empty() // VHADDPD xmm, xmm, m128
+, RegSet::empty() // VHADDPD xmm, xmm, xmm
+, RegSet::empty() // VHADDPD ymm, ymm, m256
+, RegSet::empty() // VHADDPD ymm, ymm, ymm
+, RegSet::empty() // VHADDPS xmm, xmm, m128
+, RegSet::empty() // VHADDPS xmm, xmm, xmm
+, RegSet::empty() // VHADDPS ymm, ymm, m256
+, RegSet::empty() // VHADDPS ymm, ymm, ymm
+, RegSet::empty() // VHSUBPD xmm, xmm, m128
+, RegSet::empty() // VHSUBPD xmm, xmm, xmm
+, RegSet::empty() // VHSUBPD ymm, ymm, m256
+, RegSet::empty() // VHSUBPD ymm, ymm, ymm
+, RegSet::empty() // VHSUBPS xmm, xmm, m128
+, RegSet::empty() // VHSUBPS xmm, xmm, xmm
+, RegSet::empty() // VHSUBPS ymm, ymm, m256
+, RegSet::empty() // VHSUBPS ymm, ymm, ymm
+, RegSet::empty() // VINSERTF128 ymm, ymm, m128, imm8
+, RegSet::empty() // VINSERTF128 ymm, ymm, xmm, imm8
+, RegSet::empty() // VINSERTI128 ymm, ymm, m128, imm8
+, RegSet::empty() // VINSERTI128 ymm, ymm, xmm, imm8
+, RegSet::empty() // VINSERTPS xmm, xmm, m32, imm8
+, RegSet::empty() // VINSERTPS xmm, xmm, xmm, imm8
+, RegSet::empty() // VLDDQU xmm, m128
+, RegSet::empty() // VLDDQU ymm, m256
+, RegSet::empty() // VLDMXCSR m32
+, RegSet::empty() // VMASKMOVDQU xmm, xmm
+, RegSet::empty() // VMASKMOVPD m128, xmm, xmm
+, RegSet::empty() // VMASKMOVPD m256, ymm, ymm
+, RegSet::empty() // VMASKMOVPD xmm, xmm, m128
+, RegSet::empty() // VMASKMOVPD ymm, ymm, m256
+, RegSet::empty() // VMASKMOVPS m128, xmm, xmm
+, RegSet::empty() // VMASKMOVPS m256, ymm, ymm
+, RegSet::empty() // VMASKMOVPS xmm, xmm, m128
+, RegSet::empty() // VMASKMOVPS ymm, ymm, m256
+, RegSet::empty() // VMAXPD xmm, xmm, m128
+, RegSet::empty() // VMAXPD xmm, xmm, xmm
+, RegSet::empty() // VMAXPD ymm, ymm, m256
+, RegSet::empty() // VMAXPD ymm, ymm, ymm
+, RegSet::empty() // VMAXPS xmm, xmm, m128
+, RegSet::empty() // VMAXPS xmm, xmm, xmm
+, RegSet::empty() // VMAXPS ymm, ymm, m256
+, RegSet::empty() // VMAXPS ymm, ymm, ymm
+, RegSet::empty() // VMAXSD xmm, xmm, m64
+, RegSet::empty() // VMAXSD xmm, xmm, xmm
+, RegSet::empty() // VMAXSS xmm, xmm, m32
+, RegSet::empty() // VMAXSS xmm, xmm, xmm
+, RegSet::empty() // VMINPD xmm, xmm, m128
+, RegSet::empty() // VMINPD xmm, xmm, xmm
+, RegSet::empty() // VMINPD ymm, ymm, m256
+, RegSet::empty() // VMINPD ymm, ymm, ymm
+, RegSet::empty() // VMINPS xmm, xmm, m128
+, RegSet::empty() // VMINPS xmm, xmm, xmm
+, RegSet::empty() // VMINPS ymm, ymm, m256
+, RegSet::empty() // VMINPS ymm, ymm, ymm
+, RegSet::empty() // VMINSD xmm, xmm, m64
+, RegSet::empty() // VMINSD xmm, xmm, xmm
+, RegSet::empty() // VMINSS xmm, xmm, m32
+, RegSet::empty() // VMINSS xmm, xmm, xmm
+, RegSet::empty() // VMOVAPD m128, xmm
+, RegSet::empty() // VMOVAPD m256, ymm
+, RegSet::empty() // VMOVAPD xmm, m128
+, RegSet::empty() // VMOVAPD xmm, xmm
+, RegSet::empty() // VMOVAPD xmm, xmm
+, RegSet::empty() // VMOVAPD ymm, m256
+, RegSet::empty() // VMOVAPD ymm, ymm
+, RegSet::empty() // VMOVAPD ymm, ymm
+, RegSet::empty() // VMOVAPS m128, xmm
+, RegSet::empty() // VMOVAPS m256, ymm
+, RegSet::empty() // VMOVAPS xmm, m128
+, RegSet::empty() // VMOVAPS xmm, xmm
+, RegSet::empty() // VMOVAPS xmm, xmm
+, RegSet::empty() // VMOVAPS ymm, m256
+, RegSet::empty() // VMOVAPS ymm, ymm
+, RegSet::empty() // VMOVAPS ymm, ymm
+, RegSet::empty() // VMOVD m32, xmm
+, RegSet::empty() // VMOVD r32, xmm
+, RegSet::empty() // VMOVD xmm, m32
+, RegSet::empty() // VMOVD xmm, r32
+, RegSet::empty() // VMOVDDUP xmm, m64
+, RegSet::empty() // VMOVDDUP xmm, xmm
+, RegSet::empty() // VMOVDDUP ymm, m256
+, RegSet::empty() // VMOVDDUP ymm, ymm
+, RegSet::empty() // VMOVDQA m128, xmm
+, RegSet::empty() // VMOVDQA m256, ymm
+, RegSet::empty() // VMOVDQA xmm, m128
+, RegSet::empty() // VMOVDQA xmm, xmm
+, RegSet::empty() // VMOVDQA xmm, xmm
+, RegSet::empty() // VMOVDQA ymm, m256
+, RegSet::empty() // VMOVDQA ymm, ymm
+, RegSet::empty() // VMOVDQA ymm, ymm
+, RegSet::empty() // VMOVDQU m128, xmm
+, RegSet::empty() // VMOVDQU m256, ymm
+, RegSet::empty() // VMOVDQU xmm, m128
+, RegSet::empty() // VMOVDQU xmm, xmm
+, RegSet::empty() // VMOVDQU xmm, xmm
+, RegSet::empty() // VMOVDQU ymm, m256
+, RegSet::empty() // VMOVDQU ymm, ymm
+, RegSet::empty() // VMOVDQU ymm, ymm
+, RegSet::empty() // VMOVHLPS xmm, xmm, xmm
+, RegSet::empty() // VMOVHPD m64, xmm
+, RegSet::empty() // VMOVHPD xmm, xmm, m64
+, RegSet::empty() // VMOVHPS m64, xmm
+, RegSet::empty() // VMOVHPS xmm, xmm, m64
+, RegSet::empty() // VMOVLHPS xmm, xmm, xmm
+, RegSet::empty() // VMOVLPD m64, xmm
+, RegSet::empty() // VMOVLPD xmm, xmm, m64
+, RegSet::empty() // VMOVLPS m64, xmm
+, RegSet::empty() // VMOVLPS xmm, xmm, m64
+, RegSet::empty() // VMOVMSKPD r32, xmm
+, RegSet::empty() // VMOVMSKPD r32, ymm
+, RegSet::empty() // VMOVMSKPD r64, xmm
+, RegSet::empty() // VMOVMSKPD r64, ymm
+, RegSet::empty() // VMOVMSKPS r32, xmm
+, RegSet::empty() // VMOVMSKPS r32, ymm
+, RegSet::empty() // VMOVMSKPS r64, xmm
+, RegSet::empty() // VMOVMSKPS r64, ymm
+, RegSet::empty() // VMOVNTDQ m128, xmm
+, RegSet::empty() // VMOVNTDQA xmm, m128
+, RegSet::empty() // VMOVNTDQA ymm, m256
+, RegSet::empty() // VMOVNTPD m128, xmm
+, RegSet::empty() // VMOVNTPD m256, ymm
+, RegSet::empty() // VMOVNTPS m128, xmm
+, RegSet::empty() // VMOVNTPS m256, ymm
+, RegSet::empty() // VMOVQ m64, xmm
+, RegSet::empty() // VMOVQ m64, xmm
+, RegSet::empty() // VMOVQ r64, xmm
+, RegSet::empty() // VMOVQ xmm, m64
+, RegSet::empty() // VMOVQ xmm, m64
+, RegSet::empty() // VMOVQ xmm, r64
+, RegSet::empty() // VMOVQ xmm, xmm
+, RegSet::empty() // VMOVQ xmm, xmm
+, RegSet::empty() // VMOVSD m64, xmm
+, RegSet::empty() // VMOVSD xmm, m64
+, RegSet::empty() // VMOVSD xmm, xmm, xmm
+, RegSet::empty() // VMOVSD xmm, xmm, xmm
+, RegSet::empty() // VMOVSHDUP xmm, m128
+, RegSet::empty() // VMOVSHDUP xmm, xmm
+, RegSet::empty() // VMOVSHDUP ymm, m256
+, RegSet::empty() // VMOVSHDUP ymm, ymm
+, RegSet::empty() // VMOVSLDUP xmm, m128
+, RegSet::empty() // VMOVSLDUP xmm, xmm
+, RegSet::empty() // VMOVSLDUP ymm, m256
+, RegSet::empty() // VMOVSLDUP ymm, ymm
+, RegSet::empty() // VMOVSS m32, xmm
+, RegSet::empty() // VMOVSS xmm, m32
+, RegSet::empty() // VMOVSS xmm, xmm, xmm
+, RegSet::empty() // VMOVSS xmm, xmm, xmm
+, RegSet::empty() // VMOVUPD m128, xmm
+, RegSet::empty() // VMOVUPD m256, ymm
+, RegSet::empty() // VMOVUPD xmm, m128
+, RegSet::empty() // VMOVUPD xmm, xmm
+, RegSet::empty() // VMOVUPD xmm, xmm
+, RegSet::empty() // VMOVUPD ymm, m256
+, RegSet::empty() // VMOVUPD ymm, ymm
+, RegSet::empty() // VMOVUPD ymm, ymm
+, RegSet::empty() // VMOVUPS m128, xmm
+, RegSet::empty() // VMOVUPS m256, ymm
+, RegSet::empty() // VMOVUPS xmm, m128
+, RegSet::empty() // VMOVUPS xmm, xmm
+, RegSet::empty() // VMOVUPS xmm, xmm
+, RegSet::empty() // VMOVUPS ymm, m256
+, RegSet::empty() // VMOVUPS ymm, ymm
+, RegSet::empty() // VMOVUPS ymm, ymm
+, RegSet::empty() // VMPSADBW xmm, xmm, m128, imm8
+, RegSet::empty() // VMPSADBW xmm, xmm, xmm, imm8
+, RegSet::empty() // VMPSADBW ymm, ymm, m256, imm8
+, RegSet::empty() // VMPSADBW ymm, ymm, ymm, imm8
+, RegSet::empty() // VMULPD xmm, xmm, m128
+, RegSet::empty() // VMULPD xmm, xmm, xmm
+, RegSet::empty() // VMULPD ymm, ymm, m256
+, RegSet::empty() // VMULPD ymm, ymm, ymm
+, RegSet::empty() // VMULPS xmm, xmm, m128
+, RegSet::empty() // VMULPS xmm, xmm, xmm
+, RegSet::empty() // VMULPS ymm, ymm, m256
+, RegSet::empty() // VMULPS ymm, ymm, ymm
+, RegSet::empty() // VMULSD xmm, xmm, m64
+, RegSet::empty() // VMULSD xmm, xmm, xmm
+, RegSet::empty() // VMULSS xmm, xmm, m32
+, RegSet::empty() // VMULSS xmm, xmm, xmm
+, RegSet::empty() // VORPD xmm, xmm, m128
+, RegSet::empty() // VORPD xmm, xmm, xmm
+, RegSet::empty() // VORPD ymm, ymm, m256
+, RegSet::empty() // VORPD ymm, ymm, ymm
+, RegSet::empty() // VORPS xmm, xmm, m128
+, RegSet::empty() // VORPS xmm, xmm, xmm
+, RegSet::empty() // VORPS ymm, ymm, m256
+, RegSet::empty() // VORPS ymm, ymm, ymm
+, RegSet::empty() // VPABSB xmm, m128
+, RegSet::empty() // VPABSB xmm, xmm
+, RegSet::empty() // VPABSB ymm, m256
+, RegSet::empty() // VPABSB ymm, ymm
+, RegSet::empty() // VPABSD xmm, m128
+, RegSet::empty() // VPABSD xmm, xmm
+, RegSet::empty() // VPABSD ymm, m256
+, RegSet::empty() // VPABSD ymm, ymm
+, RegSet::empty() // VPABSW xmm, m128
+, RegSet::empty() // VPABSW xmm, xmm
+, RegSet::empty() // VPABSW ymm, m256
+, RegSet::empty() // VPABSW ymm, ymm
+, RegSet::empty() // VPACKSSDW xmm, xmm, m128
+, RegSet::empty() // VPACKSSDW xmm, xmm, xmm
+, RegSet::empty() // VPACKSSDW ymm, ymm, m256
+, RegSet::empty() // VPACKSSDW ymm, ymm, ymm
+, RegSet::empty() // VPACKSSWB xmm, xmm, m128
+, RegSet::empty() // VPACKSSWB xmm, xmm, xmm
+, RegSet::empty() // VPACKSSWB ymm, ymm, m256
+, RegSet::empty() // VPACKSSWB ymm, ymm, ymm
+, RegSet::empty() // VPACKUSDW xmm, xmm, m128
+, RegSet::empty() // VPACKUSDW xmm, xmm, xmm
+, RegSet::empty() // VPACKUSDW ymm, ymm, m256
+, RegSet::empty() // VPACKUSDW ymm, ymm, ymm
+, RegSet::empty() // VPACKUSWB xmm, xmm, m128
+, RegSet::empty() // VPACKUSWB xmm, xmm, xmm
+, RegSet::empty() // VPACKUSWB ymm, ymm, m256
+, RegSet::empty() // VPACKUSWB ymm, ymm, ymm
+, RegSet::empty() // VPADDB xmm, xmm, m128
+, RegSet::empty() // VPADDB xmm, xmm, xmm
+, RegSet::empty() // VPADDB ymm, ymm, m256
+, RegSet::empty() // VPADDB ymm, ymm, ymm
+, RegSet::empty() // VPADDD xmm, xmm, m128
+, RegSet::empty() // VPADDD xmm, xmm, xmm
+, RegSet::empty() // VPADDD ymm, ymm, m256
+, RegSet::empty() // VPADDD ymm, ymm, ymm
+, RegSet::empty() // VPADDQ xmm, xmm, m128
+, RegSet::empty() // VPADDQ xmm, xmm, xmm
+, RegSet::empty() // VPADDQ ymm, ymm, m256
+, RegSet::empty() // VPADDQ ymm, ymm, ymm
+, RegSet::empty() // VPADDSB xmm, xmm, m128
+, RegSet::empty() // VPADDSB xmm, xmm, xmm
+, RegSet::empty() // VPADDSB ymm, ymm, m256
+, RegSet::empty() // VPADDSB ymm, ymm, ymm
+, RegSet::empty() // VPADDSW xmm, xmm, m128
+, RegSet::empty() // VPADDSW xmm, xmm, xmm
+, RegSet::empty() // VPADDSW ymm, ymm, m256
+, RegSet::empty() // VPADDSW ymm, ymm, ymm
+, RegSet::empty() // VPADDUSB xmm, xmm, m128
+, RegSet::empty() // VPADDUSB xmm, xmm, xmm
+, RegSet::empty() // VPADDUSB ymm, ymm, m256
+, RegSet::empty() // VPADDUSB ymm, ymm, ymm
+, RegSet::empty() // VPADDUSW xmm, xmm, m128
+, RegSet::empty() // VPADDUSW xmm, xmm, xmm
+, RegSet::empty() // VPADDUSW ymm, ymm, m256
+, RegSet::empty() // VPADDUSW ymm, ymm, ymm
+, RegSet::empty() // VPADDW xmm, xmm, m128
+, RegSet::empty() // VPADDW xmm, xmm, xmm
+, RegSet::empty() // VPADDW ymm, ymm, m256
+, RegSet::empty() // VPADDW ymm, ymm, ymm
+, RegSet::empty() // VPALIGNR xmm, xmm, m128, imm8
+, RegSet::empty() // VPALIGNR xmm, xmm, xmm, imm8
+, RegSet::empty() // VPALIGNR ymm, ymm, m256, imm8
+, RegSet::empty() // VPALIGNR ymm, ymm, ymm, imm8
+, RegSet::empty() // VPAND xmm, xmm, m128
+, RegSet::empty() // VPAND xmm, xmm, xmm
+, RegSet::empty() // VPAND ymm, ymm, m256
+, RegSet::empty() // VPAND ymm, ymm, ymm
+, RegSet::empty() // VPANDN xmm, xmm, m128
+, RegSet::empty() // VPANDN xmm, xmm, xmm
+, RegSet::empty() // VPANDN ymm, ymm, m256
+, RegSet::empty() // VPANDN ymm, ymm, ymm
+, RegSet::empty() // VPAVGB xmm, xmm, m128
+, RegSet::empty() // VPAVGB xmm, xmm, xmm
+, RegSet::empty() // VPAVGB ymm, ymm, m256
+, RegSet::empty() // VPAVGB ymm, ymm, ymm
+, RegSet::empty() // VPAVGW xmm, xmm, m128
+, RegSet::empty() // VPAVGW xmm, xmm, xmm
+, RegSet::empty() // VPAVGW ymm, ymm, m256
+, RegSet::empty() // VPAVGW ymm, ymm, ymm
+, RegSet::empty() // VPBLENDD xmm, xmm, m128, imm8
+, RegSet::empty() // VPBLENDD xmm, xmm, xmm, imm8
+, RegSet::empty() // VPBLENDD ymm, ymm, m256, imm8
+, RegSet::empty() // VPBLENDD ymm, ymm, ymm, imm8
+, RegSet::empty() // VPBLENDVB xmm, xmm, m128, xmm
+, RegSet::empty() // VPBLENDVB xmm, xmm, xmm, xmm
+, RegSet::empty() // VPBLENDVB ymm, ymm, m256, ymm
+, RegSet::empty() // VPBLENDVB ymm, ymm, ymm, ymm
+, RegSet::empty() // VPBLENDW xmm, xmm, m128, imm8
+, RegSet::empty() // VPBLENDW xmm, xmm, xmm, imm8
+, RegSet::empty() // VPBLENDW ymm, ymm, m256, imm8
+, RegSet::empty() // VPBLENDW ymm, ymm, ymm, imm8
+, RegSet::empty() // VPBROADCASTB xmm, m8
+, RegSet::empty() // VPBROADCASTB xmm, xmm
+, RegSet::empty() // VPBROADCASTB ymm, m8
+, RegSet::empty() // VPBROADCASTB ymm, xmm
+, RegSet::empty() // VPBROADCASTD xmm, m32
+, RegSet::empty() // VPBROADCASTD xmm, xmm
+, RegSet::empty() // VPBROADCASTD ymm, m32
+, RegSet::empty() // VPBROADCASTD ymm, xmm
+, RegSet::empty() // VPBROADCASTQ xmm, m64
+, RegSet::empty() // VPBROADCASTQ xmm, xmm
+, RegSet::empty() // VPBROADCASTQ ymm, m64
+, RegSet::empty() // VPBROADCASTQ ymm, xmm
+, RegSet::empty() // VPBROADCASTW xmm, m16
+, RegSet::empty() // VPBROADCASTW xmm, xmm
+, RegSet::empty() // VPBROADCASTW ymm, m16
+, RegSet::empty() // VPBROADCASTW ymm, xmm
+, RegSet::empty() // VPCLMULQDQ xmm, xmm, m128, imm8
+, RegSet::empty() // VPCLMULQDQ xmm, xmm, xmm, imm8
+, RegSet::empty() // VPCMPEQB xmm, xmm, m128
+, RegSet::empty() // VPCMPEQB xmm, xmm, xmm
+, RegSet::empty() // VPCMPEQB ymm, ymm, m256
+, RegSet::empty() // VPCMPEQB ymm, ymm, ymm
+, RegSet::empty() // VPCMPEQD xmm, xmm, m128
+, RegSet::empty() // VPCMPEQD xmm, xmm, xmm
+, RegSet::empty() // VPCMPEQD ymm, ymm, m256
+, RegSet::empty() // VPCMPEQD ymm, ymm, ymm
+, RegSet::empty() // VPCMPEQQ xmm, xmm, m128
+, RegSet::empty() // VPCMPEQQ xmm, xmm, xmm
+, RegSet::empty() // VPCMPEQQ ymm, ymm, m256
+, RegSet::empty() // VPCMPEQQ ymm, ymm, ymm
+, RegSet::empty() // VPCMPEQW xmm, xmm, m128
+, RegSet::empty() // VPCMPEQW xmm, xmm, xmm
+, RegSet::empty() // VPCMPEQW ymm, ymm, m256
+, RegSet::empty() // VPCMPEQW ymm, ymm, ymm
+, RegSet::empty()+Constants::eax()+Constants::edx() // VPCMPESTRI xmm, m128, imm8
+, RegSet::empty()+Constants::eax()+Constants::edx() // VPCMPESTRI xmm, xmm, imm8
+, RegSet::empty()+Constants::eax()+Constants::edx() // VPCMPESTRM xmm, m128, imm8
+, RegSet::empty()+Constants::eax()+Constants::edx() // VPCMPESTRM xmm, xmm, imm8
+, RegSet::empty() // VPCMPGTB xmm, xmm, m128
+, RegSet::empty() // VPCMPGTB xmm, xmm, xmm
+, RegSet::empty() // VPCMPGTB ymm, ymm, m256
+, RegSet::empty() // VPCMPGTB ymm, ymm, ymm
+, RegSet::empty() // VPCMPGTD xmm, xmm, m128
+, RegSet::empty() // VPCMPGTD xmm, xmm, xmm
+, RegSet::empty() // VPCMPGTD ymm, ymm, m256
+, RegSet::empty() // VPCMPGTD ymm, ymm, ymm
+, RegSet::empty() // VPCMPGTQ xmm, xmm, m128
+, RegSet::empty() // VPCMPGTQ xmm, xmm, xmm
+, RegSet::empty() // VPCMPGTQ ymm, ymm, m256
+, RegSet::empty() // VPCMPGTQ ymm, ymm, ymm
+, RegSet::empty() // VPCMPGTW xmm, xmm, m128
+, RegSet::empty() // VPCMPGTW xmm, xmm, xmm
+, RegSet::empty() // VPCMPGTW ymm, ymm, m256
+, RegSet::empty() // VPCMPGTW ymm, ymm, ymm
+, RegSet::empty() // VPCMPISTRI xmm, m128, imm8
+, RegSet::empty() // VPCMPISTRI xmm, xmm, imm8
+, RegSet::empty() // VPCMPISTRM xmm, m128, imm8
+, RegSet::empty() // VPCMPISTRM xmm, xmm, imm8
+, RegSet::empty() // VPERM2F128 ymm, ymm, m256, imm8
+, RegSet::empty() // VPERM2F128 ymm, ymm, ymm, imm8
+, RegSet::empty() // VPERM2I128 ymm, ymm, m256, imm8
+, RegSet::empty() // VPERM2I128 ymm, ymm, ymm, imm8
+, RegSet::empty() // VPERMD ymm, ymm, m256
+, RegSet::empty() // VPERMD ymm, ymm, ymm
+, RegSet::empty() // VPERMILPD xmm, m128, imm8
+, RegSet::empty() // VPERMILPD xmm, xmm, imm8
+, RegSet::empty() // VPERMILPD xmm, xmm, m128
+, RegSet::empty() // VPERMILPD xmm, xmm, xmm
+, RegSet::empty() // VPERMILPD ymm, m256, imm8
+, RegSet::empty() // VPERMILPD ymm, ymm, imm8
+, RegSet::empty() // VPERMILPD ymm, ymm, m256
+, RegSet::empty() // VPERMILPD ymm, ymm, ymm
+, RegSet::empty() // VPERMILPS xmm, m128, imm8
+, RegSet::empty() // VPERMILPS xmm, xmm, imm8
+, RegSet::empty() // VPERMILPS xmm, xmm, m128
+, RegSet::empty() // VPERMILPS xmm, xmm, xmm
+, RegSet::empty() // VPERMILPS ymm, m256, imm8
+, RegSet::empty() // VPERMILPS ymm, ymm, imm8
+, RegSet::empty() // VPERMILPS ymm, ymm, m256
+, RegSet::empty() // VPERMILPS ymm, ymm, ymm
+, RegSet::empty() // VPERMPD ymm, m256, imm8
+, RegSet::empty() // VPERMPD ymm, ymm, imm8
+, RegSet::empty() // VPERMPS ymm, ymm, m256
+, RegSet::empty() // VPERMPS ymm, ymm, ymm
+, RegSet::empty() // VPERMQ ymm, m256, imm8
+, RegSet::empty() // VPERMQ ymm, ymm, imm8
+, RegSet::empty() // VPEXTRB m8, xmm, imm8
+, RegSet::empty() // VPEXTRB r32, xmm, imm8
+, RegSet::empty() // VPEXTRB r64, xmm, imm8
+, RegSet::empty() // VPEXTRD m32, xmm, imm8
+, RegSet::empty() // VPEXTRD r32, xmm, imm8
+, RegSet::empty() // VPEXTRQ m64, xmm, imm8
+, RegSet::empty() // VPEXTRQ r64, xmm, imm8
+, RegSet::empty() // VPEXTRW m16, xmm, imm8
+, RegSet::empty() // VPEXTRW r32, xmm, imm8
+, RegSet::empty() // VPEXTRW r32, xmm, imm8
+, RegSet::empty() // VPEXTRW r64, xmm, imm8
+, RegSet::empty() // VPEXTRW r64, xmm, imm8
+, RegSet::empty() // VPGATHERDD xmm, m32, xmm
+, RegSet::empty() // VPGATHERDD ymm, m32, ymm
+, RegSet::empty() // VPGATHERDQ xmm, m32, xmm
+, RegSet::empty() // VPGATHERDQ ymm, m32, ymm
+, RegSet::empty() // VPGATHERQD xmm, m64, xmm
+, RegSet::empty() // VPGATHERQD xmm, m64, xmm
+, RegSet::empty() // VPGATHERQQ xmm, m64, xmm
+, RegSet::empty() // VPGATHERQQ ymm, m64, ymm
+, RegSet::empty() // VPHADDD xmm, xmm, m128
+, RegSet::empty() // VPHADDD xmm, xmm, xmm
+, RegSet::empty() // VPHADDD ymm, ymm, m256
+, RegSet::empty() // VPHADDD ymm, ymm, ymm
+, RegSet::empty() // VPHADDSW xmm, xmm, m128
+, RegSet::empty() // VPHADDSW xmm, xmm, xmm
+, RegSet::empty() // VPHADDSW ymm, ymm, m256
+, RegSet::empty() // VPHADDSW ymm, ymm, ymm
+, RegSet::empty() // VPHADDW xmm, xmm, m128
+, RegSet::empty() // VPHADDW xmm, xmm, xmm
+, RegSet::empty() // VPHADDW ymm, ymm, m256
+, RegSet::empty() // VPHADDW ymm, ymm, ymm
+, RegSet::empty() // VPHMINPOSUW xmm, m128
+, RegSet::empty() // VPHMINPOSUW xmm, xmm
+, RegSet::empty() // VPHSUBD xmm, xmm, m128
+, RegSet::empty() // VPHSUBD xmm, xmm, xmm
+, RegSet::empty() // VPHSUBD ymm, ymm, m256
+, RegSet::empty() // VPHSUBD ymm, ymm, ymm
+, RegSet::empty() // VPHSUBSW xmm, xmm, m128
+, RegSet::empty() // VPHSUBSW xmm, xmm, xmm
+, RegSet::empty() // VPHSUBSW ymm, ymm, m256
+, RegSet::empty() // VPHSUBSW ymm, ymm, ymm
+, RegSet::empty() // VPHSUBW xmm, xmm, m128
+, RegSet::empty() // VPHSUBW xmm, xmm, xmm
+, RegSet::empty() // VPHSUBW ymm, ymm, m256
+, RegSet::empty() // VPHSUBW ymm, ymm, ymm
+, RegSet::empty() // VPINSRB xmm, xmm, m8, imm8
+, RegSet::empty() // VPINSRB xmm, xmm, r32, imm8
+, RegSet::empty() // VPINSRD xmm, xmm, m32, imm8
+, RegSet::empty() // VPINSRD xmm, xmm, r32, imm8
+, RegSet::empty() // VPINSRQ xmm, xmm, m64, imm8
+, RegSet::empty() // VPINSRQ xmm, xmm, r64, imm8
+, RegSet::empty() // VPINSRW xmm, xmm, m16, imm8
+, RegSet::empty() // VPINSRW xmm, xmm, r32, imm8
+, RegSet::empty() // VPMADDUBSW xmm, xmm, m128
+, RegSet::empty() // VPMADDUBSW xmm, xmm, xmm
+, RegSet::empty() // VPMADDUBSW ymm, ymm, m256
+, RegSet::empty() // VPMADDUBSW ymm, ymm, ymm
+, RegSet::empty() // VPMADDWD xmm, xmm, m128
+, RegSet::empty() // VPMADDWD xmm, xmm, xmm
+, RegSet::empty() // VPMADDWD ymm, ymm, m256
+, RegSet::empty() // VPMADDWD ymm, ymm, ymm
+, RegSet::empty() // VPMASKMOVD m128, xmm, xmm
+, RegSet::empty() // VPMASKMOVD m256, ymm, ymm
+, RegSet::empty() // VPMASKMOVD xmm, xmm, m128
+, RegSet::empty() // VPMASKMOVD ymm, ymm, m256
+, RegSet::empty() // VPMASKMOVQ m128, xmm, xmm
+, RegSet::empty() // VPMASKMOVQ m256, ymm, ymm
+, RegSet::empty() // VPMASKMOVQ xmm, xmm, m128
+, RegSet::empty() // VPMASKMOVQ ymm, ymm, m256
+, RegSet::empty() // VPMAXSB xmm, xmm, m128
+, RegSet::empty() // VPMAXSB xmm, xmm, xmm
+, RegSet::empty() // VPMAXSB ymm, ymm, m256
+, RegSet::empty() // VPMAXSB ymm, ymm, ymm
+, RegSet::empty() // VPMAXSD xmm, xmm, m128
+, RegSet::empty() // VPMAXSD xmm, xmm, xmm
+, RegSet::empty() // VPMAXSD ymm, ymm, m256
+, RegSet::empty() // VPMAXSD ymm, ymm, ymm
+, RegSet::empty() // VPMAXSW xmm, xmm, m128
+, RegSet::empty() // VPMAXSW xmm, xmm, xmm
+, RegSet::empty() // VPMAXSW ymm, ymm, m256
+, RegSet::empty() // VPMAXSW ymm, ymm, ymm
+, RegSet::empty() // VPMAXUB xmm, xmm, m128
+, RegSet::empty() // VPMAXUB xmm, xmm, xmm
+, RegSet::empty() // VPMAXUB ymm, ymm, m256
+, RegSet::empty() // VPMAXUB ymm, ymm, ymm
+, RegSet::empty() // VPMAXUD xmm, xmm, m128
+, RegSet::empty() // VPMAXUD xmm, xmm, xmm
+, RegSet::empty() // VPMAXUD ymm, ymm, m256
+, RegSet::empty() // VPMAXUD ymm, ymm, ymm
+, RegSet::empty() // VPMAXUW xmm, xmm, m128
+, RegSet::empty() // VPMAXUW xmm, xmm, xmm
+, RegSet::empty() // VPMAXUW ymm, ymm, m256
+, RegSet::empty() // VPMAXUW ymm, ymm, ymm
+, RegSet::empty() // VPMINSB xmm, xmm, m128
+, RegSet::empty() // VPMINSB xmm, xmm, xmm
+, RegSet::empty() // VPMINSB ymm, ymm, m256
+, RegSet::empty() // VPMINSB ymm, ymm, ymm
+, RegSet::empty() // VPMINSD xmm, xmm, m128
+, RegSet::empty() // VPMINSD xmm, xmm, xmm
+, RegSet::empty() // VPMINSD ymm, ymm, m256
+, RegSet::empty() // VPMINSD ymm, ymm, ymm
+, RegSet::empty() // VPMINSW xmm, xmm, m128
+, RegSet::empty() // VPMINSW xmm, xmm, xmm
+, RegSet::empty() // VPMINUB xmm, xmm, m128
+, RegSet::empty() // VPMINUB xmm, xmm, xmm
+, RegSet::empty() // VPMINUB ymm, ymm, m256
+, RegSet::empty() // VPMINUB ymm, ymm, ymm
+, RegSet::empty() // VPMINUD xmm, xmm, m128
+, RegSet::empty() // VPMINUD xmm, xmm, xmm
+, RegSet::empty() // VPMINUD ymm, ymm, m256
+, RegSet::empty() // VPMINUD ymm, ymm, ymm
+, RegSet::empty() // VPMINUW xmm, xmm, m128
+, RegSet::empty() // VPMINUW xmm, xmm, xmm
+, RegSet::empty() // VPMINUW ymm, ymm, m256
+, RegSet::empty() // VPMINUW ymm, ymm, ymm
+, RegSet::empty() // VPMOVMSKB r32, xmm
+, RegSet::empty() // VPMOVMSKB r32, ymm
+, RegSet::empty() // VPMOVMSKB r64, xmm
+, RegSet::empty() // VPMOVMSKB r64, ymm
+, RegSet::empty() // VPMOVSXBD xmm, m32
+, RegSet::empty() // VPMOVSXBD xmm, xmm
+, RegSet::empty() // VPMOVSXBD ymm, m64
+, RegSet::empty() // VPMOVSXBD ymm, xmm
+, RegSet::empty() // VPMOVSXBQ xmm, m16
+, RegSet::empty() // VPMOVSXBQ xmm, xmm
+, RegSet::empty() // VPMOVSXBQ ymm, m32
+, RegSet::empty() // VPMOVSXBQ ymm, xmm
+, RegSet::empty() // VPMOVSXBW xmm, m64
+, RegSet::empty() // VPMOVSXBW xmm, xmm
+, RegSet::empty() // VPMOVSXBW ymm, m128
+, RegSet::empty() // VPMOVSXBW ymm, xmm
+, RegSet::empty() // VPMOVSXDQ xmm, m64
+, RegSet::empty() // VPMOVSXDQ xmm, xmm
+, RegSet::empty() // VPMOVSXDQ ymm, m128
+, RegSet::empty() // VPMOVSXDQ ymm, xmm
+, RegSet::empty() // VPMOVSXWD xmm, m64
+, RegSet::empty() // VPMOVSXWD xmm, xmm
+, RegSet::empty() // VPMOVSXWD ymm, m128
+, RegSet::empty() // VPMOVSXWD ymm, xmm
+, RegSet::empty() // VPMOVSXWQ xmm, m32
+, RegSet::empty() // VPMOVSXWQ xmm, xmm
+, RegSet::empty() // VPMOVSXWQ ymm, m64
+, RegSet::empty() // VPMOVSXWQ ymm, xmm
+, RegSet::empty() // VPMOVZXBD xmm, m32
+, RegSet::empty() // VPMOVZXBD xmm, xmm
+, RegSet::empty() // VPMOVZXBD ymm, m64
+, RegSet::empty() // VPMOVZXBD ymm, xmm
+, RegSet::empty() // VPMOVZXBQ xmm, m16
+, RegSet::empty() // VPMOVZXBQ xmm, xmm
+, RegSet::empty() // VPMOVZXBQ ymm, m32
+, RegSet::empty() // VPMOVZXBQ ymm, xmm
+, RegSet::empty() // VPMOVZXBW xmm, m64
+, RegSet::empty() // VPMOVZXBW xmm, xmm
+, RegSet::empty() // VPMOVZXBW ymm, m128
+, RegSet::empty() // VPMOVZXBW ymm, xmm
+, RegSet::empty() // VPMOVZXDQ xmm, m64
+, RegSet::empty() // VPMOVZXDQ xmm, xmm
+, RegSet::empty() // VPMOVZXDQ ymm, m128
+, RegSet::empty() // VPMOVZXDQ ymm, xmm
+, RegSet::empty() // VPMOVZXWD xmm, m64
+, RegSet::empty() // VPMOVZXWD xmm, xmm
+, RegSet::empty() // VPMOVZXWD ymm, m128
+, RegSet::empty() // VPMOVZXWD ymm, xmm
+, RegSet::empty() // VPMOVZXWQ xmm, m32
+, RegSet::empty() // VPMOVZXWQ xmm, xmm
+, RegSet::empty() // VPMOVZXWQ ymm, m64
+, RegSet::empty() // VPMOVZXWQ ymm, xmm
+, RegSet::empty() // VPMULDQ xmm, xmm, m128
+, RegSet::empty() // VPMULDQ xmm, xmm, xmm
+, RegSet::empty() // VPMULDQ ymm, ymm, m256
+, RegSet::empty() // VPMULDQ ymm, ymm, ymm
+, RegSet::empty() // VPMULHRSW xmm, xmm, m128
+, RegSet::empty() // VPMULHRSW xmm, xmm, xmm
+, RegSet::empty() // VPMULHRSW ymm, ymm, m256
+, RegSet::empty() // VPMULHRSW ymm, ymm, ymm
+, RegSet::empty() // VPMULHUW xmm, xmm, m128
+, RegSet::empty() // VPMULHUW xmm, xmm, xmm
+, RegSet::empty() // VPMULHUW ymm, ymm, m256
+, RegSet::empty() // VPMULHUW ymm, ymm, ymm
+, RegSet::empty() // VPMULHW xmm, xmm, m128
+, RegSet::empty() // VPMULHW xmm, xmm, xmm
+, RegSet::empty() // VPMULHW ymm, ymm, m256
+, RegSet::empty() // VPMULHW ymm, ymm, ymm
+, RegSet::empty() // VPMULLD xmm, xmm, m128
+, RegSet::empty() // VPMULLD xmm, xmm, xmm
+, RegSet::empty() // VPMULLD ymm, ymm, m256
+, RegSet::empty() // VPMULLD ymm, ymm, ymm
+, RegSet::empty() // VPMULLW xmm, xmm, m128
+, RegSet::empty() // VPMULLW xmm, xmm, xmm
+, RegSet::empty() // VPMULLW ymm, ymm, m256
+, RegSet::empty() // VPMULLW ymm, ymm, ymm
+, RegSet::empty() // VPMULUDQ xmm, xmm, m128
+, RegSet::empty() // VPMULUDQ xmm, xmm, xmm
+, RegSet::empty() // VPMULUDQ ymm, ymm, m256
+, RegSet::empty() // VPMULUDQ ymm, ymm, ymm
+, RegSet::empty() // VPOR xmm, xmm, m128
+, RegSet::empty() // VPOR xmm, xmm, xmm
+, RegSet::empty() // VPOR ymm, ymm, m256
+, RegSet::empty() // VPOR ymm, ymm, ymm
+, RegSet::empty() // VPSADBW xmm, xmm, m128
+, RegSet::empty() // VPSADBW xmm, xmm, xmm
+, RegSet::empty() // VPSADBW ymm, ymm, m256
+, RegSet::empty() // VPSADBW ymm, ymm, ymm
+, RegSet::empty() // VPSHUFB xmm, xmm, m128
+, RegSet::empty() // VPSHUFB xmm, xmm, xmm
+, RegSet::empty() // VPSHUFB ymm, ymm, m256
+, RegSet::empty() // VPSHUFB ymm, ymm, ymm
+, RegSet::empty() // VPSHUFD xmm, m128, imm8
+, RegSet::empty() // VPSHUFD xmm, xmm, imm8
+, RegSet::empty() // VPSHUFD ymm, m256, imm8
+, RegSet::empty() // VPSHUFD ymm, ymm, imm8
+, RegSet::empty() // VPSHUFHW xmm, m128, imm8
+, RegSet::empty() // VPSHUFHW xmm, xmm, imm8
+, RegSet::empty() // VPSHUFHW ymm, m256, imm8
+, RegSet::empty() // VPSHUFHW ymm, ymm, imm8
+, RegSet::empty() // VPSHUFLW xmm, m128, imm8
+, RegSet::empty() // VPSHUFLW xmm, xmm, imm8
+, RegSet::empty() // VPSHUFLW ymm, m256, imm8
+, RegSet::empty() // VPSHUFLW ymm, ymm, imm8
+, RegSet::empty() // VPSIGNB xmm, xmm, m128
+, RegSet::empty() // VPSIGNB xmm, xmm, xmm
+, RegSet::empty() // VPSIGND xmm, xmm, m128
+, RegSet::empty() // VPSIGND xmm, xmm, xmm
+, RegSet::empty() // VPSIGNW xmm, xmm, m128
+, RegSet::empty() // VPSIGNW xmm, xmm, xmm
+, RegSet::empty() // VPSLLD xmm, xmm, imm8
+, RegSet::empty() // VPSLLD xmm, xmm, m128
+, RegSet::empty() // VPSLLD xmm, xmm, xmm
+, RegSet::empty() // VPSLLD ymm, ymm, imm8
+, RegSet::empty() // VPSLLD ymm, ymm, m128
+, RegSet::empty() // VPSLLD ymm, ymm, xmm
+, RegSet::empty() // VPSLLDQ xmm, xmm, imm8
+, RegSet::empty() // VPSLLDQ ymm, ymm, imm8
+, RegSet::empty() // VPSLLQ xmm, xmm, imm8
+, RegSet::empty() // VPSLLQ xmm, xmm, m128
+, RegSet::empty() // VPSLLQ xmm, xmm, xmm
+, RegSet::empty() // VPSLLQ ymm, ymm, imm8
+, RegSet::empty() // VPSLLQ ymm, ymm, m128
+, RegSet::empty() // VPSLLQ ymm, ymm, xmm
+, RegSet::empty() // VPSLLVD xmm, xmm, m128
+, RegSet::empty() // VPSLLVD xmm, xmm, xmm
+, RegSet::empty() // VPSLLVD ymm, ymm, m256
+, RegSet::empty() // VPSLLVD ymm, ymm, ymm
+, RegSet::empty() // VPSLLVQ xmm, xmm, m128
+, RegSet::empty() // VPSLLVQ xmm, xmm, xmm
+, RegSet::empty() // VPSLLVQ ymm, ymm, m256
+, RegSet::empty() // VPSLLVQ ymm, ymm, ymm
+, RegSet::empty() // VPSLLW xmm, xmm, imm8
+, RegSet::empty() // VPSLLW xmm, xmm, m128
+, RegSet::empty() // VPSLLW xmm, xmm, xmm
+, RegSet::empty() // VPSLLW ymm, ymm, imm8
+, RegSet::empty() // VPSLLW ymm, ymm, m128
+, RegSet::empty() // VPSLLW ymm, ymm, xmm
+, RegSet::empty() // VPSRAD xmm, xmm, imm8
+, RegSet::empty() // VPSRAD xmm, xmm, m128
+, RegSet::empty() // VPSRAD xmm, xmm, xmm
+, RegSet::empty() // VPSRAD ymm, ymm, imm8
+, RegSet::empty() // VPSRAD ymm, ymm, m128
+, RegSet::empty() // VPSRAD ymm, ymm, xmm
+, RegSet::empty() // VPSRAVD xmm, xmm, m128
+, RegSet::empty() // VPSRAVD xmm, xmm, xmm
+, RegSet::empty() // VPSRAVD ymm, ymm, m256
+, RegSet::empty() // VPSRAVD ymm, ymm, ymm
+, RegSet::empty() // VPSRAW xmm, xmm, imm8
+, RegSet::empty() // VPSRAW xmm, xmm, m128
+, RegSet::empty() // VPSRAW xmm, xmm, xmm
+, RegSet::empty() // VPSRAW ymm, ymm, imm8
+, RegSet::empty() // VPSRAW ymm, ymm, m128
+, RegSet::empty() // VPSRAW ymm, ymm, xmm
+, RegSet::empty() // VPSRLD xmm, xmm, imm8
+, RegSet::empty() // VPSRLD xmm, xmm, m128
+, RegSet::empty() // VPSRLD xmm, xmm, xmm
+, RegSet::empty() // VPSRLD ymm, ymm, imm8
+, RegSet::empty() // VPSRLD ymm, ymm, m128
+, RegSet::empty() // VPSRLD ymm, ymm, xmm
+, RegSet::empty() // VPSRLDQ xmm, xmm, imm8
+, RegSet::empty() // VPSRLDQ ymm, ymm, imm8
+, RegSet::empty() // VPSRLQ xmm, xmm, imm8
+, RegSet::empty() // VPSRLQ xmm, xmm, m128
+, RegSet::empty() // VPSRLQ xmm, xmm, xmm
+, RegSet::empty() // VPSRLQ ymm, ymm, imm8
+, RegSet::empty() // VPSRLQ ymm, ymm, m128
+, RegSet::empty() // VPSRLQ ymm, ymm, xmm
+, RegSet::empty() // VPSRLVD xmm, xmm, m128
+, RegSet::empty() // VPSRLVD xmm, xmm, xmm
+, RegSet::empty() // VPSRLVD ymm, ymm, m256
+, RegSet::empty() // VPSRLVD ymm, ymm, ymm
+, RegSet::empty() // VPSRLVQ xmm, xmm, m128
+, RegSet::empty() // VPSRLVQ xmm, xmm, xmm
+, RegSet::empty() // VPSRLVQ ymm, ymm, m256
+, RegSet::empty() // VPSRLVQ ymm, ymm, ymm
+, RegSet::empty() // VPSRLW xmm, xmm, imm8
+, RegSet::empty() // VPSRLW xmm, xmm, m128
+, RegSet::empty() // VPSRLW xmm, xmm, xmm
+, RegSet::empty() // VPSRLW ymm, ymm, imm8
+, RegSet::empty() // VPSRLW ymm, ymm, m128
+, RegSet::empty() // VPSRLW ymm, ymm, xmm
+, RegSet::empty() // VPSUBB xmm, xmm, m128
+, RegSet::empty() // VPSUBB xmm, xmm, xmm
+, RegSet::empty() // VPSUBB ymm, ymm, m256
+, RegSet::empty() // VPSUBB ymm, ymm, ymm
+, RegSet::empty() // VPSUBD xmm, xmm, m128
+, RegSet::empty() // VPSUBD xmm, xmm, xmm
+, RegSet::empty() // VPSUBD ymm, ymm, m256
+, RegSet::empty() // VPSUBD ymm, ymm, ymm
+, RegSet::empty() // VPSUBQ xmm, xmm, m128
+, RegSet::empty() // VPSUBQ xmm, xmm, xmm
+, RegSet::empty() // VPSUBQ ymm, ymm, m256
+, RegSet::empty() // VPSUBQ ymm, ymm, ymm
+, RegSet::empty() // VPSUBSB xmm, xmm, m128
+, RegSet::empty() // VPSUBSB xmm, xmm, xmm
+, RegSet::empty() // VPSUBSB ymm, ymm, m256
+, RegSet::empty() // VPSUBSB ymm, ymm, ymm
+, RegSet::empty() // VPSUBSW xmm, xmm, m128
+, RegSet::empty() // VPSUBSW xmm, xmm, xmm
+, RegSet::empty() // VPSUBSW ymm, ymm, m256
+, RegSet::empty() // VPSUBSW ymm, ymm, ymm
+, RegSet::empty() // VPSUBUSB xmm, xmm, m128
+, RegSet::empty() // VPSUBUSB xmm, xmm, xmm
+, RegSet::empty() // VPSUBUSB ymm, ymm, m256
+, RegSet::empty() // VPSUBUSB ymm, ymm, ymm
+, RegSet::empty() // VPSUBUSW xmm, xmm, m128
+, RegSet::empty() // VPSUBUSW xmm, xmm, xmm
+, RegSet::empty() // VPSUBUSW ymm, ymm, m256
+, RegSet::empty() // VPSUBUSW ymm, ymm, ymm
+, RegSet::empty() // VPSUBW xmm, xmm, m128
+, RegSet::empty() // VPSUBW xmm, xmm, xmm
+, RegSet::empty() // VPSUBW ymm, ymm, m256
+, RegSet::empty() // VPSUBW ymm, ymm, ymm
+, RegSet::empty() // VPTEST xmm, m128
+, RegSet::empty() // VPTEST xmm, xmm
+, RegSet::empty() // VPTEST ymm, m256
+, RegSet::empty() // VPTEST ymm, ymm
+, RegSet::empty() // VPUNPCKHBW xmm, xmm, m128
+, RegSet::empty() // VPUNPCKHBW xmm, xmm, xmm
+, RegSet::empty() // VPUNPCKHBW ymm, ymm, m256
+, RegSet::empty() // VPUNPCKHBW ymm, ymm, ymm
+, RegSet::empty() // VPUNPCKHDQ xmm, xmm, m128
+, RegSet::empty() // VPUNPCKHDQ xmm, xmm, xmm
+, RegSet::empty() // VPUNPCKHDQ ymm, ymm, m256
+, RegSet::empty() // VPUNPCKHDQ ymm, ymm, ymm
+, RegSet::empty() // VPUNPCKHQDQ xmm, xmm, m128
+, RegSet::empty() // VPUNPCKHQDQ xmm, xmm, xmm
+, RegSet::empty() // VPUNPCKHQDQ ymm, ymm, m256
+, RegSet::empty() // VPUNPCKHQDQ ymm, ymm, ymm
+, RegSet::empty() // VPUNPCKHWD xmm, xmm, m128
+, RegSet::empty() // VPUNPCKHWD xmm, xmm, xmm
+, RegSet::empty() // VPUNPCKHWD ymm, ymm, m256
+, RegSet::empty() // VPUNPCKHWD ymm, ymm, ymm
+, RegSet::empty() // VPUNPCKLBW xmm, xmm, m128
+, RegSet::empty() // VPUNPCKLBW xmm, xmm, xmm
+, RegSet::empty() // VPUNPCKLBW ymm, ymm, m256
+, RegSet::empty() // VPUNPCKLBW ymm, ymm, ymm
+, RegSet::empty() // VPUNPCKLDQ xmm, xmm, m128
+, RegSet::empty() // VPUNPCKLDQ xmm, xmm, xmm
+, RegSet::empty() // VPUNPCKLDQ ymm, ymm, m256
+, RegSet::empty() // VPUNPCKLDQ ymm, ymm, ymm
+, RegSet::empty() // VPUNPCKLQDQ xmm, xmm, m128
+, RegSet::empty() // VPUNPCKLQDQ xmm, xmm, xmm
+, RegSet::empty() // VPUNPCKLQDQ ymm, ymm, m256
+, RegSet::empty() // VPUNPCKLQDQ ymm, ymm, ymm
+, RegSet::empty() // VPUNPCKLWD xmm, xmm, m128
+, RegSet::empty() // VPUNPCKLWD xmm, xmm, xmm
+, RegSet::empty() // VPUNPCKLWD ymm, ymm, m256
+, RegSet::empty() // VPUNPCKLWD ymm, ymm, ymm
+, RegSet::empty() // VPXOR xmm, xmm, m128
+, RegSet::empty() // VPXOR xmm, xmm, xmm
+, RegSet::empty() // VPXOR ymm, ymm, m256
+, RegSet::empty() // VPXOR ymm, ymm, ymm
+, RegSet::empty() // VRCPPS xmm, m128
+, RegSet::empty() // VRCPPS xmm, xmm
+, RegSet::empty() // VRCPPS ymm, m256
+, RegSet::empty() // VRCPPS ymm, ymm
+, RegSet::empty() // VRCPSS xmm, xmm, m32
+, RegSet::empty() // VRCPSS xmm, xmm, xmm
+, RegSet::empty()+Constants::mxcsr_rc() // VROUNDPD xmm, m128, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VROUNDPD xmm, xmm, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VROUNDPD ymm, m256, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VROUNDPD ymm, ymm, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VROUNDPS xmm, m128, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VROUNDPS xmm, xmm, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VROUNDPS ymm, m256, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VROUNDPS ymm, ymm, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VROUNDSD xmm, xmm, m64, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VROUNDSD xmm, xmm, xmm, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VROUNDSS xmm, xmm, m32, imm8
+, RegSet::empty()+Constants::mxcsr_rc() // VROUNDSS xmm, xmm, xmm, imm8
+, RegSet::empty() // VRSQRTPS xmm, m128
+, RegSet::empty() // VRSQRTPS xmm, xmm
+, RegSet::empty() // VRSQRTPS ymm, m256
+, RegSet::empty() // VRSQRTPS ymm, ymm
+, RegSet::empty() // VRSQRTSS xmm, xmm, m32
+, RegSet::empty() // VRSQRTSS xmm, xmm, xmm
+, RegSet::empty() // VSHUFPD xmm, xmm, m128, imm8
+, RegSet::empty() // VSHUFPD xmm, xmm, xmm, imm8
+, RegSet::empty() // VSHUFPD ymm, ymm, m256, imm8
+, RegSet::empty() // VSHUFPD ymm, ymm, ymm, imm8
+, RegSet::empty() // VSHUFPS xmm, xmm, m128, imm8
+, RegSet::empty() // VSHUFPS xmm, xmm, xmm, imm8
+, RegSet::empty() // VSHUFPS ymm, ymm, m256, imm8
+, RegSet::empty() // VSHUFPS ymm, ymm, ymm, imm8
+, RegSet::empty() // VSQRTPD xmm, m128
+, RegSet::empty() // VSQRTPD xmm, xmm
+, RegSet::empty() // VSQRTPD ymm, m256
+, RegSet::empty() // VSQRTPD ymm, ymm
+, RegSet::empty() // VSQRTPS xmm, m128
+, RegSet::empty() // VSQRTPS xmm, xmm
+, RegSet::empty() // VSQRTPS ymm, m256
+, RegSet::empty() // VSQRTPS ymm, ymm
+, RegSet::empty() // VSQRTSD xmm, xmm, m64
+, RegSet::empty() // VSQRTSD xmm, xmm, xmm
+, RegSet::empty() // VSQRTSS xmm, xmm, m32
+, RegSet::empty() // VSQRTSS xmm, xmm, xmm
+, RegSet::empty()+Constants::mxcsr_ie()+Constants::mxcsr_de()+Constants::mxcsr_ze()+Constants::mxcsr_oe()+Constants::mxcsr_ue()+Constants::mxcsr_pe()+Constants::mxcsr_daz()+Constants::mxcsr_im()+Constants::mxcsr_dm()+Constants::mxcsr_zm()+Constants::mxcsr_om()+Constants::mxcsr_um()+Constants::mxcsr_pm()+Constants::mxcsr_rc()+Constants::mxcsr_fz() // VSTMXCSR m32
+, RegSet::empty() // VSUBPD xmm, xmm, m128
+, RegSet::empty() // VSUBPD xmm, xmm, xmm
+, RegSet::empty() // VSUBPD ymm, ymm, m256
+, RegSet::empty() // VSUBPD ymm, ymm, ymm
+, RegSet::empty() // VSUBPS xmm, xmm, m128
+, RegSet::empty() // VSUBPS xmm, xmm, xmm
+, RegSet::empty() // VSUBPS ymm, ymm, m256
+, RegSet::empty() // VSUBPS ymm, ymm, ymm
+, RegSet::empty() // VSUBSD xmm, xmm, m64
+, RegSet::empty() // VSUBSD xmm, xmm, xmm
+, RegSet::empty() // VSUBSS xmm, xmm, m32
+, RegSet::empty() // VSUBSS xmm, xmm, xmm
+, RegSet::empty() // VTESTPD xmm, m128
+, RegSet::empty() // VTESTPD xmm, xmm
+, RegSet::empty() // VTESTPD ymm, m256
+, RegSet::empty() // VTESTPD ymm, ymm
+, RegSet::empty() // VTESTPS xmm, m128
+, RegSet::empty() // VTESTPS xmm, xmm
+, RegSet::empty() // VTESTPS ymm, m256
+, RegSet::empty() // VTESTPS ymm, ymm
+, RegSet::empty() // VUCOMISD xmm, m64
+, RegSet::empty() // VUCOMISD xmm, xmm
+, RegSet::empty() // VUCOMISS xmm, m32
+, RegSet::empty() // VUCOMISS xmm, xmm
+, RegSet::empty() // VUNPCKHPD xmm, xmm, m128
+, RegSet::empty() // VUNPCKHPD xmm, xmm, xmm
+, RegSet::empty() // VUNPCKHPD ymm, ymm, m256
+, RegSet::empty() // VUNPCKHPD ymm, ymm, ymm
+, RegSet::empty() // VUNPCKHPS xmm, xmm, m128
+, RegSet::empty() // VUNPCKHPS xmm, xmm, xmm
+, RegSet::empty() // VUNPCKHPS ymm, ymm, m256
+, RegSet::empty() // VUNPCKHPS ymm, ymm, ymm
+, RegSet::empty() // VUNPCKLPD xmm, xmm, m128
+, RegSet::empty() // VUNPCKLPD xmm, xmm, xmm
+, RegSet::empty() // VUNPCKLPD ymm, ymm, m256
+, RegSet::empty() // VUNPCKLPD ymm, ymm, ymm
+, RegSet::empty() // VUNPCKLPS xmm, xmm, m128
+, RegSet::empty() // VUNPCKLPS xmm, xmm, xmm
+, RegSet::empty() // VUNPCKLPS ymm, ymm, m256
+, RegSet::empty() // VUNPCKLPS ymm, ymm, ymm
+, RegSet::empty() // VXORPD xmm, xmm, m128
+, RegSet::empty() // VXORPD xmm, xmm, xmm
+, RegSet::empty() // VXORPD ymm, ymm, m256
+, RegSet::empty() // VXORPD ymm, ymm, ymm
+, RegSet::empty() // VXORPS xmm, xmm, m128
+, RegSet::empty() // VXORPS xmm, xmm, xmm
+, RegSet::empty() // VXORPS ymm, ymm, m256
+, RegSet::empty() // VXORPS ymm, ymm, ymm
+, RegSet::empty() // VZEROALL 
+, RegSet::empty()+Constants::xmm0()+Constants::xmm1()+Constants::xmm2()+Constants::xmm3()+Constants::xmm4()+Constants::xmm5()+Constants::xmm6()+Constants::xmm7()+Constants::xmm8()+Constants::xmm9()+Constants::xmm10()+Constants::xmm11()+Constants::xmm12()+Constants::xmm13()+Constants::xmm14()+Constants::xmm15() // VZEROUPPER 
+, RegSet::empty() // WAIT 
+, RegSet::empty() // WRFSBASE r32
+, RegSet::empty() // WRFSBASE r64
+, RegSet::empty() // WRGSBASE r32
+, RegSet::empty() // WRGSBASE r64
+, RegSet::empty() // XABORT imm8
+, RegSet::empty() // XACQUIRE 
+, RegSet::empty() // XADD m16, r16
+, RegSet::empty() // XADD m32, r32
+, RegSet::empty() // XADD m64, r64
+, RegSet::empty() // XADD m8, r8
+, RegSet::empty() // XADD m8, rh
+, RegSet::empty() // XADD r16, r16
+, RegSet::empty() // XADD r32, r32
+, RegSet::empty() // XADD r64, r64
+, RegSet::empty() // XADD r8, r8
+, RegSet::empty() // XADD r8, rh
+, RegSet::empty() // XADD rh, r8
+, RegSet::empty() // XADD rh, rh
+, RegSet::empty() // XBEGIN label32
+, RegSet::empty() // XBEGIN rel32
+, RegSet::empty() // XCHG AX, r16
+, RegSet::empty() // XCHG EAX, r32
+, RegSet::empty() // XCHG m16, r16
+, RegSet::empty() // XCHG m32, r32
+, RegSet::empty() // XCHG m64, r64
+, RegSet::empty() // XCHG m8, r8
+, RegSet::empty() // XCHG m8, rh
+, RegSet::empty() // XCHG r16, AX
+, RegSet::empty() // XCHG r16, m16
+, RegSet::empty() // XCHG r16, r16
+, RegSet::empty() // XCHG r16, r16
+, RegSet::empty() // XCHG r32, EAX
+, RegSet::empty() // XCHG r32, m32
+, RegSet::empty() // XCHG r32, r32
+, RegSet::empty() // XCHG r32, r32
+, RegSet::empty() // XCHG r64, m64
+, RegSet::empty() // XCHG r64, r64
+, RegSet::empty() // XCHG r64, r64
+, RegSet::empty() // XCHG r64, RAX
+, RegSet::empty() // XCHG r8, m8
+, RegSet::empty() // XCHG r8, r8
+, RegSet::empty() // XCHG r8, r8
+, RegSet::empty() // XCHG r8, rh
+, RegSet::empty() // XCHG r8, rh
+, RegSet::empty() // XCHG RAX, r64
+, RegSet::empty() // XCHG rh, m8
+, RegSet::empty() // XCHG rh, r8
+, RegSet::empty() // XCHG rh, r8
+, RegSet::empty() // XCHG rh, rh
+, RegSet::empty() // XCHG rh, rh
+, RegSet::empty() // XEND 
+, RegSet::empty()+Constants::ecx() // XGETBV 
+, RegSet::empty()+Constants::al()+Constants::ds()+Constants::bx()+Constants::ebx() // XLAT m8
+, RegSet::empty()+Constants::al()+Constants::ds()+Constants::bx()+Constants::ebx() // XLATB 
+, RegSet::empty()+Constants::al()+Constants::rbx() // XLATB 
+, RegSet::empty() // XOR AL, imm8
+, RegSet::empty() // XOR AX, imm16
+, RegSet::empty() // XOR EAX, imm32
+, RegSet::empty() // XOR m16, imm16
+, RegSet::empty() // XOR m16, imm8
+, RegSet::empty() // XOR m16, r16
+, RegSet::empty() // XOR m32, imm32
+, RegSet::empty() // XOR m32, imm8
+, RegSet::empty() // XOR m32, r32
+, RegSet::empty() // XOR m64, imm32
+, RegSet::empty() // XOR m64, imm8
+, RegSet::empty() // XOR m64, r64
+, RegSet::empty() // XOR m8, imm8
+, RegSet::empty() // XOR m8, r8
+, RegSet::empty() // XOR m8, rh
+, RegSet::empty() // XOR r16, imm16
+, RegSet::empty() // XOR r16, imm8
+, RegSet::empty() // XOR r16, m16
+, RegSet::empty() // XOR r16, r16
+, RegSet::empty() // XOR r16, r16
+, RegSet::empty() // XOR r32, imm32
+, RegSet::empty() // XOR r32, imm8
+, RegSet::empty() // XOR r32, m32
+, RegSet::empty() // XOR r32, r32
+, RegSet::empty() // XOR r32, r32
+, RegSet::empty() // XOR r64, imm32
+, RegSet::empty() // XOR r64, imm8
+, RegSet::empty() // XOR r64, m64
+, RegSet::empty() // XOR r64, r64
+, RegSet::empty() // XOR r64, r64
+, RegSet::empty() // XOR r8, imm8
+, RegSet::empty() // XOR r8, m8
+, RegSet::empty() // XOR r8, r8
+, RegSet::empty() // XOR r8, r8
+, RegSet::empty() // XOR r8, rh
+, RegSet::empty() // XOR r8, rh
+, RegSet::empty() // XOR RAX, imm32
+, RegSet::empty() // XOR rh, imm8
+, RegSet::empty() // XOR rh, m8
+, RegSet::empty() // XOR rh, r8
+, RegSet::empty() // XOR rh, r8
+, RegSet::empty() // XOR rh, rh
+, RegSet::empty() // XOR rh, rh
+, RegSet::empty() // XORPD xmm, m128
+, RegSet::empty() // XORPD xmm, xmm
+, RegSet::empty() // XORPS xmm, m128
+, RegSet::empty() // XORPS xmm, xmm
+, RegSet::empty() // XRELEASE 
+, RegSet::universe() // XRSTOR m16
+, RegSet::universe() // XRSTOR m32
+, RegSet::universe() // XRSTOR m64
+, RegSet::universe() // XRSTOR64 m16
+, RegSet::universe() // XRSTOR64 m32
+, RegSet::universe() // XRSTOR64 m64
+, RegSet::universe() // XSAVE m16
+, RegSet::universe() // XSAVE m32
+, RegSet::universe() // XSAVE m64
+, RegSet::universe() // XSAVE64 m16
+, RegSet::universe() // XSAVE64 m32
+, RegSet::universe() // XSAVE64 m64
+, RegSet::universe() // XSAVEOPT m16
+, RegSet::universe() // XSAVEOPT m32
+, RegSet::universe() // XSAVEOPT m64
+, RegSet::universe() // XSAVEOPT64 m16
+, RegSet::universe() // XSAVEOPT64 m32
+, RegSet::universe() // XSAVEOPT64 m64
+, RegSet::empty() // XTEST 
