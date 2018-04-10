@@ -105,8 +105,7 @@ bool Closure::equals(shared_ptr<Value> other) {
 
 /* Native functions */
 shared_ptr<Constant> PrintNativeFunction::evalNativeFunction(Frame& currentFrame) {
-    string arg = local_vars_[0];
-    Constant* val = currentFrame.getLocalVar(arg).get();
+    auto val = currentFrame.getLocalVar(0, "s");
     cout << val->toString() << endl;
     return make_shared<None>();
 };
@@ -118,9 +117,8 @@ shared_ptr<Constant> InputNativeFunction::evalNativeFunction(Frame& currentFrame
 };
 
 shared_ptr<Constant> IntcastNativeFunction::evalNativeFunction(Frame& currentFrame) {
-    string arg = local_vars_[0];
-    Constant* val = currentFrame.getLocalVar(arg).get();
-	auto intVal = dynamic_cast<Integer*>(val);
+    auto val = currentFrame.getLocalVar(0, "s");
+	auto intVal = dynamic_pointer_cast<Integer>(val);
     if (intVal != NULL) {
         return make_shared<Integer>(intVal->value);
     }

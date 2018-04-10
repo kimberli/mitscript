@@ -15,7 +15,19 @@
 using namespace std;
 
 Interpreter::Interpreter(shared_ptr<Function> mainFunc) {
-    shared_ptr<Frame> frame = make_shared<Frame>(Frame(mainFunc));
+    int numLocals = mainFunc->names_.size();
+    int numRefs = 0;
+    if (mainFunc->local_reference_vars_.size() != 0) {
+        throw RuntimeException("can't initialize root frame with nonzero ref vars");
+    }
+    if (mainFunc->free_vars_.size() != 0) {
+        throw RuntimeException("can't initialize root frame with nonzero free vars");
+    }
+    if (mainFunc->local_vars_.size() != 0) {
+        throw RuntimeException("can't initialize root frame with nonzero local vars");
+    }
+    mainFunc->local_vars_ = mainFunc->names_;
+    shared_ptr<Frame> frame = make_shared<Frame>(Frame(mainFunc, numLocals, numRefs));
     globalFrame = frame;
     frames.push(frame);
     finished = false;
@@ -30,9 +42,9 @@ Interpreter::Interpreter(shared_ptr<Function> mainFunc) {
     InstructionList instructions;
 	vector<shared_ptr<Function>> frameFuncs;
 	// add native functions at the beginning of functions array
-	frame.get()->func.get()->functions_[0] = make_shared<PrintNativeFunction>(*(new PrintNativeFunction(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions)));
-	frame.get()->func.get()->functions_[1] = make_shared<InputNativeFunction>(*(new InputNativeFunction(functions_, constants_, 0, args0, local_reference_vars_, free_vars_, names_, instructions)));
-	frame.get()->func.get()->functions_[2] = make_shared<IntcastNativeFunction>(*(new IntcastNativeFunction(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions)));
+	frame->func->functions_[0] = make_shared<PrintNativeFunction>(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
+	frame->func->functions_[1] = make_shared<InputNativeFunction>(functions_, constants_, 0, args0, local_reference_vars_, free_vars_, names_, instructions);
+	frame->func->functions_[2] = make_shared<IntcastNativeFunction>(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
 };
 
 void Interpreter::executeStep() {
@@ -56,40 +68,52 @@ void Interpreter::executeStep() {
             }
         case Operation::LoadLocal:
             {
-                string localName = frame->getLocalVarByIndex(inst.operand0.value());
-                frame->opStackPush(frame->getLocalVar(localName));
+                int index = inst.operand0.value();
+                frame->opStackPush(frame->getLocalVar(index, frame->func->local_vars_[index]));
                 break;
             }
         case Operation::StoreLocal:
             {
-                string localName = frame->getLocalVarByIndex(inst.operand0.value());
+                int index = inst.operand0.value();
                 auto value = dynamic_pointer_cast<Constant>(frame->opStackPop());
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for StoreLocal");
                 }
-                frame->setLocalVar(localName, value);
+                frame->setLocalVar(index, value);
                 break;
             }
         case Operation::LoadGlobal:
             {
-                string globalName = frame->getNameByIndex(inst.operand0.value());
-                frame->opStackPush(globalFrame->getLocalVar(globalName));
+                int index = inst.operand0.value();
+                if (frame != globalFrame) {
+                    string name = frame->func->names_[index];
+                    int gIndex = globalFrame->getLocalIndex(name);
+                    frame->opStackPush(globalFrame->getLocalVar(gIndex, frame->func->names_[gIndex]));
+                } else {
+                    frame->opStackPush(frame->getLocalVar(index, frame->func->names_[index]));
+                }
                 break;
             }
         case Operation::StoreGlobal:
             {
-                string globalName = frame->getNameByIndex(inst.operand0.value());
+                int index = inst.operand0.value();
                 auto value = dynamic_pointer_cast<Constant>(frame->opStackPop());
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for StoreGlobal");
                 }
-                globalFrame->setLocalVar(globalName, value);
+                if (frame != globalFrame) {
+                    string name = frame->func->names_[index];
+                    int gIndex = globalFrame->getLocalIndex(name);
+                    globalFrame->setLocalVar(gIndex, value);
+                } else {
+                    globalFrame->setLocalVar(index, value);
+                }
                 break;
             }
         case Operation::PushReference:
             {
-                string refName = frame->getRefVarByIndex(inst.operand0.value());
-                auto valuePtr = frame->getRefVar(refName);
+                int index = inst.operand0.value();
+                auto valuePtr = frame->getRefVar(index);
                 frame->opStackPush(valuePtr);
                 break;
             }
@@ -177,6 +201,10 @@ void Interpreter::executeStep() {
                     throw RuntimeException("expected Function on the stack for AllocClosure");
                 }
 
+                if (numFreeVars != func->free_vars_.size()) {
+                    throw RuntimeException("expected " + to_string(func->free_vars_.size()) + " reference variables but got " + to_string(numFreeVars));
+                }
+
                 // push new closure onto the stack
                 frame->opStackPush(make_shared<Closure>(refList, func));
                 break;
@@ -194,7 +222,7 @@ void Interpreter::executeStep() {
                     }
                     argsList.push_back(value);
                 }
-				std::reverse(argsList.begin(), argsList.end());
+				reverse(argsList.begin(), argsList.end());
                 auto clos = dynamic_pointer_cast<Closure>(frame->opStackPop());
                 if (clos == NULL) {
                     throw RuntimeException("expected Closure on operand stack for function call");
@@ -205,31 +233,27 @@ void Interpreter::executeStep() {
                 }
 
                 // process local refs and local vars
-                LocalVarMap localVars;
-                LocalRefMap localRefs;
-                for (int i = 0; i < clos->refs.size(); i++) {
-                    string free_var = clos->func->free_vars_[i];
-                    localRefs[free_var] = clos->refs[i];
-                }
-				for (int i = 0; i < clos->func->local_vars_.size(); i++) {
-                    string arg = clos->func->local_vars_[i];
-					localVars[arg] = make_shared<None>();
+                int numLocals = clos->func->local_vars_.size();
+                int numRefs = clos->func->free_vars_.size();
+                shared_ptr<Frame> newFrame = make_shared<Frame>(Frame(clos->func, numLocals, numRefs));
+				for (int i = 0; i < numLocals; i++) {
+					newFrame->setLocalVar(i, make_shared<None>());
 				}
-                for (int i = 0; i < numArgs; i++) {
-                    string arg = clos->func->local_vars_[i];
-                    localVars[arg] = argsList[i];
-					localRefs[arg] = make_shared<ValuePtr>(localVars[arg]);
+                for (int i = 0; i < numRefs; i++) {
+                    newFrame->setRefVar(i, clos->refs[i]);
                 }
-                shared_ptr<Frame> newFrame = make_shared<Frame>(Frame(clos->func, localVars, localRefs));
-				auto nativeFunc = dynamic_cast<NativeFunction*>(clos->func.get());
+                for (int i = 0; i < numArgs; i++) {
+                    newFrame->setLocalVar(i, argsList[i]);
+                }
+				auto nativeFunc = dynamic_pointer_cast<NativeFunction>(clos->func);
 				if (nativeFunc != NULL) {
-					shared_ptr<Constant> val = nativeFunc->evalNativeFunction(*newFrame.get());
-					if (dynamic_cast<None*>(val.get()) == NULL) {
+					shared_ptr<Constant> val = nativeFunc->evalNativeFunction(*newFrame);
+					if (dynamic_pointer_cast<None>(val) == NULL) {
 						frame->opStackPush(val);
 					}
 				} else {
 					newOffset = 0;
-               		frames.push(newFrame);
+                    frames.push(newFrame);
 				}
                 break;
             }
@@ -248,20 +272,20 @@ void Interpreter::executeStep() {
                 auto right = frame->opStackPop();
                 auto left = frame->opStackPop();
                 // try adding strings if left or right is a string
-                auto leftStr = dynamic_cast<String*>(left.get());
+                auto leftStr = dynamic_pointer_cast<String>(left);
                 if (leftStr != NULL) {
                     frame->opStackPush(
                         make_shared<String>(leftStr->value + right->toString()));
                     break;
                 }
-                auto rightStr = dynamic_cast<String*>(right.get());
+                auto rightStr = dynamic_pointer_cast<String>(right);
                 if (rightStr != NULL) {
                     frame->opStackPush(
                         make_shared<String>(left->toString() + rightStr->value));
                     break;
                 }
                 // try adding integers if left is an int
-                auto leftInt = dynamic_cast<Integer*>(left.get());
+                auto leftInt = dynamic_pointer_cast<Integer>(left);
                 if (leftInt != NULL) {
                     int leftI = leftInt->value;
                     int rightI = right->cast<Integer>()->value;

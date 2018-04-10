@@ -75,8 +75,8 @@ int main(int argc, char** argv) {
         bc_output = make_shared<Function>(*output);
     }
   
-    Interpreter* intp = new Interpreter(bc_output);
     try {
+        Interpreter* intp = new Interpreter(bc_output);
         intp->run();
     } catch (InterpreterException& exception) {
         cout << exception.toString() << endl;

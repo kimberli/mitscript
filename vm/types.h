@@ -53,6 +53,7 @@ struct ValuePtr: public Value {
     // Class for reference variables
     shared_ptr<Constant> ptr;
 
+    ValuePtr() {};
     ValuePtr(shared_ptr<Constant> ptr): ptr(ptr) {};
     virtual ~ValuePtr() {};
 

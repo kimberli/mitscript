@@ -1,4 +1,7 @@
 #include "frame.h"
+#include <algorithm>
+
+using namespace std;
 
 // instruction helpers
 int Frame::numInstructions() {
@@ -12,7 +15,7 @@ Instruction& Frame::getCurrInstruction() {
 void Frame::moveToInstruction(int offset) {
     int newOffset = instructionIndex + offset;
     if (newOffset < 0 || newOffset >= func->instructions.size()) {
-        throw RuntimeException("instruction " + std::to_string(instructionIndex + newOffset) + " out of bounds");
+        throw RuntimeException("instruction " + to_string(instructionIndex + newOffset) + " out of bounds");
     }
     instructionIndex += offset;
 }
@@ -20,35 +23,28 @@ void Frame::moveToInstruction(int offset) {
 // function value helpers
 shared_ptr<Constant> Frame::getConstantByIndex(int index) {
     if (index < 0 || index >= func->constants_.size()) {
-        throw RuntimeException("constant " + std::to_string(index) + " out of bounds");
+        throw RuntimeException("constant " + to_string(index) + " out of bounds");
     }
     return func->constants_[index];
 }
 
 shared_ptr<Function> Frame::getFunctionByIndex(int index) {
     if (index < 0 || index >= func->functions_.size()) {
-        throw RuntimeException("function " + std::to_string(index) + " out of bounds");
+        throw RuntimeException("function " + to_string(index) + " out of bounds");
     }
     return func->functions_[index];
 }
 
-string Frame::getLocalVarByIndex(int index) {
-    if (index < 0 || index >= func->local_vars_.size()) {
-        throw RuntimeException("local var " + std::to_string(index) + " out of bounds");
-    }
-    return func->local_vars_[index];
-}
-
 string Frame::getNameByIndex(int index) {
     if (index < 0 || index >= func->names_.size()) {
-        throw RuntimeException("name " + std::to_string(index) + " out of bounds");
+        throw RuntimeException("name " + to_string(index) + " out of bounds");
     }
     return func->names_[index];
 }
 
 string Frame::getRefVarByIndex(int index) {
     if (index < 0 || index >= (func->local_reference_vars_.size() + func->free_vars_.size())) {
-        throw RuntimeException("name " + std::to_string(index) + " out of bounds");
+        throw RuntimeException("name " + to_string(index) + " out of bounds");
     }
     if (index < func->local_reference_vars_.size()) {
         return func->local_reference_vars_[index];
@@ -57,50 +53,75 @@ string Frame::getRefVarByIndex(int index) {
 }
 
 // var map helpers
-shared_ptr<Constant> Frame::getLocalVar(string name) {
-    if (localRefs.count(name) == 0) {
-        throw UninitializedVariableException(name + " is not initialized");
+int Frame::getLocalIndex(string name) {
+    vector<string> localVarNames = func->local_vars_;
+    vector<string>::iterator it = find(localVarNames.begin(), localVarNames.end(), name);
+    if (it != localVarNames.end()) {
+        int index = it - localVarNames.begin();
+        return index;
     }
-    return localRefs[name].get()->ptr;
+    throw RuntimeException("can't find local variable " + name);
 }
 
-shared_ptr<ValuePtr> Frame::getRefVar(string name) {
-    if (localRefs.count(name) == 0) {
-        throw UninitializedVariableException(name + " is not initialized");
+shared_ptr<Constant> Frame::getLocalVar(int index, string name) {
+    if (index < 0 || index >= localVars.capacity()) {
+        throw RuntimeException("local var " + to_string(index) + " out of bounds");
     }
-    return localRefs[name];
+    shared_ptr<Constant> result = localVars[index]->ptr;
+    if (result == NULL) {
+        throw UninitializedVariableException(name + " is not defined");
+    }
+    return result;
 }
 
-void Frame::setLocalVar(string name, shared_ptr<Constant> val) {
-    if (localRefs.count(name) != 0) {
-        localRefs[name]->ptr.reset(val.get());
-    } else {
-        localVars[name] = val;
-        localRefs[name] = make_shared<ValuePtr>(localVars[name]);
+shared_ptr<ValuePtr> Frame::getRefVar(int index) {
+    if (index < 0 || index >= localRefs.capacity()) {
+        throw RuntimeException("local ref " + to_string(index) + " out of bounds");
     }
+    return localRefs[index];
 }
 
-void Frame::setRefVar(string name, shared_ptr<ValuePtr> val) {
-    localRefs[name] = val;
+void Frame::setLocalVar(int index, shared_ptr<Constant> val) {
+    if (index < 0 || index >= localVars.capacity()) {
+        throw RuntimeException("local var " + to_string(index) + " out of bounds");
+    }
+    localVars[index]->ptr = val;
+}
+
+void Frame::setRefVar(int index, shared_ptr<ValuePtr> val) {
+    if (index < 0 || index >= localRefs.capacity()) {
+        throw RuntimeException("local ref " + to_string(index) + " out of bounds");
+    }
+    localRefs[index] = val;
+}
+
+shared_ptr<ValuePtr> Frame::getRefToLocal(string name) {
+    vector<string> localVarNames = func->local_vars_;
+    auto it = find(localVarNames.begin(), localVarNames.end(), name);
+    if (it != localVarNames.end()) {
+        int index = it - localVarNames.begin();
+        return localVars[index];
+    }
+    throw RuntimeException("can't find local variable for reference to " + name);
 }
 
 // operand stack helpers
-void Frame::opStackPush(std::shared_ptr<Value> val) {
+void Frame::opStackPush(shared_ptr<Value> val) {
     opStack.push(val);
 }
 
-std::shared_ptr<Value> Frame::opStackPeek() {
+shared_ptr<Value> Frame::opStackPeek() {
     if (opStack.empty()) {
         throw InsufficientStackException("peek at empty stack");
     }
     return opStack.top();
 }
 
-std::shared_ptr<Value> Frame::opStackPop() {
+shared_ptr<Value> Frame::opStackPop() {
     if (opStack.empty()) {
         throw InsufficientStackException("pop from empty stack");
     }
-    std::shared_ptr<Value> top = opStack.top();
+    shared_ptr<Value> top = opStack.top();
     opStack.pop();
     return top;
 }
