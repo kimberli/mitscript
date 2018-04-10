@@ -166,9 +166,12 @@ void Interpreter::executeStep() {
                 break;
             }
         case Operation::IndexStore:
+            // items are popped off in this order: value to store,
+            // index
+            // record
             {
-				string index = frame->opStackPop()->toString();
 				auto value = frame->opStackPop();
+				string index = frame->opStackPop()->toString();
 				Record* record = frame->opStackPop()->cast<Record>();
 				record->value[index] = value;
                 break;
