@@ -43,19 +43,19 @@ function
 	],
     constants = [1, "hi"],
     parameter_count = 0,
-    local_vars = [x, y, z],
+    local_vars = [],
     local_ref_vars = [],
     free_vars = [],
-    names = [],
+    names = [x, y, z],
     instructions =
     [
       load_const  0
-      store_local 0
+      store_global 0
       load_const  1
-      store_local 1
-      load_local  0
-      load_local  1
+      store_global 1
+      load_global  0
+      load_global  1
       sub
-      store_local 2
+      store_global 2
     ]
 }

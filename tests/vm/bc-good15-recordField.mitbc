@@ -44,10 +44,10 @@ function
     ],
     constants = [-1, true, "blah blah 123xyz", None],
     parameter_count = 0,
-    local_vars = [x, y],
+    local_vars = [],
     local_ref_vars = [],
     free_vars = [],
-    names = [input, intcast, print, field1, Field2],
+    names = [input, intcast, print, x, field1, Field2],
     instructions =
     [
       load_func 0
@@ -61,28 +61,28 @@ function
       store_global  1
 
       alloc_record
-      store_local 0
+      store_global 3
 
-      load_local 0
+      load_global 3
       load_const 0
-      field_store 3
-
-      load_local 0
-      load_const 2
       field_store 4
 
+      load_global 3
+      load_const 2
+      field_store 5
+
       load_global 2
-      load_local 0
+      load_global 3
       call 1
 
       load_global 2
-      load_local 0
-      field_load 3
-      call 1
-
-      load_global 2
-      load_local 0
+      load_global 3
       field_load 4
+      call 1
+
+      load_global 2
+      load_global 3
+      field_load 5
       call 1
     ]
 }

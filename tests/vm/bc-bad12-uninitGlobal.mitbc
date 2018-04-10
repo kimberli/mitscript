@@ -42,7 +42,7 @@ function
             ]
         }
     ],
-    constants = [1, 2],
+    constants = [3, 2],
     parameter_count = 0,
     local_vars = [],
     local_ref_vars = [],
@@ -50,19 +50,6 @@ function
     names = [input, intcast, print],
     instructions =
     [
-      load_func 0
-      alloc_closure 0
-      store_global  2
-      load_func 1
-      alloc_closure 0
-      store_global  0
-      load_func 2
-      alloc_closure 0
-      store_global  1
-
-	  load_global 2
-      load_const  0
-      neg
-	  call 1
+      load_global 0
     ]
 }

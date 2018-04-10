@@ -40,14 +40,63 @@ function
             instructions =
             [
             ]
+        },
+        function
+        {
+            functions = [
+                function
+                {
+                    functions = [],
+                    constants = [None],
+                    parameter_count = 0,
+                    local_vars = [],
+                    local_ref_vars = [],
+                    free_vars = [y],
+                    names = [print, x],
+                    instructions =
+                    [
+                      load_global 0
+                      push_ref 0
+                      load_ref
+                      load_global 1
+                      add
+                      call 1
+                      load_const 0
+                      return
+                    ]
+                }
+            ],
+            constants = [None, 34, "hello Y"],
+            parameter_count = 0,
+            local_vars = [a, b, y],
+            local_ref_vars = [y],
+            free_vars = [],
+            names = [],
+            instructions =
+            [
+              load_const 0
+              store_local 0
+              load_const 2
+              store_local 1
+              load_const 1
+              store_local 2
+
+              load_func 0
+              push_ref 0
+              alloc_closure 1
+              call 0
+
+              load_const 0
+              return
+            ]
         }
     ],
     constants = [-1, true, "blah blah 123xyz", None],
     parameter_count = 0,
-    local_vars = [x, y],
-    local_ref_vars = [y],
+    local_vars = [],
+    local_ref_vars = [],
     free_vars = [],
-    names = [input, intcast, print],
+    names = [input, intcast, print, x],
     instructions =
     [
       load_func 0
@@ -60,32 +109,8 @@ function
       alloc_closure 0
       store_global  1
 
-      load_global 2
-      load_const 0
-      store_local 1
-      push_ref 0
-      load_ref
-      call 1
-
-      load_global 2
-      load_const 1
-      store_local 1
-      push_ref 0
-      load_ref
-      call 1
-
-      load_global 2
-      load_const 2
-      store_local 1
-      push_ref 0
-      load_ref
-      call 1
-
-      load_global 2
-      load_const 3
-      store_local 1
-      push_ref 0
-      load_ref
-      call 1
+      load_func 3
+      alloc_closure 0
+      call 0
     ]
 }

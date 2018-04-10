@@ -89,10 +89,10 @@ function
   ],
   constants = [3, 1],
   parameter_count = 0,
-  local_vars = [result],
+  local_vars = [],
   local_ref_vars = [],
   free_vars = [],
-  names = [f, input, intcast, print, x],
+  names = [f, input, intcast, print, result, x],
   instructions =
   [
     load_func 0
@@ -106,18 +106,18 @@ function
     store_global  2
 
     load_const   1
-    store_global 4
+    store_global 5
     load_func    3
     alloc_closure 0
     store_global 0
 
 	load_global 0
-	load_global 4
+	load_global 5
 	call 1
-	store_local 0
+	store_global 4
 
 	load_global 3
-	load_local 0
+	load_global 4
 	call 1
   ]
 }

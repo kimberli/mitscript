@@ -44,7 +44,7 @@ function
     ],
     constants = [3, 2],
     parameter_count = 0,
-    local_vars = [x, y, z],
+    local_vars = [],
     local_ref_vars = [],
     free_vars = [],
     names = [input, intcast, print],
