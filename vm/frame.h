@@ -14,18 +14,14 @@
 
 using namespace std;
 
-typedef vector<shared_ptr<ValuePtr>> LocalVars;
-typedef vector<shared_ptr<ValuePtr>> LocalRefs;
+typedef map<string, shared_ptr<ValuePtr>> VarMap;
 
 class Frame {
     // Class representing a stack frame in interpreter execution
 
-    // vector of local variable names to values
-    // local_vars[i] = func.local_vars_[i]
-    LocalVars localVars;
-    // vector of local reference variable names to values
-    // local_vars[i] = func.free_vars_[i] if i < s
-    LocalRefs localRefs;
+    // vector of local variable names to values (stored in ValuePtr)
+    // and local reference names to shared ValuePtrs
+    VarMap vars;
 
 public:
     // function that the frame is for
@@ -35,16 +31,7 @@ public:
     // index of current instruction in func's instructions list
     int instructionIndex = 0;
 
-    Frame(shared_ptr<Function> func, int numLocals, int numRefs):
-        func(func), instructionIndex(0) {
-            localVars.reserve(numLocals);
-            for (int i = 0; i < numLocals; i++) {
-                localVars.push_back(make_shared<ValuePtr>());
-            }
-            localRefs.reserve(numRefs);
-            for (int i = 0; i < numRefs; i++) {
-                localRefs.push_back(make_shared<ValuePtr>());
-            }
+    Frame(shared_ptr<Function> func): func(func) {
 	};
 
     // instruction helpers
@@ -53,19 +40,18 @@ public:
     void moveToInstruction(int offset);
 
     // function value helpers
-    int getLocalIndex(string name);
     shared_ptr<Constant> getConstantByIndex(int index);
     shared_ptr<Function> getFunctionByIndex(int index);
+    string getLocalByIndex(int index);
     string getNameByIndex(int index);
-    string getRefVarByIndex(int index);
-    shared_ptr<ValuePtr> getRefToLocal(string name);
+    string getRefByIndex(int index);
 
     // var map helpers
-    shared_ptr<Constant> getLocalVar(int index, string name);
-    shared_ptr<ValuePtr> getRefVar(int index);
+    shared_ptr<Constant> getLocalVar(string name);
+    shared_ptr<ValuePtr> getRefVar(string name);
 
-    void setLocalVar(int index, shared_ptr<Constant> val);
-    void setRefVar(int index, shared_ptr<ValuePtr> val);
+    void setLocalVar(string name, shared_ptr<Constant> val);
+    void setRefVar(string name, shared_ptr<ValuePtr> val);
 
     // operand stack helpers
     void opStackPush(std::shared_ptr<Value> val);

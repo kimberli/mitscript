@@ -14,7 +14,7 @@ Instruction& Frame::getCurrInstruction() {
 
 void Frame::moveToInstruction(int offset) {
     int newOffset = instructionIndex + offset;
-    if (newOffset < 0 || newOffset >= func->instructions.size()) {
+    if (newOffset < 0 || newOffset >= numInstructions()) {
         throw RuntimeException("instruction " + to_string(instructionIndex + newOffset) + " out of bounds");
     }
     instructionIndex += offset;
@@ -35,6 +35,13 @@ shared_ptr<Function> Frame::getFunctionByIndex(int index) {
     return func->functions_[index];
 }
 
+string Frame::getLocalByIndex(int index) {
+    if (index < 0 || index >= func->local_vars_.size()) {
+        throw RuntimeException("var " + to_string(index) + " out of bounds");
+    }
+    return func->local_vars_[index];
+}
+
 string Frame::getNameByIndex(int index) {
     if (index < 0 || index >= func->names_.size()) {
         throw RuntimeException("name " + to_string(index) + " out of bounds");
@@ -42,9 +49,9 @@ string Frame::getNameByIndex(int index) {
     return func->names_[index];
 }
 
-string Frame::getRefVarByIndex(int index) {
+string Frame::getRefByIndex(int index) {
     if (index < 0 || index >= (func->local_reference_vars_.size() + func->free_vars_.size())) {
-        throw RuntimeException("name " + to_string(index) + " out of bounds");
+        throw RuntimeException("ref var " + to_string(index) + " out of bounds");
     }
     if (index < func->local_reference_vars_.size()) {
         return func->local_reference_vars_[index];
@@ -53,56 +60,34 @@ string Frame::getRefVarByIndex(int index) {
 }
 
 // var map helpers
-int Frame::getLocalIndex(string name) {
-    vector<string> localVarNames = func->local_vars_;
-    vector<string>::iterator it = find(localVarNames.begin(), localVarNames.end(), name);
-    if (it != localVarNames.end()) {
-        int index = it - localVarNames.begin();
-        return index;
+shared_ptr<Constant> Frame::getLocalVar(string name) {
+    if (vars.count(name) != 0) {
+        shared_ptr<Constant> result = vars[name]->ptr;
+        if (result == NULL) {
+            throw UninitializedVariableException(name + " is not defined");
+        }
+        return result;
     }
-    throw RuntimeException("can't find local variable " + name);
+    throw UninitializedVariableException(name + " is not defined");
 }
 
-shared_ptr<Constant> Frame::getLocalVar(int index, string name) {
-    if (index < 0 || index >= localVars.capacity()) {
-        throw RuntimeException("local var " + to_string(index) + " out of bounds");
+shared_ptr<ValuePtr> Frame::getRefVar(string name) {
+    if (vars.count(name) != 0) {
+        return vars[name];
     }
-    shared_ptr<Constant> result = localVars[index]->ptr;
-    if (result == NULL) {
-        throw UninitializedVariableException(name + " is not defined");
-    }
-    return result;
+    throw RuntimeException(name + " has not been created in its frame's vars");
 }
 
-shared_ptr<ValuePtr> Frame::getRefVar(int index) {
-    if (index < 0 || index >= localRefs.capacity()) {
-        throw RuntimeException("local ref " + to_string(index) + " out of bounds");
+void Frame::setLocalVar(string name, shared_ptr<Constant> val) {
+    if (vars.count(name) == 0) {
+        vars[name] = make_shared<ValuePtr>(val);
+    } else {
+        vars[name]->ptr = val;
     }
-    return localRefs[index];
 }
 
-void Frame::setLocalVar(int index, shared_ptr<Constant> val) {
-    if (index < 0 || index >= localVars.capacity()) {
-        throw RuntimeException("local var " + to_string(index) + " out of bounds");
-    }
-    localVars[index]->ptr = val;
-}
-
-void Frame::setRefVar(int index, shared_ptr<ValuePtr> val) {
-    if (index < 0 || index >= localRefs.capacity()) {
-        throw RuntimeException("local ref " + to_string(index) + " out of bounds");
-    }
-    localRefs[index] = val;
-}
-
-shared_ptr<ValuePtr> Frame::getRefToLocal(string name) {
-    vector<string> localVarNames = func->local_vars_;
-    auto it = find(localVarNames.begin(), localVarNames.end(), name);
-    if (it != localVarNames.end()) {
-        int index = it - localVarNames.begin();
-        return localVars[index];
-    }
-    throw RuntimeException("can't find local variable for reference to " + name);
+void Frame::setRefVar(string name, shared_ptr<ValuePtr> val) {
+    vars[name] = val;
 }
 
 // operand stack helpers

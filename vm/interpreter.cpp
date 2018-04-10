@@ -27,7 +27,7 @@ Interpreter::Interpreter(shared_ptr<Function> mainFunc) {
         throw RuntimeException("can't initialize root frame with nonzero local vars");
     }
     mainFunc->local_vars_ = mainFunc->names_;
-    shared_ptr<Frame> frame = make_shared<Frame>(Frame(mainFunc, numLocals, numRefs));
+    shared_ptr<Frame> frame = make_shared<Frame>(Frame(mainFunc));
     globalFrame = frame;
     frames.push(frame);
     finished = false;
@@ -68,30 +68,25 @@ void Interpreter::executeStep() {
             }
         case Operation::LoadLocal:
             {
-                int index = inst.operand0.value();
-                frame->opStackPush(frame->getLocalVar(index, frame->func->local_vars_[index]));
+                string name = frame->getLocalByIndex(inst.operand0.value());
+                frame->opStackPush(frame->getLocalVar(name));
                 break;
             }
         case Operation::StoreLocal:
             {
-                int index = inst.operand0.value();
+                string name = frame->getLocalByIndex(inst.operand0.value());
                 auto value = dynamic_pointer_cast<Constant>(frame->opStackPop());
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for StoreLocal");
                 }
-                frame->setLocalVar(index, value);
+                frame->setLocalVar(name, value);
                 break;
             }
         case Operation::LoadGlobal:
             {
                 int index = inst.operand0.value();
-                if (frame != globalFrame) {
-                    string name = frame->func->names_[index];
-                    int gIndex = globalFrame->getLocalIndex(name);
-                    frame->opStackPush(globalFrame->getLocalVar(gIndex, frame->func->names_[gIndex]));
-                } else {
-                    frame->opStackPush(frame->getLocalVar(index, frame->func->names_[index]));
-                }
+                string name = frame->getNameByIndex(index);
+                frame->opStackPush(globalFrame->getLocalVar(name));
                 break;
             }
         case Operation::StoreGlobal:
@@ -101,19 +96,14 @@ void Interpreter::executeStep() {
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for StoreGlobal");
                 }
-                if (frame != globalFrame) {
-                    string name = frame->func->names_[index];
-                    int gIndex = globalFrame->getLocalIndex(name);
-                    globalFrame->setLocalVar(gIndex, value);
-                } else {
-                    globalFrame->setLocalVar(index, value);
-                }
+                string name = frame->getNameByIndex(index);
+                globalFrame->setLocalVar(name, value);
                 break;
             }
         case Operation::PushReference:
             {
-                int index = inst.operand0.value();
-                auto valuePtr = frame->getRefVar(index);
+                string name = frame->getRefByIndex(inst.operand0.value());
+                auto valuePtr = frame->getRefVar(name);
                 frame->opStackPush(valuePtr);
                 break;
             }
@@ -235,15 +225,19 @@ void Interpreter::executeStep() {
                 // process local refs and local vars
                 int numLocals = clos->func->local_vars_.size();
                 int numRefs = clos->func->free_vars_.size();
-                shared_ptr<Frame> newFrame = make_shared<Frame>(Frame(clos->func, numLocals, numRefs));
+                shared_ptr<Frame> newFrame = make_shared<Frame>(Frame(clos->func));
 				for (int i = 0; i < numLocals; i++) {
-					newFrame->setLocalVar(i, make_shared<None>());
+                    if (i < numArgs) {
+                        string name = clos->func->local_vars_[i];
+                        newFrame->setLocalVar(name, argsList[i]);
+                    } else {
+                        string name = clos->func->local_vars_[i];
+                        newFrame->setLocalVar(name, make_shared<None>());
+                    }
 				}
                 for (int i = 0; i < numRefs; i++) {
-                    newFrame->setRefVar(i, clos->refs[i]);
-                }
-                for (int i = 0; i < numArgs; i++) {
-                    newFrame->setLocalVar(i, argsList[i]);
+                    string name = clos->func->free_vars_[i];
+                    newFrame->setRefVar(name, clos->refs[i]);
                 }
 				auto nativeFunc = dynamic_pointer_cast<NativeFunction>(clos->func);
 				if (nativeFunc != NULL) {
