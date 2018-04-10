@@ -51,9 +51,9 @@ struct Constant: public Value {
 
 struct ValuePtr: public Value {
     // Class for reference variables
-    shared_ptr<Value> ptr;
+    shared_ptr<Constant> ptr;
 
-    ValuePtr(shared_ptr<Value> ptr): ptr(ptr) {};
+    ValuePtr(shared_ptr<Constant> ptr): ptr(ptr) {};
     virtual ~ValuePtr() {};
 
     static const string typeS;

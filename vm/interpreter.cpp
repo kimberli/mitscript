@@ -99,12 +99,15 @@ void Interpreter::executeStep() {
                 if (valuePtr == NULL) {
                     throw RuntimeException("expected ValuePtr on the stack for LoadReference");
                 }
-                frame->opStackPush(valuePtr.get()->ptr);
+                frame->opStackPush(valuePtr->ptr);
                 break;
             }
         case Operation::StoreReference:
             {
-                auto value = frame->opStackPop();
+                auto value = dynamic_pointer_cast<Constant>(frame->opStackPop());
+                if (value == NULL) {
+                    throw RuntimeException("expected Constant on the stack for StoreReference");
+                }
                 auto valuePtr = dynamic_pointer_cast<ValuePtr>(frame->opStackPop());
                 if (valuePtr == NULL) {
                     throw RuntimeException("expected ValuePtr on the stack for StoreReference");
