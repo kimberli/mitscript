@@ -48,8 +48,8 @@ function
                 {
                     functions = [],
                     constants = [None],
-                    parameter_count = 0,
-                    local_vars = [],
+                    parameter_count = 1,
+                    local_vars = [z],
                     local_ref_vars = [],
                     free_vars = [y],
                     names = [print, x],
@@ -59,6 +59,8 @@ function
                       push_ref 0
                       load_ref
                       load_global 1
+                      add
+                      load_local 0
                       add
                       call 1
                       load_const 0
@@ -84,7 +86,8 @@ function
               load_func 0
               push_ref 0
               alloc_closure 1
-              call 0
+              load_local 1
+              call 1
 
               load_const 0
               return
@@ -108,6 +111,9 @@ function
       load_func 2
       alloc_closure 0
       store_global  1
+
+      load_const 2
+      store_global 3
 
       load_func 3
       alloc_closure 0

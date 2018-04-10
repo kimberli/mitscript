@@ -75,6 +75,9 @@ function
               store_local 1
               load_local 1
               call 1
+
+              load_const 1
+              return
             ]
         }
     ],
