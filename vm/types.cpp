@@ -15,13 +15,21 @@ bool ValuePtr::equals(shared_ptr<Value> other) {
     throw RuntimeException("can't call equals on ValuePtr");
 }
 
+/* Function */
+string Function::toString() {
+    throw RuntimeException("can't cast Function to a String (try Closure instead)");
+}
+bool Function::equals(shared_ptr<Value> other) {
+    throw RuntimeException("can't call equals on a Function (try Closure instead)");
+}
+
 /* None */
 const string None::typeS = "None";
 string None::toString() {
     return "None";
 }
 bool None::equals(shared_ptr<Value> other) {
-    auto otherV = dynamic_cast<None*>(other.get());
+    auto otherV = dynamic_pointer_cast<None>(other);
     if (otherV == NULL) {
         return false;
     }
@@ -34,7 +42,7 @@ string Integer::toString() {
     return to_string(value);
 }
 bool Integer::equals(shared_ptr<Value> other) {
-    auto otherV = dynamic_cast<Integer*>(other.get());
+    auto otherV = dynamic_pointer_cast<Integer>(other);
     if (otherV == NULL) {
         return false;
     }
@@ -47,7 +55,7 @@ string String::toString() {
     return value;
 }
 bool String::equals(shared_ptr<Value> other) {
-    auto otherV = dynamic_cast<String*>(other.get());
+    auto otherV = dynamic_pointer_cast<String>(other);
     if (otherV == NULL) {
         return false;
     }
@@ -60,7 +68,7 @@ string Boolean::toString() {
     return value? "true" : "false";
 };
 bool Boolean::equals(shared_ptr<Value> other) {
-    auto otherV = dynamic_cast<Boolean*>(other.get());
+    auto otherV = dynamic_pointer_cast<Boolean>(other);
     if (otherV == NULL) {
         return false;
     }
@@ -78,19 +86,11 @@ string Record::toString() {
     return res;
 }
 bool Record::equals(shared_ptr<Value> other) {
-    // TODO
-    throw RuntimeException("unimplemented");
-}
-
-/* Function */
-const string Function::typeS = "Function";
-string Function::toString() {
-    // TODO: do we ever use this?
-    return "FUNCTION";
-}
-bool Function::equals(shared_ptr<Value> other) {
-    // TODO
-    throw RuntimeException("unimplemented");
+    auto otherV = dynamic_pointer_cast<Record>(other);
+    if (otherV == NULL) {
+        return false;
+    }
+    return value == otherV->value;
 }
 
 /* Closure */
@@ -99,8 +99,22 @@ string Closure::toString() {
     return "FUNCTION";
 }
 bool Closure::equals(shared_ptr<Value> other) {
-    // TODO
-    throw RuntimeException("unimplemented");
+    auto otherV = dynamic_pointer_cast<Closure>(other);
+    if (otherV == NULL) {
+        return false;
+    }
+    if (func != otherV->func) {
+        return false;
+    }
+    if (refs.size() != otherV->refs.size()) {
+        return false;
+    }
+    for (int i = 0; i < refs.size(); i++) {
+        if (refs[i] != otherV->refs[i]) {
+            return false;
+        }
+    }
+    return true;
 }
 
 /* Native functions */

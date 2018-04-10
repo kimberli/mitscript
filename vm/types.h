@@ -49,6 +49,62 @@ struct Constant: public Value {
     virtual ~Constant() {};
 };
 
+struct Function : public Value {
+    // Class for function type; produced by bytecode compiler
+
+    // functions defined within this function (but not inside nested functions)
+    vector<shared_ptr<Function>> functions_;
+
+    // constants used by the instructions within this function (but not inside nested functions)
+    vector<shared_ptr<Constant>> constants_;
+
+    // number of parameters to the function
+    int32_t parameter_count_;
+
+    // list of local variables
+    // note: the first parameter_count_ variables are the function's parameters
+    // in their order as given in the paraemter list
+    vector<string> local_vars_;
+
+    // list of local variables accessed by reference (LocalReference)
+    vector<string> local_reference_vars_;
+
+    // list of the names of non-global and non-local variables accessed by the function
+    vector<string> free_vars_;
+
+    // list of global variable and field names used inside the function
+    vector<string> names_;
+
+    InstructionList instructions;
+
+    Function() {};
+    virtual ~Function() {};
+
+    Function(vector<shared_ptr<Function>> functions_,
+            vector<shared_ptr<Constant>> constants_,
+            int32_t parameter_count_,
+	        vector<string> local_vars_,
+            vector<string> local_reference_vars_,
+            vector<string> free_vars_,
+	        vector<string> names_,
+            InstructionList instructions):
+        functions_(functions_),
+        constants_(constants_),
+	    parameter_count_(parameter_count_),
+        local_vars_(local_vars_),
+        local_reference_vars_(local_reference_vars_),
+	    free_vars_(free_vars_),
+        names_(names_),
+        instructions(instructions) {};
+
+    string toString();
+    bool equals(shared_ptr<Value> other);
+    static const string typeS;
+    string type() {
+        return "Function";
+    }
+};
+
 struct ValuePtr: public Value {
     // Class for reference variables
     shared_ptr<Constant> ptr;
@@ -125,7 +181,6 @@ struct Boolean : public Constant{
 
     string toString();
     bool equals(shared_ptr<Value> other);
-
 };
 
 struct Record : public Constant {
@@ -143,62 +198,6 @@ struct Record : public Constant {
     static const string typeS;
     string type() {
         return "Record";
-    }
-};
-
-struct Function : public Constant {
-    // Class for function type; produced by bytecode compiler
-
-    // functions defined within this function (but not inside nested functions)
-    vector<shared_ptr<Function>> functions_;
-
-    // constants used by the instructions within this function (but not inside nested functions)
-    vector<shared_ptr<Constant>> constants_;
-
-    // number of parameters to the function
-    int32_t parameter_count_;
-
-    // list of local variables
-    // note: the first parameter_count_ variables are the function's parameters
-    // in their order as given in the paraemter list
-    vector<string> local_vars_;
-
-    // list of local variables accessed by reference (LocalReference)
-    vector<string> local_reference_vars_;
-
-    // list of the names of non-global and non-local variables accessed by the function
-    vector<string> free_vars_;
-
-    // list of global variable and field names used inside the function
-    vector<string> names_;
-
-    InstructionList instructions;
-
-    Function() {};
-    virtual ~Function() {};
-
-    Function(vector<shared_ptr<Function>> functions_,
-            vector<shared_ptr<Constant>> constants_,
-            int32_t parameter_count_,
-	        vector<string> local_vars_,
-            vector<string> local_reference_vars_,
-            vector<string> free_vars_,
-	        vector<string> names_,
-            InstructionList instructions):
-        functions_(functions_),
-        constants_(constants_),
-	    parameter_count_(parameter_count_),
-        local_vars_(local_vars_),
-        local_reference_vars_(local_reference_vars_),
-	    free_vars_(free_vars_),
-        names_(names_),
-        instructions(instructions) {};
-
-    string toString();
-    bool equals(shared_ptr<Value> other);
-    static const string typeS;
-    string type() {
-        return "Function";
     }
 };
 
