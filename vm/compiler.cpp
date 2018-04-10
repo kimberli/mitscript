@@ -337,7 +337,13 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
     retFunc->instructions.push_back(*loadF);
 
     // 6) load refs to all the child's free vars. 
-    for (std::string var : childFunc->free_vars_) {
+    // THESE NEED TO GO ON BACKWARDS
+    //for (std::string var : childFunc->free_vars_) {
+    vector<string> freeVars = childFunc->free_vars_;
+    for (vector<string>::reverse_iterator it = freeVars.rbegin();
+         it != freeVars.rend(); 
+         it++) {
+        std::string var = *it;
         // get that var's description in the parent
         desc_t d = curTable->vars.at(var);
         int i;
