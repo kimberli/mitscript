@@ -1,0 +1,4 @@
+3
+2
+f and g share a closure so f == g: true
+intcast == intcast: true

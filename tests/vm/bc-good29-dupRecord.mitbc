@@ -97,5 +97,11 @@ function
       dup
       eq
       call 1
+
+      load_global 2
+      load_global 0
+      load_global 1
+      eq
+      call 1
     ]
 }

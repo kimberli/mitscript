@@ -134,5 +134,12 @@ function
       load_local 5
       eq
       call 1
+
+      load_global 2
+      load_local 5
+      load_func 5
+      alloc_closure 0
+      eq
+      call 1
     ]
 }

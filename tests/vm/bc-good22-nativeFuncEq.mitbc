@@ -47,7 +47,7 @@ function
     local_vars = [],
     local_ref_vars = [],
     free_vars = [],
-    names = [input, intcast, print],
+    names = [input, intcast, print, intcast2],
     instructions =
     [
       load_func 0
@@ -57,8 +57,11 @@ function
       alloc_closure 0
       store_global  0
       load_func 2
+      load_func 2
       alloc_closure 0
       store_global  1
+      alloc_closure 0
+      store_global 3
 
 	  load_global 2
       load_global 1
@@ -75,6 +78,30 @@ function
 	  load_global 2
       load_global 0
       load_global 1
+      eq
+      call 1
+
+	  load_global 2
+      load_global 0
+      load_global 0
+      eq
+      call 1
+
+	  load_global 2
+      load_global 1
+      load_global 1
+      eq
+      call 1
+
+	  load_global 2
+      load_global 2
+      load_global 2
+      eq
+      call 1
+
+	  load_global 2
+      load_global 1
+      load_global 3
       eq
       call 1
     ]

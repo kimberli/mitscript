@@ -42,7 +42,7 @@ function
             ]
         }
     ],
-    constants = [-1, true, "blah blah 123xyz", None],
+    constants = [-1, true, "blah blah 123xyz", None, "{} == {}: ", "x1 == x2: ", "x1 == z: ", "after update: "],
     parameter_count = 0,
     local_vars = [],
     local_ref_vars = [],
@@ -70,9 +70,11 @@ function
       store_global 5
 
       load_global 2
+      load_const 4
       load_global 3
       load_global 4
       eq
+      add
       call 1
 
       load_global 3
@@ -96,15 +98,33 @@ function
       field_store 7
 
       load_global 2
+      load_const 5
       load_global 3
       load_global 4
       eq
+      add
       call 1
 
       load_global 2
+      load_const 6
       load_global 3
       load_global 5
       eq
+      add
+      call 1
+
+      load_global 4
+      load_const 3
+      field_store 7
+
+      load_global 2
+      load_const 7
+      load_const 5
+      load_global 3
+      load_global 4
+      eq
+      add
+      add
       call 1
     ]
 }
