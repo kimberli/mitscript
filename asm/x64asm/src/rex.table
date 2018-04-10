@@ -1,0 +1,3873 @@
+, 0 // ADC AL, imm8
+, 0 // ADC AX, imm16
+, 0 // ADC EAX, imm32
+, 0 // ADC m16, imm16
+, 0 // ADC m16, imm8
+, 0 // ADC m16, r16
+, 0 // ADC m32, imm32
+, 0 // ADC m32, imm8
+, 0 // ADC m32, r32
+, 1 // ADC m64, imm32
+, 1 // ADC m64, imm8
+, 1 // ADC m64, r64
+, 0 // ADC m8, imm8
+, 0 // ADC m8, r8
+, 0 // ADC m8, rh
+, 0 // ADC r16, imm16
+, 0 // ADC r16, imm8
+, 0 // ADC r16, m16
+, 0 // ADC r16, r16
+, 0 // ADC r16, r16
+, 0 // ADC r32, imm32
+, 0 // ADC r32, imm8
+, 0 // ADC r32, m32
+, 0 // ADC r32, r32
+, 0 // ADC r32, r32
+, 1 // ADC r64, imm32
+, 1 // ADC r64, imm8
+, 1 // ADC r64, m64
+, 1 // ADC r64, r64
+, 1 // ADC r64, r64
+, 0 // ADC r8, imm8
+, 0 // ADC r8, m8
+, 0 // ADC r8, r8
+, 0 // ADC r8, r8
+, 0 // ADC r8, rh
+, 0 // ADC r8, rh
+, 1 // ADC RAX, imm32
+, 0 // ADC rh, imm8
+, 0 // ADC rh, m8
+, 0 // ADC rh, r8
+, 0 // ADC rh, r8
+, 0 // ADC rh, rh
+, 0 // ADC rh, rh
+, 0 // ADD AL, imm8
+, 0 // ADD AX, imm16
+, 0 // ADD EAX, imm32
+, 0 // ADD m16, imm16
+, 0 // ADD m16, imm8
+, 0 // ADD m16, r16
+, 0 // ADD m32, imm32
+, 0 // ADD m32, imm8
+, 0 // ADD m32, r32
+, 1 // ADD m64, imm32
+, 1 // ADD m64, imm8
+, 1 // ADD m64, r64
+, 0 // ADD m8, imm8
+, 0 // ADD m8, r8
+, 0 // ADD m8, rh
+, 0 // ADD r16, imm16
+, 0 // ADD r16, imm8
+, 0 // ADD r16, m16
+, 0 // ADD r16, r16
+, 0 // ADD r16, r16
+, 0 // ADD r32, imm32
+, 0 // ADD r32, imm8
+, 0 // ADD r32, m32
+, 0 // ADD r32, r32
+, 0 // ADD r32, r32
+, 1 // ADD r64, imm32
+, 1 // ADD r64, imm8
+, 1 // ADD r64, m64
+, 1 // ADD r64, r64
+, 1 // ADD r64, r64
+, 0 // ADD r8, imm8
+, 0 // ADD r8, m8
+, 0 // ADD r8, r8
+, 0 // ADD r8, r8
+, 0 // ADD r8, rh
+, 0 // ADD r8, rh
+, 1 // ADD RAX, imm32
+, 0 // ADD rh, imm8
+, 0 // ADD rh, m8
+, 0 // ADD rh, r8
+, 0 // ADD rh, r8
+, 0 // ADD rh, rh
+, 0 // ADD rh, rh
+, 0 // ADDPD xmm, m128
+, 0 // ADDPD xmm, xmm
+, 0 // ADDPS xmm, m128
+, 0 // ADDPS xmm, xmm
+, 0 // ADDSD xmm, m64
+, 0 // ADDSD xmm, xmm
+, 0 // ADDSS xmm, m32
+, 0 // ADDSS xmm, xmm
+, 0 // ADDSUBPD xmm, m128
+, 0 // ADDSUBPD xmm, xmm
+, 0 // ADDSUBPS xmm, m128
+, 0 // ADDSUBPS xmm, xmm
+, 0 // AESDEC xmm, m128
+, 0 // AESDEC xmm, xmm
+, 0 // AESDECLAST xmm, m128
+, 0 // AESDECLAST xmm, xmm
+, 0 // AESENC xmm, m128
+, 0 // AESENC xmm, xmm
+, 0 // AESENCLAST xmm, m128
+, 0 // AESENCLAST xmm, xmm
+, 0 // AESIMC xmm, m128
+, 0 // AESIMC xmm, xmm
+, 0 // AESKEYGENASSIST xmm, m128, imm8
+, 0 // AESKEYGENASSIST xmm, xmm, imm8
+, 0 // AND AL, imm8
+, 0 // AND AX, imm16
+, 0 // AND EAX, imm32
+, 0 // AND m16, imm16
+, 0 // AND m16, imm8
+, 0 // AND m16, r16
+, 0 // AND m32, imm32
+, 0 // AND m32, imm8
+, 0 // AND m32, r32
+, 1 // AND m64, imm32
+, 1 // AND m64, imm8
+, 1 // AND m64, r64
+, 0 // AND m8, imm8
+, 0 // AND m8, r8
+, 0 // AND m8, rh
+, 0 // AND r16, imm16
+, 0 // AND r16, imm8
+, 0 // AND r16, m16
+, 0 // AND r16, r16
+, 0 // AND r16, r16
+, 0 // AND r32, imm32
+, 0 // AND r32, imm8
+, 0 // AND r32, m32
+, 0 // AND r32, r32
+, 0 // AND r32, r32
+, 1 // AND r64, imm32
+, 1 // AND r64, imm8
+, 1 // AND r64, m64
+, 1 // AND r64, r64
+, 1 // AND r64, r64
+, 0 // AND r8, imm8
+, 0 // AND r8, m8
+, 0 // AND r8, r8
+, 0 // AND r8, r8
+, 0 // AND r8, rh
+, 0 // AND r8, rh
+, 1 // AND RAX, imm32
+, 0 // AND rh, imm8
+, 0 // AND rh, m8
+, 0 // AND rh, r8
+, 0 // AND rh, r8
+, 0 // AND rh, rh
+, 0 // AND rh, rh
+, 0 // ANDN r32, r32, m32
+, 0 // ANDN r32, r32, r32
+, 0 // ANDN r64, r64, m64
+, 0 // ANDN r64, r64, r64
+, 0 // ANDNPD xmm, m128
+, 0 // ANDNPD xmm, xmm
+, 0 // ANDNPS xmm, m128
+, 0 // ANDNPS xmm, xmm
+, 0 // ANDPD xmm, m128
+, 0 // ANDPD xmm, xmm
+, 0 // ANDPS xmm, m128
+, 0 // ANDPS xmm, xmm
+, 0 // BEXTR r32, m32, r32
+, 0 // BEXTR r32, r32, r32
+, 0 // BEXTR r64, m64, r64
+, 0 // BEXTR r64, r64, r64
+, 0 // BLENDPD xmm, m128, imm8
+, 0 // BLENDPD xmm, xmm, imm8
+, 0 // BLENDPS xmm, m128, imm8
+, 0 // BLENDPS xmm, xmm, imm8
+, 0 // BLENDVPD xmm, m128, <XMM0>
+, 0 // BLENDVPD xmm, xmm, <XMM0>
+, 0 // BLENDVPS xmm, m128, <XMM0>
+, 0 // BLENDVPS xmm, xmm, <XMM0>
+, 0 // BLSI r32, m32
+, 0 // BLSI r32, r32
+, 0 // BLSI r64, m64
+, 0 // BLSI r64, r64
+, 0 // BLSMSK r32, m32
+, 0 // BLSMSK r32, r32
+, 0 // BLSMSK r64, m64
+, 0 // BLSMSK r64, r64
+, 0 // BLSR r32, m32
+, 0 // BLSR r32, r32
+, 0 // BLSR r64, m64
+, 0 // BLSR r64, r64
+, 0 // BSF r16, m16
+, 0 // BSF r16, r16
+, 0 // BSF r32, m32
+, 0 // BSF r32, r32
+, 1 // BSF r64, m64
+, 1 // BSF r64, r64
+, 0 // BSR r16, m16
+, 0 // BSR r16, r16
+, 0 // BSR r32, m32
+, 0 // BSR r32, r32
+, 1 // BSR r64, m64
+, 1 // BSR r64, r64
+, 0 // BSWAP r32
+, 1 // BSWAP r64
+, 0 // BT m16, imm8
+, 0 // BT m16, r16
+, 0 // BT m32, imm8
+, 0 // BT m32, r32
+, 1 // BT m64, imm8
+, 1 // BT m64, r64
+, 0 // BT r16, imm8
+, 0 // BT r16, r16
+, 0 // BT r32, imm8
+, 0 // BT r32, r32
+, 1 // BT r64, imm8
+, 1 // BT r64, r64
+, 0 // BTC m16, imm8
+, 0 // BTC m16, r16
+, 0 // BTC m32, imm8
+, 0 // BTC m32, r32
+, 1 // BTC m64, imm8
+, 1 // BTC m64, r64
+, 0 // BTC r16, imm8
+, 0 // BTC r16, r16
+, 0 // BTC r32, imm8
+, 0 // BTC r32, r32
+, 1 // BTC r64, imm8
+, 1 // BTC r64, r64
+, 0 // BTR m16, imm8
+, 0 // BTR m16, r16
+, 0 // BTR m32, imm8
+, 0 // BTR m32, r32
+, 1 // BTR m64, imm8
+, 1 // BTR m64, r64
+, 0 // BTR r16, imm8
+, 0 // BTR r16, r16
+, 0 // BTR r32, imm8
+, 0 // BTR r32, r32
+, 1 // BTR r64, imm8
+, 1 // BTR r64, r64
+, 0 // BTS m16, imm8
+, 0 // BTS m16, r16
+, 0 // BTS m32, imm8
+, 0 // BTS m32, r32
+, 1 // BTS m64, imm8
+, 1 // BTS m64, r64
+, 0 // BTS r16, imm8
+, 0 // BTS r16, r16
+, 0 // BTS r32, imm8
+, 0 // BTS r32, r32
+, 1 // BTS r64, imm8
+, 1 // BTS r64, r64
+, 0 // BZHI r32, m32, r32
+, 0 // BZHI r32, r32, r32
+, 0 // BZHI r64, m64, r64
+, 0 // BZHI r64, r64, r64
+, 0 // CALL m16:16
+, 0 // CALL m16:32
+, 1 // CALL m16:64
+, 0 // CALL label32
+, 0 // CALL m64
+, 0 // CALL r64
+, 0 // CALL rel32
+, 0 // CBW 
+, 0 // CDQ 
+, 1 // CDQE 
+, 0 // CLC 
+, 0 // CLD 
+, 0 // CLFLUSH m8
+, 0 // CLI 
+, 0 // CMC 
+, 0 // CMOVA r16, m16
+, 0 // CMOVA r16, r16
+, 0 // CMOVA r32, m32
+, 0 // CMOVA r32, r32
+, 1 // CMOVA r64, m64
+, 1 // CMOVA r64, r64
+, 0 // CMOVAE r16, m16
+, 0 // CMOVAE r16, r16
+, 0 // CMOVAE r32, m32
+, 0 // CMOVAE r32, r32
+, 1 // CMOVAE r64, m64
+, 1 // CMOVAE r64, r64
+, 0 // CMOVB r16, m16
+, 0 // CMOVB r16, r16
+, 0 // CMOVB r32, m32
+, 0 // CMOVB r32, r32
+, 1 // CMOVB r64, m64
+, 1 // CMOVB r64, r64
+, 0 // CMOVBE r16, m16
+, 0 // CMOVBE r16, r16
+, 0 // CMOVBE r32, m32
+, 0 // CMOVBE r32, r32
+, 1 // CMOVBE r64, m64
+, 1 // CMOVBE r64, r64
+, 0 // CMOVC r16, m16
+, 0 // CMOVC r16, r16
+, 0 // CMOVC r32, m32
+, 0 // CMOVC r32, r32
+, 1 // CMOVC r64, m64
+, 1 // CMOVC r64, r64
+, 0 // CMOVE r16, m16
+, 0 // CMOVE r16, r16
+, 0 // CMOVE r32, m32
+, 0 // CMOVE r32, r32
+, 1 // CMOVE r64, m64
+, 1 // CMOVE r64, r64
+, 0 // CMOVG r16, m16
+, 0 // CMOVG r16, r16
+, 0 // CMOVG r32, m32
+, 0 // CMOVG r32, r32
+, 1 // CMOVG r64, m64
+, 1 // CMOVG r64, r64
+, 0 // CMOVGE r16, m16
+, 0 // CMOVGE r16, r16
+, 0 // CMOVGE r32, m32
+, 0 // CMOVGE r32, r32
+, 1 // CMOVGE r64, m64
+, 1 // CMOVGE r64, r64
+, 0 // CMOVL r16, m16
+, 0 // CMOVL r16, r16
+, 0 // CMOVL r32, m32
+, 0 // CMOVL r32, r32
+, 1 // CMOVL r64, m64
+, 1 // CMOVL r64, r64
+, 0 // CMOVLE r16, m16
+, 0 // CMOVLE r16, r16
+, 0 // CMOVLE r32, m32
+, 0 // CMOVLE r32, r32
+, 1 // CMOVLE r64, m64
+, 1 // CMOVLE r64, r64
+, 0 // CMOVNA r16, m16
+, 0 // CMOVNA r16, r16
+, 0 // CMOVNA r32, m32
+, 0 // CMOVNA r32, r32
+, 1 // CMOVNA r64, m64
+, 1 // CMOVNA r64, r64
+, 0 // CMOVNAE r16, m16
+, 0 // CMOVNAE r16, r16
+, 0 // CMOVNAE r32, m32
+, 0 // CMOVNAE r32, r32
+, 1 // CMOVNAE r64, m64
+, 1 // CMOVNAE r64, r64
+, 0 // CMOVNB r16, m16
+, 0 // CMOVNB r16, r16
+, 0 // CMOVNB r32, m32
+, 0 // CMOVNB r32, r32
+, 1 // CMOVNB r64, m64
+, 1 // CMOVNB r64, r64
+, 0 // CMOVNBE r16, m16
+, 0 // CMOVNBE r16, r16
+, 0 // CMOVNBE r32, m32
+, 0 // CMOVNBE r32, r32
+, 1 // CMOVNBE r64, m64
+, 1 // CMOVNBE r64, r64
+, 0 // CMOVNC r16, m16
+, 0 // CMOVNC r16, r16
+, 0 // CMOVNC r32, m32
+, 0 // CMOVNC r32, r32
+, 1 // CMOVNC r64, m64
+, 1 // CMOVNC r64, r64
+, 0 // CMOVNE r16, m16
+, 0 // CMOVNE r16, r16
+, 0 // CMOVNE r32, m32
+, 0 // CMOVNE r32, r32
+, 1 // CMOVNE r64, m64
+, 1 // CMOVNE r64, r64
+, 0 // CMOVNG r16, m16
+, 0 // CMOVNG r16, r16
+, 0 // CMOVNG r32, m32
+, 0 // CMOVNG r32, r32
+, 1 // CMOVNG r64, m64
+, 1 // CMOVNG r64, r64
+, 0 // CMOVNGE r16, m16
+, 0 // CMOVNGE r16, r16
+, 0 // CMOVNGE r32, m32
+, 0 // CMOVNGE r32, r32
+, 1 // CMOVNGE r64, m64
+, 1 // CMOVNGE r64, r64
+, 0 // CMOVNL r16, m16
+, 0 // CMOVNL r16, r16
+, 0 // CMOVNL r32, m32
+, 0 // CMOVNL r32, r32
+, 1 // CMOVNL r64, m64
+, 1 // CMOVNL r64, r64
+, 0 // CMOVNLE r16, m16
+, 0 // CMOVNLE r16, r16
+, 0 // CMOVNLE r32, m32
+, 0 // CMOVNLE r32, r32
+, 1 // CMOVNLE r64, m64
+, 1 // CMOVNLE r64, r64
+, 0 // CMOVNO r16, m16
+, 0 // CMOVNO r16, r16
+, 0 // CMOVNO r32, m32
+, 0 // CMOVNO r32, r32
+, 1 // CMOVNO r64, m64
+, 1 // CMOVNO r64, r64
+, 0 // CMOVNP r16, m16
+, 0 // CMOVNP r16, r16
+, 0 // CMOVNP r32, m32
+, 0 // CMOVNP r32, r32
+, 1 // CMOVNP r64, m64
+, 1 // CMOVNP r64, r64
+, 0 // CMOVNS r16, m16
+, 0 // CMOVNS r16, r16
+, 0 // CMOVNS r32, m32
+, 0 // CMOVNS r32, r32
+, 1 // CMOVNS r64, m64
+, 1 // CMOVNS r64, r64
+, 0 // CMOVNZ r16, m16
+, 0 // CMOVNZ r16, r16
+, 0 // CMOVNZ r32, m32
+, 0 // CMOVNZ r32, r32
+, 1 // CMOVNZ r64, m64
+, 1 // CMOVNZ r64, r64
+, 0 // CMOVO r16, m16
+, 0 // CMOVO r16, r16
+, 0 // CMOVO r32, m32
+, 0 // CMOVO r32, r32
+, 1 // CMOVO r64, m64
+, 1 // CMOVO r64, r64
+, 0 // CMOVP r16, m16
+, 0 // CMOVP r16, r16
+, 0 // CMOVP r32, m32
+, 0 // CMOVP r32, r32
+, 1 // CMOVP r64, m64
+, 1 // CMOVP r64, r64
+, 0 // CMOVPE r16, m16
+, 0 // CMOVPE r16, r16
+, 0 // CMOVPE r32, m32
+, 0 // CMOVPE r32, r32
+, 1 // CMOVPE r64, m64
+, 1 // CMOVPE r64, r64
+, 0 // CMOVPO r16, m16
+, 0 // CMOVPO r16, r16
+, 0 // CMOVPO r32, m32
+, 0 // CMOVPO r32, r32
+, 1 // CMOVPO r64, m64
+, 1 // CMOVPO r64, r64
+, 0 // CMOVS r16, m16
+, 0 // CMOVS r16, r16
+, 0 // CMOVS r32, m32
+, 0 // CMOVS r32, r32
+, 1 // CMOVS r64, m64
+, 1 // CMOVS r64, r64
+, 0 // CMOVZ r16, m16
+, 0 // CMOVZ r16, r16
+, 0 // CMOVZ r32, m32
+, 0 // CMOVZ r32, r32
+, 1 // CMOVZ r64, m64
+, 1 // CMOVZ r64, r64
+, 0 // CMP AL, imm8
+, 0 // CMP AX, imm16
+, 0 // CMP EAX, imm32
+, 0 // CMP m16, imm16
+, 0 // CMP m16, imm8
+, 0 // CMP m16, r16
+, 0 // CMP m32, imm32
+, 0 // CMP m32, imm8
+, 0 // CMP m32, r32
+, 1 // CMP m64, imm32
+, 1 // CMP m64, imm8
+, 1 // CMP m64, r64
+, 0 // CMP m8, imm8
+, 0 // CMP m8, r8
+, 0 // CMP m8, rh
+, 0 // CMP r16, imm16
+, 0 // CMP r16, imm8
+, 0 // CMP r16, m16
+, 0 // CMP r16, r16
+, 0 // CMP r16, r16
+, 0 // CMP r32, imm32
+, 0 // CMP r32, imm8
+, 0 // CMP r32, m32
+, 0 // CMP r32, r32
+, 0 // CMP r32, r32
+, 1 // CMP r64, imm32
+, 1 // CMP r64, imm8
+, 1 // CMP r64, m64
+, 1 // CMP r64, r64
+, 1 // CMP r64, r64
+, 0 // CMP r8, imm8
+, 0 // CMP r8, m8
+, 0 // CMP r8, r8
+, 0 // CMP r8, r8
+, 0 // CMP r8, rh
+, 0 // CMP r8, rh
+, 1 // CMP RAX, imm32
+, 0 // CMP rh, imm8
+, 0 // CMP rh, m8
+, 0 // CMP rh, r8
+, 0 // CMP rh, r8
+, 0 // CMP rh, rh
+, 0 // CMP rh, rh
+, 0 // CMPPD xmm, m128, imm8
+, 0 // CMPPD xmm, xmm, imm8
+, 0 // CMPPS xmm, m128, imm8
+, 0 // CMPPS xmm, xmm, imm8
+, 0 // CMPS m16, m16
+, 0 // CMPS m32, m32
+, 1 // CMPS m64, m64
+, 0 // CMPS m8, m8
+, 0 // CMPSB 
+, 0 // CMPSD 
+, 0 // CMPSD xmm, m64, imm8
+, 0 // CMPSD xmm, xmm, imm8
+, 1 // CMPSQ 
+, 0 // CMPSS xmm, m32, imm8
+, 0 // CMPSS xmm, xmm, imm8
+, 0 // CMPSW 
+, 0 // CMPXCHG m16, r16
+, 0 // CMPXCHG m32, r32
+, 1 // CMPXCHG m64, r64
+, 0 // CMPXCHG m8, r8
+, 0 // CMPXCHG m8, rh
+, 0 // CMPXCHG r16, r16
+, 0 // CMPXCHG r32, r32
+, 1 // CMPXCHG r64, r64
+, 0 // CMPXCHG r8, r8
+, 0 // CMPXCHG r8, rh
+, 0 // CMPXCHG rh, r8
+, 0 // CMPXCHG rh, rh
+, 1 // CMPXCHG16B m128
+, 0 // CMPXCHG8B m64
+, 0 // COMISD xmm, m64
+, 0 // COMISD xmm, xmm
+, 0 // COMISS xmm, m32
+, 0 // COMISS xmm, xmm
+, 0 // CPUID 
+, 1 // CQO 
+, 0 // CRC32 r32, m16
+, 0 // CRC32 r32, m32
+, 0 // CRC32 r32, m8
+, 0 // CRC32 r32, r16
+, 0 // CRC32 r32, r32
+, 0 // CRC32 r32, r8
+, 0 // CRC32 r32, rh
+, 1 // CRC32 r64, m64
+, 1 // CRC32 r64, m8
+, 1 // CRC32 r64, r64
+, 1 // CRC32 r64, r8
+, 0 // CVTDQ2PD xmm, m64
+, 0 // CVTDQ2PD xmm, xmm
+, 0 // CVTDQ2PS xmm, m128
+, 0 // CVTDQ2PS xmm, xmm
+, 0 // CVTPD2DQ xmm, m128
+, 0 // CVTPD2DQ xmm, xmm
+, 0 // CVTPD2PI mm, m128
+, 0 // CVTPD2PI mm, xmm
+, 0 // CVTPD2PS xmm, m128
+, 0 // CVTPD2PS xmm, xmm
+, 0 // CVTPI2PD xmm, m64
+, 0 // CVTPI2PD xmm, mm
+, 0 // CVTPI2PS xmm, m64
+, 0 // CVTPI2PS xmm, mm
+, 0 // CVTPS2DQ xmm, m128
+, 0 // CVTPS2DQ xmm, xmm
+, 0 // CVTPS2PD xmm, m64
+, 0 // CVTPS2PD xmm, xmm
+, 0 // CVTPS2PI mm, m64
+, 0 // CVTPS2PI mm, xmm
+, 0 // CVTSD2SI r32, m64
+, 0 // CVTSD2SI r32, xmm
+, 1 // CVTSD2SI r64, m64
+, 1 // CVTSD2SI r64, xmm
+, 0 // CVTSD2SS xmm, m64
+, 0 // CVTSD2SS xmm, xmm
+, 0 // CVTSI2SD xmm, m32
+, 1 // CVTSI2SD xmm, m64
+, 0 // CVTSI2SD xmm, r32
+, 1 // CVTSI2SD xmm, r64
+, 0 // CVTSI2SS xmm, m32
+, 1 // CVTSI2SS xmm, m64
+, 0 // CVTSI2SS xmm, r32
+, 1 // CVTSI2SS xmm, r64
+, 0 // CVTSS2SD xmm, m32
+, 0 // CVTSS2SD xmm, xmm
+, 0 // CVTSS2SI r32, m32
+, 0 // CVTSS2SI r32, xmm
+, 1 // CVTSS2SI r64, m32
+, 1 // CVTSS2SI r64, xmm
+, 0 // CVTTPD2DQ xmm, m128
+, 0 // CVTTPD2DQ xmm, xmm
+, 0 // CVTTPD2PI mm, m128
+, 0 // CVTTPD2PI mm, xmm
+, 0 // CVTTPS2DQ xmm, m128
+, 0 // CVTTPS2DQ xmm, xmm
+, 0 // CVTTPS2PI mm, m64
+, 0 // CVTTPS2PI mm, xmm
+, 0 // CVTTSD2SI r32, m64
+, 0 // CVTTSD2SI r32, xmm
+, 1 // CVTTSD2SI r64, m64
+, 1 // CVTTSD2SI r64, xmm
+, 0 // CVTTSS2SI r32, m32
+, 0 // CVTTSS2SI r32, xmm
+, 1 // CVTTSS2SI r64, m32
+, 1 // CVTTSS2SI r64, xmm
+, 0 // CWD 
+, 0 // CWDE 
+, 0 // DEC m16
+, 0 // DEC m32
+, 1 // DEC m64
+, 0 // DEC m8
+, 0 // DEC r16
+, 0 // DEC r32
+, 1 // DEC r64
+, 0 // DEC r8
+, 0 // DEC rh
+, 0 // DIV m16
+, 0 // DIV m32
+, 1 // DIV m64
+, 0 // DIV m8
+, 0 // DIV r16
+, 0 // DIV r32
+, 1 // DIV r64
+, 0 // DIV r8
+, 0 // DIV rh
+, 0 // DIVPD xmm, m128
+, 0 // DIVPD xmm, xmm
+, 0 // DIVPS xmm, m128
+, 0 // DIVPS xmm, xmm
+, 0 // DIVSD xmm, m64
+, 0 // DIVSD xmm, xmm
+, 0 // DIVSS xmm, m32
+, 0 // DIVSS xmm, xmm
+, 0 // DPPD xmm, m128, imm8
+, 0 // DPPD xmm, xmm, imm8
+, 0 // DPPS xmm, m128, imm8
+, 0 // DPPS xmm, xmm, imm8
+, 0 // EMMS 
+, 0 // ENTER imm8, imm16
+, 0 // ENTER 1, imm16
+, 0 // ENTER 0, imm16
+, 0 // EXTRACTPS m32, xmm, imm8
+, 0 // EXTRACTPS r32, xmm, imm8
+, 0 // EXTRACTPS r64, xmm, imm8
+, 0 // F2XM1 
+, 0 // FABS 
+, 0 // FADD m32fp
+, 0 // FADD m64fp
+, 0 // FADD ST(i), ST
+, 0 // FADD ST, ST(i)
+, 0 // FADDP 
+, 0 // FADDP ST(i), ST
+, 0 // FBLD m80bcd
+, 0 // FBSTP m80bcd
+, 0 // FCHS 
+, 0 // FCLEX 
+, 0 // FCMOVB ST, ST(i)
+, 0 // FCMOVBE ST, ST(i)
+, 0 // FCMOVE ST, ST(i)
+, 0 // FCMOVNB ST, ST(i)
+, 0 // FCMOVNBE ST, ST(i)
+, 0 // FCMOVNE ST, ST(i)
+, 0 // FCMOVNU ST, ST(i)
+, 0 // FCMOVU ST, ST(i)
+, 0 // FCOM 
+, 0 // FCOM m32fp
+, 0 // FCOM m64fp
+, 0 // FCOM ST(i)
+, 0 // FCOMI ST, ST(i)
+, 0 // FCOMIP ST, ST(i)
+, 0 // FCOMP 
+, 0 // FCOMP m32fp
+, 0 // FCOMP m64fp
+, 0 // FCOMP ST(i)
+, 0 // FCOMPP 
+, 0 // FCOS 
+, 0 // FDECSTP 
+, 0 // FDIV m32fp
+, 0 // FDIV m64fp
+, 0 // FDIV ST(i), ST
+, 0 // FDIV ST, ST(i)
+, 0 // FDIVP 
+, 0 // FDIVP ST(i), ST
+, 0 // FDIVR m32fp
+, 0 // FDIVR m64fp
+, 0 // FDIVR ST(i), ST
+, 0 // FDIVR ST, ST(i)
+, 0 // FDIVRP 
+, 0 // FDIVRP ST(i), ST
+, 0 // FFREE ST(i)
+, 0 // FIADD m16int
+, 0 // FIADD m32int
+, 0 // FICOM m16int
+, 0 // FICOM m32int
+, 0 // FICOMP m16int
+, 0 // FICOMP m32int
+, 0 // FIDIV m16int
+, 0 // FIDIV m32int
+, 0 // FIDIVR m16int
+, 0 // FIDIVR m32int
+, 0 // FILD m16int
+, 0 // FILD m32int
+, 0 // FILD m64int
+, 0 // FIMUL m16int
+, 0 // FIMUL m32int
+, 0 // FINCSTP 
+, 0 // FINIT 
+, 0 // FIST m16int
+, 0 // FIST m32int
+, 0 // FISTP m16int
+, 0 // FISTP m32int
+, 0 // FISTP m64int
+, 0 // FISTTP m16int
+, 0 // FISTTP m32int
+, 0 // FISTTP m64int
+, 0 // FISUB m16int
+, 0 // FISUB m32int
+, 0 // FISUBR m16int
+, 0 // FISUBR m32int
+, 0 // FLD m32fp
+, 0 // FLD m64fp
+, 0 // FLD m80fp
+, 0 // FLD ST(i)
+, 0 // FLD1 
+, 0 // FLDCW m2byte
+, 0 // FLDENV m28byte
+, 0 // FLDL2E 
+, 0 // FLDL2T 
+, 0 // FLDLG2 
+, 0 // FLDLN2 
+, 0 // FLDPI 
+, 0 // FLDZ 
+, 0 // FMUL m32fp
+, 0 // FMUL m64fp
+, 0 // FMUL ST(i), ST
+, 0 // FMUL ST, ST(i)
+, 0 // FMULP 
+, 0 // FMULP ST(i), ST
+, 0 // FNCLEX 
+, 0 // FNINIT 
+, 0 // FNOP 
+, 0 // FNSAVE m108byte
+, 0 // FNSTCW m2byte
+, 0 // FNSTENV m28byte
+, 0 // FNSTSW AX
+, 0 // FNSTSW m2byte
+, 0 // FPATAN 
+, 0 // FPREM 
+, 0 // FPREM1 
+, 0 // FPTAN 
+, 0 // FRNDINT 
+, 0 // FRSTOR m108byte
+, 0 // FSAVE m108byte
+, 0 // FSCALE 
+, 0 // FSIN 
+, 0 // FSINCOS 
+, 0 // FSQRT 
+, 0 // FST m32fp
+, 0 // FST m64fp
+, 0 // FST ST(i)
+, 0 // FSTCW m2byte
+, 0 // FSTENV m28byte
+, 0 // FSTP m32fp
+, 0 // FSTP m64fp
+, 0 // FSTP m80fp
+, 0 // FSTP ST(i)
+, 0 // FSTSW AX
+, 0 // FSTSW m2byte
+, 0 // FSUB m32fp
+, 0 // FSUB m64fp
+, 0 // FSUB ST(i), ST
+, 0 // FSUB ST, ST(i)
+, 0 // FSUBP 
+, 0 // FSUBP ST(i), ST
+, 0 // FSUBR m32fp
+, 0 // FSUBR m64fp
+, 0 // FSUBR ST(i), ST
+, 0 // FSUBR ST, ST(i)
+, 0 // FSUBRP 
+, 0 // FSUBRP ST(i), ST
+, 0 // FTST 
+, 0 // FUCOM 
+, 0 // FUCOM ST(i)
+, 0 // FUCOMI ST, ST(i)
+, 0 // FUCOMIP ST, ST(i)
+, 0 // FUCOMP 
+, 0 // FUCOMP ST(i)
+, 0 // FUCOMPP 
+, 0 // FWAIT 
+, 0 // FXAM 
+, 0 // FXCH 
+, 0 // FXCH ST(i)
+, 0 // FXRSTOR m512byte
+, 1 // FXRSTOR64 m512byte
+, 0 // FXSAVE m512byte
+, 1 // FXSAVE64 m512byte
+, 0 // FXTRACT 
+, 0 // FYL2X 
+, 0 // FYL2XP1 
+, 0 // HADDPD xmm, m128
+, 0 // HADDPD xmm, xmm
+, 0 // HADDPS xmm, m128
+, 0 // HADDPS xmm, xmm
+, 0 // HSUBPD xmm, m128
+, 0 // HSUBPD xmm, xmm
+, 0 // HSUBPS xmm, m128
+, 0 // HSUBPS xmm, xmm
+, 0 // IDIV m16
+, 0 // IDIV m32
+, 1 // IDIV m64
+, 0 // IDIV m8
+, 0 // IDIV r16
+, 0 // IDIV r32
+, 1 // IDIV r64
+, 0 // IDIV r8
+, 0 // IDIV rh
+, 0 // IMUL m16
+, 0 // IMUL m32
+, 1 // IMUL m64
+, 0 // IMUL m8
+, 0 // IMUL r16
+, 0 // IMUL r16, m16
+, 0 // IMUL r16, m16, imm16
+, 0 // IMUL r16, m16, imm8
+, 0 // IMUL r16, r16
+, 0 // IMUL r16, r16, imm16
+, 0 // IMUL r16, r16, imm8
+, 0 // IMUL r32
+, 0 // IMUL r32, m32
+, 0 // IMUL r32, m32, imm32
+, 0 // IMUL r32, m32, imm8
+, 0 // IMUL r32, r32
+, 0 // IMUL r32, r32, imm32
+, 0 // IMUL r32, r32, imm8
+, 1 // IMUL r64
+, 1 // IMUL r64, m64
+, 1 // IMUL r64, m64, imm32
+, 1 // IMUL r64, m64, imm8
+, 1 // IMUL r64, r64
+, 1 // IMUL r64, r64, imm32
+, 1 // IMUL r64, r64, imm8
+, 0 // IMUL r8
+, 0 // IMUL rh
+, 0 // IN AL, DX
+, 0 // IN AL, imm8
+, 0 // IN AX, DX
+, 0 // IN AX, imm8
+, 0 // IN EAX, DX
+, 0 // IN EAX, imm8
+, 0 // INC m16
+, 0 // INC m32
+, 1 // INC m64
+, 0 // INC m8
+, 0 // INC r16
+, 0 // INC r32
+, 1 // INC r64
+, 0 // INC r8
+, 0 // INC rh
+, 0 // INS m16, DX
+, 0 // INS m32, DX
+, 0 // INS m8, DX
+, 0 // INSB 
+, 0 // INSD 
+, 0 // INSERTPS xmm, m32, imm8
+, 0 // INSERTPS xmm, xmm, imm8
+, 0 // INSW 
+, 0 // INT imm8
+, 0 // INT 3
+, 0 // INVPCID r64, m128
+, 0 // IRET 
+, 0 // IRETD 
+, 1 // IRETQ 
+, 0 // JA label8
+, 0 // JA label32
+, 0 // JA label8, hint
+, 0 // JA label32, hint
+, 0 // JA rel32
+, 0 // JA rel32, hint
+, 0 // JA rel8
+, 0 // JA rel8, hint
+, 0 // JAE label8
+, 0 // JAE label32
+, 0 // JAE label8, hint
+, 0 // JAE label32, hint
+, 0 // JAE rel32
+, 0 // JAE rel32, hint
+, 0 // JAE rel8
+, 0 // JAE rel8, hint
+, 0 // JB label8
+, 0 // JB label32
+, 0 // JB label8, hint
+, 0 // JB label32, hint
+, 0 // JB rel32
+, 0 // JB rel32, hint
+, 0 // JB rel8
+, 0 // JB rel8, hint
+, 0 // JBE label8
+, 0 // JBE label32
+, 0 // JBE label8, hint
+, 0 // JBE label32, hint
+, 0 // JBE rel32
+, 0 // JBE rel32, hint
+, 0 // JBE rel8
+, 0 // JBE rel8, hint
+, 0 // JC label8
+, 0 // JC label32
+, 0 // JC label8, hint
+, 0 // JC label32, hint
+, 0 // JC rel32
+, 0 // JC rel32, hint
+, 0 // JC rel8
+, 0 // JC rel8, hint
+, 0 // JE label8
+, 0 // JE label32
+, 0 // JE label8, hint
+, 0 // JE label32, hint
+, 0 // JE rel32
+, 0 // JE rel32, hint
+, 0 // JE rel8
+, 0 // JE rel8, hint
+, 0 // JECXZ label8
+, 0 // JECXZ label8, hint
+, 0 // JECXZ rel8
+, 0 // JECXZ rel8, hint
+, 0 // JG label8
+, 0 // JG label32
+, 0 // JG label8, hint
+, 0 // JG label32, hint
+, 0 // JG rel32
+, 0 // JG rel32, hint
+, 0 // JG rel8
+, 0 // JG rel8, hint
+, 0 // JGE label8
+, 0 // JGE label32
+, 0 // JGE label8, hint
+, 0 // JGE label32, hint
+, 0 // JGE rel32
+, 0 // JGE rel32, hint
+, 0 // JGE rel8
+, 0 // JGE rel8, hint
+, 0 // JL label8
+, 0 // JL label32
+, 0 // JL label8, hint
+, 0 // JL label32, hint
+, 0 // JL rel32
+, 0 // JL rel32, hint
+, 0 // JL rel8
+, 0 // JL rel8, hint
+, 0 // JLE label8
+, 0 // JLE label32
+, 0 // JLE label8, hint
+, 0 // JLE label32, hint
+, 0 // JLE rel32
+, 0 // JLE rel32, hint
+, 0 // JLE rel8
+, 0 // JLE rel8, hint
+, 0 // JMP m16:16
+, 0 // JMP m16:32
+, 1 // JMP m16:64
+, 0 // JMP label8
+, 0 // JMP label32
+, 0 // JMP m64
+, 0 // JMP r64
+, 0 // JMP rel32
+, 0 // JMP rel8
+, 0 // JNA label8
+, 0 // JNA label32
+, 0 // JNA label8, hint
+, 0 // JNA label32, hint
+, 0 // JNA rel32
+, 0 // JNA rel32, hint
+, 0 // JNA rel8
+, 0 // JNA rel8, hint
+, 0 // JNAE label8
+, 0 // JNAE label32
+, 0 // JNAE label8, hint
+, 0 // JNAE label32, hint
+, 0 // JNAE rel32
+, 0 // JNAE rel32, hint
+, 0 // JNAE rel8
+, 0 // JNAE rel8, hint
+, 0 // JNB label8
+, 0 // JNB label32
+, 0 // JNB label8, hint
+, 0 // JNB label32, hint
+, 0 // JNB rel32
+, 0 // JNB rel32, hint
+, 0 // JNB rel8
+, 0 // JNB rel8, hint
+, 0 // JNBE label8
+, 0 // JNBE label32
+, 0 // JNBE label8, hint
+, 0 // JNBE label32, hint
+, 0 // JNBE rel32
+, 0 // JNBE rel32, hint
+, 0 // JNBE rel8
+, 0 // JNBE rel8, hint
+, 0 // JNC label8
+, 0 // JNC label32
+, 0 // JNC label8, hint
+, 0 // JNC label32, hint
+, 0 // JNC rel32
+, 0 // JNC rel32, hint
+, 0 // JNC rel8
+, 0 // JNC rel8, hint
+, 0 // JNE label8
+, 0 // JNE label32
+, 0 // JNE label8, hint
+, 0 // JNE label32, hint
+, 0 // JNE rel32
+, 0 // JNE rel32, hint
+, 0 // JNE rel8
+, 0 // JNE rel8, hint
+, 0 // JNG label8
+, 0 // JNG label32
+, 0 // JNG label8, hint
+, 0 // JNG label32, hint
+, 0 // JNG rel32
+, 0 // JNG rel32, hint
+, 0 // JNG rel8
+, 0 // JNG rel8, hint
+, 0 // JNGE label8
+, 0 // JNGE label32
+, 0 // JNGE label8, hint
+, 0 // JNGE label32, hint
+, 0 // JNGE rel32
+, 0 // JNGE rel32, hint
+, 0 // JNGE rel8
+, 0 // JNGE rel8, hint
+, 0 // JNL label8
+, 0 // JNL label32
+, 0 // JNL label8, hint
+, 0 // JNL label32, hint
+, 0 // JNL rel32
+, 0 // JNL rel32, hint
+, 0 // JNL rel8
+, 0 // JNL rel8, hint
+, 0 // JNLE label8
+, 0 // JNLE label32
+, 0 // JNLE label8, hint
+, 0 // JNLE label32, hint
+, 0 // JNLE rel32
+, 0 // JNLE rel32, hint
+, 0 // JNLE rel8
+, 0 // JNLE rel8, hint
+, 0 // JNO label8
+, 0 // JNO label32
+, 0 // JNO label8, hint
+, 0 // JNO label32, hint
+, 0 // JNO rel32
+, 0 // JNO rel32, hint
+, 0 // JNO rel8
+, 0 // JNO rel8, hint
+, 0 // JNP label8
+, 0 // JNP label32
+, 0 // JNP label8, hint
+, 0 // JNP label32, hint
+, 0 // JNP rel32
+, 0 // JNP rel32, hint
+, 0 // JNP rel8
+, 0 // JNP rel8, hint
+, 0 // JNS label8
+, 0 // JNS label32
+, 0 // JNS label8, hint
+, 0 // JNS label32, hint
+, 0 // JNS rel32
+, 0 // JNS rel32, hint
+, 0 // JNS rel8
+, 0 // JNS rel8, hint
+, 0 // JNZ label8
+, 0 // JNZ label32
+, 0 // JNZ label8, hint
+, 0 // JNZ label32, hint
+, 0 // JNZ rel32
+, 0 // JNZ rel32, hint
+, 0 // JNZ rel8
+, 0 // JNZ rel8, hint
+, 0 // JO label8
+, 0 // JO label32
+, 0 // JO label8, hint
+, 0 // JO label32, hint
+, 0 // JO rel32
+, 0 // JO rel32, hint
+, 0 // JO rel8
+, 0 // JO rel8, hint
+, 0 // JP label8
+, 0 // JP label32
+, 0 // JP label8, hint
+, 0 // JP label32, hint
+, 0 // JP rel32
+, 0 // JP rel32, hint
+, 0 // JP rel8
+, 0 // JP rel8, hint
+, 0 // JPE label8
+, 0 // JPE label32
+, 0 // JPE label8, hint
+, 0 // JPE label32, hint
+, 0 // JPE rel32
+, 0 // JPE rel32, hint
+, 0 // JPE rel8
+, 0 // JPE rel8, hint
+, 0 // JPO label8
+, 0 // JPO label32
+, 0 // JPO label8, hint
+, 0 // JPO label32, hint
+, 0 // JPO rel32
+, 0 // JPO rel32, hint
+, 0 // JPO rel8
+, 0 // JPO rel8, hint
+, 0 // JRCXZ label8
+, 0 // JRCXZ label8, hint
+, 0 // JRCXZ rel8
+, 0 // JRCXZ rel8, hint
+, 0 // JS label8
+, 0 // JS label32
+, 0 // JS label8, hint
+, 0 // JS label32, hint
+, 0 // JS rel32
+, 0 // JS rel32, hint
+, 0 // JS rel8
+, 0 // JS rel8, hint
+, 0 // JZ label8
+, 0 // JZ label32
+, 0 // JZ label8, hint
+, 0 // JZ label32, hint
+, 0 // JZ rel32
+, 0 // JZ rel32, hint
+, 0 // JZ rel8
+, 0 // JZ rel8, hint
+, 0 // LAHF 
+, 0 // LAR r16, m16
+, 0 // LAR r16, r16
+, 0 // LAR r32, m16
+, 0 // LAR r32, r32
+, 1 // LAR r64, m16
+, 1 // LAR r64, r32
+, 0 // LDDQU xmm, m128
+, 0 // LDMXCSR m32
+, 0 // LEA r16, m16
+, 0 // LEA r16, m32
+, 0 // LEA r16, m64
+, 0 // LEA r32, m16
+, 0 // LEA r32, m32
+, 0 // LEA r32, m64
+, 1 // LEA r64, m16
+, 1 // LEA r64, m32
+, 1 // LEA r64, m64
+, 0 // LEAVE 
+, 0 // LEAVE p66
+, 0 // LFENCE 
+, 0 // LFS r16, m16:16
+, 0 // LFS r32, m16:32
+, 1 // LFS r64, m16:64
+, 0 // LGS r16, m16:16
+, 0 // LGS r32, m16:32
+, 1 // LGS r64, m16:64
+, 0 // LOCK 
+, 0 // LODS m16
+, 0 // LODS m32
+, 1 // LODS m64
+, 0 // LODS m8
+, 0 // LODSB 
+, 0 // LODSD 
+, 1 // LODSQ 
+, 0 // LODSW 
+, 0 // LOOP label8
+, 0 // LOOP rel8
+, 0 // LOOPE label8
+, 0 // LOOPE rel8
+, 0 // LOOPNE label8
+, 0 // LOOPNE rel8
+, 0 // LSL r16, m16
+, 0 // LSL r16, r16
+, 0 // LSL r32, m16
+, 0 // LSL r32, r32
+, 1 // LSL r64, m16
+, 1 // LSL r64, r32
+, 0 // LSS r16, m16:16
+, 0 // LSS r32, m16:32
+, 1 // LSS r64, m16:64
+, 0 // LZCNT r16, m16
+, 0 // LZCNT r16, r16
+, 0 // LZCNT r32, m32
+, 0 // LZCNT r32, r32
+, 1 // LZCNT r64, m64
+, 1 // LZCNT r64, r64
+, 0 // MASKMOVDQU xmm, xmm
+, 0 // MASKMOVQ mm, mm
+, 0 // MAXPD xmm, m128
+, 0 // MAXPD xmm, xmm
+, 0 // MAXPS xmm, m128
+, 0 // MAXPS xmm, xmm
+, 0 // MAXSD xmm, m64
+, 0 // MAXSD xmm, xmm
+, 0 // MAXSS xmm, m32
+, 0 // MAXSS xmm, xmm
+, 0 // MFENCE 
+, 0 // MINPD xmm, m128
+, 0 // MINPD xmm, xmm
+, 0 // MINPS xmm, m128
+, 0 // MINPS xmm, xmm
+, 0 // MINSD xmm, m64
+, 0 // MINSD xmm, xmm
+, 0 // MINSS xmm, m32
+, 0 // MINSS xmm, xmm
+, 0 // MONITOR 
+, 0 // MOV AL, moffs8
+, 1 // MOV AL, moffs8, pw
+, 0 // MOV AX, moffs16
+, 0 // MOV EAX, moffs32
+, 0 // MOV m16, imm16
+, 0 // MOV m16, r16
+, 0 // MOV m16, Sreg
+, 0 // MOV m32, imm32
+, 0 // MOV m32, r32
+, 1 // MOV m64, imm32
+, 1 // MOV m64, r64
+, 1 // MOV m64, Sreg
+, 0 // MOV m8, imm8
+, 0 // MOV m8, r8
+, 0 // MOV m8, rh
+, 0 // MOV moffs16, AX
+, 0 // MOV moffs32, EAX
+, 1 // MOV moffs64, RAX
+, 0 // MOV moffs8, AL
+, 1 // MOV moffs8, AL, pw
+, 0 // MOV r16, imm16
+, 0 // MOV r16, imm16
+, 0 // MOV r16, m16
+, 0 // MOV r16, r16
+, 0 // MOV r16, r16
+, 0 // MOV r16, Sreg
+, 0 // MOV r32, imm32
+, 0 // MOV r32, imm32
+, 0 // MOV r32, m32
+, 0 // MOV r32, r32
+, 0 // MOV r32, r32
+, 1 // MOV r64, imm32
+, 1 // MOV r64, imm64
+, 1 // MOV r64, m64
+, 1 // MOV r64, r64
+, 1 // MOV r64, r64
+, 1 // MOV r64, Sreg
+, 0 // MOV r8, imm8
+, 0 // MOV r8, imm8
+, 0 // MOV r8, m8
+, 0 // MOV r8, r8
+, 0 // MOV r8, r8
+, 0 // MOV r8, rh
+, 0 // MOV r8, rh
+, 1 // MOV RAX, moffs64
+, 0 // MOV rh, imm8
+, 0 // MOV rh, imm8
+, 0 // MOV rh, m8
+, 0 // MOV rh, r8
+, 0 // MOV rh, r8
+, 0 // MOV rh, rh
+, 0 // MOV rh, rh
+, 0 // MOV Sreg, m16
+, 1 // MOV Sreg, m64
+, 0 // MOV Sreg, r16
+, 1 // MOV Sreg, r64
+, 0 // MOVAPD m128, xmm
+, 0 // MOVAPD xmm, m128
+, 0 // MOVAPD xmm, xmm
+, 0 // MOVAPD xmm, xmm
+, 0 // MOVAPS m128, xmm
+, 0 // MOVAPS xmm, m128
+, 0 // MOVAPS xmm, xmm
+, 0 // MOVAPS xmm, xmm
+, 0 // MOVBE m16, r16
+, 0 // MOVBE m32, r32
+, 1 // MOVBE m64, r64
+, 0 // MOVBE r16, m16
+, 0 // MOVBE r32, m32
+, 1 // MOVBE r64, m64
+, 0 // MOVD m32, mm
+, 0 // MOVD m32, xmm
+, 0 // MOVD mm, m32
+, 0 // MOVD mm, r32
+, 0 // MOVD r32, mm
+, 0 // MOVD r32, xmm
+, 0 // MOVD xmm, m32
+, 0 // MOVD xmm, r32
+, 0 // MOVDDUP xmm, m64
+, 0 // MOVDDUP xmm, xmm
+, 0 // MOVDQ2Q mm, xmm
+, 0 // MOVDQA m128, xmm
+, 0 // MOVDQA xmm, m128
+, 0 // MOVDQA xmm, xmm
+, 0 // MOVDQA xmm, xmm
+, 0 // MOVDQU m128, xmm
+, 0 // MOVDQU xmm, m128
+, 0 // MOVDQU xmm, xmm
+, 0 // MOVDQU xmm, xmm
+, 0 // MOVHLPS xmm, xmm
+, 0 // MOVHPD m64, xmm
+, 0 // MOVHPD xmm, m64
+, 0 // MOVHPS m64, xmm
+, 0 // MOVHPS xmm, m64
+, 0 // MOVLHPS xmm, xmm
+, 0 // MOVLPD m64, xmm
+, 0 // MOVLPD xmm, m64
+, 0 // MOVLPS m64, xmm
+, 0 // MOVLPS xmm, m64
+, 0 // MOVMSKPD r32, xmm
+, 0 // MOVMSKPD r64, xmm
+, 0 // MOVMSKPS r32, xmm
+, 0 // MOVMSKPS r64, xmm
+, 0 // MOVNTDQ m128, xmm
+, 0 // MOVNTDQ m256, ymm
+, 0 // MOVNTDQA xmm, m128
+, 0 // MOVNTI m32, r32
+, 1 // MOVNTI m64, r64
+, 0 // MOVNTPD m128, xmm
+, 0 // MOVNTPS m128, xmm
+, 0 // MOVNTQ m64, mm
+, 1 // MOVQ m64, mm
+, 0 // MOVQ m64, mm
+, 1 // MOVQ m64, xmm
+, 0 // MOVQ m64, xmm
+, 1 // MOVQ mm, m64
+, 0 // MOVQ mm, m64
+, 0 // MOVQ mm, mm
+, 0 // MOVQ mm, mm
+, 1 // MOVQ mm, r64
+, 1 // MOVQ r64, mm
+, 1 // MOVQ r64, xmm
+, 1 // MOVQ xmm, m64
+, 0 // MOVQ xmm, m64
+, 1 // MOVQ xmm, r64
+, 0 // MOVQ xmm, xmm
+, 0 // MOVQ xmm, xmm
+, 0 // MOVQ2DQ xmm, mm
+, 0 // MOVS m16, m16
+, 0 // MOVS m32, m32
+, 1 // MOVS m64, m64
+, 0 // MOVS m8, m8
+, 0 // MOVSB 
+, 0 // MOVSD 
+, 0 // MOVSD m64, xmm
+, 0 // MOVSD xmm, m64
+, 0 // MOVSD xmm, xmm
+, 0 // MOVSD xmm, xmm
+, 0 // MOVSHDUP xmm, m128
+, 0 // MOVSHDUP xmm, xmm
+, 0 // MOVSLDUP xmm, m128
+, 0 // MOVSLDUP xmm, xmm
+, 1 // MOVSQ 
+, 0 // MOVSS m32, xmm
+, 0 // MOVSS xmm, m32
+, 0 // MOVSS xmm, xmm
+, 0 // MOVSS xmm, xmm
+, 0 // MOVSW 
+, 0 // MOVSX r16, m8
+, 0 // MOVSX r16, r8
+, 0 // MOVSX r16, rh
+, 0 // MOVSX r32, m16
+, 0 // MOVSX r32, m8
+, 0 // MOVSX r32, r16
+, 0 // MOVSX r32, r8
+, 0 // MOVSX r32, rh
+, 1 // MOVSX r64, m16
+, 1 // MOVSX r64, m8
+, 1 // MOVSX r64, r16
+, 1 // MOVSX r64, r8
+, 1 // MOVSXD r64, m32
+, 1 // MOVSXD r64, r32
+, 0 // MOVUPD m128, xmm
+, 0 // MOVUPD xmm, m128
+, 0 // MOVUPD xmm, xmm
+, 0 // MOVUPD xmm, xmm
+, 0 // MOVUPS m128, xmm
+, 0 // MOVUPS xmm, m128
+, 0 // MOVUPS xmm, xmm
+, 0 // MOVUPS xmm, xmm
+, 0 // MOVZX r16, m8
+, 0 // MOVZX r16, r8
+, 0 // MOVZX r16, rh
+, 0 // MOVZX r32, m16
+, 0 // MOVZX r32, m8
+, 0 // MOVZX r32, r16
+, 0 // MOVZX r32, r8
+, 0 // MOVZX r32, rh
+, 1 // MOVZX r64, m16
+, 1 // MOVZX r64, m8
+, 1 // MOVZX r64, r16
+, 1 // MOVZX r64, r8
+, 0 // MPSADBW xmm, m128, imm8
+, 0 // MPSADBW xmm, xmm, imm8
+, 0 // MUL m16
+, 0 // MUL m32
+, 1 // MUL m64
+, 0 // MUL m8
+, 0 // MUL r16
+, 0 // MUL r32
+, 1 // MUL r64
+, 0 // MUL r8
+, 0 // MUL rh
+, 0 // MULPD xmm, m128
+, 0 // MULPD xmm, xmm
+, 0 // MULPS xmm, m128
+, 0 // MULPS xmm, xmm
+, 0 // MULSD xmm, m64
+, 0 // MULSD xmm, xmm
+, 0 // MULSS xmm, m32
+, 0 // MULSS xmm, xmm
+, 0 // MULX r32, r32, m32
+, 0 // MULX r32, r32, r32
+, 0 // MULX r64, r64, m64
+, 0 // MULX r64, r64, r64
+, 0 // MWAIT 
+, 0 // NEG m16
+, 0 // NEG m32
+, 1 // NEG m64
+, 0 // NEG m8
+, 0 // NEG r16
+, 0 // NEG r32
+, 1 // NEG r64
+, 0 // NEG r8
+, 0 // NEG rh
+, 0 // NOP 
+, 0 // NOP m16
+, 0 // NOP m32
+, 0 // NOP r16
+, 0 // NOP r32
+, 0 // NOT m16
+, 0 // NOT m32
+, 1 // NOT m64
+, 0 // NOT m8
+, 0 // NOT r16
+, 0 // NOT r32
+, 1 // NOT r64
+, 0 // NOT r8
+, 0 // NOT rh
+, 0 // OR AL, imm8
+, 0 // OR AX, imm16
+, 0 // OR EAX, imm32
+, 0 // OR m16, imm16
+, 0 // OR m16, imm8
+, 0 // OR m16, r16
+, 0 // OR m32, imm32
+, 0 // OR m32, imm8
+, 0 // OR m32, r32
+, 1 // OR m64, imm32
+, 1 // OR m64, imm8
+, 1 // OR m64, r64
+, 0 // OR m8, imm8
+, 0 // OR m8, r8
+, 0 // OR m8, rh
+, 0 // OR r16, imm16
+, 0 // OR r16, imm8
+, 0 // OR r16, m16
+, 0 // OR r16, r16
+, 0 // OR r16, r16
+, 0 // OR r32, imm32
+, 0 // OR r32, imm8
+, 0 // OR r32, m32
+, 0 // OR r32, r32
+, 0 // OR r32, r32
+, 1 // OR r64, imm32
+, 1 // OR r64, imm8
+, 1 // OR r64, m64
+, 1 // OR r64, r64
+, 1 // OR r64, r64
+, 0 // OR r8, imm8
+, 0 // OR r8, m8
+, 0 // OR r8, r8
+, 0 // OR r8, r8
+, 0 // OR r8, rh
+, 0 // OR r8, rh
+, 1 // OR RAX, imm32
+, 0 // OR rh, imm8
+, 0 // OR rh, m8
+, 0 // OR rh, r8
+, 0 // OR rh, r8
+, 0 // OR rh, rh
+, 0 // OR rh, rh
+, 0 // ORPD xmm, m128
+, 0 // ORPD xmm, xmm
+, 0 // ORPS xmm, m128
+, 0 // ORPS xmm, xmm
+, 0 // OUT DX, AL
+, 0 // OUT DX, AX
+, 0 // OUT DX, EAX
+, 0 // OUT imm8, AL
+, 0 // OUT imm8, AX
+, 0 // OUT imm8, EAX
+, 0 // OUTS DX, m16
+, 0 // OUTS DX, m32
+, 0 // OUTS DX, m8
+, 0 // OUTSB 
+, 0 // OUTSD 
+, 0 // OUTSW 
+, 0 // PABSB mm, m64
+, 0 // PABSB mm, mm
+, 0 // PABSB xmm, m128
+, 0 // PABSB xmm, xmm
+, 0 // PABSD mm, m64
+, 0 // PABSD mm, mm
+, 0 // PABSD xmm, m128
+, 0 // PABSD xmm, xmm
+, 0 // PABSW mm, m64
+, 0 // PABSW mm, mm
+, 0 // PABSW xmm, m128
+, 0 // PABSW xmm, xmm
+, 0 // PACKSSDW mm, m64
+, 0 // PACKSSDW mm, mm
+, 0 // PACKSSDW xmm, m128
+, 0 // PACKSSDW xmm, xmm
+, 0 // PACKSSWB mm, m64
+, 0 // PACKSSWB mm, mm
+, 0 // PACKSSWB xmm, m128
+, 0 // PACKSSWB xmm, xmm
+, 0 // PACKUSDW xmm, m128
+, 0 // PACKUSDW xmm, xmm
+, 0 // PACKUSWB mm, m64
+, 0 // PACKUSWB mm, mm
+, 0 // PACKUSWB xmm, m128
+, 0 // PACKUSWB xmm, xmm
+, 0 // PADDB mm, m64
+, 0 // PADDB mm, mm
+, 0 // PADDB xmm, m128
+, 0 // PADDB xmm, xmm
+, 0 // PADDD mm, m64
+, 0 // PADDD mm, mm
+, 0 // PADDD xmm, m128
+, 0 // PADDD xmm, xmm
+, 0 // PADDQ mm, m64
+, 0 // PADDQ mm, mm
+, 0 // PADDQ xmm, m128
+, 0 // PADDQ xmm, xmm
+, 0 // PADDSB mm, m64
+, 0 // PADDSB mm, mm
+, 0 // PADDSB xmm, m128
+, 0 // PADDSB xmm, xmm
+, 0 // PADDSW mm, m64
+, 0 // PADDSW mm, mm
+, 0 // PADDSW xmm, m128
+, 0 // PADDSW xmm, xmm
+, 0 // PADDUSB mm, m64
+, 0 // PADDUSB mm, mm
+, 0 // PADDUSB xmm, m128
+, 0 // PADDUSB xmm, xmm
+, 0 // PADDUSW mm, m64
+, 0 // PADDUSW mm, mm
+, 0 // PADDUSW xmm, m128
+, 0 // PADDUSW xmm, xmm
+, 0 // PADDW mm, m64
+, 0 // PADDW mm, mm
+, 0 // PADDW xmm, m128
+, 0 // PADDW xmm, xmm
+, 0 // PALIGNR mm, m64, imm8
+, 0 // PALIGNR mm, mm, imm8
+, 0 // PALIGNR xmm, m128, imm8
+, 0 // PALIGNR xmm, xmm, imm8
+, 0 // PAND mm, m64
+, 0 // PAND mm, mm
+, 0 // PAND xmm, m128
+, 0 // PAND xmm, xmm
+, 0 // PANDN mm, m64
+, 0 // PANDN mm, mm
+, 0 // PANDN xmm, m128
+, 0 // PANDN xmm, xmm
+, 0 // PAUSE 
+, 0 // PAVGB mm, m64
+, 0 // PAVGB mm, mm
+, 0 // PAVGB xmm, m128
+, 0 // PAVGB xmm, xmm
+, 0 // PAVGW mm, m64
+, 0 // PAVGW mm, mm
+, 0 // PAVGW xmm, m128
+, 0 // PAVGW xmm, xmm
+, 0 // PBLENDVB xmm, m128, <XMM0>
+, 0 // PBLENDVB xmm, xmm, <XMM0>
+, 0 // PBLENDW xmm, m128, imm8
+, 0 // PBLENDW xmm, xmm, imm8
+, 0 // PCLMULQDQ xmm, m128, imm8
+, 0 // PCLMULQDQ xmm, xmm, imm8
+, 0 // PCMPEQB mm, m64
+, 0 // PCMPEQB mm, mm
+, 0 // PCMPEQB xmm, m128
+, 0 // PCMPEQB xmm, xmm
+, 0 // PCMPEQD mm, m64
+, 0 // PCMPEQD mm, mm
+, 0 // PCMPEQD xmm, m128
+, 0 // PCMPEQD xmm, xmm
+, 0 // PCMPEQQ xmm, m128
+, 0 // PCMPEQQ xmm, xmm
+, 0 // PCMPEQW mm, m64
+, 0 // PCMPEQW mm, mm
+, 0 // PCMPEQW xmm, m128
+, 0 // PCMPEQW xmm, xmm
+, 0 // PCMPESTRI xmm, m128, imm8
+, 0 // PCMPESTRI xmm, xmm, imm8
+, 0 // PCMPESTRM xmm, m128, imm8
+, 0 // PCMPESTRM xmm, xmm, imm8
+, 0 // PCMPGTB mm, m64
+, 0 // PCMPGTB mm, mm
+, 0 // PCMPGTB xmm, m128
+, 0 // PCMPGTB xmm, xmm
+, 0 // PCMPGTD mm, m64
+, 0 // PCMPGTD mm, mm
+, 0 // PCMPGTD xmm, m128
+, 0 // PCMPGTD xmm, xmm
+, 0 // PCMPGTQ xmm, m128
+, 0 // PCMPGTQ xmm, xmm
+, 0 // PCMPGTW mm, m64
+, 0 // PCMPGTW mm, mm
+, 0 // PCMPGTW xmm, m128
+, 0 // PCMPGTW xmm, xmm
+, 0 // PCMPISTRI xmm, m128, imm8
+, 0 // PCMPISTRI xmm, xmm, imm8
+, 0 // PCMPISTRM xmm, m128, imm8
+, 0 // PCMPISTRM xmm, xmm, imm8
+, 0 // PDEP r32, r32, m32
+, 0 // PDEP r32, r32, r32
+, 0 // PDEP r64, r64, m64
+, 0 // PDEP r64, r64, r64
+, 0 // PEXT r32, r32, m32
+, 0 // PEXT r32, r32, r32
+, 0 // PEXT r64, r64, m64
+, 0 // PEXT r64, r64, r64
+, 0 // PEXTRB m8, xmm, imm8
+, 0 // PEXTRB r32, xmm, imm8
+, 0 // PEXTRB r64, xmm, imm8
+, 0 // PEXTRD m32, xmm, imm8
+, 0 // PEXTRD r32, xmm, imm8
+, 1 // PEXTRQ m64, xmm, imm8
+, 1 // PEXTRQ r64, xmm, imm8
+, 0 // PEXTRW m16, xmm, imm8
+, 0 // PEXTRW r32, mm, imm8
+, 0 // PEXTRW r32, xmm, imm8
+, 0 // PEXTRW r32, xmm, imm8
+, 0 // PEXTRW r64, mm, imm8
+, 0 // PEXTRW r64, xmm, imm8
+, 0 // PEXTRW r64, xmm, imm8
+, 0 // PHADDD mm, m64
+, 0 // PHADDD mm, mm
+, 0 // PHADDD xmm, m128
+, 0 // PHADDD xmm, xmm
+, 0 // PHADDSW mm, m64
+, 0 // PHADDSW mm, mm
+, 0 // PHADDSW xmm, m128
+, 0 // PHADDSW xmm, xmm
+, 0 // PHADDW mm, m64
+, 0 // PHADDW mm, mm
+, 0 // PHADDW xmm, m128
+, 0 // PHADDW xmm, xmm
+, 0 // PHMINPOSUW xmm, m128
+, 0 // PHMINPOSUW xmm, xmm
+, 0 // PHSUBD mm, m64
+, 0 // PHSUBD mm, mm
+, 0 // PHSUBD xmm, m128
+, 0 // PHSUBD xmm, xmm
+, 0 // PHSUBSW mm, m64
+, 0 // PHSUBSW mm, mm
+, 0 // PHSUBSW xmm, m128
+, 0 // PHSUBSW xmm, xmm
+, 0 // PHSUBW mm, m64
+, 0 // PHSUBW mm, mm
+, 0 // PHSUBW xmm, m128
+, 0 // PHSUBW xmm, xmm
+, 0 // PINSRB xmm, m8, imm8
+, 0 // PINSRB xmm, r32, imm8
+, 0 // PINSRD xmm, m32, imm8
+, 0 // PINSRD xmm, r32, imm8
+, 0 // PINSRW mm, m16, imm8
+, 0 // PINSRW mm, r32, imm8
+, 0 // PINSRW xmm, m16, imm8
+, 0 // PINSRW xmm, r32, imm8
+, 0 // PMADDUBSW mm, m64
+, 0 // PMADDUBSW mm, mm
+, 0 // PMADDUBSW xmm, m128
+, 0 // PMADDUBSW xmm, xmm
+, 0 // PMADDWD mm, m64
+, 0 // PMADDWD mm, mm
+, 0 // PMADDWD xmm, m128
+, 0 // PMADDWD xmm, xmm
+, 0 // PMAXSB xmm, m128
+, 0 // PMAXSB xmm, xmm
+, 0 // PMAXSD xmm, m128
+, 0 // PMAXSD xmm, xmm
+, 0 // PMAXSW mm, m64
+, 0 // PMAXSW mm, mm
+, 0 // PMAXSW xmm, m128
+, 0 // PMAXSW xmm, xmm
+, 0 // PMAXUB mm, m64
+, 0 // PMAXUB mm, mm
+, 0 // PMAXUB xmm, m128
+, 0 // PMAXUB xmm, xmm
+, 0 // PMAXUD xmm, m128
+, 0 // PMAXUD xmm, xmm
+, 0 // PMAXUW xmm, m128
+, 0 // PMAXUW xmm, xmm
+, 0 // PMINSB xmm, m128
+, 0 // PMINSB xmm, xmm
+, 0 // PMINSD xmm, m128
+, 0 // PMINSD xmm, xmm
+, 0 // PMINSW mm, m64
+, 0 // PMINSW mm, mm
+, 0 // PMINSW xmm, m128
+, 0 // PMINSW xmm, xmm
+, 0 // PMINUB mm, m64
+, 0 // PMINUB mm, mm
+, 0 // PMINUB xmm, m128
+, 0 // PMINUB xmm, xmm
+, 0 // PMINUD xmm, m128
+, 0 // PMINUD xmm, xmm
+, 0 // PMINUW xmm, m128
+, 0 // PMINUW xmm, xmm
+, 0 // PMOVMSKB r32, mm
+, 0 // PMOVMSKB r32, xmm
+, 0 // PMOVMSKB r64, mm
+, 0 // PMOVMSKB r64, xmm
+, 0 // PMOVSXBD xmm, m32
+, 0 // PMOVSXBD xmm, xmm
+, 0 // PMOVSXBQ xmm, m16
+, 0 // PMOVSXBQ xmm, xmm
+, 0 // PMOVSXBW xmm, m64
+, 0 // PMOVSXBW xmm, xmm
+, 0 // PMOVSXDQ xmm, m64
+, 0 // PMOVSXDQ xmm, xmm
+, 0 // PMOVSXWD xmm, m64
+, 0 // PMOVSXWD xmm, xmm
+, 0 // PMOVSXWQ xmm, m32
+, 0 // PMOVSXWQ xmm, xmm
+, 0 // PMOVZXBD xmm, m32
+, 0 // PMOVZXBD xmm, xmm
+, 0 // PMOVZXBQ xmm, m16
+, 0 // PMOVZXBQ xmm, xmm
+, 0 // PMOVZXBW xmm, m64
+, 0 // PMOVZXBW xmm, xmm
+, 0 // PMOVZXDQ xmm, m64
+, 0 // PMOVZXDQ xmm, xmm
+, 0 // PMOVZXWD xmm, m64
+, 0 // PMOVZXWD xmm, xmm
+, 0 // PMOVZXWQ xmm, m32
+, 0 // PMOVZXWQ xmm, xmm
+, 0 // PMULDQ xmm, m128
+, 0 // PMULDQ xmm, xmm
+, 0 // PMULHRSW mm, m64
+, 0 // PMULHRSW mm, mm
+, 0 // PMULHRSW xmm, m128
+, 0 // PMULHRSW xmm, xmm
+, 0 // PMULHUW mm, m64
+, 0 // PMULHUW mm, mm
+, 0 // PMULHUW xmm, m128
+, 0 // PMULHUW xmm, xmm
+, 0 // PMULHW mm, m64
+, 0 // PMULHW mm, mm
+, 0 // PMULHW xmm, m128
+, 0 // PMULHW xmm, xmm
+, 0 // PMULLD xmm, m128
+, 0 // PMULLD xmm, xmm
+, 0 // PMULLW mm, m64
+, 0 // PMULLW mm, mm
+, 0 // PMULLW xmm, m128
+, 0 // PMULLW xmm, xmm
+, 0 // PMULUDQ mm, m64
+, 0 // PMULUDQ mm, mm
+, 0 // PMULUDQ xmm, m128
+, 0 // PMULUDQ xmm, xmm
+, 0 // POP FS
+, 0 // POP FS, p66
+, 0 // POP GS
+, 0 // POP GS, p66
+, 0 // POP m16
+, 0 // POP m64
+, 0 // POP r16
+, 0 // POP r16
+, 0 // POP r64
+, 0 // POP r64
+, 0 // POPCNT r16, m16
+, 0 // POPCNT r16, r16
+, 0 // POPCNT r32, m32
+, 0 // POPCNT r32, r32
+, 1 // POPCNT r64, m64
+, 1 // POPCNT r64, r64
+, 0 // POPF 
+, 0 // POPFQ 
+, 0 // POR mm, m64
+, 0 // POR mm, mm
+, 0 // POR xmm, m128
+, 0 // POR xmm, xmm
+, 0 // PREFETCHNTA m8
+, 0 // PREFETCHT0 m8
+, 0 // PREFETCHT1 m8
+, 0 // PREFETCHT2 m8
+, 0 // PSADBW mm, m64
+, 0 // PSADBW mm, mm
+, 0 // PSADBW xmm, m128
+, 0 // PSADBW xmm, xmm
+, 0 // PSHUFB mm, m64
+, 0 // PSHUFB mm, mm
+, 0 // PSHUFB xmm, m128
+, 0 // PSHUFB xmm, xmm
+, 0 // PSHUFD xmm, m128, imm8
+, 0 // PSHUFD xmm, xmm, imm8
+, 0 // PSHUFHW xmm, m128, imm8
+, 0 // PSHUFHW xmm, xmm, imm8
+, 0 // PSHUFLW xmm, m128, imm8
+, 0 // PSHUFLW xmm, xmm, imm8
+, 0 // PSHUFW mm, m64, imm8
+, 0 // PSHUFW mm, mm, imm8
+, 0 // PSIGNB mm, m64
+, 0 // PSIGNB mm, mm
+, 0 // PSIGNB xmm, m128
+, 0 // PSIGNB xmm, xmm
+, 0 // PSIGND mm, m64
+, 0 // PSIGND mm, mm
+, 0 // PSIGND xmm, m128
+, 0 // PSIGND xmm, xmm
+, 0 // PSIGNW mm, m64
+, 0 // PSIGNW mm, mm
+, 0 // PSIGNW xmm, m128
+, 0 // PSIGNW xmm, xmm
+, 0 // PSLLD mm, imm8
+, 0 // PSLLD mm, m64
+, 0 // PSLLD mm, mm
+, 0 // PSLLD xmm, imm8
+, 0 // PSLLD xmm, m128
+, 0 // PSLLD xmm, xmm
+, 0 // PSLLDQ xmm, imm8
+, 0 // PSLLQ mm, imm8
+, 0 // PSLLQ mm, m64
+, 0 // PSLLQ mm, mm
+, 0 // PSLLQ xmm, imm8
+, 0 // PSLLQ xmm, m128
+, 0 // PSLLQ xmm, xmm
+, 0 // PSLLW mm, imm8
+, 0 // PSLLW mm, m64
+, 0 // PSLLW mm, mm
+, 0 // PSLLW xmm, imm8
+, 0 // PSLLW xmm, m128
+, 0 // PSLLW xmm, xmm
+, 0 // PSRAD mm, imm8
+, 0 // PSRAD mm, m64
+, 0 // PSRAD mm, mm
+, 0 // PSRAD xmm, imm8
+, 0 // PSRAD xmm, m128
+, 0 // PSRAD xmm, xmm
+, 0 // PSRAW mm, imm8
+, 0 // PSRAW mm, m64
+, 0 // PSRAW mm, mm
+, 0 // PSRAW xmm, imm8
+, 0 // PSRAW xmm, m128
+, 0 // PSRAW xmm, xmm
+, 0 // PSRLD mm, imm8
+, 0 // PSRLD mm, m64
+, 0 // PSRLD mm, mm
+, 0 // PSRLD xmm, imm8
+, 0 // PSRLD xmm, m128
+, 0 // PSRLD xmm, xmm
+, 0 // PSRLDQ xmm, imm8
+, 0 // PSRLQ mm, imm8
+, 0 // PSRLQ mm, m64
+, 0 // PSRLQ mm, mm
+, 0 // PSRLQ xmm, imm8
+, 0 // PSRLQ xmm, m128
+, 0 // PSRLQ xmm, xmm
+, 0 // PSRLW mm, imm8
+, 0 // PSRLW mm, m64
+, 0 // PSRLW mm, mm
+, 0 // PSRLW xmm, imm8
+, 0 // PSRLW xmm, m128
+, 0 // PSRLW xmm, xmm
+, 0 // PSUBB mm, m64
+, 0 // PSUBB mm, mm
+, 0 // PSUBB xmm, m128
+, 0 // PSUBB xmm, xmm
+, 0 // PSUBD mm, m64
+, 0 // PSUBD mm, mm
+, 0 // PSUBD xmm, m128
+, 0 // PSUBD xmm, xmm
+, 0 // PSUBQ mm, m64
+, 0 // PSUBQ mm, mm
+, 0 // PSUBQ xmm, m128
+, 0 // PSUBQ xmm, xmm
+, 0 // PSUBSB mm, m64
+, 0 // PSUBSB mm, mm
+, 0 // PSUBSB xmm, m128
+, 0 // PSUBSB xmm, xmm
+, 0 // PSUBSW mm, m64
+, 0 // PSUBSW mm, mm
+, 0 // PSUBSW xmm, m128
+, 0 // PSUBSW xmm, xmm
+, 0 // PSUBUSB mm, m64
+, 0 // PSUBUSB mm, mm
+, 0 // PSUBUSB xmm, m128
+, 0 // PSUBUSB xmm, xmm
+, 0 // PSUBUSW mm, m64
+, 0 // PSUBUSW mm, mm
+, 0 // PSUBUSW xmm, m128
+, 0 // PSUBUSW xmm, xmm
+, 0 // PSUBW mm, m64
+, 0 // PSUBW mm, mm
+, 0 // PSUBW xmm, m128
+, 0 // PSUBW xmm, xmm
+, 0 // PTEST xmm, m128
+, 0 // PTEST xmm, xmm
+, 0 // PUNPCKHBW mm, m64
+, 0 // PUNPCKHBW mm, mm
+, 0 // PUNPCKHBW xmm, m128
+, 0 // PUNPCKHBW xmm, xmm
+, 0 // PUNPCKHDQ mm, m64
+, 0 // PUNPCKHDQ mm, mm
+, 0 // PUNPCKHDQ xmm, m128
+, 0 // PUNPCKHDQ xmm, xmm
+, 0 // PUNPCKHQDQ xmm, m128
+, 0 // PUNPCKHQDQ xmm, xmm
+, 0 // PUNPCKHWD mm, m64
+, 0 // PUNPCKHWD mm, mm
+, 0 // PUNPCKHWD xmm, m128
+, 0 // PUNPCKHWD xmm, xmm
+, 0 // PUNPCKLBW mm, m32
+, 0 // PUNPCKLBW mm, mm
+, 0 // PUNPCKLBW xmm, m128
+, 0 // PUNPCKLBW xmm, xmm
+, 0 // PUNPCKLDQ mm, m32
+, 0 // PUNPCKLDQ mm, mm
+, 0 // PUNPCKLDQ xmm, m128
+, 0 // PUNPCKLDQ xmm, xmm
+, 0 // PUNPCKLQDQ xmm, m128
+, 0 // PUNPCKLQDQ xmm, xmm
+, 0 // PUNPCKLWD mm, m32
+, 0 // PUNPCKLWD mm, mm
+, 0 // PUNPCKLWD xmm, m128
+, 0 // PUNPCKLWD xmm, xmm
+, 0 // PUSH FS
+, 0 // PUSH GS
+, 0 // PUSH m16
+, 0 // PUSH m64
+, 0 // PUSH r16
+, 0 // PUSH r16
+, 0 // PUSH r64
+, 0 // PUSH r64
+, 0 // PUSHF 
+, 0 // PUSHFQ 
+, 0 // PUSHQ imm16
+, 0 // PUSHQ imm32
+, 0 // PUSHQ imm8
+, 0 // PUSHW imm16
+, 0 // PUSHW imm8
+, 0 // PXOR mm, m64
+, 0 // PXOR mm, mm
+, 0 // PXOR xmm, m128
+, 0 // PXOR xmm, xmm
+, 0 // RCL m16, CL
+, 0 // RCL m16, imm8
+, 0 // RCL m16, 1
+, 0 // RCL m32, CL
+, 0 // RCL m32, imm8
+, 0 // RCL m32, 1
+, 1 // RCL m64, CL
+, 1 // RCL m64, imm8
+, 1 // RCL m64, 1
+, 0 // RCL m8, CL
+, 0 // RCL m8, imm8
+, 0 // RCL m8, 1
+, 0 // RCL r16, CL
+, 0 // RCL r16, imm8
+, 0 // RCL r16, 1
+, 0 // RCL r32, CL
+, 0 // RCL r32, imm8
+, 0 // RCL r32, 1
+, 1 // RCL r64, CL
+, 1 // RCL r64, imm8
+, 1 // RCL r64, 1
+, 0 // RCL r8, CL
+, 0 // RCL r8, imm8
+, 0 // RCL r8, 1
+, 0 // RCL rh, CL
+, 0 // RCL rh, imm8
+, 0 // RCL rh, 1
+, 0 // RCPPS xmm, m128
+, 0 // RCPPS xmm, xmm
+, 0 // RCPSS xmm, m32
+, 0 // RCPSS xmm, xmm
+, 0 // RCR m16, CL
+, 0 // RCR m16, imm8
+, 0 // RCR m16, 1
+, 0 // RCR m32, CL
+, 0 // RCR m32, imm8
+, 0 // RCR m32, 1
+, 1 // RCR m64, CL
+, 1 // RCR m64, imm8
+, 1 // RCR m64, 1
+, 0 // RCR m8, CL
+, 0 // RCR m8, imm8
+, 0 // RCR m8, 1
+, 0 // RCR r16, CL
+, 0 // RCR r16, imm8
+, 0 // RCR r16, 1
+, 0 // RCR r32, CL
+, 0 // RCR r32, imm8
+, 0 // RCR r32, 1
+, 1 // RCR r64, CL
+, 1 // RCR r64, imm8
+, 1 // RCR r64, 1
+, 0 // RCR r8, CL
+, 0 // RCR r8, imm8
+, 0 // RCR r8, 1
+, 0 // RCR rh, CL
+, 0 // RCR rh, imm8
+, 0 // RCR rh, 1
+, 0 // RDFSBASE r32
+, 1 // RDFSBASE r64
+, 0 // RDGSBASE r32
+, 1 // RDGSBASE r64
+, 0 // RDRAND r16
+, 0 // RDRAND r32
+, 1 // RDRAND r64
+, 0 // REP_INS m16, DX
+, 0 // REP_INS m32, DX
+, 1 // REP_INS m64, DX
+, 0 // REP_INS m8, DX
+, 1 // REP_INS m8, DX
+, 0 // REP_LODS AL
+, 1 // REP_LODS AL
+, 0 // REP_LODS AX
+, 0 // REP_LODS EAX
+, 1 // REP_LODS RAX
+, 0 // REP_MOVS m16, m16
+, 0 // REP_MOVS m32, m32
+, 1 // REP_MOVS m64, m64
+, 0 // REP_MOVS m8, m8
+, 1 // REP_MOVS m8, m8
+, 0 // REP_OUTS DX, m16
+, 0 // REP_OUTS DX, m32
+, 1 // REP_OUTS DX, m64
+, 0 // REP_OUTS DX, m8
+, 1 // REP_OUTS DX, m8
+, 0 // REP_STOS m16
+, 0 // REP_STOS m32
+, 1 // REP_STOS m64
+, 0 // REP_STOS m8
+, 1 // REP_STOS m8
+, 0 // REPE_CMPS m16, m16
+, 0 // REPE_CMPS m32, m32
+, 1 // REPE_CMPS m64, m64
+, 0 // REPE_CMPS m8, m8
+, 1 // REPE_CMPS m8, m8
+, 0 // REPE_SCAS m16
+, 0 // REPE_SCAS m32
+, 1 // REPE_SCAS m64
+, 0 // REPE_SCAS m8
+, 1 // REPE_SCAS m8
+, 0 // REPNE_CMPS m16, m16
+, 0 // REPNE_CMPS m32, m32
+, 1 // REPNE_CMPS m64, m64
+, 0 // REPNE_CMPS m8, m8
+, 1 // REPNE_CMPS m8, m8
+, 0 // REPNE_SCAS m16
+, 0 // REPNE_SCAS m32
+, 1 // REPNE_SCAS m64
+, 0 // REPNE_SCAS m8
+, 1 // REPNE_SCAS m8
+, 0 // RET 
+, 0 // RET far
+, 0 // RET imm16
+, 0 // RET imm16, far
+, 0 // ROL m16, CL
+, 0 // ROL m16, imm8
+, 0 // ROL m16, 1
+, 0 // ROL m32, CL
+, 0 // ROL m32, imm8
+, 0 // ROL m32, 1
+, 1 // ROL m64, CL
+, 1 // ROL m64, imm8
+, 1 // ROL m64, 1
+, 0 // ROL m8, CL
+, 0 // ROL m8, imm8
+, 0 // ROL m8, 1
+, 0 // ROL r16, CL
+, 0 // ROL r16, imm8
+, 0 // ROL r16, 1
+, 0 // ROL r32, CL
+, 0 // ROL r32, imm8
+, 0 // ROL r32, 1
+, 1 // ROL r64, CL
+, 1 // ROL r64, imm8
+, 1 // ROL r64, 1
+, 0 // ROL r8, CL
+, 0 // ROL r8, imm8
+, 0 // ROL r8, 1
+, 0 // ROL rh, CL
+, 0 // ROL rh, imm8
+, 0 // ROL rh, 1
+, 0 // ROR m16, CL
+, 0 // ROR m16, imm8
+, 0 // ROR m16, 1
+, 0 // ROR m32, CL
+, 0 // ROR m32, imm8
+, 0 // ROR m32, 1
+, 1 // ROR m64, CL
+, 1 // ROR m64, imm8
+, 1 // ROR m64, 1
+, 0 // ROR m8, CL
+, 0 // ROR m8, imm8
+, 0 // ROR m8, 1
+, 0 // ROR r16, CL
+, 0 // ROR r16, imm8
+, 0 // ROR r16, 1
+, 0 // ROR r32, CL
+, 0 // ROR r32, imm8
+, 0 // ROR r32, 1
+, 1 // ROR r64, CL
+, 1 // ROR r64, imm8
+, 1 // ROR r64, 1
+, 0 // ROR r8, CL
+, 0 // ROR r8, imm8
+, 0 // ROR r8, 1
+, 0 // ROR rh, CL
+, 0 // ROR rh, imm8
+, 0 // ROR rh, 1
+, 0 // RORX r32, m32, imm8
+, 0 // RORX r32, r32, imm8
+, 0 // RORX r64, m64, imm8
+, 0 // RORX r64, r64, imm8
+, 0 // ROUNDPD xmm, m128, imm8
+, 0 // ROUNDPD xmm, xmm, imm8
+, 0 // ROUNDPS xmm, m128, imm8
+, 0 // ROUNDPS xmm, xmm, imm8
+, 0 // ROUNDSD xmm, m64, imm8
+, 0 // ROUNDSD xmm, xmm, imm8
+, 0 // ROUNDSS xmm, m32, imm8
+, 0 // ROUNDSS xmm, xmm, imm8
+, 0 // RSQRTPS xmm, m128
+, 0 // RSQRTPS xmm, xmm
+, 0 // RSQRTSS xmm, m32
+, 0 // RSQRTSS xmm, xmm
+, 0 // SAHF 
+, 0 // SAL m16, CL
+, 0 // SAL m16, imm8
+, 0 // SAL m16, 1
+, 0 // SAL m32, CL
+, 0 // SAL m32, imm8
+, 0 // SAL m32, 1
+, 1 // SAL m64, CL
+, 1 // SAL m64, imm8
+, 1 // SAL m64, 1
+, 0 // SAL m8, CL
+, 0 // SAL m8, imm8
+, 0 // SAL m8, 1
+, 0 // SAL r16, CL
+, 0 // SAL r16, imm8
+, 0 // SAL r16, 1
+, 0 // SAL r32, CL
+, 0 // SAL r32, imm8
+, 0 // SAL r32, 1
+, 1 // SAL r64, CL
+, 1 // SAL r64, imm8
+, 1 // SAL r64, 1
+, 0 // SAL r8, CL
+, 0 // SAL r8, imm8
+, 0 // SAL r8, 1
+, 0 // SAL rh, CL
+, 0 // SAL rh, imm8
+, 0 // SAL rh, 1
+, 0 // SAR m16, CL
+, 0 // SAR m16, imm8
+, 0 // SAR m16, 1
+, 0 // SAR m32, CL
+, 0 // SAR m32, imm8
+, 0 // SAR m32, 1
+, 1 // SAR m64, CL
+, 1 // SAR m64, imm8
+, 1 // SAR m64, 1
+, 0 // SAR m8, CL
+, 0 // SAR m8, imm8
+, 0 // SAR m8, 1
+, 0 // SAR r16, CL
+, 0 // SAR r16, imm8
+, 0 // SAR r16, 1
+, 0 // SAR r32, CL
+, 0 // SAR r32, imm8
+, 0 // SAR r32, 1
+, 1 // SAR r64, CL
+, 1 // SAR r64, imm8
+, 1 // SAR r64, 1
+, 0 // SAR r8, CL
+, 0 // SAR r8, imm8
+, 0 // SAR r8, 1
+, 0 // SAR rh, CL
+, 0 // SAR rh, imm8
+, 0 // SAR rh, 1
+, 0 // SARX r32, m32, r32
+, 0 // SARX r32, r32, r32
+, 0 // SARX r64, m64, r64
+, 0 // SARX r64, r64, r64
+, 0 // SBB AL, imm8
+, 0 // SBB AX, imm16
+, 0 // SBB EAX, imm32
+, 0 // SBB m16, imm16
+, 0 // SBB m16, imm8
+, 0 // SBB m16, r16
+, 0 // SBB m32, imm32
+, 0 // SBB m32, imm8
+, 0 // SBB m32, r32
+, 1 // SBB m64, imm32
+, 1 // SBB m64, imm8
+, 1 // SBB m64, r64
+, 0 // SBB m8, imm8
+, 0 // SBB m8, r8
+, 0 // SBB m8, rh
+, 0 // SBB r16, imm16
+, 0 // SBB r16, imm8
+, 0 // SBB r16, m16
+, 0 // SBB r16, r16
+, 0 // SBB r16, r16
+, 0 // SBB r32, imm32
+, 0 // SBB r32, imm8
+, 0 // SBB r32, m32
+, 0 // SBB r32, r32
+, 0 // SBB r32, r32
+, 1 // SBB r64, imm32
+, 1 // SBB r64, imm8
+, 1 // SBB r64, m64
+, 1 // SBB r64, r64
+, 1 // SBB r64, r64
+, 0 // SBB r8, imm8
+, 0 // SBB r8, m8
+, 0 // SBB r8, r8
+, 0 // SBB r8, r8
+, 0 // SBB r8, rh
+, 0 // SBB r8, rh
+, 1 // SBB RAX, imm32
+, 0 // SBB rh, imm8
+, 0 // SBB rh, m8
+, 0 // SBB rh, r8
+, 0 // SBB rh, r8
+, 0 // SBB rh, rh
+, 0 // SBB rh, rh
+, 0 // SCAS m16
+, 0 // SCAS m32
+, 1 // SCAS m64
+, 0 // SCAS m8
+, 0 // SCASB 
+, 0 // SCASD 
+, 1 // SCASQ 
+, 0 // SCASW 
+, 0 // SETA m8
+, 0 // SETA r8
+, 0 // SETA rh
+, 0 // SETAE m8
+, 0 // SETAE r8
+, 0 // SETAE rh
+, 0 // SETB m8
+, 0 // SETB r8
+, 0 // SETB rh
+, 0 // SETBE m8
+, 0 // SETBE r8
+, 0 // SETBE rh
+, 0 // SETC m8
+, 0 // SETC r8
+, 0 // SETC rh
+, 0 // SETE m8
+, 0 // SETE r8
+, 0 // SETE rh
+, 0 // SETG m8
+, 0 // SETG r8
+, 0 // SETG rh
+, 0 // SETGE m8
+, 0 // SETGE r8
+, 0 // SETGE rh
+, 0 // SETL m8
+, 0 // SETL r8
+, 0 // SETL rh
+, 0 // SETLE m8
+, 0 // SETLE r8
+, 0 // SETLE rh
+, 0 // SETNA m8
+, 0 // SETNA r8
+, 0 // SETNA rh
+, 0 // SETNAE m8
+, 0 // SETNAE r8
+, 0 // SETNAE rh
+, 0 // SETNB m8
+, 0 // SETNB r8
+, 0 // SETNB rh
+, 0 // SETNBE m8
+, 0 // SETNBE r8
+, 0 // SETNBE rh
+, 0 // SETNC m8
+, 0 // SETNC r8
+, 0 // SETNC rh
+, 0 // SETNE m8
+, 0 // SETNE r8
+, 0 // SETNE rh
+, 0 // SETNG m8
+, 0 // SETNG r8
+, 0 // SETNG rh
+, 0 // SETNGE m8
+, 0 // SETNGE r8
+, 0 // SETNGE rh
+, 0 // SETNL m8
+, 0 // SETNL r8
+, 0 // SETNL rh
+, 0 // SETNLE m8
+, 0 // SETNLE r8
+, 0 // SETNLE rh
+, 0 // SETNO m8
+, 0 // SETNO r8
+, 0 // SETNO rh
+, 0 // SETNP m8
+, 0 // SETNP r8
+, 0 // SETNP rh
+, 0 // SETNS m8
+, 0 // SETNS r8
+, 0 // SETNS rh
+, 0 // SETNZ m8
+, 0 // SETNZ r8
+, 0 // SETNZ rh
+, 0 // SETO m8
+, 0 // SETO r8
+, 0 // SETO rh
+, 0 // SETP m8
+, 0 // SETP r8
+, 0 // SETP rh
+, 0 // SETPE m8
+, 0 // SETPE r8
+, 0 // SETPE rh
+, 0 // SETPO m8
+, 0 // SETPO r8
+, 0 // SETPO rh
+, 0 // SETS m8
+, 0 // SETS r8
+, 0 // SETS rh
+, 0 // SETZ m8
+, 0 // SETZ r8
+, 0 // SETZ rh
+, 0 // SFENCE 
+, 0 // SHL m16, CL
+, 0 // SHL m16, imm8
+, 0 // SHL m16, 1
+, 0 // SHL m32, CL
+, 0 // SHL m32, imm8
+, 0 // SHL m32, 1
+, 1 // SHL m64, CL
+, 1 // SHL m64, imm8
+, 1 // SHL m64, 1
+, 0 // SHL m8, CL
+, 0 // SHL m8, imm8
+, 0 // SHL m8, 1
+, 0 // SHL r16, CL
+, 0 // SHL r16, imm8
+, 0 // SHL r16, 1
+, 0 // SHL r32, CL
+, 0 // SHL r32, imm8
+, 0 // SHL r32, 1
+, 1 // SHL r64, CL
+, 1 // SHL r64, imm8
+, 1 // SHL r64, 1
+, 0 // SHL r8, CL
+, 0 // SHL r8, imm8
+, 0 // SHL r8, 1
+, 0 // SHL rh, CL
+, 0 // SHL rh, imm8
+, 0 // SHL rh, 1
+, 0 // SHLD m16, r16, CL
+, 0 // SHLD m16, r16, imm8
+, 0 // SHLD m32, r32, CL
+, 0 // SHLD m32, r32, imm8
+, 1 // SHLD m64, r64, CL
+, 1 // SHLD m64, r64, imm8
+, 0 // SHLD r16, r16, CL
+, 0 // SHLD r16, r16, imm8
+, 0 // SHLD r32, r32, CL
+, 0 // SHLD r32, r32, imm8
+, 1 // SHLD r64, r64, CL
+, 1 // SHLD r64, r64, imm8
+, 0 // SHLX r32, m32, r32
+, 0 // SHLX r32, r32, r32
+, 0 // SHLX r64, m64, r64
+, 0 // SHLX r64, r64, r64
+, 0 // SHR m16, CL
+, 0 // SHR m16, imm8
+, 0 // SHR m16, 1
+, 0 // SHR m32, CL
+, 0 // SHR m32, imm8
+, 0 // SHR m32, 1
+, 1 // SHR m64, CL
+, 1 // SHR m64, imm8
+, 1 // SHR m64, 1
+, 0 // SHR m8, CL
+, 0 // SHR m8, imm8
+, 0 // SHR m8, 1
+, 0 // SHR r16, CL
+, 0 // SHR r16, imm8
+, 0 // SHR r16, 1
+, 0 // SHR r32, CL
+, 0 // SHR r32, imm8
+, 0 // SHR r32, 1
+, 1 // SHR r64, CL
+, 1 // SHR r64, imm8
+, 1 // SHR r64, 1
+, 0 // SHR r8, CL
+, 0 // SHR r8, imm8
+, 0 // SHR r8, 1
+, 0 // SHR rh, CL
+, 0 // SHR rh, imm8
+, 0 // SHR rh, 1
+, 0 // SHRD m16, r16, CL
+, 0 // SHRD m16, r16, imm8
+, 0 // SHRD m32, r32, CL
+, 0 // SHRD m32, r32, imm8
+, 1 // SHRD m64, r64, CL
+, 1 // SHRD m64, r64, imm8
+, 0 // SHRD r16, r16, CL
+, 0 // SHRD r16, r16, imm8
+, 0 // SHRD r32, r32, CL
+, 0 // SHRD r32, r32, imm8
+, 1 // SHRD r64, r64, CL
+, 1 // SHRD r64, r64, imm8
+, 0 // SHRX r32, m32, r32
+, 0 // SHRX r32, r32, r32
+, 0 // SHRX r64, m64, r64
+, 0 // SHRX r64, r64, r64
+, 0 // SHUFPD xmm, m128, imm8
+, 0 // SHUFPD xmm, xmm, imm8
+, 0 // SHUFPS xmm, m128, imm8
+, 0 // SHUFPS xmm, xmm, imm8
+, 0 // SQRTPD xmm, m128
+, 0 // SQRTPD xmm, xmm
+, 0 // SQRTPS xmm, m128
+, 0 // SQRTPS xmm, xmm
+, 0 // SQRTSD xmm, m64
+, 0 // SQRTSD xmm, xmm
+, 0 // SQRTSS xmm, m32
+, 0 // SQRTSS xmm, xmm
+, 0 // STC 
+, 0 // STD 
+, 0 // STI 
+, 0 // STMXCSR m32
+, 0 // STOS m16
+, 0 // STOS m32
+, 1 // STOS m64
+, 0 // STOS m8
+, 0 // STOSB 
+, 0 // STOSD 
+, 1 // STOSQ 
+, 0 // STOSW 
+, 0 // SUB AL, imm8
+, 0 // SUB AX, imm16
+, 0 // SUB EAX, imm32
+, 0 // SUB m16, imm16
+, 0 // SUB m16, imm8
+, 0 // SUB m16, r16
+, 0 // SUB m32, imm32
+, 0 // SUB m32, imm8
+, 0 // SUB m32, r32
+, 1 // SUB m64, imm32
+, 1 // SUB m64, imm8
+, 1 // SUB m64, r64
+, 0 // SUB m8, imm8
+, 0 // SUB m8, r8
+, 0 // SUB m8, rh
+, 0 // SUB r16, imm16
+, 0 // SUB r16, imm8
+, 0 // SUB r16, m16
+, 0 // SUB r16, r16
+, 0 // SUB r16, r16
+, 0 // SUB r32, imm32
+, 0 // SUB r32, imm8
+, 0 // SUB r32, m32
+, 0 // SUB r32, r32
+, 0 // SUB r32, r32
+, 1 // SUB r64, imm32
+, 1 // SUB r64, imm8
+, 1 // SUB r64, m64
+, 1 // SUB r64, r64
+, 1 // SUB r64, r64
+, 0 // SUB r8, imm8
+, 0 // SUB r8, m8
+, 0 // SUB r8, r8
+, 0 // SUB r8, r8
+, 0 // SUB r8, rh
+, 0 // SUB r8, rh
+, 1 // SUB RAX, imm32
+, 0 // SUB rh, imm8
+, 0 // SUB rh, m8
+, 0 // SUB rh, r8
+, 0 // SUB rh, r8
+, 0 // SUB rh, rh
+, 0 // SUB rh, rh
+, 0 // SUBPD xmm, m128
+, 0 // SUBPD xmm, xmm
+, 0 // SUBPS xmm, m128
+, 0 // SUBPS xmm, xmm
+, 0 // SUBSD xmm, m64
+, 0 // SUBSD xmm, xmm
+, 0 // SUBSS xmm, m32
+, 0 // SUBSS xmm, xmm
+, 0 // SWAPGS 
+, 0 // SYSCALL 
+, 0 // SYSENTER 
+, 0 // SYSEXIT 
+, 1 // SYSEXIT pw
+, 0 // SYSRET 
+, 1 // SYSRET pw
+, 0 // TEST AL, imm8
+, 0 // TEST AX, imm16
+, 0 // TEST EAX, imm32
+, 0 // TEST m16, imm16
+, 0 // TEST m16, r16
+, 0 // TEST m32, imm32
+, 0 // TEST m32, r32
+, 1 // TEST m64, imm32
+, 1 // TEST m64, r64
+, 0 // TEST m8, imm8
+, 0 // TEST m8, r8
+, 0 // TEST m8, rh
+, 0 // TEST r16, imm16
+, 0 // TEST r16, r16
+, 0 // TEST r32, imm32
+, 0 // TEST r32, r32
+, 1 // TEST r64, imm32
+, 1 // TEST r64, r64
+, 0 // TEST r8, imm8
+, 0 // TEST r8, r8
+, 0 // TEST r8, rh
+, 1 // TEST RAX, imm32
+, 0 // TEST rh, imm8
+, 0 // TEST rh, r8
+, 0 // TEST rh, rh
+, 0 // TZCNT r16, m16
+, 0 // TZCNT r16, r16
+, 0 // TZCNT r32, m32
+, 0 // TZCNT r32, r32
+, 1 // TZCNT r64, m64
+, 1 // TZCNT r64, r64
+, 0 // UCOMISD xmm, m64
+, 0 // UCOMISD xmm, xmm
+, 0 // UCOMISS xmm, m32
+, 0 // UCOMISS xmm, xmm
+, 0 // UD2 
+, 0 // UNPCKHPD xmm, m128
+, 0 // UNPCKHPD xmm, xmm
+, 0 // UNPCKHPS xmm, m128
+, 0 // UNPCKHPS xmm, xmm
+, 0 // UNPCKLPD xmm, m128
+, 0 // UNPCKLPD xmm, xmm
+, 0 // UNPCKLPS xmm, m128
+, 0 // UNPCKLPS xmm, xmm
+, 0 // VADDPD xmm, xmm, m128
+, 0 // VADDPD xmm, xmm, xmm
+, 0 // VADDPD ymm, ymm, m256
+, 0 // VADDPD ymm, ymm, ymm
+, 0 // VADDPS xmm, xmm, m128
+, 0 // VADDPS xmm, xmm, xmm
+, 0 // VADDPS ymm, ymm, m256
+, 0 // VADDPS ymm, ymm, ymm
+, 0 // VADDSD xmm, xmm, m64
+, 0 // VADDSD xmm, xmm, xmm
+, 0 // VADDSS xmm, xmm, m32
+, 0 // VADDSS xmm, xmm, xmm
+, 0 // VADDSUBPD xmm, xmm, m128
+, 0 // VADDSUBPD xmm, xmm, xmm
+, 0 // VADDSUBPD ymm, ymm, m256
+, 0 // VADDSUBPD ymm, ymm, ymm
+, 0 // VADDSUBPS xmm, xmm, m128
+, 0 // VADDSUBPS xmm, xmm, xmm
+, 0 // VADDSUBPS ymm, ymm, m256
+, 0 // VADDSUBPS ymm, ymm, ymm
+, 0 // VAESDEC xmm, xmm, m128
+, 0 // VAESDEC xmm, xmm, xmm
+, 0 // VAESDECLAST xmm, xmm, m128
+, 0 // VAESDECLAST xmm, xmm, xmm
+, 0 // VAESENC xmm, xmm, m128
+, 0 // VAESENC xmm, xmm, xmm
+, 0 // VAESENCLAST xmm, xmm, m128
+, 0 // VAESENCLAST xmm, xmm, xmm
+, 0 // VAESIMC xmm, m128
+, 0 // VAESIMC xmm, xmm
+, 0 // VAESKEYGENASSIST xmm, m128, imm8
+, 0 // VAESKEYGENASSIST xmm, xmm, imm8
+, 0 // VANDNPD xmm, xmm, m128
+, 0 // VANDNPD xmm, xmm, xmm
+, 0 // VANDNPD ymm, ymm, m256
+, 0 // VANDNPD ymm, ymm, ymm
+, 0 // VANDNPS xmm, xmm, m128
+, 0 // VANDNPS xmm, xmm, xmm
+, 0 // VANDNPS ymm, ymm, m256
+, 0 // VANDNPS ymm, ymm, ymm
+, 0 // VANDPD xmm, xmm, m128
+, 0 // VANDPD xmm, xmm, xmm
+, 0 // VANDPD ymm, ymm, m256
+, 0 // VANDPD ymm, ymm, ymm
+, 0 // VANDPS xmm, xmm, m128
+, 0 // VANDPS xmm, xmm, xmm
+, 0 // VANDPS ymm, ymm, m256
+, 0 // VANDPS ymm, ymm, ymm
+, 0 // VBLENDPD xmm, xmm, m128, imm8
+, 0 // VBLENDPD xmm, xmm, xmm, imm8
+, 0 // VBLENDPD ymm, ymm, m256, imm8
+, 0 // VBLENDPD ymm, ymm, ymm, imm8
+, 0 // VBLENDPS xmm, xmm, m128, imm8
+, 0 // VBLENDPS xmm, xmm, xmm, imm8
+, 0 // VBLENDPS ymm, ymm, m256, imm8
+, 0 // VBLENDPS ymm, ymm, ymm, imm8
+, 0 // VBLENDVPD xmm, xmm, m128, xmm
+, 0 // VBLENDVPD xmm, xmm, xmm, xmm
+, 0 // VBLENDVPD ymm, ymm, m256, ymm
+, 0 // VBLENDVPD ymm, ymm, ymm, ymm
+, 0 // VBLENDVPS xmm, xmm, m128, xmm
+, 0 // VBLENDVPS xmm, xmm, xmm, xmm
+, 0 // VBLENDVPS ymm, ymm, m256, ymm
+, 0 // VBLENDVPS ymm, ymm, ymm, ymm
+, 0 // VBROADCASTF128 ymm, m128
+, 0 // VBROADCASTI128 ymm, m128
+, 0 // VBROADCASTSD ymm, m64
+, 0 // VBROADCASTSD ymm, xmm
+, 0 // VBROADCASTSS xmm, m32
+, 0 // VBROADCASTSS xmm, xmm
+, 0 // VBROADCASTSS ymm, m32
+, 0 // VBROADCASTSS ymm, xmm
+, 0 // VCMPPD xmm, xmm, m128, imm8
+, 0 // VCMPPD xmm, xmm, xmm, imm8
+, 0 // VCMPPD ymm, ymm, m256, imm8
+, 0 // VCMPPD ymm, ymm, ymm, imm8
+, 0 // VCMPPS xmm, xmm, m128, imm8
+, 0 // VCMPPS xmm, xmm, xmm, imm8
+, 0 // VCMPPS ymm, ymm, m256, imm8
+, 0 // VCMPPS ymm, ymm, ymm, imm8
+, 0 // VCMPSD xmm, xmm, m64, imm8
+, 0 // VCMPSD xmm, xmm, xmm, imm8
+, 0 // VCMPSS xmm, xmm, m32, imm8
+, 0 // VCMPSS xmm, xmm, xmm, imm8
+, 0 // VCOMISD xmm, m64
+, 0 // VCOMISD xmm, xmm
+, 0 // VCOMISS xmm, m32
+, 0 // VCOMISS xmm, xmm
+, 0 // VCVTDQ2PD xmm, m64
+, 0 // VCVTDQ2PD xmm, xmm
+, 0 // VCVTDQ2PD ymm, m128
+, 0 // VCVTDQ2PD ymm, ymm
+, 0 // VCVTDQ2PS xmm, m128
+, 0 // VCVTDQ2PS xmm, xmm
+, 0 // VCVTDQ2PS ymm, m256
+, 0 // VCVTDQ2PS ymm, ymm
+, 0 // VCVTPD2DQ xmm, m128
+, 0 // VCVTPD2DQ xmm, m256
+, 0 // VCVTPD2DQ xmm, xmm
+, 0 // VCVTPD2DQ xmm, ymm
+, 0 // VCVTPD2PS xmm, m128
+, 0 // VCVTPD2PS xmm, m256
+, 0 // VCVTPD2PS xmm, xmm
+, 0 // VCVTPD2PS xmm, ymm
+, 0 // VCVTPH2PS xmm, m64
+, 0 // VCVTPH2PS xmm, xmm
+, 0 // VCVTPH2PS ymm, m128
+, 0 // VCVTPH2PS ymm, xmm
+, 0 // VCVTPS2DQ xmm, m128
+, 0 // VCVTPS2DQ xmm, xmm
+, 0 // VCVTPS2DQ ymm, m256
+, 0 // VCVTPS2DQ ymm, ymm
+, 0 // VCVTPS2PD xmm, m64
+, 0 // VCVTPS2PD xmm, xmm
+, 0 // VCVTPS2PD ymm, m128
+, 0 // VCVTPS2PD ymm, xmm
+, 0 // VCVTPS2PH m128, ymm, imm8
+, 0 // VCVTPS2PH m64, xmm, imm8
+, 0 // VCVTPS2PH xmm, xmm, imm8
+, 0 // VCVTPS2PH xmm, ymm, imm8
+, 0 // VCVTSD2SI r32, m64
+, 0 // VCVTSD2SI r32, xmm
+, 0 // VCVTSD2SI r64, m64
+, 0 // VCVTSD2SI r64, xmm
+, 0 // VCVTSD2SS xmm, xmm, m64
+, 0 // VCVTSD2SS xmm, xmm, xmm
+, 0 // VCVTSI2SD xmm, xmm, m32
+, 0 // VCVTSI2SD xmm, xmm, m64
+, 0 // VCVTSI2SD xmm, xmm, r32
+, 0 // VCVTSI2SD xmm, xmm, r64
+, 0 // VCVTSI2SS xmm, xmm, m32
+, 0 // VCVTSI2SS xmm, xmm, m64
+, 0 // VCVTSI2SS xmm, xmm, r32
+, 0 // VCVTSI2SS xmm, xmm, r64
+, 0 // VCVTSS2SD xmm, xmm, m32
+, 0 // VCVTSS2SD xmm, xmm, xmm
+, 0 // VCVTSS2SI r32, m32
+, 0 // VCVTSS2SI r32, xmm
+, 0 // VCVTSS2SI r64, m32
+, 0 // VCVTSS2SI r64, xmm
+, 0 // VCVTTPD2DQ xmm, m128
+, 0 // VCVTTPD2DQ xmm, m256
+, 0 // VCVTTPD2DQ xmm, xmm
+, 0 // VCVTTPD2DQ xmm, ymm
+, 0 // VCVTTPS2DQ xmm, m128
+, 0 // VCVTTPS2DQ xmm, xmm
+, 0 // VCVTTPS2DQ ymm, m256
+, 0 // VCVTTPS2DQ ymm, ymm
+, 0 // VCVTTSD2SI r32, m64
+, 0 // VCVTTSD2SI r32, xmm
+, 0 // VCVTTSD2SI r64, m64
+, 0 // VCVTTSD2SI r64, xmm
+, 0 // VCVTTSS2SI r32, m32
+, 0 // VCVTTSS2SI r32, xmm
+, 0 // VCVTTSS2SI r64, m32
+, 0 // VCVTTSS2SI r64, xmm
+, 0 // VDIVPD xmm, xmm, m128
+, 0 // VDIVPD xmm, xmm, xmm
+, 0 // VDIVPD ymm, ymm, m256
+, 0 // VDIVPD ymm, ymm, ymm
+, 0 // VDIVPS xmm, xmm, m128
+, 0 // VDIVPS xmm, xmm, xmm
+, 0 // VDIVPS ymm, ymm, m256
+, 0 // VDIVPS ymm, ymm, ymm
+, 0 // VDIVSD xmm, xmm, m64
+, 0 // VDIVSD xmm, xmm, xmm
+, 0 // VDIVSS xmm, xmm, m32
+, 0 // VDIVSS xmm, xmm, xmm
+, 0 // VDPPD xmm, xmm, m128, imm8
+, 0 // VDPPD xmm, xmm, xmm, imm8
+, 0 // VDPPS xmm, xmm, m128, imm8
+, 0 // VDPPS xmm, xmm, xmm, imm8
+, 0 // VDPPS ymm, ymm, m256, imm8
+, 0 // VDPPS ymm, ymm, ymm, imm8
+, 0 // VERR m16
+, 0 // VERR r16
+, 0 // VERW m16
+, 0 // VERW r16
+, 0 // VEXTRACTF128 m128, ymm, imm8
+, 0 // VEXTRACTF128 xmm, ymm, imm8
+, 0 // VEXTRACTI128 m128, ymm, imm8
+, 0 // VEXTRACTI128 xmm, ymm, imm8
+, 0 // VEXTRACTPS m32, xmm, imm8
+, 0 // VEXTRACTPS r32, xmm, imm8
+, 0 // VFMADD132PD xmm, xmm, m128
+, 0 // VFMADD132PD xmm, xmm, xmm
+, 0 // VFMADD132PD ymm, ymm, m256
+, 0 // VFMADD132PD ymm, ymm, ymm
+, 0 // VFMADD132PS xmm, xmm, m128
+, 0 // VFMADD132PS xmm, xmm, xmm
+, 0 // VFMADD132PS ymm, ymm, m256
+, 0 // VFMADD132PS ymm, ymm, ymm
+, 0 // VFMADD132SD xmm, xmm, m64
+, 0 // VFMADD132SD xmm, xmm, xmm
+, 0 // VFMADD132SS xmm, xmm, m32
+, 0 // VFMADD132SS xmm, xmm, xmm
+, 0 // VFMADD213PD xmm, xmm, m128
+, 0 // VFMADD213PD xmm, xmm, xmm
+, 0 // VFMADD213PD ymm, ymm, m256
+, 0 // VFMADD213PD ymm, ymm, ymm
+, 0 // VFMADD213PS xmm, xmm, m128
+, 0 // VFMADD213PS xmm, xmm, xmm
+, 0 // VFMADD213PS ymm, ymm, m256
+, 0 // VFMADD213PS ymm, ymm, ymm
+, 0 // VFMADD213SD xmm, xmm, m64
+, 0 // VFMADD213SD xmm, xmm, xmm
+, 0 // VFMADD213SS xmm, xmm, m32
+, 0 // VFMADD213SS xmm, xmm, xmm
+, 0 // VFMADD231PD xmm, xmm, m128
+, 0 // VFMADD231PD xmm, xmm, xmm
+, 0 // VFMADD231PD ymm, ymm, m256
+, 0 // VFMADD231PD ymm, ymm, ymm
+, 0 // VFMADD231PS xmm, xmm, m128
+, 0 // VFMADD231PS xmm, xmm, xmm
+, 0 // VFMADD231PS ymm, ymm, m256
+, 0 // VFMADD231PS ymm, ymm, ymm
+, 0 // VFMADD231SD xmm, xmm, m64
+, 0 // VFMADD231SD xmm, xmm, xmm
+, 0 // VFMADD231SS xmm, xmm, m32
+, 0 // VFMADD231SS xmm, xmm, xmm
+, 0 // VFMADDSUB132PD xmm, xmm, m128
+, 0 // VFMADDSUB132PD xmm, xmm, xmm
+, 0 // VFMADDSUB132PD ymm, ymm, m256
+, 0 // VFMADDSUB132PD ymm, ymm, ymm
+, 0 // VFMADDSUB132PS xmm, xmm, m128
+, 0 // VFMADDSUB132PS xmm, xmm, xmm
+, 0 // VFMADDSUB132PS ymm, ymm, m256
+, 0 // VFMADDSUB132PS ymm, ymm, ymm
+, 0 // VFMADDSUB213PD xmm, xmm, m128
+, 0 // VFMADDSUB213PD xmm, xmm, xmm
+, 0 // VFMADDSUB213PD ymm, ymm, m256
+, 0 // VFMADDSUB213PD ymm, ymm, ymm
+, 0 // VFMADDSUB213PS xmm, xmm, m128
+, 0 // VFMADDSUB213PS xmm, xmm, xmm
+, 0 // VFMADDSUB213PS ymm, ymm, m256
+, 0 // VFMADDSUB213PS ymm, ymm, ymm
+, 0 // VFMADDSUB231PD xmm, xmm, m128
+, 0 // VFMADDSUB231PD xmm, xmm, xmm
+, 0 // VFMADDSUB231PD ymm, ymm, m256
+, 0 // VFMADDSUB231PD ymm, ymm, ymm
+, 0 // VFMADDSUB231PS xmm, xmm, m128
+, 0 // VFMADDSUB231PS xmm, xmm, xmm
+, 0 // VFMADDSUB231PS ymm, ymm, m256
+, 0 // VFMADDSUB231PS ymm, ymm, ymm
+, 0 // VFMSUB132PD xmm, xmm, m128
+, 0 // VFMSUB132PD xmm, xmm, xmm
+, 0 // VFMSUB132PD ymm, ymm, m256
+, 0 // VFMSUB132PD ymm, ymm, ymm
+, 0 // VFMSUB132PS xmm, xmm, m128
+, 0 // VFMSUB132PS xmm, xmm, xmm
+, 0 // VFMSUB132PS ymm, ymm, m256
+, 0 // VFMSUB132PS ymm, ymm, ymm
+, 0 // VFMSUB132SD xmm, xmm, m64
+, 0 // VFMSUB132SD xmm, xmm, xmm
+, 0 // VFMSUB132SS xmm, xmm, m32
+, 0 // VFMSUB132SS xmm, xmm, xmm
+, 0 // VFMSUB213PD xmm, xmm, m128
+, 0 // VFMSUB213PD xmm, xmm, xmm
+, 0 // VFMSUB213PD ymm, ymm, m256
+, 0 // VFMSUB213PD ymm, ymm, ymm
+, 0 // VFMSUB213PS xmm, xmm, m128
+, 0 // VFMSUB213PS xmm, xmm, xmm
+, 0 // VFMSUB213PS ymm, ymm, m256
+, 0 // VFMSUB213PS ymm, ymm, ymm
+, 0 // VFMSUB213SD xmm, xmm, m64
+, 0 // VFMSUB213SD xmm, xmm, xmm
+, 0 // VFMSUB213SS xmm, xmm, m32
+, 0 // VFMSUB213SS xmm, xmm, xmm
+, 0 // VFMSUB231PD xmm, xmm, m128
+, 0 // VFMSUB231PD xmm, xmm, xmm
+, 0 // VFMSUB231PD ymm, ymm, m256
+, 0 // VFMSUB231PD ymm, ymm, ymm
+, 0 // VFMSUB231PS xmm, xmm, m128
+, 0 // VFMSUB231PS xmm, xmm, xmm
+, 0 // VFMSUB231PS ymm, ymm, m256
+, 0 // VFMSUB231PS ymm, ymm, ymm
+, 0 // VFMSUB231SD xmm, xmm, m64
+, 0 // VFMSUB231SD xmm, xmm, xmm
+, 0 // VFMSUB231SS xmm, xmm, m32
+, 0 // VFMSUB231SS xmm, xmm, xmm
+, 0 // VFMSUBADD132PD xmm, xmm, m128
+, 0 // VFMSUBADD132PD xmm, xmm, xmm
+, 0 // VFMSUBADD132PD ymm, ymm, m256
+, 0 // VFMSUBADD132PD ymm, ymm, ymm
+, 0 // VFMSUBADD132PS xmm, xmm, m128
+, 0 // VFMSUBADD132PS xmm, xmm, xmm
+, 0 // VFMSUBADD132PS ymm, ymm, m256
+, 0 // VFMSUBADD132PS ymm, ymm, ymm
+, 0 // VFMSUBADD213PD xmm, xmm, m128
+, 0 // VFMSUBADD213PD xmm, xmm, xmm
+, 0 // VFMSUBADD213PD ymm, ymm, m256
+, 0 // VFMSUBADD213PD ymm, ymm, ymm
+, 0 // VFMSUBADD213PS xmm, xmm, m128
+, 0 // VFMSUBADD213PS xmm, xmm, xmm
+, 0 // VFMSUBADD213PS ymm, ymm, m256
+, 0 // VFMSUBADD213PS ymm, ymm, ymm
+, 0 // VFMSUBADD231PD xmm, xmm, m128
+, 0 // VFMSUBADD231PD xmm, xmm, xmm
+, 0 // VFMSUBADD231PD ymm, ymm, m256
+, 0 // VFMSUBADD231PD ymm, ymm, ymm
+, 0 // VFMSUBADD231PS xmm, xmm, m128
+, 0 // VFMSUBADD231PS xmm, xmm, xmm
+, 0 // VFMSUBADD231PS ymm, ymm, m256
+, 0 // VFMSUBADD231PS ymm, ymm, ymm
+, 0 // VFNMADD132PD xmm, xmm, m128
+, 0 // VFNMADD132PD xmm, xmm, xmm
+, 0 // VFNMADD132PD ymm, ymm, m256
+, 0 // VFNMADD132PD ymm, ymm, ymm
+, 0 // VFNMADD132PS xmm, xmm, m128
+, 0 // VFNMADD132PS xmm, xmm, xmm
+, 0 // VFNMADD132PS ymm, ymm, m256
+, 0 // VFNMADD132PS ymm, ymm, ymm
+, 0 // VFNMADD132SD xmm, xmm, m64
+, 0 // VFNMADD132SD xmm, xmm, xmm
+, 0 // VFNMADD132SS xmm, xmm, m32
+, 0 // VFNMADD132SS xmm, xmm, xmm
+, 0 // VFNMADD213PD xmm, xmm, m128
+, 0 // VFNMADD213PD xmm, xmm, xmm
+, 0 // VFNMADD213PD ymm, ymm, m256
+, 0 // VFNMADD213PD ymm, ymm, ymm
+, 0 // VFNMADD213PS xmm, xmm, m128
+, 0 // VFNMADD213PS xmm, xmm, xmm
+, 0 // VFNMADD213PS ymm, ymm, m256
+, 0 // VFNMADD213PS ymm, ymm, ymm
+, 0 // VFNMADD213SD xmm, xmm, m64
+, 0 // VFNMADD213SD xmm, xmm, xmm
+, 0 // VFNMADD213SS xmm, xmm, m32
+, 0 // VFNMADD213SS xmm, xmm, xmm
+, 0 // VFNMADD231PD xmm, xmm, m128
+, 0 // VFNMADD231PD xmm, xmm, xmm
+, 0 // VFNMADD231PD ymm, ymm, m256
+, 0 // VFNMADD231PD ymm, ymm, ymm
+, 0 // VFNMADD231PS xmm, xmm, m128
+, 0 // VFNMADD231PS xmm, xmm, xmm
+, 0 // VFNMADD231PS ymm, ymm, m256
+, 0 // VFNMADD231PS ymm, ymm, ymm
+, 0 // VFNMADD231SD xmm, xmm, m64
+, 0 // VFNMADD231SD xmm, xmm, xmm
+, 0 // VFNMADD231SS xmm, xmm, m32
+, 0 // VFNMADD231SS xmm, xmm, xmm
+, 0 // VFNMSUB132PD xmm, xmm, m128
+, 0 // VFNMSUB132PD xmm, xmm, xmm
+, 0 // VFNMSUB132PD ymm, ymm, m256
+, 0 // VFNMSUB132PD ymm, ymm, ymm
+, 0 // VFNMSUB132PS xmm, xmm, m128
+, 0 // VFNMSUB132PS xmm, xmm, xmm
+, 0 // VFNMSUB132PS ymm, ymm, m256
+, 0 // VFNMSUB132PS ymm, ymm, ymm
+, 0 // VFNMSUB132SD xmm, xmm, m64
+, 0 // VFNMSUB132SD xmm, xmm, xmm
+, 0 // VFNMSUB132SS xmm, xmm, m32
+, 0 // VFNMSUB132SS xmm, xmm, xmm
+, 0 // VFNMSUB213PD xmm, xmm, m128
+, 0 // VFNMSUB213PD xmm, xmm, xmm
+, 0 // VFNMSUB213PD ymm, ymm, m256
+, 0 // VFNMSUB213PD ymm, ymm, ymm
+, 0 // VFNMSUB213PS xmm, xmm, m128
+, 0 // VFNMSUB213PS xmm, xmm, xmm
+, 0 // VFNMSUB213PS ymm, ymm, m256
+, 0 // VFNMSUB213PS ymm, ymm, ymm
+, 0 // VFNMSUB213SD xmm, xmm, m64
+, 0 // VFNMSUB213SD xmm, xmm, xmm
+, 0 // VFNMSUB213SS xmm, xmm, m32
+, 0 // VFNMSUB213SS xmm, xmm, xmm
+, 0 // VFNMSUB231PD xmm, xmm, m128
+, 0 // VFNMSUB231PD xmm, xmm, xmm
+, 0 // VFNMSUB231PD ymm, ymm, m256
+, 0 // VFNMSUB231PD ymm, ymm, ymm
+, 0 // VFNMSUB231PS xmm, xmm, m128
+, 0 // VFNMSUB231PS xmm, xmm, xmm
+, 0 // VFNMSUB231PS ymm, ymm, m256
+, 0 // VFNMSUB231PS ymm, ymm, ymm
+, 0 // VFNMSUB231SD xmm, xmm, m64
+, 0 // VFNMSUB231SD xmm, xmm, xmm
+, 0 // VFNMSUB231SS xmm, xmm, m32
+, 0 // VFNMSUB231SS xmm, xmm, xmm
+, 0 // VGATHERDPD xmm, m32, xmm
+, 0 // VGATHERDPD ymm, m32, ymm
+, 0 // VGATHERDPS xmm, m32, xmm
+, 0 // VGATHERDPS ymm, m32, ymm
+, 0 // VGATHERQPD xmm, m64, xmm
+, 0 // VGATHERQPD ymm, m64, ymm
+, 0 // VGATHERQPS xmm, m64, xmm
+, 0 // VGATHERQPS xmm, m64, xmm
+, 0 // VHADDPD xmm, xmm, m128
+, 0 // VHADDPD xmm, xmm, xmm
+, 0 // VHADDPD ymm, ymm, m256
+, 0 // VHADDPD ymm, ymm, ymm
+, 0 // VHADDPS xmm, xmm, m128
+, 0 // VHADDPS xmm, xmm, xmm
+, 0 // VHADDPS ymm, ymm, m256
+, 0 // VHADDPS ymm, ymm, ymm
+, 0 // VHSUBPD xmm, xmm, m128
+, 0 // VHSUBPD xmm, xmm, xmm
+, 0 // VHSUBPD ymm, ymm, m256
+, 0 // VHSUBPD ymm, ymm, ymm
+, 0 // VHSUBPS xmm, xmm, m128
+, 0 // VHSUBPS xmm, xmm, xmm
+, 0 // VHSUBPS ymm, ymm, m256
+, 0 // VHSUBPS ymm, ymm, ymm
+, 0 // VINSERTF128 ymm, ymm, m128, imm8
+, 0 // VINSERTF128 ymm, ymm, xmm, imm8
+, 0 // VINSERTI128 ymm, ymm, m128, imm8
+, 0 // VINSERTI128 ymm, ymm, xmm, imm8
+, 0 // VINSERTPS xmm, xmm, m32, imm8
+, 0 // VINSERTPS xmm, xmm, xmm, imm8
+, 0 // VLDDQU xmm, m128
+, 0 // VLDDQU ymm, m256
+, 0 // VLDMXCSR m32
+, 0 // VMASKMOVDQU xmm, xmm
+, 0 // VMASKMOVPD m128, xmm, xmm
+, 0 // VMASKMOVPD m256, ymm, ymm
+, 0 // VMASKMOVPD xmm, xmm, m128
+, 0 // VMASKMOVPD ymm, ymm, m256
+, 0 // VMASKMOVPS m128, xmm, xmm
+, 0 // VMASKMOVPS m256, ymm, ymm
+, 0 // VMASKMOVPS xmm, xmm, m128
+, 0 // VMASKMOVPS ymm, ymm, m256
+, 0 // VMAXPD xmm, xmm, m128
+, 0 // VMAXPD xmm, xmm, xmm
+, 0 // VMAXPD ymm, ymm, m256
+, 0 // VMAXPD ymm, ymm, ymm
+, 0 // VMAXPS xmm, xmm, m128
+, 0 // VMAXPS xmm, xmm, xmm
+, 0 // VMAXPS ymm, ymm, m256
+, 0 // VMAXPS ymm, ymm, ymm
+, 0 // VMAXSD xmm, xmm, m64
+, 0 // VMAXSD xmm, xmm, xmm
+, 0 // VMAXSS xmm, xmm, m32
+, 0 // VMAXSS xmm, xmm, xmm
+, 0 // VMINPD xmm, xmm, m128
+, 0 // VMINPD xmm, xmm, xmm
+, 0 // VMINPD ymm, ymm, m256
+, 0 // VMINPD ymm, ymm, ymm
+, 0 // VMINPS xmm, xmm, m128
+, 0 // VMINPS xmm, xmm, xmm
+, 0 // VMINPS ymm, ymm, m256
+, 0 // VMINPS ymm, ymm, ymm
+, 0 // VMINSD xmm, xmm, m64
+, 0 // VMINSD xmm, xmm, xmm
+, 0 // VMINSS xmm, xmm, m32
+, 0 // VMINSS xmm, xmm, xmm
+, 0 // VMOVAPD m128, xmm
+, 0 // VMOVAPD m256, ymm
+, 0 // VMOVAPD xmm, m128
+, 0 // VMOVAPD xmm, xmm
+, 0 // VMOVAPD xmm, xmm
+, 0 // VMOVAPD ymm, m256
+, 0 // VMOVAPD ymm, ymm
+, 0 // VMOVAPD ymm, ymm
+, 0 // VMOVAPS m128, xmm
+, 0 // VMOVAPS m256, ymm
+, 0 // VMOVAPS xmm, m128
+, 0 // VMOVAPS xmm, xmm
+, 0 // VMOVAPS xmm, xmm
+, 0 // VMOVAPS ymm, m256
+, 0 // VMOVAPS ymm, ymm
+, 0 // VMOVAPS ymm, ymm
+, 0 // VMOVD m32, xmm
+, 0 // VMOVD r32, xmm
+, 0 // VMOVD xmm, m32
+, 0 // VMOVD xmm, r32
+, 0 // VMOVDDUP xmm, m64
+, 0 // VMOVDDUP xmm, xmm
+, 0 // VMOVDDUP ymm, m256
+, 0 // VMOVDDUP ymm, ymm
+, 0 // VMOVDQA m128, xmm
+, 0 // VMOVDQA m256, ymm
+, 0 // VMOVDQA xmm, m128
+, 0 // VMOVDQA xmm, xmm
+, 0 // VMOVDQA xmm, xmm
+, 0 // VMOVDQA ymm, m256
+, 0 // VMOVDQA ymm, ymm
+, 0 // VMOVDQA ymm, ymm
+, 0 // VMOVDQU m128, xmm
+, 0 // VMOVDQU m256, ymm
+, 0 // VMOVDQU xmm, m128
+, 0 // VMOVDQU xmm, xmm
+, 0 // VMOVDQU xmm, xmm
+, 0 // VMOVDQU ymm, m256
+, 0 // VMOVDQU ymm, ymm
+, 0 // VMOVDQU ymm, ymm
+, 0 // VMOVHLPS xmm, xmm, xmm
+, 0 // VMOVHPD m64, xmm
+, 0 // VMOVHPD xmm, xmm, m64
+, 0 // VMOVHPS m64, xmm
+, 0 // VMOVHPS xmm, xmm, m64
+, 0 // VMOVLHPS xmm, xmm, xmm
+, 0 // VMOVLPD m64, xmm
+, 0 // VMOVLPD xmm, xmm, m64
+, 0 // VMOVLPS m64, xmm
+, 0 // VMOVLPS xmm, xmm, m64
+, 0 // VMOVMSKPD r32, xmm
+, 0 // VMOVMSKPD r32, ymm
+, 0 // VMOVMSKPD r64, xmm
+, 0 // VMOVMSKPD r64, ymm
+, 0 // VMOVMSKPS r32, xmm
+, 0 // VMOVMSKPS r32, ymm
+, 0 // VMOVMSKPS r64, xmm
+, 0 // VMOVMSKPS r64, ymm
+, 0 // VMOVNTDQ m128, xmm
+, 0 // VMOVNTDQA xmm, m128
+, 0 // VMOVNTDQA ymm, m256
+, 0 // VMOVNTPD m128, xmm
+, 0 // VMOVNTPD m256, ymm
+, 0 // VMOVNTPS m128, xmm
+, 0 // VMOVNTPS m256, ymm
+, 0 // VMOVQ m64, xmm
+, 0 // VMOVQ m64, xmm
+, 0 // VMOVQ r64, xmm
+, 0 // VMOVQ xmm, m64
+, 0 // VMOVQ xmm, m64
+, 0 // VMOVQ xmm, r64
+, 0 // VMOVQ xmm, xmm
+, 0 // VMOVQ xmm, xmm
+, 0 // VMOVSD m64, xmm
+, 0 // VMOVSD xmm, m64
+, 0 // VMOVSD xmm, xmm, xmm
+, 0 // VMOVSD xmm, xmm, xmm
+, 0 // VMOVSHDUP xmm, m128
+, 0 // VMOVSHDUP xmm, xmm
+, 0 // VMOVSHDUP ymm, m256
+, 0 // VMOVSHDUP ymm, ymm
+, 0 // VMOVSLDUP xmm, m128
+, 0 // VMOVSLDUP xmm, xmm
+, 0 // VMOVSLDUP ymm, m256
+, 0 // VMOVSLDUP ymm, ymm
+, 0 // VMOVSS m32, xmm
+, 0 // VMOVSS xmm, m32
+, 0 // VMOVSS xmm, xmm, xmm
+, 0 // VMOVSS xmm, xmm, xmm
+, 0 // VMOVUPD m128, xmm
+, 0 // VMOVUPD m256, ymm
+, 0 // VMOVUPD xmm, m128
+, 0 // VMOVUPD xmm, xmm
+, 0 // VMOVUPD xmm, xmm
+, 0 // VMOVUPD ymm, m256
+, 0 // VMOVUPD ymm, ymm
+, 0 // VMOVUPD ymm, ymm
+, 0 // VMOVUPS m128, xmm
+, 0 // VMOVUPS m256, ymm
+, 0 // VMOVUPS xmm, m128
+, 0 // VMOVUPS xmm, xmm
+, 0 // VMOVUPS xmm, xmm
+, 0 // VMOVUPS ymm, m256
+, 0 // VMOVUPS ymm, ymm
+, 0 // VMOVUPS ymm, ymm
+, 0 // VMPSADBW xmm, xmm, m128, imm8
+, 0 // VMPSADBW xmm, xmm, xmm, imm8
+, 0 // VMPSADBW ymm, ymm, m256, imm8
+, 0 // VMPSADBW ymm, ymm, ymm, imm8
+, 0 // VMULPD xmm, xmm, m128
+, 0 // VMULPD xmm, xmm, xmm
+, 0 // VMULPD ymm, ymm, m256
+, 0 // VMULPD ymm, ymm, ymm
+, 0 // VMULPS xmm, xmm, m128
+, 0 // VMULPS xmm, xmm, xmm
+, 0 // VMULPS ymm, ymm, m256
+, 0 // VMULPS ymm, ymm, ymm
+, 0 // VMULSD xmm, xmm, m64
+, 0 // VMULSD xmm, xmm, xmm
+, 0 // VMULSS xmm, xmm, m32
+, 0 // VMULSS xmm, xmm, xmm
+, 0 // VORPD xmm, xmm, m128
+, 0 // VORPD xmm, xmm, xmm
+, 0 // VORPD ymm, ymm, m256
+, 0 // VORPD ymm, ymm, ymm
+, 0 // VORPS xmm, xmm, m128
+, 0 // VORPS xmm, xmm, xmm
+, 0 // VORPS ymm, ymm, m256
+, 0 // VORPS ymm, ymm, ymm
+, 0 // VPABSB xmm, m128
+, 0 // VPABSB xmm, xmm
+, 0 // VPABSB ymm, m256
+, 0 // VPABSB ymm, ymm
+, 0 // VPABSD xmm, m128
+, 0 // VPABSD xmm, xmm
+, 0 // VPABSD ymm, m256
+, 0 // VPABSD ymm, ymm
+, 0 // VPABSW xmm, m128
+, 0 // VPABSW xmm, xmm
+, 0 // VPABSW ymm, m256
+, 0 // VPABSW ymm, ymm
+, 0 // VPACKSSDW xmm, xmm, m128
+, 0 // VPACKSSDW xmm, xmm, xmm
+, 0 // VPACKSSDW ymm, ymm, m256
+, 0 // VPACKSSDW ymm, ymm, ymm
+, 0 // VPACKSSWB xmm, xmm, m128
+, 0 // VPACKSSWB xmm, xmm, xmm
+, 0 // VPACKSSWB ymm, ymm, m256
+, 0 // VPACKSSWB ymm, ymm, ymm
+, 0 // VPACKUSDW xmm, xmm, m128
+, 0 // VPACKUSDW xmm, xmm, xmm
+, 0 // VPACKUSDW ymm, ymm, m256
+, 0 // VPACKUSDW ymm, ymm, ymm
+, 0 // VPACKUSWB xmm, xmm, m128
+, 0 // VPACKUSWB xmm, xmm, xmm
+, 0 // VPACKUSWB ymm, ymm, m256
+, 0 // VPACKUSWB ymm, ymm, ymm
+, 0 // VPADDB xmm, xmm, m128
+, 0 // VPADDB xmm, xmm, xmm
+, 0 // VPADDB ymm, ymm, m256
+, 0 // VPADDB ymm, ymm, ymm
+, 0 // VPADDD xmm, xmm, m128
+, 0 // VPADDD xmm, xmm, xmm
+, 0 // VPADDD ymm, ymm, m256
+, 0 // VPADDD ymm, ymm, ymm
+, 0 // VPADDQ xmm, xmm, m128
+, 0 // VPADDQ xmm, xmm, xmm
+, 0 // VPADDQ ymm, ymm, m256
+, 0 // VPADDQ ymm, ymm, ymm
+, 0 // VPADDSB xmm, xmm, m128
+, 0 // VPADDSB xmm, xmm, xmm
+, 0 // VPADDSB ymm, ymm, m256
+, 0 // VPADDSB ymm, ymm, ymm
+, 0 // VPADDSW xmm, xmm, m128
+, 0 // VPADDSW xmm, xmm, xmm
+, 0 // VPADDSW ymm, ymm, m256
+, 0 // VPADDSW ymm, ymm, ymm
+, 0 // VPADDUSB xmm, xmm, m128
+, 0 // VPADDUSB xmm, xmm, xmm
+, 0 // VPADDUSB ymm, ymm, m256
+, 0 // VPADDUSB ymm, ymm, ymm
+, 0 // VPADDUSW xmm, xmm, m128
+, 0 // VPADDUSW xmm, xmm, xmm
+, 0 // VPADDUSW ymm, ymm, m256
+, 0 // VPADDUSW ymm, ymm, ymm
+, 0 // VPADDW xmm, xmm, m128
+, 0 // VPADDW xmm, xmm, xmm
+, 0 // VPADDW ymm, ymm, m256
+, 0 // VPADDW ymm, ymm, ymm
+, 0 // VPALIGNR xmm, xmm, m128, imm8
+, 0 // VPALIGNR xmm, xmm, xmm, imm8
+, 0 // VPALIGNR ymm, ymm, m256, imm8
+, 0 // VPALIGNR ymm, ymm, ymm, imm8
+, 0 // VPAND xmm, xmm, m128
+, 0 // VPAND xmm, xmm, xmm
+, 0 // VPAND ymm, ymm, m256
+, 0 // VPAND ymm, ymm, ymm
+, 0 // VPANDN xmm, xmm, m128
+, 0 // VPANDN xmm, xmm, xmm
+, 0 // VPANDN ymm, ymm, m256
+, 0 // VPANDN ymm, ymm, ymm
+, 0 // VPAVGB xmm, xmm, m128
+, 0 // VPAVGB xmm, xmm, xmm
+, 0 // VPAVGB ymm, ymm, m256
+, 0 // VPAVGB ymm, ymm, ymm
+, 0 // VPAVGW xmm, xmm, m128
+, 0 // VPAVGW xmm, xmm, xmm
+, 0 // VPAVGW ymm, ymm, m256
+, 0 // VPAVGW ymm, ymm, ymm
+, 0 // VPBLENDD xmm, xmm, m128, imm8
+, 0 // VPBLENDD xmm, xmm, xmm, imm8
+, 0 // VPBLENDD ymm, ymm, m256, imm8
+, 0 // VPBLENDD ymm, ymm, ymm, imm8
+, 0 // VPBLENDVB xmm, xmm, m128, xmm
+, 0 // VPBLENDVB xmm, xmm, xmm, xmm
+, 0 // VPBLENDVB ymm, ymm, m256, ymm
+, 0 // VPBLENDVB ymm, ymm, ymm, ymm
+, 0 // VPBLENDW xmm, xmm, m128, imm8
+, 0 // VPBLENDW xmm, xmm, xmm, imm8
+, 0 // VPBLENDW ymm, ymm, m256, imm8
+, 0 // VPBLENDW ymm, ymm, ymm, imm8
+, 0 // VPBROADCASTB xmm, m8
+, 0 // VPBROADCASTB xmm, xmm
+, 0 // VPBROADCASTB ymm, m8
+, 0 // VPBROADCASTB ymm, xmm
+, 0 // VPBROADCASTD xmm, m32
+, 0 // VPBROADCASTD xmm, xmm
+, 0 // VPBROADCASTD ymm, m32
+, 0 // VPBROADCASTD ymm, xmm
+, 0 // VPBROADCASTQ xmm, m64
+, 0 // VPBROADCASTQ xmm, xmm
+, 0 // VPBROADCASTQ ymm, m64
+, 0 // VPBROADCASTQ ymm, xmm
+, 0 // VPBROADCASTW xmm, m16
+, 0 // VPBROADCASTW xmm, xmm
+, 0 // VPBROADCASTW ymm, m16
+, 0 // VPBROADCASTW ymm, xmm
+, 0 // VPCLMULQDQ xmm, xmm, m128, imm8
+, 0 // VPCLMULQDQ xmm, xmm, xmm, imm8
+, 0 // VPCMPEQB xmm, xmm, m128
+, 0 // VPCMPEQB xmm, xmm, xmm
+, 0 // VPCMPEQB ymm, ymm, m256
+, 0 // VPCMPEQB ymm, ymm, ymm
+, 0 // VPCMPEQD xmm, xmm, m128
+, 0 // VPCMPEQD xmm, xmm, xmm
+, 0 // VPCMPEQD ymm, ymm, m256
+, 0 // VPCMPEQD ymm, ymm, ymm
+, 0 // VPCMPEQQ xmm, xmm, m128
+, 0 // VPCMPEQQ xmm, xmm, xmm
+, 0 // VPCMPEQQ ymm, ymm, m256
+, 0 // VPCMPEQQ ymm, ymm, ymm
+, 0 // VPCMPEQW xmm, xmm, m128
+, 0 // VPCMPEQW xmm, xmm, xmm
+, 0 // VPCMPEQW ymm, ymm, m256
+, 0 // VPCMPEQW ymm, ymm, ymm
+, 0 // VPCMPESTRI xmm, m128, imm8
+, 0 // VPCMPESTRI xmm, xmm, imm8
+, 0 // VPCMPESTRM xmm, m128, imm8
+, 0 // VPCMPESTRM xmm, xmm, imm8
+, 0 // VPCMPGTB xmm, xmm, m128
+, 0 // VPCMPGTB xmm, xmm, xmm
+, 0 // VPCMPGTB ymm, ymm, m256
+, 0 // VPCMPGTB ymm, ymm, ymm
+, 0 // VPCMPGTD xmm, xmm, m128
+, 0 // VPCMPGTD xmm, xmm, xmm
+, 0 // VPCMPGTD ymm, ymm, m256
+, 0 // VPCMPGTD ymm, ymm, ymm
+, 0 // VPCMPGTQ xmm, xmm, m128
+, 0 // VPCMPGTQ xmm, xmm, xmm
+, 0 // VPCMPGTQ ymm, ymm, m256
+, 0 // VPCMPGTQ ymm, ymm, ymm
+, 0 // VPCMPGTW xmm, xmm, m128
+, 0 // VPCMPGTW xmm, xmm, xmm
+, 0 // VPCMPGTW ymm, ymm, m256
+, 0 // VPCMPGTW ymm, ymm, ymm
+, 0 // VPCMPISTRI xmm, m128, imm8
+, 0 // VPCMPISTRI xmm, xmm, imm8
+, 0 // VPCMPISTRM xmm, m128, imm8
+, 0 // VPCMPISTRM xmm, xmm, imm8
+, 0 // VPERM2F128 ymm, ymm, m256, imm8
+, 0 // VPERM2F128 ymm, ymm, ymm, imm8
+, 0 // VPERM2I128 ymm, ymm, m256, imm8
+, 0 // VPERM2I128 ymm, ymm, ymm, imm8
+, 0 // VPERMD ymm, ymm, m256
+, 0 // VPERMD ymm, ymm, ymm
+, 0 // VPERMILPD xmm, m128, imm8
+, 0 // VPERMILPD xmm, xmm, imm8
+, 0 // VPERMILPD xmm, xmm, m128
+, 0 // VPERMILPD xmm, xmm, xmm
+, 0 // VPERMILPD ymm, m256, imm8
+, 0 // VPERMILPD ymm, ymm, imm8
+, 0 // VPERMILPD ymm, ymm, m256
+, 0 // VPERMILPD ymm, ymm, ymm
+, 0 // VPERMILPS xmm, m128, imm8
+, 0 // VPERMILPS xmm, xmm, imm8
+, 0 // VPERMILPS xmm, xmm, m128
+, 0 // VPERMILPS xmm, xmm, xmm
+, 0 // VPERMILPS ymm, m256, imm8
+, 0 // VPERMILPS ymm, ymm, imm8
+, 0 // VPERMILPS ymm, ymm, m256
+, 0 // VPERMILPS ymm, ymm, ymm
+, 0 // VPERMPD ymm, m256, imm8
+, 0 // VPERMPD ymm, ymm, imm8
+, 0 // VPERMPS ymm, ymm, m256
+, 0 // VPERMPS ymm, ymm, ymm
+, 0 // VPERMQ ymm, m256, imm8
+, 0 // VPERMQ ymm, ymm, imm8
+, 0 // VPEXTRB m8, xmm, imm8
+, 0 // VPEXTRB r32, xmm, imm8
+, 0 // VPEXTRB r64, xmm, imm8
+, 0 // VPEXTRD m32, xmm, imm8
+, 0 // VPEXTRD r32, xmm, imm8
+, 0 // VPEXTRQ m64, xmm, imm8
+, 0 // VPEXTRQ r64, xmm, imm8
+, 0 // VPEXTRW m16, xmm, imm8
+, 0 // VPEXTRW r32, xmm, imm8
+, 0 // VPEXTRW r32, xmm, imm8
+, 0 // VPEXTRW r64, xmm, imm8
+, 0 // VPEXTRW r64, xmm, imm8
+, 0 // VPGATHERDD xmm, m32, xmm
+, 0 // VPGATHERDD ymm, m32, ymm
+, 0 // VPGATHERDQ xmm, m32, xmm
+, 0 // VPGATHERDQ ymm, m32, ymm
+, 0 // VPGATHERQD xmm, m64, xmm
+, 0 // VPGATHERQD xmm, m64, xmm
+, 0 // VPGATHERQQ xmm, m64, xmm
+, 0 // VPGATHERQQ ymm, m64, ymm
+, 0 // VPHADDD xmm, xmm, m128
+, 0 // VPHADDD xmm, xmm, xmm
+, 0 // VPHADDD ymm, ymm, m256
+, 0 // VPHADDD ymm, ymm, ymm
+, 0 // VPHADDSW xmm, xmm, m128
+, 0 // VPHADDSW xmm, xmm, xmm
+, 0 // VPHADDSW ymm, ymm, m256
+, 0 // VPHADDSW ymm, ymm, ymm
+, 0 // VPHADDW xmm, xmm, m128
+, 0 // VPHADDW xmm, xmm, xmm
+, 0 // VPHADDW ymm, ymm, m256
+, 0 // VPHADDW ymm, ymm, ymm
+, 0 // VPHMINPOSUW xmm, m128
+, 0 // VPHMINPOSUW xmm, xmm
+, 0 // VPHSUBD xmm, xmm, m128
+, 0 // VPHSUBD xmm, xmm, xmm
+, 0 // VPHSUBD ymm, ymm, m256
+, 0 // VPHSUBD ymm, ymm, ymm
+, 0 // VPHSUBSW xmm, xmm, m128
+, 0 // VPHSUBSW xmm, xmm, xmm
+, 0 // VPHSUBSW ymm, ymm, m256
+, 0 // VPHSUBSW ymm, ymm, ymm
+, 0 // VPHSUBW xmm, xmm, m128
+, 0 // VPHSUBW xmm, xmm, xmm
+, 0 // VPHSUBW ymm, ymm, m256
+, 0 // VPHSUBW ymm, ymm, ymm
+, 0 // VPINSRB xmm, xmm, m8, imm8
+, 0 // VPINSRB xmm, xmm, r32, imm8
+, 0 // VPINSRD xmm, xmm, m32, imm8
+, 0 // VPINSRD xmm, xmm, r32, imm8
+, 0 // VPINSRQ xmm, xmm, m64, imm8
+, 0 // VPINSRQ xmm, xmm, r64, imm8
+, 0 // VPINSRW xmm, xmm, m16, imm8
+, 0 // VPINSRW xmm, xmm, r32, imm8
+, 0 // VPMADDUBSW xmm, xmm, m128
+, 0 // VPMADDUBSW xmm, xmm, xmm
+, 0 // VPMADDUBSW ymm, ymm, m256
+, 0 // VPMADDUBSW ymm, ymm, ymm
+, 0 // VPMADDWD xmm, xmm, m128
+, 0 // VPMADDWD xmm, xmm, xmm
+, 0 // VPMADDWD ymm, ymm, m256
+, 0 // VPMADDWD ymm, ymm, ymm
+, 0 // VPMASKMOVD m128, xmm, xmm
+, 0 // VPMASKMOVD m256, ymm, ymm
+, 0 // VPMASKMOVD xmm, xmm, m128
+, 0 // VPMASKMOVD ymm, ymm, m256
+, 0 // VPMASKMOVQ m128, xmm, xmm
+, 0 // VPMASKMOVQ m256, ymm, ymm
+, 0 // VPMASKMOVQ xmm, xmm, m128
+, 0 // VPMASKMOVQ ymm, ymm, m256
+, 0 // VPMAXSB xmm, xmm, m128
+, 0 // VPMAXSB xmm, xmm, xmm
+, 0 // VPMAXSB ymm, ymm, m256
+, 0 // VPMAXSB ymm, ymm, ymm
+, 0 // VPMAXSD xmm, xmm, m128
+, 0 // VPMAXSD xmm, xmm, xmm
+, 0 // VPMAXSD ymm, ymm, m256
+, 0 // VPMAXSD ymm, ymm, ymm
+, 0 // VPMAXSW xmm, xmm, m128
+, 0 // VPMAXSW xmm, xmm, xmm
+, 0 // VPMAXSW ymm, ymm, m256
+, 0 // VPMAXSW ymm, ymm, ymm
+, 0 // VPMAXUB xmm, xmm, m128
+, 0 // VPMAXUB xmm, xmm, xmm
+, 0 // VPMAXUB ymm, ymm, m256
+, 0 // VPMAXUB ymm, ymm, ymm
+, 0 // VPMAXUD xmm, xmm, m128
+, 0 // VPMAXUD xmm, xmm, xmm
+, 0 // VPMAXUD ymm, ymm, m256
+, 0 // VPMAXUD ymm, ymm, ymm
+, 0 // VPMAXUW xmm, xmm, m128
+, 0 // VPMAXUW xmm, xmm, xmm
+, 0 // VPMAXUW ymm, ymm, m256
+, 0 // VPMAXUW ymm, ymm, ymm
+, 0 // VPMINSB xmm, xmm, m128
+, 0 // VPMINSB xmm, xmm, xmm
+, 0 // VPMINSB ymm, ymm, m256
+, 0 // VPMINSB ymm, ymm, ymm
+, 0 // VPMINSD xmm, xmm, m128
+, 0 // VPMINSD xmm, xmm, xmm
+, 0 // VPMINSD ymm, ymm, m256
+, 0 // VPMINSD ymm, ymm, ymm
+, 0 // VPMINSW xmm, xmm, m128
+, 0 // VPMINSW xmm, xmm, xmm
+, 0 // VPMINUB xmm, xmm, m128
+, 0 // VPMINUB xmm, xmm, xmm
+, 0 // VPMINUB ymm, ymm, m256
+, 0 // VPMINUB ymm, ymm, ymm
+, 0 // VPMINUD xmm, xmm, m128
+, 0 // VPMINUD xmm, xmm, xmm
+, 0 // VPMINUD ymm, ymm, m256
+, 0 // VPMINUD ymm, ymm, ymm
+, 0 // VPMINUW xmm, xmm, m128
+, 0 // VPMINUW xmm, xmm, xmm
+, 0 // VPMINUW ymm, ymm, m256
+, 0 // VPMINUW ymm, ymm, ymm
+, 0 // VPMOVMSKB r32, xmm
+, 0 // VPMOVMSKB r32, ymm
+, 0 // VPMOVMSKB r64, xmm
+, 0 // VPMOVMSKB r64, ymm
+, 0 // VPMOVSXBD xmm, m32
+, 0 // VPMOVSXBD xmm, xmm
+, 0 // VPMOVSXBD ymm, m64
+, 0 // VPMOVSXBD ymm, xmm
+, 0 // VPMOVSXBQ xmm, m16
+, 0 // VPMOVSXBQ xmm, xmm
+, 0 // VPMOVSXBQ ymm, m32
+, 0 // VPMOVSXBQ ymm, xmm
+, 0 // VPMOVSXBW xmm, m64
+, 0 // VPMOVSXBW xmm, xmm
+, 0 // VPMOVSXBW ymm, m128
+, 0 // VPMOVSXBW ymm, xmm
+, 0 // VPMOVSXDQ xmm, m64
+, 0 // VPMOVSXDQ xmm, xmm
+, 0 // VPMOVSXDQ ymm, m128
+, 0 // VPMOVSXDQ ymm, xmm
+, 0 // VPMOVSXWD xmm, m64
+, 0 // VPMOVSXWD xmm, xmm
+, 0 // VPMOVSXWD ymm, m128
+, 0 // VPMOVSXWD ymm, xmm
+, 0 // VPMOVSXWQ xmm, m32
+, 0 // VPMOVSXWQ xmm, xmm
+, 0 // VPMOVSXWQ ymm, m64
+, 0 // VPMOVSXWQ ymm, xmm
+, 0 // VPMOVZXBD xmm, m32
+, 0 // VPMOVZXBD xmm, xmm
+, 0 // VPMOVZXBD ymm, m64
+, 0 // VPMOVZXBD ymm, xmm
+, 0 // VPMOVZXBQ xmm, m16
+, 0 // VPMOVZXBQ xmm, xmm
+, 0 // VPMOVZXBQ ymm, m32
+, 0 // VPMOVZXBQ ymm, xmm
+, 0 // VPMOVZXBW xmm, m64
+, 0 // VPMOVZXBW xmm, xmm
+, 0 // VPMOVZXBW ymm, m128
+, 0 // VPMOVZXBW ymm, xmm
+, 0 // VPMOVZXDQ xmm, m64
+, 0 // VPMOVZXDQ xmm, xmm
+, 0 // VPMOVZXDQ ymm, m128
+, 0 // VPMOVZXDQ ymm, xmm
+, 0 // VPMOVZXWD xmm, m64
+, 0 // VPMOVZXWD xmm, xmm
+, 0 // VPMOVZXWD ymm, m128
+, 0 // VPMOVZXWD ymm, xmm
+, 0 // VPMOVZXWQ xmm, m32
+, 0 // VPMOVZXWQ xmm, xmm
+, 0 // VPMOVZXWQ ymm, m64
+, 0 // VPMOVZXWQ ymm, xmm
+, 0 // VPMULDQ xmm, xmm, m128
+, 0 // VPMULDQ xmm, xmm, xmm
+, 0 // VPMULDQ ymm, ymm, m256
+, 0 // VPMULDQ ymm, ymm, ymm
+, 0 // VPMULHRSW xmm, xmm, m128
+, 0 // VPMULHRSW xmm, xmm, xmm
+, 0 // VPMULHRSW ymm, ymm, m256
+, 0 // VPMULHRSW ymm, ymm, ymm
+, 0 // VPMULHUW xmm, xmm, m128
+, 0 // VPMULHUW xmm, xmm, xmm
+, 0 // VPMULHUW ymm, ymm, m256
+, 0 // VPMULHUW ymm, ymm, ymm
+, 0 // VPMULHW xmm, xmm, m128
+, 0 // VPMULHW xmm, xmm, xmm
+, 0 // VPMULHW ymm, ymm, m256
+, 0 // VPMULHW ymm, ymm, ymm
+, 0 // VPMULLD xmm, xmm, m128
+, 0 // VPMULLD xmm, xmm, xmm
+, 0 // VPMULLD ymm, ymm, m256
+, 0 // VPMULLD ymm, ymm, ymm
+, 0 // VPMULLW xmm, xmm, m128
+, 0 // VPMULLW xmm, xmm, xmm
+, 0 // VPMULLW ymm, ymm, m256
+, 0 // VPMULLW ymm, ymm, ymm
+, 0 // VPMULUDQ xmm, xmm, m128
+, 0 // VPMULUDQ xmm, xmm, xmm
+, 0 // VPMULUDQ ymm, ymm, m256
+, 0 // VPMULUDQ ymm, ymm, ymm
+, 0 // VPOR xmm, xmm, m128
+, 0 // VPOR xmm, xmm, xmm
+, 0 // VPOR ymm, ymm, m256
+, 0 // VPOR ymm, ymm, ymm
+, 0 // VPSADBW xmm, xmm, m128
+, 0 // VPSADBW xmm, xmm, xmm
+, 0 // VPSADBW ymm, ymm, m256
+, 0 // VPSADBW ymm, ymm, ymm
+, 0 // VPSHUFB xmm, xmm, m128
+, 0 // VPSHUFB xmm, xmm, xmm
+, 0 // VPSHUFB ymm, ymm, m256
+, 0 // VPSHUFB ymm, ymm, ymm
+, 0 // VPSHUFD xmm, m128, imm8
+, 0 // VPSHUFD xmm, xmm, imm8
+, 0 // VPSHUFD ymm, m256, imm8
+, 0 // VPSHUFD ymm, ymm, imm8
+, 0 // VPSHUFHW xmm, m128, imm8
+, 0 // VPSHUFHW xmm, xmm, imm8
+, 0 // VPSHUFHW ymm, m256, imm8
+, 0 // VPSHUFHW ymm, ymm, imm8
+, 0 // VPSHUFLW xmm, m128, imm8
+, 0 // VPSHUFLW xmm, xmm, imm8
+, 0 // VPSHUFLW ymm, m256, imm8
+, 0 // VPSHUFLW ymm, ymm, imm8
+, 0 // VPSIGNB xmm, xmm, m128
+, 0 // VPSIGNB xmm, xmm, xmm
+, 0 // VPSIGND xmm, xmm, m128
+, 0 // VPSIGND xmm, xmm, xmm
+, 0 // VPSIGNW xmm, xmm, m128
+, 0 // VPSIGNW xmm, xmm, xmm
+, 0 // VPSLLD xmm, xmm, imm8
+, 0 // VPSLLD xmm, xmm, m128
+, 0 // VPSLLD xmm, xmm, xmm
+, 0 // VPSLLD ymm, ymm, imm8
+, 0 // VPSLLD ymm, ymm, m128
+, 0 // VPSLLD ymm, ymm, xmm
+, 0 // VPSLLDQ xmm, xmm, imm8
+, 0 // VPSLLDQ ymm, ymm, imm8
+, 0 // VPSLLQ xmm, xmm, imm8
+, 0 // VPSLLQ xmm, xmm, m128
+, 0 // VPSLLQ xmm, xmm, xmm
+, 0 // VPSLLQ ymm, ymm, imm8
+, 0 // VPSLLQ ymm, ymm, m128
+, 0 // VPSLLQ ymm, ymm, xmm
+, 0 // VPSLLVD xmm, xmm, m128
+, 0 // VPSLLVD xmm, xmm, xmm
+, 0 // VPSLLVD ymm, ymm, m256
+, 0 // VPSLLVD ymm, ymm, ymm
+, 0 // VPSLLVQ xmm, xmm, m128
+, 0 // VPSLLVQ xmm, xmm, xmm
+, 0 // VPSLLVQ ymm, ymm, m256
+, 0 // VPSLLVQ ymm, ymm, ymm
+, 0 // VPSLLW xmm, xmm, imm8
+, 0 // VPSLLW xmm, xmm, m128
+, 0 // VPSLLW xmm, xmm, xmm
+, 0 // VPSLLW ymm, ymm, imm8
+, 0 // VPSLLW ymm, ymm, m128
+, 0 // VPSLLW ymm, ymm, xmm
+, 0 // VPSRAD xmm, xmm, imm8
+, 0 // VPSRAD xmm, xmm, m128
+, 0 // VPSRAD xmm, xmm, xmm
+, 0 // VPSRAD ymm, ymm, imm8
+, 0 // VPSRAD ymm, ymm, m128
+, 0 // VPSRAD ymm, ymm, xmm
+, 0 // VPSRAVD xmm, xmm, m128
+, 0 // VPSRAVD xmm, xmm, xmm
+, 0 // VPSRAVD ymm, ymm, m256
+, 0 // VPSRAVD ymm, ymm, ymm
+, 0 // VPSRAW xmm, xmm, imm8
+, 0 // VPSRAW xmm, xmm, m128
+, 0 // VPSRAW xmm, xmm, xmm
+, 0 // VPSRAW ymm, ymm, imm8
+, 0 // VPSRAW ymm, ymm, m128
+, 0 // VPSRAW ymm, ymm, xmm
+, 0 // VPSRLD xmm, xmm, imm8
+, 0 // VPSRLD xmm, xmm, m128
+, 0 // VPSRLD xmm, xmm, xmm
+, 0 // VPSRLD ymm, ymm, imm8
+, 0 // VPSRLD ymm, ymm, m128
+, 0 // VPSRLD ymm, ymm, xmm
+, 0 // VPSRLDQ xmm, xmm, imm8
+, 0 // VPSRLDQ ymm, ymm, imm8
+, 0 // VPSRLQ xmm, xmm, imm8
+, 0 // VPSRLQ xmm, xmm, m128
+, 0 // VPSRLQ xmm, xmm, xmm
+, 0 // VPSRLQ ymm, ymm, imm8
+, 0 // VPSRLQ ymm, ymm, m128
+, 0 // VPSRLQ ymm, ymm, xmm
+, 0 // VPSRLVD xmm, xmm, m128
+, 0 // VPSRLVD xmm, xmm, xmm
+, 0 // VPSRLVD ymm, ymm, m256
+, 0 // VPSRLVD ymm, ymm, ymm
+, 0 // VPSRLVQ xmm, xmm, m128
+, 0 // VPSRLVQ xmm, xmm, xmm
+, 0 // VPSRLVQ ymm, ymm, m256
+, 0 // VPSRLVQ ymm, ymm, ymm
+, 0 // VPSRLW xmm, xmm, imm8
+, 0 // VPSRLW xmm, xmm, m128
+, 0 // VPSRLW xmm, xmm, xmm
+, 0 // VPSRLW ymm, ymm, imm8
+, 0 // VPSRLW ymm, ymm, m128
+, 0 // VPSRLW ymm, ymm, xmm
+, 0 // VPSUBB xmm, xmm, m128
+, 0 // VPSUBB xmm, xmm, xmm
+, 0 // VPSUBB ymm, ymm, m256
+, 0 // VPSUBB ymm, ymm, ymm
+, 0 // VPSUBD xmm, xmm, m128
+, 0 // VPSUBD xmm, xmm, xmm
+, 0 // VPSUBD ymm, ymm, m256
+, 0 // VPSUBD ymm, ymm, ymm
+, 0 // VPSUBQ xmm, xmm, m128
+, 0 // VPSUBQ xmm, xmm, xmm
+, 0 // VPSUBQ ymm, ymm, m256
+, 0 // VPSUBQ ymm, ymm, ymm
+, 0 // VPSUBSB xmm, xmm, m128
+, 0 // VPSUBSB xmm, xmm, xmm
+, 0 // VPSUBSB ymm, ymm, m256
+, 0 // VPSUBSB ymm, ymm, ymm
+, 0 // VPSUBSW xmm, xmm, m128
+, 0 // VPSUBSW xmm, xmm, xmm
+, 0 // VPSUBSW ymm, ymm, m256
+, 0 // VPSUBSW ymm, ymm, ymm
+, 0 // VPSUBUSB xmm, xmm, m128
+, 0 // VPSUBUSB xmm, xmm, xmm
+, 0 // VPSUBUSB ymm, ymm, m256
+, 0 // VPSUBUSB ymm, ymm, ymm
+, 0 // VPSUBUSW xmm, xmm, m128
+, 0 // VPSUBUSW xmm, xmm, xmm
+, 0 // VPSUBUSW ymm, ymm, m256
+, 0 // VPSUBUSW ymm, ymm, ymm
+, 0 // VPSUBW xmm, xmm, m128
+, 0 // VPSUBW xmm, xmm, xmm
+, 0 // VPSUBW ymm, ymm, m256
+, 0 // VPSUBW ymm, ymm, ymm
+, 0 // VPTEST xmm, m128
+, 0 // VPTEST xmm, xmm
+, 0 // VPTEST ymm, m256
+, 0 // VPTEST ymm, ymm
+, 0 // VPUNPCKHBW xmm, xmm, m128
+, 0 // VPUNPCKHBW xmm, xmm, xmm
+, 0 // VPUNPCKHBW ymm, ymm, m256
+, 0 // VPUNPCKHBW ymm, ymm, ymm
+, 0 // VPUNPCKHDQ xmm, xmm, m128
+, 0 // VPUNPCKHDQ xmm, xmm, xmm
+, 0 // VPUNPCKHDQ ymm, ymm, m256
+, 0 // VPUNPCKHDQ ymm, ymm, ymm
+, 0 // VPUNPCKHQDQ xmm, xmm, m128
+, 0 // VPUNPCKHQDQ xmm, xmm, xmm
+, 0 // VPUNPCKHQDQ ymm, ymm, m256
+, 0 // VPUNPCKHQDQ ymm, ymm, ymm
+, 0 // VPUNPCKHWD xmm, xmm, m128
+, 0 // VPUNPCKHWD xmm, xmm, xmm
+, 0 // VPUNPCKHWD ymm, ymm, m256
+, 0 // VPUNPCKHWD ymm, ymm, ymm
+, 0 // VPUNPCKLBW xmm, xmm, m128
+, 0 // VPUNPCKLBW xmm, xmm, xmm
+, 0 // VPUNPCKLBW ymm, ymm, m256
+, 0 // VPUNPCKLBW ymm, ymm, ymm
+, 0 // VPUNPCKLDQ xmm, xmm, m128
+, 0 // VPUNPCKLDQ xmm, xmm, xmm
+, 0 // VPUNPCKLDQ ymm, ymm, m256
+, 0 // VPUNPCKLDQ ymm, ymm, ymm
+, 0 // VPUNPCKLQDQ xmm, xmm, m128
+, 0 // VPUNPCKLQDQ xmm, xmm, xmm
+, 0 // VPUNPCKLQDQ ymm, ymm, m256
+, 0 // VPUNPCKLQDQ ymm, ymm, ymm
+, 0 // VPUNPCKLWD xmm, xmm, m128
+, 0 // VPUNPCKLWD xmm, xmm, xmm
+, 0 // VPUNPCKLWD ymm, ymm, m256
+, 0 // VPUNPCKLWD ymm, ymm, ymm
+, 0 // VPXOR xmm, xmm, m128
+, 0 // VPXOR xmm, xmm, xmm
+, 0 // VPXOR ymm, ymm, m256
+, 0 // VPXOR ymm, ymm, ymm
+, 0 // VRCPPS xmm, m128
+, 0 // VRCPPS xmm, xmm
+, 0 // VRCPPS ymm, m256
+, 0 // VRCPPS ymm, ymm
+, 0 // VRCPSS xmm, xmm, m32
+, 0 // VRCPSS xmm, xmm, xmm
+, 0 // VROUNDPD xmm, m128, imm8
+, 0 // VROUNDPD xmm, xmm, imm8
+, 0 // VROUNDPD ymm, m256, imm8
+, 0 // VROUNDPD ymm, ymm, imm8
+, 0 // VROUNDPS xmm, m128, imm8
+, 0 // VROUNDPS xmm, xmm, imm8
+, 0 // VROUNDPS ymm, m256, imm8
+, 0 // VROUNDPS ymm, ymm, imm8
+, 0 // VROUNDSD xmm, xmm, m64, imm8
+, 0 // VROUNDSD xmm, xmm, xmm, imm8
+, 0 // VROUNDSS xmm, xmm, m32, imm8
+, 0 // VROUNDSS xmm, xmm, xmm, imm8
+, 0 // VRSQRTPS xmm, m128
+, 0 // VRSQRTPS xmm, xmm
+, 0 // VRSQRTPS ymm, m256
+, 0 // VRSQRTPS ymm, ymm
+, 0 // VRSQRTSS xmm, xmm, m32
+, 0 // VRSQRTSS xmm, xmm, xmm
+, 0 // VSHUFPD xmm, xmm, m128, imm8
+, 0 // VSHUFPD xmm, xmm, xmm, imm8
+, 0 // VSHUFPD ymm, ymm, m256, imm8
+, 0 // VSHUFPD ymm, ymm, ymm, imm8
+, 0 // VSHUFPS xmm, xmm, m128, imm8
+, 0 // VSHUFPS xmm, xmm, xmm, imm8
+, 0 // VSHUFPS ymm, ymm, m256, imm8
+, 0 // VSHUFPS ymm, ymm, ymm, imm8
+, 0 // VSQRTPD xmm, m128
+, 0 // VSQRTPD xmm, xmm
+, 0 // VSQRTPD ymm, m256
+, 0 // VSQRTPD ymm, ymm
+, 0 // VSQRTPS xmm, m128
+, 0 // VSQRTPS xmm, xmm
+, 0 // VSQRTPS ymm, m256
+, 0 // VSQRTPS ymm, ymm
+, 0 // VSQRTSD xmm, xmm, m64
+, 0 // VSQRTSD xmm, xmm, xmm
+, 0 // VSQRTSS xmm, xmm, m32
+, 0 // VSQRTSS xmm, xmm, xmm
+, 0 // VSTMXCSR m32
+, 0 // VSUBPD xmm, xmm, m128
+, 0 // VSUBPD xmm, xmm, xmm
+, 0 // VSUBPD ymm, ymm, m256
+, 0 // VSUBPD ymm, ymm, ymm
+, 0 // VSUBPS xmm, xmm, m128
+, 0 // VSUBPS xmm, xmm, xmm
+, 0 // VSUBPS ymm, ymm, m256
+, 0 // VSUBPS ymm, ymm, ymm
+, 0 // VSUBSD xmm, xmm, m64
+, 0 // VSUBSD xmm, xmm, xmm
+, 0 // VSUBSS xmm, xmm, m32
+, 0 // VSUBSS xmm, xmm, xmm
+, 0 // VTESTPD xmm, m128
+, 0 // VTESTPD xmm, xmm
+, 0 // VTESTPD ymm, m256
+, 0 // VTESTPD ymm, ymm
+, 0 // VTESTPS xmm, m128
+, 0 // VTESTPS xmm, xmm
+, 0 // VTESTPS ymm, m256
+, 0 // VTESTPS ymm, ymm
+, 0 // VUCOMISD xmm, m64
+, 0 // VUCOMISD xmm, xmm
+, 0 // VUCOMISS xmm, m32
+, 0 // VUCOMISS xmm, xmm
+, 0 // VUNPCKHPD xmm, xmm, m128
+, 0 // VUNPCKHPD xmm, xmm, xmm
+, 0 // VUNPCKHPD ymm, ymm, m256
+, 0 // VUNPCKHPD ymm, ymm, ymm
+, 0 // VUNPCKHPS xmm, xmm, m128
+, 0 // VUNPCKHPS xmm, xmm, xmm
+, 0 // VUNPCKHPS ymm, ymm, m256
+, 0 // VUNPCKHPS ymm, ymm, ymm
+, 0 // VUNPCKLPD xmm, xmm, m128
+, 0 // VUNPCKLPD xmm, xmm, xmm
+, 0 // VUNPCKLPD ymm, ymm, m256
+, 0 // VUNPCKLPD ymm, ymm, ymm
+, 0 // VUNPCKLPS xmm, xmm, m128
+, 0 // VUNPCKLPS xmm, xmm, xmm
+, 0 // VUNPCKLPS ymm, ymm, m256
+, 0 // VUNPCKLPS ymm, ymm, ymm
+, 0 // VXORPD xmm, xmm, m128
+, 0 // VXORPD xmm, xmm, xmm
+, 0 // VXORPD ymm, ymm, m256
+, 0 // VXORPD ymm, ymm, ymm
+, 0 // VXORPS xmm, xmm, m128
+, 0 // VXORPS xmm, xmm, xmm
+, 0 // VXORPS ymm, ymm, m256
+, 0 // VXORPS ymm, ymm, ymm
+, 0 // VZEROALL 
+, 0 // VZEROUPPER 
+, 0 // WAIT 
+, 0 // WRFSBASE r32
+, 1 // WRFSBASE r64
+, 0 // WRGSBASE r32
+, 1 // WRGSBASE r64
+, 0 // XABORT imm8
+, 0 // XACQUIRE 
+, 0 // XADD m16, r16
+, 0 // XADD m32, r32
+, 1 // XADD m64, r64
+, 0 // XADD m8, r8
+, 0 // XADD m8, rh
+, 0 // XADD r16, r16
+, 0 // XADD r32, r32
+, 1 // XADD r64, r64
+, 0 // XADD r8, r8
+, 0 // XADD r8, rh
+, 0 // XADD rh, r8
+, 0 // XADD rh, rh
+, 0 // XBEGIN label32
+, 0 // XBEGIN rel32
+, 0 // XCHG AX, r16
+, 0 // XCHG EAX, r32
+, 0 // XCHG m16, r16
+, 0 // XCHG m32, r32
+, 1 // XCHG m64, r64
+, 0 // XCHG m8, r8
+, 0 // XCHG m8, rh
+, 0 // XCHG r16, AX
+, 0 // XCHG r16, m16
+, 0 // XCHG r16, r16
+, 0 // XCHG r16, r16
+, 0 // XCHG r32, EAX
+, 0 // XCHG r32, m32
+, 0 // XCHG r32, r32
+, 0 // XCHG r32, r32
+, 1 // XCHG r64, m64
+, 1 // XCHG r64, r64
+, 1 // XCHG r64, r64
+, 1 // XCHG r64, RAX
+, 0 // XCHG r8, m8
+, 0 // XCHG r8, r8
+, 0 // XCHG r8, r8
+, 0 // XCHG r8, rh
+, 0 // XCHG r8, rh
+, 1 // XCHG RAX, r64
+, 0 // XCHG rh, m8
+, 0 // XCHG rh, r8
+, 0 // XCHG rh, r8
+, 0 // XCHG rh, rh
+, 0 // XCHG rh, rh
+, 0 // XEND 
+, 0 // XGETBV 
+, 0 // XLAT m8
+, 0 // XLATB 
+, 1 // XLATB 
+, 0 // XOR AL, imm8
+, 0 // XOR AX, imm16
+, 0 // XOR EAX, imm32
+, 0 // XOR m16, imm16
+, 0 // XOR m16, imm8
+, 0 // XOR m16, r16
+, 0 // XOR m32, imm32
+, 0 // XOR m32, imm8
+, 0 // XOR m32, r32
+, 1 // XOR m64, imm32
+, 1 // XOR m64, imm8
+, 1 // XOR m64, r64
+, 0 // XOR m8, imm8
+, 0 // XOR m8, r8
+, 0 // XOR m8, rh
+, 0 // XOR r16, imm16
+, 0 // XOR r16, imm8
+, 0 // XOR r16, m16
+, 0 // XOR r16, r16
+, 0 // XOR r16, r16
+, 0 // XOR r32, imm32
+, 0 // XOR r32, imm8
+, 0 // XOR r32, m32
+, 0 // XOR r32, r32
+, 0 // XOR r32, r32
+, 1 // XOR r64, imm32
+, 1 // XOR r64, imm8
+, 1 // XOR r64, m64
+, 1 // XOR r64, r64
+, 1 // XOR r64, r64
+, 0 // XOR r8, imm8
+, 0 // XOR r8, m8
+, 0 // XOR r8, r8
+, 0 // XOR r8, r8
+, 0 // XOR r8, rh
+, 0 // XOR r8, rh
+, 1 // XOR RAX, imm32
+, 0 // XOR rh, imm8
+, 0 // XOR rh, m8
+, 0 // XOR rh, r8
+, 0 // XOR rh, r8
+, 0 // XOR rh, rh
+, 0 // XOR rh, rh
+, 0 // XORPD xmm, m128
+, 0 // XORPD xmm, xmm
+, 0 // XORPS xmm, m128
+, 0 // XORPS xmm, xmm
+, 0 // XRELEASE 
+, 0 // XRSTOR m16
+, 0 // XRSTOR m32
+, 0 // XRSTOR m64
+, 1 // XRSTOR64 m16
+, 1 // XRSTOR64 m32
+, 1 // XRSTOR64 m64
+, 0 // XSAVE m16
+, 0 // XSAVE m32
+, 0 // XSAVE m64
+, 1 // XSAVE64 m16
+, 1 // XSAVE64 m32
+, 1 // XSAVE64 m64
+, 0 // XSAVEOPT m16
+, 0 // XSAVEOPT m32
+, 0 // XSAVEOPT m64
+, 1 // XSAVEOPT64 m16
+, 1 // XSAVEOPT64 m32
+, 1 // XSAVEOPT64 m64
+, 0 // XTEST 

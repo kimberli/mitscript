@@ -1,0 +1,3873 @@
+, {{Type::AL,Type::IMM_8}} // ADC AL, imm8
+, {{Type::AX,Type::IMM_16}} // ADC AX, imm16
+, {{Type::EAX,Type::IMM_32}} // ADC EAX, imm32
+, {{Type::M_16,Type::IMM_16}} // ADC m16, imm16
+, {{Type::M_16,Type::IMM_8}} // ADC m16, imm8
+, {{Type::M_16,Type::R_16}} // ADC m16, r16
+, {{Type::M_32,Type::IMM_32}} // ADC m32, imm32
+, {{Type::M_32,Type::IMM_8}} // ADC m32, imm8
+, {{Type::M_32,Type::R_32}} // ADC m32, r32
+, {{Type::M_64,Type::IMM_32}} // ADC m64, imm32
+, {{Type::M_64,Type::IMM_8}} // ADC m64, imm8
+, {{Type::M_64,Type::R_64}} // ADC m64, r64
+, {{Type::M_8,Type::IMM_8}} // ADC m8, imm8
+, {{Type::M_8,Type::R_8}} // ADC m8, r8
+, {{Type::M_8,Type::RH}} // ADC m8, rh
+, {{Type::R_16,Type::IMM_16}} // ADC r16, imm16
+, {{Type::R_16,Type::IMM_8}} // ADC r16, imm8
+, {{Type::R_16,Type::M_16}} // ADC r16, m16
+, {{Type::R_16,Type::R_16}} // ADC r16, r16
+, {{Type::R_16,Type::R_16}} // ADC r16, r16
+, {{Type::R_32,Type::IMM_32}} // ADC r32, imm32
+, {{Type::R_32,Type::IMM_8}} // ADC r32, imm8
+, {{Type::R_32,Type::M_32}} // ADC r32, m32
+, {{Type::R_32,Type::R_32}} // ADC r32, r32
+, {{Type::R_32,Type::R_32}} // ADC r32, r32
+, {{Type::R_64,Type::IMM_32}} // ADC r64, imm32
+, {{Type::R_64,Type::IMM_8}} // ADC r64, imm8
+, {{Type::R_64,Type::M_64}} // ADC r64, m64
+, {{Type::R_64,Type::R_64}} // ADC r64, r64
+, {{Type::R_64,Type::R_64}} // ADC r64, r64
+, {{Type::R_8,Type::IMM_8}} // ADC r8, imm8
+, {{Type::R_8,Type::M_8}} // ADC r8, m8
+, {{Type::R_8,Type::R_8}} // ADC r8, r8
+, {{Type::R_8,Type::R_8}} // ADC r8, r8
+, {{Type::R_8,Type::RH}} // ADC r8, rh
+, {{Type::R_8,Type::RH}} // ADC r8, rh
+, {{Type::RAX,Type::IMM_32}} // ADC RAX, imm32
+, {{Type::RH,Type::IMM_8}} // ADC rh, imm8
+, {{Type::RH,Type::M_8}} // ADC rh, m8
+, {{Type::RH,Type::R_8}} // ADC rh, r8
+, {{Type::RH,Type::R_8}} // ADC rh, r8
+, {{Type::RH,Type::RH}} // ADC rh, rh
+, {{Type::RH,Type::RH}} // ADC rh, rh
+, {{Type::AL,Type::IMM_8}} // ADD AL, imm8
+, {{Type::AX,Type::IMM_16}} // ADD AX, imm16
+, {{Type::EAX,Type::IMM_32}} // ADD EAX, imm32
+, {{Type::M_16,Type::IMM_16}} // ADD m16, imm16
+, {{Type::M_16,Type::IMM_8}} // ADD m16, imm8
+, {{Type::M_16,Type::R_16}} // ADD m16, r16
+, {{Type::M_32,Type::IMM_32}} // ADD m32, imm32
+, {{Type::M_32,Type::IMM_8}} // ADD m32, imm8
+, {{Type::M_32,Type::R_32}} // ADD m32, r32
+, {{Type::M_64,Type::IMM_32}} // ADD m64, imm32
+, {{Type::M_64,Type::IMM_8}} // ADD m64, imm8
+, {{Type::M_64,Type::R_64}} // ADD m64, r64
+, {{Type::M_8,Type::IMM_8}} // ADD m8, imm8
+, {{Type::M_8,Type::R_8}} // ADD m8, r8
+, {{Type::M_8,Type::RH}} // ADD m8, rh
+, {{Type::R_16,Type::IMM_16}} // ADD r16, imm16
+, {{Type::R_16,Type::IMM_8}} // ADD r16, imm8
+, {{Type::R_16,Type::M_16}} // ADD r16, m16
+, {{Type::R_16,Type::R_16}} // ADD r16, r16
+, {{Type::R_16,Type::R_16}} // ADD r16, r16
+, {{Type::R_32,Type::IMM_32}} // ADD r32, imm32
+, {{Type::R_32,Type::IMM_8}} // ADD r32, imm8
+, {{Type::R_32,Type::M_32}} // ADD r32, m32
+, {{Type::R_32,Type::R_32}} // ADD r32, r32
+, {{Type::R_32,Type::R_32}} // ADD r32, r32
+, {{Type::R_64,Type::IMM_32}} // ADD r64, imm32
+, {{Type::R_64,Type::IMM_8}} // ADD r64, imm8
+, {{Type::R_64,Type::M_64}} // ADD r64, m64
+, {{Type::R_64,Type::R_64}} // ADD r64, r64
+, {{Type::R_64,Type::R_64}} // ADD r64, r64
+, {{Type::R_8,Type::IMM_8}} // ADD r8, imm8
+, {{Type::R_8,Type::M_8}} // ADD r8, m8
+, {{Type::R_8,Type::R_8}} // ADD r8, r8
+, {{Type::R_8,Type::R_8}} // ADD r8, r8
+, {{Type::R_8,Type::RH}} // ADD r8, rh
+, {{Type::R_8,Type::RH}} // ADD r8, rh
+, {{Type::RAX,Type::IMM_32}} // ADD RAX, imm32
+, {{Type::RH,Type::IMM_8}} // ADD rh, imm8
+, {{Type::RH,Type::M_8}} // ADD rh, m8
+, {{Type::RH,Type::R_8}} // ADD rh, r8
+, {{Type::RH,Type::R_8}} // ADD rh, r8
+, {{Type::RH,Type::RH}} // ADD rh, rh
+, {{Type::RH,Type::RH}} // ADD rh, rh
+, {{Type::XMM,Type::M_128}} // ADDPD xmm, m128
+, {{Type::XMM,Type::XMM}} // ADDPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // ADDPS xmm, m128
+, {{Type::XMM,Type::XMM}} // ADDPS xmm, xmm
+, {{Type::XMM,Type::M_64}} // ADDSD xmm, m64
+, {{Type::XMM,Type::XMM}} // ADDSD xmm, xmm
+, {{Type::XMM,Type::M_32}} // ADDSS xmm, m32
+, {{Type::XMM,Type::XMM}} // ADDSS xmm, xmm
+, {{Type::XMM,Type::M_128}} // ADDSUBPD xmm, m128
+, {{Type::XMM,Type::XMM}} // ADDSUBPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // ADDSUBPS xmm, m128
+, {{Type::XMM,Type::XMM}} // ADDSUBPS xmm, xmm
+, {{Type::XMM,Type::M_128}} // AESDEC xmm, m128
+, {{Type::XMM,Type::XMM}} // AESDEC xmm, xmm
+, {{Type::XMM,Type::M_128}} // AESDECLAST xmm, m128
+, {{Type::XMM,Type::XMM}} // AESDECLAST xmm, xmm
+, {{Type::XMM,Type::M_128}} // AESENC xmm, m128
+, {{Type::XMM,Type::XMM}} // AESENC xmm, xmm
+, {{Type::XMM,Type::M_128}} // AESENCLAST xmm, m128
+, {{Type::XMM,Type::XMM}} // AESENCLAST xmm, xmm
+, {{Type::XMM,Type::M_128}} // AESIMC xmm, m128
+, {{Type::XMM,Type::XMM}} // AESIMC xmm, xmm
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // AESKEYGENASSIST xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // AESKEYGENASSIST xmm, xmm, imm8
+, {{Type::AL,Type::IMM_8}} // AND AL, imm8
+, {{Type::AX,Type::IMM_16}} // AND AX, imm16
+, {{Type::EAX,Type::IMM_32}} // AND EAX, imm32
+, {{Type::M_16,Type::IMM_16}} // AND m16, imm16
+, {{Type::M_16,Type::IMM_8}} // AND m16, imm8
+, {{Type::M_16,Type::R_16}} // AND m16, r16
+, {{Type::M_32,Type::IMM_32}} // AND m32, imm32
+, {{Type::M_32,Type::IMM_8}} // AND m32, imm8
+, {{Type::M_32,Type::R_32}} // AND m32, r32
+, {{Type::M_64,Type::IMM_32}} // AND m64, imm32
+, {{Type::M_64,Type::IMM_8}} // AND m64, imm8
+, {{Type::M_64,Type::R_64}} // AND m64, r64
+, {{Type::M_8,Type::IMM_8}} // AND m8, imm8
+, {{Type::M_8,Type::R_8}} // AND m8, r8
+, {{Type::M_8,Type::RH}} // AND m8, rh
+, {{Type::R_16,Type::IMM_16}} // AND r16, imm16
+, {{Type::R_16,Type::IMM_8}} // AND r16, imm8
+, {{Type::R_16,Type::M_16}} // AND r16, m16
+, {{Type::R_16,Type::R_16}} // AND r16, r16
+, {{Type::R_16,Type::R_16}} // AND r16, r16
+, {{Type::R_32,Type::IMM_32}} // AND r32, imm32
+, {{Type::R_32,Type::IMM_8}} // AND r32, imm8
+, {{Type::R_32,Type::M_32}} // AND r32, m32
+, {{Type::R_32,Type::R_32}} // AND r32, r32
+, {{Type::R_32,Type::R_32}} // AND r32, r32
+, {{Type::R_64,Type::IMM_32}} // AND r64, imm32
+, {{Type::R_64,Type::IMM_8}} // AND r64, imm8
+, {{Type::R_64,Type::M_64}} // AND r64, m64
+, {{Type::R_64,Type::R_64}} // AND r64, r64
+, {{Type::R_64,Type::R_64}} // AND r64, r64
+, {{Type::R_8,Type::IMM_8}} // AND r8, imm8
+, {{Type::R_8,Type::M_8}} // AND r8, m8
+, {{Type::R_8,Type::R_8}} // AND r8, r8
+, {{Type::R_8,Type::R_8}} // AND r8, r8
+, {{Type::R_8,Type::RH}} // AND r8, rh
+, {{Type::R_8,Type::RH}} // AND r8, rh
+, {{Type::RAX,Type::IMM_32}} // AND RAX, imm32
+, {{Type::RH,Type::IMM_8}} // AND rh, imm8
+, {{Type::RH,Type::M_8}} // AND rh, m8
+, {{Type::RH,Type::R_8}} // AND rh, r8
+, {{Type::RH,Type::R_8}} // AND rh, r8
+, {{Type::RH,Type::RH}} // AND rh, rh
+, {{Type::RH,Type::RH}} // AND rh, rh
+, {{Type::R_32,Type::R_32,Type::M_32}} // ANDN r32, r32, m32
+, {{Type::R_32,Type::R_32,Type::R_32}} // ANDN r32, r32, r32
+, {{Type::R_64,Type::R_64,Type::M_64}} // ANDN r64, r64, m64
+, {{Type::R_64,Type::R_64,Type::R_64}} // ANDN r64, r64, r64
+, {{Type::XMM,Type::M_128}} // ANDNPD xmm, m128
+, {{Type::XMM,Type::XMM}} // ANDNPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // ANDNPS xmm, m128
+, {{Type::XMM,Type::XMM}} // ANDNPS xmm, xmm
+, {{Type::XMM,Type::M_128}} // ANDPD xmm, m128
+, {{Type::XMM,Type::XMM}} // ANDPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // ANDPS xmm, m128
+, {{Type::XMM,Type::XMM}} // ANDPS xmm, xmm
+, {{Type::R_32,Type::M_32,Type::R_32}} // BEXTR r32, m32, r32
+, {{Type::R_32,Type::R_32,Type::R_32}} // BEXTR r32, r32, r32
+, {{Type::R_64,Type::M_64,Type::R_64}} // BEXTR r64, m64, r64
+, {{Type::R_64,Type::R_64,Type::R_64}} // BEXTR r64, r64, r64
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // BLENDPD xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // BLENDPD xmm, xmm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // BLENDPS xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // BLENDPS xmm, xmm, imm8
+, {{Type::XMM,Type::M_128,Type::XMM_0}} // BLENDVPD xmm, m128, <XMM0>
+, {{Type::XMM,Type::XMM,Type::XMM_0}} // BLENDVPD xmm, xmm, <XMM0>
+, {{Type::XMM,Type::M_128,Type::XMM_0}} // BLENDVPS xmm, m128, <XMM0>
+, {{Type::XMM,Type::XMM,Type::XMM_0}} // BLENDVPS xmm, xmm, <XMM0>
+, {{Type::R_32,Type::M_32}} // BLSI r32, m32
+, {{Type::R_32,Type::R_32}} // BLSI r32, r32
+, {{Type::R_64,Type::M_64}} // BLSI r64, m64
+, {{Type::R_64,Type::R_64}} // BLSI r64, r64
+, {{Type::R_32,Type::M_32}} // BLSMSK r32, m32
+, {{Type::R_32,Type::R_32}} // BLSMSK r32, r32
+, {{Type::R_64,Type::M_64}} // BLSMSK r64, m64
+, {{Type::R_64,Type::R_64}} // BLSMSK r64, r64
+, {{Type::R_32,Type::M_32}} // BLSR r32, m32
+, {{Type::R_32,Type::R_32}} // BLSR r32, r32
+, {{Type::R_64,Type::M_64}} // BLSR r64, m64
+, {{Type::R_64,Type::R_64}} // BLSR r64, r64
+, {{Type::R_16,Type::M_16}} // BSF r16, m16
+, {{Type::R_16,Type::R_16}} // BSF r16, r16
+, {{Type::R_32,Type::M_32}} // BSF r32, m32
+, {{Type::R_32,Type::R_32}} // BSF r32, r32
+, {{Type::R_64,Type::M_64}} // BSF r64, m64
+, {{Type::R_64,Type::R_64}} // BSF r64, r64
+, {{Type::R_16,Type::M_16}} // BSR r16, m16
+, {{Type::R_16,Type::R_16}} // BSR r16, r16
+, {{Type::R_32,Type::M_32}} // BSR r32, m32
+, {{Type::R_32,Type::R_32}} // BSR r32, r32
+, {{Type::R_64,Type::M_64}} // BSR r64, m64
+, {{Type::R_64,Type::R_64}} // BSR r64, r64
+, {{Type::R_32}} // BSWAP r32
+, {{Type::R_64}} // BSWAP r64
+, {{Type::M_16,Type::IMM_8}} // BT m16, imm8
+, {{Type::M_16,Type::R_16}} // BT m16, r16
+, {{Type::M_32,Type::IMM_8}} // BT m32, imm8
+, {{Type::M_32,Type::R_32}} // BT m32, r32
+, {{Type::M_64,Type::IMM_8}} // BT m64, imm8
+, {{Type::M_64,Type::R_64}} // BT m64, r64
+, {{Type::R_16,Type::IMM_8}} // BT r16, imm8
+, {{Type::R_16,Type::R_16}} // BT r16, r16
+, {{Type::R_32,Type::IMM_8}} // BT r32, imm8
+, {{Type::R_32,Type::R_32}} // BT r32, r32
+, {{Type::R_64,Type::IMM_8}} // BT r64, imm8
+, {{Type::R_64,Type::R_64}} // BT r64, r64
+, {{Type::M_16,Type::IMM_8}} // BTC m16, imm8
+, {{Type::M_16,Type::R_16}} // BTC m16, r16
+, {{Type::M_32,Type::IMM_8}} // BTC m32, imm8
+, {{Type::M_32,Type::R_32}} // BTC m32, r32
+, {{Type::M_64,Type::IMM_8}} // BTC m64, imm8
+, {{Type::M_64,Type::R_64}} // BTC m64, r64
+, {{Type::R_16,Type::IMM_8}} // BTC r16, imm8
+, {{Type::R_16,Type::R_16}} // BTC r16, r16
+, {{Type::R_32,Type::IMM_8}} // BTC r32, imm8
+, {{Type::R_32,Type::R_32}} // BTC r32, r32
+, {{Type::R_64,Type::IMM_8}} // BTC r64, imm8
+, {{Type::R_64,Type::R_64}} // BTC r64, r64
+, {{Type::M_16,Type::IMM_8}} // BTR m16, imm8
+, {{Type::M_16,Type::R_16}} // BTR m16, r16
+, {{Type::M_32,Type::IMM_8}} // BTR m32, imm8
+, {{Type::M_32,Type::R_32}} // BTR m32, r32
+, {{Type::M_64,Type::IMM_8}} // BTR m64, imm8
+, {{Type::M_64,Type::R_64}} // BTR m64, r64
+, {{Type::R_16,Type::IMM_8}} // BTR r16, imm8
+, {{Type::R_16,Type::R_16}} // BTR r16, r16
+, {{Type::R_32,Type::IMM_8}} // BTR r32, imm8
+, {{Type::R_32,Type::R_32}} // BTR r32, r32
+, {{Type::R_64,Type::IMM_8}} // BTR r64, imm8
+, {{Type::R_64,Type::R_64}} // BTR r64, r64
+, {{Type::M_16,Type::IMM_8}} // BTS m16, imm8
+, {{Type::M_16,Type::R_16}} // BTS m16, r16
+, {{Type::M_32,Type::IMM_8}} // BTS m32, imm8
+, {{Type::M_32,Type::R_32}} // BTS m32, r32
+, {{Type::M_64,Type::IMM_8}} // BTS m64, imm8
+, {{Type::M_64,Type::R_64}} // BTS m64, r64
+, {{Type::R_16,Type::IMM_8}} // BTS r16, imm8
+, {{Type::R_16,Type::R_16}} // BTS r16, r16
+, {{Type::R_32,Type::IMM_8}} // BTS r32, imm8
+, {{Type::R_32,Type::R_32}} // BTS r32, r32
+, {{Type::R_64,Type::IMM_8}} // BTS r64, imm8
+, {{Type::R_64,Type::R_64}} // BTS r64, r64
+, {{Type::R_32,Type::M_32,Type::R_32}} // BZHI r32, m32, r32
+, {{Type::R_32,Type::R_32,Type::R_32}} // BZHI r32, r32, r32
+, {{Type::R_64,Type::M_64,Type::R_64}} // BZHI r64, m64, r64
+, {{Type::R_64,Type::R_64,Type::R_64}} // BZHI r64, r64, r64
+, {{Type::FAR_PTR_16_16}} // CALL m16:16
+, {{Type::FAR_PTR_16_32}} // CALL m16:32
+, {{Type::FAR_PTR_16_64}} // CALL m16:64
+, {{Type::LABEL}} // CALL label32
+, {{Type::M_64}} // CALL m64
+, {{Type::R_64}} // CALL r64
+, {{Type::REL_32}} // CALL rel32
+, {{}} // CBW 
+, {{}} // CDQ 
+, {{}} // CDQE 
+, {{}} // CLC 
+, {{}} // CLD 
+, {{Type::M_8}} // CLFLUSH m8
+, {{}} // CLI 
+, {{}} // CMC 
+, {{Type::R_16,Type::M_16}} // CMOVA r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVA r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVA r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVA r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVA r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVA r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVAE r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVAE r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVAE r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVAE r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVAE r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVAE r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVB r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVB r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVB r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVB r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVB r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVB r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVBE r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVBE r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVBE r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVBE r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVBE r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVBE r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVC r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVC r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVC r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVC r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVC r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVC r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVE r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVE r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVE r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVE r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVE r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVE r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVG r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVG r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVG r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVG r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVG r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVG r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVGE r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVGE r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVGE r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVGE r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVGE r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVGE r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVL r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVL r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVL r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVL r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVL r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVL r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVLE r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVLE r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVLE r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVLE r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVLE r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVLE r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNA r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNA r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNA r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNA r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNA r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNA r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNAE r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNAE r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNAE r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNAE r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNAE r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNAE r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNB r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNB r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNB r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNB r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNB r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNB r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNBE r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNBE r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNBE r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNBE r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNBE r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNBE r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNC r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNC r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNC r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNC r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNC r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNC r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNE r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNE r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNE r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNE r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNE r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNE r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNG r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNG r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNG r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNG r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNG r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNG r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNGE r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNGE r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNGE r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNGE r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNGE r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNGE r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNL r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNL r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNL r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNL r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNL r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNL r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNLE r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNLE r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNLE r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNLE r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNLE r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNLE r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNO r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNO r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNO r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNO r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNO r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNO r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNP r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNP r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNP r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNP r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNP r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNP r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNS r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNS r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNS r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNS r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNS r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNS r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVNZ r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVNZ r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVNZ r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVNZ r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVNZ r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVNZ r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVO r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVO r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVO r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVO r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVO r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVO r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVP r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVP r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVP r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVP r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVP r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVP r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVPE r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVPE r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVPE r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVPE r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVPE r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVPE r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVPO r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVPO r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVPO r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVPO r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVPO r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVPO r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVS r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVS r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVS r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVS r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVS r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVS r64, r64
+, {{Type::R_16,Type::M_16}} // CMOVZ r16, m16
+, {{Type::R_16,Type::R_16}} // CMOVZ r16, r16
+, {{Type::R_32,Type::M_32}} // CMOVZ r32, m32
+, {{Type::R_32,Type::R_32}} // CMOVZ r32, r32
+, {{Type::R_64,Type::M_64}} // CMOVZ r64, m64
+, {{Type::R_64,Type::R_64}} // CMOVZ r64, r64
+, {{Type::AL,Type::IMM_8}} // CMP AL, imm8
+, {{Type::AX,Type::IMM_16}} // CMP AX, imm16
+, {{Type::EAX,Type::IMM_32}} // CMP EAX, imm32
+, {{Type::M_16,Type::IMM_16}} // CMP m16, imm16
+, {{Type::M_16,Type::IMM_8}} // CMP m16, imm8
+, {{Type::M_16,Type::R_16}} // CMP m16, r16
+, {{Type::M_32,Type::IMM_32}} // CMP m32, imm32
+, {{Type::M_32,Type::IMM_8}} // CMP m32, imm8
+, {{Type::M_32,Type::R_32}} // CMP m32, r32
+, {{Type::M_64,Type::IMM_32}} // CMP m64, imm32
+, {{Type::M_64,Type::IMM_8}} // CMP m64, imm8
+, {{Type::M_64,Type::R_64}} // CMP m64, r64
+, {{Type::M_8,Type::IMM_8}} // CMP m8, imm8
+, {{Type::M_8,Type::R_8}} // CMP m8, r8
+, {{Type::M_8,Type::RH}} // CMP m8, rh
+, {{Type::R_16,Type::IMM_16}} // CMP r16, imm16
+, {{Type::R_16,Type::IMM_8}} // CMP r16, imm8
+, {{Type::R_16,Type::M_16}} // CMP r16, m16
+, {{Type::R_16,Type::R_16}} // CMP r16, r16
+, {{Type::R_16,Type::R_16}} // CMP r16, r16
+, {{Type::R_32,Type::IMM_32}} // CMP r32, imm32
+, {{Type::R_32,Type::IMM_8}} // CMP r32, imm8
+, {{Type::R_32,Type::M_32}} // CMP r32, m32
+, {{Type::R_32,Type::R_32}} // CMP r32, r32
+, {{Type::R_32,Type::R_32}} // CMP r32, r32
+, {{Type::R_64,Type::IMM_32}} // CMP r64, imm32
+, {{Type::R_64,Type::IMM_8}} // CMP r64, imm8
+, {{Type::R_64,Type::M_64}} // CMP r64, m64
+, {{Type::R_64,Type::R_64}} // CMP r64, r64
+, {{Type::R_64,Type::R_64}} // CMP r64, r64
+, {{Type::R_8,Type::IMM_8}} // CMP r8, imm8
+, {{Type::R_8,Type::M_8}} // CMP r8, m8
+, {{Type::R_8,Type::R_8}} // CMP r8, r8
+, {{Type::R_8,Type::R_8}} // CMP r8, r8
+, {{Type::R_8,Type::RH}} // CMP r8, rh
+, {{Type::R_8,Type::RH}} // CMP r8, rh
+, {{Type::RAX,Type::IMM_32}} // CMP RAX, imm32
+, {{Type::RH,Type::IMM_8}} // CMP rh, imm8
+, {{Type::RH,Type::M_8}} // CMP rh, m8
+, {{Type::RH,Type::R_8}} // CMP rh, r8
+, {{Type::RH,Type::R_8}} // CMP rh, r8
+, {{Type::RH,Type::RH}} // CMP rh, rh
+, {{Type::RH,Type::RH}} // CMP rh, rh
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // CMPPD xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // CMPPD xmm, xmm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // CMPPS xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // CMPPS xmm, xmm, imm8
+, {{Type::M_16,Type::M_16}} // CMPS m16, m16
+, {{Type::M_32,Type::M_32}} // CMPS m32, m32
+, {{Type::M_64,Type::M_64}} // CMPS m64, m64
+, {{Type::M_8,Type::M_8}} // CMPS m8, m8
+, {{}} // CMPSB 
+, {{}} // CMPSD 
+, {{Type::XMM,Type::M_64,Type::IMM_8}} // CMPSD xmm, m64, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // CMPSD xmm, xmm, imm8
+, {{}} // CMPSQ 
+, {{Type::XMM,Type::M_32,Type::IMM_8}} // CMPSS xmm, m32, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // CMPSS xmm, xmm, imm8
+, {{}} // CMPSW 
+, {{Type::M_16,Type::R_16}} // CMPXCHG m16, r16
+, {{Type::M_32,Type::R_32}} // CMPXCHG m32, r32
+, {{Type::M_64,Type::R_64}} // CMPXCHG m64, r64
+, {{Type::M_8,Type::R_8}} // CMPXCHG m8, r8
+, {{Type::M_8,Type::RH}} // CMPXCHG m8, rh
+, {{Type::R_16,Type::R_16}} // CMPXCHG r16, r16
+, {{Type::R_32,Type::R_32}} // CMPXCHG r32, r32
+, {{Type::R_64,Type::R_64}} // CMPXCHG r64, r64
+, {{Type::R_8,Type::R_8}} // CMPXCHG r8, r8
+, {{Type::R_8,Type::RH}} // CMPXCHG r8, rh
+, {{Type::RH,Type::R_8}} // CMPXCHG rh, r8
+, {{Type::RH,Type::RH}} // CMPXCHG rh, rh
+, {{Type::M_128}} // CMPXCHG16B m128
+, {{Type::M_64}} // CMPXCHG8B m64
+, {{Type::XMM,Type::M_64}} // COMISD xmm, m64
+, {{Type::XMM,Type::XMM}} // COMISD xmm, xmm
+, {{Type::XMM,Type::M_32}} // COMISS xmm, m32
+, {{Type::XMM,Type::XMM}} // COMISS xmm, xmm
+, {{}} // CPUID 
+, {{}} // CQO 
+, {{Type::R_32,Type::M_16}} // CRC32 r32, m16
+, {{Type::R_32,Type::M_32}} // CRC32 r32, m32
+, {{Type::R_32,Type::M_8}} // CRC32 r32, m8
+, {{Type::R_32,Type::R_16}} // CRC32 r32, r16
+, {{Type::R_32,Type::R_32}} // CRC32 r32, r32
+, {{Type::R_32,Type::R_8}} // CRC32 r32, r8
+, {{Type::R_32,Type::RH}} // CRC32 r32, rh
+, {{Type::R_64,Type::M_64}} // CRC32 r64, m64
+, {{Type::R_64,Type::M_8}} // CRC32 r64, m8
+, {{Type::R_64,Type::R_64}} // CRC32 r64, r64
+, {{Type::R_64,Type::R_8}} // CRC32 r64, r8
+, {{Type::XMM,Type::M_64}} // CVTDQ2PD xmm, m64
+, {{Type::XMM,Type::XMM}} // CVTDQ2PD xmm, xmm
+, {{Type::XMM,Type::M_128}} // CVTDQ2PS xmm, m128
+, {{Type::XMM,Type::XMM}} // CVTDQ2PS xmm, xmm
+, {{Type::XMM,Type::M_128}} // CVTPD2DQ xmm, m128
+, {{Type::XMM,Type::XMM}} // CVTPD2DQ xmm, xmm
+, {{Type::MM,Type::M_128}} // CVTPD2PI mm, m128
+, {{Type::MM,Type::XMM}} // CVTPD2PI mm, xmm
+, {{Type::XMM,Type::M_128}} // CVTPD2PS xmm, m128
+, {{Type::XMM,Type::XMM}} // CVTPD2PS xmm, xmm
+, {{Type::XMM,Type::M_64}} // CVTPI2PD xmm, m64
+, {{Type::XMM,Type::MM}} // CVTPI2PD xmm, mm
+, {{Type::XMM,Type::M_64}} // CVTPI2PS xmm, m64
+, {{Type::XMM,Type::MM}} // CVTPI2PS xmm, mm
+, {{Type::XMM,Type::M_128}} // CVTPS2DQ xmm, m128
+, {{Type::XMM,Type::XMM}} // CVTPS2DQ xmm, xmm
+, {{Type::XMM,Type::M_64}} // CVTPS2PD xmm, m64
+, {{Type::XMM,Type::XMM}} // CVTPS2PD xmm, xmm
+, {{Type::MM,Type::M_64}} // CVTPS2PI mm, m64
+, {{Type::MM,Type::XMM}} // CVTPS2PI mm, xmm
+, {{Type::R_32,Type::M_64}} // CVTSD2SI r32, m64
+, {{Type::R_32,Type::XMM}} // CVTSD2SI r32, xmm
+, {{Type::R_64,Type::M_64}} // CVTSD2SI r64, m64
+, {{Type::R_64,Type::XMM}} // CVTSD2SI r64, xmm
+, {{Type::XMM,Type::M_64}} // CVTSD2SS xmm, m64
+, {{Type::XMM,Type::XMM}} // CVTSD2SS xmm, xmm
+, {{Type::XMM,Type::M_32}} // CVTSI2SD xmm, m32
+, {{Type::XMM,Type::M_64}} // CVTSI2SD xmm, m64
+, {{Type::XMM,Type::R_32}} // CVTSI2SD xmm, r32
+, {{Type::XMM,Type::R_64}} // CVTSI2SD xmm, r64
+, {{Type::XMM,Type::M_32}} // CVTSI2SS xmm, m32
+, {{Type::XMM,Type::M_64}} // CVTSI2SS xmm, m64
+, {{Type::XMM,Type::R_32}} // CVTSI2SS xmm, r32
+, {{Type::XMM,Type::R_64}} // CVTSI2SS xmm, r64
+, {{Type::XMM,Type::M_32}} // CVTSS2SD xmm, m32
+, {{Type::XMM,Type::XMM}} // CVTSS2SD xmm, xmm
+, {{Type::R_32,Type::M_32}} // CVTSS2SI r32, m32
+, {{Type::R_32,Type::XMM}} // CVTSS2SI r32, xmm
+, {{Type::R_64,Type::M_32}} // CVTSS2SI r64, m32
+, {{Type::R_64,Type::XMM}} // CVTSS2SI r64, xmm
+, {{Type::XMM,Type::M_128}} // CVTTPD2DQ xmm, m128
+, {{Type::XMM,Type::XMM}} // CVTTPD2DQ xmm, xmm
+, {{Type::MM,Type::M_128}} // CVTTPD2PI mm, m128
+, {{Type::MM,Type::XMM}} // CVTTPD2PI mm, xmm
+, {{Type::XMM,Type::M_128}} // CVTTPS2DQ xmm, m128
+, {{Type::XMM,Type::XMM}} // CVTTPS2DQ xmm, xmm
+, {{Type::MM,Type::M_64}} // CVTTPS2PI mm, m64
+, {{Type::MM,Type::XMM}} // CVTTPS2PI mm, xmm
+, {{Type::R_32,Type::M_64}} // CVTTSD2SI r32, m64
+, {{Type::R_32,Type::XMM}} // CVTTSD2SI r32, xmm
+, {{Type::R_64,Type::M_64}} // CVTTSD2SI r64, m64
+, {{Type::R_64,Type::XMM}} // CVTTSD2SI r64, xmm
+, {{Type::R_32,Type::M_32}} // CVTTSS2SI r32, m32
+, {{Type::R_32,Type::XMM}} // CVTTSS2SI r32, xmm
+, {{Type::R_64,Type::M_32}} // CVTTSS2SI r64, m32
+, {{Type::R_64,Type::XMM}} // CVTTSS2SI r64, xmm
+, {{}} // CWD 
+, {{}} // CWDE 
+, {{Type::M_16}} // DEC m16
+, {{Type::M_32}} // DEC m32
+, {{Type::M_64}} // DEC m64
+, {{Type::M_8}} // DEC m8
+, {{Type::R_16}} // DEC r16
+, {{Type::R_32}} // DEC r32
+, {{Type::R_64}} // DEC r64
+, {{Type::R_8}} // DEC r8
+, {{Type::RH}} // DEC rh
+, {{Type::M_16}} // DIV m16
+, {{Type::M_32}} // DIV m32
+, {{Type::M_64}} // DIV m64
+, {{Type::M_8}} // DIV m8
+, {{Type::R_16}} // DIV r16
+, {{Type::R_32}} // DIV r32
+, {{Type::R_64}} // DIV r64
+, {{Type::R_8}} // DIV r8
+, {{Type::RH}} // DIV rh
+, {{Type::XMM,Type::M_128}} // DIVPD xmm, m128
+, {{Type::XMM,Type::XMM}} // DIVPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // DIVPS xmm, m128
+, {{Type::XMM,Type::XMM}} // DIVPS xmm, xmm
+, {{Type::XMM,Type::M_64}} // DIVSD xmm, m64
+, {{Type::XMM,Type::XMM}} // DIVSD xmm, xmm
+, {{Type::XMM,Type::M_32}} // DIVSS xmm, m32
+, {{Type::XMM,Type::XMM}} // DIVSS xmm, xmm
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // DPPD xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // DPPD xmm, xmm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // DPPS xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // DPPS xmm, xmm, imm8
+, {{}} // EMMS 
+, {{Type::IMM_8,Type::IMM_16}} // ENTER imm8, imm16
+, {{Type::ONE,Type::IMM_16}} // ENTER 1, imm16
+, {{Type::ZERO,Type::IMM_16}} // ENTER 0, imm16
+, {{Type::M_32,Type::XMM,Type::IMM_8}} // EXTRACTPS m32, xmm, imm8
+, {{Type::R_32,Type::XMM,Type::IMM_8}} // EXTRACTPS r32, xmm, imm8
+, {{Type::R_64,Type::XMM,Type::IMM_8}} // EXTRACTPS r64, xmm, imm8
+, {{}} // F2XM1 
+, {{}} // FABS 
+, {{Type::M_32_FP}} // FADD m32fp
+, {{Type::M_64_FP}} // FADD m64fp
+, {{Type::ST,Type::ST_0}} // FADD ST(i), ST
+, {{Type::ST_0,Type::ST}} // FADD ST, ST(i)
+, {{}} // FADDP 
+, {{Type::ST,Type::ST_0}} // FADDP ST(i), ST
+, {{Type::M_80_BCD}} // FBLD m80bcd
+, {{Type::M_80_BCD}} // FBSTP m80bcd
+, {{}} // FCHS 
+, {{}} // FCLEX 
+, {{Type::ST_0,Type::ST}} // FCMOVB ST, ST(i)
+, {{Type::ST_0,Type::ST}} // FCMOVBE ST, ST(i)
+, {{Type::ST_0,Type::ST}} // FCMOVE ST, ST(i)
+, {{Type::ST_0,Type::ST}} // FCMOVNB ST, ST(i)
+, {{Type::ST_0,Type::ST}} // FCMOVNBE ST, ST(i)
+, {{Type::ST_0,Type::ST}} // FCMOVNE ST, ST(i)
+, {{Type::ST_0,Type::ST}} // FCMOVNU ST, ST(i)
+, {{Type::ST_0,Type::ST}} // FCMOVU ST, ST(i)
+, {{}} // FCOM 
+, {{Type::M_32_FP}} // FCOM m32fp
+, {{Type::M_64_FP}} // FCOM m64fp
+, {{Type::ST}} // FCOM ST(i)
+, {{Type::ST_0,Type::ST}} // FCOMI ST, ST(i)
+, {{Type::ST_0,Type::ST}} // FCOMIP ST, ST(i)
+, {{}} // FCOMP 
+, {{Type::M_32_FP}} // FCOMP m32fp
+, {{Type::M_64_FP}} // FCOMP m64fp
+, {{Type::ST}} // FCOMP ST(i)
+, {{}} // FCOMPP 
+, {{}} // FCOS 
+, {{}} // FDECSTP 
+, {{Type::M_32_FP}} // FDIV m32fp
+, {{Type::M_64_FP}} // FDIV m64fp
+, {{Type::ST,Type::ST_0}} // FDIV ST(i), ST
+, {{Type::ST_0,Type::ST}} // FDIV ST, ST(i)
+, {{}} // FDIVP 
+, {{Type::ST,Type::ST_0}} // FDIVP ST(i), ST
+, {{Type::M_32_FP}} // FDIVR m32fp
+, {{Type::M_64_FP}} // FDIVR m64fp
+, {{Type::ST,Type::ST_0}} // FDIVR ST(i), ST
+, {{Type::ST_0,Type::ST}} // FDIVR ST, ST(i)
+, {{}} // FDIVRP 
+, {{Type::ST,Type::ST_0}} // FDIVRP ST(i), ST
+, {{Type::ST}} // FFREE ST(i)
+, {{Type::M_16_INT}} // FIADD m16int
+, {{Type::M_32_INT}} // FIADD m32int
+, {{Type::M_16_INT}} // FICOM m16int
+, {{Type::M_32_INT}} // FICOM m32int
+, {{Type::M_16_INT}} // FICOMP m16int
+, {{Type::M_32_INT}} // FICOMP m32int
+, {{Type::M_16_INT}} // FIDIV m16int
+, {{Type::M_32_INT}} // FIDIV m32int
+, {{Type::M_16_INT}} // FIDIVR m16int
+, {{Type::M_32_INT}} // FIDIVR m32int
+, {{Type::M_16_INT}} // FILD m16int
+, {{Type::M_32_INT}} // FILD m32int
+, {{Type::M_64_INT}} // FILD m64int
+, {{Type::M_16_INT}} // FIMUL m16int
+, {{Type::M_32_INT}} // FIMUL m32int
+, {{}} // FINCSTP 
+, {{}} // FINIT 
+, {{Type::M_16_INT}} // FIST m16int
+, {{Type::M_32_INT}} // FIST m32int
+, {{Type::M_16_INT}} // FISTP m16int
+, {{Type::M_32_INT}} // FISTP m32int
+, {{Type::M_64_INT}} // FISTP m64int
+, {{Type::M_16_INT}} // FISTTP m16int
+, {{Type::M_32_INT}} // FISTTP m32int
+, {{Type::M_64_INT}} // FISTTP m64int
+, {{Type::M_16_INT}} // FISUB m16int
+, {{Type::M_32_INT}} // FISUB m32int
+, {{Type::M_16_INT}} // FISUBR m16int
+, {{Type::M_32_INT}} // FISUBR m32int
+, {{Type::M_32_FP}} // FLD m32fp
+, {{Type::M_64_FP}} // FLD m64fp
+, {{Type::M_80_FP}} // FLD m80fp
+, {{Type::ST}} // FLD ST(i)
+, {{}} // FLD1 
+, {{Type::M_2_BYTE}} // FLDCW m2byte
+, {{Type::M_28_BYTE}} // FLDENV m28byte
+, {{}} // FLDL2E 
+, {{}} // FLDL2T 
+, {{}} // FLDLG2 
+, {{}} // FLDLN2 
+, {{}} // FLDPI 
+, {{}} // FLDZ 
+, {{Type::M_32_FP}} // FMUL m32fp
+, {{Type::M_64_FP}} // FMUL m64fp
+, {{Type::ST,Type::ST_0}} // FMUL ST(i), ST
+, {{Type::ST_0,Type::ST}} // FMUL ST, ST(i)
+, {{}} // FMULP 
+, {{Type::ST,Type::ST_0}} // FMULP ST(i), ST
+, {{}} // FNCLEX 
+, {{}} // FNINIT 
+, {{}} // FNOP 
+, {{Type::M_108_BYTE}} // FNSAVE m108byte
+, {{Type::M_2_BYTE}} // FNSTCW m2byte
+, {{Type::M_28_BYTE}} // FNSTENV m28byte
+, {{Type::AX}} // FNSTSW AX
+, {{Type::M_2_BYTE}} // FNSTSW m2byte
+, {{}} // FPATAN 
+, {{}} // FPREM 
+, {{}} // FPREM1 
+, {{}} // FPTAN 
+, {{}} // FRNDINT 
+, {{Type::M_108_BYTE}} // FRSTOR m108byte
+, {{Type::M_108_BYTE}} // FSAVE m108byte
+, {{}} // FSCALE 
+, {{}} // FSIN 
+, {{}} // FSINCOS 
+, {{}} // FSQRT 
+, {{Type::M_32_FP}} // FST m32fp
+, {{Type::M_64_FP}} // FST m64fp
+, {{Type::ST}} // FST ST(i)
+, {{Type::M_2_BYTE}} // FSTCW m2byte
+, {{Type::M_28_BYTE}} // FSTENV m28byte
+, {{Type::M_32_FP}} // FSTP m32fp
+, {{Type::M_64_FP}} // FSTP m64fp
+, {{Type::M_80_FP}} // FSTP m80fp
+, {{Type::ST}} // FSTP ST(i)
+, {{Type::AX}} // FSTSW AX
+, {{Type::M_2_BYTE}} // FSTSW m2byte
+, {{Type::M_32_FP}} // FSUB m32fp
+, {{Type::M_64_FP}} // FSUB m64fp
+, {{Type::ST,Type::ST_0}} // FSUB ST(i), ST
+, {{Type::ST_0,Type::ST}} // FSUB ST, ST(i)
+, {{}} // FSUBP 
+, {{Type::ST,Type::ST_0}} // FSUBP ST(i), ST
+, {{Type::M_32_FP}} // FSUBR m32fp
+, {{Type::M_64_FP}} // FSUBR m64fp
+, {{Type::ST,Type::ST_0}} // FSUBR ST(i), ST
+, {{Type::ST_0,Type::ST}} // FSUBR ST, ST(i)
+, {{}} // FSUBRP 
+, {{Type::ST,Type::ST_0}} // FSUBRP ST(i), ST
+, {{}} // FTST 
+, {{}} // FUCOM 
+, {{Type::ST}} // FUCOM ST(i)
+, {{Type::ST_0,Type::ST}} // FUCOMI ST, ST(i)
+, {{Type::ST_0,Type::ST}} // FUCOMIP ST, ST(i)
+, {{}} // FUCOMP 
+, {{Type::ST}} // FUCOMP ST(i)
+, {{}} // FUCOMPP 
+, {{}} // FWAIT 
+, {{}} // FXAM 
+, {{}} // FXCH 
+, {{Type::ST}} // FXCH ST(i)
+, {{Type::M_512_BYTE}} // FXRSTOR m512byte
+, {{Type::M_512_BYTE}} // FXRSTOR64 m512byte
+, {{Type::M_512_BYTE}} // FXSAVE m512byte
+, {{Type::M_512_BYTE}} // FXSAVE64 m512byte
+, {{}} // FXTRACT 
+, {{}} // FYL2X 
+, {{}} // FYL2XP1 
+, {{Type::XMM,Type::M_128}} // HADDPD xmm, m128
+, {{Type::XMM,Type::XMM}} // HADDPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // HADDPS xmm, m128
+, {{Type::XMM,Type::XMM}} // HADDPS xmm, xmm
+, {{Type::XMM,Type::M_128}} // HSUBPD xmm, m128
+, {{Type::XMM,Type::XMM}} // HSUBPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // HSUBPS xmm, m128
+, {{Type::XMM,Type::XMM}} // HSUBPS xmm, xmm
+, {{Type::M_16}} // IDIV m16
+, {{Type::M_32}} // IDIV m32
+, {{Type::M_64}} // IDIV m64
+, {{Type::M_8}} // IDIV m8
+, {{Type::R_16}} // IDIV r16
+, {{Type::R_32}} // IDIV r32
+, {{Type::R_64}} // IDIV r64
+, {{Type::R_8}} // IDIV r8
+, {{Type::RH}} // IDIV rh
+, {{Type::M_16}} // IMUL m16
+, {{Type::M_32}} // IMUL m32
+, {{Type::M_64}} // IMUL m64
+, {{Type::M_8}} // IMUL m8
+, {{Type::R_16}} // IMUL r16
+, {{Type::R_16,Type::M_16}} // IMUL r16, m16
+, {{Type::R_16,Type::M_16,Type::IMM_16}} // IMUL r16, m16, imm16
+, {{Type::R_16,Type::M_16,Type::IMM_8}} // IMUL r16, m16, imm8
+, {{Type::R_16,Type::R_16}} // IMUL r16, r16
+, {{Type::R_16,Type::R_16,Type::IMM_16}} // IMUL r16, r16, imm16
+, {{Type::R_16,Type::R_16,Type::IMM_8}} // IMUL r16, r16, imm8
+, {{Type::R_32}} // IMUL r32
+, {{Type::R_32,Type::M_32}} // IMUL r32, m32
+, {{Type::R_32,Type::M_32,Type::IMM_32}} // IMUL r32, m32, imm32
+, {{Type::R_32,Type::M_32,Type::IMM_8}} // IMUL r32, m32, imm8
+, {{Type::R_32,Type::R_32}} // IMUL r32, r32
+, {{Type::R_32,Type::R_32,Type::IMM_32}} // IMUL r32, r32, imm32
+, {{Type::R_32,Type::R_32,Type::IMM_8}} // IMUL r32, r32, imm8
+, {{Type::R_64}} // IMUL r64
+, {{Type::R_64,Type::M_64}} // IMUL r64, m64
+, {{Type::R_64,Type::M_64,Type::IMM_32}} // IMUL r64, m64, imm32
+, {{Type::R_64,Type::M_64,Type::IMM_8}} // IMUL r64, m64, imm8
+, {{Type::R_64,Type::R_64}} // IMUL r64, r64
+, {{Type::R_64,Type::R_64,Type::IMM_32}} // IMUL r64, r64, imm32
+, {{Type::R_64,Type::R_64,Type::IMM_8}} // IMUL r64, r64, imm8
+, {{Type::R_8}} // IMUL r8
+, {{Type::RH}} // IMUL rh
+, {{Type::AL,Type::DX}} // IN AL, DX
+, {{Type::AL,Type::IMM_8}} // IN AL, imm8
+, {{Type::AX,Type::DX}} // IN AX, DX
+, {{Type::AX,Type::IMM_8}} // IN AX, imm8
+, {{Type::EAX,Type::DX}} // IN EAX, DX
+, {{Type::EAX,Type::IMM_8}} // IN EAX, imm8
+, {{Type::M_16}} // INC m16
+, {{Type::M_32}} // INC m32
+, {{Type::M_64}} // INC m64
+, {{Type::M_8}} // INC m8
+, {{Type::R_16}} // INC r16
+, {{Type::R_32}} // INC r32
+, {{Type::R_64}} // INC r64
+, {{Type::R_8}} // INC r8
+, {{Type::RH}} // INC rh
+, {{Type::M_16,Type::DX}} // INS m16, DX
+, {{Type::M_32,Type::DX}} // INS m32, DX
+, {{Type::M_8,Type::DX}} // INS m8, DX
+, {{}} // INSB 
+, {{}} // INSD 
+, {{Type::XMM,Type::M_32,Type::IMM_8}} // INSERTPS xmm, m32, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // INSERTPS xmm, xmm, imm8
+, {{}} // INSW 
+, {{Type::IMM_8}} // INT imm8
+, {{Type::THREE}} // INT 3
+, {{Type::R_64,Type::M_128}} // INVPCID r64, m128
+, {{}} // IRET 
+, {{}} // IRETD 
+, {{}} // IRETQ 
+, {{Type::LABEL}} // JA label8
+, {{Type::LABEL}} // JA label32
+, {{Type::LABEL,Type::HINT}} // JA label8, hint
+, {{Type::LABEL,Type::HINT}} // JA label32, hint
+, {{Type::REL_32}} // JA rel32
+, {{Type::REL_32,Type::HINT}} // JA rel32, hint
+, {{Type::REL_8}} // JA rel8
+, {{Type::REL_8,Type::HINT}} // JA rel8, hint
+, {{Type::LABEL}} // JAE label8
+, {{Type::LABEL}} // JAE label32
+, {{Type::LABEL,Type::HINT}} // JAE label8, hint
+, {{Type::LABEL,Type::HINT}} // JAE label32, hint
+, {{Type::REL_32}} // JAE rel32
+, {{Type::REL_32,Type::HINT}} // JAE rel32, hint
+, {{Type::REL_8}} // JAE rel8
+, {{Type::REL_8,Type::HINT}} // JAE rel8, hint
+, {{Type::LABEL}} // JB label8
+, {{Type::LABEL}} // JB label32
+, {{Type::LABEL,Type::HINT}} // JB label8, hint
+, {{Type::LABEL,Type::HINT}} // JB label32, hint
+, {{Type::REL_32}} // JB rel32
+, {{Type::REL_32,Type::HINT}} // JB rel32, hint
+, {{Type::REL_8}} // JB rel8
+, {{Type::REL_8,Type::HINT}} // JB rel8, hint
+, {{Type::LABEL}} // JBE label8
+, {{Type::LABEL}} // JBE label32
+, {{Type::LABEL,Type::HINT}} // JBE label8, hint
+, {{Type::LABEL,Type::HINT}} // JBE label32, hint
+, {{Type::REL_32}} // JBE rel32
+, {{Type::REL_32,Type::HINT}} // JBE rel32, hint
+, {{Type::REL_8}} // JBE rel8
+, {{Type::REL_8,Type::HINT}} // JBE rel8, hint
+, {{Type::LABEL}} // JC label8
+, {{Type::LABEL}} // JC label32
+, {{Type::LABEL,Type::HINT}} // JC label8, hint
+, {{Type::LABEL,Type::HINT}} // JC label32, hint
+, {{Type::REL_32}} // JC rel32
+, {{Type::REL_32,Type::HINT}} // JC rel32, hint
+, {{Type::REL_8}} // JC rel8
+, {{Type::REL_8,Type::HINT}} // JC rel8, hint
+, {{Type::LABEL}} // JE label8
+, {{Type::LABEL}} // JE label32
+, {{Type::LABEL,Type::HINT}} // JE label8, hint
+, {{Type::LABEL,Type::HINT}} // JE label32, hint
+, {{Type::REL_32}} // JE rel32
+, {{Type::REL_32,Type::HINT}} // JE rel32, hint
+, {{Type::REL_8}} // JE rel8
+, {{Type::REL_8,Type::HINT}} // JE rel8, hint
+, {{Type::LABEL}} // JECXZ label8
+, {{Type::LABEL,Type::HINT}} // JECXZ label8, hint
+, {{Type::REL_8}} // JECXZ rel8
+, {{Type::REL_8,Type::HINT}} // JECXZ rel8, hint
+, {{Type::LABEL}} // JG label8
+, {{Type::LABEL}} // JG label32
+, {{Type::LABEL,Type::HINT}} // JG label8, hint
+, {{Type::LABEL,Type::HINT}} // JG label32, hint
+, {{Type::REL_32}} // JG rel32
+, {{Type::REL_32,Type::HINT}} // JG rel32, hint
+, {{Type::REL_8}} // JG rel8
+, {{Type::REL_8,Type::HINT}} // JG rel8, hint
+, {{Type::LABEL}} // JGE label8
+, {{Type::LABEL}} // JGE label32
+, {{Type::LABEL,Type::HINT}} // JGE label8, hint
+, {{Type::LABEL,Type::HINT}} // JGE label32, hint
+, {{Type::REL_32}} // JGE rel32
+, {{Type::REL_32,Type::HINT}} // JGE rel32, hint
+, {{Type::REL_8}} // JGE rel8
+, {{Type::REL_8,Type::HINT}} // JGE rel8, hint
+, {{Type::LABEL}} // JL label8
+, {{Type::LABEL}} // JL label32
+, {{Type::LABEL,Type::HINT}} // JL label8, hint
+, {{Type::LABEL,Type::HINT}} // JL label32, hint
+, {{Type::REL_32}} // JL rel32
+, {{Type::REL_32,Type::HINT}} // JL rel32, hint
+, {{Type::REL_8}} // JL rel8
+, {{Type::REL_8,Type::HINT}} // JL rel8, hint
+, {{Type::LABEL}} // JLE label8
+, {{Type::LABEL}} // JLE label32
+, {{Type::LABEL,Type::HINT}} // JLE label8, hint
+, {{Type::LABEL,Type::HINT}} // JLE label32, hint
+, {{Type::REL_32}} // JLE rel32
+, {{Type::REL_32,Type::HINT}} // JLE rel32, hint
+, {{Type::REL_8}} // JLE rel8
+, {{Type::REL_8,Type::HINT}} // JLE rel8, hint
+, {{Type::FAR_PTR_16_16}} // JMP m16:16
+, {{Type::FAR_PTR_16_32}} // JMP m16:32
+, {{Type::FAR_PTR_16_64}} // JMP m16:64
+, {{Type::LABEL}} // JMP label8
+, {{Type::LABEL}} // JMP label32
+, {{Type::M_64}} // JMP m64
+, {{Type::R_64}} // JMP r64
+, {{Type::REL_32}} // JMP rel32
+, {{Type::REL_8}} // JMP rel8
+, {{Type::LABEL}} // JNA label8
+, {{Type::LABEL}} // JNA label32
+, {{Type::LABEL,Type::HINT}} // JNA label8, hint
+, {{Type::LABEL,Type::HINT}} // JNA label32, hint
+, {{Type::REL_32}} // JNA rel32
+, {{Type::REL_32,Type::HINT}} // JNA rel32, hint
+, {{Type::REL_8}} // JNA rel8
+, {{Type::REL_8,Type::HINT}} // JNA rel8, hint
+, {{Type::LABEL}} // JNAE label8
+, {{Type::LABEL}} // JNAE label32
+, {{Type::LABEL,Type::HINT}} // JNAE label8, hint
+, {{Type::LABEL,Type::HINT}} // JNAE label32, hint
+, {{Type::REL_32}} // JNAE rel32
+, {{Type::REL_32,Type::HINT}} // JNAE rel32, hint
+, {{Type::REL_8}} // JNAE rel8
+, {{Type::REL_8,Type::HINT}} // JNAE rel8, hint
+, {{Type::LABEL}} // JNB label8
+, {{Type::LABEL}} // JNB label32
+, {{Type::LABEL,Type::HINT}} // JNB label8, hint
+, {{Type::LABEL,Type::HINT}} // JNB label32, hint
+, {{Type::REL_32}} // JNB rel32
+, {{Type::REL_32,Type::HINT}} // JNB rel32, hint
+, {{Type::REL_8}} // JNB rel8
+, {{Type::REL_8,Type::HINT}} // JNB rel8, hint
+, {{Type::LABEL}} // JNBE label8
+, {{Type::LABEL}} // JNBE label32
+, {{Type::LABEL,Type::HINT}} // JNBE label8, hint
+, {{Type::LABEL,Type::HINT}} // JNBE label32, hint
+, {{Type::REL_32}} // JNBE rel32
+, {{Type::REL_32,Type::HINT}} // JNBE rel32, hint
+, {{Type::REL_8}} // JNBE rel8
+, {{Type::REL_8,Type::HINT}} // JNBE rel8, hint
+, {{Type::LABEL}} // JNC label8
+, {{Type::LABEL}} // JNC label32
+, {{Type::LABEL,Type::HINT}} // JNC label8, hint
+, {{Type::LABEL,Type::HINT}} // JNC label32, hint
+, {{Type::REL_32}} // JNC rel32
+, {{Type::REL_32,Type::HINT}} // JNC rel32, hint
+, {{Type::REL_8}} // JNC rel8
+, {{Type::REL_8,Type::HINT}} // JNC rel8, hint
+, {{Type::LABEL}} // JNE label8
+, {{Type::LABEL}} // JNE label32
+, {{Type::LABEL,Type::HINT}} // JNE label8, hint
+, {{Type::LABEL,Type::HINT}} // JNE label32, hint
+, {{Type::REL_32}} // JNE rel32
+, {{Type::REL_32,Type::HINT}} // JNE rel32, hint
+, {{Type::REL_8}} // JNE rel8
+, {{Type::REL_8,Type::HINT}} // JNE rel8, hint
+, {{Type::LABEL}} // JNG label8
+, {{Type::LABEL}} // JNG label32
+, {{Type::LABEL,Type::HINT}} // JNG label8, hint
+, {{Type::LABEL,Type::HINT}} // JNG label32, hint
+, {{Type::REL_32}} // JNG rel32
+, {{Type::REL_32,Type::HINT}} // JNG rel32, hint
+, {{Type::REL_8}} // JNG rel8
+, {{Type::REL_8,Type::HINT}} // JNG rel8, hint
+, {{Type::LABEL}} // JNGE label8
+, {{Type::LABEL}} // JNGE label32
+, {{Type::LABEL,Type::HINT}} // JNGE label8, hint
+, {{Type::LABEL,Type::HINT}} // JNGE label32, hint
+, {{Type::REL_32}} // JNGE rel32
+, {{Type::REL_32,Type::HINT}} // JNGE rel32, hint
+, {{Type::REL_8}} // JNGE rel8
+, {{Type::REL_8,Type::HINT}} // JNGE rel8, hint
+, {{Type::LABEL}} // JNL label8
+, {{Type::LABEL}} // JNL label32
+, {{Type::LABEL,Type::HINT}} // JNL label8, hint
+, {{Type::LABEL,Type::HINT}} // JNL label32, hint
+, {{Type::REL_32}} // JNL rel32
+, {{Type::REL_32,Type::HINT}} // JNL rel32, hint
+, {{Type::REL_8}} // JNL rel8
+, {{Type::REL_8,Type::HINT}} // JNL rel8, hint
+, {{Type::LABEL}} // JNLE label8
+, {{Type::LABEL}} // JNLE label32
+, {{Type::LABEL,Type::HINT}} // JNLE label8, hint
+, {{Type::LABEL,Type::HINT}} // JNLE label32, hint
+, {{Type::REL_32}} // JNLE rel32
+, {{Type::REL_32,Type::HINT}} // JNLE rel32, hint
+, {{Type::REL_8}} // JNLE rel8
+, {{Type::REL_8,Type::HINT}} // JNLE rel8, hint
+, {{Type::LABEL}} // JNO label8
+, {{Type::LABEL}} // JNO label32
+, {{Type::LABEL,Type::HINT}} // JNO label8, hint
+, {{Type::LABEL,Type::HINT}} // JNO label32, hint
+, {{Type::REL_32}} // JNO rel32
+, {{Type::REL_32,Type::HINT}} // JNO rel32, hint
+, {{Type::REL_8}} // JNO rel8
+, {{Type::REL_8,Type::HINT}} // JNO rel8, hint
+, {{Type::LABEL}} // JNP label8
+, {{Type::LABEL}} // JNP label32
+, {{Type::LABEL,Type::HINT}} // JNP label8, hint
+, {{Type::LABEL,Type::HINT}} // JNP label32, hint
+, {{Type::REL_32}} // JNP rel32
+, {{Type::REL_32,Type::HINT}} // JNP rel32, hint
+, {{Type::REL_8}} // JNP rel8
+, {{Type::REL_8,Type::HINT}} // JNP rel8, hint
+, {{Type::LABEL}} // JNS label8
+, {{Type::LABEL}} // JNS label32
+, {{Type::LABEL,Type::HINT}} // JNS label8, hint
+, {{Type::LABEL,Type::HINT}} // JNS label32, hint
+, {{Type::REL_32}} // JNS rel32
+, {{Type::REL_32,Type::HINT}} // JNS rel32, hint
+, {{Type::REL_8}} // JNS rel8
+, {{Type::REL_8,Type::HINT}} // JNS rel8, hint
+, {{Type::LABEL}} // JNZ label8
+, {{Type::LABEL}} // JNZ label32
+, {{Type::LABEL,Type::HINT}} // JNZ label8, hint
+, {{Type::LABEL,Type::HINT}} // JNZ label32, hint
+, {{Type::REL_32}} // JNZ rel32
+, {{Type::REL_32,Type::HINT}} // JNZ rel32, hint
+, {{Type::REL_8}} // JNZ rel8
+, {{Type::REL_8,Type::HINT}} // JNZ rel8, hint
+, {{Type::LABEL}} // JO label8
+, {{Type::LABEL}} // JO label32
+, {{Type::LABEL,Type::HINT}} // JO label8, hint
+, {{Type::LABEL,Type::HINT}} // JO label32, hint
+, {{Type::REL_32}} // JO rel32
+, {{Type::REL_32,Type::HINT}} // JO rel32, hint
+, {{Type::REL_8}} // JO rel8
+, {{Type::REL_8,Type::HINT}} // JO rel8, hint
+, {{Type::LABEL}} // JP label8
+, {{Type::LABEL}} // JP label32
+, {{Type::LABEL,Type::HINT}} // JP label8, hint
+, {{Type::LABEL,Type::HINT}} // JP label32, hint
+, {{Type::REL_32}} // JP rel32
+, {{Type::REL_32,Type::HINT}} // JP rel32, hint
+, {{Type::REL_8}} // JP rel8
+, {{Type::REL_8,Type::HINT}} // JP rel8, hint
+, {{Type::LABEL}} // JPE label8
+, {{Type::LABEL}} // JPE label32
+, {{Type::LABEL,Type::HINT}} // JPE label8, hint
+, {{Type::LABEL,Type::HINT}} // JPE label32, hint
+, {{Type::REL_32}} // JPE rel32
+, {{Type::REL_32,Type::HINT}} // JPE rel32, hint
+, {{Type::REL_8}} // JPE rel8
+, {{Type::REL_8,Type::HINT}} // JPE rel8, hint
+, {{Type::LABEL}} // JPO label8
+, {{Type::LABEL}} // JPO label32
+, {{Type::LABEL,Type::HINT}} // JPO label8, hint
+, {{Type::LABEL,Type::HINT}} // JPO label32, hint
+, {{Type::REL_32}} // JPO rel32
+, {{Type::REL_32,Type::HINT}} // JPO rel32, hint
+, {{Type::REL_8}} // JPO rel8
+, {{Type::REL_8,Type::HINT}} // JPO rel8, hint
+, {{Type::LABEL}} // JRCXZ label8
+, {{Type::LABEL,Type::HINT}} // JRCXZ label8, hint
+, {{Type::REL_8}} // JRCXZ rel8
+, {{Type::REL_8,Type::HINT}} // JRCXZ rel8, hint
+, {{Type::LABEL}} // JS label8
+, {{Type::LABEL}} // JS label32
+, {{Type::LABEL,Type::HINT}} // JS label8, hint
+, {{Type::LABEL,Type::HINT}} // JS label32, hint
+, {{Type::REL_32}} // JS rel32
+, {{Type::REL_32,Type::HINT}} // JS rel32, hint
+, {{Type::REL_8}} // JS rel8
+, {{Type::REL_8,Type::HINT}} // JS rel8, hint
+, {{Type::LABEL}} // JZ label8
+, {{Type::LABEL}} // JZ label32
+, {{Type::LABEL,Type::HINT}} // JZ label8, hint
+, {{Type::LABEL,Type::HINT}} // JZ label32, hint
+, {{Type::REL_32}} // JZ rel32
+, {{Type::REL_32,Type::HINT}} // JZ rel32, hint
+, {{Type::REL_8}} // JZ rel8
+, {{Type::REL_8,Type::HINT}} // JZ rel8, hint
+, {{}} // LAHF 
+, {{Type::R_16,Type::M_16}} // LAR r16, m16
+, {{Type::R_16,Type::R_16}} // LAR r16, r16
+, {{Type::R_32,Type::M_16}} // LAR r32, m16
+, {{Type::R_32,Type::R_32}} // LAR r32, r32
+, {{Type::R_64,Type::M_16}} // LAR r64, m16
+, {{Type::R_64,Type::R_32}} // LAR r64, r32
+, {{Type::XMM,Type::M_128}} // LDDQU xmm, m128
+, {{Type::M_32}} // LDMXCSR m32
+, {{Type::R_16,Type::M_16}} // LEA r16, m16
+, {{Type::R_16,Type::M_32}} // LEA r16, m32
+, {{Type::R_16,Type::M_64}} // LEA r16, m64
+, {{Type::R_32,Type::M_16}} // LEA r32, m16
+, {{Type::R_32,Type::M_32}} // LEA r32, m32
+, {{Type::R_32,Type::M_64}} // LEA r32, m64
+, {{Type::R_64,Type::M_16}} // LEA r64, m16
+, {{Type::R_64,Type::M_32}} // LEA r64, m32
+, {{Type::R_64,Type::M_64}} // LEA r64, m64
+, {{}} // LEAVE 
+, {{Type::PREF_66}} // LEAVE p66
+, {{}} // LFENCE 
+, {{Type::R_16,Type::FAR_PTR_16_16}} // LFS r16, m16:16
+, {{Type::R_32,Type::FAR_PTR_16_32}} // LFS r32, m16:32
+, {{Type::R_64,Type::FAR_PTR_16_64}} // LFS r64, m16:64
+, {{Type::R_16,Type::FAR_PTR_16_16}} // LGS r16, m16:16
+, {{Type::R_32,Type::FAR_PTR_16_32}} // LGS r32, m16:32
+, {{Type::R_64,Type::FAR_PTR_16_64}} // LGS r64, m16:64
+, {{}} // LOCK 
+, {{Type::M_16}} // LODS m16
+, {{Type::M_32}} // LODS m32
+, {{Type::M_64}} // LODS m64
+, {{Type::M_8}} // LODS m8
+, {{}} // LODSB 
+, {{}} // LODSD 
+, {{}} // LODSQ 
+, {{}} // LODSW 
+, {{Type::LABEL}} // LOOP label8
+, {{Type::REL_8}} // LOOP rel8
+, {{Type::LABEL}} // LOOPE label8
+, {{Type::REL_8}} // LOOPE rel8
+, {{Type::LABEL}} // LOOPNE label8
+, {{Type::REL_8}} // LOOPNE rel8
+, {{Type::R_16,Type::M_16}} // LSL r16, m16
+, {{Type::R_16,Type::R_16}} // LSL r16, r16
+, {{Type::R_32,Type::M_16}} // LSL r32, m16
+, {{Type::R_32,Type::R_32}} // LSL r32, r32
+, {{Type::R_64,Type::M_16}} // LSL r64, m16
+, {{Type::R_64,Type::R_32}} // LSL r64, r32
+, {{Type::R_16,Type::FAR_PTR_16_16}} // LSS r16, m16:16
+, {{Type::R_32,Type::FAR_PTR_16_32}} // LSS r32, m16:32
+, {{Type::R_64,Type::FAR_PTR_16_64}} // LSS r64, m16:64
+, {{Type::R_16,Type::M_16}} // LZCNT r16, m16
+, {{Type::R_16,Type::R_16}} // LZCNT r16, r16
+, {{Type::R_32,Type::M_32}} // LZCNT r32, m32
+, {{Type::R_32,Type::R_32}} // LZCNT r32, r32
+, {{Type::R_64,Type::M_64}} // LZCNT r64, m64
+, {{Type::R_64,Type::R_64}} // LZCNT r64, r64
+, {{Type::XMM,Type::XMM}} // MASKMOVDQU xmm, xmm
+, {{Type::MM,Type::MM}} // MASKMOVQ mm, mm
+, {{Type::XMM,Type::M_128}} // MAXPD xmm, m128
+, {{Type::XMM,Type::XMM}} // MAXPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // MAXPS xmm, m128
+, {{Type::XMM,Type::XMM}} // MAXPS xmm, xmm
+, {{Type::XMM,Type::M_64}} // MAXSD xmm, m64
+, {{Type::XMM,Type::XMM}} // MAXSD xmm, xmm
+, {{Type::XMM,Type::M_32}} // MAXSS xmm, m32
+, {{Type::XMM,Type::XMM}} // MAXSS xmm, xmm
+, {{}} // MFENCE 
+, {{Type::XMM,Type::M_128}} // MINPD xmm, m128
+, {{Type::XMM,Type::XMM}} // MINPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // MINPS xmm, m128
+, {{Type::XMM,Type::XMM}} // MINPS xmm, xmm
+, {{Type::XMM,Type::M_64}} // MINSD xmm, m64
+, {{Type::XMM,Type::XMM}} // MINSD xmm, xmm
+, {{Type::XMM,Type::M_32}} // MINSS xmm, m32
+, {{Type::XMM,Type::XMM}} // MINSS xmm, xmm
+, {{}} // MONITOR 
+, {{Type::AL,Type::MOFFS_8}} // MOV AL, moffs8
+, {{Type::AL,Type::MOFFS_8,Type::PREF_REX_W}} // MOV AL, moffs8, pw
+, {{Type::AX,Type::MOFFS_16}} // MOV AX, moffs16
+, {{Type::EAX,Type::MOFFS_32}} // MOV EAX, moffs32
+, {{Type::M_16,Type::IMM_16}} // MOV m16, imm16
+, {{Type::M_16,Type::R_16}} // MOV m16, r16
+, {{Type::M_16,Type::SREG}} // MOV m16, Sreg
+, {{Type::M_32,Type::IMM_32}} // MOV m32, imm32
+, {{Type::M_32,Type::R_32}} // MOV m32, r32
+, {{Type::M_64,Type::IMM_32}} // MOV m64, imm32
+, {{Type::M_64,Type::R_64}} // MOV m64, r64
+, {{Type::M_64,Type::SREG}} // MOV m64, Sreg
+, {{Type::M_8,Type::IMM_8}} // MOV m8, imm8
+, {{Type::M_8,Type::R_8}} // MOV m8, r8
+, {{Type::M_8,Type::RH}} // MOV m8, rh
+, {{Type::MOFFS_16,Type::AX}} // MOV moffs16, AX
+, {{Type::MOFFS_32,Type::EAX}} // MOV moffs32, EAX
+, {{Type::MOFFS_64,Type::RAX}} // MOV moffs64, RAX
+, {{Type::MOFFS_8,Type::AL}} // MOV moffs8, AL
+, {{Type::MOFFS_8,Type::AL,Type::PREF_REX_W}} // MOV moffs8, AL, pw
+, {{Type::R_16,Type::IMM_16}} // MOV r16, imm16
+, {{Type::R_16,Type::IMM_16}} // MOV r16, imm16
+, {{Type::R_16,Type::M_16}} // MOV r16, m16
+, {{Type::R_16,Type::R_16}} // MOV r16, r16
+, {{Type::R_16,Type::R_16}} // MOV r16, r16
+, {{Type::R_16,Type::SREG}} // MOV r16, Sreg
+, {{Type::R_32,Type::IMM_32}} // MOV r32, imm32
+, {{Type::R_32,Type::IMM_32}} // MOV r32, imm32
+, {{Type::R_32,Type::M_32}} // MOV r32, m32
+, {{Type::R_32,Type::R_32}} // MOV r32, r32
+, {{Type::R_32,Type::R_32}} // MOV r32, r32
+, {{Type::R_64,Type::IMM_32}} // MOV r64, imm32
+, {{Type::R_64,Type::IMM_64}} // MOV r64, imm64
+, {{Type::R_64,Type::M_64}} // MOV r64, m64
+, {{Type::R_64,Type::R_64}} // MOV r64, r64
+, {{Type::R_64,Type::R_64}} // MOV r64, r64
+, {{Type::R_64,Type::SREG}} // MOV r64, Sreg
+, {{Type::R_8,Type::IMM_8}} // MOV r8, imm8
+, {{Type::R_8,Type::IMM_8}} // MOV r8, imm8
+, {{Type::R_8,Type::M_8}} // MOV r8, m8
+, {{Type::R_8,Type::R_8}} // MOV r8, r8
+, {{Type::R_8,Type::R_8}} // MOV r8, r8
+, {{Type::R_8,Type::RH}} // MOV r8, rh
+, {{Type::R_8,Type::RH}} // MOV r8, rh
+, {{Type::RAX,Type::MOFFS_64}} // MOV RAX, moffs64
+, {{Type::RH,Type::IMM_8}} // MOV rh, imm8
+, {{Type::RH,Type::IMM_8}} // MOV rh, imm8
+, {{Type::RH,Type::M_8}} // MOV rh, m8
+, {{Type::RH,Type::R_8}} // MOV rh, r8
+, {{Type::RH,Type::R_8}} // MOV rh, r8
+, {{Type::RH,Type::RH}} // MOV rh, rh
+, {{Type::RH,Type::RH}} // MOV rh, rh
+, {{Type::SREG,Type::M_16}} // MOV Sreg, m16
+, {{Type::SREG,Type::M_64}} // MOV Sreg, m64
+, {{Type::SREG,Type::R_16}} // MOV Sreg, r16
+, {{Type::SREG,Type::R_64}} // MOV Sreg, r64
+, {{Type::M_128,Type::XMM}} // MOVAPD m128, xmm
+, {{Type::XMM,Type::M_128}} // MOVAPD xmm, m128
+, {{Type::XMM,Type::XMM}} // MOVAPD xmm, xmm
+, {{Type::XMM,Type::XMM}} // MOVAPD xmm, xmm
+, {{Type::M_128,Type::XMM}} // MOVAPS m128, xmm
+, {{Type::XMM,Type::M_128}} // MOVAPS xmm, m128
+, {{Type::XMM,Type::XMM}} // MOVAPS xmm, xmm
+, {{Type::XMM,Type::XMM}} // MOVAPS xmm, xmm
+, {{Type::M_16,Type::R_16}} // MOVBE m16, r16
+, {{Type::M_32,Type::R_32}} // MOVBE m32, r32
+, {{Type::M_64,Type::R_64}} // MOVBE m64, r64
+, {{Type::R_16,Type::M_16}} // MOVBE r16, m16
+, {{Type::R_32,Type::M_32}} // MOVBE r32, m32
+, {{Type::R_64,Type::M_64}} // MOVBE r64, m64
+, {{Type::M_32,Type::MM}} // MOVD m32, mm
+, {{Type::M_32,Type::XMM}} // MOVD m32, xmm
+, {{Type::MM,Type::M_32}} // MOVD mm, m32
+, {{Type::MM,Type::R_32}} // MOVD mm, r32
+, {{Type::R_32,Type::MM}} // MOVD r32, mm
+, {{Type::R_32,Type::XMM}} // MOVD r32, xmm
+, {{Type::XMM,Type::M_32}} // MOVD xmm, m32
+, {{Type::XMM,Type::R_32}} // MOVD xmm, r32
+, {{Type::XMM,Type::M_64}} // MOVDDUP xmm, m64
+, {{Type::XMM,Type::XMM}} // MOVDDUP xmm, xmm
+, {{Type::MM,Type::XMM}} // MOVDQ2Q mm, xmm
+, {{Type::M_128,Type::XMM}} // MOVDQA m128, xmm
+, {{Type::XMM,Type::M_128}} // MOVDQA xmm, m128
+, {{Type::XMM,Type::XMM}} // MOVDQA xmm, xmm
+, {{Type::XMM,Type::XMM}} // MOVDQA xmm, xmm
+, {{Type::M_128,Type::XMM}} // MOVDQU m128, xmm
+, {{Type::XMM,Type::M_128}} // MOVDQU xmm, m128
+, {{Type::XMM,Type::XMM}} // MOVDQU xmm, xmm
+, {{Type::XMM,Type::XMM}} // MOVDQU xmm, xmm
+, {{Type::XMM,Type::XMM}} // MOVHLPS xmm, xmm
+, {{Type::M_64,Type::XMM}} // MOVHPD m64, xmm
+, {{Type::XMM,Type::M_64}} // MOVHPD xmm, m64
+, {{Type::M_64,Type::XMM}} // MOVHPS m64, xmm
+, {{Type::XMM,Type::M_64}} // MOVHPS xmm, m64
+, {{Type::XMM,Type::XMM}} // MOVLHPS xmm, xmm
+, {{Type::M_64,Type::XMM}} // MOVLPD m64, xmm
+, {{Type::XMM,Type::M_64}} // MOVLPD xmm, m64
+, {{Type::M_64,Type::XMM}} // MOVLPS m64, xmm
+, {{Type::XMM,Type::M_64}} // MOVLPS xmm, m64
+, {{Type::R_32,Type::XMM}} // MOVMSKPD r32, xmm
+, {{Type::R_64,Type::XMM}} // MOVMSKPD r64, xmm
+, {{Type::R_32,Type::XMM}} // MOVMSKPS r32, xmm
+, {{Type::R_64,Type::XMM}} // MOVMSKPS r64, xmm
+, {{Type::M_128,Type::XMM}} // MOVNTDQ m128, xmm
+, {{Type::M_256,Type::YMM}} // MOVNTDQ m256, ymm
+, {{Type::XMM,Type::M_128}} // MOVNTDQA xmm, m128
+, {{Type::M_32,Type::R_32}} // MOVNTI m32, r32
+, {{Type::M_64,Type::R_64}} // MOVNTI m64, r64
+, {{Type::M_128,Type::XMM}} // MOVNTPD m128, xmm
+, {{Type::M_128,Type::XMM}} // MOVNTPS m128, xmm
+, {{Type::M_64,Type::MM}} // MOVNTQ m64, mm
+, {{Type::M_64,Type::MM}} // MOVQ m64, mm
+, {{Type::M_64,Type::MM}} // MOVQ m64, mm
+, {{Type::M_64,Type::XMM}} // MOVQ m64, xmm
+, {{Type::M_64,Type::XMM}} // MOVQ m64, xmm
+, {{Type::MM,Type::M_64}} // MOVQ mm, m64
+, {{Type::MM,Type::M_64}} // MOVQ mm, m64
+, {{Type::MM,Type::MM}} // MOVQ mm, mm
+, {{Type::MM,Type::MM}} // MOVQ mm, mm
+, {{Type::MM,Type::R_64}} // MOVQ mm, r64
+, {{Type::R_64,Type::MM}} // MOVQ r64, mm
+, {{Type::R_64,Type::XMM}} // MOVQ r64, xmm
+, {{Type::XMM,Type::M_64}} // MOVQ xmm, m64
+, {{Type::XMM,Type::M_64}} // MOVQ xmm, m64
+, {{Type::XMM,Type::R_64}} // MOVQ xmm, r64
+, {{Type::XMM,Type::XMM}} // MOVQ xmm, xmm
+, {{Type::XMM,Type::XMM}} // MOVQ xmm, xmm
+, {{Type::XMM,Type::MM}} // MOVQ2DQ xmm, mm
+, {{Type::M_16,Type::M_16}} // MOVS m16, m16
+, {{Type::M_32,Type::M_32}} // MOVS m32, m32
+, {{Type::M_64,Type::M_64}} // MOVS m64, m64
+, {{Type::M_8,Type::M_8}} // MOVS m8, m8
+, {{}} // MOVSB 
+, {{}} // MOVSD 
+, {{Type::M_64,Type::XMM}} // MOVSD m64, xmm
+, {{Type::XMM,Type::M_64}} // MOVSD xmm, m64
+, {{Type::XMM,Type::XMM}} // MOVSD xmm, xmm
+, {{Type::XMM,Type::XMM}} // MOVSD xmm, xmm
+, {{Type::XMM,Type::M_128}} // MOVSHDUP xmm, m128
+, {{Type::XMM,Type::XMM}} // MOVSHDUP xmm, xmm
+, {{Type::XMM,Type::M_128}} // MOVSLDUP xmm, m128
+, {{Type::XMM,Type::XMM}} // MOVSLDUP xmm, xmm
+, {{}} // MOVSQ 
+, {{Type::M_32,Type::XMM}} // MOVSS m32, xmm
+, {{Type::XMM,Type::M_32}} // MOVSS xmm, m32
+, {{Type::XMM,Type::XMM}} // MOVSS xmm, xmm
+, {{Type::XMM,Type::XMM}} // MOVSS xmm, xmm
+, {{}} // MOVSW 
+, {{Type::R_16,Type::M_8}} // MOVSX r16, m8
+, {{Type::R_16,Type::R_8}} // MOVSX r16, r8
+, {{Type::R_16,Type::RH}} // MOVSX r16, rh
+, {{Type::R_32,Type::M_16}} // MOVSX r32, m16
+, {{Type::R_32,Type::M_8}} // MOVSX r32, m8
+, {{Type::R_32,Type::R_16}} // MOVSX r32, r16
+, {{Type::R_32,Type::R_8}} // MOVSX r32, r8
+, {{Type::R_32,Type::RH}} // MOVSX r32, rh
+, {{Type::R_64,Type::M_16}} // MOVSX r64, m16
+, {{Type::R_64,Type::M_8}} // MOVSX r64, m8
+, {{Type::R_64,Type::R_16}} // MOVSX r64, r16
+, {{Type::R_64,Type::R_8}} // MOVSX r64, r8
+, {{Type::R_64,Type::M_32}} // MOVSXD r64, m32
+, {{Type::R_64,Type::R_32}} // MOVSXD r64, r32
+, {{Type::M_128,Type::XMM}} // MOVUPD m128, xmm
+, {{Type::XMM,Type::M_128}} // MOVUPD xmm, m128
+, {{Type::XMM,Type::XMM}} // MOVUPD xmm, xmm
+, {{Type::XMM,Type::XMM}} // MOVUPD xmm, xmm
+, {{Type::M_128,Type::XMM}} // MOVUPS m128, xmm
+, {{Type::XMM,Type::M_128}} // MOVUPS xmm, m128
+, {{Type::XMM,Type::XMM}} // MOVUPS xmm, xmm
+, {{Type::XMM,Type::XMM}} // MOVUPS xmm, xmm
+, {{Type::R_16,Type::M_8}} // MOVZX r16, m8
+, {{Type::R_16,Type::R_8}} // MOVZX r16, r8
+, {{Type::R_16,Type::RH}} // MOVZX r16, rh
+, {{Type::R_32,Type::M_16}} // MOVZX r32, m16
+, {{Type::R_32,Type::M_8}} // MOVZX r32, m8
+, {{Type::R_32,Type::R_16}} // MOVZX r32, r16
+, {{Type::R_32,Type::R_8}} // MOVZX r32, r8
+, {{Type::R_32,Type::RH}} // MOVZX r32, rh
+, {{Type::R_64,Type::M_16}} // MOVZX r64, m16
+, {{Type::R_64,Type::M_8}} // MOVZX r64, m8
+, {{Type::R_64,Type::R_16}} // MOVZX r64, r16
+, {{Type::R_64,Type::R_8}} // MOVZX r64, r8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // MPSADBW xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // MPSADBW xmm, xmm, imm8
+, {{Type::M_16}} // MUL m16
+, {{Type::M_32}} // MUL m32
+, {{Type::M_64}} // MUL m64
+, {{Type::M_8}} // MUL m8
+, {{Type::R_16}} // MUL r16
+, {{Type::R_32}} // MUL r32
+, {{Type::R_64}} // MUL r64
+, {{Type::R_8}} // MUL r8
+, {{Type::RH}} // MUL rh
+, {{Type::XMM,Type::M_128}} // MULPD xmm, m128
+, {{Type::XMM,Type::XMM}} // MULPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // MULPS xmm, m128
+, {{Type::XMM,Type::XMM}} // MULPS xmm, xmm
+, {{Type::XMM,Type::M_64}} // MULSD xmm, m64
+, {{Type::XMM,Type::XMM}} // MULSD xmm, xmm
+, {{Type::XMM,Type::M_32}} // MULSS xmm, m32
+, {{Type::XMM,Type::XMM}} // MULSS xmm, xmm
+, {{Type::R_32,Type::R_32,Type::M_32}} // MULX r32, r32, m32
+, {{Type::R_32,Type::R_32,Type::R_32}} // MULX r32, r32, r32
+, {{Type::R_64,Type::R_64,Type::M_64}} // MULX r64, r64, m64
+, {{Type::R_64,Type::R_64,Type::R_64}} // MULX r64, r64, r64
+, {{}} // MWAIT 
+, {{Type::M_16}} // NEG m16
+, {{Type::M_32}} // NEG m32
+, {{Type::M_64}} // NEG m64
+, {{Type::M_8}} // NEG m8
+, {{Type::R_16}} // NEG r16
+, {{Type::R_32}} // NEG r32
+, {{Type::R_64}} // NEG r64
+, {{Type::R_8}} // NEG r8
+, {{Type::RH}} // NEG rh
+, {{}} // NOP 
+, {{Type::M_16}} // NOP m16
+, {{Type::M_32}} // NOP m32
+, {{Type::R_16}} // NOP r16
+, {{Type::R_32}} // NOP r32
+, {{Type::M_16}} // NOT m16
+, {{Type::M_32}} // NOT m32
+, {{Type::M_64}} // NOT m64
+, {{Type::M_8}} // NOT m8
+, {{Type::R_16}} // NOT r16
+, {{Type::R_32}} // NOT r32
+, {{Type::R_64}} // NOT r64
+, {{Type::R_8}} // NOT r8
+, {{Type::RH}} // NOT rh
+, {{Type::AL,Type::IMM_8}} // OR AL, imm8
+, {{Type::AX,Type::IMM_16}} // OR AX, imm16
+, {{Type::EAX,Type::IMM_32}} // OR EAX, imm32
+, {{Type::M_16,Type::IMM_16}} // OR m16, imm16
+, {{Type::M_16,Type::IMM_8}} // OR m16, imm8
+, {{Type::M_16,Type::R_16}} // OR m16, r16
+, {{Type::M_32,Type::IMM_32}} // OR m32, imm32
+, {{Type::M_32,Type::IMM_8}} // OR m32, imm8
+, {{Type::M_32,Type::R_32}} // OR m32, r32
+, {{Type::M_64,Type::IMM_32}} // OR m64, imm32
+, {{Type::M_64,Type::IMM_8}} // OR m64, imm8
+, {{Type::M_64,Type::R_64}} // OR m64, r64
+, {{Type::M_8,Type::IMM_8}} // OR m8, imm8
+, {{Type::M_8,Type::R_8}} // OR m8, r8
+, {{Type::M_8,Type::RH}} // OR m8, rh
+, {{Type::R_16,Type::IMM_16}} // OR r16, imm16
+, {{Type::R_16,Type::IMM_8}} // OR r16, imm8
+, {{Type::R_16,Type::M_16}} // OR r16, m16
+, {{Type::R_16,Type::R_16}} // OR r16, r16
+, {{Type::R_16,Type::R_16}} // OR r16, r16
+, {{Type::R_32,Type::IMM_32}} // OR r32, imm32
+, {{Type::R_32,Type::IMM_8}} // OR r32, imm8
+, {{Type::R_32,Type::M_32}} // OR r32, m32
+, {{Type::R_32,Type::R_32}} // OR r32, r32
+, {{Type::R_32,Type::R_32}} // OR r32, r32
+, {{Type::R_64,Type::IMM_32}} // OR r64, imm32
+, {{Type::R_64,Type::IMM_8}} // OR r64, imm8
+, {{Type::R_64,Type::M_64}} // OR r64, m64
+, {{Type::R_64,Type::R_64}} // OR r64, r64
+, {{Type::R_64,Type::R_64}} // OR r64, r64
+, {{Type::R_8,Type::IMM_8}} // OR r8, imm8
+, {{Type::R_8,Type::M_8}} // OR r8, m8
+, {{Type::R_8,Type::R_8}} // OR r8, r8
+, {{Type::R_8,Type::R_8}} // OR r8, r8
+, {{Type::R_8,Type::RH}} // OR r8, rh
+, {{Type::R_8,Type::RH}} // OR r8, rh
+, {{Type::RAX,Type::IMM_32}} // OR RAX, imm32
+, {{Type::RH,Type::IMM_8}} // OR rh, imm8
+, {{Type::RH,Type::M_8}} // OR rh, m8
+, {{Type::RH,Type::R_8}} // OR rh, r8
+, {{Type::RH,Type::R_8}} // OR rh, r8
+, {{Type::RH,Type::RH}} // OR rh, rh
+, {{Type::RH,Type::RH}} // OR rh, rh
+, {{Type::XMM,Type::M_128}} // ORPD xmm, m128
+, {{Type::XMM,Type::XMM}} // ORPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // ORPS xmm, m128
+, {{Type::XMM,Type::XMM}} // ORPS xmm, xmm
+, {{Type::DX,Type::AL}} // OUT DX, AL
+, {{Type::DX,Type::AX}} // OUT DX, AX
+, {{Type::DX,Type::EAX}} // OUT DX, EAX
+, {{Type::IMM_8,Type::AL}} // OUT imm8, AL
+, {{Type::IMM_8,Type::AX}} // OUT imm8, AX
+, {{Type::IMM_8,Type::EAX}} // OUT imm8, EAX
+, {{Type::DX,Type::M_16}} // OUTS DX, m16
+, {{Type::DX,Type::M_32}} // OUTS DX, m32
+, {{Type::DX,Type::M_8}} // OUTS DX, m8
+, {{}} // OUTSB 
+, {{}} // OUTSD 
+, {{}} // OUTSW 
+, {{Type::MM,Type::M_64}} // PABSB mm, m64
+, {{Type::MM,Type::MM}} // PABSB mm, mm
+, {{Type::XMM,Type::M_128}} // PABSB xmm, m128
+, {{Type::XMM,Type::XMM}} // PABSB xmm, xmm
+, {{Type::MM,Type::M_64}} // PABSD mm, m64
+, {{Type::MM,Type::MM}} // PABSD mm, mm
+, {{Type::XMM,Type::M_128}} // PABSD xmm, m128
+, {{Type::XMM,Type::XMM}} // PABSD xmm, xmm
+, {{Type::MM,Type::M_64}} // PABSW mm, m64
+, {{Type::MM,Type::MM}} // PABSW mm, mm
+, {{Type::XMM,Type::M_128}} // PABSW xmm, m128
+, {{Type::XMM,Type::XMM}} // PABSW xmm, xmm
+, {{Type::MM,Type::M_64}} // PACKSSDW mm, m64
+, {{Type::MM,Type::MM}} // PACKSSDW mm, mm
+, {{Type::XMM,Type::M_128}} // PACKSSDW xmm, m128
+, {{Type::XMM,Type::XMM}} // PACKSSDW xmm, xmm
+, {{Type::MM,Type::M_64}} // PACKSSWB mm, m64
+, {{Type::MM,Type::MM}} // PACKSSWB mm, mm
+, {{Type::XMM,Type::M_128}} // PACKSSWB xmm, m128
+, {{Type::XMM,Type::XMM}} // PACKSSWB xmm, xmm
+, {{Type::XMM,Type::M_128}} // PACKUSDW xmm, m128
+, {{Type::XMM,Type::XMM}} // PACKUSDW xmm, xmm
+, {{Type::MM,Type::M_64}} // PACKUSWB mm, m64
+, {{Type::MM,Type::MM}} // PACKUSWB mm, mm
+, {{Type::XMM,Type::M_128}} // PACKUSWB xmm, m128
+, {{Type::XMM,Type::XMM}} // PACKUSWB xmm, xmm
+, {{Type::MM,Type::M_64}} // PADDB mm, m64
+, {{Type::MM,Type::MM}} // PADDB mm, mm
+, {{Type::XMM,Type::M_128}} // PADDB xmm, m128
+, {{Type::XMM,Type::XMM}} // PADDB xmm, xmm
+, {{Type::MM,Type::M_64}} // PADDD mm, m64
+, {{Type::MM,Type::MM}} // PADDD mm, mm
+, {{Type::XMM,Type::M_128}} // PADDD xmm, m128
+, {{Type::XMM,Type::XMM}} // PADDD xmm, xmm
+, {{Type::MM,Type::M_64}} // PADDQ mm, m64
+, {{Type::MM,Type::MM}} // PADDQ mm, mm
+, {{Type::XMM,Type::M_128}} // PADDQ xmm, m128
+, {{Type::XMM,Type::XMM}} // PADDQ xmm, xmm
+, {{Type::MM,Type::M_64}} // PADDSB mm, m64
+, {{Type::MM,Type::MM}} // PADDSB mm, mm
+, {{Type::XMM,Type::M_128}} // PADDSB xmm, m128
+, {{Type::XMM,Type::XMM}} // PADDSB xmm, xmm
+, {{Type::MM,Type::M_64}} // PADDSW mm, m64
+, {{Type::MM,Type::MM}} // PADDSW mm, mm
+, {{Type::XMM,Type::M_128}} // PADDSW xmm, m128
+, {{Type::XMM,Type::XMM}} // PADDSW xmm, xmm
+, {{Type::MM,Type::M_64}} // PADDUSB mm, m64
+, {{Type::MM,Type::MM}} // PADDUSB mm, mm
+, {{Type::XMM,Type::M_128}} // PADDUSB xmm, m128
+, {{Type::XMM,Type::XMM}} // PADDUSB xmm, xmm
+, {{Type::MM,Type::M_64}} // PADDUSW mm, m64
+, {{Type::MM,Type::MM}} // PADDUSW mm, mm
+, {{Type::XMM,Type::M_128}} // PADDUSW xmm, m128
+, {{Type::XMM,Type::XMM}} // PADDUSW xmm, xmm
+, {{Type::MM,Type::M_64}} // PADDW mm, m64
+, {{Type::MM,Type::MM}} // PADDW mm, mm
+, {{Type::XMM,Type::M_128}} // PADDW xmm, m128
+, {{Type::XMM,Type::XMM}} // PADDW xmm, xmm
+, {{Type::MM,Type::M_64,Type::IMM_8}} // PALIGNR mm, m64, imm8
+, {{Type::MM,Type::MM,Type::IMM_8}} // PALIGNR mm, mm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // PALIGNR xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // PALIGNR xmm, xmm, imm8
+, {{Type::MM,Type::M_64}} // PAND mm, m64
+, {{Type::MM,Type::MM}} // PAND mm, mm
+, {{Type::XMM,Type::M_128}} // PAND xmm, m128
+, {{Type::XMM,Type::XMM}} // PAND xmm, xmm
+, {{Type::MM,Type::M_64}} // PANDN mm, m64
+, {{Type::MM,Type::MM}} // PANDN mm, mm
+, {{Type::XMM,Type::M_128}} // PANDN xmm, m128
+, {{Type::XMM,Type::XMM}} // PANDN xmm, xmm
+, {{}} // PAUSE 
+, {{Type::MM,Type::M_64}} // PAVGB mm, m64
+, {{Type::MM,Type::MM}} // PAVGB mm, mm
+, {{Type::XMM,Type::M_128}} // PAVGB xmm, m128
+, {{Type::XMM,Type::XMM}} // PAVGB xmm, xmm
+, {{Type::MM,Type::M_64}} // PAVGW mm, m64
+, {{Type::MM,Type::MM}} // PAVGW mm, mm
+, {{Type::XMM,Type::M_128}} // PAVGW xmm, m128
+, {{Type::XMM,Type::XMM}} // PAVGW xmm, xmm
+, {{Type::XMM,Type::M_128,Type::XMM_0}} // PBLENDVB xmm, m128, <XMM0>
+, {{Type::XMM,Type::XMM,Type::XMM_0}} // PBLENDVB xmm, xmm, <XMM0>
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // PBLENDW xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // PBLENDW xmm, xmm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // PCLMULQDQ xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // PCLMULQDQ xmm, xmm, imm8
+, {{Type::MM,Type::M_64}} // PCMPEQB mm, m64
+, {{Type::MM,Type::MM}} // PCMPEQB mm, mm
+, {{Type::XMM,Type::M_128}} // PCMPEQB xmm, m128
+, {{Type::XMM,Type::XMM}} // PCMPEQB xmm, xmm
+, {{Type::MM,Type::M_64}} // PCMPEQD mm, m64
+, {{Type::MM,Type::MM}} // PCMPEQD mm, mm
+, {{Type::XMM,Type::M_128}} // PCMPEQD xmm, m128
+, {{Type::XMM,Type::XMM}} // PCMPEQD xmm, xmm
+, {{Type::XMM,Type::M_128}} // PCMPEQQ xmm, m128
+, {{Type::XMM,Type::XMM}} // PCMPEQQ xmm, xmm
+, {{Type::MM,Type::M_64}} // PCMPEQW mm, m64
+, {{Type::MM,Type::MM}} // PCMPEQW mm, mm
+, {{Type::XMM,Type::M_128}} // PCMPEQW xmm, m128
+, {{Type::XMM,Type::XMM}} // PCMPEQW xmm, xmm
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // PCMPESTRI xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // PCMPESTRI xmm, xmm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // PCMPESTRM xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // PCMPESTRM xmm, xmm, imm8
+, {{Type::MM,Type::M_64}} // PCMPGTB mm, m64
+, {{Type::MM,Type::MM}} // PCMPGTB mm, mm
+, {{Type::XMM,Type::M_128}} // PCMPGTB xmm, m128
+, {{Type::XMM,Type::XMM}} // PCMPGTB xmm, xmm
+, {{Type::MM,Type::M_64}} // PCMPGTD mm, m64
+, {{Type::MM,Type::MM}} // PCMPGTD mm, mm
+, {{Type::XMM,Type::M_128}} // PCMPGTD xmm, m128
+, {{Type::XMM,Type::XMM}} // PCMPGTD xmm, xmm
+, {{Type::XMM,Type::M_128}} // PCMPGTQ xmm, m128
+, {{Type::XMM,Type::XMM}} // PCMPGTQ xmm, xmm
+, {{Type::MM,Type::M_64}} // PCMPGTW mm, m64
+, {{Type::MM,Type::MM}} // PCMPGTW mm, mm
+, {{Type::XMM,Type::M_128}} // PCMPGTW xmm, m128
+, {{Type::XMM,Type::XMM}} // PCMPGTW xmm, xmm
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // PCMPISTRI xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // PCMPISTRI xmm, xmm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // PCMPISTRM xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // PCMPISTRM xmm, xmm, imm8
+, {{Type::R_32,Type::R_32,Type::M_32}} // PDEP r32, r32, m32
+, {{Type::R_32,Type::R_32,Type::R_32}} // PDEP r32, r32, r32
+, {{Type::R_64,Type::R_64,Type::M_64}} // PDEP r64, r64, m64
+, {{Type::R_64,Type::R_64,Type::R_64}} // PDEP r64, r64, r64
+, {{Type::R_32,Type::R_32,Type::M_32}} // PEXT r32, r32, m32
+, {{Type::R_32,Type::R_32,Type::R_32}} // PEXT r32, r32, r32
+, {{Type::R_64,Type::R_64,Type::M_64}} // PEXT r64, r64, m64
+, {{Type::R_64,Type::R_64,Type::R_64}} // PEXT r64, r64, r64
+, {{Type::M_8,Type::XMM,Type::IMM_8}} // PEXTRB m8, xmm, imm8
+, {{Type::R_32,Type::XMM,Type::IMM_8}} // PEXTRB r32, xmm, imm8
+, {{Type::R_64,Type::XMM,Type::IMM_8}} // PEXTRB r64, xmm, imm8
+, {{Type::M_32,Type::XMM,Type::IMM_8}} // PEXTRD m32, xmm, imm8
+, {{Type::R_32,Type::XMM,Type::IMM_8}} // PEXTRD r32, xmm, imm8
+, {{Type::M_64,Type::XMM,Type::IMM_8}} // PEXTRQ m64, xmm, imm8
+, {{Type::R_64,Type::XMM,Type::IMM_8}} // PEXTRQ r64, xmm, imm8
+, {{Type::M_16,Type::XMM,Type::IMM_8}} // PEXTRW m16, xmm, imm8
+, {{Type::R_32,Type::MM,Type::IMM_8}} // PEXTRW r32, mm, imm8
+, {{Type::R_32,Type::XMM,Type::IMM_8}} // PEXTRW r32, xmm, imm8
+, {{Type::R_32,Type::XMM,Type::IMM_8}} // PEXTRW r32, xmm, imm8
+, {{Type::R_64,Type::MM,Type::IMM_8}} // PEXTRW r64, mm, imm8
+, {{Type::R_64,Type::XMM,Type::IMM_8}} // PEXTRW r64, xmm, imm8
+, {{Type::R_64,Type::XMM,Type::IMM_8}} // PEXTRW r64, xmm, imm8
+, {{Type::MM,Type::M_64}} // PHADDD mm, m64
+, {{Type::MM,Type::MM}} // PHADDD mm, mm
+, {{Type::XMM,Type::M_128}} // PHADDD xmm, m128
+, {{Type::XMM,Type::XMM}} // PHADDD xmm, xmm
+, {{Type::MM,Type::M_64}} // PHADDSW mm, m64
+, {{Type::MM,Type::MM}} // PHADDSW mm, mm
+, {{Type::XMM,Type::M_128}} // PHADDSW xmm, m128
+, {{Type::XMM,Type::XMM}} // PHADDSW xmm, xmm
+, {{Type::MM,Type::M_64}} // PHADDW mm, m64
+, {{Type::MM,Type::MM}} // PHADDW mm, mm
+, {{Type::XMM,Type::M_128}} // PHADDW xmm, m128
+, {{Type::XMM,Type::XMM}} // PHADDW xmm, xmm
+, {{Type::XMM,Type::M_128}} // PHMINPOSUW xmm, m128
+, {{Type::XMM,Type::XMM}} // PHMINPOSUW xmm, xmm
+, {{Type::MM,Type::M_64}} // PHSUBD mm, m64
+, {{Type::MM,Type::MM}} // PHSUBD mm, mm
+, {{Type::XMM,Type::M_128}} // PHSUBD xmm, m128
+, {{Type::XMM,Type::XMM}} // PHSUBD xmm, xmm
+, {{Type::MM,Type::M_64}} // PHSUBSW mm, m64
+, {{Type::MM,Type::MM}} // PHSUBSW mm, mm
+, {{Type::XMM,Type::M_128}} // PHSUBSW xmm, m128
+, {{Type::XMM,Type::XMM}} // PHSUBSW xmm, xmm
+, {{Type::MM,Type::M_64}} // PHSUBW mm, m64
+, {{Type::MM,Type::MM}} // PHSUBW mm, mm
+, {{Type::XMM,Type::M_128}} // PHSUBW xmm, m128
+, {{Type::XMM,Type::XMM}} // PHSUBW xmm, xmm
+, {{Type::XMM,Type::M_8,Type::IMM_8}} // PINSRB xmm, m8, imm8
+, {{Type::XMM,Type::R_32,Type::IMM_8}} // PINSRB xmm, r32, imm8
+, {{Type::XMM,Type::M_32,Type::IMM_8}} // PINSRD xmm, m32, imm8
+, {{Type::XMM,Type::R_32,Type::IMM_8}} // PINSRD xmm, r32, imm8
+, {{Type::MM,Type::M_16,Type::IMM_8}} // PINSRW mm, m16, imm8
+, {{Type::MM,Type::R_32,Type::IMM_8}} // PINSRW mm, r32, imm8
+, {{Type::XMM,Type::M_16,Type::IMM_8}} // PINSRW xmm, m16, imm8
+, {{Type::XMM,Type::R_32,Type::IMM_8}} // PINSRW xmm, r32, imm8
+, {{Type::MM,Type::M_64}} // PMADDUBSW mm, m64
+, {{Type::MM,Type::MM}} // PMADDUBSW mm, mm
+, {{Type::XMM,Type::M_128}} // PMADDUBSW xmm, m128
+, {{Type::XMM,Type::XMM}} // PMADDUBSW xmm, xmm
+, {{Type::MM,Type::M_64}} // PMADDWD mm, m64
+, {{Type::MM,Type::MM}} // PMADDWD mm, mm
+, {{Type::XMM,Type::M_128}} // PMADDWD xmm, m128
+, {{Type::XMM,Type::XMM}} // PMADDWD xmm, xmm
+, {{Type::XMM,Type::M_128}} // PMAXSB xmm, m128
+, {{Type::XMM,Type::XMM}} // PMAXSB xmm, xmm
+, {{Type::XMM,Type::M_128}} // PMAXSD xmm, m128
+, {{Type::XMM,Type::XMM}} // PMAXSD xmm, xmm
+, {{Type::MM,Type::M_64}} // PMAXSW mm, m64
+, {{Type::MM,Type::MM}} // PMAXSW mm, mm
+, {{Type::XMM,Type::M_128}} // PMAXSW xmm, m128
+, {{Type::XMM,Type::XMM}} // PMAXSW xmm, xmm
+, {{Type::MM,Type::M_64}} // PMAXUB mm, m64
+, {{Type::MM,Type::MM}} // PMAXUB mm, mm
+, {{Type::XMM,Type::M_128}} // PMAXUB xmm, m128
+, {{Type::XMM,Type::XMM}} // PMAXUB xmm, xmm
+, {{Type::XMM,Type::M_128}} // PMAXUD xmm, m128
+, {{Type::XMM,Type::XMM}} // PMAXUD xmm, xmm
+, {{Type::XMM,Type::M_128}} // PMAXUW xmm, m128
+, {{Type::XMM,Type::XMM}} // PMAXUW xmm, xmm
+, {{Type::XMM,Type::M_128}} // PMINSB xmm, m128
+, {{Type::XMM,Type::XMM}} // PMINSB xmm, xmm
+, {{Type::XMM,Type::M_128}} // PMINSD xmm, m128
+, {{Type::XMM,Type::XMM}} // PMINSD xmm, xmm
+, {{Type::MM,Type::M_64}} // PMINSW mm, m64
+, {{Type::MM,Type::MM}} // PMINSW mm, mm
+, {{Type::XMM,Type::M_128}} // PMINSW xmm, m128
+, {{Type::XMM,Type::XMM}} // PMINSW xmm, xmm
+, {{Type::MM,Type::M_64}} // PMINUB mm, m64
+, {{Type::MM,Type::MM}} // PMINUB mm, mm
+, {{Type::XMM,Type::M_128}} // PMINUB xmm, m128
+, {{Type::XMM,Type::XMM}} // PMINUB xmm, xmm
+, {{Type::XMM,Type::M_128}} // PMINUD xmm, m128
+, {{Type::XMM,Type::XMM}} // PMINUD xmm, xmm
+, {{Type::XMM,Type::M_128}} // PMINUW xmm, m128
+, {{Type::XMM,Type::XMM}} // PMINUW xmm, xmm
+, {{Type::R_32,Type::MM}} // PMOVMSKB r32, mm
+, {{Type::R_32,Type::XMM}} // PMOVMSKB r32, xmm
+, {{Type::R_64,Type::MM}} // PMOVMSKB r64, mm
+, {{Type::R_64,Type::XMM}} // PMOVMSKB r64, xmm
+, {{Type::XMM,Type::M_32}} // PMOVSXBD xmm, m32
+, {{Type::XMM,Type::XMM}} // PMOVSXBD xmm, xmm
+, {{Type::XMM,Type::M_16}} // PMOVSXBQ xmm, m16
+, {{Type::XMM,Type::XMM}} // PMOVSXBQ xmm, xmm
+, {{Type::XMM,Type::M_64}} // PMOVSXBW xmm, m64
+, {{Type::XMM,Type::XMM}} // PMOVSXBW xmm, xmm
+, {{Type::XMM,Type::M_64}} // PMOVSXDQ xmm, m64
+, {{Type::XMM,Type::XMM}} // PMOVSXDQ xmm, xmm
+, {{Type::XMM,Type::M_64}} // PMOVSXWD xmm, m64
+, {{Type::XMM,Type::XMM}} // PMOVSXWD xmm, xmm
+, {{Type::XMM,Type::M_32}} // PMOVSXWQ xmm, m32
+, {{Type::XMM,Type::XMM}} // PMOVSXWQ xmm, xmm
+, {{Type::XMM,Type::M_32}} // PMOVZXBD xmm, m32
+, {{Type::XMM,Type::XMM}} // PMOVZXBD xmm, xmm
+, {{Type::XMM,Type::M_16}} // PMOVZXBQ xmm, m16
+, {{Type::XMM,Type::XMM}} // PMOVZXBQ xmm, xmm
+, {{Type::XMM,Type::M_64}} // PMOVZXBW xmm, m64
+, {{Type::XMM,Type::XMM}} // PMOVZXBW xmm, xmm
+, {{Type::XMM,Type::M_64}} // PMOVZXDQ xmm, m64
+, {{Type::XMM,Type::XMM}} // PMOVZXDQ xmm, xmm
+, {{Type::XMM,Type::M_64}} // PMOVZXWD xmm, m64
+, {{Type::XMM,Type::XMM}} // PMOVZXWD xmm, xmm
+, {{Type::XMM,Type::M_32}} // PMOVZXWQ xmm, m32
+, {{Type::XMM,Type::XMM}} // PMOVZXWQ xmm, xmm
+, {{Type::XMM,Type::M_128}} // PMULDQ xmm, m128
+, {{Type::XMM,Type::XMM}} // PMULDQ xmm, xmm
+, {{Type::MM,Type::M_64}} // PMULHRSW mm, m64
+, {{Type::MM,Type::MM}} // PMULHRSW mm, mm
+, {{Type::XMM,Type::M_128}} // PMULHRSW xmm, m128
+, {{Type::XMM,Type::XMM}} // PMULHRSW xmm, xmm
+, {{Type::MM,Type::M_64}} // PMULHUW mm, m64
+, {{Type::MM,Type::MM}} // PMULHUW mm, mm
+, {{Type::XMM,Type::M_128}} // PMULHUW xmm, m128
+, {{Type::XMM,Type::XMM}} // PMULHUW xmm, xmm
+, {{Type::MM,Type::M_64}} // PMULHW mm, m64
+, {{Type::MM,Type::MM}} // PMULHW mm, mm
+, {{Type::XMM,Type::M_128}} // PMULHW xmm, m128
+, {{Type::XMM,Type::XMM}} // PMULHW xmm, xmm
+, {{Type::XMM,Type::M_128}} // PMULLD xmm, m128
+, {{Type::XMM,Type::XMM}} // PMULLD xmm, xmm
+, {{Type::MM,Type::M_64}} // PMULLW mm, m64
+, {{Type::MM,Type::MM}} // PMULLW mm, mm
+, {{Type::XMM,Type::M_128}} // PMULLW xmm, m128
+, {{Type::XMM,Type::XMM}} // PMULLW xmm, xmm
+, {{Type::MM,Type::M_64}} // PMULUDQ mm, m64
+, {{Type::MM,Type::MM}} // PMULUDQ mm, mm
+, {{Type::XMM,Type::M_128}} // PMULUDQ xmm, m128
+, {{Type::XMM,Type::XMM}} // PMULUDQ xmm, xmm
+, {{Type::FS}} // POP FS
+, {{Type::FS,Type::PREF_66}} // POP FS, p66
+, {{Type::GS}} // POP GS
+, {{Type::GS,Type::PREF_66}} // POP GS, p66
+, {{Type::M_16}} // POP m16
+, {{Type::M_64}} // POP m64
+, {{Type::R_16}} // POP r16
+, {{Type::R_16}} // POP r16
+, {{Type::R_64}} // POP r64
+, {{Type::R_64}} // POP r64
+, {{Type::R_16,Type::M_16}} // POPCNT r16, m16
+, {{Type::R_16,Type::R_16}} // POPCNT r16, r16
+, {{Type::R_32,Type::M_32}} // POPCNT r32, m32
+, {{Type::R_32,Type::R_32}} // POPCNT r32, r32
+, {{Type::R_64,Type::M_64}} // POPCNT r64, m64
+, {{Type::R_64,Type::R_64}} // POPCNT r64, r64
+, {{}} // POPF 
+, {{}} // POPFQ 
+, {{Type::MM,Type::M_64}} // POR mm, m64
+, {{Type::MM,Type::MM}} // POR mm, mm
+, {{Type::XMM,Type::M_128}} // POR xmm, m128
+, {{Type::XMM,Type::XMM}} // POR xmm, xmm
+, {{Type::M_8}} // PREFETCHNTA m8
+, {{Type::M_8}} // PREFETCHT0 m8
+, {{Type::M_8}} // PREFETCHT1 m8
+, {{Type::M_8}} // PREFETCHT2 m8
+, {{Type::MM,Type::M_64}} // PSADBW mm, m64
+, {{Type::MM,Type::MM}} // PSADBW mm, mm
+, {{Type::XMM,Type::M_128}} // PSADBW xmm, m128
+, {{Type::XMM,Type::XMM}} // PSADBW xmm, xmm
+, {{Type::MM,Type::M_64}} // PSHUFB mm, m64
+, {{Type::MM,Type::MM}} // PSHUFB mm, mm
+, {{Type::XMM,Type::M_128}} // PSHUFB xmm, m128
+, {{Type::XMM,Type::XMM}} // PSHUFB xmm, xmm
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // PSHUFD xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // PSHUFD xmm, xmm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // PSHUFHW xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // PSHUFHW xmm, xmm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // PSHUFLW xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // PSHUFLW xmm, xmm, imm8
+, {{Type::MM,Type::M_64,Type::IMM_8}} // PSHUFW mm, m64, imm8
+, {{Type::MM,Type::MM,Type::IMM_8}} // PSHUFW mm, mm, imm8
+, {{Type::MM,Type::M_64}} // PSIGNB mm, m64
+, {{Type::MM,Type::MM}} // PSIGNB mm, mm
+, {{Type::XMM,Type::M_128}} // PSIGNB xmm, m128
+, {{Type::XMM,Type::XMM}} // PSIGNB xmm, xmm
+, {{Type::MM,Type::M_64}} // PSIGND mm, m64
+, {{Type::MM,Type::MM}} // PSIGND mm, mm
+, {{Type::XMM,Type::M_128}} // PSIGND xmm, m128
+, {{Type::XMM,Type::XMM}} // PSIGND xmm, xmm
+, {{Type::MM,Type::M_64}} // PSIGNW mm, m64
+, {{Type::MM,Type::MM}} // PSIGNW mm, mm
+, {{Type::XMM,Type::M_128}} // PSIGNW xmm, m128
+, {{Type::XMM,Type::XMM}} // PSIGNW xmm, xmm
+, {{Type::MM,Type::IMM_8}} // PSLLD mm, imm8
+, {{Type::MM,Type::M_64}} // PSLLD mm, m64
+, {{Type::MM,Type::MM}} // PSLLD mm, mm
+, {{Type::XMM,Type::IMM_8}} // PSLLD xmm, imm8
+, {{Type::XMM,Type::M_128}} // PSLLD xmm, m128
+, {{Type::XMM,Type::XMM}} // PSLLD xmm, xmm
+, {{Type::XMM,Type::IMM_8}} // PSLLDQ xmm, imm8
+, {{Type::MM,Type::IMM_8}} // PSLLQ mm, imm8
+, {{Type::MM,Type::M_64}} // PSLLQ mm, m64
+, {{Type::MM,Type::MM}} // PSLLQ mm, mm
+, {{Type::XMM,Type::IMM_8}} // PSLLQ xmm, imm8
+, {{Type::XMM,Type::M_128}} // PSLLQ xmm, m128
+, {{Type::XMM,Type::XMM}} // PSLLQ xmm, xmm
+, {{Type::MM,Type::IMM_8}} // PSLLW mm, imm8
+, {{Type::MM,Type::M_64}} // PSLLW mm, m64
+, {{Type::MM,Type::MM}} // PSLLW mm, mm
+, {{Type::XMM,Type::IMM_8}} // PSLLW xmm, imm8
+, {{Type::XMM,Type::M_128}} // PSLLW xmm, m128
+, {{Type::XMM,Type::XMM}} // PSLLW xmm, xmm
+, {{Type::MM,Type::IMM_8}} // PSRAD mm, imm8
+, {{Type::MM,Type::M_64}} // PSRAD mm, m64
+, {{Type::MM,Type::MM}} // PSRAD mm, mm
+, {{Type::XMM,Type::IMM_8}} // PSRAD xmm, imm8
+, {{Type::XMM,Type::M_128}} // PSRAD xmm, m128
+, {{Type::XMM,Type::XMM}} // PSRAD xmm, xmm
+, {{Type::MM,Type::IMM_8}} // PSRAW mm, imm8
+, {{Type::MM,Type::M_64}} // PSRAW mm, m64
+, {{Type::MM,Type::MM}} // PSRAW mm, mm
+, {{Type::XMM,Type::IMM_8}} // PSRAW xmm, imm8
+, {{Type::XMM,Type::M_128}} // PSRAW xmm, m128
+, {{Type::XMM,Type::XMM}} // PSRAW xmm, xmm
+, {{Type::MM,Type::IMM_8}} // PSRLD mm, imm8
+, {{Type::MM,Type::M_64}} // PSRLD mm, m64
+, {{Type::MM,Type::MM}} // PSRLD mm, mm
+, {{Type::XMM,Type::IMM_8}} // PSRLD xmm, imm8
+, {{Type::XMM,Type::M_128}} // PSRLD xmm, m128
+, {{Type::XMM,Type::XMM}} // PSRLD xmm, xmm
+, {{Type::XMM,Type::IMM_8}} // PSRLDQ xmm, imm8
+, {{Type::MM,Type::IMM_8}} // PSRLQ mm, imm8
+, {{Type::MM,Type::M_64}} // PSRLQ mm, m64
+, {{Type::MM,Type::MM}} // PSRLQ mm, mm
+, {{Type::XMM,Type::IMM_8}} // PSRLQ xmm, imm8
+, {{Type::XMM,Type::M_128}} // PSRLQ xmm, m128
+, {{Type::XMM,Type::XMM}} // PSRLQ xmm, xmm
+, {{Type::MM,Type::IMM_8}} // PSRLW mm, imm8
+, {{Type::MM,Type::M_64}} // PSRLW mm, m64
+, {{Type::MM,Type::MM}} // PSRLW mm, mm
+, {{Type::XMM,Type::IMM_8}} // PSRLW xmm, imm8
+, {{Type::XMM,Type::M_128}} // PSRLW xmm, m128
+, {{Type::XMM,Type::XMM}} // PSRLW xmm, xmm
+, {{Type::MM,Type::M_64}} // PSUBB mm, m64
+, {{Type::MM,Type::MM}} // PSUBB mm, mm
+, {{Type::XMM,Type::M_128}} // PSUBB xmm, m128
+, {{Type::XMM,Type::XMM}} // PSUBB xmm, xmm
+, {{Type::MM,Type::M_64}} // PSUBD mm, m64
+, {{Type::MM,Type::MM}} // PSUBD mm, mm
+, {{Type::XMM,Type::M_128}} // PSUBD xmm, m128
+, {{Type::XMM,Type::XMM}} // PSUBD xmm, xmm
+, {{Type::MM,Type::M_64}} // PSUBQ mm, m64
+, {{Type::MM,Type::MM}} // PSUBQ mm, mm
+, {{Type::XMM,Type::M_128}} // PSUBQ xmm, m128
+, {{Type::XMM,Type::XMM}} // PSUBQ xmm, xmm
+, {{Type::MM,Type::M_64}} // PSUBSB mm, m64
+, {{Type::MM,Type::MM}} // PSUBSB mm, mm
+, {{Type::XMM,Type::M_128}} // PSUBSB xmm, m128
+, {{Type::XMM,Type::XMM}} // PSUBSB xmm, xmm
+, {{Type::MM,Type::M_64}} // PSUBSW mm, m64
+, {{Type::MM,Type::MM}} // PSUBSW mm, mm
+, {{Type::XMM,Type::M_128}} // PSUBSW xmm, m128
+, {{Type::XMM,Type::XMM}} // PSUBSW xmm, xmm
+, {{Type::MM,Type::M_64}} // PSUBUSB mm, m64
+, {{Type::MM,Type::MM}} // PSUBUSB mm, mm
+, {{Type::XMM,Type::M_128}} // PSUBUSB xmm, m128
+, {{Type::XMM,Type::XMM}} // PSUBUSB xmm, xmm
+, {{Type::MM,Type::M_64}} // PSUBUSW mm, m64
+, {{Type::MM,Type::MM}} // PSUBUSW mm, mm
+, {{Type::XMM,Type::M_128}} // PSUBUSW xmm, m128
+, {{Type::XMM,Type::XMM}} // PSUBUSW xmm, xmm
+, {{Type::MM,Type::M_64}} // PSUBW mm, m64
+, {{Type::MM,Type::MM}} // PSUBW mm, mm
+, {{Type::XMM,Type::M_128}} // PSUBW xmm, m128
+, {{Type::XMM,Type::XMM}} // PSUBW xmm, xmm
+, {{Type::XMM,Type::M_128}} // PTEST xmm, m128
+, {{Type::XMM,Type::XMM}} // PTEST xmm, xmm
+, {{Type::MM,Type::M_64}} // PUNPCKHBW mm, m64
+, {{Type::MM,Type::MM}} // PUNPCKHBW mm, mm
+, {{Type::XMM,Type::M_128}} // PUNPCKHBW xmm, m128
+, {{Type::XMM,Type::XMM}} // PUNPCKHBW xmm, xmm
+, {{Type::MM,Type::M_64}} // PUNPCKHDQ mm, m64
+, {{Type::MM,Type::MM}} // PUNPCKHDQ mm, mm
+, {{Type::XMM,Type::M_128}} // PUNPCKHDQ xmm, m128
+, {{Type::XMM,Type::XMM}} // PUNPCKHDQ xmm, xmm
+, {{Type::XMM,Type::M_128}} // PUNPCKHQDQ xmm, m128
+, {{Type::XMM,Type::XMM}} // PUNPCKHQDQ xmm, xmm
+, {{Type::MM,Type::M_64}} // PUNPCKHWD mm, m64
+, {{Type::MM,Type::MM}} // PUNPCKHWD mm, mm
+, {{Type::XMM,Type::M_128}} // PUNPCKHWD xmm, m128
+, {{Type::XMM,Type::XMM}} // PUNPCKHWD xmm, xmm
+, {{Type::MM,Type::M_32}} // PUNPCKLBW mm, m32
+, {{Type::MM,Type::MM}} // PUNPCKLBW mm, mm
+, {{Type::XMM,Type::M_128}} // PUNPCKLBW xmm, m128
+, {{Type::XMM,Type::XMM}} // PUNPCKLBW xmm, xmm
+, {{Type::MM,Type::M_32}} // PUNPCKLDQ mm, m32
+, {{Type::MM,Type::MM}} // PUNPCKLDQ mm, mm
+, {{Type::XMM,Type::M_128}} // PUNPCKLDQ xmm, m128
+, {{Type::XMM,Type::XMM}} // PUNPCKLDQ xmm, xmm
+, {{Type::XMM,Type::M_128}} // PUNPCKLQDQ xmm, m128
+, {{Type::XMM,Type::XMM}} // PUNPCKLQDQ xmm, xmm
+, {{Type::MM,Type::M_32}} // PUNPCKLWD mm, m32
+, {{Type::MM,Type::MM}} // PUNPCKLWD mm, mm
+, {{Type::XMM,Type::M_128}} // PUNPCKLWD xmm, m128
+, {{Type::XMM,Type::XMM}} // PUNPCKLWD xmm, xmm
+, {{Type::FS}} // PUSH FS
+, {{Type::GS}} // PUSH GS
+, {{Type::M_16}} // PUSH m16
+, {{Type::M_64}} // PUSH m64
+, {{Type::R_16}} // PUSH r16
+, {{Type::R_16}} // PUSH r16
+, {{Type::R_64}} // PUSH r64
+, {{Type::R_64}} // PUSH r64
+, {{}} // PUSHF 
+, {{}} // PUSHFQ 
+, {{Type::IMM_16}} // PUSHQ imm16
+, {{Type::IMM_32}} // PUSHQ imm32
+, {{Type::IMM_8}} // PUSHQ imm8
+, {{Type::IMM_16}} // PUSHW imm16
+, {{Type::IMM_8}} // PUSHW imm8
+, {{Type::MM,Type::M_64}} // PXOR mm, m64
+, {{Type::MM,Type::MM}} // PXOR mm, mm
+, {{Type::XMM,Type::M_128}} // PXOR xmm, m128
+, {{Type::XMM,Type::XMM}} // PXOR xmm, xmm
+, {{Type::M_16,Type::CL}} // RCL m16, CL
+, {{Type::M_16,Type::IMM_8}} // RCL m16, imm8
+, {{Type::M_16,Type::ONE}} // RCL m16, 1
+, {{Type::M_32,Type::CL}} // RCL m32, CL
+, {{Type::M_32,Type::IMM_8}} // RCL m32, imm8
+, {{Type::M_32,Type::ONE}} // RCL m32, 1
+, {{Type::M_64,Type::CL}} // RCL m64, CL
+, {{Type::M_64,Type::IMM_8}} // RCL m64, imm8
+, {{Type::M_64,Type::ONE}} // RCL m64, 1
+, {{Type::M_8,Type::CL}} // RCL m8, CL
+, {{Type::M_8,Type::IMM_8}} // RCL m8, imm8
+, {{Type::M_8,Type::ONE}} // RCL m8, 1
+, {{Type::R_16,Type::CL}} // RCL r16, CL
+, {{Type::R_16,Type::IMM_8}} // RCL r16, imm8
+, {{Type::R_16,Type::ONE}} // RCL r16, 1
+, {{Type::R_32,Type::CL}} // RCL r32, CL
+, {{Type::R_32,Type::IMM_8}} // RCL r32, imm8
+, {{Type::R_32,Type::ONE}} // RCL r32, 1
+, {{Type::R_64,Type::CL}} // RCL r64, CL
+, {{Type::R_64,Type::IMM_8}} // RCL r64, imm8
+, {{Type::R_64,Type::ONE}} // RCL r64, 1
+, {{Type::R_8,Type::CL}} // RCL r8, CL
+, {{Type::R_8,Type::IMM_8}} // RCL r8, imm8
+, {{Type::R_8,Type::ONE}} // RCL r8, 1
+, {{Type::RH,Type::CL}} // RCL rh, CL
+, {{Type::RH,Type::IMM_8}} // RCL rh, imm8
+, {{Type::RH,Type::ONE}} // RCL rh, 1
+, {{Type::XMM,Type::M_128}} // RCPPS xmm, m128
+, {{Type::XMM,Type::XMM}} // RCPPS xmm, xmm
+, {{Type::XMM,Type::M_32}} // RCPSS xmm, m32
+, {{Type::XMM,Type::XMM}} // RCPSS xmm, xmm
+, {{Type::M_16,Type::CL}} // RCR m16, CL
+, {{Type::M_16,Type::IMM_8}} // RCR m16, imm8
+, {{Type::M_16,Type::ONE}} // RCR m16, 1
+, {{Type::M_32,Type::CL}} // RCR m32, CL
+, {{Type::M_32,Type::IMM_8}} // RCR m32, imm8
+, {{Type::M_32,Type::ONE}} // RCR m32, 1
+, {{Type::M_64,Type::CL}} // RCR m64, CL
+, {{Type::M_64,Type::IMM_8}} // RCR m64, imm8
+, {{Type::M_64,Type::ONE}} // RCR m64, 1
+, {{Type::M_8,Type::CL}} // RCR m8, CL
+, {{Type::M_8,Type::IMM_8}} // RCR m8, imm8
+, {{Type::M_8,Type::ONE}} // RCR m8, 1
+, {{Type::R_16,Type::CL}} // RCR r16, CL
+, {{Type::R_16,Type::IMM_8}} // RCR r16, imm8
+, {{Type::R_16,Type::ONE}} // RCR r16, 1
+, {{Type::R_32,Type::CL}} // RCR r32, CL
+, {{Type::R_32,Type::IMM_8}} // RCR r32, imm8
+, {{Type::R_32,Type::ONE}} // RCR r32, 1
+, {{Type::R_64,Type::CL}} // RCR r64, CL
+, {{Type::R_64,Type::IMM_8}} // RCR r64, imm8
+, {{Type::R_64,Type::ONE}} // RCR r64, 1
+, {{Type::R_8,Type::CL}} // RCR r8, CL
+, {{Type::R_8,Type::IMM_8}} // RCR r8, imm8
+, {{Type::R_8,Type::ONE}} // RCR r8, 1
+, {{Type::RH,Type::CL}} // RCR rh, CL
+, {{Type::RH,Type::IMM_8}} // RCR rh, imm8
+, {{Type::RH,Type::ONE}} // RCR rh, 1
+, {{Type::R_32}} // RDFSBASE r32
+, {{Type::R_64}} // RDFSBASE r64
+, {{Type::R_32}} // RDGSBASE r32
+, {{Type::R_64}} // RDGSBASE r64
+, {{Type::R_16}} // RDRAND r16
+, {{Type::R_32}} // RDRAND r32
+, {{Type::R_64}} // RDRAND r64
+, {{Type::M_16,Type::DX}} // REP_INS m16, DX
+, {{Type::M_32,Type::DX}} // REP_INS m32, DX
+, {{Type::M_64,Type::DX}} // REP_INS m64, DX
+, {{Type::M_8,Type::DX}} // REP_INS m8, DX
+, {{Type::M_8,Type::DX}} // REP_INS m8, DX
+, {{Type::AL}} // REP_LODS AL
+, {{Type::AL}} // REP_LODS AL
+, {{Type::AX}} // REP_LODS AX
+, {{Type::EAX}} // REP_LODS EAX
+, {{Type::RAX}} // REP_LODS RAX
+, {{Type::M_16,Type::M_16}} // REP_MOVS m16, m16
+, {{Type::M_32,Type::M_32}} // REP_MOVS m32, m32
+, {{Type::M_64,Type::M_64}} // REP_MOVS m64, m64
+, {{Type::M_8,Type::M_8}} // REP_MOVS m8, m8
+, {{Type::M_8,Type::M_8}} // REP_MOVS m8, m8
+, {{Type::DX,Type::M_16}} // REP_OUTS DX, m16
+, {{Type::DX,Type::M_32}} // REP_OUTS DX, m32
+, {{Type::DX,Type::M_64}} // REP_OUTS DX, m64
+, {{Type::DX,Type::M_8}} // REP_OUTS DX, m8
+, {{Type::DX,Type::M_8}} // REP_OUTS DX, m8
+, {{Type::M_16}} // REP_STOS m16
+, {{Type::M_32}} // REP_STOS m32
+, {{Type::M_64}} // REP_STOS m64
+, {{Type::M_8}} // REP_STOS m8
+, {{Type::M_8}} // REP_STOS m8
+, {{Type::M_16,Type::M_16}} // REPE_CMPS m16, m16
+, {{Type::M_32,Type::M_32}} // REPE_CMPS m32, m32
+, {{Type::M_64,Type::M_64}} // REPE_CMPS m64, m64
+, {{Type::M_8,Type::M_8}} // REPE_CMPS m8, m8
+, {{Type::M_8,Type::M_8}} // REPE_CMPS m8, m8
+, {{Type::M_16}} // REPE_SCAS m16
+, {{Type::M_32}} // REPE_SCAS m32
+, {{Type::M_64}} // REPE_SCAS m64
+, {{Type::M_8}} // REPE_SCAS m8
+, {{Type::M_8}} // REPE_SCAS m8
+, {{Type::M_16,Type::M_16}} // REPNE_CMPS m16, m16
+, {{Type::M_32,Type::M_32}} // REPNE_CMPS m32, m32
+, {{Type::M_64,Type::M_64}} // REPNE_CMPS m64, m64
+, {{Type::M_8,Type::M_8}} // REPNE_CMPS m8, m8
+, {{Type::M_8,Type::M_8}} // REPNE_CMPS m8, m8
+, {{Type::M_16}} // REPNE_SCAS m16
+, {{Type::M_32}} // REPNE_SCAS m32
+, {{Type::M_64}} // REPNE_SCAS m64
+, {{Type::M_8}} // REPNE_SCAS m8
+, {{Type::M_8}} // REPNE_SCAS m8
+, {{}} // RET 
+, {{Type::FAR}} // RET far
+, {{Type::IMM_16}} // RET imm16
+, {{Type::IMM_16,Type::FAR}} // RET imm16, far
+, {{Type::M_16,Type::CL}} // ROL m16, CL
+, {{Type::M_16,Type::IMM_8}} // ROL m16, imm8
+, {{Type::M_16,Type::ONE}} // ROL m16, 1
+, {{Type::M_32,Type::CL}} // ROL m32, CL
+, {{Type::M_32,Type::IMM_8}} // ROL m32, imm8
+, {{Type::M_32,Type::ONE}} // ROL m32, 1
+, {{Type::M_64,Type::CL}} // ROL m64, CL
+, {{Type::M_64,Type::IMM_8}} // ROL m64, imm8
+, {{Type::M_64,Type::ONE}} // ROL m64, 1
+, {{Type::M_8,Type::CL}} // ROL m8, CL
+, {{Type::M_8,Type::IMM_8}} // ROL m8, imm8
+, {{Type::M_8,Type::ONE}} // ROL m8, 1
+, {{Type::R_16,Type::CL}} // ROL r16, CL
+, {{Type::R_16,Type::IMM_8}} // ROL r16, imm8
+, {{Type::R_16,Type::ONE}} // ROL r16, 1
+, {{Type::R_32,Type::CL}} // ROL r32, CL
+, {{Type::R_32,Type::IMM_8}} // ROL r32, imm8
+, {{Type::R_32,Type::ONE}} // ROL r32, 1
+, {{Type::R_64,Type::CL}} // ROL r64, CL
+, {{Type::R_64,Type::IMM_8}} // ROL r64, imm8
+, {{Type::R_64,Type::ONE}} // ROL r64, 1
+, {{Type::R_8,Type::CL}} // ROL r8, CL
+, {{Type::R_8,Type::IMM_8}} // ROL r8, imm8
+, {{Type::R_8,Type::ONE}} // ROL r8, 1
+, {{Type::RH,Type::CL}} // ROL rh, CL
+, {{Type::RH,Type::IMM_8}} // ROL rh, imm8
+, {{Type::RH,Type::ONE}} // ROL rh, 1
+, {{Type::M_16,Type::CL}} // ROR m16, CL
+, {{Type::M_16,Type::IMM_8}} // ROR m16, imm8
+, {{Type::M_16,Type::ONE}} // ROR m16, 1
+, {{Type::M_32,Type::CL}} // ROR m32, CL
+, {{Type::M_32,Type::IMM_8}} // ROR m32, imm8
+, {{Type::M_32,Type::ONE}} // ROR m32, 1
+, {{Type::M_64,Type::CL}} // ROR m64, CL
+, {{Type::M_64,Type::IMM_8}} // ROR m64, imm8
+, {{Type::M_64,Type::ONE}} // ROR m64, 1
+, {{Type::M_8,Type::CL}} // ROR m8, CL
+, {{Type::M_8,Type::IMM_8}} // ROR m8, imm8
+, {{Type::M_8,Type::ONE}} // ROR m8, 1
+, {{Type::R_16,Type::CL}} // ROR r16, CL
+, {{Type::R_16,Type::IMM_8}} // ROR r16, imm8
+, {{Type::R_16,Type::ONE}} // ROR r16, 1
+, {{Type::R_32,Type::CL}} // ROR r32, CL
+, {{Type::R_32,Type::IMM_8}} // ROR r32, imm8
+, {{Type::R_32,Type::ONE}} // ROR r32, 1
+, {{Type::R_64,Type::CL}} // ROR r64, CL
+, {{Type::R_64,Type::IMM_8}} // ROR r64, imm8
+, {{Type::R_64,Type::ONE}} // ROR r64, 1
+, {{Type::R_8,Type::CL}} // ROR r8, CL
+, {{Type::R_8,Type::IMM_8}} // ROR r8, imm8
+, {{Type::R_8,Type::ONE}} // ROR r8, 1
+, {{Type::RH,Type::CL}} // ROR rh, CL
+, {{Type::RH,Type::IMM_8}} // ROR rh, imm8
+, {{Type::RH,Type::ONE}} // ROR rh, 1
+, {{Type::R_32,Type::M_32,Type::IMM_8}} // RORX r32, m32, imm8
+, {{Type::R_32,Type::R_32,Type::IMM_8}} // RORX r32, r32, imm8
+, {{Type::R_64,Type::M_64,Type::IMM_8}} // RORX r64, m64, imm8
+, {{Type::R_64,Type::R_64,Type::IMM_8}} // RORX r64, r64, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // ROUNDPD xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // ROUNDPD xmm, xmm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // ROUNDPS xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // ROUNDPS xmm, xmm, imm8
+, {{Type::XMM,Type::M_64,Type::IMM_8}} // ROUNDSD xmm, m64, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // ROUNDSD xmm, xmm, imm8
+, {{Type::XMM,Type::M_32,Type::IMM_8}} // ROUNDSS xmm, m32, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // ROUNDSS xmm, xmm, imm8
+, {{Type::XMM,Type::M_128}} // RSQRTPS xmm, m128
+, {{Type::XMM,Type::XMM}} // RSQRTPS xmm, xmm
+, {{Type::XMM,Type::M_32}} // RSQRTSS xmm, m32
+, {{Type::XMM,Type::XMM}} // RSQRTSS xmm, xmm
+, {{}} // SAHF 
+, {{Type::M_16,Type::CL}} // SAL m16, CL
+, {{Type::M_16,Type::IMM_8}} // SAL m16, imm8
+, {{Type::M_16,Type::ONE}} // SAL m16, 1
+, {{Type::M_32,Type::CL}} // SAL m32, CL
+, {{Type::M_32,Type::IMM_8}} // SAL m32, imm8
+, {{Type::M_32,Type::ONE}} // SAL m32, 1
+, {{Type::M_64,Type::CL}} // SAL m64, CL
+, {{Type::M_64,Type::IMM_8}} // SAL m64, imm8
+, {{Type::M_64,Type::ONE}} // SAL m64, 1
+, {{Type::M_8,Type::CL}} // SAL m8, CL
+, {{Type::M_8,Type::IMM_8}} // SAL m8, imm8
+, {{Type::M_8,Type::ONE}} // SAL m8, 1
+, {{Type::R_16,Type::CL}} // SAL r16, CL
+, {{Type::R_16,Type::IMM_8}} // SAL r16, imm8
+, {{Type::R_16,Type::ONE}} // SAL r16, 1
+, {{Type::R_32,Type::CL}} // SAL r32, CL
+, {{Type::R_32,Type::IMM_8}} // SAL r32, imm8
+, {{Type::R_32,Type::ONE}} // SAL r32, 1
+, {{Type::R_64,Type::CL}} // SAL r64, CL
+, {{Type::R_64,Type::IMM_8}} // SAL r64, imm8
+, {{Type::R_64,Type::ONE}} // SAL r64, 1
+, {{Type::R_8,Type::CL}} // SAL r8, CL
+, {{Type::R_8,Type::IMM_8}} // SAL r8, imm8
+, {{Type::R_8,Type::ONE}} // SAL r8, 1
+, {{Type::RH,Type::CL}} // SAL rh, CL
+, {{Type::RH,Type::IMM_8}} // SAL rh, imm8
+, {{Type::RH,Type::ONE}} // SAL rh, 1
+, {{Type::M_16,Type::CL}} // SAR m16, CL
+, {{Type::M_16,Type::IMM_8}} // SAR m16, imm8
+, {{Type::M_16,Type::ONE}} // SAR m16, 1
+, {{Type::M_32,Type::CL}} // SAR m32, CL
+, {{Type::M_32,Type::IMM_8}} // SAR m32, imm8
+, {{Type::M_32,Type::ONE}} // SAR m32, 1
+, {{Type::M_64,Type::CL}} // SAR m64, CL
+, {{Type::M_64,Type::IMM_8}} // SAR m64, imm8
+, {{Type::M_64,Type::ONE}} // SAR m64, 1
+, {{Type::M_8,Type::CL}} // SAR m8, CL
+, {{Type::M_8,Type::IMM_8}} // SAR m8, imm8
+, {{Type::M_8,Type::ONE}} // SAR m8, 1
+, {{Type::R_16,Type::CL}} // SAR r16, CL
+, {{Type::R_16,Type::IMM_8}} // SAR r16, imm8
+, {{Type::R_16,Type::ONE}} // SAR r16, 1
+, {{Type::R_32,Type::CL}} // SAR r32, CL
+, {{Type::R_32,Type::IMM_8}} // SAR r32, imm8
+, {{Type::R_32,Type::ONE}} // SAR r32, 1
+, {{Type::R_64,Type::CL}} // SAR r64, CL
+, {{Type::R_64,Type::IMM_8}} // SAR r64, imm8
+, {{Type::R_64,Type::ONE}} // SAR r64, 1
+, {{Type::R_8,Type::CL}} // SAR r8, CL
+, {{Type::R_8,Type::IMM_8}} // SAR r8, imm8
+, {{Type::R_8,Type::ONE}} // SAR r8, 1
+, {{Type::RH,Type::CL}} // SAR rh, CL
+, {{Type::RH,Type::IMM_8}} // SAR rh, imm8
+, {{Type::RH,Type::ONE}} // SAR rh, 1
+, {{Type::R_32,Type::M_32,Type::R_32}} // SARX r32, m32, r32
+, {{Type::R_32,Type::R_32,Type::R_32}} // SARX r32, r32, r32
+, {{Type::R_64,Type::M_64,Type::R_64}} // SARX r64, m64, r64
+, {{Type::R_64,Type::R_64,Type::R_64}} // SARX r64, r64, r64
+, {{Type::AL,Type::IMM_8}} // SBB AL, imm8
+, {{Type::AX,Type::IMM_16}} // SBB AX, imm16
+, {{Type::EAX,Type::IMM_32}} // SBB EAX, imm32
+, {{Type::M_16,Type::IMM_16}} // SBB m16, imm16
+, {{Type::M_16,Type::IMM_8}} // SBB m16, imm8
+, {{Type::M_16,Type::R_16}} // SBB m16, r16
+, {{Type::M_32,Type::IMM_32}} // SBB m32, imm32
+, {{Type::M_32,Type::IMM_8}} // SBB m32, imm8
+, {{Type::M_32,Type::R_32}} // SBB m32, r32
+, {{Type::M_64,Type::IMM_32}} // SBB m64, imm32
+, {{Type::M_64,Type::IMM_8}} // SBB m64, imm8
+, {{Type::M_64,Type::R_64}} // SBB m64, r64
+, {{Type::M_8,Type::IMM_8}} // SBB m8, imm8
+, {{Type::M_8,Type::R_8}} // SBB m8, r8
+, {{Type::M_8,Type::RH}} // SBB m8, rh
+, {{Type::R_16,Type::IMM_16}} // SBB r16, imm16
+, {{Type::R_16,Type::IMM_8}} // SBB r16, imm8
+, {{Type::R_16,Type::M_16}} // SBB r16, m16
+, {{Type::R_16,Type::R_16}} // SBB r16, r16
+, {{Type::R_16,Type::R_16}} // SBB r16, r16
+, {{Type::R_32,Type::IMM_32}} // SBB r32, imm32
+, {{Type::R_32,Type::IMM_8}} // SBB r32, imm8
+, {{Type::R_32,Type::M_32}} // SBB r32, m32
+, {{Type::R_32,Type::R_32}} // SBB r32, r32
+, {{Type::R_32,Type::R_32}} // SBB r32, r32
+, {{Type::R_64,Type::IMM_32}} // SBB r64, imm32
+, {{Type::R_64,Type::IMM_8}} // SBB r64, imm8
+, {{Type::R_64,Type::M_64}} // SBB r64, m64
+, {{Type::R_64,Type::R_64}} // SBB r64, r64
+, {{Type::R_64,Type::R_64}} // SBB r64, r64
+, {{Type::R_8,Type::IMM_8}} // SBB r8, imm8
+, {{Type::R_8,Type::M_8}} // SBB r8, m8
+, {{Type::R_8,Type::R_8}} // SBB r8, r8
+, {{Type::R_8,Type::R_8}} // SBB r8, r8
+, {{Type::R_8,Type::RH}} // SBB r8, rh
+, {{Type::R_8,Type::RH}} // SBB r8, rh
+, {{Type::RAX,Type::IMM_32}} // SBB RAX, imm32
+, {{Type::RH,Type::IMM_8}} // SBB rh, imm8
+, {{Type::RH,Type::M_8}} // SBB rh, m8
+, {{Type::RH,Type::R_8}} // SBB rh, r8
+, {{Type::RH,Type::R_8}} // SBB rh, r8
+, {{Type::RH,Type::RH}} // SBB rh, rh
+, {{Type::RH,Type::RH}} // SBB rh, rh
+, {{Type::M_16}} // SCAS m16
+, {{Type::M_32}} // SCAS m32
+, {{Type::M_64}} // SCAS m64
+, {{Type::M_8}} // SCAS m8
+, {{}} // SCASB 
+, {{}} // SCASD 
+, {{}} // SCASQ 
+, {{}} // SCASW 
+, {{Type::M_8}} // SETA m8
+, {{Type::R_8}} // SETA r8
+, {{Type::RH}} // SETA rh
+, {{Type::M_8}} // SETAE m8
+, {{Type::R_8}} // SETAE r8
+, {{Type::RH}} // SETAE rh
+, {{Type::M_8}} // SETB m8
+, {{Type::R_8}} // SETB r8
+, {{Type::RH}} // SETB rh
+, {{Type::M_8}} // SETBE m8
+, {{Type::R_8}} // SETBE r8
+, {{Type::RH}} // SETBE rh
+, {{Type::M_8}} // SETC m8
+, {{Type::R_8}} // SETC r8
+, {{Type::RH}} // SETC rh
+, {{Type::M_8}} // SETE m8
+, {{Type::R_8}} // SETE r8
+, {{Type::RH}} // SETE rh
+, {{Type::M_8}} // SETG m8
+, {{Type::R_8}} // SETG r8
+, {{Type::RH}} // SETG rh
+, {{Type::M_8}} // SETGE m8
+, {{Type::R_8}} // SETGE r8
+, {{Type::RH}} // SETGE rh
+, {{Type::M_8}} // SETL m8
+, {{Type::R_8}} // SETL r8
+, {{Type::RH}} // SETL rh
+, {{Type::M_8}} // SETLE m8
+, {{Type::R_8}} // SETLE r8
+, {{Type::RH}} // SETLE rh
+, {{Type::M_8}} // SETNA m8
+, {{Type::R_8}} // SETNA r8
+, {{Type::RH}} // SETNA rh
+, {{Type::M_8}} // SETNAE m8
+, {{Type::R_8}} // SETNAE r8
+, {{Type::RH}} // SETNAE rh
+, {{Type::M_8}} // SETNB m8
+, {{Type::R_8}} // SETNB r8
+, {{Type::RH}} // SETNB rh
+, {{Type::M_8}} // SETNBE m8
+, {{Type::R_8}} // SETNBE r8
+, {{Type::RH}} // SETNBE rh
+, {{Type::M_8}} // SETNC m8
+, {{Type::R_8}} // SETNC r8
+, {{Type::RH}} // SETNC rh
+, {{Type::M_8}} // SETNE m8
+, {{Type::R_8}} // SETNE r8
+, {{Type::RH}} // SETNE rh
+, {{Type::M_8}} // SETNG m8
+, {{Type::R_8}} // SETNG r8
+, {{Type::RH}} // SETNG rh
+, {{Type::M_8}} // SETNGE m8
+, {{Type::R_8}} // SETNGE r8
+, {{Type::RH}} // SETNGE rh
+, {{Type::M_8}} // SETNL m8
+, {{Type::R_8}} // SETNL r8
+, {{Type::RH}} // SETNL rh
+, {{Type::M_8}} // SETNLE m8
+, {{Type::R_8}} // SETNLE r8
+, {{Type::RH}} // SETNLE rh
+, {{Type::M_8}} // SETNO m8
+, {{Type::R_8}} // SETNO r8
+, {{Type::RH}} // SETNO rh
+, {{Type::M_8}} // SETNP m8
+, {{Type::R_8}} // SETNP r8
+, {{Type::RH}} // SETNP rh
+, {{Type::M_8}} // SETNS m8
+, {{Type::R_8}} // SETNS r8
+, {{Type::RH}} // SETNS rh
+, {{Type::M_8}} // SETNZ m8
+, {{Type::R_8}} // SETNZ r8
+, {{Type::RH}} // SETNZ rh
+, {{Type::M_8}} // SETO m8
+, {{Type::R_8}} // SETO r8
+, {{Type::RH}} // SETO rh
+, {{Type::M_8}} // SETP m8
+, {{Type::R_8}} // SETP r8
+, {{Type::RH}} // SETP rh
+, {{Type::M_8}} // SETPE m8
+, {{Type::R_8}} // SETPE r8
+, {{Type::RH}} // SETPE rh
+, {{Type::M_8}} // SETPO m8
+, {{Type::R_8}} // SETPO r8
+, {{Type::RH}} // SETPO rh
+, {{Type::M_8}} // SETS m8
+, {{Type::R_8}} // SETS r8
+, {{Type::RH}} // SETS rh
+, {{Type::M_8}} // SETZ m8
+, {{Type::R_8}} // SETZ r8
+, {{Type::RH}} // SETZ rh
+, {{}} // SFENCE 
+, {{Type::M_16,Type::CL}} // SHL m16, CL
+, {{Type::M_16,Type::IMM_8}} // SHL m16, imm8
+, {{Type::M_16,Type::ONE}} // SHL m16, 1
+, {{Type::M_32,Type::CL}} // SHL m32, CL
+, {{Type::M_32,Type::IMM_8}} // SHL m32, imm8
+, {{Type::M_32,Type::ONE}} // SHL m32, 1
+, {{Type::M_64,Type::CL}} // SHL m64, CL
+, {{Type::M_64,Type::IMM_8}} // SHL m64, imm8
+, {{Type::M_64,Type::ONE}} // SHL m64, 1
+, {{Type::M_8,Type::CL}} // SHL m8, CL
+, {{Type::M_8,Type::IMM_8}} // SHL m8, imm8
+, {{Type::M_8,Type::ONE}} // SHL m8, 1
+, {{Type::R_16,Type::CL}} // SHL r16, CL
+, {{Type::R_16,Type::IMM_8}} // SHL r16, imm8
+, {{Type::R_16,Type::ONE}} // SHL r16, 1
+, {{Type::R_32,Type::CL}} // SHL r32, CL
+, {{Type::R_32,Type::IMM_8}} // SHL r32, imm8
+, {{Type::R_32,Type::ONE}} // SHL r32, 1
+, {{Type::R_64,Type::CL}} // SHL r64, CL
+, {{Type::R_64,Type::IMM_8}} // SHL r64, imm8
+, {{Type::R_64,Type::ONE}} // SHL r64, 1
+, {{Type::R_8,Type::CL}} // SHL r8, CL
+, {{Type::R_8,Type::IMM_8}} // SHL r8, imm8
+, {{Type::R_8,Type::ONE}} // SHL r8, 1
+, {{Type::RH,Type::CL}} // SHL rh, CL
+, {{Type::RH,Type::IMM_8}} // SHL rh, imm8
+, {{Type::RH,Type::ONE}} // SHL rh, 1
+, {{Type::M_16,Type::R_16,Type::CL}} // SHLD m16, r16, CL
+, {{Type::M_16,Type::R_16,Type::IMM_8}} // SHLD m16, r16, imm8
+, {{Type::M_32,Type::R_32,Type::CL}} // SHLD m32, r32, CL
+, {{Type::M_32,Type::R_32,Type::IMM_8}} // SHLD m32, r32, imm8
+, {{Type::M_64,Type::R_64,Type::CL}} // SHLD m64, r64, CL
+, {{Type::M_64,Type::R_64,Type::IMM_8}} // SHLD m64, r64, imm8
+, {{Type::R_16,Type::R_16,Type::CL}} // SHLD r16, r16, CL
+, {{Type::R_16,Type::R_16,Type::IMM_8}} // SHLD r16, r16, imm8
+, {{Type::R_32,Type::R_32,Type::CL}} // SHLD r32, r32, CL
+, {{Type::R_32,Type::R_32,Type::IMM_8}} // SHLD r32, r32, imm8
+, {{Type::R_64,Type::R_64,Type::CL}} // SHLD r64, r64, CL
+, {{Type::R_64,Type::R_64,Type::IMM_8}} // SHLD r64, r64, imm8
+, {{Type::R_32,Type::M_32,Type::R_32}} // SHLX r32, m32, r32
+, {{Type::R_32,Type::R_32,Type::R_32}} // SHLX r32, r32, r32
+, {{Type::R_64,Type::M_64,Type::R_64}} // SHLX r64, m64, r64
+, {{Type::R_64,Type::R_64,Type::R_64}} // SHLX r64, r64, r64
+, {{Type::M_16,Type::CL}} // SHR m16, CL
+, {{Type::M_16,Type::IMM_8}} // SHR m16, imm8
+, {{Type::M_16,Type::ONE}} // SHR m16, 1
+, {{Type::M_32,Type::CL}} // SHR m32, CL
+, {{Type::M_32,Type::IMM_8}} // SHR m32, imm8
+, {{Type::M_32,Type::ONE}} // SHR m32, 1
+, {{Type::M_64,Type::CL}} // SHR m64, CL
+, {{Type::M_64,Type::IMM_8}} // SHR m64, imm8
+, {{Type::M_64,Type::ONE}} // SHR m64, 1
+, {{Type::M_8,Type::CL}} // SHR m8, CL
+, {{Type::M_8,Type::IMM_8}} // SHR m8, imm8
+, {{Type::M_8,Type::ONE}} // SHR m8, 1
+, {{Type::R_16,Type::CL}} // SHR r16, CL
+, {{Type::R_16,Type::IMM_8}} // SHR r16, imm8
+, {{Type::R_16,Type::ONE}} // SHR r16, 1
+, {{Type::R_32,Type::CL}} // SHR r32, CL
+, {{Type::R_32,Type::IMM_8}} // SHR r32, imm8
+, {{Type::R_32,Type::ONE}} // SHR r32, 1
+, {{Type::R_64,Type::CL}} // SHR r64, CL
+, {{Type::R_64,Type::IMM_8}} // SHR r64, imm8
+, {{Type::R_64,Type::ONE}} // SHR r64, 1
+, {{Type::R_8,Type::CL}} // SHR r8, CL
+, {{Type::R_8,Type::IMM_8}} // SHR r8, imm8
+, {{Type::R_8,Type::ONE}} // SHR r8, 1
+, {{Type::RH,Type::CL}} // SHR rh, CL
+, {{Type::RH,Type::IMM_8}} // SHR rh, imm8
+, {{Type::RH,Type::ONE}} // SHR rh, 1
+, {{Type::M_16,Type::R_16,Type::CL}} // SHRD m16, r16, CL
+, {{Type::M_16,Type::R_16,Type::IMM_8}} // SHRD m16, r16, imm8
+, {{Type::M_32,Type::R_32,Type::CL}} // SHRD m32, r32, CL
+, {{Type::M_32,Type::R_32,Type::IMM_8}} // SHRD m32, r32, imm8
+, {{Type::M_64,Type::R_64,Type::CL}} // SHRD m64, r64, CL
+, {{Type::M_64,Type::R_64,Type::IMM_8}} // SHRD m64, r64, imm8
+, {{Type::R_16,Type::R_16,Type::CL}} // SHRD r16, r16, CL
+, {{Type::R_16,Type::R_16,Type::IMM_8}} // SHRD r16, r16, imm8
+, {{Type::R_32,Type::R_32,Type::CL}} // SHRD r32, r32, CL
+, {{Type::R_32,Type::R_32,Type::IMM_8}} // SHRD r32, r32, imm8
+, {{Type::R_64,Type::R_64,Type::CL}} // SHRD r64, r64, CL
+, {{Type::R_64,Type::R_64,Type::IMM_8}} // SHRD r64, r64, imm8
+, {{Type::R_32,Type::M_32,Type::R_32}} // SHRX r32, m32, r32
+, {{Type::R_32,Type::R_32,Type::R_32}} // SHRX r32, r32, r32
+, {{Type::R_64,Type::M_64,Type::R_64}} // SHRX r64, m64, r64
+, {{Type::R_64,Type::R_64,Type::R_64}} // SHRX r64, r64, r64
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // SHUFPD xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // SHUFPD xmm, xmm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // SHUFPS xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // SHUFPS xmm, xmm, imm8
+, {{Type::XMM,Type::M_128}} // SQRTPD xmm, m128
+, {{Type::XMM,Type::XMM}} // SQRTPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // SQRTPS xmm, m128
+, {{Type::XMM,Type::XMM}} // SQRTPS xmm, xmm
+, {{Type::XMM,Type::M_64}} // SQRTSD xmm, m64
+, {{Type::XMM,Type::XMM}} // SQRTSD xmm, xmm
+, {{Type::XMM,Type::M_32}} // SQRTSS xmm, m32
+, {{Type::XMM,Type::XMM}} // SQRTSS xmm, xmm
+, {{}} // STC 
+, {{}} // STD 
+, {{}} // STI 
+, {{Type::M_32}} // STMXCSR m32
+, {{Type::M_16}} // STOS m16
+, {{Type::M_32}} // STOS m32
+, {{Type::M_64}} // STOS m64
+, {{Type::M_8}} // STOS m8
+, {{}} // STOSB 
+, {{}} // STOSD 
+, {{}} // STOSQ 
+, {{}} // STOSW 
+, {{Type::AL,Type::IMM_8}} // SUB AL, imm8
+, {{Type::AX,Type::IMM_16}} // SUB AX, imm16
+, {{Type::EAX,Type::IMM_32}} // SUB EAX, imm32
+, {{Type::M_16,Type::IMM_16}} // SUB m16, imm16
+, {{Type::M_16,Type::IMM_8}} // SUB m16, imm8
+, {{Type::M_16,Type::R_16}} // SUB m16, r16
+, {{Type::M_32,Type::IMM_32}} // SUB m32, imm32
+, {{Type::M_32,Type::IMM_8}} // SUB m32, imm8
+, {{Type::M_32,Type::R_32}} // SUB m32, r32
+, {{Type::M_64,Type::IMM_32}} // SUB m64, imm32
+, {{Type::M_64,Type::IMM_8}} // SUB m64, imm8
+, {{Type::M_64,Type::R_64}} // SUB m64, r64
+, {{Type::M_8,Type::IMM_8}} // SUB m8, imm8
+, {{Type::M_8,Type::R_8}} // SUB m8, r8
+, {{Type::M_8,Type::RH}} // SUB m8, rh
+, {{Type::R_16,Type::IMM_16}} // SUB r16, imm16
+, {{Type::R_16,Type::IMM_8}} // SUB r16, imm8
+, {{Type::R_16,Type::M_16}} // SUB r16, m16
+, {{Type::R_16,Type::R_16}} // SUB r16, r16
+, {{Type::R_16,Type::R_16}} // SUB r16, r16
+, {{Type::R_32,Type::IMM_32}} // SUB r32, imm32
+, {{Type::R_32,Type::IMM_8}} // SUB r32, imm8
+, {{Type::R_32,Type::M_32}} // SUB r32, m32
+, {{Type::R_32,Type::R_32}} // SUB r32, r32
+, {{Type::R_32,Type::R_32}} // SUB r32, r32
+, {{Type::R_64,Type::IMM_32}} // SUB r64, imm32
+, {{Type::R_64,Type::IMM_8}} // SUB r64, imm8
+, {{Type::R_64,Type::M_64}} // SUB r64, m64
+, {{Type::R_64,Type::R_64}} // SUB r64, r64
+, {{Type::R_64,Type::R_64}} // SUB r64, r64
+, {{Type::R_8,Type::IMM_8}} // SUB r8, imm8
+, {{Type::R_8,Type::M_8}} // SUB r8, m8
+, {{Type::R_8,Type::R_8}} // SUB r8, r8
+, {{Type::R_8,Type::R_8}} // SUB r8, r8
+, {{Type::R_8,Type::RH}} // SUB r8, rh
+, {{Type::R_8,Type::RH}} // SUB r8, rh
+, {{Type::RAX,Type::IMM_32}} // SUB RAX, imm32
+, {{Type::RH,Type::IMM_8}} // SUB rh, imm8
+, {{Type::RH,Type::M_8}} // SUB rh, m8
+, {{Type::RH,Type::R_8}} // SUB rh, r8
+, {{Type::RH,Type::R_8}} // SUB rh, r8
+, {{Type::RH,Type::RH}} // SUB rh, rh
+, {{Type::RH,Type::RH}} // SUB rh, rh
+, {{Type::XMM,Type::M_128}} // SUBPD xmm, m128
+, {{Type::XMM,Type::XMM}} // SUBPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // SUBPS xmm, m128
+, {{Type::XMM,Type::XMM}} // SUBPS xmm, xmm
+, {{Type::XMM,Type::M_64}} // SUBSD xmm, m64
+, {{Type::XMM,Type::XMM}} // SUBSD xmm, xmm
+, {{Type::XMM,Type::M_32}} // SUBSS xmm, m32
+, {{Type::XMM,Type::XMM}} // SUBSS xmm, xmm
+, {{}} // SWAPGS 
+, {{}} // SYSCALL 
+, {{}} // SYSENTER 
+, {{}} // SYSEXIT 
+, {{Type::PREF_REX_W}} // SYSEXIT pw
+, {{}} // SYSRET 
+, {{Type::PREF_REX_W}} // SYSRET pw
+, {{Type::AL,Type::IMM_8}} // TEST AL, imm8
+, {{Type::AX,Type::IMM_16}} // TEST AX, imm16
+, {{Type::EAX,Type::IMM_32}} // TEST EAX, imm32
+, {{Type::M_16,Type::IMM_16}} // TEST m16, imm16
+, {{Type::M_16,Type::R_16}} // TEST m16, r16
+, {{Type::M_32,Type::IMM_32}} // TEST m32, imm32
+, {{Type::M_32,Type::R_32}} // TEST m32, r32
+, {{Type::M_64,Type::IMM_32}} // TEST m64, imm32
+, {{Type::M_64,Type::R_64}} // TEST m64, r64
+, {{Type::M_8,Type::IMM_8}} // TEST m8, imm8
+, {{Type::M_8,Type::R_8}} // TEST m8, r8
+, {{Type::M_8,Type::RH}} // TEST m8, rh
+, {{Type::R_16,Type::IMM_16}} // TEST r16, imm16
+, {{Type::R_16,Type::R_16}} // TEST r16, r16
+, {{Type::R_32,Type::IMM_32}} // TEST r32, imm32
+, {{Type::R_32,Type::R_32}} // TEST r32, r32
+, {{Type::R_64,Type::IMM_32}} // TEST r64, imm32
+, {{Type::R_64,Type::R_64}} // TEST r64, r64
+, {{Type::R_8,Type::IMM_8}} // TEST r8, imm8
+, {{Type::R_8,Type::R_8}} // TEST r8, r8
+, {{Type::R_8,Type::RH}} // TEST r8, rh
+, {{Type::RAX,Type::IMM_32}} // TEST RAX, imm32
+, {{Type::RH,Type::IMM_8}} // TEST rh, imm8
+, {{Type::RH,Type::R_8}} // TEST rh, r8
+, {{Type::RH,Type::RH}} // TEST rh, rh
+, {{Type::R_16,Type::M_16}} // TZCNT r16, m16
+, {{Type::R_16,Type::R_16}} // TZCNT r16, r16
+, {{Type::R_32,Type::M_32}} // TZCNT r32, m32
+, {{Type::R_32,Type::R_32}} // TZCNT r32, r32
+, {{Type::R_64,Type::M_64}} // TZCNT r64, m64
+, {{Type::R_64,Type::R_64}} // TZCNT r64, r64
+, {{Type::XMM,Type::M_64}} // UCOMISD xmm, m64
+, {{Type::XMM,Type::XMM}} // UCOMISD xmm, xmm
+, {{Type::XMM,Type::M_32}} // UCOMISS xmm, m32
+, {{Type::XMM,Type::XMM}} // UCOMISS xmm, xmm
+, {{}} // UD2 
+, {{Type::XMM,Type::M_128}} // UNPCKHPD xmm, m128
+, {{Type::XMM,Type::XMM}} // UNPCKHPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // UNPCKHPS xmm, m128
+, {{Type::XMM,Type::XMM}} // UNPCKHPS xmm, xmm
+, {{Type::XMM,Type::M_128}} // UNPCKLPD xmm, m128
+, {{Type::XMM,Type::XMM}} // UNPCKLPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // UNPCKLPS xmm, m128
+, {{Type::XMM,Type::XMM}} // UNPCKLPS xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VADDPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VADDPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VADDPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VADDPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VADDPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VADDPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VADDPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VADDPS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VADDSD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VADDSD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VADDSS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VADDSS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VADDSUBPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VADDSUBPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VADDSUBPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VADDSUBPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VADDSUBPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VADDSUBPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VADDSUBPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VADDSUBPS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VAESDEC xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VAESDEC xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VAESDECLAST xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VAESDECLAST xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VAESENC xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VAESENC xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VAESENCLAST xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VAESENCLAST xmm, xmm, xmm
+, {{Type::XMM,Type::M_128}} // VAESIMC xmm, m128
+, {{Type::XMM,Type::XMM}} // VAESIMC xmm, xmm
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // VAESKEYGENASSIST xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VAESKEYGENASSIST xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VANDNPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VANDNPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VANDNPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VANDNPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VANDNPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VANDNPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VANDNPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VANDNPS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VANDPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VANDPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VANDPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VANDPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VANDPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VANDPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VANDPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VANDPS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128,Type::IMM_8}} // VBLENDPD xmm, xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VBLENDPD xmm, xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256,Type::IMM_8}} // VBLENDPD ymm, ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::YMM,Type::IMM_8}} // VBLENDPD ymm, ymm, ymm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128,Type::IMM_8}} // VBLENDPS xmm, xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VBLENDPS xmm, xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256,Type::IMM_8}} // VBLENDPS ymm, ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::YMM,Type::IMM_8}} // VBLENDPS ymm, ymm, ymm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128,Type::XMM}} // VBLENDVPD xmm, xmm, m128, xmm
+, {{Type::XMM,Type::XMM,Type::XMM,Type::XMM}} // VBLENDVPD xmm, xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256,Type::YMM}} // VBLENDVPD ymm, ymm, m256, ymm
+, {{Type::YMM,Type::YMM,Type::YMM,Type::YMM}} // VBLENDVPD ymm, ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128,Type::XMM}} // VBLENDVPS xmm, xmm, m128, xmm
+, {{Type::XMM,Type::XMM,Type::XMM,Type::XMM}} // VBLENDVPS xmm, xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256,Type::YMM}} // VBLENDVPS ymm, ymm, m256, ymm
+, {{Type::YMM,Type::YMM,Type::YMM,Type::YMM}} // VBLENDVPS ymm, ymm, ymm, ymm
+, {{Type::YMM,Type::M_128}} // VBROADCASTF128 ymm, m128
+, {{Type::YMM,Type::M_128}} // VBROADCASTI128 ymm, m128
+, {{Type::YMM,Type::M_64}} // VBROADCASTSD ymm, m64
+, {{Type::YMM,Type::XMM}} // VBROADCASTSD ymm, xmm
+, {{Type::XMM,Type::M_32}} // VBROADCASTSS xmm, m32
+, {{Type::XMM,Type::XMM}} // VBROADCASTSS xmm, xmm
+, {{Type::YMM,Type::M_32}} // VBROADCASTSS ymm, m32
+, {{Type::YMM,Type::XMM}} // VBROADCASTSS ymm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128,Type::IMM_8}} // VCMPPD xmm, xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VCMPPD xmm, xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256,Type::IMM_8}} // VCMPPD ymm, ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::YMM,Type::IMM_8}} // VCMPPD ymm, ymm, ymm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128,Type::IMM_8}} // VCMPPS xmm, xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VCMPPS xmm, xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256,Type::IMM_8}} // VCMPPS ymm, ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::YMM,Type::IMM_8}} // VCMPPS ymm, ymm, ymm, imm8
+, {{Type::XMM,Type::XMM,Type::M_64,Type::IMM_8}} // VCMPSD xmm, xmm, m64, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VCMPSD xmm, xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_32,Type::IMM_8}} // VCMPSS xmm, xmm, m32, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VCMPSS xmm, xmm, xmm, imm8
+, {{Type::XMM,Type::M_64}} // VCOMISD xmm, m64
+, {{Type::XMM,Type::XMM}} // VCOMISD xmm, xmm
+, {{Type::XMM,Type::M_32}} // VCOMISS xmm, m32
+, {{Type::XMM,Type::XMM}} // VCOMISS xmm, xmm
+, {{Type::XMM,Type::M_64}} // VCVTDQ2PD xmm, m64
+, {{Type::XMM,Type::XMM}} // VCVTDQ2PD xmm, xmm
+, {{Type::YMM,Type::M_128}} // VCVTDQ2PD ymm, m128
+, {{Type::YMM,Type::YMM}} // VCVTDQ2PD ymm, ymm
+, {{Type::XMM,Type::M_128}} // VCVTDQ2PS xmm, m128
+, {{Type::XMM,Type::XMM}} // VCVTDQ2PS xmm, xmm
+, {{Type::YMM,Type::M_256}} // VCVTDQ2PS ymm, m256
+, {{Type::YMM,Type::YMM}} // VCVTDQ2PS ymm, ymm
+, {{Type::XMM,Type::M_128}} // VCVTPD2DQ xmm, m128
+, {{Type::XMM,Type::M_256}} // VCVTPD2DQ xmm, m256
+, {{Type::XMM,Type::XMM}} // VCVTPD2DQ xmm, xmm
+, {{Type::XMM,Type::YMM}} // VCVTPD2DQ xmm, ymm
+, {{Type::XMM,Type::M_128}} // VCVTPD2PS xmm, m128
+, {{Type::XMM,Type::M_256}} // VCVTPD2PS xmm, m256
+, {{Type::XMM,Type::XMM}} // VCVTPD2PS xmm, xmm
+, {{Type::XMM,Type::YMM}} // VCVTPD2PS xmm, ymm
+, {{Type::XMM,Type::M_64}} // VCVTPH2PS xmm, m64
+, {{Type::XMM,Type::XMM}} // VCVTPH2PS xmm, xmm
+, {{Type::YMM,Type::M_128}} // VCVTPH2PS ymm, m128
+, {{Type::YMM,Type::XMM}} // VCVTPH2PS ymm, xmm
+, {{Type::XMM,Type::M_128}} // VCVTPS2DQ xmm, m128
+, {{Type::XMM,Type::XMM}} // VCVTPS2DQ xmm, xmm
+, {{Type::YMM,Type::M_256}} // VCVTPS2DQ ymm, m256
+, {{Type::YMM,Type::YMM}} // VCVTPS2DQ ymm, ymm
+, {{Type::XMM,Type::M_64}} // VCVTPS2PD xmm, m64
+, {{Type::XMM,Type::XMM}} // VCVTPS2PD xmm, xmm
+, {{Type::YMM,Type::M_128}} // VCVTPS2PD ymm, m128
+, {{Type::YMM,Type::XMM}} // VCVTPS2PD ymm, xmm
+, {{Type::M_128,Type::YMM,Type::IMM_8}} // VCVTPS2PH m128, ymm, imm8
+, {{Type::M_64,Type::XMM,Type::IMM_8}} // VCVTPS2PH m64, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VCVTPS2PH xmm, xmm, imm8
+, {{Type::XMM,Type::YMM,Type::IMM_8}} // VCVTPS2PH xmm, ymm, imm8
+, {{Type::R_32,Type::M_64}} // VCVTSD2SI r32, m64
+, {{Type::R_32,Type::XMM}} // VCVTSD2SI r32, xmm
+, {{Type::R_64,Type::M_64}} // VCVTSD2SI r64, m64
+, {{Type::R_64,Type::XMM}} // VCVTSD2SI r64, xmm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VCVTSD2SS xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VCVTSD2SS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VCVTSI2SD xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::M_64}} // VCVTSI2SD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::R_32}} // VCVTSI2SD xmm, xmm, r32
+, {{Type::XMM,Type::XMM,Type::R_64}} // VCVTSI2SD xmm, xmm, r64
+, {{Type::XMM,Type::XMM,Type::M_32}} // VCVTSI2SS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::M_64}} // VCVTSI2SS xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::R_32}} // VCVTSI2SS xmm, xmm, r32
+, {{Type::XMM,Type::XMM,Type::R_64}} // VCVTSI2SS xmm, xmm, r64
+, {{Type::XMM,Type::XMM,Type::M_32}} // VCVTSS2SD xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VCVTSS2SD xmm, xmm, xmm
+, {{Type::R_32,Type::M_32}} // VCVTSS2SI r32, m32
+, {{Type::R_32,Type::XMM}} // VCVTSS2SI r32, xmm
+, {{Type::R_64,Type::M_32}} // VCVTSS2SI r64, m32
+, {{Type::R_64,Type::XMM}} // VCVTSS2SI r64, xmm
+, {{Type::XMM,Type::M_128}} // VCVTTPD2DQ xmm, m128
+, {{Type::XMM,Type::M_256}} // VCVTTPD2DQ xmm, m256
+, {{Type::XMM,Type::XMM}} // VCVTTPD2DQ xmm, xmm
+, {{Type::XMM,Type::YMM}} // VCVTTPD2DQ xmm, ymm
+, {{Type::XMM,Type::M_128}} // VCVTTPS2DQ xmm, m128
+, {{Type::XMM,Type::XMM}} // VCVTTPS2DQ xmm, xmm
+, {{Type::YMM,Type::M_256}} // VCVTTPS2DQ ymm, m256
+, {{Type::YMM,Type::YMM}} // VCVTTPS2DQ ymm, ymm
+, {{Type::R_32,Type::M_64}} // VCVTTSD2SI r32, m64
+, {{Type::R_32,Type::XMM}} // VCVTTSD2SI r32, xmm
+, {{Type::R_64,Type::M_64}} // VCVTTSD2SI r64, m64
+, {{Type::R_64,Type::XMM}} // VCVTTSD2SI r64, xmm
+, {{Type::R_32,Type::M_32}} // VCVTTSS2SI r32, m32
+, {{Type::R_32,Type::XMM}} // VCVTTSS2SI r32, xmm
+, {{Type::R_64,Type::M_32}} // VCVTTSS2SI r64, m32
+, {{Type::R_64,Type::XMM}} // VCVTTSS2SI r64, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VDIVPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VDIVPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VDIVPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VDIVPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VDIVPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VDIVPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VDIVPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VDIVPS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VDIVSD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VDIVSD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VDIVSS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VDIVSS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128,Type::IMM_8}} // VDPPD xmm, xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VDPPD xmm, xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128,Type::IMM_8}} // VDPPS xmm, xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VDPPS xmm, xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256,Type::IMM_8}} // VDPPS ymm, ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::YMM,Type::IMM_8}} // VDPPS ymm, ymm, ymm, imm8
+, {{Type::M_16}} // VERR m16
+, {{Type::R_16}} // VERR r16
+, {{Type::M_16}} // VERW m16
+, {{Type::R_16}} // VERW r16
+, {{Type::M_128,Type::YMM,Type::IMM_8}} // VEXTRACTF128 m128, ymm, imm8
+, {{Type::XMM,Type::YMM,Type::IMM_8}} // VEXTRACTF128 xmm, ymm, imm8
+, {{Type::M_128,Type::YMM,Type::IMM_8}} // VEXTRACTI128 m128, ymm, imm8
+, {{Type::XMM,Type::YMM,Type::IMM_8}} // VEXTRACTI128 xmm, ymm, imm8
+, {{Type::M_32,Type::XMM,Type::IMM_8}} // VEXTRACTPS m32, xmm, imm8
+, {{Type::R_32,Type::XMM,Type::IMM_8}} // VEXTRACTPS r32, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMADD132PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADD132PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMADD132PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMADD132PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMADD132PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADD132PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMADD132PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMADD132PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VFMADD132SD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADD132SD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VFMADD132SS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADD132SS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMADD213PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADD213PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMADD213PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMADD213PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMADD213PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADD213PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMADD213PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMADD213PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VFMADD213SD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADD213SD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VFMADD213SS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADD213SS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMADD231PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADD231PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMADD231PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMADD231PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMADD231PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADD231PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMADD231PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMADD231PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VFMADD231SD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADD231SD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VFMADD231SS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADD231SS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMADDSUB132PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADDSUB132PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMADDSUB132PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMADDSUB132PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMADDSUB132PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADDSUB132PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMADDSUB132PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMADDSUB132PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMADDSUB213PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADDSUB213PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMADDSUB213PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMADDSUB213PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMADDSUB213PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADDSUB213PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMADDSUB213PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMADDSUB213PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMADDSUB231PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADDSUB231PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMADDSUB231PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMADDSUB231PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMADDSUB231PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMADDSUB231PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMADDSUB231PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMADDSUB231PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMSUB132PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUB132PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMSUB132PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMSUB132PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMSUB132PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUB132PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMSUB132PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMSUB132PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VFMSUB132SD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUB132SD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VFMSUB132SS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUB132SS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMSUB213PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUB213PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMSUB213PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMSUB213PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMSUB213PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUB213PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMSUB213PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMSUB213PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VFMSUB213SD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUB213SD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VFMSUB213SS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUB213SS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMSUB231PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUB231PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMSUB231PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMSUB231PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMSUB231PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUB231PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMSUB231PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMSUB231PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VFMSUB231SD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUB231SD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VFMSUB231SS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUB231SS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMSUBADD132PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUBADD132PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMSUBADD132PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMSUBADD132PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMSUBADD132PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUBADD132PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMSUBADD132PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMSUBADD132PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMSUBADD213PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUBADD213PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMSUBADD213PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMSUBADD213PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMSUBADD213PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUBADD213PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMSUBADD213PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMSUBADD213PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMSUBADD231PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUBADD231PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMSUBADD231PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMSUBADD231PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFMSUBADD231PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFMSUBADD231PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFMSUBADD231PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFMSUBADD231PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFNMADD132PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMADD132PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFNMADD132PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFNMADD132PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFNMADD132PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMADD132PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFNMADD132PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFNMADD132PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VFNMADD132SD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMADD132SD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VFNMADD132SS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMADD132SS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFNMADD213PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMADD213PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFNMADD213PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFNMADD213PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFNMADD213PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMADD213PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFNMADD213PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFNMADD213PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VFNMADD213SD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMADD213SD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VFNMADD213SS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMADD213SS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFNMADD231PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMADD231PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFNMADD231PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFNMADD231PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFNMADD231PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMADD231PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFNMADD231PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFNMADD231PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VFNMADD231SD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMADD231SD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VFNMADD231SS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMADD231SS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFNMSUB132PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMSUB132PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFNMSUB132PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFNMSUB132PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFNMSUB132PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMSUB132PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFNMSUB132PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFNMSUB132PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VFNMSUB132SD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMSUB132SD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VFNMSUB132SS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMSUB132SS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFNMSUB213PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMSUB213PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFNMSUB213PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFNMSUB213PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFNMSUB213PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMSUB213PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFNMSUB213PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFNMSUB213PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VFNMSUB213SD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMSUB213SD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VFNMSUB213SS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMSUB213SS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFNMSUB231PD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMSUB231PD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFNMSUB231PD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFNMSUB231PD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VFNMSUB231PS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMSUB231PS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VFNMSUB231PS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VFNMSUB231PS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VFNMSUB231SD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMSUB231SD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VFNMSUB231SS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VFNMSUB231SS xmm, xmm, xmm
+, {{Type::XMM,Type::M_32,Type::XMM}} // VGATHERDPD xmm, m32, xmm
+, {{Type::YMM,Type::M_32,Type::YMM}} // VGATHERDPD ymm, m32, ymm
+, {{Type::XMM,Type::M_32,Type::XMM}} // VGATHERDPS xmm, m32, xmm
+, {{Type::YMM,Type::M_32,Type::YMM}} // VGATHERDPS ymm, m32, ymm
+, {{Type::XMM,Type::M_64,Type::XMM}} // VGATHERQPD xmm, m64, xmm
+, {{Type::YMM,Type::M_64,Type::YMM}} // VGATHERQPD ymm, m64, ymm
+, {{Type::XMM,Type::M_64,Type::XMM}} // VGATHERQPS xmm, m64, xmm
+, {{Type::XMM,Type::M_64,Type::XMM}} // VGATHERQPS xmm, m64, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VHADDPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VHADDPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VHADDPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VHADDPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VHADDPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VHADDPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VHADDPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VHADDPS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VHSUBPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VHSUBPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VHSUBPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VHSUBPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VHSUBPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VHSUBPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VHSUBPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VHSUBPS ymm, ymm, ymm
+, {{Type::YMM,Type::YMM,Type::M_128,Type::IMM_8}} // VINSERTF128 ymm, ymm, m128, imm8
+, {{Type::YMM,Type::YMM,Type::XMM,Type::IMM_8}} // VINSERTF128 ymm, ymm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::M_128,Type::IMM_8}} // VINSERTI128 ymm, ymm, m128, imm8
+, {{Type::YMM,Type::YMM,Type::XMM,Type::IMM_8}} // VINSERTI128 ymm, ymm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_32,Type::IMM_8}} // VINSERTPS xmm, xmm, m32, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VINSERTPS xmm, xmm, xmm, imm8
+, {{Type::XMM,Type::M_128}} // VLDDQU xmm, m128
+, {{Type::YMM,Type::M_256}} // VLDDQU ymm, m256
+, {{Type::M_32}} // VLDMXCSR m32
+, {{Type::XMM,Type::XMM}} // VMASKMOVDQU xmm, xmm
+, {{Type::M_128,Type::XMM,Type::XMM}} // VMASKMOVPD m128, xmm, xmm
+, {{Type::M_256,Type::YMM,Type::YMM}} // VMASKMOVPD m256, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VMASKMOVPD xmm, xmm, m128
+, {{Type::YMM,Type::YMM,Type::M_256}} // VMASKMOVPD ymm, ymm, m256
+, {{Type::M_128,Type::XMM,Type::XMM}} // VMASKMOVPS m128, xmm, xmm
+, {{Type::M_256,Type::YMM,Type::YMM}} // VMASKMOVPS m256, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VMASKMOVPS xmm, xmm, m128
+, {{Type::YMM,Type::YMM,Type::M_256}} // VMASKMOVPS ymm, ymm, m256
+, {{Type::XMM,Type::XMM,Type::M_128}} // VMAXPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMAXPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VMAXPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VMAXPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VMAXPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMAXPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VMAXPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VMAXPS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VMAXSD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMAXSD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VMAXSS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMAXSS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VMINPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMINPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VMINPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VMINPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VMINPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMINPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VMINPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VMINPS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VMINSD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMINSD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VMINSS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMINSS xmm, xmm, xmm
+, {{Type::M_128,Type::XMM}} // VMOVAPD m128, xmm
+, {{Type::M_256,Type::YMM}} // VMOVAPD m256, ymm
+, {{Type::XMM,Type::M_128}} // VMOVAPD xmm, m128
+, {{Type::XMM,Type::XMM}} // VMOVAPD xmm, xmm
+, {{Type::XMM,Type::XMM}} // VMOVAPD xmm, xmm
+, {{Type::YMM,Type::M_256}} // VMOVAPD ymm, m256
+, {{Type::YMM,Type::YMM}} // VMOVAPD ymm, ymm
+, {{Type::YMM,Type::YMM}} // VMOVAPD ymm, ymm
+, {{Type::M_128,Type::XMM}} // VMOVAPS m128, xmm
+, {{Type::M_256,Type::YMM}} // VMOVAPS m256, ymm
+, {{Type::XMM,Type::M_128}} // VMOVAPS xmm, m128
+, {{Type::XMM,Type::XMM}} // VMOVAPS xmm, xmm
+, {{Type::XMM,Type::XMM}} // VMOVAPS xmm, xmm
+, {{Type::YMM,Type::M_256}} // VMOVAPS ymm, m256
+, {{Type::YMM,Type::YMM}} // VMOVAPS ymm, ymm
+, {{Type::YMM,Type::YMM}} // VMOVAPS ymm, ymm
+, {{Type::M_32,Type::XMM}} // VMOVD m32, xmm
+, {{Type::R_32,Type::XMM}} // VMOVD r32, xmm
+, {{Type::XMM,Type::M_32}} // VMOVD xmm, m32
+, {{Type::XMM,Type::R_32}} // VMOVD xmm, r32
+, {{Type::XMM,Type::M_64}} // VMOVDDUP xmm, m64
+, {{Type::XMM,Type::XMM}} // VMOVDDUP xmm, xmm
+, {{Type::YMM,Type::M_256}} // VMOVDDUP ymm, m256
+, {{Type::YMM,Type::YMM}} // VMOVDDUP ymm, ymm
+, {{Type::M_128,Type::XMM}} // VMOVDQA m128, xmm
+, {{Type::M_256,Type::YMM}} // VMOVDQA m256, ymm
+, {{Type::XMM,Type::M_128}} // VMOVDQA xmm, m128
+, {{Type::XMM,Type::XMM}} // VMOVDQA xmm, xmm
+, {{Type::XMM,Type::XMM}} // VMOVDQA xmm, xmm
+, {{Type::YMM,Type::M_256}} // VMOVDQA ymm, m256
+, {{Type::YMM,Type::YMM}} // VMOVDQA ymm, ymm
+, {{Type::YMM,Type::YMM}} // VMOVDQA ymm, ymm
+, {{Type::M_128,Type::XMM}} // VMOVDQU m128, xmm
+, {{Type::M_256,Type::YMM}} // VMOVDQU m256, ymm
+, {{Type::XMM,Type::M_128}} // VMOVDQU xmm, m128
+, {{Type::XMM,Type::XMM}} // VMOVDQU xmm, xmm
+, {{Type::XMM,Type::XMM}} // VMOVDQU xmm, xmm
+, {{Type::YMM,Type::M_256}} // VMOVDQU ymm, m256
+, {{Type::YMM,Type::YMM}} // VMOVDQU ymm, ymm
+, {{Type::YMM,Type::YMM}} // VMOVDQU ymm, ymm
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMOVHLPS xmm, xmm, xmm
+, {{Type::M_64,Type::XMM}} // VMOVHPD m64, xmm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VMOVHPD xmm, xmm, m64
+, {{Type::M_64,Type::XMM}} // VMOVHPS m64, xmm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VMOVHPS xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMOVLHPS xmm, xmm, xmm
+, {{Type::M_64,Type::XMM}} // VMOVLPD m64, xmm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VMOVLPD xmm, xmm, m64
+, {{Type::M_64,Type::XMM}} // VMOVLPS m64, xmm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VMOVLPS xmm, xmm, m64
+, {{Type::R_32,Type::XMM}} // VMOVMSKPD r32, xmm
+, {{Type::R_32,Type::YMM}} // VMOVMSKPD r32, ymm
+, {{Type::R_64,Type::XMM}} // VMOVMSKPD r64, xmm
+, {{Type::R_64,Type::YMM}} // VMOVMSKPD r64, ymm
+, {{Type::R_32,Type::XMM}} // VMOVMSKPS r32, xmm
+, {{Type::R_32,Type::YMM}} // VMOVMSKPS r32, ymm
+, {{Type::R_64,Type::XMM}} // VMOVMSKPS r64, xmm
+, {{Type::R_64,Type::YMM}} // VMOVMSKPS r64, ymm
+, {{Type::M_128,Type::XMM}} // VMOVNTDQ m128, xmm
+, {{Type::XMM,Type::M_128}} // VMOVNTDQA xmm, m128
+, {{Type::YMM,Type::M_256}} // VMOVNTDQA ymm, m256
+, {{Type::M_128,Type::XMM}} // VMOVNTPD m128, xmm
+, {{Type::M_256,Type::YMM}} // VMOVNTPD m256, ymm
+, {{Type::M_128,Type::XMM}} // VMOVNTPS m128, xmm
+, {{Type::M_256,Type::YMM}} // VMOVNTPS m256, ymm
+, {{Type::M_64,Type::XMM}} // VMOVQ m64, xmm
+, {{Type::M_64,Type::XMM}} // VMOVQ m64, xmm
+, {{Type::R_64,Type::XMM}} // VMOVQ r64, xmm
+, {{Type::XMM,Type::M_64}} // VMOVQ xmm, m64
+, {{Type::XMM,Type::M_64}} // VMOVQ xmm, m64
+, {{Type::XMM,Type::R_64}} // VMOVQ xmm, r64
+, {{Type::XMM,Type::XMM}} // VMOVQ xmm, xmm
+, {{Type::XMM,Type::XMM}} // VMOVQ xmm, xmm
+, {{Type::M_64,Type::XMM}} // VMOVSD m64, xmm
+, {{Type::XMM,Type::M_64}} // VMOVSD xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMOVSD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMOVSD xmm, xmm, xmm
+, {{Type::XMM,Type::M_128}} // VMOVSHDUP xmm, m128
+, {{Type::XMM,Type::XMM}} // VMOVSHDUP xmm, xmm
+, {{Type::YMM,Type::M_256}} // VMOVSHDUP ymm, m256
+, {{Type::YMM,Type::YMM}} // VMOVSHDUP ymm, ymm
+, {{Type::XMM,Type::M_128}} // VMOVSLDUP xmm, m128
+, {{Type::XMM,Type::XMM}} // VMOVSLDUP xmm, xmm
+, {{Type::YMM,Type::M_256}} // VMOVSLDUP ymm, m256
+, {{Type::YMM,Type::YMM}} // VMOVSLDUP ymm, ymm
+, {{Type::M_32,Type::XMM}} // VMOVSS m32, xmm
+, {{Type::XMM,Type::M_32}} // VMOVSS xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMOVSS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMOVSS xmm, xmm, xmm
+, {{Type::M_128,Type::XMM}} // VMOVUPD m128, xmm
+, {{Type::M_256,Type::YMM}} // VMOVUPD m256, ymm
+, {{Type::XMM,Type::M_128}} // VMOVUPD xmm, m128
+, {{Type::XMM,Type::XMM}} // VMOVUPD xmm, xmm
+, {{Type::XMM,Type::XMM}} // VMOVUPD xmm, xmm
+, {{Type::YMM,Type::M_256}} // VMOVUPD ymm, m256
+, {{Type::YMM,Type::YMM}} // VMOVUPD ymm, ymm
+, {{Type::YMM,Type::YMM}} // VMOVUPD ymm, ymm
+, {{Type::M_128,Type::XMM}} // VMOVUPS m128, xmm
+, {{Type::M_256,Type::YMM}} // VMOVUPS m256, ymm
+, {{Type::XMM,Type::M_128}} // VMOVUPS xmm, m128
+, {{Type::XMM,Type::XMM}} // VMOVUPS xmm, xmm
+, {{Type::XMM,Type::XMM}} // VMOVUPS xmm, xmm
+, {{Type::YMM,Type::M_256}} // VMOVUPS ymm, m256
+, {{Type::YMM,Type::YMM}} // VMOVUPS ymm, ymm
+, {{Type::YMM,Type::YMM}} // VMOVUPS ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128,Type::IMM_8}} // VMPSADBW xmm, xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VMPSADBW xmm, xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256,Type::IMM_8}} // VMPSADBW ymm, ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::YMM,Type::IMM_8}} // VMPSADBW ymm, ymm, ymm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VMULPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMULPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VMULPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VMULPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VMULPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMULPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VMULPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VMULPS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VMULSD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMULSD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VMULSS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VMULSS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VORPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VORPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VORPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VORPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VORPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VORPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VORPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VORPS ymm, ymm, ymm
+, {{Type::XMM,Type::M_128}} // VPABSB xmm, m128
+, {{Type::XMM,Type::XMM}} // VPABSB xmm, xmm
+, {{Type::YMM,Type::M_256}} // VPABSB ymm, m256
+, {{Type::YMM,Type::YMM}} // VPABSB ymm, ymm
+, {{Type::XMM,Type::M_128}} // VPABSD xmm, m128
+, {{Type::XMM,Type::XMM}} // VPABSD xmm, xmm
+, {{Type::YMM,Type::M_256}} // VPABSD ymm, m256
+, {{Type::YMM,Type::YMM}} // VPABSD ymm, ymm
+, {{Type::XMM,Type::M_128}} // VPABSW xmm, m128
+, {{Type::XMM,Type::XMM}} // VPABSW xmm, xmm
+, {{Type::YMM,Type::M_256}} // VPABSW ymm, m256
+, {{Type::YMM,Type::YMM}} // VPABSW ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPACKSSDW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPACKSSDW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPACKSSDW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPACKSSDW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPACKSSWB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPACKSSWB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPACKSSWB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPACKSSWB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPACKUSDW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPACKUSDW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPACKUSDW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPACKUSDW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPACKUSWB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPACKUSWB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPACKUSWB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPACKUSWB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPADDB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPADDB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPADDB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPADDB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPADDD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPADDD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPADDD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPADDD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPADDQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPADDQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPADDQ ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPADDQ ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPADDSB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPADDSB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPADDSB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPADDSB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPADDSW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPADDSW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPADDSW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPADDSW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPADDUSB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPADDUSB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPADDUSB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPADDUSB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPADDUSW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPADDUSW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPADDUSW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPADDUSW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPADDW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPADDW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPADDW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPADDW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128,Type::IMM_8}} // VPALIGNR xmm, xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VPALIGNR xmm, xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256,Type::IMM_8}} // VPALIGNR ymm, ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::YMM,Type::IMM_8}} // VPALIGNR ymm, ymm, ymm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPAND xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPAND xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPAND ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPAND ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPANDN xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPANDN xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPANDN ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPANDN ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPAVGB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPAVGB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPAVGB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPAVGB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPAVGW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPAVGW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPAVGW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPAVGW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128,Type::IMM_8}} // VPBLENDD xmm, xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VPBLENDD xmm, xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256,Type::IMM_8}} // VPBLENDD ymm, ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::YMM,Type::IMM_8}} // VPBLENDD ymm, ymm, ymm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128,Type::XMM}} // VPBLENDVB xmm, xmm, m128, xmm
+, {{Type::XMM,Type::XMM,Type::XMM,Type::XMM}} // VPBLENDVB xmm, xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256,Type::YMM}} // VPBLENDVB ymm, ymm, m256, ymm
+, {{Type::YMM,Type::YMM,Type::YMM,Type::YMM}} // VPBLENDVB ymm, ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128,Type::IMM_8}} // VPBLENDW xmm, xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VPBLENDW xmm, xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256,Type::IMM_8}} // VPBLENDW ymm, ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::YMM,Type::IMM_8}} // VPBLENDW ymm, ymm, ymm, imm8
+, {{Type::XMM,Type::M_8}} // VPBROADCASTB xmm, m8
+, {{Type::XMM,Type::XMM}} // VPBROADCASTB xmm, xmm
+, {{Type::YMM,Type::M_8}} // VPBROADCASTB ymm, m8
+, {{Type::YMM,Type::XMM}} // VPBROADCASTB ymm, xmm
+, {{Type::XMM,Type::M_32}} // VPBROADCASTD xmm, m32
+, {{Type::XMM,Type::XMM}} // VPBROADCASTD xmm, xmm
+, {{Type::YMM,Type::M_32}} // VPBROADCASTD ymm, m32
+, {{Type::YMM,Type::XMM}} // VPBROADCASTD ymm, xmm
+, {{Type::XMM,Type::M_64}} // VPBROADCASTQ xmm, m64
+, {{Type::XMM,Type::XMM}} // VPBROADCASTQ xmm, xmm
+, {{Type::YMM,Type::M_64}} // VPBROADCASTQ ymm, m64
+, {{Type::YMM,Type::XMM}} // VPBROADCASTQ ymm, xmm
+, {{Type::XMM,Type::M_16}} // VPBROADCASTW xmm, m16
+, {{Type::XMM,Type::XMM}} // VPBROADCASTW xmm, xmm
+, {{Type::YMM,Type::M_16}} // VPBROADCASTW ymm, m16
+, {{Type::YMM,Type::XMM}} // VPBROADCASTW ymm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128,Type::IMM_8}} // VPCLMULQDQ xmm, xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VPCLMULQDQ xmm, xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPCMPEQB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPCMPEQB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPCMPEQB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPCMPEQB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPCMPEQD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPCMPEQD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPCMPEQD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPCMPEQD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPCMPEQQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPCMPEQQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPCMPEQQ ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPCMPEQQ ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPCMPEQW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPCMPEQW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPCMPEQW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPCMPEQW ymm, ymm, ymm
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // VPCMPESTRI xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPCMPESTRI xmm, xmm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // VPCMPESTRM xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPCMPESTRM xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPCMPGTB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPCMPGTB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPCMPGTB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPCMPGTB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPCMPGTD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPCMPGTD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPCMPGTD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPCMPGTD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPCMPGTQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPCMPGTQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPCMPGTQ ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPCMPGTQ ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPCMPGTW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPCMPGTW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPCMPGTW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPCMPGTW ymm, ymm, ymm
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // VPCMPISTRI xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPCMPISTRI xmm, xmm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // VPCMPISTRM xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPCMPISTRM xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256,Type::IMM_8}} // VPERM2F128 ymm, ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::YMM,Type::IMM_8}} // VPERM2F128 ymm, ymm, ymm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256,Type::IMM_8}} // VPERM2I128 ymm, ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::YMM,Type::IMM_8}} // VPERM2I128 ymm, ymm, ymm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPERMD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPERMD ymm, ymm, ymm
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // VPERMILPD xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPERMILPD xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPERMILPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPERMILPD xmm, xmm, xmm
+, {{Type::YMM,Type::M_256,Type::IMM_8}} // VPERMILPD ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPERMILPD ymm, ymm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPERMILPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPERMILPD ymm, ymm, ymm
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // VPERMILPS xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPERMILPS xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPERMILPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPERMILPS xmm, xmm, xmm
+, {{Type::YMM,Type::M_256,Type::IMM_8}} // VPERMILPS ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPERMILPS ymm, ymm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPERMILPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPERMILPS ymm, ymm, ymm
+, {{Type::YMM,Type::M_256,Type::IMM_8}} // VPERMPD ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPERMPD ymm, ymm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPERMPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPERMPS ymm, ymm, ymm
+, {{Type::YMM,Type::M_256,Type::IMM_8}} // VPERMQ ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPERMQ ymm, ymm, imm8
+, {{Type::M_8,Type::XMM,Type::IMM_8}} // VPEXTRB m8, xmm, imm8
+, {{Type::R_32,Type::XMM,Type::IMM_8}} // VPEXTRB r32, xmm, imm8
+, {{Type::R_64,Type::XMM,Type::IMM_8}} // VPEXTRB r64, xmm, imm8
+, {{Type::M_32,Type::XMM,Type::IMM_8}} // VPEXTRD m32, xmm, imm8
+, {{Type::R_32,Type::XMM,Type::IMM_8}} // VPEXTRD r32, xmm, imm8
+, {{Type::M_64,Type::XMM,Type::IMM_8}} // VPEXTRQ m64, xmm, imm8
+, {{Type::R_64,Type::XMM,Type::IMM_8}} // VPEXTRQ r64, xmm, imm8
+, {{Type::M_16,Type::XMM,Type::IMM_8}} // VPEXTRW m16, xmm, imm8
+, {{Type::R_32,Type::XMM,Type::IMM_8}} // VPEXTRW r32, xmm, imm8
+, {{Type::R_32,Type::XMM,Type::IMM_8}} // VPEXTRW r32, xmm, imm8
+, {{Type::R_64,Type::XMM,Type::IMM_8}} // VPEXTRW r64, xmm, imm8
+, {{Type::R_64,Type::XMM,Type::IMM_8}} // VPEXTRW r64, xmm, imm8
+, {{Type::XMM,Type::M_32,Type::XMM}} // VPGATHERDD xmm, m32, xmm
+, {{Type::YMM,Type::M_32,Type::YMM}} // VPGATHERDD ymm, m32, ymm
+, {{Type::XMM,Type::M_32,Type::XMM}} // VPGATHERDQ xmm, m32, xmm
+, {{Type::YMM,Type::M_32,Type::YMM}} // VPGATHERDQ ymm, m32, ymm
+, {{Type::XMM,Type::M_64,Type::XMM}} // VPGATHERQD xmm, m64, xmm
+, {{Type::XMM,Type::M_64,Type::XMM}} // VPGATHERQD xmm, m64, xmm
+, {{Type::XMM,Type::M_64,Type::XMM}} // VPGATHERQQ xmm, m64, xmm
+, {{Type::YMM,Type::M_64,Type::YMM}} // VPGATHERQQ ymm, m64, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPHADDD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPHADDD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPHADDD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPHADDD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPHADDSW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPHADDSW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPHADDSW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPHADDSW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPHADDW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPHADDW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPHADDW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPHADDW ymm, ymm, ymm
+, {{Type::XMM,Type::M_128}} // VPHMINPOSUW xmm, m128
+, {{Type::XMM,Type::XMM}} // VPHMINPOSUW xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPHSUBD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPHSUBD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPHSUBD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPHSUBD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPHSUBSW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPHSUBSW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPHSUBSW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPHSUBSW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPHSUBW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPHSUBW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPHSUBW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPHSUBW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_8,Type::IMM_8}} // VPINSRB xmm, xmm, m8, imm8
+, {{Type::XMM,Type::XMM,Type::R_32,Type::IMM_8}} // VPINSRB xmm, xmm, r32, imm8
+, {{Type::XMM,Type::XMM,Type::M_32,Type::IMM_8}} // VPINSRD xmm, xmm, m32, imm8
+, {{Type::XMM,Type::XMM,Type::R_32,Type::IMM_8}} // VPINSRD xmm, xmm, r32, imm8
+, {{Type::XMM,Type::XMM,Type::M_64,Type::IMM_8}} // VPINSRQ xmm, xmm, m64, imm8
+, {{Type::XMM,Type::XMM,Type::R_64,Type::IMM_8}} // VPINSRQ xmm, xmm, r64, imm8
+, {{Type::XMM,Type::XMM,Type::M_16,Type::IMM_8}} // VPINSRW xmm, xmm, m16, imm8
+, {{Type::XMM,Type::XMM,Type::R_32,Type::IMM_8}} // VPINSRW xmm, xmm, r32, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMADDUBSW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMADDUBSW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMADDUBSW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMADDUBSW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMADDWD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMADDWD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMADDWD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMADDWD ymm, ymm, ymm
+, {{Type::M_128,Type::XMM,Type::XMM}} // VPMASKMOVD m128, xmm, xmm
+, {{Type::M_256,Type::YMM,Type::YMM}} // VPMASKMOVD m256, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMASKMOVD xmm, xmm, m128
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMASKMOVD ymm, ymm, m256
+, {{Type::M_128,Type::XMM,Type::XMM}} // VPMASKMOVQ m128, xmm, xmm
+, {{Type::M_256,Type::YMM,Type::YMM}} // VPMASKMOVQ m256, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMASKMOVQ xmm, xmm, m128
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMASKMOVQ ymm, ymm, m256
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMAXSB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMAXSB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMAXSB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMAXSB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMAXSD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMAXSD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMAXSD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMAXSD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMAXSW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMAXSW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMAXSW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMAXSW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMAXUB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMAXUB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMAXUB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMAXUB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMAXUD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMAXUD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMAXUD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMAXUD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMAXUW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMAXUW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMAXUW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMAXUW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMINSB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMINSB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMINSB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMINSB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMINSD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMINSD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMINSD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMINSD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMINSW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMINSW xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMINUB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMINUB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMINUB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMINUB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMINUD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMINUD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMINUD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMINUD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMINUW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMINUW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMINUW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMINUW ymm, ymm, ymm
+, {{Type::R_32,Type::XMM}} // VPMOVMSKB r32, xmm
+, {{Type::R_32,Type::YMM}} // VPMOVMSKB r32, ymm
+, {{Type::R_64,Type::XMM}} // VPMOVMSKB r64, xmm
+, {{Type::R_64,Type::YMM}} // VPMOVMSKB r64, ymm
+, {{Type::XMM,Type::M_32}} // VPMOVSXBD xmm, m32
+, {{Type::XMM,Type::XMM}} // VPMOVSXBD xmm, xmm
+, {{Type::YMM,Type::M_64}} // VPMOVSXBD ymm, m64
+, {{Type::YMM,Type::XMM}} // VPMOVSXBD ymm, xmm
+, {{Type::XMM,Type::M_16}} // VPMOVSXBQ xmm, m16
+, {{Type::XMM,Type::XMM}} // VPMOVSXBQ xmm, xmm
+, {{Type::YMM,Type::M_32}} // VPMOVSXBQ ymm, m32
+, {{Type::YMM,Type::XMM}} // VPMOVSXBQ ymm, xmm
+, {{Type::XMM,Type::M_64}} // VPMOVSXBW xmm, m64
+, {{Type::XMM,Type::XMM}} // VPMOVSXBW xmm, xmm
+, {{Type::YMM,Type::M_128}} // VPMOVSXBW ymm, m128
+, {{Type::YMM,Type::XMM}} // VPMOVSXBW ymm, xmm
+, {{Type::XMM,Type::M_64}} // VPMOVSXDQ xmm, m64
+, {{Type::XMM,Type::XMM}} // VPMOVSXDQ xmm, xmm
+, {{Type::YMM,Type::M_128}} // VPMOVSXDQ ymm, m128
+, {{Type::YMM,Type::XMM}} // VPMOVSXDQ ymm, xmm
+, {{Type::XMM,Type::M_64}} // VPMOVSXWD xmm, m64
+, {{Type::XMM,Type::XMM}} // VPMOVSXWD xmm, xmm
+, {{Type::YMM,Type::M_128}} // VPMOVSXWD ymm, m128
+, {{Type::YMM,Type::XMM}} // VPMOVSXWD ymm, xmm
+, {{Type::XMM,Type::M_32}} // VPMOVSXWQ xmm, m32
+, {{Type::XMM,Type::XMM}} // VPMOVSXWQ xmm, xmm
+, {{Type::YMM,Type::M_64}} // VPMOVSXWQ ymm, m64
+, {{Type::YMM,Type::XMM}} // VPMOVSXWQ ymm, xmm
+, {{Type::XMM,Type::M_32}} // VPMOVZXBD xmm, m32
+, {{Type::XMM,Type::XMM}} // VPMOVZXBD xmm, xmm
+, {{Type::YMM,Type::M_64}} // VPMOVZXBD ymm, m64
+, {{Type::YMM,Type::XMM}} // VPMOVZXBD ymm, xmm
+, {{Type::XMM,Type::M_16}} // VPMOVZXBQ xmm, m16
+, {{Type::XMM,Type::XMM}} // VPMOVZXBQ xmm, xmm
+, {{Type::YMM,Type::M_32}} // VPMOVZXBQ ymm, m32
+, {{Type::YMM,Type::XMM}} // VPMOVZXBQ ymm, xmm
+, {{Type::XMM,Type::M_64}} // VPMOVZXBW xmm, m64
+, {{Type::XMM,Type::XMM}} // VPMOVZXBW xmm, xmm
+, {{Type::YMM,Type::M_128}} // VPMOVZXBW ymm, m128
+, {{Type::YMM,Type::XMM}} // VPMOVZXBW ymm, xmm
+, {{Type::XMM,Type::M_64}} // VPMOVZXDQ xmm, m64
+, {{Type::XMM,Type::XMM}} // VPMOVZXDQ xmm, xmm
+, {{Type::YMM,Type::M_128}} // VPMOVZXDQ ymm, m128
+, {{Type::YMM,Type::XMM}} // VPMOVZXDQ ymm, xmm
+, {{Type::XMM,Type::M_64}} // VPMOVZXWD xmm, m64
+, {{Type::XMM,Type::XMM}} // VPMOVZXWD xmm, xmm
+, {{Type::YMM,Type::M_128}} // VPMOVZXWD ymm, m128
+, {{Type::YMM,Type::XMM}} // VPMOVZXWD ymm, xmm
+, {{Type::XMM,Type::M_32}} // VPMOVZXWQ xmm, m32
+, {{Type::XMM,Type::XMM}} // VPMOVZXWQ xmm, xmm
+, {{Type::YMM,Type::M_64}} // VPMOVZXWQ ymm, m64
+, {{Type::YMM,Type::XMM}} // VPMOVZXWQ ymm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMULDQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMULDQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMULDQ ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMULDQ ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMULHRSW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMULHRSW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMULHRSW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMULHRSW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMULHUW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMULHUW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMULHUW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMULHUW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMULHW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMULHW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMULHW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMULHW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMULLD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMULLD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMULLD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMULLD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMULLW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMULLW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMULLW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMULLW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPMULUDQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPMULUDQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPMULUDQ ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPMULUDQ ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPOR xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPOR xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPOR ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPOR ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSADBW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSADBW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSADBW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSADBW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSHUFB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSHUFB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSHUFB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSHUFB ymm, ymm, ymm
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // VPSHUFD xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPSHUFD xmm, xmm, imm8
+, {{Type::YMM,Type::M_256,Type::IMM_8}} // VPSHUFD ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPSHUFD ymm, ymm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // VPSHUFHW xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPSHUFHW xmm, xmm, imm8
+, {{Type::YMM,Type::M_256,Type::IMM_8}} // VPSHUFHW ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPSHUFHW ymm, ymm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // VPSHUFLW xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPSHUFLW xmm, xmm, imm8
+, {{Type::YMM,Type::M_256,Type::IMM_8}} // VPSHUFLW ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPSHUFLW ymm, ymm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSIGNB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSIGNB xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSIGND xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSIGND xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSIGNW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSIGNW xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPSLLD xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSLLD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSLLD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPSLLD ymm, ymm, imm8
+, {{Type::YMM,Type::YMM,Type::M_128}} // VPSLLD ymm, ymm, m128
+, {{Type::YMM,Type::YMM,Type::XMM}} // VPSLLD ymm, ymm, xmm
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPSLLDQ xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPSLLDQ ymm, ymm, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPSLLQ xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSLLQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSLLQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPSLLQ ymm, ymm, imm8
+, {{Type::YMM,Type::YMM,Type::M_128}} // VPSLLQ ymm, ymm, m128
+, {{Type::YMM,Type::YMM,Type::XMM}} // VPSLLQ ymm, ymm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSLLVD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSLLVD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSLLVD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSLLVD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSLLVQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSLLVQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSLLVQ ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSLLVQ ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPSLLW xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSLLW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSLLW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPSLLW ymm, ymm, imm8
+, {{Type::YMM,Type::YMM,Type::M_128}} // VPSLLW ymm, ymm, m128
+, {{Type::YMM,Type::YMM,Type::XMM}} // VPSLLW ymm, ymm, xmm
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPSRAD xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSRAD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSRAD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPSRAD ymm, ymm, imm8
+, {{Type::YMM,Type::YMM,Type::M_128}} // VPSRAD ymm, ymm, m128
+, {{Type::YMM,Type::YMM,Type::XMM}} // VPSRAD ymm, ymm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSRAVD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSRAVD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSRAVD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSRAVD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPSRAW xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSRAW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSRAW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPSRAW ymm, ymm, imm8
+, {{Type::YMM,Type::YMM,Type::M_128}} // VPSRAW ymm, ymm, m128
+, {{Type::YMM,Type::YMM,Type::XMM}} // VPSRAW ymm, ymm, xmm
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPSRLD xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSRLD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSRLD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPSRLD ymm, ymm, imm8
+, {{Type::YMM,Type::YMM,Type::M_128}} // VPSRLD ymm, ymm, m128
+, {{Type::YMM,Type::YMM,Type::XMM}} // VPSRLD ymm, ymm, xmm
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPSRLDQ xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPSRLDQ ymm, ymm, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPSRLQ xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSRLQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSRLQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPSRLQ ymm, ymm, imm8
+, {{Type::YMM,Type::YMM,Type::M_128}} // VPSRLQ ymm, ymm, m128
+, {{Type::YMM,Type::YMM,Type::XMM}} // VPSRLQ ymm, ymm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSRLVD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSRLVD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSRLVD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSRLVD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSRLVQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSRLVQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSRLVQ ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSRLVQ ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VPSRLW xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSRLW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSRLW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VPSRLW ymm, ymm, imm8
+, {{Type::YMM,Type::YMM,Type::M_128}} // VPSRLW ymm, ymm, m128
+, {{Type::YMM,Type::YMM,Type::XMM}} // VPSRLW ymm, ymm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSUBB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSUBB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSUBB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSUBB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSUBD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSUBD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSUBD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSUBD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSUBQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSUBQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSUBQ ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSUBQ ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSUBSB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSUBSB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSUBSB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSUBSB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSUBSW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSUBSW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSUBSW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSUBSW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSUBUSB xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSUBUSB xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSUBUSB ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSUBUSB ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSUBUSW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSUBUSW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSUBUSW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSUBUSW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPSUBW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPSUBW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPSUBW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPSUBW ymm, ymm, ymm
+, {{Type::XMM,Type::M_128}} // VPTEST xmm, m128
+, {{Type::XMM,Type::XMM}} // VPTEST xmm, xmm
+, {{Type::YMM,Type::M_256}} // VPTEST ymm, m256
+, {{Type::YMM,Type::YMM}} // VPTEST ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPUNPCKHBW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPUNPCKHBW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPUNPCKHBW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPUNPCKHBW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPUNPCKHDQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPUNPCKHDQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPUNPCKHDQ ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPUNPCKHDQ ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPUNPCKHQDQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPUNPCKHQDQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPUNPCKHQDQ ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPUNPCKHQDQ ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPUNPCKHWD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPUNPCKHWD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPUNPCKHWD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPUNPCKHWD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPUNPCKLBW xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPUNPCKLBW xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPUNPCKLBW ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPUNPCKLBW ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPUNPCKLDQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPUNPCKLDQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPUNPCKLDQ ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPUNPCKLDQ ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPUNPCKLQDQ xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPUNPCKLQDQ xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPUNPCKLQDQ ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPUNPCKLQDQ ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPUNPCKLWD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPUNPCKLWD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPUNPCKLWD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPUNPCKLWD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VPXOR xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VPXOR xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VPXOR ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VPXOR ymm, ymm, ymm
+, {{Type::XMM,Type::M_128}} // VRCPPS xmm, m128
+, {{Type::XMM,Type::XMM}} // VRCPPS xmm, xmm
+, {{Type::YMM,Type::M_256}} // VRCPPS ymm, m256
+, {{Type::YMM,Type::YMM}} // VRCPPS ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VRCPSS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VRCPSS xmm, xmm, xmm
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // VROUNDPD xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VROUNDPD xmm, xmm, imm8
+, {{Type::YMM,Type::M_256,Type::IMM_8}} // VROUNDPD ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VROUNDPD ymm, ymm, imm8
+, {{Type::XMM,Type::M_128,Type::IMM_8}} // VROUNDPS xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::IMM_8}} // VROUNDPS xmm, xmm, imm8
+, {{Type::YMM,Type::M_256,Type::IMM_8}} // VROUNDPS ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::IMM_8}} // VROUNDPS ymm, ymm, imm8
+, {{Type::XMM,Type::XMM,Type::M_64,Type::IMM_8}} // VROUNDSD xmm, xmm, m64, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VROUNDSD xmm, xmm, xmm, imm8
+, {{Type::XMM,Type::XMM,Type::M_32,Type::IMM_8}} // VROUNDSS xmm, xmm, m32, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VROUNDSS xmm, xmm, xmm, imm8
+, {{Type::XMM,Type::M_128}} // VRSQRTPS xmm, m128
+, {{Type::XMM,Type::XMM}} // VRSQRTPS xmm, xmm
+, {{Type::YMM,Type::M_256}} // VRSQRTPS ymm, m256
+, {{Type::YMM,Type::YMM}} // VRSQRTPS ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VRSQRTSS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VRSQRTSS xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128,Type::IMM_8}} // VSHUFPD xmm, xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VSHUFPD xmm, xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256,Type::IMM_8}} // VSHUFPD ymm, ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::YMM,Type::IMM_8}} // VSHUFPD ymm, ymm, ymm, imm8
+, {{Type::XMM,Type::XMM,Type::M_128,Type::IMM_8}} // VSHUFPS xmm, xmm, m128, imm8
+, {{Type::XMM,Type::XMM,Type::XMM,Type::IMM_8}} // VSHUFPS xmm, xmm, xmm, imm8
+, {{Type::YMM,Type::YMM,Type::M_256,Type::IMM_8}} // VSHUFPS ymm, ymm, m256, imm8
+, {{Type::YMM,Type::YMM,Type::YMM,Type::IMM_8}} // VSHUFPS ymm, ymm, ymm, imm8
+, {{Type::XMM,Type::M_128}} // VSQRTPD xmm, m128
+, {{Type::XMM,Type::XMM}} // VSQRTPD xmm, xmm
+, {{Type::YMM,Type::M_256}} // VSQRTPD ymm, m256
+, {{Type::YMM,Type::YMM}} // VSQRTPD ymm, ymm
+, {{Type::XMM,Type::M_128}} // VSQRTPS xmm, m128
+, {{Type::XMM,Type::XMM}} // VSQRTPS xmm, xmm
+, {{Type::YMM,Type::M_256}} // VSQRTPS ymm, m256
+, {{Type::YMM,Type::YMM}} // VSQRTPS ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VSQRTSD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VSQRTSD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VSQRTSS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VSQRTSS xmm, xmm, xmm
+, {{Type::M_32}} // VSTMXCSR m32
+, {{Type::XMM,Type::XMM,Type::M_128}} // VSUBPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VSUBPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VSUBPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VSUBPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VSUBPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VSUBPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VSUBPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VSUBPS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_64}} // VSUBSD xmm, xmm, m64
+, {{Type::XMM,Type::XMM,Type::XMM}} // VSUBSD xmm, xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_32}} // VSUBSS xmm, xmm, m32
+, {{Type::XMM,Type::XMM,Type::XMM}} // VSUBSS xmm, xmm, xmm
+, {{Type::XMM,Type::M_128}} // VTESTPD xmm, m128
+, {{Type::XMM,Type::XMM}} // VTESTPD xmm, xmm
+, {{Type::YMM,Type::M_256}} // VTESTPD ymm, m256
+, {{Type::YMM,Type::YMM}} // VTESTPD ymm, ymm
+, {{Type::XMM,Type::M_128}} // VTESTPS xmm, m128
+, {{Type::XMM,Type::XMM}} // VTESTPS xmm, xmm
+, {{Type::YMM,Type::M_256}} // VTESTPS ymm, m256
+, {{Type::YMM,Type::YMM}} // VTESTPS ymm, ymm
+, {{Type::XMM,Type::M_64}} // VUCOMISD xmm, m64
+, {{Type::XMM,Type::XMM}} // VUCOMISD xmm, xmm
+, {{Type::XMM,Type::M_32}} // VUCOMISS xmm, m32
+, {{Type::XMM,Type::XMM}} // VUCOMISS xmm, xmm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VUNPCKHPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VUNPCKHPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VUNPCKHPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VUNPCKHPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VUNPCKHPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VUNPCKHPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VUNPCKHPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VUNPCKHPS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VUNPCKLPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VUNPCKLPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VUNPCKLPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VUNPCKLPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VUNPCKLPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VUNPCKLPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VUNPCKLPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VUNPCKLPS ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VXORPD xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VXORPD xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VXORPD ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VXORPD ymm, ymm, ymm
+, {{Type::XMM,Type::XMM,Type::M_128}} // VXORPS xmm, xmm, m128
+, {{Type::XMM,Type::XMM,Type::XMM}} // VXORPS xmm, xmm, xmm
+, {{Type::YMM,Type::YMM,Type::M_256}} // VXORPS ymm, ymm, m256
+, {{Type::YMM,Type::YMM,Type::YMM}} // VXORPS ymm, ymm, ymm
+, {{}} // VZEROALL 
+, {{}} // VZEROUPPER 
+, {{}} // WAIT 
+, {{Type::R_32}} // WRFSBASE r32
+, {{Type::R_64}} // WRFSBASE r64
+, {{Type::R_32}} // WRGSBASE r32
+, {{Type::R_64}} // WRGSBASE r64
+, {{Type::IMM_8}} // XABORT imm8
+, {{}} // XACQUIRE 
+, {{Type::M_16,Type::R_16}} // XADD m16, r16
+, {{Type::M_32,Type::R_32}} // XADD m32, r32
+, {{Type::M_64,Type::R_64}} // XADD m64, r64
+, {{Type::M_8,Type::R_8}} // XADD m8, r8
+, {{Type::M_8,Type::RH}} // XADD m8, rh
+, {{Type::R_16,Type::R_16}} // XADD r16, r16
+, {{Type::R_32,Type::R_32}} // XADD r32, r32
+, {{Type::R_64,Type::R_64}} // XADD r64, r64
+, {{Type::R_8,Type::R_8}} // XADD r8, r8
+, {{Type::R_8,Type::RH}} // XADD r8, rh
+, {{Type::RH,Type::R_8}} // XADD rh, r8
+, {{Type::RH,Type::RH}} // XADD rh, rh
+, {{Type::LABEL}} // XBEGIN label32
+, {{Type::REL_32}} // XBEGIN rel32
+, {{Type::AX,Type::R_16}} // XCHG AX, r16
+, {{Type::EAX,Type::R_32}} // XCHG EAX, r32
+, {{Type::M_16,Type::R_16}} // XCHG m16, r16
+, {{Type::M_32,Type::R_32}} // XCHG m32, r32
+, {{Type::M_64,Type::R_64}} // XCHG m64, r64
+, {{Type::M_8,Type::R_8}} // XCHG m8, r8
+, {{Type::M_8,Type::RH}} // XCHG m8, rh
+, {{Type::R_16,Type::AX}} // XCHG r16, AX
+, {{Type::R_16,Type::M_16}} // XCHG r16, m16
+, {{Type::R_16,Type::R_16}} // XCHG r16, r16
+, {{Type::R_16,Type::R_16}} // XCHG r16, r16
+, {{Type::R_32,Type::EAX}} // XCHG r32, EAX
+, {{Type::R_32,Type::M_32}} // XCHG r32, m32
+, {{Type::R_32,Type::R_32}} // XCHG r32, r32
+, {{Type::R_32,Type::R_32}} // XCHG r32, r32
+, {{Type::R_64,Type::M_64}} // XCHG r64, m64
+, {{Type::R_64,Type::R_64}} // XCHG r64, r64
+, {{Type::R_64,Type::R_64}} // XCHG r64, r64
+, {{Type::R_64,Type::RAX}} // XCHG r64, RAX
+, {{Type::R_8,Type::M_8}} // XCHG r8, m8
+, {{Type::R_8,Type::R_8}} // XCHG r8, r8
+, {{Type::R_8,Type::R_8}} // XCHG r8, r8
+, {{Type::R_8,Type::RH}} // XCHG r8, rh
+, {{Type::R_8,Type::RH}} // XCHG r8, rh
+, {{Type::RAX,Type::R_64}} // XCHG RAX, r64
+, {{Type::RH,Type::M_8}} // XCHG rh, m8
+, {{Type::RH,Type::R_8}} // XCHG rh, r8
+, {{Type::RH,Type::R_8}} // XCHG rh, r8
+, {{Type::RH,Type::RH}} // XCHG rh, rh
+, {{Type::RH,Type::RH}} // XCHG rh, rh
+, {{}} // XEND 
+, {{}} // XGETBV 
+, {{Type::M_8}} // XLAT m8
+, {{}} // XLATB 
+, {{}} // XLATB 
+, {{Type::AL,Type::IMM_8}} // XOR AL, imm8
+, {{Type::AX,Type::IMM_16}} // XOR AX, imm16
+, {{Type::EAX,Type::IMM_32}} // XOR EAX, imm32
+, {{Type::M_16,Type::IMM_16}} // XOR m16, imm16
+, {{Type::M_16,Type::IMM_8}} // XOR m16, imm8
+, {{Type::M_16,Type::R_16}} // XOR m16, r16
+, {{Type::M_32,Type::IMM_32}} // XOR m32, imm32
+, {{Type::M_32,Type::IMM_8}} // XOR m32, imm8
+, {{Type::M_32,Type::R_32}} // XOR m32, r32
+, {{Type::M_64,Type::IMM_32}} // XOR m64, imm32
+, {{Type::M_64,Type::IMM_8}} // XOR m64, imm8
+, {{Type::M_64,Type::R_64}} // XOR m64, r64
+, {{Type::M_8,Type::IMM_8}} // XOR m8, imm8
+, {{Type::M_8,Type::R_8}} // XOR m8, r8
+, {{Type::M_8,Type::RH}} // XOR m8, rh
+, {{Type::R_16,Type::IMM_16}} // XOR r16, imm16
+, {{Type::R_16,Type::IMM_8}} // XOR r16, imm8
+, {{Type::R_16,Type::M_16}} // XOR r16, m16
+, {{Type::R_16,Type::R_16}} // XOR r16, r16
+, {{Type::R_16,Type::R_16}} // XOR r16, r16
+, {{Type::R_32,Type::IMM_32}} // XOR r32, imm32
+, {{Type::R_32,Type::IMM_8}} // XOR r32, imm8
+, {{Type::R_32,Type::M_32}} // XOR r32, m32
+, {{Type::R_32,Type::R_32}} // XOR r32, r32
+, {{Type::R_32,Type::R_32}} // XOR r32, r32
+, {{Type::R_64,Type::IMM_32}} // XOR r64, imm32
+, {{Type::R_64,Type::IMM_8}} // XOR r64, imm8
+, {{Type::R_64,Type::M_64}} // XOR r64, m64
+, {{Type::R_64,Type::R_64}} // XOR r64, r64
+, {{Type::R_64,Type::R_64}} // XOR r64, r64
+, {{Type::R_8,Type::IMM_8}} // XOR r8, imm8
+, {{Type::R_8,Type::M_8}} // XOR r8, m8
+, {{Type::R_8,Type::R_8}} // XOR r8, r8
+, {{Type::R_8,Type::R_8}} // XOR r8, r8
+, {{Type::R_8,Type::RH}} // XOR r8, rh
+, {{Type::R_8,Type::RH}} // XOR r8, rh
+, {{Type::RAX,Type::IMM_32}} // XOR RAX, imm32
+, {{Type::RH,Type::IMM_8}} // XOR rh, imm8
+, {{Type::RH,Type::M_8}} // XOR rh, m8
+, {{Type::RH,Type::R_8}} // XOR rh, r8
+, {{Type::RH,Type::R_8}} // XOR rh, r8
+, {{Type::RH,Type::RH}} // XOR rh, rh
+, {{Type::RH,Type::RH}} // XOR rh, rh
+, {{Type::XMM,Type::M_128}} // XORPD xmm, m128
+, {{Type::XMM,Type::XMM}} // XORPD xmm, xmm
+, {{Type::XMM,Type::M_128}} // XORPS xmm, m128
+, {{Type::XMM,Type::XMM}} // XORPS xmm, xmm
+, {{}} // XRELEASE 
+, {{Type::M_16}} // XRSTOR m16
+, {{Type::M_32}} // XRSTOR m32
+, {{Type::M_64}} // XRSTOR m64
+, {{Type::M_16}} // XRSTOR64 m16
+, {{Type::M_32}} // XRSTOR64 m32
+, {{Type::M_64}} // XRSTOR64 m64
+, {{Type::M_16}} // XSAVE m16
+, {{Type::M_32}} // XSAVE m32
+, {{Type::M_64}} // XSAVE m64
+, {{Type::M_16}} // XSAVE64 m16
+, {{Type::M_32}} // XSAVE64 m32
+, {{Type::M_64}} // XSAVE64 m64
+, {{Type::M_16}} // XSAVEOPT m16
+, {{Type::M_32}} // XSAVEOPT m32
+, {{Type::M_64}} // XSAVEOPT m64
+, {{Type::M_16}} // XSAVEOPT64 m16
+, {{Type::M_32}} // XSAVEOPT64 m32
+, {{Type::M_64}} // XSAVEOPT64 m64
+, {{}} // XTEST 
