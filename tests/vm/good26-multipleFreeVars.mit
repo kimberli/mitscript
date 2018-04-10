@@ -1,0 +1,15 @@
+a = fun(x) {
+  b = fun(y) {
+    y = x + " inside b";
+    c = fun(z) {
+      z = z + " inside c";
+      print(x);
+      print(y);
+      print(z);
+    };
+    c(y);
+  };
+  b(x);
+};
+
+a("a");
