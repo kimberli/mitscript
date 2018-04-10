@@ -61,7 +61,12 @@ int main(int argc, char** argv) {
             return 1;
         }
         BytecodeCompiler* bc = new BytecodeCompiler();
-        bc_output = bc->evaluate(*output);
+        try {
+            bc_output = bc->evaluate(*output);
+        } catch (InterpreterException& exception) {
+            cout << exception.toString() << endl;
+            return 1;
+        }
     } else if (file_type == BYTECODE) {
         // parse bytecode, set bc_output
         Function* output;
