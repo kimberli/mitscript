@@ -64,13 +64,13 @@ function
       store_global 3
 
       load_global 3
-      load_const 0
       load_const 2
+      load_const 0
       index_store
 
       load_global 3
-      load_const 1
       load_const 3
+      load_const 1
       index_store
 
       load_global 2
@@ -78,13 +78,13 @@ function
       call 1
 
       load_global 3
-      load_const 2
       load_const 4
+      load_const 2
       index_store
 
       load_global 3
-      load_const 2
       load_const 3
+      load_const 2
       index_store
 
       load_global 2
