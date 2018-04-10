@@ -60,14 +60,9 @@ function
       alloc_closure 0
       store_global  1
 
-      load_const  0
-      store_local 0
-      load_local  0
-      neg
-      store_local 1
-
 	  load_global 2
-	  load_local 1
+      load_const  0
+      neg
 	  call 1
     ]
 }

@@ -42,9 +42,9 @@ function
             ]
         }
     ],
-    constants = [5, 3],
+    constants = [-1, "blah blah 123xyz", true, None, "field"],
     parameter_count = 0,
-    local_vars = [x, y, z],
+    local_vars = [x, y],
     local_ref_vars = [],
     free_vars = [],
     names = [input, intcast, print],
@@ -61,9 +61,17 @@ function
       store_global  1
 
       load_global 2
-      load_const  0
-      load_const  1
-      mul
+
+      load_const 0
+      load_const 0
+      add
+
+      call 1
+      load_const 3
+      return
+
+      load_global 2
+      load_const 1
       call 1
     ]
 }
