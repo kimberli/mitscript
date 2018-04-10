@@ -85,7 +85,7 @@ function
   ],
   constants = [],
   parameter_count = 0,
-  local_vars = [result],
+  local_vars = [],
   local_ref_vars = [],
   free_vars = [],
   names = [f, input, intcast, print],

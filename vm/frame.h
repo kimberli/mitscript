@@ -14,17 +14,14 @@
 
 using namespace std;
 
-// TODO: change these to vectors
-typedef map<string, std::shared_ptr<Constant>> LocalVarMap;
-typedef map<string, std::shared_ptr<ValuePtr>> LocalRefMap;
+typedef map<string, shared_ptr<ValuePtr>> VarMap;
 
 class Frame {
     // Class representing a stack frame in interpreter execution
 
-    // map of local variable names to values
-    LocalVarMap localVars;
-    // map of local reference variable names to values
-    LocalRefMap localRefs;
+    // vector of local variable names to values (stored in ValuePtr)
+    // and local reference names to shared ValuePtrs
+    VarMap vars;
 
 public:
     // function that the frame is for
@@ -34,9 +31,7 @@ public:
     // index of current instruction in func's instructions list
     int instructionIndex = 0;
 
-    Frame(std::shared_ptr<Function> func): func(func) {};
-    Frame(std::shared_ptr<Function> func, LocalVarMap& localVars, LocalRefMap& localRefs):
-        func(func), localVars(localVars), localRefs(localRefs) {
+    Frame(shared_ptr<Function> func): func(func) {
 	};
 
     // instruction helpers
@@ -47,9 +42,9 @@ public:
     // function value helpers
     shared_ptr<Constant> getConstantByIndex(int index);
     shared_ptr<Function> getFunctionByIndex(int index);
-    string getLocalVarByIndex(int index);
+    string getLocalByIndex(int index);
     string getNameByIndex(int index);
-    string getRefVarByIndex(int index);
+    string getRefByIndex(int index);
 
     // var map helpers
     shared_ptr<Constant> getLocalVar(string name);

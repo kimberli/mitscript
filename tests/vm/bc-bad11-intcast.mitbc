@@ -44,36 +44,36 @@ function
     ],
     constants = ["129h", " -12 blahoih", "hello"],
     parameter_count = 0,
-    local_vars = [x, y, z],
+    local_vars = [],
     local_ref_vars = [],
     free_vars = [],
-    names = [print, input, intcast],
+    names = [input, intcast, print],
     instructions =
     [
       load_func 0
       alloc_closure 0
-      store_global  0
+      store_global  2
       load_func 1
       alloc_closure 0
-      store_global  1
+      store_global  0
       load_func 2
       alloc_closure 0
-      store_global  2
+      store_global  1
 
-	  load_global 0
 	  load_global 2
+	  load_global 1
       load_const  0
 	  call 1
 	  call 1
 
-	  load_global 0
 	  load_global 2
+	  load_global 1
       load_const  1
 	  call 1
 	  call 1
 
-	  load_global 0
 	  load_global 2
+	  load_global 1
       load_const  2
 	  call 1
 	  call 1

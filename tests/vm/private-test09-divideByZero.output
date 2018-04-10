@@ -1,2 +1,2 @@
 hello
-IllegalArithmeticException: divide by zero
+IllegalArithmeticException: cannot divide by 0

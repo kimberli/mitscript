@@ -1,2 +1,2 @@
 a1
-UninitializedVariableException: c is not initialized
+UninitializedVariableException: c is not defined

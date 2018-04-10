@@ -40,11 +40,50 @@ function
             instructions =
             [
             ]
+        },
+        function
+        {
+            functions = [],
+            constants = [-1, true, "blah blah 123xyz", None],
+            parameter_count = 0,
+            local_vars = [x, y, z],
+            local_ref_vars = [],
+            free_vars = [],
+            names = [print],
+            instructions =
+            [
+              load_global 0
+              load_const 0
+              store_local 0
+              load_local 0
+              call 1
+
+              load_global 0
+              load_const 1
+              store_local 0
+              load_local 0
+              call 1
+
+              load_global 0
+              load_const 2
+              store_local 2
+              load_local 2
+              call 1
+
+              load_global 0
+              load_const 3
+              store_local 1
+              load_local 1
+              call 1
+
+              load_const 1
+              return
+            ]
         }
     ],
-    constants = [-1, true, "blah blah 123xyz", None],
+    constants = [],
     parameter_count = 0,
-    local_vars = [x, y, z],
+    local_vars = [],
     local_ref_vars = [],
     free_vars = [],
     names = [input, intcast, print],
@@ -60,28 +99,8 @@ function
       alloc_closure 0
       store_global  1
 
-      load_global 2
-      load_const 0
-      store_local 0
-      load_local 0
-      call 1
-
-      load_global 2
-      load_const 1
-      store_local 0
-      load_local 0
-      call 1
-
-      load_global 2
-      load_const 2
-      store_local 2
-      load_local 2
-      call 1
-
-      load_global 2
-      load_const 3
-      store_local 1
-      load_local 1
-      call 1
+      load_func 3
+      alloc_closure 0
+      call 0
     ]
 }
