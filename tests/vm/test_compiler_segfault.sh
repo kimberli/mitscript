@@ -58,7 +58,7 @@ if [ -n "$1" ]; then
                 exit 0
             fi
             if run_test $filename; then
-                rm tmp.out
+                rm tmp.txt
             else
                 if [ $count == 1 ]; then
                     echo -ne "${BLUE}IMPORTANT: if you believe the interpreter is in fact behaving correctly, do you want to update the ${TARGET_FILE_EXT} file? (Y/n):${NC} "
@@ -66,9 +66,9 @@ if [ -n "$1" ]; then
                     if [ "$resp" == "Y" ]; then
                         new_file=$DIR$(basename $filename $TEST_FILE_EXT)$TARGET_FILE_EXT
                         echo -e "\t${BLUE}writing new output to $new_file${NC}"
-                        mv tmp.out $new_file
+                        mv tmp.txt $new_file
                     else
-                        rm tmp.out
+                        rm tmp.txt
                     fi
                 fi
             fi
@@ -78,7 +78,7 @@ else
     for filename in $DIR*$TEST_FILE_EXT; do
         run_test $filename
     done
-    rm tmp.out
+    rm tmp.txt
 fi
 
 echo -e "\n\n----------"
