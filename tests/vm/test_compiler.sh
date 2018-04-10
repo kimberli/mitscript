@@ -26,6 +26,10 @@ run_test() {
     echo "==== TEST - $(basename $filename) ===="
     TOTAL=$((TOTAL+1))
     $PROG $filename > tmp.out
+    if [[ $? -eq 139 ]]; then
+        echo -e "${RED}Test Failed${NC}\n"
+        return 0
+    fi
     target=$DIR$(basename $filename $TEST_FILE_EXT)$TARGET_FILE_EXT
     if [ ! -e $target ]; then
         echo -e "Target file $target not found"
