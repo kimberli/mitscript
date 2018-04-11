@@ -1,0 +1,99 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [5, 2, None],
+			parameter_count = 0,
+			local_vars = [z],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [x],
+			instructions = 
+			[
+				load_global	0
+				load_const	0
+				gt
+				if	2
+				goto	3
+				load_const	1
+				store_local	0
+				load_local	0
+				return
+				load_const	2
+				return
+			]
+		}
+	],
+	constants = [3, "Should return None, not error:"],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [input, intcast, print, x, y],
+	instructions = 
+	[
+		load_func	0
+		alloc_closure	0
+		store_global	2
+		load_func	1
+		alloc_closure	0
+		store_global	0
+		load_func	2
+		alloc_closure	0
+		store_global	1
+		load_const	0
+		store_global	3
+		load_func	3
+		alloc_closure	0
+		store_global	4
+		load_global	2
+		load_const	1
+		call	1
+		load_global	2
+		load_global	4
+		call	0
+		call	1
+	]
+}

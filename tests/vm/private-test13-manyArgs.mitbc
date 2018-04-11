@@ -1,0 +1,244 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [None],
+			parameter_count = 52,
+			local_vars = [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt, uu, vv, ww, xx, yy, zz],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+				load_local	0
+				load_local	1
+				add
+				load_local	2
+				add
+				load_local	3
+				add
+				load_local	4
+				add
+				load_local	5
+				add
+				load_local	6
+				add
+				load_local	7
+				add
+				load_local	8
+				add
+				load_local	9
+				add
+				load_local	10
+				add
+				load_local	11
+				add
+				load_local	12
+				add
+				load_local	13
+				add
+				load_local	14
+				add
+				load_local	15
+				add
+				load_local	16
+				add
+				load_local	17
+				add
+				load_local	18
+				add
+				load_local	19
+				add
+				load_local	20
+				add
+				load_local	21
+				add
+				load_local	22
+				add
+				load_local	23
+				add
+				load_local	24
+				add
+				load_local	25
+				add
+				load_local	26
+				add
+				load_local	27
+				add
+				load_local	28
+				add
+				load_local	29
+				add
+				load_local	30
+				add
+				load_local	31
+				add
+				load_local	32
+				add
+				load_local	33
+				add
+				load_local	34
+				add
+				load_local	35
+				add
+				load_local	36
+				add
+				load_local	37
+				add
+				load_local	38
+				add
+				load_local	39
+				add
+				load_local	40
+				add
+				load_local	41
+				add
+				load_local	42
+				add
+				load_local	43
+				add
+				load_local	44
+				add
+				load_local	45
+				add
+				load_local	46
+				add
+				load_local	47
+				add
+				load_local	48
+				add
+				load_local	49
+				add
+				load_local	50
+				add
+				load_local	51
+				add
+				return
+				load_const	0
+				return
+			]
+		}
+	],
+	constants = ["Should print: 52", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [a, input, intcast, print],
+	instructions = 
+	[
+		load_func	0
+		alloc_closure	0
+		store_global	3
+		load_func	1
+		alloc_closure	0
+		store_global	1
+		load_func	2
+		alloc_closure	0
+		store_global	2
+		load_func	3
+		alloc_closure	0
+		store_global	0
+		load_global	3
+		load_const	0
+		call	1
+		load_global	3
+		load_global	0
+		load_const	1
+		load_const	2
+		load_const	3
+		load_const	4
+		load_const	5
+		load_const	6
+		load_const	7
+		load_const	8
+		load_const	9
+		load_const	10
+		load_const	11
+		load_const	12
+		load_const	13
+		load_const	14
+		load_const	15
+		load_const	16
+		load_const	17
+		load_const	18
+		load_const	19
+		load_const	20
+		load_const	21
+		load_const	22
+		load_const	23
+		load_const	24
+		load_const	25
+		load_const	26
+		load_const	27
+		load_const	28
+		load_const	29
+		load_const	30
+		load_const	31
+		load_const	32
+		load_const	33
+		load_const	34
+		load_const	35
+		load_const	36
+		load_const	37
+		load_const	38
+		load_const	39
+		load_const	40
+		load_const	41
+		load_const	42
+		load_const	43
+		load_const	44
+		load_const	45
+		load_const	46
+		load_const	47
+		load_const	48
+		load_const	49
+		load_const	50
+		load_const	51
+		load_const	52
+		call	52
+		call	1
+	]
+}

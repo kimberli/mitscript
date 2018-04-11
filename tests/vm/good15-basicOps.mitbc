@@ -1,0 +1,494 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [None],
+			parameter_count = 3,
+			local_vars = [a, b, c],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [print],
+			instructions = 
+			[
+				load_global	0
+				load_local	0
+				load_local	1
+				add
+				load_local	2
+				add
+				call	1
+				load_const	0
+				return
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [None],
+			parameter_count = 3,
+			local_vars = [a, b, c],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [print],
+			instructions = 
+			[
+				load_global	0
+				load_local	0
+				load_local	1
+				add
+				load_local	2
+				add
+				call	1
+				load_const	0
+				return
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = ["hi", None],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [print],
+			instructions = 
+			[
+				load_global	0
+				load_const	0
+				call	1
+				load_const	1
+				return
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = ["log [", "] ", None],
+			parameter_count = 2,
+			local_vars = [lvl, s],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [debug, oldprint],
+			instructions = 
+			[
+				load_local	0
+				load_global	0
+				gt
+				if	2
+				goto	10
+				load_global	1
+				load_const	0
+				load_local	0
+				add
+				load_const	1
+				add
+				load_local	1
+				add
+				call	1
+				load_const	2
+				return
+			]
+		},
+		function
+		{
+			functions =
+			[
+				function
+				{
+					functions = [],
+					constants = [0, "setting debug lvl to ", None],
+					parameter_count = 0,
+					local_vars = [],
+					local_ref_vars = [],
+					free_vars = [],
+					names = [debug, oldprint],
+					instructions = 
+					[
+						load_const	0
+						store_global	0
+						load_global	1
+						load_const	1
+						load_global	0
+						add
+						call	1
+						load_const	2
+						return
+					]
+				}
+			],
+			constants = ["starting at debug lvl ", 1, "hello", 3, "PRINT ME", 0, 1, "DONEEEE", None, None],
+			parameter_count = 0,
+			local_vars = [setLogOn],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [debug, logStuff, oldprint, print],
+			instructions = 
+			[
+				load_global	2
+				load_const	0
+				load_global	0
+				add
+				call	1
+				load_global	3
+				load_const	1
+				load_const	2
+				call	2
+				load_global	3
+				load_const	3
+				load_const	4
+				call	2
+				load_func	0
+				alloc_closure	0
+				store_local	0
+				load_global	0
+				load_const	5
+				eq
+				if	2
+				goto	7
+				load_global	3
+				load_const	6
+				load_const	7
+				call	2
+				load_const	8
+				return
+				load_local	0
+				call	0
+				load_global	1
+				call	0
+				load_const	9
+				return
+			]
+		}
+	],
+	constants = [" test arithmetic ops", 4, 1, 4, 1, 4, 1, 4, 1, 1042120, 10000, 2, 2, 2, 2, " test equality", 5, 5, 5, 5, 0, false, false, false, 3, 0, false, 3, 0, None, None, None, 0, None, "", "hello", true, "hello", true, " test comparison", 3, 1000, 3, 3, 3, 3, 40, 100, " test string casting", 400, false, None, "hi ", "hi ", "hi ", "hi ", "hi ", " test native", "0", "-23910   hello", "    00001;", " test reassigning native", 2],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [AAA, a, b, c, d, debug, e, f, g, h, input, intcast, logStuff, oldprint, print, x, y, xyz, j, z, x, x, y, xyz, j, z],
+	instructions = 
+	[
+		load_func	0
+		alloc_closure	0
+		store_global	14
+		load_func	1
+		alloc_closure	0
+		store_global	10
+		load_func	2
+		alloc_closure	0
+		store_global	11
+		load_global	14
+		load_const	0
+		call	1
+		load_global	14
+		load_const	1
+		neg
+		load_const	2
+		add
+		call	1
+		load_global	14
+		load_const	3
+		neg
+		load_const	4
+		sub
+		call	1
+		load_global	14
+		load_const	5
+		neg
+		load_const	6
+		mul
+		call	1
+		load_global	14
+		load_const	7
+		neg
+		load_const	8
+		div
+		call	1
+		load_global	14
+		load_const	9
+		neg
+		load_const	10
+		div
+		call	1
+		load_global	14
+		load_const	11
+		load_const	12
+		mul
+		load_const	13
+		mul
+		load_const	14
+		neg
+		mul
+		call	1
+		load_global	14
+		load_const	15
+		call	1
+		load_const	16
+		store_global	1
+		load_global	14
+		load_const	17
+		load_global	1
+		eq
+		call	1
+		load_global	14
+		load_const	18
+		neg
+		load_global	1
+		eq
+		call	1
+		load_global	14
+		load_const	19
+		load_global	1
+		sub
+		load_const	20
+		eq
+		call	1
+		load_global	14
+		load_const	21
+		load_const	22
+		eq
+		call	1
+		load_global	14
+		load_const	23
+		load_const	24
+		load_const	25
+		swap
+		gt
+		eq
+		call	1
+		load_global	14
+		load_const	26
+		load_const	27
+		eq
+		load_const	28
+		eq
+		call	1
+		load_global	14
+		load_const	29
+		load_const	30
+		eq
+		call	1
+		load_global	14
+		load_const	31
+		load_const	32
+		eq
+		call	1
+		load_global	14
+		load_const	33
+		load_const	34
+		eq
+		call	1
+		alloc_record
+		dup
+		load_global	1
+		field_store	15
+		dup
+		load_const	35
+		field_store	16
+		dup
+		alloc_record
+		dup
+		load_const	36
+		field_store	17
+		dup
+		alloc_record
+		field_store	18
+		field_store	19
+		dup
+		load_global	1
+		load_global	1
+		mul
+		field_store	20
+		store_global	1
+		load_global	1
+		store_global	0
+		load_global	14
+		load_global	1
+		load_global	0
+		eq
+		call	1
+		alloc_record
+		dup
+		load_global	1
+		field_store	21
+		dup
+		load_const	37
+		field_store	22
+		dup
+		alloc_record
+		dup
+		load_const	38
+		field_store	23
+		dup
+		alloc_record
+		field_store	24
+		field_store	25
+		store_global	2
+		load_global	14
+		load_global	1
+		load_global	2
+		eq
+		call	1
+		load_func	3
+		alloc_closure	0
+		store_global	7
+		load_global	7
+		store_global	8
+		load_func	4
+		alloc_closure	0
+		store_global	9
+		load_global	14
+		load_global	7
+		load_global	8
+		eq
+		call	1
+		load_global	14
+		load_global	9
+		load_global	8
+		eq
+		call	1
+		load_global	14
+		load_const	39
+		call	1
+		load_global	14
+		load_const	40
+		load_const	41
+		swap
+		gt
+		call	1
+		load_global	14
+		load_const	42
+		load_const	43
+		swap
+		geq
+		call	1
+		load_global	14
+		load_const	44
+		neg
+		load_const	45
+		neg
+		geq
+		call	1
+		load_global	14
+		load_const	46
+		load_const	47
+		gt
+		call	1
+		load_global	14
+		load_const	48
+		call	1
+		load_const	49
+		neg
+		store_global	1
+		load_const	50
+		store_global	2
+		load_global	0
+		store_global	3
+		load_func	5
+		alloc_closure	0
+		store_global	4
+		load_const	51
+		store_global	6
+		load_global	14
+		load_const	52
+		load_global	1
+		add
+		call	1
+		load_global	14
+		load_const	53
+		load_global	2
+		add
+		call	1
+		load_global	14
+		load_const	54
+		load_global	3
+		add
+		call	1
+		load_global	14
+		load_const	55
+		load_global	4
+		add
+		call	1
+		load_global	14
+		load_const	56
+		load_global	6
+		add
+		call	1
+		load_global	14
+		load_const	57
+		call	1
+		load_global	14
+		load_global	11
+		load_const	58
+		call	1
+		call	1
+		load_global	14
+		load_global	11
+		load_const	59
+		call	1
+		call	1
+		load_global	14
+		load_global	11
+		load_const	60
+		call	1
+		call	1
+		load_global	14
+		load_const	61
+		call	1
+		load_const	62
+		store_global	5
+		load_global	14
+		store_global	13
+		load_func	6
+		alloc_closure	0
+		store_global	14
+		load_func	7
+		alloc_closure	0
+		store_global	12
+		load_global	12
+		call	0
+	]
+}

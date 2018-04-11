@@ -19,8 +19,10 @@ run_test() {
     # filename is the filename of the test with the appropriate file ext
     filename=$1
     
-    if [[ $filename =~ "parse" ]]; then
+    if [[ $filename =~ "DirectOutput" ]]; then
         TARGET_FILE_EXT=".output"
+    else
+        TARGET_FILE_EXT=".mitbc"
     fi
 
     echo "==== TEST - $(basename $filename) ===="
