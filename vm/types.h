@@ -31,7 +31,7 @@ struct Value : public Collectable {
     // instance function that returns printable representation of this value's data
     virtual string toString() = 0;
     // instance function to determine whether this value is equal to another one
-    virtual bool equals(shared_ptr<Value> other) = 0;
+    virtual bool equals(Value* other) = 0;
 
     // helper function to dynamically cast value to a specific subclass type
     // and raise an IllegalCastException if the cast fails
@@ -54,10 +54,10 @@ struct Function : public Value {
     // Class for function type; produced by bytecode compiler
 
     // functions defined within this function (but not inside nested functions)
-    vector<shared_ptr<Function>> functions_;
+    vector<Function*> functions_;
 
     // constants used by the instructions within this function (but not inside nested functions)
-    vector<shared_ptr<Constant>> constants_;
+    vector<Constant*> constants_;
 
     // number of parameters to the function
     int32_t parameter_count_;
@@ -81,8 +81,8 @@ struct Function : public Value {
     Function() {};
     virtual ~Function() {};
 
-    Function(vector<shared_ptr<Function>> functions_,
-            vector<shared_ptr<Constant>> constants_,
+    Function(vector<Function*> functions_,
+            vector<Constant*> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -99,7 +99,7 @@ struct Function : public Value {
         instructions(instructions) {};
 
     string toString();
-    bool equals(shared_ptr<Value> other);
+    bool equals(Value* other);
     static const string typeS;
     string type() {
         return "Function";
@@ -110,10 +110,10 @@ struct Function : public Value {
 
 struct ValuePtr: public Value {
     // Class for reference variables
-    shared_ptr<Constant> ptr;
+    Constant* ptr;
 
     ValuePtr() {};
-    ValuePtr(shared_ptr<Constant> ptr): ptr(ptr) {};
+    ValuePtr(Constant* ptr): ptr(ptr) {};
     virtual ~ValuePtr() {};
 
     static const string typeS;
@@ -122,7 +122,7 @@ struct ValuePtr: public Value {
     }
 
     string toString();
-    bool equals(shared_ptr<Value> other);
+    bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
 };
@@ -137,7 +137,7 @@ struct None : public Constant {
     }
 
     string toString();
-    bool equals(shared_ptr<Value> other);
+    bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
 };
@@ -155,7 +155,7 @@ struct Integer : public Constant {
     }
 
     string toString();
-    bool equals(shared_ptr<Value> other);
+    bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
 };
@@ -173,7 +173,7 @@ struct String : public Constant {
     }
 
     string toString();
-    bool equals(shared_ptr<Value> other);
+    bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
 };
@@ -191,23 +191,23 @@ struct Boolean : public Constant{
     }
 
     string toString();
-    bool equals(shared_ptr<Value> other);
+    bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
 };
 
 struct Record : public Constant {
     // Class for record type (note that this is mutable)
-	map<string, shared_ptr<Value>> value;
+	map<string, Value*> value;
 
     Record() {
-		value = *(new map<string, shared_ptr<Value>>());
+		value = *(new map<string, Value*>());
 	}
-    Record(map<string, shared_ptr<Value>> value): value(value) {}
+    Record(map<string, Value*> value): value(value) {}
 
     virtual ~Record() {}
     string toString();
-    bool equals(shared_ptr<Value> other);
+    bool equals(Value* other);
     static const string typeS;
     string type() {
         return "Record";
@@ -221,12 +221,12 @@ struct Closure: public Constant {
 
     // list of reference variables, in the same order as listed in the function's
     // free_vars_ list
-    vector<shared_ptr<ValuePtr>> refs;
+    vector<ValuePtr*> refs;
 
     // function that the closure is for
-    shared_ptr<Function> func;
+    Function* func;
 
-    Closure(vector<shared_ptr<ValuePtr>> refs, shared_ptr<Function> func):
+    Closure(vector<ValuePtr*> refs, Function* func):
         refs(refs), func(func) {};
     virtual ~Closure() {};
 
@@ -236,7 +236,7 @@ struct Closure: public Constant {
     }
 
     string toString();
-    bool equals(shared_ptr<Value> other);
+    bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
 };
@@ -244,8 +244,8 @@ struct Closure: public Constant {
 class NativeFunction : public Function {
     // Abstract class for native functions
 public:
-    NativeFunction(vector<shared_ptr<Function>> functions_,
-            vector<shared_ptr<Constant>> constants_,
+    NativeFunction(vector<Function*> functions_,
+            vector<Constant*> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -255,14 +255,14 @@ public:
 			Function(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-    virtual shared_ptr<Constant> evalNativeFunction(Frame& currentFrame) = 0;
+    virtual Constant* evalNativeFunction(Frame& currentFrame) = 0;
 };
 
 class PrintNativeFunction : public NativeFunction {
     // Class for print native function
 public:
-    PrintNativeFunction(vector<shared_ptr<Function>> functions_,
-            vector<shared_ptr<Constant>> constants_,
+    PrintNativeFunction(vector<Function*> functions_,
+            vector<Constant*> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -272,14 +272,14 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-   shared_ptr<Constant> evalNativeFunction(Frame& currentFrame);
+   Constant* evalNativeFunction(Frame& currentFrame);
 };
 
 class InputNativeFunction : public NativeFunction {
     // Class for input native function
 public:
-    InputNativeFunction(vector<shared_ptr<Function>> functions_,
-            vector<shared_ptr<Constant>> constants_,
+    InputNativeFunction(vector<Function*> functions_,
+            vector<Constant*> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -289,14 +289,14 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-    shared_ptr<Constant> evalNativeFunction(Frame& currentFrame);
+    Constant* evalNativeFunction(Frame& currentFrame);
 };
 
 class IntcastNativeFunction : public NativeFunction {
     // Class for intcast native function
 public:
-    IntcastNativeFunction(vector<shared_ptr<Function>> functions_,
-            vector<shared_ptr<Constant>> constants_,
+    IntcastNativeFunction(vector<Function*> functions_,
+            vector<Constant*> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -306,5 +306,5 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-    shared_ptr<Constant> evalNativeFunction(Frame& currentFrame);
+    Constant* evalNativeFunction(Frame& currentFrame);
 };

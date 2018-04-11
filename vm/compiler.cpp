@@ -104,7 +104,7 @@ void BytecodeCompiler::loadBuiltIns() {
     // for each func, create a func /w right amount of args, 
     // add to the curent frame, 
     // then generate code to load globally
-    funcptr_t printFunc = std::make_shared<Function>(Function());
+    funcptr_t printFunc = new Function();
     printFunc->parameter_count_ = 1;
     int printIdx = retFunc->functions_.size();
     retFunc->functions_.push_back(printFunc);
@@ -115,7 +115,7 @@ void BytecodeCompiler::loadBuiltIns() {
     addWriteVarInstructions("print");
     
     // input 
-    funcptr_t inputFunc = std::make_shared<Function>(Function());
+    funcptr_t inputFunc = new Function(Function());
     inputFunc->parameter_count_ = 0;
     int inputIdx = retFunc->functions_.size();
     retFunc->functions_.push_back(inputFunc);
@@ -126,7 +126,7 @@ void BytecodeCompiler::loadBuiltIns() {
     addWriteVarInstructions("input");
 
     // intcast
-    funcptr_t intcastFunc = std::make_shared<Function>(Function());
+    funcptr_t intcastFunc = new Function(Function());
     intcastFunc->parameter_count_ = 1;
     int intcastIdx = retFunc->functions_.size();
     retFunc->functions_.push_back(intcastFunc);
@@ -140,7 +140,7 @@ void BytecodeCompiler::loadBuiltIns() {
 funcptr_t BytecodeCompiler::evaluate(Expression& exp) {
     // set current function 
     // TODO: LOAD BUILT-INS
-    retFunc = std::make_shared<Function>(Function());
+    retFunc = new Function(Function());
     retFunc->parameter_count_ = 0;
 
     // generate a symbol table 
@@ -290,7 +290,7 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
     stptr_t childTable = symbolTables.at(stCounter);
 
     // 2) make the new function object 
-    funcptr_t childFunc = std::make_shared<Function>(Function());
+    funcptr_t childFunc = new Function(Function());
     childFunc->parameter_count_ = exp.args.size();
 
     // load up childFunc with vars from symbol table
@@ -320,7 +320,7 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
     exp.body.accept(*this);
     // if there is no explicit return statement, add a return None
     // add a return None
-    constptr_t n = std::make_shared<None>(None());
+    constptr_t n = new None(None());
     loadConstant(n);
     Instruction* ret = new Instruction(Operation::Return, optint_t());
     retFunc->instructions.push_back(*ret);
@@ -524,21 +524,21 @@ void BytecodeCompiler::visit(Identifier& exp) {
 }
 
 void BytecodeCompiler::visit(IntConst& exp) {
-    constptr_t i = std::make_shared<Integer>(exp.val);
+    constptr_t i = new Integer(exp.val);
     loadConstant(i);
 }
 
 void BytecodeCompiler::visit(StrConst& exp) {
-    constptr_t s = std::make_shared<String>(exp.val);
+    constptr_t s = new String(exp.val);
     loadConstant(s);
 }
 
 void BytecodeCompiler::visit(BoolConst& exp) {
-    constptr_t b = std::make_shared<Boolean>(Boolean(exp.val));
+    constptr_t b = new Boolean(exp.val);
     loadConstant(b);
 }
 
 void BytecodeCompiler::visit(NoneConst& exp) {
-    constptr_t n = std::make_shared<None>(None());
+    constptr_t n = new None();
     loadConstant(n);
 }

@@ -11,17 +11,19 @@ const string ValuePtr::typeS = "ValuePtr";
 string ValuePtr::toString() {
     throw RuntimeException("can't cast ValuePtr to String");
 }
-bool ValuePtr::equals(shared_ptr<Value> other) {
+bool ValuePtr::equals(Value* other) {
     throw RuntimeException("can't call equals on ValuePtr");
 }
 void ValuePtr::follow(CollectedHeap& heap){
+    // mark the value this points to 
+    heap.markSuccessors(ptr);
 }
 
 /* Function */
 string Function::toString() {
     throw RuntimeException("can't cast Function to a String (try Closure instead)");
 }
-bool Function::equals(shared_ptr<Value> other) {
+bool Function::equals(Value* other) {
     throw RuntimeException("can't call equals on a Function (try Closure instead)");
 }
 void Function::follow(CollectedHeap& heap) {
@@ -32,8 +34,8 @@ const string None::typeS = "None";
 string None::toString() {
     return "None";
 }
-bool None::equals(shared_ptr<Value> other) {
-    auto otherV = dynamic_pointer_cast<None>(other);
+bool None::equals(Value* other) {
+    None* otherV = dynamic_cast<None*>(other);
     if (otherV == NULL) {
         return false;
     }
@@ -46,8 +48,8 @@ const string Integer::typeS = "Integer";
 string Integer::toString() {
     return to_string(value);
 }
-bool Integer::equals(shared_ptr<Value> other) {
-    auto otherV = dynamic_pointer_cast<Integer>(other);
+bool Integer::equals(Value* other) {
+    auto otherV = dynamic_cast<Integer*>(other);
     if (otherV == NULL) {
         return false;
     }
@@ -75,8 +77,8 @@ string String::toString() {
 
     return *replaced;
 }
-bool String::equals(shared_ptr<Value> other) {
-    auto otherV = dynamic_pointer_cast<String>(other);
+bool String::equals(Value* other) {
+    auto otherV = dynamic_cast<String*>(other);
     if (otherV == NULL) {
         return false;
     }
@@ -89,8 +91,8 @@ const string Boolean::typeS = "Boolean";
 string Boolean::toString() {
     return value? "true" : "false";
 };
-bool Boolean::equals(shared_ptr<Value> other) {
-    auto otherV = dynamic_pointer_cast<Boolean>(other);
+bool Boolean::equals(Value* other) {
+    auto otherV = dynamic_cast<Boolean*>(other);
     if (otherV == NULL) {
         return false;
     }
@@ -103,13 +105,13 @@ const string Record::typeS = "Record";
 string Record::toString() {
     string res = "{";
     for (auto x: value) {
-        res += x.first + ":" + x.second.get()->toString() + " ";
+        res += x.first + ":" + x.second->toString() + " ";
     }
     res += "}";
     return res;
 }
-bool Record::equals(shared_ptr<Value> other) {
-    auto otherV = dynamic_pointer_cast<Record>(other);
+bool Record::equals(Value* other) {
+    auto otherV = dynamic_cast<Record*>(other);
     if (otherV == NULL) {
         return false;
     }
@@ -122,8 +124,8 @@ const string Closure::typeS = "Closure";
 string Closure::toString() {
     return "FUNCTION";
 }
-bool Closure::equals(shared_ptr<Value> other) {
-    auto otherV = dynamic_pointer_cast<Closure>(other);
+bool Closure::equals(Value* other) {
+    auto otherV = dynamic_cast<Closure*>(other);
     if (otherV == NULL) {
         return false;
     }
@@ -143,33 +145,33 @@ bool Closure::equals(shared_ptr<Value> other) {
 void Closure::follow(CollectedHeap& heap) {
 }
 /* Native functions */
-shared_ptr<Constant> PrintNativeFunction::evalNativeFunction(Frame& currentFrame) {
+Constant* PrintNativeFunction::evalNativeFunction(Frame& currentFrame) {
     string name = currentFrame.getLocalByIndex(0);
     auto val = currentFrame.getLocalVar(name);
     cout << val->toString() << endl;
-    return make_shared<None>();
+    return new None();
 };
 
-shared_ptr<Constant> InputNativeFunction::evalNativeFunction(Frame& currentFrame) {
+Constant* InputNativeFunction::evalNativeFunction(Frame& currentFrame) {
     string input;
     getline(cin, input);
-    return make_shared<String>(input);
+    return new String(input);
 };
 
-shared_ptr<Constant> IntcastNativeFunction::evalNativeFunction(Frame& currentFrame) {
+Constant* IntcastNativeFunction::evalNativeFunction(Frame& currentFrame) {
     string name = currentFrame.getLocalByIndex(0);
     auto val = currentFrame.getLocalVar(name);
-	auto intVal = dynamic_pointer_cast<Integer>(val);
+	auto intVal = dynamic_cast<Integer*>(val);
     if (intVal != NULL) {
-        return make_shared<Integer>(intVal->value);
+        return new Integer(intVal->value);
     }
     auto strVal = val->cast<String>();
     if (strVal->value == "0") {
-        return make_shared<Integer>(0);
+        return new Integer(0);
     }
     int result = atoi(strVal->value.c_str());
     if (result == 0) {
         throw IllegalCastException("cannot convert value " + strVal->value + " to IntValue");
     }
-    return make_shared<Integer>(result);
+    return new Integer(result);
 };

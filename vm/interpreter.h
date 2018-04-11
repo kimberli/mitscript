@@ -16,12 +16,12 @@ using namespace std;
 class Interpreter {
     // class used to handle interpreter state
 private:
-    shared_ptr<Frame> globalFrame;  // root function frame
-    stack<shared_ptr<Frame>> frames;  // stack of frames
+    Frame* globalFrame;  // root function frame
+    stack<Frame*> frames;  // stack of frames
     void executeStep();  // execute a single next instruction
     bool finished;  // true when the program has terminated
     CollectedHeap* collector;
 public:
-    Interpreter(shared_ptr<Function> mainFunc, CollectedHeap* gCollector);
+    Interpreter(Function* mainFunc, CollectedHeap* gCollector);
     void run();  // executes all instructions until termination
 };
