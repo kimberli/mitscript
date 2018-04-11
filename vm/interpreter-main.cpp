@@ -7,6 +7,8 @@
  * 2) with the -s flag, it reads in MITScript source, compiles it to bytecode, and
  *    executes the resulting bytecode
  */
+#include <stdexcept>
+
 #include "../parser/parser.h"
 #include "../parser/lexer.h"
 #include "bc-parser.h"
@@ -46,7 +48,7 @@ int main(int argc, char** argv) {
             }
             try {
                 maxmem = stoi(argv[i+1]);
-            } catch {
+            } catch (std::invalid_argument& ia) {
                 cout << memError << endl;
                 return 1;
             }
@@ -78,7 +80,7 @@ int main(int argc, char** argv) {
             cout<<"Parsing MITScript failed"<<endl;
             return 1;
         }
-        BytecodeCompiler* bc = new BytecodeCompiler();
+        BytecodeCompiler* bc = new BytecodeCompiler(collector);
         try {
             bc_output = bc->evaluate(*output);
         } catch (InterpreterException& exception) {
@@ -99,7 +101,7 @@ int main(int argc, char** argv) {
     }
   
     try {
-        Interpreter* intp = new Interpreter(bc_output);
+        Interpreter* intp = new Interpreter(bc_output, collector);
         intp->run();
     } catch (InterpreterException& exception) {
         cout << exception.toString() << endl;

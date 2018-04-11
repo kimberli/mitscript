@@ -20,7 +20,8 @@ private:
     stack<shared_ptr<Frame>> frames;  // stack of frames
     void executeStep();  // execute a single next instruction
     bool finished;  // true when the program has terminated
+    CollectedHeap* collector;
 public:
-    Interpreter(shared_ptr<Function> mainFunc);
+    Interpreter(shared_ptr<Function> mainFunc, CollectedHeap* gCollector);
     void run();  // executes all instructions until termination
 };

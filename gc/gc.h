@@ -32,9 +32,9 @@ This class keeps track of the garbage collected heap. The class must do all of t
 	- 
 */
 class CollectedHeap {
-private 
+private:
     int currentSize;
-    std::list<Collectable> allocated;
+    std::list<Collectable*> allocated;
 public:
 
 	/*

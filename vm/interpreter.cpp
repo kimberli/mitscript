@@ -14,7 +14,7 @@
 
 using namespace std;
 
-Interpreter::Interpreter(shared_ptr<Function> mainFunc) {
+Interpreter::Interpreter(shared_ptr<Function> mainFunc, CollectedHeap* gCollector) {
     int numLocals = mainFunc->names_.size();
     int numRefs = 0;
     if (mainFunc->local_reference_vars_.size() != 0) {
@@ -45,6 +45,9 @@ Interpreter::Interpreter(shared_ptr<Function> mainFunc) {
 	frame->func->functions_[0] = make_shared<PrintNativeFunction>(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
 	frame->func->functions_[1] = make_shared<InputNativeFunction>(functions_, constants_, 0, args0, local_reference_vars_, free_vars_, names_, instructions);
 	frame->func->functions_[2] = make_shared<IntcastNativeFunction>(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
+
+    // store the garbage collector
+    collector = gCollector;
 };
 
 void Interpreter::executeStep() {

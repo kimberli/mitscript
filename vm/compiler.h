@@ -57,7 +57,10 @@ private:
     stptr_t curTable;
     int stCounter = 0;
 
+    CollectedHeap* collector;
+
 public:
+    BytecodeCompiler(CollectedHeap* collector): collector(collector) {};
     funcptr_t evaluate(Expression& exp); // entrypoint of the visitor
     funcptr_t retFunc;  // statements update this
 

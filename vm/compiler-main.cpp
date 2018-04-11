@@ -36,7 +36,8 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    BytecodeCompiler* bc = new BytecodeCompiler();
+    CollectedHeap* collector = new CollectedHeap(100000);
+    BytecodeCompiler* bc = new BytecodeCompiler(collector);
 
     try {
         funcptr_t rootFunc = bc->evaluate(*output);
