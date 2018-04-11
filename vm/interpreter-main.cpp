@@ -14,6 +14,7 @@
 
 #include "compiler.h"
 #include "interpreter.h"
+#include "../gc/gc.h"
 
 #define MITSCRIPT 1
 #define BYTECODE 2
@@ -30,13 +31,28 @@ int main(int argc, char** argv) {
     funcptr_t bc_output;
     int file_type = 0;
     int rvalue = 0;
+    int maxmem = 1000;
 
     for (int i = 1; i < argc; ++i) {
         if (strcmp(argv[i], "-b") == 0) {
             file_type = BYTECODE;
         } else if (strcmp(argv[i], "-s") == 0) {
             file_type = MITSCRIPT;
-        } else {
+        } else if (strcmp(argv[i], "-mem") == 0) {
+            string memError = "-mem takes an integer specifying max data usage in MB";
+            if ((i+1) >= argc) {
+                cout << memError << endl;
+                return 1;
+            }
+            try {
+                maxmem = stoi(argv[i+1]);
+            } catch {
+                cout << memError << endl;
+                return 1;
+            }
+            i++; // skip an arg
+        }
+        else {
             infile = fopen(argv[i], "r");
             if (infile == NULL) {
                 cout << "Cannot open file " << argv[i] << endl;
@@ -50,6 +66,8 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    // allocate a garbage collector
+    CollectedHeap* collector = new CollectedHeap(maxmem);
     if (file_type == MITSCRIPT) {
         // parse mitscript, set output to bc_output
         void* scanner;

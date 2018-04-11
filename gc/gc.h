@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdio>
-
+#include <list>
 
 class CollectedHeap;
 
@@ -11,6 +11,7 @@ private:
 	//(since it is declared as friend below). You can think of these fields as the header for the object, 
 	//which will include metadata that is useful for the garbage collector.
     bool marked;
+    int size;
 protected:
 	/*
 	The mark phase of the garbage collector needs to follow all pointers from the collectable objects, check 
@@ -23,8 +24,6 @@ protected:
 	friend CollectedHeap;
 };
 
-
-
 /*
 This class keeps track of the garbage collected heap. The class must do all of the following: 
 	- provide an interface to allocate objects that will be supported by garbage collection.
@@ -33,7 +32,9 @@ This class keeps track of the garbage collected heap. The class must do all of t
 	- 
 */
 class CollectedHeap {
-
+private 
+    int currentSize;
+    std::list<Collectable> allocated;
 public:
 
 	/*
@@ -56,7 +57,7 @@ public:
 	*/
 	int count() 
 	{
-	
+	    // returns the size of allocated ll 
 	}
 
 	/*
@@ -67,7 +68,13 @@ public:
 	template<typename T>
 	T* allocate() 
 	{
-	
+	    // allocate an object using new 
+        // estimate the size of the object 
+        // register the object's size in the object's header and 
+        //     by adding it to this.currentSize
+        // put the object in the allocated ll so it can be garbage 
+        //    collected
+        // return the pointer
 	}
 
 
@@ -78,13 +85,15 @@ public:
 	template<typename T, typename ARG>
 	T* allocate(ARG a) 
 	{
-	
+	    // see above
 	}
 
 	/*
 	For performance reasons, you may want to implement specialized allocate methods to allocate particular kinds of objects.
 	
 	*/
+    // TODO probably need custom allocators for functions, records, closures, etc
+    // so that we can do a customized estimation of how much space they take
 
 
 	/*
@@ -94,7 +103,8 @@ public:
 	*/
 	inline void markSuccessors(Collectable* next) 
 	{
-    	
+    	// for each child, it not already marked, set marked to true and
+        // call next.follow()
 	}
 
 	/*
@@ -110,9 +120,9 @@ public:
 	template<typename ITERATOR>
 	void gc(ITERATOR begin, ITERATOR end) 
 	{
-        // calls markSucessors on everything in the root set? 
-        // loop through the allocated list and dereference anything not marked
-
+        // makes the root set (how???)
+        // calls markSucessors on everything in the root set 
+        // loop through the allocated ll. if marked = False, deallocate, decrement the size of the collector, and remove from ll. Else, set marked to False
 	}
 };
 
