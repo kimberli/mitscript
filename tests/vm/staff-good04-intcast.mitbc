@@ -44,35 +44,36 @@ function
 		function
 		{
 			functions = [],
-			constants = ["hello", 3, "hi", None],
-			parameter_count = 0,
+			constants = ["Value ", 1, 1, None],
+			parameter_count = 1,
 			local_vars = [x],
 			local_ref_vars = [],
 			free_vars = [],
-			names = [],
+			names = [print],
 			instructions = 
 			[
+				load_global	0
 				load_const	0
-				store_local	0
-				load_const	1
 				load_local	0
-				swap
+				load_const	1
+				sub
+				add
+				call	1
 				load_local	0
 				load_const	2
-				add
-				swap
-				index_store
+				sub
+				return
 				load_const	3
 				return
 			]
 		}
 	],
-	constants = [],
+	constants = ["0", 1, 0],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [f, input, intcast, print],
+	names = [foo, input, intcast, print, x],
 	instructions = 
 	[
 		load_func	0
@@ -87,7 +88,20 @@ function
 		load_func	3
 		alloc_closure	0
 		store_global	0
+		load_global	2
+		load_const	0
+		call	1
+		store_global	4
+		goto	5
 		load_global	0
-		call	0
+		load_global	4
+		call	1
+		store_global	4
+		load_global	4
+		load_const	1
+		add
+		load_const	2
+		gt
+		if	-9
 	]
 }

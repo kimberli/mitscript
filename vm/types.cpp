@@ -58,7 +58,22 @@ void Integer::follow(CollectedHeap& heap) {
 /* String */
 const string String::typeS = "String";
 string String::toString() {
-    return value;
+    string* replaced = new string(value);
+    auto pos = replaced->find("\\");
+    while (pos != string::npos) {
+        if (replaced->at(pos + 1) == 'n') {
+            replaced->replace(pos, 2, "\n");
+        } else if (replaced->at(pos + 1) == 't') {
+            replaced->replace(pos, 2, "\t");
+        } else if (replaced->at(pos + 1) == '\\') {
+            replaced->replace(pos, 2, "\\");
+        } else if (replaced->at(pos + 1) == '"') {
+            replaced->replace(pos, 2, "\"");
+        }
+        pos = replaced->find("\\", pos + 1);
+    }
+
+    return *replaced;
 }
 bool String::equals(shared_ptr<Value> other) {
     auto otherV = dynamic_pointer_cast<String>(other);

@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = ["hello", 3, "hi", None],
+			constants = [true, 1, 2, None],
 			parameter_count = 0,
 			local_vars = [x],
 			local_ref_vars = [],
@@ -53,15 +53,12 @@ function
 			instructions = 
 			[
 				load_const	0
-				store_local	0
+				if	4
 				load_const	1
-				load_local	0
-				swap
-				load_local	0
+				return
+				goto	3
 				load_const	2
-				add
-				swap
-				index_store
+				store_local	0
 				load_const	3
 				return
 			]
@@ -72,22 +69,24 @@ function
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [f, input, intcast, print],
+	names = [input, intcast, print, x],
 	instructions = 
 	[
 		load_func	0
 		alloc_closure	0
-		store_global	3
+		store_global	2
 		load_func	1
 		alloc_closure	0
-		store_global	1
+		store_global	0
 		load_func	2
 		alloc_closure	0
-		store_global	2
+		store_global	1
 		load_func	3
 		alloc_closure	0
-		store_global	0
-		load_global	0
+		store_global	3
+		load_global	2
+		load_global	3
 		call	0
+		call	1
 	]
 }

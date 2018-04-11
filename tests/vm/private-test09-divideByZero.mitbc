@@ -40,39 +40,14 @@ function
 			instructions = 
 			[
 			]
-		},
-		function
-		{
-			functions = [],
-			constants = ["hello", 3, "hi", None],
-			parameter_count = 0,
-			local_vars = [x],
-			local_ref_vars = [],
-			free_vars = [],
-			names = [],
-			instructions = 
-			[
-				load_const	0
-				store_local	0
-				load_const	1
-				load_local	0
-				swap
-				load_local	0
-				load_const	2
-				add
-				swap
-				index_store
-				load_const	3
-				return
-			]
 		}
 	],
-	constants = [],
+	constants = ["hello", 4, 0],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [f, input, intcast, print],
+	names = [bad, input, intcast, print],
 	instructions = 
 	[
 		load_func	0
@@ -84,10 +59,12 @@ function
 		load_func	2
 		alloc_closure	0
 		store_global	2
-		load_func	3
-		alloc_closure	0
+		load_global	3
+		load_const	0
+		call	1
+		load_const	1
+		load_const	2
+		div
 		store_global	0
-		load_global	0
-		call	0
 	]
 }

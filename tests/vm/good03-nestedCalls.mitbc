@@ -43,26 +43,45 @@ function
 		},
 		function
 		{
-			functions = [],
-			constants = ["hello", 3, "hi", None],
+			functions =
+			[
+				function
+				{
+					functions = [],
+					constants = ["hi", 3, None],
+					parameter_count = 0,
+					local_vars = [],
+					local_ref_vars = [],
+					free_vars = [],
+					names = [print],
+					instructions = 
+					[
+						load_global	0
+						load_const	0
+						call	1
+						load_const	1
+						return
+						load_const	2
+						return
+					]
+				}
+			],
+			constants = [None],
 			parameter_count = 0,
-			local_vars = [x],
+			local_vars = [y],
 			local_ref_vars = [],
 			free_vars = [],
-			names = [],
+			names = [print],
 			instructions = 
 			[
-				load_const	0
+				load_func	0
+				alloc_closure	0
 				store_local	0
-				load_const	1
+				load_global	0
 				load_local	0
-				swap
-				load_local	0
-				load_const	2
-				add
-				swap
-				index_store
-				load_const	3
+				call	0
+				call	1
+				load_const	0
 				return
 			]
 		}
@@ -87,7 +106,9 @@ function
 		load_func	3
 		alloc_closure	0
 		store_global	0
+		load_global	3
 		load_global	0
 		call	0
+		call	1
 	]
 }
