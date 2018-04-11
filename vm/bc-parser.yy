@@ -61,7 +61,7 @@ int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* me
 	std::string* strconst;
 
 	Function*   func;
-	vector<shared_ptr<Function>>*   funclist;
+	vector<Function*>*   funclist;
 
     vector<string>* identlist;
 
@@ -70,7 +70,7 @@ int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* me
 
 
     Constant* constant;
-    vector<shared_ptr<Constant>>* constantlist;
+    vector<Constant*>* constantlist;
 }
 
 //Below is where you define your tokens and their types.
@@ -171,7 +171,7 @@ Function:
 }
 
 FunctionListStar:
-  %empty { $$ = new vector<shared_ptr<Function>>(); }
+  %empty { $$ = new vector<Function*>(); }
 | FunctionListPlus
 {
 	$$ = $1;
@@ -180,9 +180,9 @@ FunctionListStar:
 FunctionListPlus:
 Function
 {
-	auto list = new vector<shared_ptr<Function>>();
+	auto list = new vector<Function*>();
 
-  	list->insert(list->begin(), std::shared_ptr<Function>($1));
+  	list->insert(list->begin(), $1);
 
 	$$ = list;
 }
@@ -190,7 +190,7 @@ Function
 {
      auto list = $3;
 
-     list->insert(list->begin(), std::shared_ptr<Function>($1));
+     list->insert(list->begin(), $1);
 
 	 $$ = list;
 }
@@ -247,7 +247,7 @@ Constant :
 }
 
 ConstantListStar:
-%empty { $$ = new vector<shared_ptr<Constant> >(); }
+%empty { $$ = new vector<Constant*>(); }
 | ConstantListPlus
 {
 	$$ = $1;
@@ -256,9 +256,9 @@ ConstantListStar:
 ConstantListPlus:
 Constant
 {
-	auto list = new vector<shared_ptr<Constant>>();
+	auto list = new vector<Constant*>();
 
-	list->insert(list->begin(), std::shared_ptr<Constant>($1));
+	list->insert(list->begin(), $1);
 
 	$$ = list;
 }
@@ -266,7 +266,7 @@ Constant
 {
 	auto list = $3;
 
-	list->insert(list->begin(), std::shared_ptr<Constant>($1));
+	list->insert(list->begin(), $1);
 
 	$$ = list;
 }
