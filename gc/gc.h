@@ -10,6 +10,7 @@ private:
 	//Any private fields you add to the Collectable class will be accessible by the CollectedHeap 
 	//(since it is declared as friend below). You can think of these fields as the header for the object, 
 	//which will include metadata that is useful for the garbage collector.
+    bool marked;
 protected:
 	/*
 	The mark phase of the garbage collector needs to follow all pointers from the collectable objects, check 
@@ -93,7 +94,7 @@ public:
 	*/
 	inline void markSuccessors(Collectable* next) 
 	{
-	
+    	
 	}
 
 	/*
@@ -109,7 +110,8 @@ public:
 	template<typename ITERATOR>
 	void gc(ITERATOR begin, ITERATOR end) 
 	{
-	
+        // calls markSucessors on everything in the root set? 
+        // loop through the allocated list and dereference anything not marked
 
 	}
 };
