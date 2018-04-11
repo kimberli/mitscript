@@ -89,15 +89,14 @@ int main(int argc, char** argv) {
         }
     } else if (file_type == BYTECODE) {
         // parse bytecode, set bc_output
-        Function* output;
+        Function* bc_output;
         void* scanner;
         bclex_init(&scanner);
         bcset_in(infile, scanner);
-        if (bcparse(scanner, output) == 1) {
+        if (bcparse(scanner, bc_output) == 1) {
             cout << "Parsing bytecode failed" << endl;
             return 1;
         }
-        bc_output = make_shared<Function>(*output);
     }
   
     try {

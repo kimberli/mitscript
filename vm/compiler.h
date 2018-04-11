@@ -19,8 +19,8 @@
 
 using namespace std;
 
-typedef std::shared_ptr<Constant> constptr_t;
-typedef std::shared_ptr<Function> funcptr_t;
+typedef Constant* constptr_t;
+typedef Function* funcptr_t;
 typedef std::experimental::optional<int32_t> optint_t;
 
 class BytecodeCompiler : public Visitor {

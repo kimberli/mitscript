@@ -14,7 +14,7 @@
 
 using namespace std;
 
-typedef map<string, shared_ptr<ValuePtr>> VarMap;
+typedef map<string, ValuePtr*> VarMap;
 
 class Frame : public Collectable {
     // Class representing a stack frame in interpreter execution
@@ -25,13 +25,13 @@ class Frame : public Collectable {
     void follow(CollectedHeap& heap) override;
 public:
     // function that the frame is for
-    std::shared_ptr<Function> func;
+    Function* func;
     // operand stack
-    stack<std::shared_ptr<Value>> opStack;
+    stack<Value*> opStack;
     // index of current instruction in func's instructions list
     int instructionIndex = 0;
 
-    Frame(shared_ptr<Function> func): func(func) {
+    Frame(Function* func): func(func) {
 	};
 
     // instruction helpers
@@ -40,21 +40,21 @@ public:
     void moveToInstruction(int offset);
 
     // function value helpers
-    shared_ptr<Constant> getConstantByIndex(int index);
-    shared_ptr<Function> getFunctionByIndex(int index);
+    Constant* getConstantByIndex(int index);
+    Function* getFunctionByIndex(int index);
     string getLocalByIndex(int index);
     string getNameByIndex(int index);
     string getRefByIndex(int index);
 
     // var map helpers
-    shared_ptr<Constant> getLocalVar(string name);
-    shared_ptr<ValuePtr> getRefVar(string name);
+    Constant* getLocalVar(string name);
+    ValuePtr* getRefVar(string name);
 
-    void setLocalVar(string name, shared_ptr<Constant> val);
-    void setRefVar(string name, shared_ptr<ValuePtr> val);
+    void setLocalVar(string name, Constant* val);
+    void setRefVar(string name, ValuePtr* val);
 
     // operand stack helpers
-    void opStackPush(std::shared_ptr<Value> val);
-    std::shared_ptr<Value> opStackPeek();
-    std::shared_ptr<Value> opStackPop();
+    void opStackPush(Value* val);
+    Value* opStackPeek();
+    Value* opStackPop();
 };

@@ -21,14 +21,14 @@ void Frame::moveToInstruction(int offset) {
 }
 
 // function value helpers
-shared_ptr<Constant> Frame::getConstantByIndex(int index) {
+Constant* Frame::getConstantByIndex(int index) {
     if (index < 0 || index >= func->constants_.size()) {
         throw RuntimeException("constant " + to_string(index) + " out of bounds");
     }
     return func->constants_[index];
 }
 
-shared_ptr<Function> Frame::getFunctionByIndex(int index) {
+Function* Frame::getFunctionByIndex(int index) {
     if (index < 0 || index >= func->functions_.size()) {
         throw RuntimeException("function " + to_string(index) + " out of bounds");
     }
@@ -60,9 +60,9 @@ string Frame::getRefByIndex(int index) {
 }
 
 // var map helpers
-shared_ptr<Constant> Frame::getLocalVar(string name) {
+Constant* Frame::getLocalVar(string name) {
     if (vars.count(name) != 0) {
-        shared_ptr<Constant> result = vars[name]->ptr;
+        Constant* result = vars[name]->ptr;
         if (result == NULL) {
             throw UninitializedVariableException(name + " is not defined");
         }
@@ -71,42 +71,42 @@ shared_ptr<Constant> Frame::getLocalVar(string name) {
     throw UninitializedVariableException(name + " is not defined");
 }
 
-shared_ptr<ValuePtr> Frame::getRefVar(string name) {
+ValuePtr* Frame::getRefVar(string name) {
     if (vars.count(name) != 0) {
         return vars[name];
     }
     throw RuntimeException(name + " has not been created in its frame's vars");
 }
 
-void Frame::setLocalVar(string name, shared_ptr<Constant> val) {
+void Frame::setLocalVar(string name, Constant* val) {
     if (vars.count(name) == 0) {
-        vars[name] = make_shared<ValuePtr>(val);
+        vars[name] = new ValuePtr(val);
     } else {
         vars[name]->ptr = val;
     }
 }
 
-void Frame::setRefVar(string name, shared_ptr<ValuePtr> val) {
+void Frame::setRefVar(string name, ValuePtr* val) {
     vars[name] = val;
 }
 
 // operand stack helpers
-void Frame::opStackPush(shared_ptr<Value> val) {
+void Frame::opStackPush(Value* val) {
     opStack.push(val);
 }
 
-shared_ptr<Value> Frame::opStackPeek() {
+Value* Frame::opStackPeek() {
     if (opStack.empty()) {
         throw InsufficientStackException("peek at empty stack");
     }
     return opStack.top();
 }
 
-shared_ptr<Value> Frame::opStackPop() {
+Value* Frame::opStackPop() {
     if (opStack.empty()) {
         throw InsufficientStackException("pop from empty stack");
     }
-    shared_ptr<Value> top = opStack.top();
+    Value* top = opStack.top();
     opStack.pop();
     return top;
 }

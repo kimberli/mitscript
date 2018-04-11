@@ -14,7 +14,7 @@
 
 using namespace std;
 
-Interpreter::Interpreter(shared_ptr<Function> mainFunc, CollectedHeap* gCollector) {
+Interpreter::Interpreter(Function* mainFunc, CollectedHeap* gCollector) {
     int numLocals = mainFunc->names_.size();
     int numRefs = 0;
     if (mainFunc->local_reference_vars_.size() != 0) {
@@ -27,13 +27,13 @@ Interpreter::Interpreter(shared_ptr<Function> mainFunc, CollectedHeap* gCollecto
         throw RuntimeException("can't initialize root frame with nonzero local vars");
     }
     mainFunc->local_vars_ = mainFunc->names_;
-    shared_ptr<Frame> frame = make_shared<Frame>(mainFunc);
+    Frame* frame = new Frame(mainFunc);
     globalFrame = frame;
     frames.push(frame);
     finished = false;
 
-	vector<shared_ptr<Function>> functions_;
-    vector<shared_ptr<Constant>> constants_;
+	vector<Function*> functions_;
+    vector<Constant*> constants_;
 	vector<string> args0 ;
 	vector<string> args1 = { string("s") };
     vector<string> local_reference_vars_;
@@ -42,9 +42,9 @@ Interpreter::Interpreter(shared_ptr<Function> mainFunc, CollectedHeap* gCollecto
     InstructionList instructions;
 	vector<shared_ptr<Function>> frameFuncs;
 	// add native functions at the beginning of functions array
-	frame->func->functions_[0] = make_shared<PrintNativeFunction>(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
-	frame->func->functions_[1] = make_shared<InputNativeFunction>(functions_, constants_, 0, args0, local_reference_vars_, free_vars_, names_, instructions);
-	frame->func->functions_[2] = make_shared<IntcastNativeFunction>(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
+	frame->func->functions_[0] = new PrintNativeFunction(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
+	frame->func->functions_[1] = new InputNativeFunction(functions_, constants_, 0, args0, local_reference_vars_, free_vars_, names_, instructions);
+	frame->func->functions_[2] = new IntcastNativeFunction(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
 
     // store the garbage collector
     collector = gCollector;
@@ -52,7 +52,7 @@ Interpreter::Interpreter(shared_ptr<Function> mainFunc, CollectedHeap* gCollecto
 
 void Interpreter::executeStep() {
     // executes a single instruction and updates state of interpreter
-    shared_ptr<Frame> frame = frames.top();
+    Frame* frame = frames.top();
     Instruction& inst = frame->getCurrInstruction();
     int newOffset = 1;
     LOG("executing instruction " + to_string(frame->instructionIndex));
@@ -78,7 +78,7 @@ void Interpreter::executeStep() {
         case Operation::StoreLocal:
             {
                 string name = frame->getLocalByIndex(inst.operand0.value());
-                auto value = dynamic_pointer_cast<Constant>(frame->opStackPop());
+                Constant* value = dynamic_cast<Constant*>(frame->opStackPop());
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for StoreLocal");
                 }
@@ -95,7 +95,7 @@ void Interpreter::executeStep() {
         case Operation::StoreGlobal:
             {
                 int index = inst.operand0.value();
-                auto value = dynamic_pointer_cast<Constant>(frame->opStackPop());
+                Constant* value = dynamic_cast<Constant*>(frame->opStackPop());
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for StoreGlobal");
                 }
@@ -112,7 +112,7 @@ void Interpreter::executeStep() {
             }
         case Operation::LoadReference:
             {
-                auto valuePtr = dynamic_pointer_cast<ValuePtr>(frame->opStackPop());
+                ValuePtr* valuePtr = dynamic_cast<ValuePtr*>(frame->opStackPop());
                 if (valuePtr == NULL) {
                     throw RuntimeException("expected ValuePtr on the stack for LoadReference");
                 }
@@ -121,11 +121,11 @@ void Interpreter::executeStep() {
             }
         case Operation::StoreReference:
             {
-                auto value = dynamic_pointer_cast<Constant>(frame->opStackPop());
+                Constant* value = dynamic_cast<Constant*>(frame->opStackPop());
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for StoreReference");
                 }
-                auto valuePtr = dynamic_pointer_cast<ValuePtr>(frame->opStackPop());
+                ValuePtr* valuePtr = dynamic_cast<ValuePtr*>(frame->opStackPop());
                 if (valuePtr == NULL) {
                     throw RuntimeException("expected ValuePtr on the stack for StoreReference");
                 }
@@ -134,7 +134,7 @@ void Interpreter::executeStep() {
             }
         case Operation::AllocRecord:
             {
-				frame->opStackPush(make_shared<Record>());
+				frame->opStackPush(new Record());
                 break;
             }
         case Operation::FieldLoad:
@@ -142,14 +142,14 @@ void Interpreter::executeStep() {
 				Record* record = frame->opStackPop()->cast<Record>();
 				string field = frame->getNameByIndex(inst.operand0.value());
                 if (record->value.count(field) == 0) {
-                    record->value[field] = make_shared<None>();
+                    record->value[field] = new None();
                 }
 				frame->opStackPush(record->value[field]);
                 break;
             }
         case Operation::FieldStore:
             {
-				auto value = dynamic_pointer_cast<Constant>(frame->opStackPop());
+				Constant* value = dynamic_cast<Constant*>(frame->opStackPop());
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for FieldStore");
                 }
@@ -163,7 +163,7 @@ void Interpreter::executeStep() {
 				string index = frame->opStackPop()->toString();
 				Record* record = frame->opStackPop()->cast<Record>();
                 if (record->value.count(index) == 0) {
-                    record->value[index] = make_shared<None>();
+                    record->value[index] = new None();
                 }
 				frame->opStackPush(record->value[index]);
                 break;
@@ -183,16 +183,16 @@ void Interpreter::executeStep() {
             {
                 // read num free vars, ref vars, and function off the stack
                 int numFreeVars = inst.operand0.value();
-                vector<shared_ptr<ValuePtr>> refList;
+                vector<ValuePtr*> refList;
                 for (int i = 0; i < numFreeVars; i++) {
                     auto top = frame->opStackPop();
-                    auto value = dynamic_pointer_cast<ValuePtr>(top);
+                    ValuePtr* value = dynamic_cast<ValuePtr*>(top);
                     if (value == NULL) {
                         throw RuntimeException("expected ValuePtr on the stack for AllocClosure");
                     }
                     refList.push_back(value);
                 }
-                auto func = dynamic_pointer_cast<Function>(frame->opStackPop());
+                Function* func = dynamic_cast<Function*>(frame->opStackPop());
                 if (func == NULL) {
                     throw RuntimeException("expected Function on the stack for AllocClosure");
                 }
@@ -202,24 +202,24 @@ void Interpreter::executeStep() {
                 }
 
                 // push new closure onto the stack
-                frame->opStackPush(make_shared<Closure>(refList, func));
+                frame->opStackPush(new Closure(refList, func));
                 break;
             }
         case Operation::Call:
             {
                 // read num arguments, argument values, and closure off the stack
                 int numArgs = inst.operand0.value();
-                vector<shared_ptr<Constant>> argsList;
+                vector<Constant*> argsList;
                 for (int i = 0; i < numArgs; i++) {
                     auto top = frame->opStackPop();
-                    auto value = dynamic_pointer_cast<Constant>(top);
+                    Constant* value = dynamic_cast<Constant*>(top);
                     if (value == NULL) {
                         throw RuntimeException("expected Constant on the stack for Call");
                     }
                     argsList.push_back(value);
                 }
 				reverse(argsList.begin(), argsList.end());
-                auto clos = dynamic_pointer_cast<Closure>(frame->opStackPop());
+                Closure* clos = dynamic_cast<Closure*>(frame->opStackPop());
                 if (clos == NULL) {
                     throw RuntimeException("expected Closure on operand stack for function call");
                 }
@@ -231,24 +231,24 @@ void Interpreter::executeStep() {
                 // process local refs and local vars
                 int numLocals = clos->func->local_vars_.size();
                 int numRefs = clos->func->free_vars_.size();
-                shared_ptr<Frame> newFrame = make_shared<Frame>(clos->func);
+                Frame* newFrame = new Frame(clos->func);
 				for (int i = 0; i < numLocals; i++) {
                     if (i < numArgs) {
                         string name = clos->func->local_vars_[i];
                         newFrame->setLocalVar(name, argsList[i]);
                     } else {
                         string name = clos->func->local_vars_[i];
-                        newFrame->setLocalVar(name, make_shared<None>());
+                        newFrame->setLocalVar(name, new None());
                     }
 				}
                 for (int i = 0; i < numRefs; i++) {
                     string name = clos->func->free_vars_[i];
                     newFrame->setRefVar(name, clos->refs[i]);
                 }
-				auto nativeFunc = dynamic_pointer_cast<NativeFunction>(clos->func);
+				NativeFunction* nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
 				if (nativeFunc != NULL) {
-					shared_ptr<Constant> val = nativeFunc->evalNativeFunction(*newFrame);
-					if (dynamic_pointer_cast<None>(val) == NULL) {
+					Constant* val = nativeFunc->evalNativeFunction(*newFrame);
+					if (dynamic_cast<None*>(val) == NULL) {
 						frame->opStackPush(val);
 					}
 				} else {
@@ -276,25 +276,25 @@ void Interpreter::executeStep() {
                 auto right = frame->opStackPop();
                 auto left = frame->opStackPop();
                 // try adding strings if left or right is a string
-                auto leftStr = dynamic_pointer_cast<String>(left);
+                String* leftStr = dynamic_cast<String*>(left);
                 if (leftStr != NULL) {
                     frame->opStackPush(
-                        make_shared<String>(leftStr->value + right->toString()));
+                        new String(leftStr->value + right->toString()));
                     break;
                 }
-                auto rightStr = dynamic_pointer_cast<String>(right);
+                String* rightStr = dynamic_cast<String*>(right);
                 if (rightStr != NULL) {
                     frame->opStackPush(
-                        make_shared<String>(left->toString() + rightStr->value));
+                        new String(left->toString() + rightStr->value));
                     break;
                 }
                 // try adding integers if left is an int
-                auto leftInt = dynamic_pointer_cast<Integer>(left);
+                Integer* leftInt = dynamic_cast<Integer*>(left);
                 if (leftInt != NULL) {
                     int leftI = leftInt->value;
                     int rightI = right->cast<Integer>()->value;
                     frame->opStackPush(
-                        make_shared<Integer>(leftI + rightI));
+                        new Integer(leftI + rightI));
                     break;
                 }
                 break;
@@ -304,7 +304,7 @@ void Interpreter::executeStep() {
                 int right = frame->opStackPop()->cast<Integer>()->value;
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        make_shared<Integer>(left - right));
+                        new Integer(left - right));
                 break;
             }
         case Operation::Mul:
@@ -312,7 +312,7 @@ void Interpreter::executeStep() {
                 int right = frame->opStackPop()->cast<Integer>()->value;
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        make_shared<Integer>(left * right));
+                       new Integer(left * right));
                 break;
             }
         case Operation::Div:
@@ -323,14 +323,14 @@ void Interpreter::executeStep() {
                     throw IllegalArithmeticException("cannot divide by 0");
                 }
                 frame->opStackPush(
-                        make_shared<Integer>(left / right));
+                        new Integer(left / right));
                 break;
             }
         case Operation::Neg:
             {
                 int top = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        make_shared<Integer>(-top));
+                        new Integer(-top));
                 break;
             }
         case Operation::Gt:
@@ -338,7 +338,7 @@ void Interpreter::executeStep() {
                 int right = frame->opStackPop()->cast<Integer>()->value;
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        make_shared<Boolean>(left > right));
+                        new Boolean(left > right));
                 break;
             }
         case Operation::Geq:
@@ -346,15 +346,15 @@ void Interpreter::executeStep() {
                 int right = frame->opStackPop()->cast<Integer>()->value;
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        make_shared<Boolean>(left >= right));
+                        new Boolean(left >= right));
                 break;
             }
         case Operation::Eq:
             {
-                shared_ptr<Value> right = frame->opStackPop();
+                Value* right = frame->opStackPop();
                 auto left = frame->opStackPop();
                 frame->opStackPush(
-                        make_shared<Boolean>(left->equals(right)));
+                        new Boolean(left->equals(right)));
                 break;
             }
         case Operation::And:
@@ -362,7 +362,7 @@ void Interpreter::executeStep() {
                 bool right = frame->opStackPop()->cast<Boolean>()->value;
                 bool left = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
-                        make_shared<Boolean>(left && right));
+                        new Boolean(left && right));
                 break;
             }
         case Operation::Or:
@@ -370,14 +370,14 @@ void Interpreter::executeStep() {
                 bool right = frame->opStackPop()->cast<Boolean>()->value;
                 bool left = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
-                        make_shared<Boolean>(left || right));
+                        new Boolean(left || right));
                 break;
             }
         case Operation::Not:
             {
                 bool top = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
-                        make_shared<Boolean>(!top));
+                        new Boolean(!top));
                 break;
             }
         case Operation::Goto:
