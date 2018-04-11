@@ -40,54 +40,62 @@ function
 			instructions = 
 			[
 			]
-		},
-		function
-		{
-			functions = [],
-			constants = ["hello", 3, "hi", None],
-			parameter_count = 0,
-			local_vars = [x],
-			local_ref_vars = [],
-			free_vars = [],
-			names = [],
-			instructions = 
-			[
-				load_const	0
-				store_local	0
-				load_const	1
-				load_local	0
-				swap
-				load_local	0
-				load_const	2
-				add
-				swap
-				index_store
-				load_const	3
-				return
-			]
 		}
 	],
-	constants = [],
+	constants = [5, 6, 8, "All should print 8", "c", "d"],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [f, input, intcast, print],
+	names = [input, intcast, print, record1, record2, a, b, c, c, d, c, d, d, c],
 	instructions = 
 	[
 		load_func	0
 		alloc_closure	0
-		store_global	3
+		store_global	2
 		load_func	1
 		alloc_closure	0
-		store_global	1
+		store_global	0
 		load_func	2
 		alloc_closure	0
-		store_global	2
-		load_func	3
-		alloc_closure	0
-		store_global	0
-		load_global	0
-		call	0
+		store_global	1
+		alloc_record
+		dup
+		load_const	0
+		field_store	5
+		dup
+		load_const	1
+		field_store	6
+		dup
+		alloc_record
+		field_store	7
+		store_global	3
+		load_global	3
+		field_load	8
+		store_global	4
+		load_const	2
+		load_global	4
+		swap
+		field_store	9
+		load_global	2
+		load_const	3
+		call	1
+		load_global	2
+		load_global	3
+		field_load	10
+		field_load	11
+		call	1
+		load_global	2
+		load_global	3
+		load_const	4
+		index_load
+		field_load	12
+		call	1
+		load_global	2
+		load_global	3
+		field_load	13
+		load_const	5
+		index_load
+		call	1
 	]
 }

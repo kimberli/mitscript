@@ -44,50 +44,79 @@ function
 		function
 		{
 			functions = [],
-			constants = ["hello", 3, "hi", None],
-			parameter_count = 0,
-			local_vars = [x],
+			constants = [2, None],
+			parameter_count = 1,
+			local_vars = [hi],
 			local_ref_vars = [],
 			free_vars = [],
-			names = [],
+			names = [print, x],
 			instructions = 
 			[
-				load_const	0
-				store_local	0
-				load_const	1
+				load_global	0
 				load_local	0
+				call	1
+				load_const	0
+				load_global	1
 				swap
 				load_local	0
-				load_const	2
-				add
 				swap
 				index_store
-				load_const	3
+				load_global	0
+				load_global	1
+				call	1
+				load_const	1
+				return
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [None],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [print, x, abc],
+			instructions = 
+			[
+				load_global	0
+				load_global	1
+				field_load	2
+				call	1
+				load_const	0
 				return
 			]
 		}
 	],
-	constants = [],
+	constants = ["abc"],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [f, input, intcast, print],
+	names = [f, g, input, intcast, print, x],
 	instructions = 
 	[
 		load_func	0
 		alloc_closure	0
-		store_global	3
+		store_global	4
 		load_func	1
 		alloc_closure	0
-		store_global	1
+		store_global	2
 		load_func	2
 		alloc_closure	0
-		store_global	2
+		store_global	3
+		alloc_record
+		store_global	5
 		load_func	3
 		alloc_closure	0
 		store_global	0
+		load_func	4
+		alloc_closure	0
+		store_global	1
 		load_global	0
+		load_const	0
+		call	1
+		load_global	1
 		call	0
 	]
 }

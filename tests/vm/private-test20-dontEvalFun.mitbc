@@ -44,25 +44,24 @@ function
 		function
 		{
 			functions = [],
-			constants = ["hello", 3, "hi", None],
+			constants = [5, 4, None],
 			parameter_count = 0,
-			local_vars = [x],
+			local_vars = [x, y],
 			local_ref_vars = [],
 			free_vars = [],
-			names = [],
+			names = [print],
 			instructions = 
 			[
 				load_const	0
 				store_local	0
 				load_const	1
+				store_local	1
+				load_global	0
 				load_local	0
-				swap
-				load_local	0
+				load_local	1
+				eq
+				call	1
 				load_const	2
-				add
-				swap
-				index_store
-				load_const	3
 				return
 			]
 		}
@@ -87,7 +86,5 @@ function
 		load_func	3
 		alloc_closure	0
 		store_global	0
-		load_global	0
-		call	0
 	]
 }

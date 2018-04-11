@@ -1,0 +1,185 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [0, 0, "", 1, 1, None],
+			parameter_count = 3,
+			local_vars = [im, x, y, ch, i, j, line],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [print],
+			instructions = 
+			[
+				load_const	0
+				store_local	4
+				goto	31
+				load_const	1
+				store_local	5
+				load_const	2
+				store_local	6
+				goto	14
+				load_local	0
+				load_local	4
+				load_local	5
+				call	2
+				store_local	3
+				load_local	6
+				load_local	3
+				add
+				store_local	6
+				load_local	5
+				load_const	3
+				add
+				store_local	5
+				load_local	5
+				load_local	2
+				swap
+				gt
+				if	-17
+				load_global	0
+				load_local	6
+				call	1
+				load_local	4
+				load_const	4
+				add
+				store_local	4
+				load_local	4
+				load_local	1
+				swap
+				gt
+				if	-34
+				load_const	5
+				return
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = ["x", " ", None],
+			parameter_count = 2,
+			local_vars = [x, y],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [p, x, y],
+			instructions = 
+			[
+				load_local	0
+				load_global	0
+				field_load	1
+				eq
+				load_local	1
+				load_global	0
+				field_load	2
+				eq
+				and
+				if	2
+				goto	3
+				load_const	0
+				return
+				load_const	1
+				return
+				load_const	2
+				return
+			]
+		}
+	],
+	constants = [0, 0, 0, 30, 30, 1, 30],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [consolePrint, i, im, input, intcast, p, print, x, y, x, y],
+	instructions = 
+	[
+		load_func	0
+		alloc_closure	0
+		store_global	6
+		load_func	1
+		alloc_closure	0
+		store_global	3
+		load_func	2
+		alloc_closure	0
+		store_global	4
+		load_func	3
+		alloc_closure	0
+		store_global	0
+		alloc_record
+		dup
+		load_const	0
+		field_store	7
+		dup
+		load_const	1
+		field_store	8
+		store_global	5
+		load_func	4
+		alloc_closure	0
+		store_global	2
+		load_const	2
+		store_global	1
+		goto	18
+		load_global	0
+		load_global	2
+		load_const	3
+		load_const	4
+		call	3
+		load_global	1
+		load_global	5
+		swap
+		field_store	9
+		load_global	1
+		load_global	5
+		swap
+		field_store	10
+		load_global	1
+		load_const	5
+		add
+		store_global	1
+		load_global	1
+		load_const	6
+		swap
+		gt
+		if	-21
+	]
+}

@@ -44,40 +44,48 @@ function
 		function
 		{
 			functions = [],
-			constants = ["hello", 3, "hi", None],
-			parameter_count = 0,
-			local_vars = [x],
+			constants = ["gets here", 1, None],
+			parameter_count = 1,
+			local_vars = [n, carmap],
 			local_ref_vars = [],
 			free_vars = [],
-			names = [],
+			names = [print, n],
 			instructions = 
 			[
+				alloc_record
+				dup
+				load_local	0
+				field_store	1
+				store_local	1
+				load_global	0
 				load_const	0
-				store_local	0
+				call	1
+				load_global	0
+				load_local	1
+				call	1
+				load_local	0
 				load_const	1
+				sub
+				store_local	0
+				load_global	0
 				load_local	0
-				swap
-				load_local	0
+				call	1
 				load_const	2
-				add
-				swap
-				index_store
-				load_const	3
 				return
 			]
 		}
 	],
-	constants = [],
+	constants = [10, "hello"],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [f, input, intcast, print],
+	names = [cars, input, intcast, manycars, print],
 	instructions = 
 	[
 		load_func	0
 		alloc_closure	0
-		store_global	3
+		store_global	4
 		load_func	1
 		alloc_closure	0
 		store_global	1
@@ -86,8 +94,13 @@ function
 		store_global	2
 		load_func	3
 		alloc_closure	0
+		store_global	3
+		load_global	3
+		load_const	0
+		call	1
 		store_global	0
-		load_global	0
-		call	0
+		load_global	4
+		load_const	1
+		call	1
 	]
 }

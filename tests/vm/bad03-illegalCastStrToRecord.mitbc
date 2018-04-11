@@ -19,7 +19,7 @@ function
 		{
 			functions = [],
 			constants = [],
-			parameter_count = 1,
+			parameter_count = 0,
 			local_vars = [],
 			local_ref_vars = [],
 			free_vars = [],
@@ -32,7 +32,7 @@ function
 		{
 			functions = [],
 			constants = [],
-			parameter_count = 0,
+			parameter_count = 1,
 			local_vars = [],
 			local_ref_vars = [],
 			free_vars = [],
@@ -76,10 +76,10 @@ function
 		store_global	3
 		load_func	1
 		alloc_closure	0
-		store_global	2
+		store_global	1
 		load_func	2
 		alloc_closure	0
-		store_global	1
+		store_global	2
 		load_func	3
 		alloc_closure	0
 		store_global	0

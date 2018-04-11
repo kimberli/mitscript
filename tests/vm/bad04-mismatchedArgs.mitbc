@@ -19,19 +19,6 @@ function
 		{
 			functions = [],
 			constants = [],
-			parameter_count = 1,
-			local_vars = [],
-			local_ref_vars = [],
-			free_vars = [],
-			names = [],
-			instructions = 
-			[
-			]
-		},
-		function
-		{
-			functions = [],
-			constants = [],
 			parameter_count = 0,
 			local_vars = [],
 			local_ref_vars = [],
@@ -45,6 +32,19 @@ function
 		{
 			functions = [],
 			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [None],
 			parameter_count = 2,
 			local_vars = [a, b],
 			local_ref_vars = [],
@@ -55,6 +55,8 @@ function
 				load_local	0
 				load_local	1
 				add
+				return
+				load_const	0
 				return
 			]
 		}
@@ -72,10 +74,10 @@ function
 		store_global	2
 		load_func	1
 		alloc_closure	0
-		store_global	1
+		store_global	0
 		load_func	2
 		alloc_closure	0
-		store_global	0
+		store_global	1
 		load_func	3
 		alloc_closure	0
 		store_global	3
