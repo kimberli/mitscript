@@ -63,7 +63,22 @@ bool IntValue::equals(Value* other) {
 StrValue::StrValue(string val) : val(val) {};
 
 string StrValue::toString() {
-    return val;
+    string* replaced = new string(val);
+    auto pos = replaced->find("\\");
+    while (pos != string::npos) {
+        if (replaced->at(pos + 1) == 'n') {
+            replaced->replace(pos, 2, "\n");
+        } else if (replaced->at(pos + 1) == 't') {
+            replaced->replace(pos, 2, "\t");
+        } else if (replaced->at(pos + 1) == '\\') {
+            replaced->replace(pos, 2, "\\");
+        } else if (replaced->at(pos + 1) == '"') {
+            replaced->replace(pos, 2, "\"");
+        }
+        pos = replaced->find("\\", pos + 1);
+    }
+
+    return *replaced;
 };
 
 bool StrValue::equals(Value* other) {
