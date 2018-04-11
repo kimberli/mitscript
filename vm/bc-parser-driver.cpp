@@ -29,7 +29,7 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    std::shared_ptr<Function> func(output);
+    Function* func(output);
 
     PrettyPrinter printer;
 
