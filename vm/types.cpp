@@ -14,6 +14,8 @@ string ValuePtr::toString() {
 bool ValuePtr::equals(shared_ptr<Value> other) {
     throw RuntimeException("can't call equals on ValuePtr");
 }
+void ValuePtr::follow(CollectedHeap& heap){
+}
 
 /* Function */
 string Function::toString() {
@@ -21,6 +23,8 @@ string Function::toString() {
 }
 bool Function::equals(shared_ptr<Value> other) {
     throw RuntimeException("can't call equals on a Function (try Closure instead)");
+}
+void Function::follow(CollectedHeap& heap) {
 }
 
 /* None */
@@ -35,7 +39,8 @@ bool None::equals(shared_ptr<Value> other) {
     }
     return true;
 }
-
+void None::follow(CollectedHeap& heap) {
+}
 /* Integer */
 const string Integer::typeS = "Integer";
 string Integer::toString() {
@@ -48,7 +53,8 @@ bool Integer::equals(shared_ptr<Value> other) {
     }
     return this->value == otherV->value;
 }
-
+void Integer::follow(CollectedHeap& heap) {
+}
 /* String */
 const string String::typeS = "String";
 string String::toString() {
@@ -61,7 +67,8 @@ bool String::equals(shared_ptr<Value> other) {
     }
     return this->value.compare(otherV->value) == 0;
 }
-
+void String::follow(CollectedHeap& heap) {
+}
 /* Boolean */
 const string Boolean::typeS = "Boolean";
 string Boolean::toString() {
@@ -74,7 +81,8 @@ bool Boolean::equals(shared_ptr<Value> other) {
     }
     return this->value == otherV->value;
 }
-
+void Boolean::follow(CollectedHeap& heap) {
+}
 /* Record */
 const string Record::typeS = "Record";
 string Record::toString() {
@@ -92,7 +100,8 @@ bool Record::equals(shared_ptr<Value> other) {
     }
     return value == otherV->value;
 }
-
+void Record::follow(CollectedHeap& heap) {
+}
 /* Closure */
 const string Closure::typeS = "Closure";
 string Closure::toString() {
@@ -116,7 +125,8 @@ bool Closure::equals(shared_ptr<Value> other) {
     }
     return true;
 }
-
+void Closure::follow(CollectedHeap& heap) {
+}
 /* Native functions */
 shared_ptr<Constant> PrintNativeFunction::evalNativeFunction(Frame& currentFrame) {
     string name = currentFrame.getLocalByIndex(0);

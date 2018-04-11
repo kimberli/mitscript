@@ -16,13 +16,13 @@ using namespace std;
 
 typedef map<string, shared_ptr<ValuePtr>> VarMap;
 
-class Frame {
+class Frame : public Collectable {
     // Class representing a stack frame in interpreter execution
 
     // vector of local variable names to values (stored in ValuePtr)
     // and local reference names to shared ValuePtrs
     VarMap vars;
-
+    void follow(CollectedHeap& heap) override;
 public:
     // function that the frame is for
     std::shared_ptr<Function> func;

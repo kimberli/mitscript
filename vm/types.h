@@ -7,6 +7,7 @@
 
 #include "exception.h"
 #include "instructions.h"
+#include "../gc/gc.h"
 
 #include <cstdint>
 #include <iostream>
@@ -19,7 +20,7 @@
 
 class Frame;
 
-struct Value {
+struct Value : public Collectable {
     // Abstract class for program values that can be stored on a frame's
     // operand stack
     virtual ~Value() {};
@@ -103,6 +104,8 @@ struct Function : public Value {
     string type() {
         return "Function";
     }
+
+    void follow(CollectedHeap& heap) override;
 };
 
 struct ValuePtr: public Value {
@@ -120,6 +123,8 @@ struct ValuePtr: public Value {
 
     string toString();
     bool equals(shared_ptr<Value> other);
+
+    void follow(CollectedHeap& heap) override;
 };
 
 struct None : public Constant {
@@ -133,6 +138,8 @@ struct None : public Constant {
 
     string toString();
     bool equals(shared_ptr<Value> other);
+
+    void follow(CollectedHeap& heap) override;
 };
 
 struct Integer : public Constant {
@@ -149,6 +156,8 @@ struct Integer : public Constant {
 
     string toString();
     bool equals(shared_ptr<Value> other);
+
+    void follow(CollectedHeap& heap) override;
 };
 
 struct String : public Constant {
@@ -165,6 +174,8 @@ struct String : public Constant {
 
     string toString();
     bool equals(shared_ptr<Value> other);
+
+    void follow(CollectedHeap& heap) override;
 };
 
 struct Boolean : public Constant{
@@ -181,6 +192,8 @@ struct Boolean : public Constant{
 
     string toString();
     bool equals(shared_ptr<Value> other);
+
+    void follow(CollectedHeap& heap) override;
 };
 
 struct Record : public Constant {
@@ -199,6 +212,8 @@ struct Record : public Constant {
     string type() {
         return "Record";
     }
+
+    void follow(CollectedHeap& heap) override;
 };
 
 struct Closure: public Constant {
@@ -222,6 +237,8 @@ struct Closure: public Constant {
 
     string toString();
     bool equals(shared_ptr<Value> other);
+
+    void follow(CollectedHeap& heap) override;
 };
 
 class NativeFunction : public Function {

@@ -110,3 +110,6 @@ shared_ptr<Value> Frame::opStackPop() {
     opStack.pop();
     return top;
 }
+
+void Frame::follow(CollectedHeap& heap) {
+}
