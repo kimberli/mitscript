@@ -11,11 +11,11 @@ const string ValuePtr::typeS = "ValuePtr";
 string ValuePtr::toString() {
     throw RuntimeException("can't cast ValuePtr to String");
 }
-bool ValuePtr::equals(Value* other) {
+bool ValuePtr::equals(vptr<Value> other) {
     throw RuntimeException("can't call equals on ValuePtr");
 }
 void ValuePtr::follow(CollectedHeap& heap){
-    // mark the value this points to 
+    // mark the value this points to
     heap.markSuccessors(ptr);
 }
 
@@ -23,15 +23,15 @@ void ValuePtr::follow(CollectedHeap& heap){
 string Function::toString() {
     throw RuntimeException("can't cast Function to a String (try Closure instead)");
 }
-bool Function::equals(Value* other) {
+bool Function::equals(vptr<Value> other) {
     throw RuntimeException("can't call equals on a Function (try Closure instead)");
 }
 void Function::follow(CollectedHeap& heap) {
     // follow functions_ and constants_,
-    for (Function* f : functions_) {
+    for (vptr<Function> f : functions_) {
         heap.markSuccessors(f);
     }
-    for (Constant* c : constants_) {
+    for (vptr<Constant> c : constants_) {
         heap.markSuccessors(c);
     }
 }
@@ -41,8 +41,8 @@ const string None::typeS = "None";
 string None::toString() {
     return "None";
 }
-bool None::equals(Value* other) {
-    None* otherV = dynamic_cast<None*>(other);
+bool None::equals(vptr<Value> other) {
+    vptr<None> otherV = dynamic_cast<vptr<None>>(other);
     if (otherV == NULL) {
         return false;
     }
@@ -56,7 +56,7 @@ const string Integer::typeS = "Integer";
 string Integer::toString() {
     return to_string(value);
 }
-bool Integer::equals(Value* other) {
+bool Integer::equals(vptr<Value> other) {
     auto otherV = dynamic_cast<Integer*>(other);
     if (otherV == NULL) {
         return false;
@@ -86,8 +86,8 @@ string String::toString() {
 
     return *replaced;
 }
-bool String::equals(Value* other) {
-    auto otherV = dynamic_cast<String*>(other);
+bool String::equals(vptr<Value> other) {
+    auto otherV = dynamic_cast<vptr<String>>(other);
     if (otherV == NULL) {
         return false;
     }
@@ -101,7 +101,7 @@ const string Boolean::typeS = "Boolean";
 string Boolean::toString() {
     return value? "true" : "false";
 };
-bool Boolean::equals(Value* other) {
+bool Boolean::equals(vptr<Value> other) {
     auto otherV = dynamic_cast<Boolean*>(other);
     if (otherV == NULL) {
         return false;
@@ -121,7 +121,7 @@ string Record::toString() {
     res += "}";
     return res;
 }
-bool Record::equals(Value* other) {
+bool Record::equals(vptr<Value> other) {
     auto otherV = dynamic_cast<Record*>(other);
     if (otherV == NULL) {
         return false;
@@ -130,7 +130,7 @@ bool Record::equals(Value* other) {
 }
 void Record::follow(CollectedHeap& heap) {
     // point to all the values contained in the record
-    for (std::map<string, Value*>::iterator it = value.begin(); it != value.end(); it++) {
+    for (std::map<string, vptr<Value>>::iterator it = value.begin(); it != value.end(); it++) {
         heap.markSuccessors(it->second);
     }
 }
@@ -139,7 +139,7 @@ const string Closure::typeS = "Closure";
 string Closure::toString() {
     return "FUNCTION";
 }
-bool Closure::equals(Value* other) {
+bool Closure::equals(vptr<Value> other) {
     auto otherV = dynamic_cast<Closure*>(other);
     if (otherV == NULL) {
         return false;
@@ -159,26 +159,26 @@ bool Closure::equals(Value* other) {
 }
 void Closure::follow(CollectedHeap& heap) {
     // follow the refs and the function
-    for (ValuePtr* v : refs) {
+    for (vptr<ValuePtr> v : refs) {
         heap.markSuccessors(v);
     }
     heap.markSuccessors(func);
 }
 /* Native functions */
-Constant* PrintNativeFunction::evalNativeFunction(Frame& currentFrame) {
+vptr<Constant> PrintNativeFunction::evalNativeFunction(Frame& currentFrame) {
     string name = currentFrame.getLocalByIndex(0);
     auto val = currentFrame.getLocalVar(name);
     cout << val->toString() << endl;
     return new None();
 };
 
-Constant* InputNativeFunction::evalNativeFunction(Frame& currentFrame) {
+vptr<Constant> InputNativeFunction::evalNativeFunction(Frame& currentFrame) {
     string input;
     getline(cin, input);
     return new String(input);
 };
 
-Constant* IntcastNativeFunction::evalNativeFunction(Frame& currentFrame) {
+vptr<Constant> IntcastNativeFunction::evalNativeFunction(Frame& currentFrame) {
     string name = currentFrame.getLocalByIndex(0);
     auto val = currentFrame.getLocalVar(name);
 	auto intVal = dynamic_cast<Integer*>(val);
