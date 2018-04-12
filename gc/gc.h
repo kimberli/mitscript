@@ -43,7 +43,7 @@ protected:
     template<typename T>
     size_t getStackSize(stack<T> s);
 
-	virtual void follow(CollectedHeap& heap)=0;
+	virtual void follow(CollectedHeap& heap) = 0;
     virtual size_t getSize() = 0;
 	friend CollectedHeap;
 };
@@ -53,7 +53,6 @@ This class keeps track of the garbage collected heap. The class must do all of t
 	- provide an interface to allocate objects that will be supported by garbage collection.
 	- keep track of all currently allocated objects.
 	- keep track of the number of currently allocated objects.
-	- 
 */
 class CollectedHeap {
 private:
@@ -72,16 +71,12 @@ public:
 	*/
 	CollectedHeap(int maxmem);
 
-
 	/*
 	return number of objects in the heap.
 	This is different from the size of the heap, which should also be tracked
 	by the garbage collector.
 	*/
-	int count() 
-	{
-	    // returns the size of allocated ll 
-	}
+	int count();
 
 	/*
 	This method allocates an object of type T using the default constructor (with no parameters).
@@ -90,14 +85,6 @@ public:
 	*/
 	template<typename T>
 	T* allocate();
-	    // allocate an object using new 
-        // estimate the size of the object 
-        // register the object's size in the object's header and 
-        //     by adding it to this.currentSize
-        // put the object in the allocated ll so it can be garbage 
-        //    collected
-        // return the pointer
-
 
 	/*
 	A variant of the method above; this version of allocate can be used to allocate objects whose constructor
@@ -108,7 +95,6 @@ public:
 
 	/*
 	For performance reasons, you may want to implement specialized allocate methods to allocate particular kinds of objects.
-	
 	*/
     // TODO probably need custom allocators for functions, records, closures, etc
     // so that we can do a customized estimation of how much space they take
@@ -133,17 +119,6 @@ public:
     T* allocate(vector<ValuePtr*> refs, Function* func);
 
 	/*
-	This is the method that is called by the follow(...) method of a Collectable object. This 
-	is how a Collectable object lets the garbage collector know about other Collectable otjects pointed to 
-	by itself.
-	*/
-	inline void markSuccessors(Collectable* next) 
-	{
-    	// for each child, it not already marked, set marked to true and
-        // call next.follow()
-	}
-
-	/*
 	The gc method should be called by your VM (or by other methods in CollectedHeap) 
 	whenever the VM decides it is time to reclaim memory. This method
 	triggers the mark and sweep process.
@@ -154,12 +129,15 @@ public:
 	
 	*/
 	template<typename ITERATOR>
-	void gc(ITERATOR begin, ITERATOR end) 
-	{
-        // makes the root set (how???)
-        // calls markSucessors on everything in the root set 
-        // loop through the allocated ll. if marked = False, deallocate, decrement the size of the collector, and remove from ll. Else, set marked to False
-	}
+	void gc(ITERATOR begin, ITERATOR end);
+
+	/*
+	This is the method that is called by the follow(...) method of a Collectable object. This
+	is how a Collectable object lets the garbage collector know about other Collectable objects pointed to
+	by itself.
+	*/
+	inline void markSuccessors(Collectable* next) {
+        // for each child, it not already marked, set marked to true and
+        // call next.follow()
+    }
 };
-
-

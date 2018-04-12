@@ -1,5 +1,6 @@
 # include "gc.h" 
 
+/* Collectable */
 template<class T>
 size_t Collectable::getVecSize(vector<T> v) {
     size_t overhead = sizeof(v);
@@ -21,8 +22,14 @@ size_t Collectable::getStackSize(stack<T> s) {
     return overhead + stackSize;
 }
 
+/* CollectedHeap */
 CollectedHeap::CollectedHeap(int maxmem) {
     long maxSizeBytes = maxmem*1000000;
+}
+
+int CollectedHeap::count() {
+    // returns the size of allocated ll
+    throw "unimplemented";
 }
 
 void CollectedHeap::registerCollectable(Collectable* c) {
@@ -73,6 +80,14 @@ T* CollectedHeap::allocate(vector<ValuePtr*> refs, Function* func) {
     return ret;
 }
 
+template<typename ITERATOR>
+void CollectedHeap::gc(ITERATOR begin, ITERATOR end) {
+    // makes the root set (how???)
+    // calls markSucessors on everything in the root set
+    // loop through the allocated ll. if marked = False, deallocate, decrement the size of the collector, and remove from ll. Else, set marked to False
+    throw "unimplemented";
+}
+
 // Declarations so templates are compiled
 template class vector<string>;
 template size_t Collectable::getVecSize<string>(vector<string>);
@@ -90,4 +105,3 @@ template class map<string, Value*>;
 template size_t Collectable::getMapSize(map<string, Value*>);
 template class map<string, ValuePtr*>;
 template size_t Collectable::getMapSize(map<string, ValuePtr*>);
-
