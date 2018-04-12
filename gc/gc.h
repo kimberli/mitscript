@@ -137,7 +137,9 @@ public:
 	by itself.
 	*/
 	inline void markSuccessors(Collectable* next) {
-        // for each child, it not already marked, set marked to true and
-        // call next.follow()
-    }
+		next->marked = true;
+		next->follow(*this);
+	}
+    // for each child, it not already marked, set marked to true and
+    // call next.follow()
 };
