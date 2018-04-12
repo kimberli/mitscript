@@ -7,7 +7,6 @@
 
 #include "exception.h"
 #include "instructions.h"
-#include "../gc/gc.h"
 
 #include <cstdint>
 #include <iostream>
@@ -25,7 +24,6 @@ using vptr = T*;
 
 class Frame;
 class Collectable;
-typedef Frame* fptr;
 
 
 struct Value : public Collectable {
@@ -271,7 +269,7 @@ public:
 			Function(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-    virtual vptr<Constant> evalNativeFunction(Frame& currentFrame) = 0;
+    virtual vptr<Constant> evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) = 0;
 };
 
 class PrintNativeFunction : public NativeFunction {
@@ -288,7 +286,7 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-   vptr<Constant> evalNativeFunction(Frame& currentFrame);
+   vptr<Constant> evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
 };
 
 class InputNativeFunction : public NativeFunction {
@@ -305,7 +303,7 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-    vptr<Constant> evalNativeFunction(Frame& currentFrame);
+    vptr<Constant> evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
 };
 
 class IntcastNativeFunction : public NativeFunction {
@@ -322,5 +320,5 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-    vptr<Constant> evalNativeFunction(Frame& currentFrame);
+    vptr<Constant> evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
 };

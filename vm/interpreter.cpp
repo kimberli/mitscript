@@ -27,10 +27,13 @@ Interpreter::Interpreter(vptr<Function> mainFunc, CollectedHeap* gCollector) {
         throw RuntimeException("can't initialize root frame with nonzero local vars");
     }
     mainFunc->local_vars_ = mainFunc->names_;
-    fptr frame = new Frame(mainFunc);
+    fptr frame = gCollector->allocate<Frame, vptr<Function>>(mainFunc);
     globalFrame = frame;
     frames.push_back(frame);
     finished = false;
+
+    // store the garbage collector
+    collector = gCollector;
 
 	vector<vptr<Function>> functions_;
     vector<vptr<Constant>> constants_;
@@ -42,9 +45,9 @@ Interpreter::Interpreter(vptr<Function> mainFunc, CollectedHeap* gCollector) {
     InstructionList instructions;
 	vector<shared_ptr<Function>> frameFuncs;
 	// add native functions at the beginning of functions array
-	frame->func->functions_[0] = new PrintNativeFunction(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
-	frame->func->functions_[1] = new InputNativeFunction(functions_, constants_, 0, args0, local_reference_vars_, free_vars_, names_, instructions);
-	frame->func->functions_[2] = new IntcastNativeFunction(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
+	frame->func->functions_[0] = collector->allocate<PrintNativeFunction>(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
+	frame->func->functions_[1] = collector->allocate<InputNativeFunction>(functions_, constants_, 0, args0, local_reference_vars_, free_vars_, names_, instructions);
+	frame->func->functions_[2] = collector->allocate<IntcastNativeFunction>(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
 
     // store the garbage collector
     collector = gCollector;
@@ -83,7 +86,7 @@ void Interpreter::executeStep() {
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for StoreLocal");
                 }
-                frame->setLocalVar(name, value);
+                frame->setLocalVar(name, value, collector);
                 break;
             }
         case Operation::LoadGlobal:
@@ -101,7 +104,7 @@ void Interpreter::executeStep() {
                     throw RuntimeException("expected Constant on the stack for StoreGlobal");
                 }
                 string name = frame->getNameByIndex(index);
-                globalFrame->setLocalVar(name, value);
+                globalFrame->setLocalVar(name, value, collector);
                 break;
             }
         case Operation::PushReference:
@@ -135,7 +138,7 @@ void Interpreter::executeStep() {
             }
         case Operation::AllocRecord:
             {
-				frame->opStackPush(new Record());
+				frame->opStackPush(collector->allocate<Record>());
                 break;
             }
         case Operation::FieldLoad:
@@ -143,7 +146,7 @@ void Interpreter::executeStep() {
 				vptr<Record> record = frame->opStackPop()->cast<Record>();
 				string field = frame->getNameByIndex(inst.operand0.value());
                 if (record->value.count(field) == 0) {
-                    record->value[field] = new None();
+                    record->value[field] = collector->allocate<None>();
                 }
 				frame->opStackPush(record->value[field]);
                 break;
@@ -164,7 +167,7 @@ void Interpreter::executeStep() {
 				string index = frame->opStackPop()->toString();
 				vptr<Record> record = frame->opStackPop()->cast<Record>();
                 if (record->value.count(index) == 0) {
-                    record->value[index] = new None();
+                    record->value[index] = collector->allocate<None>();
                 }
 				frame->opStackPush(record->value[index]);
                 break;
@@ -203,7 +206,7 @@ void Interpreter::executeStep() {
                 }
 
                 // push new closure onto the stack
-                frame->opStackPush(new Closure(refList, func));
+                frame->opStackPush(collector->allocate<Closure>(refList, func));
                 break;
             }
         case Operation::Call:
@@ -232,14 +235,14 @@ void Interpreter::executeStep() {
                 // process local refs and local vars
                 int numLocals = clos->func->local_vars_.size();
                 int numRefs = clos->func->free_vars_.size();
-                fptr newFrame = new Frame(clos->func);
+                fptr newFrame = collector->allocate<Frame>(clos->func);
 				for (int i = 0; i < numLocals; i++) {
                     if (i < numArgs) {
                         string name = clos->func->local_vars_[i];
-                        newFrame->setLocalVar(name, argsList[i]);
+                        newFrame->setLocalVar(name, argsList[i], collector);
                     } else {
                         string name = clos->func->local_vars_[i];
-                        newFrame->setLocalVar(name, new None());
+                        newFrame->setLocalVar(name, collector->allocate<None>(), collector);
                     }
 				}
                 for (int i = 0; i < numRefs; i++) {
@@ -248,7 +251,7 @@ void Interpreter::executeStep() {
                 }
 				vptr<NativeFunction> nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
 				if (nativeFunc != NULL) {
-					vptr<Constant> val = nativeFunc->evalNativeFunction(*newFrame);
+					vptr<Constant> val = nativeFunc->evalNativeFunction(*newFrame, *collector);
 					if (dynamic_cast<None*>(val) == NULL) {
 						frame->opStackPush(val);
 					}
@@ -280,13 +283,13 @@ void Interpreter::executeStep() {
                 vptr<String> leftStr = dynamic_cast<String*>(left);
                 if (leftStr != NULL) {
                     frame->opStackPush(
-                        new String(leftStr->value + right->toString()));
+                        collector->allocate<String>(leftStr->value + right->toString()));
                     break;
                 }
                 vptr<String> rightStr = dynamic_cast<String*>(right);
                 if (rightStr != NULL) {
                     frame->opStackPush(
-                        new String(left->toString() + rightStr->value));
+                        collector->allocate<String>(left->toString() + rightStr->value));
                     break;
                 }
                 // try adding integers if left is an int
@@ -295,7 +298,7 @@ void Interpreter::executeStep() {
                     int leftI = leftInt->value;
                     int rightI = right->cast<Integer>()->value;
                     frame->opStackPush(
-                        new Integer(leftI + rightI));
+                        collector->allocate<Integer>(leftI + rightI));
                     break;
                 }
                 break;
@@ -305,7 +308,7 @@ void Interpreter::executeStep() {
                 int right = frame->opStackPop()->cast<Integer>()->value;
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        new Integer(left - right));
+                        collector->allocate<Integer>(left - right));
                 break;
             }
         case Operation::Mul:
@@ -313,7 +316,7 @@ void Interpreter::executeStep() {
                 int right = frame->opStackPop()->cast<Integer>()->value;
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                       new Integer(left * right));
+                       collector->allocate<Integer>(left * right));
                 break;
             }
         case Operation::Div:
@@ -324,14 +327,14 @@ void Interpreter::executeStep() {
                     throw IllegalArithmeticException("cannot divide by 0");
                 }
                 frame->opStackPush(
-                        new Integer(left / right));
+                        collector->allocate<Integer>(left / right));
                 break;
             }
         case Operation::Neg:
             {
                 int top = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        new Integer(-top));
+                        collector->allocate<Integer>(-top));
                 break;
             }
         case Operation::Gt:
@@ -339,7 +342,7 @@ void Interpreter::executeStep() {
                 int right = frame->opStackPop()->cast<Integer>()->value;
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        new Boolean(left > right));
+                        collector->allocate<Boolean>(left > right));
                 break;
             }
         case Operation::Geq:
@@ -347,7 +350,7 @@ void Interpreter::executeStep() {
                 int right = frame->opStackPop()->cast<Integer>()->value;
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
-                        new Boolean(left >= right));
+                        collector->allocate<Boolean>(left >= right));
                 break;
             }
         case Operation::Eq:
@@ -355,7 +358,7 @@ void Interpreter::executeStep() {
                 vptr<Value> right = frame->opStackPop();
                 auto left = frame->opStackPop();
                 frame->opStackPush(
-                        new Boolean(left->equals(right)));
+                        collector->allocate<Boolean>(left->equals(right)));
                 break;
             }
         case Operation::And:
@@ -363,7 +366,7 @@ void Interpreter::executeStep() {
                 bool right = frame->opStackPop()->cast<Boolean>()->value;
                 bool left = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
-                        new Boolean(left && right));
+                        collector->allocate<Boolean>(left && right));
                 break;
             }
         case Operation::Or:
@@ -371,14 +374,14 @@ void Interpreter::executeStep() {
                 bool right = frame->opStackPop()->cast<Boolean>()->value;
                 bool left = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
-                        new Boolean(left || right));
+                        collector->allocate<Boolean>(left || right));
                 break;
             }
         case Operation::Not:
             {
                 bool top = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
-                        new Boolean(!top));
+                        collector->allocate<Boolean>(!top));
                 break;
             }
         case Operation::Goto:

@@ -1,4 +1,6 @@
 #include "frame.h"
+#include "../gc/gc.h"
+
 #include <algorithm>
 
 using namespace std;
@@ -78,9 +80,9 @@ vptr<ValuePtr> Frame::getRefVar(string name) {
     throw RuntimeException(name + " has not been created in its frame's vars");
 }
 
-void Frame::setLocalVar(string name, vptr<Constant> val) {
+void Frame::setLocalVar(string name, vptr<Constant> val, CollectedHeap* ch) {
     if (vars.count(name) == 0) {
-        vars[name] = new ValuePtr(val);
+        vars[name] = ch->allocate<ValuePtr>(val);
     } else {
         vars[name]->ptr = val;
     }
