@@ -1,4 +1,4 @@
-# include "gc.h" 
+# include "gc.h"
 
 /* Collectable */
 template<class T>
@@ -29,7 +29,11 @@ CollectedHeap::CollectedHeap(int maxmem) {
 
 int CollectedHeap::count() {
     // returns the size of allocated ll
-    throw "unimplemented";
+	int totalSize = 0;
+	for (Collectable* x: allocated) {
+		totalSize += x->getSize();
+	}
+	return totalSize;
 }
 
 void CollectedHeap::registerCollectable(Collectable* c) {
@@ -60,8 +64,8 @@ T* CollectedHeap::allocate(map<KEY, VAL> mapping) {
 }
 
 template<typename T>
-T* CollectedHeap::allocate(vector<Function*> functions_, 
-            vector<Constant*> constants_, 
+T* CollectedHeap::allocate(vector<Function*> functions_,
+            vector<Constant*> constants_,
             int32_t parameter_count_,
             vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -83,9 +87,22 @@ T* CollectedHeap::allocate(vector<ValuePtr*> refs, Function* func) {
 template<typename ITERATOR>
 void CollectedHeap::gc(ITERATOR begin, ITERATOR end) {
     // makes the root set (how???)
-    // calls markSucessors on everything in the root set
+    // calls markSuccessors on everything in the root set
     // loop through the allocated ll. if marked = False, deallocate, decrement the size of the collector, and remove from ll. Else, set marked to False
-    throw "unimplemented";
+	for (ITERATOR i = begin; i < end; ++i) {
+		i->markSuccessors();
+	}
+	auto it = allocated.begin();
+	while (it != allocated.end()) {
+    	Collectable* c = *it;
+    	if (!c->marked) {
+			currentSizeBytes -= c->getSize();
+			it = allocated.erase(it);
+    	} else {
+			c->marked = false;
+    	    ++it;
+    	}
+	}
 }
 
 // Declarations so templates are compiled
