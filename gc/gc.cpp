@@ -94,9 +94,7 @@ void CollectedHeap::gc() {
     // calls markSuccessors on everything in the root set
     // loop through the allocated ll. if marked = False, deallocate, decrement the size of the collector, and remove from ll. Else, set marked to False
 	for (Frame* frame: rootset) {
-		for (Collectable* item: frame->opStack) {
-			markSuccessors(item);
-		}
+        markSuccessors(frame);
 	}
 	auto it = allocated.begin();
 	while (it != allocated.end()) {

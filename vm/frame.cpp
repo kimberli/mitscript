@@ -117,10 +117,9 @@ void Frame::follow(CollectedHeap& heap) {
     // follow the function it contains
     // As well as all the stuff on the op stack?
     heap.markSuccessors(func);
-    // TODO: iterate through the stack to mark???
-    //for (Value* v : opStack) {
-    //    markSuccessors(v);
-    //}
+    for (Value* v : opStack) {
+        heap.markSuccessors(v);
+    }
 }
 
 size_t Frame::getSize() {

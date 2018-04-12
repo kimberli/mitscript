@@ -21,7 +21,9 @@ bool ValuePtr::equals(vptr<Value> other) {
 }
 void ValuePtr::follow(CollectedHeap& heap){
     // mark the value this points to
-    heap.markSuccessors(ptr);
+    if (ptr) {
+        heap.markSuccessors(ptr);
+    }
 }
 
 /* Function */
