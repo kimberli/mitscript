@@ -89,7 +89,6 @@ int main(int argc, char** argv) {
         }
     } else if (file_type == BYTECODE) {
         // parse bytecode, set bc_output
-        Function* bc_output;
         void* scanner;
         bclex_init(&scanner);
         bcset_in(infile, scanner);

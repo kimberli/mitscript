@@ -15,7 +15,7 @@
 
 using namespace std;
 
-typedef map<string, ValuePtr*> VarMap;
+typedef map<string, vptr<ValuePtr>> VarMap;
 
 class Frame : public Collectable {
     // Class representing a stack frame in interpreter execution
@@ -27,13 +27,13 @@ class Frame : public Collectable {
     size_t getSize() override;
 public:
     // function that the frame is for
-    Function* func;
+    vptr<Function> func;
     // operand stack
-    stack<Value*> opStack;
+    stack<vptr<Value>> opStack;
     // index of current instruction in func's instructions list
     int instructionIndex = 0;
 
-    Frame(Function* func): func(func) {
+    Frame(vptr<Function> func): func(func) {
 	};
 
     // instruction helpers
@@ -42,21 +42,21 @@ public:
     void moveToInstruction(int offset);
 
     // function value helpers
-    Constant* getConstantByIndex(int index);
-    Function* getFunctionByIndex(int index);
+    vptr<Constant> getConstantByIndex(int index);
+    vptr<Function> getFunctionByIndex(int index);
     string getLocalByIndex(int index);
     string getNameByIndex(int index);
     string getRefByIndex(int index);
 
     // var map helpers
-    Constant* getLocalVar(string name);
-    ValuePtr* getRefVar(string name);
+    vptr<Constant> getLocalVar(string name);
+    vptr<ValuePtr> getRefVar(string name);
 
-    void setLocalVar(string name, Constant* val);
-    void setRefVar(string name, ValuePtr* val);
+    void setLocalVar(string name, vptr<Constant> val);
+    void setRefVar(string name, vptr<ValuePtr> val);
 
     // operand stack helpers
-    void opStackPush(Value* val);
-    Value* opStackPeek();
-    Value* opStackPop();
+    void opStackPush(vptr<Value> val);
+    vptr<Value> opStackPeek();
+    vptr<Value> opStackPop();
 };

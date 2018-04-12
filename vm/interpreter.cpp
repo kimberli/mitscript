@@ -14,7 +14,7 @@
 
 using namespace std;
 
-Interpreter::Interpreter(Function* mainFunc, CollectedHeap* gCollector) {
+Interpreter::Interpreter(vptr<Function> mainFunc, CollectedHeap* gCollector) {
     int numLocals = mainFunc->names_.size();
     int numRefs = 0;
     if (mainFunc->local_reference_vars_.size() != 0) {
@@ -27,13 +27,13 @@ Interpreter::Interpreter(Function* mainFunc, CollectedHeap* gCollector) {
         throw RuntimeException("can't initialize root frame with nonzero local vars");
     }
     mainFunc->local_vars_ = mainFunc->names_;
-    Frame* frame = new Frame(mainFunc);
+    fptr frame = new Frame(mainFunc);
     globalFrame = frame;
     frames.push(frame);
     finished = false;
 
-	vector<Function*> functions_;
-    vector<Constant*> constants_;
+	vector<vptr<Function>> functions_;
+    vector<vptr<Constant>> constants_;
 	vector<string> args0 ;
 	vector<string> args1 = { string("s") };
     vector<string> local_reference_vars_;
@@ -52,7 +52,7 @@ Interpreter::Interpreter(Function* mainFunc, CollectedHeap* gCollector) {
 
 void Interpreter::executeStep() {
     // executes a single instruction and updates state of interpreter
-    Frame* frame = frames.top();
+    fptr frame = frames.top();
     Instruction& inst = frame->getCurrInstruction();
     int newOffset = 1;
     LOG("executing instruction " + to_string(frame->instructionIndex));
@@ -78,7 +78,7 @@ void Interpreter::executeStep() {
         case Operation::StoreLocal:
             {
                 string name = frame->getLocalByIndex(inst.operand0.value());
-                Constant* value = dynamic_cast<Constant*>(frame->opStackPop());
+                vptr<Constant> value = dynamic_cast<Constant*>(frame->opStackPop());
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for StoreLocal");
                 }
@@ -95,7 +95,7 @@ void Interpreter::executeStep() {
         case Operation::StoreGlobal:
             {
                 int index = inst.operand0.value();
-                Constant* value = dynamic_cast<Constant*>(frame->opStackPop());
+                vptr<Constant> value = dynamic_cast<Constant*>(frame->opStackPop());
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for StoreGlobal");
                 }
@@ -112,7 +112,7 @@ void Interpreter::executeStep() {
             }
         case Operation::LoadReference:
             {
-                ValuePtr* valuePtr = dynamic_cast<ValuePtr*>(frame->opStackPop());
+                vptr<ValuePtr> valuePtr = dynamic_cast<ValuePtr*>(frame->opStackPop());
                 if (valuePtr == NULL) {
                     throw RuntimeException("expected ValuePtr on the stack for LoadReference");
                 }
@@ -121,11 +121,11 @@ void Interpreter::executeStep() {
             }
         case Operation::StoreReference:
             {
-                Constant* value = dynamic_cast<Constant*>(frame->opStackPop());
+                vptr<Constant> value = dynamic_cast<Constant*>(frame->opStackPop());
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for StoreReference");
                 }
-                ValuePtr* valuePtr = dynamic_cast<ValuePtr*>(frame->opStackPop());
+                vptr<ValuePtr> valuePtr = dynamic_cast<ValuePtr*>(frame->opStackPop());
                 if (valuePtr == NULL) {
                     throw RuntimeException("expected ValuePtr on the stack for StoreReference");
                 }
@@ -139,7 +139,7 @@ void Interpreter::executeStep() {
             }
         case Operation::FieldLoad:
             {
-				Record* record = frame->opStackPop()->cast<Record>();
+				vptr<Record> record = frame->opStackPop()->cast<Record>();
 				string field = frame->getNameByIndex(inst.operand0.value());
                 if (record->value.count(field) == 0) {
                     record->value[field] = new None();
@@ -149,11 +149,11 @@ void Interpreter::executeStep() {
             }
         case Operation::FieldStore:
             {
-				Constant* value = dynamic_cast<Constant*>(frame->opStackPop());
+				vptr<Constant> value = dynamic_cast<Constant*>(frame->opStackPop());
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for FieldStore");
                 }
-				Record* record = frame->opStackPop()->cast<Record>();
+				vptr<Record> record = frame->opStackPop()->cast<Record>();
 				string field = frame->getNameByIndex(inst.operand0.value());
 				record->value[field] = value;
                 break;
@@ -161,7 +161,7 @@ void Interpreter::executeStep() {
         case Operation::IndexLoad:
             {
 				string index = frame->opStackPop()->toString();
-				Record* record = frame->opStackPop()->cast<Record>();
+				vptr<Record> record = frame->opStackPop()->cast<Record>();
                 if (record->value.count(index) == 0) {
                     record->value[index] = new None();
                 }
@@ -175,7 +175,7 @@ void Interpreter::executeStep() {
             {
 				auto value = frame->opStackPop();
 				string index = frame->opStackPop()->toString();
-				Record* record = frame->opStackPop()->cast<Record>();
+				vptr<Record> record = frame->opStackPop()->cast<Record>();
 				record->value[index] = value;
                 break;
             }
@@ -183,16 +183,16 @@ void Interpreter::executeStep() {
             {
                 // read num free vars, ref vars, and function off the stack
                 int numFreeVars = inst.operand0.value();
-                vector<ValuePtr*> refList;
+                vector<vptr<ValuePtr>> refList;
                 for (int i = 0; i < numFreeVars; i++) {
                     auto top = frame->opStackPop();
-                    ValuePtr* value = dynamic_cast<ValuePtr*>(top);
+                    vptr<ValuePtr> value = dynamic_cast<ValuePtr*>(top);
                     if (value == NULL) {
                         throw RuntimeException("expected ValuePtr on the stack for AllocClosure");
                     }
                     refList.push_back(value);
                 }
-                Function* func = dynamic_cast<Function*>(frame->opStackPop());
+                vptr<Function> func = dynamic_cast<Function*>(frame->opStackPop());
                 if (func == NULL) {
                     throw RuntimeException("expected Function on the stack for AllocClosure");
                 }
@@ -209,17 +209,17 @@ void Interpreter::executeStep() {
             {
                 // read num arguments, argument values, and closure off the stack
                 int numArgs = inst.operand0.value();
-                vector<Constant*> argsList;
+                vector<vptr<Constant>> argsList;
                 for (int i = 0; i < numArgs; i++) {
                     auto top = frame->opStackPop();
-                    Constant* value = dynamic_cast<Constant*>(top);
+                    vptr<Constant> value = dynamic_cast<Constant*>(top);
                     if (value == NULL) {
                         throw RuntimeException("expected Constant on the stack for Call");
                     }
                     argsList.push_back(value);
                 }
 				reverse(argsList.begin(), argsList.end());
-                Closure* clos = dynamic_cast<Closure*>(frame->opStackPop());
+                vptr<Closure> clos = dynamic_cast<Closure*>(frame->opStackPop());
                 if (clos == NULL) {
                     throw RuntimeException("expected Closure on operand stack for function call");
                 }
@@ -231,7 +231,7 @@ void Interpreter::executeStep() {
                 // process local refs and local vars
                 int numLocals = clos->func->local_vars_.size();
                 int numRefs = clos->func->free_vars_.size();
-                Frame* newFrame = new Frame(clos->func);
+                fptr newFrame = new Frame(clos->func);
 				for (int i = 0; i < numLocals; i++) {
                     if (i < numArgs) {
                         string name = clos->func->local_vars_[i];
@@ -245,9 +245,9 @@ void Interpreter::executeStep() {
                     string name = clos->func->free_vars_[i];
                     newFrame->setRefVar(name, clos->refs[i]);
                 }
-				NativeFunction* nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
+				vptr<NativeFunction> nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
 				if (nativeFunc != NULL) {
-					Constant* val = nativeFunc->evalNativeFunction(*newFrame);
+					vptr<Constant> val = nativeFunc->evalNativeFunction(*newFrame);
 					if (dynamic_cast<None*>(val) == NULL) {
 						frame->opStackPush(val);
 					}
@@ -276,20 +276,20 @@ void Interpreter::executeStep() {
                 auto right = frame->opStackPop();
                 auto left = frame->opStackPop();
                 // try adding strings if left or right is a string
-                String* leftStr = dynamic_cast<String*>(left);
+                vptr<String> leftStr = dynamic_cast<String*>(left);
                 if (leftStr != NULL) {
                     frame->opStackPush(
                         new String(leftStr->value + right->toString()));
                     break;
                 }
-                String* rightStr = dynamic_cast<String*>(right);
+                vptr<String> rightStr = dynamic_cast<String*>(right);
                 if (rightStr != NULL) {
                     frame->opStackPush(
                         new String(left->toString() + rightStr->value));
                     break;
                 }
                 // try adding integers if left is an int
-                Integer* leftInt = dynamic_cast<Integer*>(left);
+                vptr<Integer> leftInt = dynamic_cast<Integer*>(left);
                 if (leftInt != NULL) {
                     int leftI = leftInt->value;
                     int rightI = right->cast<Integer>()->value;
@@ -351,7 +351,7 @@ void Interpreter::executeStep() {
             }
         case Operation::Eq:
             {
-                Value* right = frame->opStackPop();
+                vptr<Value> right = frame->opStackPop();
                 auto left = frame->opStackPop();
                 frame->opStackPush(
                         new Boolean(left->equals(right)));
