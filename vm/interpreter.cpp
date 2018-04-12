@@ -29,7 +29,7 @@ Interpreter::Interpreter(vptr<Function> mainFunc, CollectedHeap* gCollector) {
     mainFunc->local_vars_ = mainFunc->names_;
     fptr frame = new Frame(mainFunc);
     globalFrame = frame;
-    frames.push(frame);
+    frames.push_back(frame);
     finished = false;
 
 	vector<vptr<Function>> functions_;
@@ -52,7 +52,7 @@ Interpreter::Interpreter(vptr<Function> mainFunc, CollectedHeap* gCollector) {
 
 void Interpreter::executeStep() {
     // executes a single instruction and updates state of interpreter
-    fptr frame = frames.top();
+    fptr frame = frames.back();
     Instruction& inst = frame->getCurrInstruction();
     int newOffset = 1;
     LOG("executing instruction " + to_string(frame->instructionIndex));
@@ -253,7 +253,7 @@ void Interpreter::executeStep() {
 					}
 				} else {
 					newOffset = 0;
-                    frames.push(newFrame);
+                    frames.push_back(newFrame);
 				}
                 break;
             }
@@ -261,12 +261,12 @@ void Interpreter::executeStep() {
             {
                 // take return val from top of stack & discard current frame
                 auto returnVal = frame->opStackPeek();
-                frames.pop();
-                if (frames.size() == 0) {
+                frames.pop_back();
+                if (frames.empty()) {
                     finished = true;
                     return;
                 }
-                frame = frames.top();
+                frame = frames.back();
                 // push return val to top of new parent frame
                 frame->opStackPush(returnVal);
                 break;
@@ -423,8 +423,8 @@ void Interpreter::executeStep() {
     }
     if (frame->instructionIndex + newOffset == frame->numInstructions()) {
         // last instruction of current function
-        frames.pop();
-        frame = frames.top();
+        frames.pop_back();
+        frame = frames.back();
     }
     frame->moveToInstruction(newOffset);
 };

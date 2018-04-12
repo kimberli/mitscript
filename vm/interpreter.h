@@ -8,7 +8,7 @@
 
 #include "types.h"
 #include "frame.h"
-#include <stack>
+#include <list>
 #include <iostream>
 
 using namespace std;
@@ -17,7 +17,7 @@ class Interpreter {
     // class used to handle interpreter state
 private:
     fptr globalFrame;  // root function frame
-    stack<fptr> frames;  // stack of frames
+    list<fptr> frames;  // stack of frames
     void executeStep();  // execute a single next instruction
     bool finished;  // true when the program has terminated
     CollectedHeap* collector;
