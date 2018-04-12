@@ -98,6 +98,7 @@ void CollectedHeap::gc(ITERATOR begin, ITERATOR end) {
     	if (!c->marked) {
 			currentSizeBytes -= c->getSize();
 			it = allocated.erase(it);
+			delete c;
     	} else {
 			c->marked = false;
     	    ++it;
