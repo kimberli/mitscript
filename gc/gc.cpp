@@ -16,7 +16,7 @@ size_t Collectable::getMapSize(map<KEY, VAL> m) {
 }
 
 template<typename T>
-size_t Collectable::getStackSize(stack<T> s) {
+size_t Collectable::getStackSize(list<T> s) {
     size_t overhead = sizeof(s);
     size_t stackSize = s.size()*sizeof(T);
     return overhead + stackSize;
@@ -117,8 +117,8 @@ template class vector<Function*>;
 template size_t Collectable::getVecSize<Function*>(vector<Function*>);
 //template class vector<Instruction*>;
 //template size_t Collectable::getVecSize<Instruction>(vector<Instruction>);
-template class stack<Value*>;
-template size_t Collectable::getStackSize<Value*>(stack<Value*>);
+template class list<Value*>;
+template size_t Collectable::getStackSize<Value*>(list<Value*>);
 template class map<string, Value*>;
 template size_t Collectable::getMapSize(map<string, Value*>);
 template class map<string, ValuePtr*>;

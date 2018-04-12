@@ -11,7 +11,7 @@
 #include "../gc/gc.h"
 #include <string>
 #include <map>
-#include <stack>
+#include <list>
 
 using namespace std;
 
@@ -29,7 +29,7 @@ public:
     // function that the frame is for
     vptr<Function> func;
     // operand stack
-    stack<vptr<Value>> opStack;
+    list<vptr<Value>> opStack;
     // index of current instruction in func's instructions list
     int instructionIndex = 0;
 

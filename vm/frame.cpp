@@ -92,28 +92,28 @@ void Frame::setRefVar(string name, vptr<ValuePtr> val) {
 
 // operand stack helpers
 void Frame::opStackPush(vptr<Value> val) {
-    opStack.push(val);
+    opStack.push_back(val);
 }
 
 vptr<Value> Frame::opStackPeek() {
     if (opStack.empty()) {
         throw InsufficientStackException("peek at empty stack");
     }
-    return opStack.top();
+    return opStack.back();
 }
 
 vptr<Value> Frame::opStackPop() {
     if (opStack.empty()) {
         throw InsufficientStackException("pop from empty stack");
     }
-    vptr<Value> top = opStack.top();
-    opStack.pop();
+    vptr<Value> top = opStack.back();
+    opStack.pop_back();
     return top;
 }
 
 void Frame::follow(CollectedHeap& heap) {
-    // follow the function it contains 
-    // As well as all the stuff on the op stack? 
+    // follow the function it contains
+    // As well as all the stuff on the op stack?
     heap.markSuccessors(func);
     // TODO: iterate through the stack to mark???
     //for (Value* v : opStack) {
