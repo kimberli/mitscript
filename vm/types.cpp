@@ -27,6 +27,13 @@ bool Function::equals(Value* other) {
     throw RuntimeException("can't call equals on a Function (try Closure instead)");
 }
 void Function::follow(CollectedHeap& heap) {
+    // follow functions_ and constants_,
+    for (Function* f : functions_) {
+        heap.markSuccessors(f);
+    }
+    for (Constant* c : constants_) {
+        heap.markSuccessors(c);
+    }
 }
 
 /* None */
@@ -42,6 +49,7 @@ bool None::equals(Value* other) {
     return true;
 }
 void None::follow(CollectedHeap& heap) {
+    // no-op; no pointers
 }
 /* Integer */
 const string Integer::typeS = "Integer";
@@ -56,6 +64,7 @@ bool Integer::equals(Value* other) {
     return this->value == otherV->value;
 }
 void Integer::follow(CollectedHeap& heap) {
+    // no-op: no pointers
 }
 /* String */
 const string String::typeS = "String";
@@ -85,6 +94,7 @@ bool String::equals(Value* other) {
     return this->value.compare(otherV->value) == 0;
 }
 void String::follow(CollectedHeap& heap) {
+    // no-op: no pointers
 }
 /* Boolean */
 const string Boolean::typeS = "Boolean";
@@ -99,6 +109,7 @@ bool Boolean::equals(Value* other) {
     return this->value == otherV->value;
 }
 void Boolean::follow(CollectedHeap& heap) {
+    // no-op; no pointers
 }
 /* Record */
 const string Record::typeS = "Record";
@@ -118,6 +129,10 @@ bool Record::equals(Value* other) {
     return value == otherV->value;
 }
 void Record::follow(CollectedHeap& heap) {
+    // point to all the values contained in the record
+    for (std::map<string, Value*>::iterator it = value.begin(); it != value.end(); it++) {
+        heap.markSuccessors(it->second);
+    }
 }
 /* Closure */
 const string Closure::typeS = "Closure";
@@ -143,6 +158,11 @@ bool Closure::equals(Value* other) {
     return true;
 }
 void Closure::follow(CollectedHeap& heap) {
+    // follow the refs and the function
+    for (ValuePtr* v : refs) {
+        heap.markSuccessors(v);
+    }
+    heap.markSuccessors(func);
 }
 /* Native functions */
 Constant* PrintNativeFunction::evalNativeFunction(Frame& currentFrame) {
