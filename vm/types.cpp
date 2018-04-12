@@ -5,6 +5,7 @@
  */
 #include "types.h"
 #include "frame.h"
+#include "../gc/gc.h"
 
 /* ValuePtr */
 const string ValuePtr::typeS = "ValuePtr";
@@ -40,7 +41,6 @@ void Function::follow(CollectedHeap& heap) {
     }
 }
 size_t Function::getSize() {
-    // TODO
     size_t overhead = sizeof(Function);
     size_t funcsSize = getVecSize(functions_);
     size_t consSize = getVecSize(constants_);
@@ -205,33 +205,33 @@ void Closure::follow(CollectedHeap& heap) {
     heap.markSuccessors(func);
 }
 /* Native functions */
-vptr<Constant> PrintNativeFunction::evalNativeFunction(Frame& currentFrame) {
+vptr<Constant> PrintNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
     string name = currentFrame.getLocalByIndex(0);
     auto val = currentFrame.getLocalVar(name);
     cout << val->toString() << endl;
-    return new None();
+    return ch.allocate<None>();
 };
 
-vptr<Constant> InputNativeFunction::evalNativeFunction(Frame& currentFrame) {
+vptr<Constant> InputNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
     string input;
     getline(cin, input);
-    return new String(input);
+    return ch.allocate<String, string>(input);
 };
 
-vptr<Constant> IntcastNativeFunction::evalNativeFunction(Frame& currentFrame) {
+vptr<Constant> IntcastNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
     string name = currentFrame.getLocalByIndex(0);
     auto val = currentFrame.getLocalVar(name);
 	auto intVal = dynamic_cast<Integer*>(val);
     if (intVal != NULL) {
-        return new Integer(intVal->value);
+        return ch.allocate<Integer, int>(intVal->value);
     }
     auto strVal = val->cast<String>();
     if (strVal->value == "0") {
-        return new Integer(0);
+        return ch.allocate<Integer, int>(0);
     }
     int result = atoi(strVal->value.c_str());
     if (result == 0) {
         throw IllegalCastException("cannot convert value " + strVal->value + " to IntValue");
     }
-    return new Integer(result);
+    return ch.allocate<Integer, int>(result);
 };

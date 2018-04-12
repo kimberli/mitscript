@@ -1,5 +1,8 @@
 # include "gc.h"
 # include "../vm/types.h"
+#include "../vm/frame.h"
+
+using namespace std;
 
 /* Collectable */
 template<class T>
@@ -116,8 +119,6 @@ template class vector<Constant*>;
 template size_t Collectable::getVecSize<Constant*>(vector<Constant*>);
 template class vector<Function*>;
 template size_t Collectable::getVecSize<Function*>(vector<Function*>);
-//template class vector<Instruction*>;
-//template size_t Collectable::getVecSize<Instruction>(vector<Instruction>);
 template class list<Value*>;
 template size_t Collectable::getStackSize<Value*>(list<Value*>);
 template class map<string, Value*>;
@@ -131,3 +132,11 @@ template None* CollectedHeap::allocate<None>();
 template Boolean* CollectedHeap::allocate<Boolean>(bool);
 template String* CollectedHeap::allocate<String>(string);
 template Integer* CollectedHeap::allocate<Integer>(int);
+template Record* CollectedHeap::allocate<Record>();
+template Closure* CollectedHeap::allocate<Closure>(vector<ValuePtr*>, Function*);
+template Frame* CollectedHeap::allocate<Frame, Function*>(Function* func);
+template ValuePtr* CollectedHeap::allocate<ValuePtr, Constant*>(Constant*);
+
+template PrintNativeFunction* CollectedHeap::allocate<PrintNativeFunction>(std::vector<Function*, std::allocator<Function*> >, std::vector<Constant*, std::allocator<Constant*> >, int, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, std::vector<Instruction, std::allocator<Instruction> >);
+template InputNativeFunction* CollectedHeap::allocate<InputNativeFunction>(std::vector<Function*, std::allocator<Function*> >, std::vector<Constant*, std::allocator<Constant*> >, int, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, std::vector<Instruction, std::allocator<Instruction> >);
+template IntcastNativeFunction* CollectedHeap::allocate<IntcastNativeFunction>(std::vector<Function*, std::allocator<Function*> >, std::vector<Constant*, std::allocator<Constant*> >, int, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >, std::vector<Instruction, std::allocator<Instruction> >);

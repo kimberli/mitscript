@@ -5,8 +5,6 @@
 #include <vector>
 #include <list>
 
-//#include "../vm/types.h"
-
 using namespace std;
 
 class CollectedHeap;
@@ -99,8 +97,6 @@ public:
 	/*
 	For performance reasons, you may want to implement specialized allocate methods to allocate particular kinds of objects.
 	*/
-    // TODO probably need custom allocators for functions, records, closures, etc
-    // so that we can do a customized estimation of how much space they take
 
     // for records
     template<typename T, typename KEY, typename VAL>

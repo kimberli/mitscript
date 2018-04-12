@@ -16,6 +16,7 @@
 using namespace std;
 
 typedef map<string, vptr<ValuePtr>> VarMap;
+typedef Frame* fptr;
 
 class Frame : public Collectable {
     // Class representing a stack frame in interpreter execution
@@ -52,7 +53,7 @@ public:
     vptr<Constant> getLocalVar(string name);
     vptr<ValuePtr> getRefVar(string name);
 
-    void setLocalVar(string name, vptr<Constant> val);
+    void setLocalVar(string name, vptr<Constant> val, CollectedHeap* ch);
     void setRefVar(string name, vptr<ValuePtr> val);
 
     // operand stack helpers
