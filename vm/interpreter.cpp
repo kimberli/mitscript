@@ -48,6 +48,7 @@ Interpreter::Interpreter(vptr<Function> mainFunc, CollectedHeap* gCollector) {
 
     // store the garbage collector
     collector = gCollector;
+	collector->rootset = frames;
 };
 
 void Interpreter::executeStep() {

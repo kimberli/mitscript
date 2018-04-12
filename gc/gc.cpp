@@ -1,4 +1,5 @@
 # include "gc.h"
+# include "../vm/frame.h"
 
 /* Collectable */
 template<class T>
@@ -84,13 +85,14 @@ T* CollectedHeap::allocate(vector<ValuePtr*> refs, Function* func) {
     return ret;
 }
 
-template<typename ITERATOR>
-void CollectedHeap::gc(ITERATOR begin, ITERATOR end) {
+void CollectedHeap::gc() {
     // makes the root set (how???)
     // calls markSuccessors on everything in the root set
     // loop through the allocated ll. if marked = False, deallocate, decrement the size of the collector, and remove from ll. Else, set marked to False
-	for (ITERATOR i = begin; i < end; ++i) {
-		i->markSuccessors();
+	for (Frame* frame: rootset) {
+		for (Collectable* item: frame->opStack) {
+			markSuccessors(item);
+		}
 	}
 	auto it = allocated.begin();
 	while (it != allocated.end()) {

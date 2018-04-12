@@ -9,6 +9,7 @@
 
 using namespace std;
 
+class Frame;
 class CollectedHeap;
 class Record;
 class Function;
@@ -61,7 +62,7 @@ private:
     void registerCollectable(Collectable* c);
     std::list<Collectable*> allocated;
 public:
-
+	list<Frame*> rootset;
 	/*
 	The constructor should take as an argument the maximum size of the garbage collected heap.
 	You get to decide what the units of this value should be. Your VM should compute
@@ -128,8 +129,7 @@ public:
 	This code will take iterators marking the [begin, end) range of the rootset
 
 	*/
-	template<typename ITERATOR>
-	void gc(ITERATOR begin, ITERATOR end);
+	void gc();
 
 	/*
 	This is the method that is called by the follow(...) method of a Collectable object. This
