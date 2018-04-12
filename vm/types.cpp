@@ -18,6 +18,9 @@ void ValuePtr::follow(CollectedHeap& heap){
     // mark the value this points to 
     heap.markSuccessors(ptr);
 }
+size_t ValuePtr::getSize() {
+    return sizeof(ValuePtr);
+}
 
 /* Function */
 string Function::toString() {
@@ -36,6 +39,21 @@ void Function::follow(CollectedHeap& heap) {
     }
 }
 
+size_t Function::getSize() {
+    // TODO
+    size_t overhead = sizeof(Function);
+    size_t funcsSize = getVecSize(functions_);
+    size_t consSize = getVecSize(constants_);
+    size_t localsSize = getVecSize(local_vars_);
+    size_t refsSize = getVecSize(local_reference_vars_);
+    size_t freeSize = getVecSize(free_vars_);
+    size_t namesSize = getVecSize(names_);
+    // templates are not workin for this, just copy code
+    //size_t instrSize = getVecSize(instructions); 
+    size_t instrSize = sizeof(instructions) + instructions.capacity()*sizeof(Instruction);
+    return overhead + funcsSize + consSize + localsSize + refsSize + freeSize + namesSize + instrSize;
+}
+
 /* None */
 const string None::typeS = "None";
 string None::toString() {
@@ -51,6 +69,9 @@ bool None::equals(Value* other) {
 void None::follow(CollectedHeap& heap) {
     // no-op; no pointers
 }
+size_t None::getSize() {
+    return sizeof(None);
+}
 /* Integer */
 const string Integer::typeS = "Integer";
 string Integer::toString() {
@@ -65,6 +86,9 @@ bool Integer::equals(Value* other) {
 }
 void Integer::follow(CollectedHeap& heap) {
     // no-op: no pointers
+}
+size_t Integer::getSize() {
+    return sizeof(Integer);
 }
 /* String */
 const string String::typeS = "String";
@@ -96,6 +120,9 @@ bool String::equals(Value* other) {
 void String::follow(CollectedHeap& heap) {
     // no-op: no pointers
 }
+size_t String::getSize() {
+    return sizeof(String);
+}
 /* Boolean */
 const string Boolean::typeS = "Boolean";
 string Boolean::toString() {
@@ -110,6 +137,9 @@ bool Boolean::equals(Value* other) {
 }
 void Boolean::follow(CollectedHeap& heap) {
     // no-op; no pointers
+}
+size_t Boolean::getSize() {
+    return sizeof(Boolean);
 }
 /* Record */
 const string Record::typeS = "Record";
@@ -133,6 +163,11 @@ void Record::follow(CollectedHeap& heap) {
     for (std::map<string, Value*>::iterator it = value.begin(); it != value.end(); it++) {
         heap.markSuccessors(it->second);
     }
+}
+size_t Record::getSize() {
+    size_t overhead = sizeof(Record);
+    size_t mapSize = getMapSize(value);
+    return overhead + mapSize;
 }
 /* Closure */
 const string Closure::typeS = "Closure";
@@ -163,6 +198,11 @@ void Closure::follow(CollectedHeap& heap) {
         heap.markSuccessors(v);
     }
     heap.markSuccessors(func);
+}
+size_t Closure::getSize() {
+    size_t overhead = sizeof(Closure);
+    size_t refsSize = getVecSize(refs);
+    return overhead + refsSize;
 }
 /* Native functions */
 Constant* PrintNativeFunction::evalNativeFunction(Frame& currentFrame) {

@@ -8,6 +8,7 @@
 #pragma once
 
 #include "types.h"
+#include "../gc/gc.h"
 #include <string>
 #include <map>
 #include <stack>
@@ -23,6 +24,7 @@ class Frame : public Collectable {
     // and local reference names to shared ValuePtrs
     VarMap vars;
     void follow(CollectedHeap& heap) override;
+    size_t getSize() override;
 public:
     // function that the frame is for
     Function* func;

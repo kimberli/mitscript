@@ -1,8 +1,21 @@
 #pragma once
 #include <cstdio>
 #include <list>
+#include <map>
+#include <vector>
+#include <stack>
+
+//#include "../vm/types.h"
+
+using namespace std;
 
 class CollectedHeap;
+class Record;
+class Function;
+class Constant;
+class Instruction;
+class ValuePtr;
+class Value;
 
 //Any object that inherits from collectable can be created and tracked by the garbage collector.
 class Collectable {
@@ -10,8 +23,9 @@ private:
 	//Any private fields you add to the Collectable class will be accessible by the CollectedHeap 
 	//(since it is declared as friend below). You can think of these fields as the header for the object, 
 	//which will include metadata that is useful for the garbage collector.
-    bool marked;
-    int size;
+    bool marked = false;
+
+    // helper to estimate memory allocated for a vector
 protected:
 	/*
 	The mark phase of the garbage collector needs to follow all pointers from the collectable objects, check 
@@ -20,7 +34,17 @@ protected:
 	that calls heap.markSuccessors( ) on all collectable objects that this object points to.
 	markSuccessors() is the one responsible for checking if the object is marked and marking it.
 	*/
+	template<typename T>
+    size_t getVecSize(vector<T> v);
+
+    template<typename KEY, typename VAL>
+    size_t getMapSize(map<KEY, VAL> m);
+
+    template<typename T>
+    size_t getStackSize(stack<T> s);
+
 	virtual void follow(CollectedHeap& heap)=0;
+    virtual size_t getSize() = 0;
 	friend CollectedHeap;
 };
 
@@ -33,7 +57,9 @@ This class keeps track of the garbage collected heap. The class must do all of t
 */
 class CollectedHeap {
 private:
-    int currentSize;
+    int maxSizeBytes;
+    int currentSizeBytes;
+    void registerCollectable(Collectable* c);
     std::list<Collectable*> allocated;
 public:
 
@@ -44,10 +70,7 @@ public:
 	your VM could be using some extra memory that is not managed by the garbage collector, so 
 	make sure you account for this.
 	*/
-	CollectedHeap(int maxmem) 
-	{
-	
-	}
+	CollectedHeap(int maxmem);
 
 
 	/*
@@ -66,8 +89,7 @@ public:
 	it can be deallocated later.	
 	*/
 	template<typename T>
-	T* allocate() 
-	{
+	T* allocate();
 	    // allocate an object using new 
         // estimate the size of the object 
         // register the object's size in the object's header and 
@@ -75,7 +97,6 @@ public:
         // put the object in the allocated ll so it can be garbage 
         //    collected
         // return the pointer
-	}
 
 
 	/*
@@ -83,10 +104,7 @@ public:
 	takes one parameter. Useful when allocating Integer or String objects.
 	*/
 	template<typename T, typename ARG>
-	T* allocate(ARG a) 
-	{
-	    // see above
-	}
+	T* allocate(ARG a);
 
 	/*
 	For performance reasons, you may want to implement specialized allocate methods to allocate particular kinds of objects.
@@ -95,6 +113,24 @@ public:
     // TODO probably need custom allocators for functions, records, closures, etc
     // so that we can do a customized estimation of how much space they take
 
+    // for records
+    template<typename T, typename KEY, typename VAL>
+    T* allocate(map<KEY, VAL> mapping);
+
+    // for functions
+    template<typename T>
+    T* allocate(vector<Function*> functions_, 
+            vector<Constant*> constants_, 
+            int32_t parameter_count_,
+            vector<string> local_vars_,
+            vector<string> local_reference_vars_,
+            vector<string> free_vars_,
+            vector<string> names_,
+            vector<Instruction> instructions); 
+
+    // for closures 
+    template<typename T>
+    T* allocate(vector<ValuePtr*> refs, Function* func);
 
 	/*
 	This is the method that is called by the follow(...) method of a Collectable object. This 

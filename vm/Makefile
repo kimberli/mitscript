@@ -1,13 +1,13 @@
 all: compiler interpreter
 
-compiler: compiler-main.cpp compiler.cpp types.cpp symboltable.cpp frame.cpp
-	g++ -g -std=c++1y compiler-main.cpp compiler.cpp types.cpp symboltable.cpp frame.cpp ../parser/parser.cpp ../parser/lexer.cpp -o mitscriptc
+compiler: compiler-main.cpp compiler.cpp types.cpp symboltable.cpp frame.cpp ../gc/gc.cpp
+	g++ -g -std=c++1y compiler-main.cpp compiler.cpp types.cpp symboltable.cpp frame.cpp ../gc/gc.cpp ../parser/parser.cpp ../parser/lexer.cpp -o mitscriptc
 
 interpreter: interpreter-main.cpp interpreter.cpp compiler.cpp types.cpp symboltable.cpp frame.cpp ../gc/gc.cpp bc-parser
 	g++ -g -std=c++1y compiler.cpp types.cpp symboltable.cpp frame.cpp interpreter-main.cpp interpreter.cpp ../gc/gc.cpp bc-parser.cpp bc-lexer.cpp ../parser/parser.cpp ../parser/lexer.cpp -o mitscript
 
 bc-parser: bc-parser.cpp frame.cpp bc-lexer.cpp bc-parser-driver.cpp
-	g++ -g -std=c++1y types.cpp frame.cpp bc-parser-driver.cpp bc-parser.cpp bc-lexer.cpp -o bc-parser
+	g++ -g -std=c++1y types.cpp frame.cpp ../gc/gc.cpp bc-parser-driver.cpp bc-parser.cpp bc-lexer.cpp -o bc-parser
 
 bc-parser.cpp: bc-parser.yy
 	bison -Dapi.prefix={bc} --output=bc-parser.cpp --defines=bc-parser.h bc-parser.yy

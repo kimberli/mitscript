@@ -16,9 +16,12 @@
 #include <string>
 #include <vector>
 
+#include "../gc/gc.h"
+
 #define LOG(msg) { if (false) std::cerr << msg << endl; }
 
 class Frame;
+class Collectable;
 
 struct Value : public Collectable {
     // Abstract class for program values that can be stored on a frame's
@@ -106,6 +109,7 @@ struct Function : public Value {
     }
 
     void follow(CollectedHeap& heap) override;
+    size_t getSize() override;
 };
 
 struct ValuePtr: public Value {
@@ -125,6 +129,7 @@ struct ValuePtr: public Value {
     bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
+    size_t getSize() override;
 };
 
 struct None : public Constant {
@@ -140,6 +145,7 @@ struct None : public Constant {
     bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
+    size_t getSize() override;
 };
 
 struct Integer : public Constant {
@@ -158,6 +164,7 @@ struct Integer : public Constant {
     bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
+    size_t getSize() override;
 };
 
 struct String : public Constant {
@@ -176,6 +183,7 @@ struct String : public Constant {
     bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
+    size_t getSize() override;
 };
 
 struct Boolean : public Constant{
@@ -194,6 +202,7 @@ struct Boolean : public Constant{
     bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
+    size_t getSize() override;
 };
 
 struct Record : public Constant {
@@ -214,6 +223,7 @@ struct Record : public Constant {
     }
 
     void follow(CollectedHeap& heap) override;
+    size_t getSize() override;
 };
 
 struct Closure: public Constant {
@@ -239,6 +249,7 @@ struct Closure: public Constant {
     bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
+    size_t getSize() override;
 };
 
 class NativeFunction : public Function {

@@ -10,6 +10,7 @@
 #include <iostream>
 #include "prettyprinter.h"
 #include "compiler.h"
+#include "../gc/gc.h"
 
 using namespace std;
 
