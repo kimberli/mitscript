@@ -17,6 +17,9 @@ class Constant;
 class Instruction;
 class ValuePtr;
 class Value;
+class None;
+class Boolean;
+class String;
 
 //Any object that inherits from collectable can be created and tracked by the garbage collector.
 class Collectable {

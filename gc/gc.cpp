@@ -1,5 +1,6 @@
 # include "gc.h"
 # include "../vm/frame.h"
+# include "../vm/types.h"
 
 /* Collectable */
 template<class T>
@@ -108,7 +109,7 @@ void CollectedHeap::gc() {
 	}
 }
 
-// Declarations so templates are compiled
+// Declarations for vector size
 template class vector<string>;
 template size_t Collectable::getVecSize<string>(vector<string>);
 template class vector<ValuePtr*>;
@@ -125,3 +126,10 @@ template class map<string, Value*>;
 template size_t Collectable::getMapSize(map<string, Value*>);
 template class map<string, ValuePtr*>;
 template size_t Collectable::getMapSize(map<string, ValuePtr*>);
+
+// Declarations for allocate
+template Function* CollectedHeap::allocate<Function>();
+template None* CollectedHeap::allocate<None>();
+template Boolean* CollectedHeap::allocate<Boolean>(bool);
+template String* CollectedHeap::allocate<String>(string);
+template Integer* CollectedHeap::allocate<Integer>(int);
