@@ -1,7 +1,19 @@
-i = 0;
-while (i < 10000) {
-    r = { id : i; };
-    print(r);
-    i = i + 1;
-}
+i = 0; 
+f = fun() {
+    myrec = {
+        one: 1;
+        two: 2;
+        three: 3;
+        four: 4;
+        five: 5;
+        six: 6;
+        seven: 7;
+        eight: 8;
+        nine: 9;
+        ten: 10;
+    };
+};
 
+while (i < 10000) {
+    f();
+} 
