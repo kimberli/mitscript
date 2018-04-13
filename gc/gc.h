@@ -50,8 +50,13 @@ protected:
     template<typename KEY, typename VAL>
     size_t getMapSize(map<KEY, VAL> m);
 
+//    template<typename VAL>
+//    size_t getStringMapSize(map<string, VAL> m);
+
     template<typename T>
     size_t getStackSize(list<T> s);
+
+    size_t getStringSize(std::string s);
 
 	virtual void follow(CollectedHeap& heap) = 0;
     virtual size_t getSize() = 0;

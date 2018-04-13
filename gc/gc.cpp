@@ -18,11 +18,25 @@ size_t Collectable::getMapSize(map<KEY, VAL> m) {
     size_t mapSize = m.size()*(sizeof(KEY) + sizeof(VAL));
     return overhead + mapSize;
 }
+//template<typename VAL>
+//size_t getStringMapSize(map<string, VAL> m) {
+//    size_t overhead = sizeof(m);
+//    size_t mapSize = m.size()*(sizeof(string) + sizeof(VAL));
+//    size_t stringSize = 0; 
+//    for (map<string, VAL>::iterator it != map.begin(); it < map.end(); it++) {
+//        stringSize += getStringSize(it->first);
+//    }
+//    return overhead + mapSize + stringSize;
+//}
 template<typename T>
 size_t Collectable::getStackSize(list<T> s) {
     size_t overhead = sizeof(s);
     size_t stackSize = s.size()*sizeof(T);
     return overhead + stackSize;
+}
+
+size_t Collectable::getStringSize(std::string s) {
+    return s.size();
 }
 
 /* CollectedHeap */
@@ -134,6 +148,7 @@ template class list<Value*>;
 template size_t Collectable::getStackSize<Value*>(list<Value*>);
 template class map<string, Value*>;
 template size_t Collectable::getMapSize(map<string, Value*>);
+//template size_t Collectable::getStringMapSize(map<string, Value*>);
 template class map<string, ValuePtr*>;
 template size_t Collectable::getMapSize(map<string, ValuePtr*>);
 
