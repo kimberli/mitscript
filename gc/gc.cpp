@@ -92,19 +92,22 @@ void CollectedHeap::gc() {
     // loop through the allocated ll. if marked = False, deallocate, decrement the size of the collector, and remove from ll. Else, set marked to False
     if (currentSizeBytes > maxSizeBytes / 2) {
         LOG("STARTING GC: count = " << currentSizeBytes << "/" << maxSizeBytes);
+        LOG("Items on the heap: " << count());
+        // mark stage
         for (auto frame = rootset->begin(); frame != rootset->end(); ++frame) {
             markSuccessors(*frame);
         }
+        // sweep stage
+        // we recount the data we are using to get a more accurate tally
+        currentSizeBytes = 0;
         auto it = allocated.begin();
         while (it != allocated.end()) {
             Collectable* c = *it;
             if (!c->marked) {
-                // TODO: this getSize calculation is not exactly the size of what
-                // we are deleting
-                currentSizeBytes -= c->getSize();
                 it = allocated.erase(it);
                 delete c;
             } else {
+                currentSizeBytes += c->getSize();
                 c->marked = false;
                 ++it;
             }
@@ -113,6 +116,7 @@ void CollectedHeap::gc() {
             (*frame)->func->marked = false;
         }
         LOG("ENDING GC: count = " << currentSizeBytes);
+        LOG("Items on the heap: " << count());
     } else {
         LOG("SKIPPED GC: count = " << currentSizeBytes << "/" << maxSizeBytes);
     }
