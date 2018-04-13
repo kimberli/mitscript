@@ -117,9 +117,20 @@ void Frame::follow(CollectedHeap& heap) {
     // follow the function it contains
     // As well as all the stuff on the op stack?
     heap.markSuccessors(func);
-    for (Value* v : opStack) {
+    for (Collectable* v : opStack) {
         heap.markSuccessors(v);
     }
+   	for (string arg : func->local_vars_) {
+		if (vars.count(arg) != 0) {
+			Collectable* localVar = vars[arg];
+   	    	heap.markSuccessors(localVar); }
+   	}
+   	for (string arg : func->local_reference_vars_) {
+		if (vars.count(arg) != 0) {
+			Collectable* localRef = vars[arg];
+   	    	heap.markSuccessors(localRef);
+		}
+   	}
 }
 
 size_t Frame::getSize() {

@@ -96,6 +96,7 @@ void CollectedHeap::gc() {
 	for (Frame* frame: rootset) {
         markSuccessors(frame);
 	}
+
 	auto it = allocated.begin();
 	while (it != allocated.end()) {
     	Collectable* c = *it;
@@ -107,6 +108,9 @@ void CollectedHeap::gc() {
 			c->marked = false;
     	    ++it;
     	}
+	}
+	for (Frame* frame: rootset) {
+		frame->func->marked = false;
 	}
 }
 

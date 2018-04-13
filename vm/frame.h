@@ -21,12 +21,12 @@ typedef Frame* fptr;
 class Frame : public Collectable {
     // Class representing a stack frame in interpreter execution
 
-    // vector of local variable names to values (stored in ValuePtr)
     // and local reference names to shared ValuePtrs
-    VarMap vars;
     void follow(CollectedHeap& heap) override;
     size_t getSize() override;
 public:
+    // vector of local variable names to values (stored in ValuePtr)
+    VarMap vars;
     // function that the frame is for
     vptr<Function> func;
     // operand stack

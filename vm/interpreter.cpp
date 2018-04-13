@@ -419,7 +419,6 @@ void Interpreter::executeStep() {
         default:
             throw RuntimeException("should never get here - invalid instruction");
     }
-
     if (frames.size() == 1 && frame->instructionIndex + newOffset == frame->numInstructions()) {
         // last instruction of the whole program
         finished = true;
@@ -431,6 +430,7 @@ void Interpreter::executeStep() {
         frame = frames.back();
     }
     frame->moveToInstruction(newOffset);
+	collector->gc();
 };
 
 void Interpreter::run() {
