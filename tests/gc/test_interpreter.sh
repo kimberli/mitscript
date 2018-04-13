@@ -1,7 +1,8 @@
 #!/bin/bash
 ROOT=$(git rev-parse --show-toplevel)
 DIR=$ROOT/tests/gc/
-PROG="${ROOT}/vm/mitscript -mem 1 -s"
+LIMIT="50"  # in KB
+PROG="${ROOT}/vm/mitscript -mem $LIMIT -s"
 TEST_FILE_EXT=".mit"
 TARGET_FILE_EXT=".output"
 THIS_FILE="test_interpreter.sh"
@@ -13,7 +14,8 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "Testing interpreter from MITScript to program output...\n"
+echo -e "Testing interpreter from MITScript to program output..."
+echo -e "Memory limit: $LIMIT KB\n"
 
 run_test() {
     # filename is the filename of the test with the appropriate file ext
