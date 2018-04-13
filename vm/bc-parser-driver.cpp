@@ -23,7 +23,8 @@ int main(int argc, char** argv)
     bcset_in(infile, scanner);
 
     Function* output;
-    int rvalue = bcparse(scanner, output);
+    CollectedHeap* collector = new CollectedHeap(100);
+    int rvalue = bcparse(scanner, output, collector);
     if(rvalue == 1){
         cout<<"Parsing failed"<<endl;
         return 1;
