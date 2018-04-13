@@ -122,7 +122,9 @@ void String::follow(CollectedHeap& heap) {
     // no-op: no pointers
 }
 size_t String::getSize() {
-    return sizeof(String);
+    size_t overhead = sizeof(String);
+    size_t stringSize = getStringSize(value);
+    return overhead + stringSize;
 }
 
 /* Boolean */
