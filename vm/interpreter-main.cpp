@@ -69,7 +69,6 @@ int main(int argc, char** argv) {
     }
 
     // allocate a garbage collector
-    CollectedHeap* collector = new CollectedHeap(maxmem);
     if (file_type == MITSCRIPT) {
         // parse mitscript, set output to bc_output
         void* scanner;
@@ -80,7 +79,7 @@ int main(int argc, char** argv) {
             cout<<"Parsing MITScript failed"<<endl;
             return 1;
         }
-        BytecodeCompiler* bc = new BytecodeCompiler(collector);
+        BytecodeCompiler* bc = new BytecodeCompiler();
         try {
             bc_output = bc->evaluate(*output);
         } catch (InterpreterException& exception) {
@@ -99,7 +98,7 @@ int main(int argc, char** argv) {
     }
   
     try {
-        Interpreter* intp = new Interpreter(bc_output, collector);
+        Interpreter* intp = new Interpreter(bc_output, maxmem);
         intp->run();
     } catch (InterpreterException& exception) {
         cout << exception.toString() << endl;

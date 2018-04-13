@@ -17,7 +17,7 @@
 
 #include "../gc/gc.h"
 
-#define LOG(msg) { if (false) std::cerr << msg << endl; }
+#define LOG(msg) { if (true) std::cerr << msg << endl; }
 
 template<typename T>
 using vptr = T*;

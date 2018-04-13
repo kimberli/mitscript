@@ -27,8 +27,10 @@ size_t Collectable::getStackSize(list<T> s) {
 }
 
 /* CollectedHeap */
-CollectedHeap::CollectedHeap(int maxmem) {
+CollectedHeap::CollectedHeap(int maxmem, int currentSize, list<Frame*>* frames) {
     long maxSizeBytes = maxmem*1000000;
+    currentSizeBytes = currentSize;
+    rootset = frames;
 }
 
 int CollectedHeap::count() {

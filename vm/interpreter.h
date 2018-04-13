@@ -22,6 +22,6 @@ private:
     bool finished;  // true when the program has terminated
     CollectedHeap* collector;
 public:
-    Interpreter(vptr<Function> mainFunc, CollectedHeap* gCollector);
+    Interpreter(vptr<Function> mainFunc, int maxmem);
     void run();  // executes all instructions until termination
 };

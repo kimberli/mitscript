@@ -66,8 +66,6 @@ size_t Function::getSize() {
     size_t refsSize = getVecSize(local_reference_vars_);
     size_t freeSize = getVecSize(free_vars_);
     size_t namesSize = getVecSize(names_);
-    // templates are not workin for this, just copy code
-    //size_t instrSize = getVecSize(instructions);
     size_t instrSize = sizeof(instructions) + instructions.capacity()*sizeof(Instruction);
     return overhead + funcsSize + consSize + localsSize + refsSize + freeSize + namesSize + instrSize;
 }

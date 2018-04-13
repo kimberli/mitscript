@@ -74,7 +74,7 @@ public:
 	your VM could be using some extra memory that is not managed by the garbage collector, so
 	make sure you account for this.
 	*/
-	CollectedHeap(int maxmem);
+	CollectedHeap(int maxmem, int currentSize, list<Frame*>* frames);
 
 	/*
 	return number of objects in the heap.

@@ -14,7 +14,14 @@
 
 using namespace std;
 
-Interpreter::Interpreter(vptr<Function> mainFunc, CollectedHeap* gCollector) {
+Interpreter::Interpreter(vptr<Function> mainFunc, int maxmem) {
+    // initialize the garbage collector
+    // note that mainFunc is not included in the gc's allocated list because
+    // we never have to deallocate it
+    // TODO: does getSize() return bytes?
+    collector = new CollectedHeap(maxmem, mainFunc->getSize(), &frames);
+
+    // initialize the root frame
     int numLocals = mainFunc->names_.size();
     int numRefs = 0;
     if (mainFunc->local_reference_vars_.size() != 0) {
@@ -27,14 +34,12 @@ Interpreter::Interpreter(vptr<Function> mainFunc, CollectedHeap* gCollector) {
         throw RuntimeException("can't initialize root frame with nonzero local vars");
     }
     mainFunc->local_vars_ = mainFunc->names_;
-    fptr frame = gCollector->allocate<Frame, vptr<Function>>(mainFunc);
+    fptr frame = collector->allocate<Frame, vptr<Function>>(mainFunc);
     globalFrame = frame;
     frames.push_back(frame);
     finished = false;
 
-    // store the garbage collector
-    collector = gCollector;
-
+    // set up native functions at the beginning of functions array
 	vector<vptr<Function>> functions_;
     vector<vptr<Constant>> constants_;
 	vector<string> args0 ;
@@ -44,14 +49,9 @@ Interpreter::Interpreter(vptr<Function> mainFunc, CollectedHeap* gCollector) {
 	vector<string> names_;
     InstructionList instructions;
 	vector<shared_ptr<Function>> frameFuncs;
-	// add native functions at the beginning of functions array
 	frame->func->functions_[0] = collector->allocate<PrintNativeFunction>(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
 	frame->func->functions_[1] = collector->allocate<InputNativeFunction>(functions_, constants_, 0, args0, local_reference_vars_, free_vars_, names_, instructions);
 	frame->func->functions_[2] = collector->allocate<IntcastNativeFunction>(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
-
-    // store the garbage collector
-    collector = gCollector;
-	collector->rootset = &frames;
 };
 
 void Interpreter::executeStep() {
@@ -200,11 +200,9 @@ void Interpreter::executeStep() {
                 if (func == NULL) {
                     throw RuntimeException("expected Function on the stack for AllocClosure");
                 }
-
                 if (numFreeVars != func->free_vars_.size()) {
                     throw RuntimeException("expected " + to_string(func->free_vars_.size()) + " reference variables but got " + to_string(numFreeVars));
                 }
-
                 // push new closure onto the stack
                 frame->opStackPush(collector->allocate<Closure>(refList, func));
                 break;
@@ -227,11 +225,9 @@ void Interpreter::executeStep() {
                 if (clos == NULL) {
                     throw RuntimeException("expected Closure on operand stack for function call");
                 }
-
                 if (numArgs != clos->func->parameter_count_) {
                     throw RuntimeException("expected " + to_string(clos->func->parameter_count_) + " arguments, got " + to_string(numArgs));
                 }
-
                 // process local refs and local vars
                 int numLocals = clos->func->local_vars_.size();
                 int numRefs = clos->func->free_vars_.size();
