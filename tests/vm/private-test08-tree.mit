@@ -20,14 +20,14 @@ Tree = fun(){
                  else{ return this.right.contains(x); } 
            }
     };
-        add:fun(x){
+        addx:fun(x){
            if(x < this.val){
               if(this.left == None){ this.left = Node(x); }
-              else{ this.left.add(x); }
+              else{ this.left.addx(x); }
            }else{
           if(x > this.val){
                 if(this.right == None){ this.right = Node(x); }
-                else{ this.right.add(x); }
+                else{ this.right.addx(x); }
               }
            }
         };
@@ -58,11 +58,11 @@ Tree = fun(){
     return this.root.contains(x);   
       }
     };
-    add:fun(x){
+    addx:fun(x){
       if(this.root==None){
     this.root = Node(x);
       }else{
-    this.root.add(x);   
+    this.root.addx(x);   
       }
 
     };
@@ -116,7 +116,7 @@ while(i < N){
         j = 0;
         inval =intcast("6") ;
         while(j < M){
-           t.add(inval+ j);
+           t.addx(inval+ j);
         j = j + 1;
     }
         i = i + 1;

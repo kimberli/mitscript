@@ -174,7 +174,7 @@ function
 			local_vars = [x, y, this],
 			local_ref_vars = [x, y],
 			free_vars = [],
-			names = [getx, gety, print, eq, plus],
+			names = [getx, gety, print, equ, plus],
 			instructions = 
 			[
 				alloc_record
@@ -219,7 +219,7 @@ function
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [Vector, input, intcast, print, v1, v2, x, print, print, plus, eq, print],
+	names = [Vector, input, intcast, print, v1, v2, x, print, print, plus, equ, print],
 	instructions = 
 	[
 		load_func	0

@@ -1,6 +1,6 @@
 List = fun(){ this = {head:None;
         len: fun(){ if(this.head == None){ return 0; }else{ return this.head.len; }};
-        add: fun(v){ this.head = {len:this.len()+1 ; car:v; cdr:this.head;}; };
+        addx: fun(v){ this.head = {len:this.len()+1 ; car:v; cdr:this.head;}; };
 
         print: fun(){
                 t = this.head;
@@ -39,23 +39,23 @@ modN = fun(lst, N){
 
   lst.forall(fun(n){
      while(n >= N){ n = n - N; }
-     rv.add(n);
+     rv.addx(n);
    });
    return rv;
 };
 
 pair = fun(l1, l2){
    while(l1.len() > l2.len()){
-  l2.add(0);
+  l2.addx(0);
    }
    while(l2.len() > l1.len()){
-  l1.add(0);
+  l1.addx(0);
    }
    state = {node:l1.head;};
    rv = List();
    l2.forall(
      fun(v){
-       rv.add({v1:v; v2:state.node.car;});
+       rv.addx({v1:v; v2:state.node.car;});
        state.node = state.node.cdr;
      }
    );
@@ -71,11 +71,11 @@ plus = fun( a, b, N){
   v = pair.v1 + pair.v2 + state.carry;
         state.carry = 0;
         while(v >= N){ v = v - N; state.carry = state.carry + 1; }
-        rv.add(v);
+        rv.addx(v);
     }
   );
   if(!(state.carry == 0)){
-     rv.add(state.carry);
+     rv.addx(state.carry);
   }
   return rv;
 };
@@ -84,7 +84,7 @@ plus = fun( a, b, N){
 mult = fun(a, smallb, N){
    i=0;
    v = List();
-   v.add(0);
+   v.addx(0);
    while(i < smallb){
        v = plus(v, a, N);
       i = i + 1;
@@ -96,9 +96,9 @@ mult = fun(a, smallb, N){
 N = 10;
 l = List();
 i=0;
-l.add(5);
-l.add(15);
-l.add(6);
+l.addx(5);
+l.addx(15);
+l.addx(6);
 BASE = 10;
 print("After read");
 l = modN(l, BASE);

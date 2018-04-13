@@ -261,7 +261,7 @@ function
 			local_vars = [this],
 			local_ref_vars = [this],
 			free_vars = [],
-			names = [head, len, add, print, forall, clone],
+			names = [head, len, addx, print, forall, clone],
 			instructions = 
 			[
 				alloc_record
@@ -312,7 +312,7 @@ function
 					local_vars = [n],
 					local_ref_vars = [],
 					free_vars = [N, rv],
-					names = [add],
+					names = [addx],
 					instructions = 
 					[
 						goto	6
@@ -372,7 +372,7 @@ function
 					local_vars = [v],
 					local_ref_vars = [],
 					free_vars = [rv, state],
-					names = [add, v1, node, car, v2, node, cdr, node],
+					names = [addx, v1, node, car, v2, node, cdr, node],
 					instructions = 
 					[
 						push_ref	0
@@ -407,7 +407,7 @@ function
 			local_vars = [l1, l2, rv, state],
 			local_ref_vars = [rv, state],
 			free_vars = [],
-			names = [List, add, len, len, add, len, len, head, node, forall],
+			names = [List, addx, len, len, addx, len, len, head, node, forall],
 			instructions = 
 			[
 				goto	5
@@ -470,7 +470,7 @@ function
 					local_vars = [pair, v],
 					local_ref_vars = [],
 					free_vars = [N, rv, state],
-					names = [v1, v2, carry, carry, carry, carry, add],
+					names = [v1, v2, carry, carry, carry, carry, addx],
 					instructions = 
 					[
 						load_local	0
@@ -523,7 +523,7 @@ function
 			local_vars = [a, b, N, rv, state, temp],
 			local_ref_vars = [N, rv, state],
 			free_vars = [],
-			names = [List, pair, carry, forall, carry, add, carry],
+			names = [List, pair, carry, forall, carry, addx, carry],
 			instructions = 
 			[
 				load_global	1
@@ -573,7 +573,7 @@ function
 			local_vars = [a, smallb, N, i, v],
 			local_ref_vars = [],
 			free_vars = [],
-			names = [List, plus, add],
+			names = [List, plus, addx],
 			instructions = 
 			[
 				load_const	0
@@ -613,7 +613,7 @@ function
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [BASE, List, N, i, input, intcast, l, l2, l4, l5, modN, mult, pair, plus, print, add, add, add, print, print, print, print, print],
+	names = [BASE, List, N, i, input, intcast, l, l2, l4, l5, modN, mult, pair, plus, print, addx, addx, addx, print, print, print, print, print],
 	instructions = 
 	[
 		load_func	0

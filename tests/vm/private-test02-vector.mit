@@ -3,7 +3,7 @@ Vector = fun(x, y){
     getx : fun(){ return x; };
     gety : fun(){ return y; };
     print : fun(){ print("(" + x + ", " + y + ")"); };
-    eq : fun(that){ return that.getx() == x & that.gety() ==y; };
+    eqx : fun(that){ return that.getx() == x & that.gety() ==y; };
     plus : fun(that){ return Vector(x + that.getx(), y + that.gety()); };
   };
   return this;
@@ -20,7 +20,7 @@ v2.print();
 x = v1.plus(v1);
 
 
-if(x.eq(v2)){
+if(x.eqx(v2)){
 print("The vectors are equal");
 x.print();
 

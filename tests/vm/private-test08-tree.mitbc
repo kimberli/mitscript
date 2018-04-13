@@ -172,7 +172,7 @@ function
 							local_vars = [x],
 							local_ref_vars = [],
 							free_vars = [Node, this],
-							names = [val, val, right, right, add, right, left, left, add, left],
+							names = [val, val, right, right, addx, right, left, left, addx, left],
 							instructions = 
 							[
 								load_local	0
@@ -354,7 +354,7 @@ function
 					local_vars = [v, this],
 					local_ref_vars = [this],
 					free_vars = [Node],
-					names = [val, left, right, len, contains, add, min, max, forall],
+					names = [val, left, right, len, contains, addx, min, max, forall],
 					instructions = 
 					[
 						alloc_record
@@ -444,7 +444,7 @@ function
 					local_vars = [x],
 					local_ref_vars = [],
 					free_vars = [Node, this],
-					names = [root, root, add, root],
+					names = [root, root, addx, root],
 					instructions = 
 					[
 						push_ref	1
@@ -596,7 +596,7 @@ function
 			local_vars = [Node, this],
 			local_ref_vars = [Node, this],
 			free_vars = [],
-			names = [root, contains, add, min, max, len, forall],
+			names = [root, contains, addx, min, max, len, forall],
 			instructions = 
 			[
 				load_func	0
@@ -651,7 +651,7 @@ function
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [M, N, Tree, i, input, intcast, inval, j, max, min, missing, print, t, add, min, max, contains, len],
+	names = [M, N, Tree, i, input, intcast, inval, j, max, min, missing, print, t, addx, min, max, contains, len],
 	instructions = 
 	[
 		load_func	0
