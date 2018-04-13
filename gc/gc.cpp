@@ -1,7 +1,6 @@
-# include "gc.h"
-# include "../vm/frame.h"
-# include "../vm/types.h"
+#include "gc.h"
 #include "../vm/frame.h"
+#include "../vm/types.h"
 
 using namespace std;
 
@@ -34,11 +33,11 @@ CollectedHeap::CollectedHeap(int maxmem) {
 
 int CollectedHeap::count() {
     // returns the size of allocated ll
-	int totalSize = 0;
-	for (Collectable* x: allocated) {
-		totalSize += x->getSize();
-	}
-	return totalSize;
+    int totalSize = 0;
+    for (Collectable* x: allocated) {
+        totalSize += x->getSize();
+    }
+    return totalSize;
 }
 
 void CollectedHeap::registerCollectable(Collectable* c) {
@@ -93,25 +92,25 @@ void CollectedHeap::gc() {
     // makes the root set (how???)
     // calls markSuccessors on everything in the root set
     // loop through the allocated ll. if marked = False, deallocate, decrement the size of the collector, and remove from ll. Else, set marked to False
-	for (Frame* frame: rootset) {
+    for (Frame* frame: rootset) {
         markSuccessors(frame);
-	}
+    }
 
-	auto it = allocated.begin();
-	while (it != allocated.end()) {
-    	Collectable* c = *it;
-    	if (!c->marked) {
-			currentSizeBytes -= c->getSize();
-			it = allocated.erase(it);
-			delete c;
-    	} else {
-			c->marked = false;
-    	    ++it;
-    	}
-	}
-	for (Frame* frame: rootset) {
-		frame->func->marked = false;
-	}
+    auto it = allocated.begin();
+    while (it != allocated.end()) {
+        Collectable* c = *it;
+        if (!c->marked) {
+            currentSizeBytes -= c->getSize();
+            it = allocated.erase(it);
+            delete c;
+        } else {
+            c->marked = false;
+            ++it;
+        }
+    }
+    for (Frame* frame: rootset) {
+        frame->func->marked = false;
+    }
 }
 
 // Declarations for vector size
