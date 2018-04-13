@@ -25,11 +25,13 @@ whitespace   ([ \t\n]*)
 // In this section of the file, you can define named regular expressions.
 // like int_const and whitespace above
 //begin_student_code
+
+//string_const ("\""[^\n\"]*"\"")
 %}
 name	[a-zA-Z_][a-zA-Z0-9_]*
 
 
-string_const ("\""[^\n\"]*"\"")
+string_const \"(\\[nt\\\"]|[^\\\"])*\"
 
 Operator     ([\%\/\<\>\;\!\?\*\-\+\,\.\:\[\]\(\)\{\}\=\|\&\^\$])
 
