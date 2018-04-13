@@ -25,7 +25,6 @@ using vptr = T*;
 class Frame;
 class Collectable;
 
-
 struct Value : public Collectable {
     // Abstract class for program values that can be stored on a frame's
     // operand stack

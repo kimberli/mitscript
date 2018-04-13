@@ -25,7 +25,7 @@ using namespace std;
 
 int main(int argc, char** argv) {
     if (argc < 2) {
-        cout << "Usage: interpreter [-b|-s] <FILENAME>" << endl;
+        cout << "Usage: interpreter [-b|-s] <FILENAME> -mem <mem in MB>" << endl;
         return 1;
     }
 
