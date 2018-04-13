@@ -54,7 +54,7 @@ public:
     vptr<ValuePtr> getRefVar(string name);
 
     void setLocalVar(string name, vptr<Constant> val, CollectedHeap* ch);
-    void setRefVar(string name, vptr<ValuePtr> val);
+    void setRefVar(string name, vptr<ValuePtr> val, CollectedHeap* ch);
 
     // operand stack helpers
     void opStackPush(vptr<Value> val);

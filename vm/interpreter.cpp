@@ -146,9 +146,10 @@ void Interpreter::executeStep() {
 				vptr<Record> record = frame->opStackPop()->cast<Record>();
 				string field = frame->getNameByIndex(inst.operand0.value());
                 if (record->value.count(field) == 0) {
-                    record->value[field] = collector->allocate<None>();
+                    vptr<Value> val = collector->allocate<None>();
+                    record->set(field, val, *collector);
                 }
-				frame->opStackPush(record->value[field]);
+				frame->opStackPush(record->get(field));
                 break;
             }
         case Operation::FieldStore:
@@ -159,7 +160,7 @@ void Interpreter::executeStep() {
                 }
 				vptr<Record> record = frame->opStackPop()->cast<Record>();
 				string field = frame->getNameByIndex(inst.operand0.value());
-				record->value[field] = value;
+                record->set(field, value, *collector);
                 break;
             }
         case Operation::IndexLoad:
@@ -167,9 +168,10 @@ void Interpreter::executeStep() {
 				string index = frame->opStackPop()->toString();
 				vptr<Record> record = frame->opStackPop()->cast<Record>();
                 if (record->value.count(index) == 0) {
-                    record->value[index] = collector->allocate<None>();
+                    vptr<Value> val = collector->allocate<None>();
+                    record->set(index, val, *collector);
                 }
-				frame->opStackPush(record->value[index]);
+				frame->opStackPush(record->get(index));
                 break;
             }
         case Operation::IndexStore:
@@ -180,7 +182,7 @@ void Interpreter::executeStep() {
 				auto value = frame->opStackPop();
 				string index = frame->opStackPop()->toString();
 				vptr<Record> record = frame->opStackPop()->cast<Record>();
-				record->value[index] = value;
+                record->set(index, value, *collector);
                 break;
             }
         case Operation::AllocClosure:
@@ -243,7 +245,7 @@ void Interpreter::executeStep() {
 				}
                 for (int i = 0; i < numRefs; i++) {
                     string name = clos->func->free_vars_[i];
-                    newFrame->setRefVar(name, clos->refs[i]);
+                    newFrame->setRefVar(name, clos->refs[i], collector);
                 }
 				vptr<NativeFunction> nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
 				if (nativeFunc != NULL) {

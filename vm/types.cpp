@@ -156,6 +156,13 @@ string Record::toString() {
     res += "}";
     return res;
 }
+vptr<Value> Record::get(string key) {
+    return value[key];
+}
+void Record::set(string key, vptr<Value> val, CollectedHeap& collector) {
+    collector.increment(sizeof(key) + key.size() + sizeof(val));
+    value[key] = val;
+}
 bool Record::equals(vptr<Value> other) {
     auto otherV = dynamic_cast<Record*>(other);
     if (otherV == NULL) {

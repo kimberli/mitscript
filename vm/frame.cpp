@@ -83,12 +83,16 @@ vptr<ValuePtr> Frame::getRefVar(string name) {
 void Frame::setLocalVar(string name, vptr<Constant> val, CollectedHeap* ch) {
     if (vars.count(name) == 0) {
         vars[name] = ch->allocate<ValuePtr>(val);
+        ch->increment(sizeof(name) + name.size() + sizeof(val));
     } else {
         vars[name]->ptr = val;
     }
 }
 
-void Frame::setRefVar(string name, vptr<ValuePtr> val) {
+void Frame::setRefVar(string name, vptr<ValuePtr> val, CollectedHeap* ch) {
+    if (vars.count(name) == 0) {
+        ch->increment(sizeof(name) + name.size() + sizeof(val));
+    }
     vars[name] = val;
 }
 

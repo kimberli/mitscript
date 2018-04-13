@@ -92,6 +92,11 @@ public:
 	 */
 	CollectedHeap(int maxmem, int currentSize, list<Frame*>* rootset);
 
+    /*
+     * Increment our tracked currentSizeBytes
+     */
+    void increment(int newMem);
+
 	/*
 	 * Return number of objects in the heap
 	 * This is different from the size of the heap, which should also be tracked
