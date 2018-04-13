@@ -1,10 +1,10 @@
 i = 0;
 r = {};
 while (i < 1000000) {
-    r[x] = "yooooooooooooooo";
+    r["x"] = "yooooooooooooooo";
     r.y = "heeeeeeeeeeeeeeey";
     r.x = None;
-    r[y] = None;
+    r["y"] = None;
     i = i + 1;
 }
 
