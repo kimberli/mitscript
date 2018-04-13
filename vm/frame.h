@@ -60,4 +60,10 @@ public:
     void opStackPush(vptr<Value> val);
     vptr<Value> opStackPeek();
     vptr<Value> opStackPop();
+
+    void opStackPrint() {
+        for (Value* v : opStack) {
+            LOG(v->toString());
+        }
+    }
 };

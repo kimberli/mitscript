@@ -92,25 +92,49 @@ void CollectedHeap::gc() {
     // makes the root set (how???)
     // calls markSuccessors on everything in the root set
     // loop through the allocated ll. if marked = False, deallocate, decrement the size of the collector, and remove from ll. Else, set marked to False
-    for (Frame* frame: rootset) {
-        markSuccessors(frame);
+    LOG("STARTING GC: count = " << count());
+    for (auto frame = rootset->begin(); frame != rootset->end(); ++frame) {
+        markSuccessors(*frame);
     }
 
     auto it = allocated.begin();
     while (it != allocated.end()) {
         Collectable* c = *it;
         if (!c->marked) {
+            // TODO: delete this debugging stuff
+            Frame* f = dynamic_cast<Frame*>(c);
+            Value* con = dynamic_cast<Value*>(c);
+            if (f != NULL) {
+                LOG("  deallocating Frame " << c);
+            } else if (con != NULL) {
+                LOG("  deallocating " << con->type() << " @ " << c);
+            } else {
+                LOG("  deallocating ??");
+            }
+
             currentSizeBytes -= c->getSize();
             it = allocated.erase(it);
             delete c;
         } else {
+            // TODO: delete this debugging stuff
+            Frame* f = dynamic_cast<Frame*>(c);
+            Value* con = dynamic_cast<Value*>(c);
+            if (f != NULL) {
+                LOG("  checked Frame " << c << ", was marked");
+            } else if (con != NULL) {
+                LOG("  checked " << con->type() << " @ " << c << ", was marked");
+            } else {
+                LOG("  checked ?? @ " << c << ", was marked");
+            }
+
             c->marked = false;
             ++it;
         }
     }
-    for (Frame* frame: rootset) {
-        frame->func->marked = false;
+    for (auto frame = rootset->begin(); frame != rootset->end(); ++frame) {
+        (*frame)->func->marked = false;
     }
+    LOG("ENDING GC: count = " << count());
 }
 
 // Declarations for vector size

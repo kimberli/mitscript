@@ -7,12 +7,25 @@
 #include "frame.h"
 #include "../gc/gc.h"
 
+// TODO: delete this
+void toStringHelper2(Collectable* c, string preface) {
+    // DEBUG stuff
+    Frame* f = dynamic_cast<Frame*>(c);
+    Value* con = dynamic_cast<Value*>(c);
+    if (f != NULL) {
+        LOG(preface << c << " marked: " << c->marked);
+    } else if (con != NULL) {
+        LOG(preface << con->type() << " @ " << c << " marked: " << c->marked);
+    } else {
+        LOG(preface << "??" << " marked: " << c->marked);
+    }
+}
+
 /* ValuePtr */
 const string ValuePtr::typeS = "ValuePtr";
 string ValuePtr::toString() {
     throw RuntimeException("can't cast ValuePtr to String");
 }
-
 size_t ValuePtr::getSize() {
     return sizeof(ValuePtr);
 }
@@ -22,6 +35,7 @@ bool ValuePtr::equals(vptr<Value> other) {
 void ValuePtr::follow(CollectedHeap& heap){
     // mark the value this points to
     if (ptr) {
+        toStringHelper2(ptr, "\tValuePtr marking: ");
         heap.markSuccessors(ptr);
     }
 }
@@ -36,9 +50,11 @@ bool Function::equals(vptr<Value> other) {
 void Function::follow(CollectedHeap& heap) {
     // follow functions_ and constants_,
     for (vptr<Function> f : functions_) {
+        toStringHelper2(f, "\tFunction marking: ");
         heap.markSuccessors(f);
     }
     for (vptr<Constant> c : constants_) {
+        toStringHelper2(c, "\tFunction marking: ");
         heap.markSuccessors(c);
     }
 }
@@ -74,6 +90,7 @@ void None::follow(CollectedHeap& heap) {
 size_t None::getSize() {
     return sizeof(None);
 }
+
 /* Integer */
 const string Integer::typeS = "Integer";
 string Integer::toString() {
@@ -92,6 +109,7 @@ void Integer::follow(CollectedHeap& heap) {
 size_t Integer::getSize() {
     return sizeof(Integer);
 }
+
 /* String */
 const string String::typeS = "String";
 string String::toString() {
@@ -109,7 +127,6 @@ string String::toString() {
         }
         pos = replaced->find("\\", pos + 1);
     }
-
     return *replaced;
 }
 bool String::equals(vptr<Value> other) {
@@ -125,6 +142,7 @@ void String::follow(CollectedHeap& heap) {
 size_t String::getSize() {
     return sizeof(String);
 }
+
 /* Boolean */
 const string Boolean::typeS = "Boolean";
 string Boolean::toString() {
@@ -143,6 +161,7 @@ void Boolean::follow(CollectedHeap& heap) {
 size_t Boolean::getSize() {
     return sizeof(Boolean);
 }
+
 /* Record */
 const string Record::typeS = "Record";
 string Record::toString() {
@@ -163,6 +182,7 @@ bool Record::equals(vptr<Value> other) {
 void Record::follow(CollectedHeap& heap) {
     // point to all the values contained in the record
     for (std::map<string, vptr<Value>>::iterator it = value.begin(); it != value.end(); it++) {
+        toStringHelper2(it->second, "\tRecord marking: ");
         heap.markSuccessors(it->second);
     }
 }
@@ -171,6 +191,7 @@ size_t Record::getSize() {
     size_t mapSize = getMapSize(value);
     return overhead + mapSize;
 }
+
 /* Closure */
 const string Closure::typeS = "Closure";
 string Closure::toString() {
@@ -202,10 +223,13 @@ size_t Closure::getSize() {
 void Closure::follow(CollectedHeap& heap) {
     // follow the refs and the function
     for (vptr<ValuePtr> v : refs) {
+        toStringHelper2(v, "\tClosure marking: ");
         heap.markSuccessors(v);
     }
+    toStringHelper2(func, "\tClosure marking: ");
     heap.markSuccessors(func);
 }
+
 /* Native functions */
 vptr<Constant> PrintNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
     string name = currentFrame.getLocalByIndex(0);
@@ -213,13 +237,11 @@ vptr<Constant> PrintNativeFunction::evalNativeFunction(Frame& currentFrame, Coll
     cout << val->toString() << endl;
     return ch.allocate<None>();
 };
-
 vptr<Constant> InputNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
     string input;
     getline(cin, input);
     return ch.allocate<String, string>(input);
 };
-
 vptr<Constant> IntcastNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
     string name = currentFrame.getLocalByIndex(0);
     auto val = currentFrame.getLocalVar(name);

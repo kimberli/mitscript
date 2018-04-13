@@ -51,7 +51,7 @@ Interpreter::Interpreter(vptr<Function> mainFunc, CollectedHeap* gCollector) {
 
     // store the garbage collector
     collector = gCollector;
-	collector->rootset = frames;
+	collector->rootset = &frames;
 };
 
 void Interpreter::executeStep() {
@@ -59,7 +59,7 @@ void Interpreter::executeStep() {
     fptr frame = frames.back();
     Instruction& inst = frame->getCurrInstruction();
     int newOffset = 1;
-    LOG("executing instruction " + to_string(frame->instructionIndex));
+    LOG("\nexecuting instruction " + to_string(frame->instructionIndex));
     switch (inst.operation) {
         case Operation::LoadConst:
             {

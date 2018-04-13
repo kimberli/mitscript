@@ -1,9 +1,9 @@
 #pragma once
 #include <cstdio>
+#include <iostream>
 #include <list>
 #include <map>
 #include <vector>
-#include <list>
 
 using namespace std;
 
@@ -25,7 +25,7 @@ private:
 	//Any private fields you add to the Collectable class will be accessible by the CollectedHeap
 	//(since it is declared as friend below). You can think of these fields as the header for the object,
 	//which will include metadata that is useful for the garbage collector.
-    bool marked = false;
+//    bool marked = false;
 
     // helper to estimate memory allocated for a vector
 protected:
@@ -48,6 +48,9 @@ protected:
 	virtual void follow(CollectedHeap& heap) = 0;
     virtual size_t getSize() = 0;
 	friend CollectedHeap;
+// TODO: delete this
+public:
+    bool marked = false;
 };
 
 /*
@@ -61,9 +64,9 @@ private:
     int maxSizeBytes;
     int currentSizeBytes;
     void registerCollectable(Collectable* c);
-    std::list<Collectable*> allocated;
+    list<Collectable*> allocated;
 public:
-	list<Frame*> rootset;
+	list<Frame*>* rootset;
 	/*
 	The constructor should take as an argument the maximum size of the garbage collected heap.
 	You get to decide what the units of this value should be. Your VM should compute
