@@ -93,7 +93,9 @@ public:
 
     /*
      * Check the memory usage to make sure it's in bounds
+     * Throws an exception if OOB
      */
+    void checkSize();
 
 	/*
      * This method allocates an object of type T using the default

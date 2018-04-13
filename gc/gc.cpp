@@ -1,4 +1,5 @@
 #include "gc.h"
+#include "../vm/exception.h"
 #include "../vm/frame.h"
 #include "../vm/types.h"
 
@@ -32,13 +33,17 @@ CollectedHeap::CollectedHeap(int maxmem, int currentSize, list<Frame*>* frames) 
 }
 int CollectedHeap::count() {
     // TODO: this function doesn't do what it says it does;
-    // why do we need this instead of using currentSizeBytes?
     // returns the number of allocated in the ll
     int totalSize = 0;
     for (Collectable* x: allocated) {
         totalSize += x->getSize();
     }
     return totalSize;
+}
+void CollectedHeap::checkSize() {
+    if (currentSizeBytes < 0 || currentSizeBytes > maxSizeBytes) {
+        throw RuntimeException("size OOB: " + to_string(currentSizeBytes) + " / " + to_string(maxSizeBytes));
+    }
 }
 void CollectedHeap::registerCollectable(Collectable* c) {
     currentSizeBytes += c->getSize();
@@ -95,6 +100,8 @@ void CollectedHeap::gc() {
         while (it != allocated.end()) {
             Collectable* c = *it;
             if (!c->marked) {
+                // TODO: this getSize calculation is not exactly the size of what
+                // we are deleting
                 currentSizeBytes -= c->getSize();
                 it = allocated.erase(it);
                 delete c;
@@ -110,6 +117,7 @@ void CollectedHeap::gc() {
     } else {
         LOG("SKIPPED GC: count = " << currentSizeBytes << "/" << maxSizeBytes);
     }
+    checkSize();
 }
 
 // Declarations for vector size
