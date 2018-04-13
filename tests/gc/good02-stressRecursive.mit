@@ -1,0 +1,18 @@
+g = fun() {
+    i = 0;
+    while (i < 1000) {
+        r = { id : i; };
+        print(r);
+        i = i + 1;
+    }
+};
+
+f = fun(i) {
+    if (i == 0) {
+        return None;
+    }
+    g();
+    f(i-1);
+};
+
+f(100);
