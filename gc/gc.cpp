@@ -91,8 +91,7 @@ void CollectedHeap::gc() {
     // calls markSuccessors on everything in the root set
     // loop through the allocated ll. if marked = False, deallocate, decrement the size of the collector, and remove from ll. Else, set marked to False
     if (currentSizeBytes > maxSizeBytes / 2) {
-        LOG("STARTING GC: count = " << currentSizeBytes << "/" << maxSizeBytes);
-        LOG("Items on the heap: " << count());
+        LOG("STARTING GC: size = " << currentSizeBytes << "/" << maxSizeBytes << ", count = " << count());
         // mark stage
         for (auto frame = rootset->begin(); frame != rootset->end(); ++frame) {
             markSuccessors(*frame);
@@ -115,10 +114,9 @@ void CollectedHeap::gc() {
         for (auto frame = rootset->begin(); frame != rootset->end(); ++frame) {
             (*frame)->func->marked = false;
         }
-        LOG("ENDING GC: count = " << currentSizeBytes);
-        LOG("Items on the heap: " << count());
+        LOG("ENDING GC: size = " << currentSizeBytes << ", count = " << count());
     } else {
-        LOG("SKIPPED GC: count = " << currentSizeBytes << "/" << maxSizeBytes);
+        //LOG("SKIPPED GC: count = " << currentSizeBytes << "/" << maxSizeBytes);
     }
     checkSize();
 }

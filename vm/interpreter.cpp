@@ -59,7 +59,7 @@ void Interpreter::executeStep() {
     fptr frame = frames.back();
     Instruction& inst = frame->getCurrInstruction();
     int newOffset = 1;
-    LOG("\nexecuting instruction " + to_string(frame->instructionIndex));
+    // LOG("\nexecuting instruction " + to_string(frame->instructionIndex));
     switch (inst.operation) {
         case Operation::LoadConst:
             {
@@ -434,5 +434,5 @@ void Interpreter::run() {
     while (!finished) {
         executeStep();
     }
-    LOG("program finished");
+    // LOG("program finished");
 };

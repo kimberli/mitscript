@@ -116,7 +116,6 @@ vptr<Value> Frame::opStackPop() {
 void Frame::follow(CollectedHeap& heap) {
     // follow the function it contains
     // As well as all the stuff on the op stack?
-    LOG("\tFOLLOWING FRAME @ " << this);
     heap.markSuccessors(func);
     for (Collectable* v : opStack) {
         heap.markSuccessors(v);
