@@ -1,0 +1,9 @@
+i = 0;
+while (i < 1000000) {
+    x = "yooooooooooooooo";
+    y = "heeeeeeeeeeeeeeey";
+    x = None;
+    y = None;
+    i = i + 1;
+}
+
