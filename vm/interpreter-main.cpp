@@ -25,7 +25,7 @@ using namespace std;
 
 int main(int argc, char** argv) {
     if (argc < 2) {
-        cout << "Usage: interpreter [-b|-s] <FILENAME> -mem <mem in KB>" << endl;
+        cout << "Usage: interpreter [-b|-s] <FILENAME> -mem <mem in MB>" << endl;
         return 1;
     }
 
@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
         } else if (strcmp(argv[i], "-s") == 0) {
             file_type = MITSCRIPT;
         } else if (strcmp(argv[i], "-mem") == 0) {
-            string memError = "-mem takes an integer specifying max data usage in KB";
+            string memError = "-mem takes an integer specifying max data usage in MB";
             if ((i+1) >= argc) {
                 cout << memError << endl;
                 return 1;

@@ -27,8 +27,8 @@ size_t Collectable::getStackSize(list<T> s) {
 
 /* CollectedHeap */
 CollectedHeap::CollectedHeap(int maxmem, int currentSize, list<Frame*>* frames) {
-    // maxmem is in KB
-    maxSizeBytes = long(maxmem * 1000);
+    // maxmem is in MB
+    maxSizeBytes = long(maxmem * 1000000);
     currentSizeBytes = currentSize;
     rootset = frames;
 }
