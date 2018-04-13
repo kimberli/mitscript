@@ -92,7 +92,7 @@ int main(int argc, char** argv) {
         void* scanner;
         bclex_init(&scanner);
         bcset_in(infile, scanner);
-        if (bcparse(scanner, bc_output, collector) == 1) {
+        if (bcparse(scanner, bc_output) == 1) {
             cout << "Parsing bytecode failed" << endl;
             return 1;
         }

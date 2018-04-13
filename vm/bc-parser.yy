@@ -35,7 +35,6 @@ using namespace std;
 
 #include "instructions.h"
 #include "types.h"
-#include "../gc/gc.h"
 
 #include <cassert>
 
@@ -46,14 +45,14 @@ uint32_t safe_unsigned_cast(int64_t value);
 
 
 %define api.pure full
-%parse-param {yyscan_t yyscanner} {Function*& out} {CollectedHeap* collector}
+%parse-param {yyscan_t yyscanner} {Function*& out}
 %lex-param {yyscan_t yyscanner}
 %locations
 %define parse.error verbose
 
 %code provides{
 YY_DECL;
-int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, CollectedHeap* collector, const char* message);
+int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* message);
 }
 
 
@@ -166,7 +165,7 @@ Function:
   T_instructions '=' '[' InstructionList ']'
   '}'
 {
-	$$ = collector->allocate<Function>(*$6, *$12, safe_cast($17), *$22, *$28, *$34, *$40, *$46);
+	$$ = new Function{*$6, *$12, safe_cast($17), *$22, *$28, *$34, *$40, *$46};
 
     out = $$;
 }
@@ -226,25 +225,25 @@ T_ident
 Constant :
   T_none
 {
-	$$ = collector->allocate<None>();
+	$$ = new None();
 }
 | T_true
 {
-	$$ = collector->allocate<Boolean>(true);
+	$$ = new Boolean(true);
 }
 | T_false
 {
-	$$ = collector->allocate<Boolean>(false);
+	$$ = new Boolean(false);
 }
 |  T_string
 {
-	$$ = collector->allocate<String>(*$1);
+	$$ = new String(*$1);
 
 	delete $1;
 }
 | T_int
 {
-	$$ = collector->allocate<Integer>(safe_cast($1));
+	$$ = new Integer{safe_cast($1)};
 }
 
 ConstantListStar:
@@ -421,7 +420,7 @@ InstructionList:
 %%
 
 // Error reporting function. You should not have to modify this.
-int yyerror(BCLTYPE * yylloc, void* p, Function*& out, CollectedHeap* collector, const char*  msg){
+int yyerror(BCLTYPE * yylloc, void* p, Function*& out, const char*  msg){
 
   cout<<"Error in line "<<yylloc->last_line<<", col "<<yylloc->last_column<<": "<<msg <<endl;
   return 0;
