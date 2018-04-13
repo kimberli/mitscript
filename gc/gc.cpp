@@ -103,32 +103,10 @@ void CollectedHeap::gc() {
     while (it != allocated.end()) {
         Collectable* c = *it;
         if (!c->marked) {
-            // TODO: delete this debugging stuff
-            Frame* f = dynamic_cast<Frame*>(c);
-            Value* con = dynamic_cast<Value*>(c);
-            if (f != NULL) {
-                LOG("  deallocating Frame " << c);
-            } else if (con != NULL) {
-                LOG("  deallocating " << con->type() << " @ " << c);
-            } else {
-                LOG("  deallocating ??");
-            }
-
             currentSizeBytes -= c->getSize();
             it = allocated.erase(it);
             delete c;
         } else {
-            // TODO: delete this debugging stuff
-            Frame* f = dynamic_cast<Frame*>(c);
-            Value* con = dynamic_cast<Value*>(c);
-            if (f != NULL) {
-                LOG("  checked Frame " << c << ", was marked");
-            } else if (con != NULL) {
-                LOG("  checked " << con->type() << " @ " << c << ", was marked");
-            } else {
-                LOG("  checked ?? @ " << c << ", was marked");
-            }
-
             c->marked = false;
             ++it;
         }

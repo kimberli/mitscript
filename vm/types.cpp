@@ -7,19 +7,6 @@
 #include "frame.h"
 #include "../gc/gc.h"
 
-// TODO: delete this
-void toStringHelper2(Collectable* c, string preface) {
-    // DEBUG stuff
-    Frame* f = dynamic_cast<Frame*>(c);
-    Value* con = dynamic_cast<Value*>(c);
-    if (f != NULL) {
-        LOG(preface << c << " marked: " << c->marked);
-    } else if (con != NULL) {
-        LOG(preface << con->type() << " @ " << c << " marked: " << c->marked);
-    } else {
-        LOG(preface << "??" << " marked: " << c->marked);
-    }
-}
 
 /* ValuePtr */
 const string ValuePtr::typeS = "ValuePtr";
@@ -35,7 +22,6 @@ bool ValuePtr::equals(vptr<Value> other) {
 void ValuePtr::follow(CollectedHeap& heap){
     // mark the value this points to
     if (ptr) {
-        toStringHelper2(ptr, "\tValuePtr marking: ");
         heap.markSuccessors(ptr);
     }
 }
@@ -50,11 +36,9 @@ bool Function::equals(vptr<Value> other) {
 void Function::follow(CollectedHeap& heap) {
     // follow functions_ and constants_,
     for (vptr<Function> f : functions_) {
-        toStringHelper2(f, "\tFunction marking: ");
         heap.markSuccessors(f);
     }
     for (vptr<Constant> c : constants_) {
-        toStringHelper2(c, "\tFunction marking: ");
         heap.markSuccessors(c);
     }
 }
@@ -180,7 +164,6 @@ bool Record::equals(vptr<Value> other) {
 void Record::follow(CollectedHeap& heap) {
     // point to all the values contained in the record
     for (std::map<string, vptr<Value>>::iterator it = value.begin(); it != value.end(); it++) {
-        toStringHelper2(it->second, "\tRecord marking: ");
         heap.markSuccessors(it->second);
     }
 }
@@ -221,10 +204,8 @@ size_t Closure::getSize() {
 void Closure::follow(CollectedHeap& heap) {
     // follow the refs and the function
     for (vptr<ValuePtr> v : refs) {
-        toStringHelper2(v, "\tClosure marking: ");
         heap.markSuccessors(v);
     }
-    toStringHelper2(func, "\tClosure marking: ");
     heap.markSuccessors(func);
 }
 

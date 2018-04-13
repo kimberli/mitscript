@@ -113,44 +113,22 @@ vptr<Value> Frame::opStackPop() {
     return top;
 }
 
-// TODO: delete this
-void toStringHelper(Collectable* c, string preface) {
-    // DEBUG stuff
-    Frame* f = dynamic_cast<Frame*>(c);
-    Value* con = dynamic_cast<Value*>(c);
-    if (f != NULL) {
-        LOG(preface << c << " marked: " << c->marked);
-    } else if (con != NULL) {
-        LOG(preface << con->type() << " @ " << c << " marked: " << c->marked);
-    } else {
-        LOG(preface << "??" << " marked: " << c->marked);
-    }
-}
-
 void Frame::follow(CollectedHeap& heap) {
     // follow the function it contains
     // As well as all the stuff on the op stack?
     LOG("\tFOLLOWING FRAME @ " << this);
-    toStringHelper(func, "\tframe marking ");
     heap.markSuccessors(func);
     for (Collectable* v : opStack) {
-        toStringHelper(v, "\topStack marking ");
         heap.markSuccessors(v);
     }
-    // for (auto const& v : vars) {
-    //     LOG("\t marking " << v.second->toString());
-    //     heap.markSuccessors(v.second);
-    // }
    	for (string arg : func->local_vars_) {
 		if (vars.count(arg) != 0) {
 			Collectable* localVar = vars[arg];
-            toStringHelper(localVar, "\tlocal vars marking ");
    	    	heap.markSuccessors(localVar); }
    	}
    	for (string arg : func->local_reference_vars_) {
 		if (vars.count(arg) != 0) {
 			Collectable* localRef = vars[arg];
-            toStringHelper(localRef, "\tref vars marking ");
    	    	heap.markSuccessors(localRef);
 		}
    	}
