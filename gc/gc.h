@@ -85,7 +85,7 @@ public:
      * units of maxmem: KB
      * units of currentSize: B
 	 */
-	CollectedHeap(int maxmem, int currentSize, list<Frame*>* frames);
+	CollectedHeap(int maxmem, int currentSize, list<Frame*>* rootset);
 
 	/*
 	 * Return number of objects in the heap
@@ -93,6 +93,11 @@ public:
 	 * by the garbage collector.
 	 */
 	int count();
+
+    /*
+     * Get current size of heap
+     */
+    long getSize();
 
     /*
      * Check the memory usage to make sure it's in bounds

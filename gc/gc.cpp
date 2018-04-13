@@ -41,6 +41,9 @@ int CollectedHeap::count() {
     }
     return totalSize;
 }
+long CollectedHeap::getSize() {
+    return currentSizeBytes;
+}
 void CollectedHeap::checkSize() {
     if (currentSizeBytes < 0 || currentSizeBytes > maxSizeBytes) {
         throw RuntimeException("size OOB: " + to_string(currentSizeBytes) + " / " + to_string(maxSizeBytes));
@@ -89,7 +92,6 @@ T* CollectedHeap::allocate(vector<ValuePtr*> refs, Function* func) {
     return ret;
 }
 void CollectedHeap::gc() {
-    // makes the root set (how???)
     // calls markSuccessors on everything in the root set
     // loop through the allocated ll. if marked = False, deallocate, decrement the size of the collector, and remove from ll. Else, set marked to False
     if (currentSizeBytes > maxSizeBytes / 2) {

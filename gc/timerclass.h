@@ -73,6 +73,3 @@ class timerclass{
 		return *this;
 	}
 };
-
-
-#endif /*TIMERCLASS_H_*/
