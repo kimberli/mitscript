@@ -81,6 +81,9 @@ public:
 	 * -mem parameter passed to it. Keep in mind, however, that
 	 * your VM could be using some extra memory that is not managed by
      * the garbage collector, so make sure you account for this.
+     *
+     * units of maxmem: KB
+     * units of currentSize: B
 	 */
 	CollectedHeap(int maxmem, int currentSize, list<Frame*>* frames);
 
