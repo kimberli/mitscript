@@ -35,11 +35,7 @@ CollectedHeap::CollectedHeap(int maxmem, int currentSize, list<Frame*>* frames) 
 int CollectedHeap::count() {
     // TODO: this function doesn't do what it says it does;
     // returns the number of allocated in the ll
-    int totalSize = 0;
-    for (Collectable* x: allocated) {
-        totalSize += x->getSize();
-    }
-    return totalSize;
+    return allocated.size();
 }
 long CollectedHeap::getSize() {
     return currentSizeBytes;
