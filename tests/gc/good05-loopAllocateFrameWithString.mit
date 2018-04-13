@@ -1,0 +1,8 @@
+i = 0; 
+f = fun() {
+    x = "This is a sample mitscript file written for 6.s081 class";
+};
+
+while (i < 10000) {
+    f();
+} 
