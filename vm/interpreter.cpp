@@ -18,23 +18,23 @@ Interpreter::Interpreter(vptr<Function> mainFunc, int maxmem) {
     // initialize the garbage collector
     // note that mainFunc is not included in the gc's allocated list because
     // we never have to deallocate it
-    // TODO: does getSize() return bytes?
     collector = new CollectedHeap(maxmem, mainFunc->getSize(), &frames);
 
     // initialize the root frame
     int numLocals = mainFunc->names_.size();
     int numRefs = 0;
     if (mainFunc->local_reference_vars_.size() != 0) {
-        throw RuntimeException("can't initialize root frame with nonzero ref vars");
+        throw RuntimeException("can't initialize root frame w/ nonzero ref vars");
     }
     if (mainFunc->free_vars_.size() != 0) {
-        throw RuntimeException("can't initialize root frame with nonzero free vars");
+        throw RuntimeException("can't initialize root frame w/ nonzero free vars");
     }
     if (mainFunc->local_vars_.size() != 0) {
-        throw RuntimeException("can't initialize root frame with nonzero local vars");
+        throw RuntimeException("can't initialize root frame w/ nonzero local vars");
     }
     mainFunc->local_vars_ = mainFunc->names_;
     fptr frame = collector->allocate<Frame, vptr<Function>>(mainFunc);
+    frame->collector = collector;
     globalFrame = frame;
     frames.push_back(frame);
     finished = false;
@@ -86,7 +86,7 @@ void Interpreter::executeStep() {
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for StoreLocal");
                 }
-                frame->setLocalVar(name, value, collector);
+                frame->setLocalVar(name, value);
                 break;
             }
         case Operation::LoadGlobal:
@@ -104,7 +104,7 @@ void Interpreter::executeStep() {
                     throw RuntimeException("expected Constant on the stack for StoreGlobal");
                 }
                 string name = frame->getNameByIndex(index);
-                globalFrame->setLocalVar(name, value, collector);
+                globalFrame->setLocalVar(name, value);
                 break;
             }
         case Operation::PushReference:
@@ -234,18 +234,19 @@ void Interpreter::executeStep() {
                 int numLocals = clos->func->local_vars_.size();
                 int numRefs = clos->func->free_vars_.size();
                 fptr newFrame = collector->allocate<Frame>(clos->func);
+                frame->collector = collector;
 				for (int i = 0; i < numLocals; i++) {
                     if (i < numArgs) {
                         string name = clos->func->local_vars_[i];
-                        newFrame->setLocalVar(name, argsList[i], collector);
+                        newFrame->setLocalVar(name, argsList[i]);
                     } else {
                         string name = clos->func->local_vars_[i];
-                        newFrame->setLocalVar(name, collector->allocate<None>(), collector);
+                        newFrame->setLocalVar(name, collector->allocate<None>());
                     }
 				}
                 for (int i = 0; i < numRefs; i++) {
                     string name = clos->func->free_vars_[i];
-                    newFrame->setRefVar(name, clos->refs[i], collector);
+                    newFrame->setRefVar(name, clos->refs[i]);
                 }
 				vptr<NativeFunction> nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
 				if (nativeFunc != NULL) {

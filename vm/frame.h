@@ -33,6 +33,8 @@ public:
     list<vptr<Value>> opStack;
     // index of current instruction in func's instructions list
     int instructionIndex = 0;
+    // garbage collector
+    CollectedHeap* collector;
 
     Frame(vptr<Function> func): func(func) {
 	};
@@ -53,8 +55,8 @@ public:
     vptr<Constant> getLocalVar(string name);
     vptr<ValuePtr> getRefVar(string name);
 
-    void setLocalVar(string name, vptr<Constant> val, CollectedHeap* ch);
-    void setRefVar(string name, vptr<ValuePtr> val, CollectedHeap* ch);
+    void setLocalVar(string name, vptr<Constant> val);
+    void setRefVar(string name, vptr<ValuePtr> val);
 
     // operand stack helpers
     void opStackPush(vptr<Value> val);

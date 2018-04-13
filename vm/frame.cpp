@@ -80,24 +80,25 @@ vptr<ValuePtr> Frame::getRefVar(string name) {
     throw RuntimeException(name + " has not been created in its frame's vars");
 }
 
-void Frame::setLocalVar(string name, vptr<Constant> val, CollectedHeap* ch) {
+void Frame::setLocalVar(string name, vptr<Constant> val) {
     if (vars.count(name) == 0) {
-        vars[name] = ch->allocate<ValuePtr>(val);
-        ch->increment(sizeof(name) + name.size() + sizeof(val));
+        vars[name] = collector->allocate<ValuePtr>(val);
+        collector->increment(sizeof(name) + name.size() + sizeof(val));
     } else {
         vars[name]->ptr = val;
     }
 }
 
-void Frame::setRefVar(string name, vptr<ValuePtr> val, CollectedHeap* ch) {
+void Frame::setRefVar(string name, vptr<ValuePtr> val) {
     if (vars.count(name) == 0) {
-        ch->increment(sizeof(name) + name.size() + sizeof(val));
+        collector->increment(sizeof(name) + name.size() + sizeof(val));
     }
     vars[name] = val;
 }
 
 // operand stack helpers
 void Frame::opStackPush(vptr<Value> val) {
+    collector->increment(sizeof(val));
     opStack.push_back(val);
 }
 
@@ -113,6 +114,8 @@ vptr<Value> Frame::opStackPop() {
         throw InsufficientStackException("pop from empty stack");
     }
     vptr<Value> top = opStack.back();
+    int size = sizeof(top);
+    collector->increment(-size);
     opStack.pop_back();
     return top;
 }

@@ -50,8 +50,6 @@ void CollectedHeap::increment(int newMem) {
     currentSizeBytes += newMem;
 }
 int CollectedHeap::count() {
-    // TODO: this function doesn't do what it says it does;
-    // returns the number of allocated in the ll
     return allocated.size();
 }
 long CollectedHeap::getSize() {
