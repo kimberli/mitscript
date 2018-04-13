@@ -1,0 +1,93 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		}
+	],
+	constants = [5, 7, "x is True: ", 3, 2, "y is -5: ", true, true, "z is True: "],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [input, intcast, print, x, y, z],
+	instructions = 
+	[
+		load_func	0
+		alloc_closure	0
+		store_global	2
+		load_func	1
+		alloc_closure	0
+		store_global	0
+		load_func	2
+		alloc_closure	0
+		store_global	1
+		load_const	0
+		load_const	1
+		eq
+		not
+		store_global	3
+		load_global	2
+		load_const	2
+		load_global	3
+		add
+		call	1
+		load_const	3
+		neg
+		load_const	4
+		sub
+		store_global	4
+		load_global	2
+		load_const	5
+		load_global	4
+		add
+		call	1
+		load_const	6
+		not
+		load_const	7
+		or
+		store_global	5
+		load_global	2
+		load_const	8
+		load_global	5
+		add
+		call	1
+	]
+}

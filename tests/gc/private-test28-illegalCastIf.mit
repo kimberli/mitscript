@@ -1,0 +1,8 @@
+x = 5;
+if (x == 5){
+	print("This should print");
+}
+
+if (x + 5){
+	print("This should've been an illegal cast exception");
+}

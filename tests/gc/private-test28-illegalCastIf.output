@@ -1,0 +1,2 @@
+This should print
+IllegalCastException: cannot cast type Integer to Boolean

@@ -1,0 +1,94 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		}
+	],
+	constants = [50, 0, 0, "", 1, 1, 1, "hello"],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [i, input, intcast, iterations, j, key, print],
+	instructions = 
+	[
+		load_func	0
+		alloc_closure	0
+		store_global	6
+		load_func	1
+		alloc_closure	0
+		store_global	1
+		load_func	2
+		alloc_closure	0
+		store_global	2
+		load_const	0
+		store_global	3
+		load_const	1
+		store_global	0
+		goto	19
+		load_const	2
+		store_global	4
+		load_const	3
+		store_global	5
+		goto	5
+		load_global	4
+		load_const	4
+		add
+		store_global	4
+		load_global	4
+		load_const	5
+		swap
+		gt
+		if	-8
+		load_global	0
+		load_const	6
+		add
+		store_global	0
+		load_global	0
+		load_global	3
+		swap
+		gt
+		if	-22
+		load_global	6
+		load_const	7
+		call	1
+	]
+}
