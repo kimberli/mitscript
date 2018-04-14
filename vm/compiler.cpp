@@ -199,6 +199,8 @@ void BytecodeCompiler::visit(Assignment& exp) {
 
 void BytecodeCompiler::visit(CallStatement& exp) {
     addInstructions(exp.call);
+    Instruction* popInstr = new Instruction(Operation::Pop, optint_t());
+    retFunc->instructions.push_back(*popInstr);
 }
 
 void BytecodeCompiler::visit(IfStatement& exp) {
