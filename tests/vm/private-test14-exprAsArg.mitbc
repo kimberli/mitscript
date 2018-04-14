@@ -1,0 +1,119 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		}
+	],
+	constants = [5, 1, 2, "Should print: 5 0 -2 -10 25 1 -1", " ", " ", " ", " ", " ", 3, " ", 3],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [a, b, c, input, intcast, print],
+	instructions = 
+	[
+		load_func	0
+		alloc_closure	0
+		store_global	5
+		load_func	1
+		alloc_closure	0
+		store_global	3
+		load_func	2
+		alloc_closure	0
+		store_global	4
+		load_const	0
+		neg
+		store_global	0
+		load_const	1
+		neg
+		store_global	1
+		load_const	2
+		store_global	2
+		load_global	5
+		load_const	3
+		call	1
+		load_global	5
+		load_global	0
+		load_global	1
+		div
+		load_const	4
+		add
+		load_global	1
+		load_global	0
+		div
+		add
+		load_const	5
+		add
+		load_global	0
+		load_global	2
+		div
+		add
+		load_const	6
+		add
+		load_global	0
+		load_global	2
+		mul
+		add
+		load_const	7
+		add
+		load_global	0
+		load_global	0
+		mul
+		add
+		load_const	8
+		add
+		load_global	0
+		load_const	9
+		load_global	2
+		mul
+		add
+		add
+		load_const	10
+		add
+		load_global	2
+		load_const	11
+		load_global	1
+		mul
+		add
+		add
+		call	1
+	]
+}

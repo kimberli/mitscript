@@ -1,0 +1,366 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [None],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+				load_const	0
+				return
+			]
+		}
+	],
+	constants = ["Should print: 1hi", 1, "hi", "Should print: 2", 1, 1, "Should print: hi1", "hi", 1, "Should print: 3", 9, 3, "Should print: 9", 3, 3, "Should print: {hello:9 }", 5, 2, 1, "Should print: FUNCTION", "Should print: True", true, true, false, false, 100, 30, 4, 134, 1, 2, 2, 1, 2, 1, 1, 2, "hello", "hell", "o", false, None, "yep", "nes", "ted", "Should print: False", 1, 1, 2, 2, 1, 2, 2, 1, 1, "hello", "hel", true],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [input, intcast, mega_nested, print, x, y, hello, derp, herp, nested, still, yep, still_nested, still_nested, still, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp],
+	instructions = 
+	[
+		load_func	0
+		alloc_closure	0
+		store_global	3
+		load_func	1
+		alloc_closure	0
+		store_global	0
+		load_func	2
+		alloc_closure	0
+		store_global	1
+		load_global	3
+		load_const	0
+		call	1
+		load_global	3
+		load_const	1
+		load_const	2
+		add
+		call	1
+		load_global	3
+		load_const	3
+		call	1
+		load_global	3
+		load_const	4
+		load_const	5
+		add
+		call	1
+		load_global	3
+		load_const	6
+		call	1
+		load_global	3
+		load_const	7
+		load_const	8
+		add
+		call	1
+		load_global	3
+		load_const	9
+		call	1
+		load_global	3
+		load_const	10
+		load_const	11
+		div
+		call	1
+		load_global	3
+		load_const	12
+		call	1
+		load_global	3
+		load_const	13
+		load_const	14
+		mul
+		call	1
+		load_global	3
+		load_const	15
+		call	1
+		load_global	3
+		alloc_record
+		dup
+		load_const	16
+		load_const	17
+		mul
+		load_const	18
+		sub
+		field_store	6
+		call	1
+		load_global	3
+		load_const	19
+		call	1
+		load_global	3
+		load_global	3
+		call	1
+		load_global	3
+		load_const	20
+		call	1
+		load_global	3
+		load_const	21
+		load_const	22
+		eq
+		call	1
+		load_global	3
+		load_const	23
+		load_const	24
+		eq
+		call	1
+		load_global	3
+		load_const	25
+		load_const	26
+		add
+		load_const	27
+		add
+		load_const	28
+		eq
+		call	1
+		alloc_record
+		store_global	4
+		load_global	3
+		load_global	4
+		load_global	4
+		eq
+		call	1
+		load_global	3
+		load_global	3
+		load_global	3
+		eq
+		call	1
+		load_func	3
+		alloc_closure	0
+		store_global	4
+		load_global	3
+		load_global	4
+		load_global	4
+		eq
+		call	1
+		load_global	3
+		load_const	29
+		load_const	30
+		swap
+		gt
+		call	1
+		load_global	3
+		load_const	31
+		load_const	32
+		gt
+		call	1
+		load_global	3
+		load_const	33
+		load_const	34
+		geq
+		call	1
+		load_global	3
+		load_const	35
+		load_const	36
+		swap
+		geq
+		call	1
+		load_global	3
+		load_const	37
+		load_const	38
+		load_const	39
+		add
+		eq
+		call	1
+		load_global	3
+		load_const	40
+		not
+		call	1
+		alloc_record
+		dup
+		alloc_record
+		dup
+		alloc_record
+		dup
+		alloc_record
+		dup
+		alloc_record
+		dup
+		alloc_record
+		dup
+		load_const	41
+		field_store	7
+		field_store	8
+		field_store	9
+		field_store	10
+		field_store	11
+		field_store	12
+		store_global	2
+		load_global	2
+		load_global	2
+		field_load	13
+		load_const	42
+		index_load
+		field_load	14
+		load_const	43
+		load_const	44
+		add
+		index_load
+		field_load	15
+		swap
+		field_store	16
+		load_global	3
+		load_global	2
+		field_load	17
+		field_load	18
+		field_load	19
+		field_load	20
+		field_load	21
+		field_load	22
+		load_global	2
+		eq
+		call	1
+		load_global	3
+		load_global	2
+		field_load	23
+		field_load	24
+		field_load	25
+		field_load	26
+		field_load	27
+		field_load	28
+		field_load	29
+		field_load	30
+		field_load	31
+		field_load	32
+		field_load	33
+		field_load	34
+		field_load	35
+		field_load	36
+		field_load	37
+		field_load	38
+		field_load	39
+		field_load	40
+		field_load	41
+		field_load	42
+		field_load	43
+		field_load	44
+		field_load	45
+		field_load	46
+		field_load	47
+		field_load	48
+		field_load	49
+		field_load	50
+		field_load	51
+		field_load	52
+		field_load	53
+		field_load	54
+		field_load	55
+		field_load	56
+		field_load	57
+		field_load	58
+		field_load	59
+		field_load	60
+		field_load	61
+		field_load	62
+		field_load	63
+		field_load	64
+		field_load	65
+		field_load	66
+		field_load	67
+		field_load	68
+		field_load	69
+		field_load	70
+		field_load	71
+		field_load	72
+		field_load	73
+		field_load	74
+		field_load	75
+		field_load	76
+		load_global	2
+		eq
+		call	1
+		load_global	3
+		load_const	45
+		call	1
+		load_global	3
+		load_const	46
+		load_const	47
+		swap
+		gt
+		call	1
+		load_global	3
+		load_const	48
+		load_const	49
+		gt
+		call	1
+		load_global	3
+		load_const	50
+		load_const	51
+		geq
+		call	1
+		load_global	3
+		load_const	52
+		load_const	53
+		swap
+		geq
+		call	1
+		load_global	3
+		load_const	54
+		load_global	4
+		eq
+		call	1
+		load_global	3
+		load_global	4
+		load_global	3
+		eq
+		call	1
+		alloc_record
+		store_global	5
+		load_global	3
+		load_global	4
+		load_global	5
+		eq
+		call	1
+		load_global	3
+		load_const	55
+		load_const	56
+		eq
+		call	1
+		load_global	3
+		load_const	57
+		not
+		call	1
+	]
+}

@@ -53,23 +53,8 @@ comment  "//".*"\n"
 }
 
 {str_const} {
-    string* replaced = new string(yytext + 1);
-    auto pos = replaced->find("\\");
-    while (pos != string::npos) {
-        if (replaced->at(pos + 1) == 'n') {
-            replaced->replace(pos, 2, "\n");
-        } else if (replaced->at(pos + 1) == 't') {
-            replaced->replace(pos, 2, "\t");
-        } else if (replaced->at(pos + 1) == '\\') {
-            replaced->replace(pos, 2, "\\");
-        } else if (replaced->at(pos + 1) == '"') {
-            replaced->replace(pos, 2, "\"");
-        }
-        pos = replaced->find("\\", pos + 1);
-    }
-    replaced->pop_back();
-
-    yylval->strconst = replaced;
+    yylval->strconst = new string(yytext+1);
+    yylval->strconst->pop_back();
     return T_STR;
 }
 

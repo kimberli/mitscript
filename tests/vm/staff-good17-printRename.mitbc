@@ -1,0 +1,266 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = ["Inside S1", "--> ", None],
+			parameter_count = 1,
+			local_vars = [x],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [debugprint, oldprint],
+			instructions = 
+			[
+				load_global	0
+				load_const	0
+				call	1
+				load_global	1
+				load_const	1
+				load_local	0
+				add
+				call	1
+				load_const	2
+				return
+			]
+		},
+		function
+		{
+			functions =
+			[
+				function
+				{
+					functions = [],
+					constants = [None],
+					parameter_count = 0,
+					local_vars = [],
+					local_ref_vars = [],
+					free_vars = [],
+					names = [print],
+					instructions = 
+					[
+						load_global	0
+						return
+						load_const	0
+						return
+					]
+				},
+				function
+				{
+					functions =
+					[
+						function
+						{
+							functions = [],
+							constants = ["Inside S2", "--> ", None],
+							parameter_count = 1,
+							local_vars = [x],
+							local_ref_vars = [],
+							free_vars = [oldprint],
+							names = [debugprint],
+							instructions = 
+							[
+								load_global	0
+								load_const	0
+								call	1
+								push_ref	0
+								load_ref
+								load_const	1
+								load_local	0
+								add
+								call	1
+								load_const	2
+								return
+							]
+						}
+					],
+					constants = ["Here we go!", None],
+					parameter_count = 1,
+					local_vars = [x, oldprint, print],
+					local_ref_vars = [oldprint],
+					free_vars = [getprint, y],
+					names = [debugprint, z],
+					instructions = 
+					[
+						push_ref	1
+						load_ref
+						call	0
+						store_local	1
+						load_func	0
+						push_ref	0
+						alloc_closure	1
+						store_local	2
+						load_global	0
+						load_const	0
+						call	1
+						load_local	2
+						load_local	0
+						call	1
+						load_local	2
+						push_ref	2
+						load_ref
+						call	1
+						load_local	2
+						load_global	1
+						call	1
+						load_const	1
+						return
+					]
+				},
+				function
+				{
+					functions = [],
+					constants = ["--> ", None],
+					parameter_count = 1,
+					local_vars = [x],
+					local_ref_vars = [],
+					free_vars = [oldprint],
+					names = [],
+					instructions = 
+					[
+						push_ref	0
+						load_ref
+						load_const	0
+						load_local	0
+						add
+						call	1
+						load_const	1
+						return
+					]
+				}
+			],
+			constants = ["?", 234, "Hello", "???", "And now?", "is this for real?", "This is getting confusing.", None],
+			parameter_count = 1,
+			local_vars = [x, f, getprint, oldprint, y],
+			local_ref_vars = [getprint, oldprint, y],
+			free_vars = [],
+			names = [print, z],
+			instructions = 
+			[
+				load_global	0
+				load_local	0
+				call	1
+				load_local	0
+				load_const	0
+				add
+				store_local	4
+				load_const	1
+				store_global	1
+				load_func	0
+				alloc_closure	0
+				store_local	2
+				load_func	1
+				push_ref	2
+				push_ref	0
+				alloc_closure	2
+				store_local	1
+				load_local	1
+				load_const	2
+				call	1
+				load_local	4
+				load_const	3
+				add
+				store_local	4
+				load_const	4
+				store_global	1
+				load_local	1
+				load_const	5
+				call	1
+				load_global	0
+				store_local	3
+				load_func	2
+				push_ref	1
+				alloc_closure	1
+				store_global	0
+				load_local	1
+				load_const	6
+				call	1
+				load_local	1
+				return
+				load_const	7
+				return
+			]
+		}
+	],
+	constants = ["TEST1", "TEST2", "TEST3", "TEST4"],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [debugprint, f, g, input, intcast, oldprint, print, z],
+	instructions = 
+	[
+		load_func	0
+		alloc_closure	0
+		store_global	6
+		load_func	1
+		alloc_closure	0
+		store_global	3
+		load_func	2
+		alloc_closure	0
+		store_global	4
+		load_global	6
+		store_global	0
+		load_global	6
+		store_global	5
+		load_func	3
+		alloc_closure	0
+		store_global	6
+		load_func	4
+		alloc_closure	0
+		store_global	1
+		load_global	1
+		load_const	0
+		call	1
+		store_global	2
+		load_global	2
+		load_const	1
+		call	1
+		load_global	1
+		load_const	2
+		call	1
+		load_global	2
+		load_const	3
+		call	1
+	]
+}

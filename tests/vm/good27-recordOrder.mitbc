@@ -1,0 +1,79 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+			]
+		}
+	],
+	constants = [1, 2, 3, "Numbermap is: \n"],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [input, intcast, numbermap, print, one, two, three],
+	instructions = 
+	[
+		load_func	0
+		alloc_closure	0
+		store_global	3
+		load_func	1
+		alloc_closure	0
+		store_global	0
+		load_func	2
+		alloc_closure	0
+		store_global	1
+		alloc_record
+		dup
+		load_const	0
+		field_store	4
+		dup
+		load_const	1
+		field_store	5
+		dup
+		load_const	2
+		field_store	6
+		store_global	2
+		load_global	3
+		load_const	3
+		load_global	2
+		add
+		call	1
+	]
+}

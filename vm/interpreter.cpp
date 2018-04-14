@@ -27,7 +27,7 @@ Interpreter::Interpreter(shared_ptr<Function> mainFunc) {
         throw RuntimeException("can't initialize root frame with nonzero local vars");
     }
     mainFunc->local_vars_ = mainFunc->names_;
-    shared_ptr<Frame> frame = make_shared<Frame>(Frame(mainFunc));
+    shared_ptr<Frame> frame = make_shared<Frame>(mainFunc);
     globalFrame = frame;
     frames.push(frame);
     finished = false;
@@ -228,7 +228,7 @@ void Interpreter::executeStep() {
                 // process local refs and local vars
                 int numLocals = clos->func->local_vars_.size();
                 int numRefs = clos->func->free_vars_.size();
-                shared_ptr<Frame> newFrame = make_shared<Frame>(Frame(clos->func));
+                shared_ptr<Frame> newFrame = make_shared<Frame>(clos->func);
 				for (int i = 0; i < numLocals; i++) {
                     if (i < numArgs) {
                         string name = clos->func->local_vars_[i];
