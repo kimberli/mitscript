@@ -65,17 +65,19 @@ function
 		load_const	1
 		eq
 		if	2
-		goto	4
+		goto	5
 		load_global	2
 		load_const	2
 		call	1
+		pop
 		load_global	3
 		load_const	3
 		add
 		if	2
-		goto	4
+		goto	5
 		load_global	2
 		load_const	4
 		call	1
+		pop
 	]
 }

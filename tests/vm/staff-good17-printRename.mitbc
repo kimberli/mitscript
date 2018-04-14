@@ -55,11 +55,13 @@ function
 				load_global	0
 				load_const	0
 				call	1
+				pop
 				load_global	1
 				load_const	1
 				load_local	0
 				add
 				call	1
+				pop
 				load_const	2
 				return
 			]
@@ -103,12 +105,14 @@ function
 								load_global	0
 								load_const	0
 								call	1
+								pop
 								push_ref	0
 								load_ref
 								load_const	1
 								load_local	0
 								add
 								call	1
+								pop
 								load_const	2
 								return
 							]
@@ -133,16 +137,20 @@ function
 						load_global	0
 						load_const	0
 						call	1
+						pop
 						load_local	2
 						load_local	0
 						call	1
+						pop
 						load_local	2
 						push_ref	2
 						load_ref
 						call	1
+						pop
 						load_local	2
 						load_global	1
 						call	1
+						pop
 						load_const	1
 						return
 					]
@@ -164,6 +172,7 @@ function
 						load_local	0
 						add
 						call	1
+						pop
 						load_const	1
 						return
 					]
@@ -180,6 +189,7 @@ function
 				load_global	0
 				load_local	0
 				call	1
+				pop
 				load_local	0
 				load_const	0
 				add
@@ -197,6 +207,7 @@ function
 				load_local	1
 				load_const	2
 				call	1
+				pop
 				load_local	4
 				load_const	3
 				add
@@ -206,6 +217,7 @@ function
 				load_local	1
 				load_const	5
 				call	1
+				pop
 				load_global	0
 				store_local	3
 				load_func	2
@@ -215,6 +227,7 @@ function
 				load_local	1
 				load_const	6
 				call	1
+				pop
 				load_local	1
 				return
 				load_const	7
@@ -256,11 +269,14 @@ function
 		load_global	2
 		load_const	1
 		call	1
+		pop
 		load_global	1
 		load_const	2
 		call	1
+		pop
 		load_global	2
 		load_const	3
 		call	1
+		pop
 	]
 }

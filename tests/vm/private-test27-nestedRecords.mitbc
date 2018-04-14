@@ -80,22 +80,26 @@ function
 		load_global	2
 		load_const	3
 		call	1
+		pop
 		load_global	2
 		load_global	3
 		field_load	10
 		field_load	11
 		call	1
+		pop
 		load_global	2
 		load_global	3
 		load_const	4
 		index_load
 		field_load	12
 		call	1
+		pop
 		load_global	2
 		load_global	3
 		field_load	13
 		load_const	5
 		index_load
 		call	1
+		pop
 	]
 }

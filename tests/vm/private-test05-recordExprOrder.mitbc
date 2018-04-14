@@ -78,21 +78,25 @@ function
 				load_local	0
 				add
 				call	1
+				pop
 				load_global	0
 				load_const	1
 				load_local	1
 				add
 				call	1
+				pop
 				load_global	0
 				load_const	2
 				load_local	2
 				add
 				call	1
+				pop
 				load_global	0
 				load_const	3
 				load_local	3
 				add
 				call	1
+				pop
 				load_const	4
 				return
 			]
@@ -148,30 +152,35 @@ function
 		field_load	12
 		add
 		call	1
+		pop
 		load_global	4
 		load_const	2
 		load_global	5
 		field_load	13
 		add
 		call	1
+		pop
 		load_global	4
 		load_const	3
 		load_global	5
 		field_load	14
 		add
 		call	1
+		pop
 		load_global	4
 		load_const	4
 		load_global	5
 		field_load	15
 		add
 		call	1
+		pop
 		load_global	4
 		load_const	5
 		load_global	5
 		field_load	16
 		add
 		call	1
+		pop
 		load_func	4
 		alloc_closure	0
 		store_global	3
@@ -185,5 +194,6 @@ function
 		load_global	0
 		call	0
 		call	4
+		pop
 	]
 }

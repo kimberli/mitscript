@@ -115,6 +115,7 @@ function
 		call	1
 		add
 		call	1
+		pop
 		load_global	3
 		call	0
 		store_global	9
@@ -124,18 +125,20 @@ function
 		load_global	4
 		eq
 		if	2
-		goto	4
+		goto	5
 		load_global	8
 		load_const	2
 		call	1
+		pop
 		load_global	4
 		load_global	9
 		eq
 		if	2
-		goto	4
+		goto	5
 		load_global	8
 		load_const	3
 		call	1
+		pop
 		alloc_record
 		dup
 		load_const	4
@@ -158,32 +161,35 @@ function
 		load_global	2
 		eq
 		if	2
-		goto	4
+		goto	5
 		load_global	8
 		load_const	8
 		call	1
+		pop
 		load_global	0
 		load_global	1
 		eq
 		if	2
-		goto	4
+		goto	5
 		load_global	8
 		load_const	9
 		call	1
+		pop
 		load_global	0
 		load_global	4
 		eq
 		if	2
-		goto	4
+		goto	5
 		load_global	8
 		load_const	10
 		call	1
+		pop
 		load_global	0
 		load_global	4
 		eq
 		not
 		if	2
-		goto	8
+		goto	9
 		load_global	8
 		load_const	11
 		load_global	0
@@ -191,8 +197,10 @@ function
 		eq
 		add
 		call	1
+		pop
 		load_global	8
 		load_const	12
 		call	1
+		pop
 	]
 }

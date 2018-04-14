@@ -57,11 +57,13 @@ function
 				load_const	0
 				sub
 				call	1
+				pop
 				load_global	0
 				load_global	1
 				load_const	1
 				add
 				call	1
+				pop
 				load_const	2
 				return
 			]
@@ -89,14 +91,17 @@ function
 		load_global	3
 		load_global	4
 		call	1
+		pop
 		load_global	3
 		load_global	4
 		call	1
+		pop
 		load_func	3
 		alloc_closure	0
 		store_global	0
 		load_global	0
 		load_global	4
 		call	1
+		pop
 	]
 }

@@ -67,5 +67,6 @@ function
 		load_global	2
 		load_global	3
 		call	1
+		pop
 	]
 }

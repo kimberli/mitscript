@@ -61,6 +61,7 @@ function
 						load_global	1
 						add
 						call	1
+						pop
 						load_global	1
 						load_const	1
 						eq
@@ -118,5 +119,6 @@ function
 		store_global	1
 		load_global	1
 		call	0
+		pop
 	]
 }

@@ -61,7 +61,7 @@ function
 						load_ref
 						swap
 						gt
-						if	9
+						if	10
 						load_global	0
 						load_const	0
 						load_local	0
@@ -69,6 +69,7 @@ function
 						load_const	1
 						add
 						call	1
+						pop
 						goto	8
 						load_local	1
 						push_ref	1
@@ -97,7 +98,7 @@ function
 						load_ref
 						swap
 						gt
-						if	9
+						if	10
 						load_global	0
 						load_const	0
 						load_local	0
@@ -105,6 +106,7 @@ function
 						load_const	1
 						add
 						call	1
+						pop
 						goto	6
 						push_ref	1
 						load_ref
@@ -158,6 +160,7 @@ function
 						load_const	5
 						add
 						call	1
+						pop
 						load_const	6
 						return
 					]
@@ -221,6 +224,7 @@ function
 		load_global	6
 		load_const	0
 		call	1
+		pop
 		load_global	0
 		load_const	1
 		call	1
@@ -230,32 +234,39 @@ function
 		load_const	2
 		load_const	3
 		call	2
+		pop
 		load_global	1
 		field_load	8
 		load_const	4
 		load_const	5
 		call	2
+		pop
 		load_global	1
 		field_load	9
 		load_const	6
 		load_const	7
 		call	2
+		pop
 		load_global	1
 		field_load	10
 		load_const	8
 		load_const	9
 		call	2
+		pop
 		load_global	1
 		field_load	11
 		load_const	10
 		load_global	0
 		call	2
+		pop
 		load_global	6
 		load_const	11
 		call	1
+		pop
 		load_global	1
 		field_load	12
 		call	0
+		pop
 		load_global	1
 		field_load	13
 		load_const	12
@@ -270,28 +281,34 @@ function
 		load_const	14
 		load_const	15
 		call	2
+		pop
 		load_global	2
 		field_load	15
 		load_const	16
 		load_const	17
 		call	2
+		pop
 		load_global	2
 		field_load	16
 		load_const	18
 		load_const	19
 		call	2
+		pop
 		load_global	2
 		field_load	17
 		load_const	20
 		load_const	21
 		call	2
+		pop
 		load_global	2
 		field_load	18
 		load_const	22
 		load_const	23
 		call	2
+		pop
 		load_global	2
 		field_load	19
 		call	0
+		pop
 	]
 }

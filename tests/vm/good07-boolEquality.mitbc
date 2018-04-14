@@ -64,21 +64,25 @@ function
 		load_const	1
 		eq
 		call	1
+		pop
 		load_global	2
 		load_const	2
 		load_const	3
 		eq
 		call	1
+		pop
 		load_global	2
 		load_const	4
 		load_const	5
 		eq
 		call	1
+		pop
 		load_global	2
 		load_const	6
 		load_const	7
 		eq
 		not
 		call	1
+		pop
 	]
 }

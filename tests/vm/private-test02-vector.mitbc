@@ -105,6 +105,7 @@ function
 						load_const	2
 						add
 						call	1
+						pop
 						load_const	3
 						return
 					]
@@ -247,15 +248,19 @@ function
 		load_global	3
 		load_const	4
 		call	1
+		pop
 		load_global	4
 		field_load	7
 		call	0
+		pop
 		load_global	3
 		load_const	5
 		call	1
+		pop
 		load_global	5
 		field_load	8
 		call	0
+		pop
 		load_global	4
 		field_load	9
 		load_global	4
@@ -266,12 +271,14 @@ function
 		load_global	5
 		call	1
 		if	2
-		goto	7
+		goto	9
 		load_global	3
 		load_const	6
 		call	1
+		pop
 		load_global	6
 		field_load	11
 		call	0
+		pop
 	]
 }

@@ -184,6 +184,7 @@ function
 		load_global	3
 		load_const	0
 		call	1
+		pop
 		load_global	3
 		load_global	0
 		load_const	1
@@ -240,5 +241,6 @@ function
 		load_const	52
 		call	52
 		call	1
+		pop
 	]
 }

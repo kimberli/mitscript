@@ -59,6 +59,7 @@ function
 				load_local	2
 				add
 				call	1
+				pop
 				load_const	0
 				return
 			]
@@ -81,6 +82,7 @@ function
 				load_local	2
 				add
 				call	1
+				pop
 				load_const	0
 				return
 			]
@@ -99,6 +101,7 @@ function
 				load_global	0
 				load_const	0
 				call	1
+				pop
 				load_const	1
 				return
 			]
@@ -118,7 +121,7 @@ function
 				load_global	0
 				gt
 				if	2
-				goto	10
+				goto	11
 				load_global	1
 				load_const	0
 				load_local	0
@@ -128,6 +131,7 @@ function
 				load_local	1
 				add
 				call	1
+				pop
 				load_const	2
 				return
 			]
@@ -154,6 +158,7 @@ function
 						load_global	0
 						add
 						call	1
+						pop
 						load_const	2
 						return
 					]
@@ -172,14 +177,17 @@ function
 				load_global	0
 				add
 				call	1
+				pop
 				load_global	3
 				load_const	1
 				load_const	2
 				call	2
+				pop
 				load_global	3
 				load_const	3
 				load_const	4
 				call	2
+				pop
 				load_func	0
 				alloc_closure	0
 				store_local	0
@@ -187,17 +195,20 @@ function
 				load_const	5
 				eq
 				if	2
-				goto	7
+				goto	8
 				load_global	3
 				load_const	6
 				load_const	7
 				call	2
+				pop
 				load_const	8
 				return
 				load_local	0
 				call	0
+				pop
 				load_global	1
 				call	0
+				pop
 				load_const	9
 				return
 			]
@@ -223,36 +234,42 @@ function
 		load_global	14
 		load_const	0
 		call	1
+		pop
 		load_global	14
 		load_const	1
 		neg
 		load_const	2
 		add
 		call	1
+		pop
 		load_global	14
 		load_const	3
 		neg
 		load_const	4
 		sub
 		call	1
+		pop
 		load_global	14
 		load_const	5
 		neg
 		load_const	6
 		mul
 		call	1
+		pop
 		load_global	14
 		load_const	7
 		neg
 		load_const	8
 		div
 		call	1
+		pop
 		load_global	14
 		load_const	9
 		neg
 		load_const	10
 		div
 		call	1
+		pop
 		load_global	14
 		load_const	11
 		load_const	12
@@ -263,9 +280,11 @@ function
 		neg
 		mul
 		call	1
+		pop
 		load_global	14
 		load_const	15
 		call	1
+		pop
 		load_const	16
 		store_global	1
 		load_global	14
@@ -273,12 +292,14 @@ function
 		load_global	1
 		eq
 		call	1
+		pop
 		load_global	14
 		load_const	18
 		neg
 		load_global	1
 		eq
 		call	1
+		pop
 		load_global	14
 		load_const	19
 		load_global	1
@@ -286,11 +307,13 @@ function
 		load_const	20
 		eq
 		call	1
+		pop
 		load_global	14
 		load_const	21
 		load_const	22
 		eq
 		call	1
+		pop
 		load_global	14
 		load_const	23
 		load_const	24
@@ -299,6 +322,7 @@ function
 		gt
 		eq
 		call	1
+		pop
 		load_global	14
 		load_const	26
 		load_const	27
@@ -306,21 +330,25 @@ function
 		load_const	28
 		eq
 		call	1
+		pop
 		load_global	14
 		load_const	29
 		load_const	30
 		eq
 		call	1
+		pop
 		load_global	14
 		load_const	31
 		load_const	32
 		eq
 		call	1
+		pop
 		load_global	14
 		load_const	33
 		load_const	34
 		eq
 		call	1
+		pop
 		alloc_record
 		dup
 		load_global	1
@@ -350,6 +378,7 @@ function
 		load_global	0
 		eq
 		call	1
+		pop
 		alloc_record
 		dup
 		load_global	1
@@ -372,6 +401,7 @@ function
 		load_global	2
 		eq
 		call	1
+		pop
 		load_func	3
 		alloc_closure	0
 		store_global	7
@@ -385,26 +415,31 @@ function
 		load_global	8
 		eq
 		call	1
+		pop
 		load_global	14
 		load_global	9
 		load_global	8
 		eq
 		call	1
+		pop
 		load_global	14
 		load_const	39
 		call	1
+		pop
 		load_global	14
 		load_const	40
 		load_const	41
 		swap
 		gt
 		call	1
+		pop
 		load_global	14
 		load_const	42
 		load_const	43
 		swap
 		geq
 		call	1
+		pop
 		load_global	14
 		load_const	44
 		neg
@@ -412,14 +447,17 @@ function
 		neg
 		geq
 		call	1
+		pop
 		load_global	14
 		load_const	46
 		load_const	47
 		gt
 		call	1
+		pop
 		load_global	14
 		load_const	48
 		call	1
+		pop
 		load_const	49
 		neg
 		store_global	1
@@ -437,47 +475,57 @@ function
 		load_global	1
 		add
 		call	1
+		pop
 		load_global	14
 		load_const	53
 		load_global	2
 		add
 		call	1
+		pop
 		load_global	14
 		load_const	54
 		load_global	3
 		add
 		call	1
+		pop
 		load_global	14
 		load_const	55
 		load_global	4
 		add
 		call	1
+		pop
 		load_global	14
 		load_const	56
 		load_global	6
 		add
 		call	1
+		pop
 		load_global	14
 		load_const	57
 		call	1
+		pop
 		load_global	14
 		load_global	11
 		load_const	58
 		call	1
 		call	1
+		pop
 		load_global	14
 		load_global	11
 		load_const	59
 		call	1
 		call	1
+		pop
 		load_global	14
 		load_global	11
 		load_const	60
 		call	1
 		call	1
+		pop
 		load_global	14
 		load_const	61
 		call	1
+		pop
 		load_const	62
 		store_global	5
 		load_global	14
@@ -490,5 +538,6 @@ function
 		store_global	12
 		load_global	12
 		call	0
+		pop
 	]
 }

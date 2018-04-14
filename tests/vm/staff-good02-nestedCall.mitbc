@@ -101,5 +101,6 @@ function
 		load_const	2
 		call	2
 		call	1
+		pop
 	]
 }

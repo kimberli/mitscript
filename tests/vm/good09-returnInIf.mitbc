@@ -62,6 +62,7 @@ function
 		load_global	2
 		load_const	0
 		call	1
+		pop
 		load_const	1
 		if	2
 		goto	3
@@ -70,5 +71,6 @@ function
 		load_global	2
 		load_const	3
 		call	1
+		pop
 	]
 }

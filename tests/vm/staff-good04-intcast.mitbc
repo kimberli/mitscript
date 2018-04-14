@@ -59,6 +59,7 @@ function
 				sub
 				add
 				call	1
+				pop
 				load_local	0
 				load_const	2
 				sub

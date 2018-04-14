@@ -68,5 +68,6 @@ function
 		load_global	4
 		eq
 		call	1
+		pop
 	]
 }

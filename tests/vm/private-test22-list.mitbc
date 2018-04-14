@@ -146,6 +146,7 @@ function
 						load_global	0
 						load_local	0
 						call	1
+						pop
 						load_const	3
 						return
 					]
@@ -165,11 +166,12 @@ function
 						load_ref
 						field_load	0
 						store_local	1
-						goto	8
+						goto	9
 						load_local	0
 						load_local	1
 						field_load	1
 						call	1
+						pop
 						load_local	1
 						field_load	2
 						store_local	1
@@ -177,7 +179,7 @@ function
 						load_const	0
 						eq
 						not
-						if	-11
+						if	-12
 						load_const	1
 						return
 					]
@@ -331,6 +333,7 @@ function
 						field_load	0
 						load_local	0
 						call	1
+						pop
 						load_const	0
 						return
 					]
@@ -354,6 +357,7 @@ function
 				push_ref	0
 				alloc_closure	2
 				call	1
+				pop
 				load_local	2
 				return
 				load_const	0
@@ -389,6 +393,7 @@ function
 						field_load	3
 						field_store	4
 						call	1
+						pop
 						push_ref	1
 						load_ref
 						field_load	5
@@ -410,11 +415,12 @@ function
 			names = [List, addx, len, len, addx, len, len, head, node, forall],
 			instructions = 
 			[
-				goto	5
+				goto	6
 				load_local	1
 				field_load	1
 				load_const	0
 				call	1
+				pop
 				load_local	0
 				field_load	2
 				call	0
@@ -422,12 +428,13 @@ function
 				field_load	3
 				call	0
 				gt
-				if	-11
-				goto	5
+				if	-12
+				goto	6
 				load_local	0
 				field_load	4
 				load_const	1
 				call	1
+				pop
 				load_local	1
 				field_load	5
 				call	0
@@ -435,7 +442,7 @@ function
 				field_load	6
 				call	0
 				gt
-				if	-11
+				if	-12
 				alloc_record
 				dup
 				load_local	0
@@ -452,6 +459,7 @@ function
 				push_ref	0
 				alloc_closure	2
 				call	1
+				pop
 				load_local	2
 				return
 				load_const	2
@@ -513,6 +521,7 @@ function
 						field_load	6
 						load_local	1
 						call	1
+						pop
 						load_const	2
 						return
 					]
@@ -547,18 +556,20 @@ function
 				push_ref	0
 				alloc_closure	3
 				call	1
+				pop
 				load_local	4
 				field_load	4
 				load_const	1
 				eq
 				not
 				if	2
-				goto	6
+				goto	7
 				load_local	3
 				field_load	5
 				load_local	4
 				field_load	6
 				call	1
+				pop
 				load_local	3
 				return
 				load_const	2
@@ -585,6 +596,7 @@ function
 				field_load	2
 				load_const	1
 				call	1
+				pop
 				goto	11
 				load_global	1
 				load_local	4
@@ -651,19 +663,23 @@ function
 		field_load	15
 		load_const	2
 		call	1
+		pop
 		load_global	6
 		field_load	16
 		load_const	3
 		call	1
+		pop
 		load_global	6
 		field_load	17
 		load_const	4
 		call	1
+		pop
 		load_const	5
 		store_global	0
 		load_global	14
 		load_const	6
 		call	1
+		pop
 		load_global	10
 		load_global	6
 		load_global	0
@@ -672,9 +688,11 @@ function
 		load_global	14
 		load_const	7
 		call	1
+		pop
 		load_global	6
 		field_load	18
 		call	0
+		pop
 		load_global	13
 		load_global	6
 		load_global	6
@@ -684,6 +702,7 @@ function
 		load_global	14
 		load_const	8
 		call	1
+		pop
 		load_global	13
 		load_global	7
 		load_global	7
@@ -693,20 +712,24 @@ function
 		load_global	6
 		field_load	19
 		call	0
+		pop
 		load_global	7
 		field_load	20
 		call	0
+		pop
 		load_global	8
 		field_load	21
 		call	0
+		pop
 		load_const	9
 		store_global	3
-		goto	19
+		goto	21
 		load_global	14
 		load_const	10
 		load_global	3
 		add
 		call	1
+		pop
 		load_global	11
 		load_global	8
 		load_global	3
@@ -716,6 +739,7 @@ function
 		load_global	9
 		field_load	22
 		call	0
+		pop
 		load_global	3
 		load_const	11
 		add
@@ -724,6 +748,6 @@ function
 		load_const	12
 		swap
 		gt
-		if	-22
+		if	-24
 	]
 }

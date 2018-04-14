@@ -64,5 +64,6 @@ function
 		load_const	1
 		add
 		call	1
+		pop
 	]
 }

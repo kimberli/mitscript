@@ -90,5 +90,6 @@ function
 		load_global	6
 		load_const	7
 		call	1
+		pop
 	]
 }

@@ -77,46 +77,57 @@ function
 		load_global	3
 		load_const	0
 		call	1
+		pop
 		load_global	3
 		load_const	1
 		load_const	2
 		add
 		call	1
+		pop
 		load_global	3
 		load_const	3
 		call	1
+		pop
 		load_global	3
 		load_const	4
 		load_const	5
 		add
 		call	1
+		pop
 		load_global	3
 		load_const	6
 		call	1
+		pop
 		load_global	3
 		load_const	7
 		load_const	8
 		add
 		call	1
+		pop
 		load_global	3
 		load_const	9
 		call	1
+		pop
 		load_global	3
 		load_const	10
 		load_const	11
 		div
 		call	1
+		pop
 		load_global	3
 		load_const	12
 		call	1
+		pop
 		load_global	3
 		load_const	13
 		load_const	14
 		mul
 		call	1
+		pop
 		load_global	3
 		load_const	15
 		call	1
+		pop
 		load_global	3
 		alloc_record
 		dup
@@ -127,25 +138,31 @@ function
 		sub
 		field_store	6
 		call	1
+		pop
 		load_global	3
 		load_const	19
 		call	1
+		pop
 		load_global	3
 		load_global	3
 		call	1
+		pop
 		load_global	3
 		load_const	20
 		call	1
+		pop
 		load_global	3
 		load_const	21
 		load_const	22
 		eq
 		call	1
+		pop
 		load_global	3
 		load_const	23
 		load_const	24
 		eq
 		call	1
+		pop
 		load_global	3
 		load_const	25
 		load_const	26
@@ -155,6 +172,7 @@ function
 		load_const	28
 		eq
 		call	1
+		pop
 		alloc_record
 		store_global	4
 		load_global	3
@@ -162,11 +180,13 @@ function
 		load_global	4
 		eq
 		call	1
+		pop
 		load_global	3
 		load_global	3
 		load_global	3
 		eq
 		call	1
+		pop
 		load_func	3
 		alloc_closure	0
 		store_global	4
@@ -175,28 +195,33 @@ function
 		load_global	4
 		eq
 		call	1
+		pop
 		load_global	3
 		load_const	29
 		load_const	30
 		swap
 		gt
 		call	1
+		pop
 		load_global	3
 		load_const	31
 		load_const	32
 		gt
 		call	1
+		pop
 		load_global	3
 		load_const	33
 		load_const	34
 		geq
 		call	1
+		pop
 		load_global	3
 		load_const	35
 		load_const	36
 		swap
 		geq
 		call	1
+		pop
 		load_global	3
 		load_const	37
 		load_const	38
@@ -204,10 +229,12 @@ function
 		add
 		eq
 		call	1
+		pop
 		load_global	3
 		load_const	40
 		not
 		call	1
+		pop
 		alloc_record
 		dup
 		alloc_record
@@ -252,6 +279,7 @@ function
 		load_global	2
 		eq
 		call	1
+		pop
 		load_global	3
 		load_global	2
 		field_load	23
@@ -311,41 +339,49 @@ function
 		load_global	2
 		eq
 		call	1
+		pop
 		load_global	3
 		load_const	45
 		call	1
+		pop
 		load_global	3
 		load_const	46
 		load_const	47
 		swap
 		gt
 		call	1
+		pop
 		load_global	3
 		load_const	48
 		load_const	49
 		gt
 		call	1
+		pop
 		load_global	3
 		load_const	50
 		load_const	51
 		geq
 		call	1
+		pop
 		load_global	3
 		load_const	52
 		load_const	53
 		swap
 		geq
 		call	1
+		pop
 		load_global	3
 		load_const	54
 		load_global	4
 		eq
 		call	1
+		pop
 		load_global	3
 		load_global	4
 		load_global	3
 		eq
 		call	1
+		pop
 		alloc_record
 		store_global	5
 		load_global	3
@@ -353,14 +389,17 @@ function
 		load_global	5
 		eq
 		call	1
+		pop
 		load_global	3
 		load_const	55
 		load_const	56
 		eq
 		call	1
+		pop
 		load_global	3
 		load_const	57
 		not
 		call	1
+		pop
 	]
 }
