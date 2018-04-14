@@ -89,5 +89,6 @@ function
 		store_global	0
 		load_global	0
 		call	0
+		pop
 	]
 }

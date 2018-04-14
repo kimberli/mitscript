@@ -78,10 +78,11 @@ function
 			[
 				load_const	0
 				store_local	0
-				goto	18
+				goto	20
 				load_global	1
 				load_const	1
 				call	1
+				pop
 				load_local	0
 				load_const	2
 				add
@@ -90,15 +91,16 @@ function
 				load_const	3
 				gt
 				if	2
-				goto	6
+				goto	7
 				load_global	1
 				load_const	4
 				call	1
+				pop
 				load_const	5
 				return
 				load_global	0
 				call	0
-				if	-19
+				if	-21
 				load_const	6
 				return
 			]
@@ -131,5 +133,6 @@ function
 		store_global	4
 		load_global	4
 		call	0
+		pop
 	]
 }

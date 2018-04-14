@@ -52,14 +52,15 @@ function
 			names = [print],
 			instructions = 
 			[
-				goto	4
+				goto	5
 				load_global	0
 				load_local	0
 				call	1
+				pop
 				load_const	0
 				load_const	1
 				add
-				if	-6
+				if	-7
 				load_const	2
 				return
 			]
@@ -89,5 +90,6 @@ function
 		load_const	0
 		neg
 		call	1
+		pop
 	]
 }

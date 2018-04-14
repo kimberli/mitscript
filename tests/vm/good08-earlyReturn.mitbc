@@ -62,10 +62,12 @@ function
 		load_global	2
 		load_const	0
 		call	1
+		pop
 		load_const	1
 		return
 		load_global	2
 		load_const	2
 		call	1
+		pop
 	]
 }

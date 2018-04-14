@@ -75,5 +75,6 @@ function
 		load_global	2
 		add
 		call	1
+		pop
 	]
 }

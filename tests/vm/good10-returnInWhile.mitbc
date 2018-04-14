@@ -64,10 +64,12 @@ function
 		load_global	2
 		load_global	3
 		call	1
-		goto	10
+		pop
+		goto	11
 		load_global	2
 		load_global	3
 		call	1
+		pop
 		load_global	3
 		return
 		load_global	3
@@ -77,9 +79,10 @@ function
 		load_global	3
 		load_const	2
 		gt
-		if	-12
+		if	-13
 		load_global	2
 		load_const	3
 		call	1
+		pop
 	]
 }

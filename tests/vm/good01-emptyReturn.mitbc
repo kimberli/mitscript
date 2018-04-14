@@ -81,5 +81,6 @@ function
 		load_global	0
 		call	0
 		call	1
+		pop
 	]
 }

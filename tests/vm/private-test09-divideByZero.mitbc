@@ -62,6 +62,7 @@ function
 		load_global	3
 		load_const	0
 		call	1
+		pop
 		load_const	1
 		load_const	2
 		div

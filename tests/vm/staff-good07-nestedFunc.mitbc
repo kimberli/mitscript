@@ -70,6 +70,7 @@ function
 								load_ref
 								add
 								call	1
+								pop
 								load_const	2
 								return
 							]
@@ -92,11 +93,13 @@ function
 						load_local	1
 						load_const	1
 						call	1
+						pop
 						load_const	2
 						store_local	2
 						load_local	1
 						load_const	3
 						call	1
+						pop
 						load_local	1
 						return
 						load_const	4
@@ -116,7 +119,7 @@ function
 				load_const	0
 				gt
 				if	2
-				goto	22
+				goto	24
 				load_local	0
 				store_local	3
 				load_func	0
@@ -129,6 +132,7 @@ function
 				load_local	1
 				load_const	2
 				call	1
+				pop
 				load_global	0
 				load_const	3
 				load_local	0
@@ -138,6 +142,7 @@ function
 				load_local	3
 				add
 				call	1
+				pop
 				load_const	5
 				return
 			]
@@ -168,5 +173,6 @@ function
 		load_global	0
 		load_const	1
 		call	1
+		pop
 	]
 }

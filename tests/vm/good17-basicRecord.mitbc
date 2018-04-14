@@ -72,9 +72,11 @@ function
 		load_global	3
 		field_load	6
 		call	1
+		pop
 		load_global	2
 		load_global	3
 		field_load	7
 		call	1
+		pop
 	]
 }

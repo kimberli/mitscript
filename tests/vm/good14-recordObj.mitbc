@@ -113,7 +113,7 @@ function
 				store_local	3
 				load_local	3
 				return
-				goto	22
+				goto	23
 				alloc_record
 				dup
 				load_local	0
@@ -135,6 +135,7 @@ function
 				load_global	0
 				load_const	0
 				call	1
+				pop
 				load_const	1
 				return
 			]
@@ -180,6 +181,7 @@ function
 						load_const	1
 						add
 						call	1
+						pop
 						load_local	0
 						load_local	1
 						add
@@ -251,6 +253,7 @@ function
 				load_local	8
 				eq
 				call	1
+				pop
 				load_local	3
 				return
 				load_const	1
@@ -312,14 +315,17 @@ function
 		load_global	1
 		field_load	11
 		call	1
+		pop
 		load_global	6
 		load_global	1
 		field_load	12
 		call	1
+		pop
 		load_global	6
 		load_global	1
 		field_load	13
 		call	1
+		pop
 		load_func	5
 		alloc_closure	0
 		store_global	0
@@ -332,5 +338,6 @@ function
 		call	3
 		add
 		call	1
+		pop
 	]
 }

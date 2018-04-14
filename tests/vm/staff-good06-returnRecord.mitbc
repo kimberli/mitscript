@@ -71,6 +71,7 @@ function
 						load_const	2
 						add
 						call	1
+						pop
 						load_const	3
 						return
 					]
@@ -132,5 +133,6 @@ function
 		load_global	3
 		field_load	5
 		call	0
+		pop
 	]
 }

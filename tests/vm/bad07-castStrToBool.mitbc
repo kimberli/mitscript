@@ -61,9 +61,10 @@ function
 		store_global	1
 		load_const	0
 		if	2
-		goto	4
+		goto	5
 		load_global	2
 		load_const	1
 		call	1
+		pop
 	]
 }

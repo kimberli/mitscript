@@ -60,9 +60,11 @@ function
 				load_global	0
 				load_const	0
 				call	1
+				pop
 				load_global	0
 				load_local	1
 				call	1
+				pop
 				load_local	0
 				load_const	1
 				sub
@@ -70,6 +72,7 @@ function
 				load_global	0
 				load_local	0
 				call	1
+				pop
 				load_const	2
 				return
 			]
@@ -102,5 +105,6 @@ function
 		load_global	4
 		load_const	1
 		call	1
+		pop
 	]
 }

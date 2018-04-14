@@ -70,6 +70,7 @@ function
 				load_const	3
 				add
 				call	1
+				pop
 				load_const	4
 				return
 			]
@@ -109,5 +110,6 @@ function
 		load_global	0
 		load_global	3
 		call	1
+		pop
 	]
 }

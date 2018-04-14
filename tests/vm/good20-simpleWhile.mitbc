@@ -61,7 +61,7 @@ function
 		store_global	1
 		load_const	0
 		store_global	3
-		goto	8
+		goto	9
 		load_global	3
 		load_const	1
 		add
@@ -69,10 +69,11 @@ function
 		load_global	2
 		load_global	3
 		call	1
+		pop
 		load_global	3
 		load_const	2
 		swap
 		gt
-		if	-11
+		if	-12
 	]
 }
