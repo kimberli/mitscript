@@ -91,9 +91,11 @@ function
 		load_global	2
 		load_const	1
 		call	1
+		pop
 		load_global	2
 		load_global	4
 		call	0
 		call	1
+		pop
 	]
 }

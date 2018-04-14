@@ -74,11 +74,11 @@ function
 		load_func	2
 		alloc_closure	0
 		store_global	2
-
 		load_func	3
 		alloc_closure	0
 		store_global	0
 		load_global	0
 		call	0
+		pop
 	]
 }

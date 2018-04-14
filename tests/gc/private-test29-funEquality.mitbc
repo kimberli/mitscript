@@ -115,6 +115,7 @@ function
 		call	1
 		add
 		call	1
+		pop
 		load_global	0
 		call	0
 		store_global	6
@@ -124,20 +125,23 @@ function
 		load_global	1
 		eq
 		if	2
-		goto	4
+		goto	5
 		load_global	5
 		load_const	2
 		call	1
+		pop
 		load_global	1
 		load_global	0
 		eq
 		if	2
-		goto	4
+		goto	5
 		load_global	5
 		load_const	3
 		call	1
+		pop
 		load_global	5
 		load_const	4
 		call	1
+		pop
 	]
 }

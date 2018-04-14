@@ -44,74 +44,84 @@ function
 		function
 		{
 			functions = [],
-			constants = [1, 5, None],
+			constants = ["Hello", None],
 			parameter_count = 0,
 			local_vars = [],
 			local_ref_vars = [],
 			free_vars = [],
-			names = [x],
+			names = [print],
 			instructions = 
 			[
 				load_global	0
 				load_const	0
-				add
-				store_global	0
-				load_global	0
+				call	1
+				pop
 				load_const	1
-				swap
-				gt
-				return
-				load_const	2
 				return
 			]
 		},
 		function
 		{
 			functions = [],
-			constants = [0, "loop", 1, 100, "You're in an infinite loop!", 0, None],
+			constants = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", None],
 			parameter_count = 0,
-			local_vars = [i],
+			local_vars = [],
 			local_ref_vars = [],
 			free_vars = [],
-			names = [increm, print],
+			names = [print],
 			instructions = 
 			[
+				load_global	0
 				load_const	0
-				store_local	0
-				goto	20
-				load_global	1
+				call	1
+				pop
+				load_global	0
 				load_const	1
 				call	1
 				pop
-				load_local	0
+				load_global	0
 				load_const	2
-				add
-				store_local	0
-				load_local	0
+				call	1
+				pop
+				load_global	0
 				load_const	3
-				gt
-				if	2
-				goto	7
-				load_global	1
+				call	1
+				pop
+				load_global	0
 				load_const	4
 				call	1
 				pop
-				load_const	5
-				return
 				load_global	0
-				call	0
-				if	-21
+				load_const	5
+				call	1
+				pop
+				load_global	0
 				load_const	6
+				call	1
+				pop
+				load_global	0
+				load_const	7
+				call	1
+				pop
+				load_global	0
+				load_const	8
+				call	1
+				pop
+				load_global	0
+				load_const	9
+				call	1
+				pop
+				load_const	10
 				return
 			]
 		}
 	],
-	constants = [0],
+	constants = [0, "x", None, None, "y", 1, 10000],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [increm, input, intcast, print, testing, x],
+	names = [i, input, intcast, print, r, y, x],
 	instructions = 
 	[
 		load_func	0
@@ -124,15 +134,40 @@ function
 		alloc_closure	0
 		store_global	2
 		load_const	0
-		store_global	5
+		store_global	0
+		alloc_record
+		store_global	4
+		goto	27
 		load_func	3
 		alloc_closure	0
-		store_global	0
+		load_global	4
+		swap
+		load_const	1
+		swap
+		index_store
 		load_func	4
 		alloc_closure	0
-		store_global	4
 		load_global	4
-		call	0
-		pop
+		swap
+		field_store	5
+		load_const	2
+		load_global	4
+		swap
+		field_store	6
+		load_const	3
+		load_global	4
+		swap
+		load_const	4
+		swap
+		index_store
+		load_global	0
+		load_const	5
+		add
+		store_global	0
+		load_global	0
+		load_const	6
+		swap
+		gt
+		if	-30
 	]
 }

@@ -65,6 +65,7 @@ function
 								load_local	0
 								add
 								call	1
+								pop
 								load_const	1
 								return
 							]
@@ -81,6 +82,7 @@ function
 						load_global	1
 						load_global	0
 						call	1
+						pop
 						load_const	0
 						store_global	0
 						load_func	0
@@ -89,6 +91,7 @@ function
 						load_global	0
 						load_const	1
 						call	1
+						pop
 						load_global	0
 						return
 						load_const	2
@@ -107,6 +110,7 @@ function
 				load_global	0
 				load_local	0
 				call	1
+				pop
 				load_const	0
 				store_local	0
 				load_func	0
@@ -119,6 +123,7 @@ function
 				load_local	2
 				load_const	2
 				call	1
+				pop
 				load_const	3
 				return
 			]
@@ -149,8 +154,10 @@ function
 		load_global	0
 		load_const	1
 		call	1
+		pop
 		load_global	0
 		load_const	2
 		call	1
+		pop
 	]
 }

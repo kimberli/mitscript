@@ -216,18 +216,20 @@ function
 				load_local	0
 				load_global	0
 				eq
-				if	13
+				if	15
 				load_local	1
 				load_local	0
 				field_load	2
 				call	0
 				call	1
+				pop
 				load_global	1
 				load_local	0
 				field_load	3
 				call	0
 				load_local	1
 				call	2
+				pop
 				goto	1
 				load_const	0
 				return
@@ -255,6 +257,7 @@ function
 						add
 						add
 						call	1
+						pop
 						load_const	2
 						return
 					]
@@ -273,6 +276,7 @@ function
 				load_func	0
 				alloc_closure	0
 				call	2
+				pop
 				load_local	0
 				return
 				load_const	0
@@ -328,12 +332,14 @@ function
 		load_global	6
 		load_global	7
 		call	2
+		pop
 		load_func	7
 		alloc_closure	0
 		store_global	2
 		load_global	2
 		load_global	6
 		call	1
+		pop
 		load_global	7
 		load_global	2
 		load_global	0
@@ -348,10 +354,12 @@ function
 		call	2
 		call	1
 		call	1
+		pop
 		load_global	7
 		load_global	6
 		field_load	10
 		call	0
 		call	1
+		pop
 	]
 }

@@ -40,59 +40,14 @@ function
 			instructions = 
 			[
 			]
-		},
-		function
-		{
-			functions = [],
-			constants = [1, 1, "fac of ", 1, " is ", None],
-			parameter_count = 1,
-			local_vars = [x, v],
-			local_ref_vars = [],
-			free_vars = [],
-			names = [fac, print],
-			instructions = 
-			[
-				load_local	0
-				load_const	0
-				swap
-				geq
-				if	2
-				goto	3
-				load_local	0
-				return
-				load_global	0
-				load_local	0
-				load_const	1
-				sub
-				call	1
-				store_local	1
-				load_global	1
-				load_const	2
-				load_local	0
-				load_const	3
-				sub
-				add
-				load_const	4
-				add
-				load_local	1
-				add
-				call	1
-				pop
-				load_local	0
-				load_local	1
-				mul
-				return
-				load_const	5
-				return
-			]
 		}
 	],
-	constants = [5, "fac of ", " is "],
+	constants = [0, "yooooooooooooooo", "x", "heeeeeeeeeeeeeeey", None, None, "y", 1, 1000000],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [fac, input, intcast, print, v, x],
+	names = [i, input, intcast, print, r, y, x],
 	instructions = 
 	[
 		load_func	0
@@ -105,23 +60,38 @@ function
 		alloc_closure	0
 		store_global	2
 		load_const	0
-		store_global	5
-		load_func	3
-		alloc_closure	0
+		store_global	0
+		alloc_record
+		store_global	4
+		goto	25
+		load_const	1
+		load_global	4
+		swap
+		load_const	2
+		swap
+		index_store
+		load_const	3
+		load_global	4
+		swap
+		field_store	5
+		load_const	4
+		load_global	4
+		swap
+		field_store	6
+		load_const	5
+		load_global	4
+		swap
+		load_const	6
+		swap
+		index_store
+		load_global	0
+		load_const	7
+		add
 		store_global	0
 		load_global	0
-		load_global	5
-		call	1
-		store_global	4
-		load_global	3
-		load_const	1
-		load_global	5
-		add
-		load_const	2
-		add
-		load_global	4
-		add
-		call	1
-		pop
+		load_const	8
+		swap
+		gt
+		if	-28
 	]
 }

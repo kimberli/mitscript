@@ -181,26 +181,27 @@ function
 								field_load	0
 								swap
 								gt
-								if	30
+								if	31
 								load_local	0
 								push_ref	1
 								load_ref
 								field_load	1
 								gt
 								if	2
-								goto	22
+								goto	23
 								push_ref	1
 								load_ref
 								field_load	2
 								load_const	0
 								eq
-								if	8
+								if	9
 								push_ref	1
 								load_ref
 								field_load	3
 								field_load	4
 								load_local	0
 								call	1
+								pop
 								goto	9
 								push_ref	0
 								load_ref
@@ -210,19 +211,20 @@ function
 								load_ref
 								swap
 								field_store	5
-								goto	22
+								goto	23
 								push_ref	1
 								load_ref
 								field_load	6
 								load_const	1
 								eq
-								if	8
+								if	9
 								push_ref	1
 								load_ref
 								field_load	7
 								field_load	8
 								load_local	0
 								call	1
+								pop
 								goto	9
 								push_ref	0
 								load_ref
@@ -318,18 +320,20 @@ function
 								eq
 								not
 								if	2
-								goto	7
+								goto	8
 								push_ref	0
 								load_ref
 								field_load	1
 								field_load	2
 								load_local	0
 								call	1
+								pop
 								load_local	0
 								push_ref	0
 								load_ref
 								field_load	3
 								call	1
+								pop
 								push_ref	0
 								load_ref
 								field_load	4
@@ -337,13 +341,14 @@ function
 								eq
 								not
 								if	2
-								goto	7
+								goto	8
 								push_ref	0
 								load_ref
 								field_load	5
 								field_load	6
 								load_local	0
 								call	1
+								pop
 								load_const	2
 								return
 							]
@@ -452,13 +457,14 @@ function
 						field_load	0
 						load_const	0
 						eq
-						if	8
+						if	9
 						push_ref	1
 						load_ref
 						field_load	1
 						field_load	2
 						load_local	0
 						call	1
+						pop
 						goto	9
 						push_ref	0
 						load_ref
@@ -578,13 +584,14 @@ function
 						field_load	0
 						load_const	0
 						eq
-						if	8
+						if	9
 						push_ref	0
 						load_ref
 						field_load	1
 						field_load	2
 						load_local	0
 						call	1
+						pop
 						goto	1
 						load_const	1
 						return
@@ -677,20 +684,21 @@ function
 		store_global	12
 		load_const	2
 		store_global	3
-		goto	27
+		goto	28
 		load_const	3
 		store_global	7
 		load_global	5
 		load_const	4
 		call	1
 		store_global	6
-		goto	11
+		goto	12
 		load_global	12
 		field_load	13
 		load_global	6
 		load_global	7
 		add
 		call	1
+		pop
 		load_global	7
 		load_const	5
 		add
@@ -699,7 +707,7 @@ function
 		load_global	0
 		swap
 		gt
-		if	-14
+		if	-15
 		load_global	3
 		load_const	6
 		add
@@ -708,7 +716,7 @@ function
 		load_global	1
 		swap
 		gt
-		if	-30
+		if	-31
 		load_global	12
 		field_load	14
 		call	0
@@ -722,11 +730,13 @@ function
 		load_global	9
 		add
 		call	1
+		pop
 		load_global	11
 		load_const	8
 		load_global	8
 		add
 		call	1
+		pop
 		load_global	9
 		store_global	3
 		load_const	9
@@ -761,11 +771,13 @@ function
 		add
 		add
 		call	1
+		pop
 		load_global	11
 		load_const	14
 		load_global	10
 		add
 		call	1
+		pop
 		load_global	11
 		load_const	15
 		load_global	12
@@ -773,8 +785,10 @@ function
 		call	0
 		add
 		call	1
+		pop
 		load_global	11
 		load_const	16
 		call	1
+		pop
 	]
 }

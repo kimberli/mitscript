@@ -43,61 +43,28 @@ function
 		},
 		function
 		{
-			functions =
-			[
-				function
-				{
-					functions = [],
-					constants = ["Value = ", 10, None],
-					parameter_count = 0,
-					local_vars = [],
-					local_ref_vars = [],
-					free_vars = [],
-					names = [print, x],
-					instructions = 
-					[
-						load_global	0
-						load_const	0
-						load_global	1
-						add
-						call	1
-						pop
-						load_global	1
-						load_const	1
-						eq
-						if	2
-						goto	1
-						load_const	2
-						return
-					]
-				}
-			],
-			constants = [7, None],
+			functions = [],
+			constants = ["This is a sample mitscript file written for 6.s081 class", None],
 			parameter_count = 0,
-			local_vars = [g, x],
+			local_vars = [x],
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
 			instructions = 
 			[
 				load_const	0
-				store_local	1
-				load_func	0
-				alloc_closure	0
 				store_local	0
-				load_local	0
-				return
 				load_const	1
 				return
 			]
 		}
 	],
-	constants = [5],
+	constants = [0, 10000],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [f, h, input, intcast, print, x],
+	names = [f, i, input, intcast, print],
 	instructions = 
 	[
 		load_func	0
@@ -110,15 +77,18 @@ function
 		alloc_closure	0
 		store_global	3
 		load_const	0
-		store_global	5
+		store_global	1
 		load_func	3
 		alloc_closure	0
 		store_global	0
+		goto	4
 		load_global	0
 		call	0
-		store_global	1
-		load_global	1
-		call	0
 		pop
+		load_global	1
+		load_const	1
+		swap
+		gt
+		if	-7
 	]
 }

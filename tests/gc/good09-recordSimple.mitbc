@@ -59,7 +59,6 @@ function
 		load_func	2
 		alloc_closure	0
 		store_global	1
-
 		alloc_record
 		store_global	3
 		load_const	0

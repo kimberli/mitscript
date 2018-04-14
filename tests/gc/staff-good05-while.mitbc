@@ -54,7 +54,7 @@ function
 			[
 				load_const	0
 				store_local	4
-				goto	31
+				goto	32
 				load_const	1
 				store_local	5
 				load_const	2
@@ -81,6 +81,7 @@ function
 				load_global	0
 				load_local	6
 				call	1
+				pop
 				load_local	4
 				load_const	4
 				add
@@ -89,7 +90,7 @@ function
 				load_local	1
 				swap
 				gt
-				if	-34
+				if	-35
 				load_const	5
 				return
 			]
@@ -158,12 +159,13 @@ function
 		store_global	2
 		load_const	2
 		store_global	1
-		goto	18
+		goto	19
 		load_global	0
 		load_global	2
 		load_const	3
 		load_const	4
 		call	3
+		pop
 		load_global	1
 		load_global	5
 		swap
@@ -180,6 +182,6 @@ function
 		load_const	6
 		swap
 		gt
-		if	-21
+		if	-22
 	]
 }

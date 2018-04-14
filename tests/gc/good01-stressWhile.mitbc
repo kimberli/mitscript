@@ -40,44 +40,85 @@ function
 			instructions = 
 			[
 			]
+		},
+		function
+		{
+			functions = [],
+			constants = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, None],
+			parameter_count = 0,
+			local_vars = [myrec],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [one, two, three, four, five, six, seven, eight, nine, ten],
+			instructions = 
+			[
+				alloc_record
+				dup
+				load_const	0
+				field_store	0
+				dup
+				load_const	1
+				field_store	1
+				dup
+				load_const	2
+				field_store	2
+				dup
+				load_const	3
+				field_store	3
+				dup
+				load_const	4
+				field_store	4
+				dup
+				load_const	5
+				field_store	5
+				dup
+				load_const	6
+				field_store	6
+				dup
+				load_const	7
+				field_store	7
+				dup
+				load_const	8
+				field_store	8
+				dup
+				load_const	9
+				field_store	9
+				store_local	0
+				load_const	10
+				return
+			]
 		}
 	],
-	constants = [0, 1, 10000],
+	constants = [0, 10000],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [i, input, intcast, print, r, id],
+	names = [f, i, input, intcast, print],
 	instructions = 
 	[
 		load_func	0
 		alloc_closure	0
-		store_global	3
+		store_global	4
 		load_func	1
 		alloc_closure	0
-		store_global	1
+		store_global	2
 		load_func	2
 		alloc_closure	0
-		store_global	2
+		store_global	3
 		load_const	0
+		store_global	1
+		load_func	3
+		alloc_closure	0
 		store_global	0
-		goto	13
-		alloc_record
-		dup
+		goto	4
 		load_global	0
-		field_store	5
-		store_global	4
-		load_global	3
-		load_global	4
-		call	1
-		load_global	0
+		call	0
+		pop
+		load_global	1
 		load_const	1
-		add
-		store_global	0
-		load_global	0
-		load_const	2
 		swap
 		gt
-		if	-16
+		if	-7
 	]
 }

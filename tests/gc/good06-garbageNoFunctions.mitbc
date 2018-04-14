@@ -40,71 +40,44 @@ function
 			instructions = 
 			[
 			]
-		},
-		function
-		{
-			functions = [],
-			constants = ["gets here", 1, None],
-			parameter_count = 1,
-			local_vars = [n, carmap],
-			local_ref_vars = [],
-			free_vars = [],
-			names = [print, n],
-			instructions = 
-			[
-				alloc_record
-				dup
-				load_local	0
-				field_store	1
-				store_local	1
-				load_global	0
-				load_const	0
-				call	1
-				pop
-				load_global	0
-				load_local	1
-				call	1
-				pop
-				load_local	0
-				load_const	1
-				sub
-				store_local	0
-				load_global	0
-				load_local	0
-				call	1
-				pop
-				load_const	2
-				return
-			]
 		}
 	],
-	constants = [10, "hello"],
+	constants = [0, "yooooooooooooooo", "heeeeeeeeeeeeeeey", None, None, 1, 1000000],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [cars, input, intcast, manycars, print],
+	names = [i, input, intcast, print, x, y],
 	instructions = 
 	[
 		load_func	0
 		alloc_closure	0
-		store_global	4
+		store_global	3
 		load_func	1
 		alloc_closure	0
 		store_global	1
 		load_func	2
 		alloc_closure	0
 		store_global	2
-		load_func	3
-		alloc_closure	0
-		store_global	3
-		load_global	3
 		load_const	0
-		call	1
 		store_global	0
-		load_global	4
+		goto	13
 		load_const	1
-		call	1
-		pop
+		store_global	4
+		load_const	2
+		store_global	5
+		load_const	3
+		store_global	4
+		load_const	4
+		store_global	5
+		load_global	0
+		load_const	5
+		add
+		store_global	0
+		load_global	0
+		load_const	6
+		swap
+		gt
+		if	-16
 	]
 }
