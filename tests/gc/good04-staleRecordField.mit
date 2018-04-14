@@ -1,6 +1,6 @@
 i = 0;
 r = {};
-while (i < 10000) {
+while (i < 100000) {
     r["x"] = fun() {
         print("Hello");
     };

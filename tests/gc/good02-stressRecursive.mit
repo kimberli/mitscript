@@ -2,7 +2,6 @@ g = fun() {
     i = 0;
     while (i < 1000) {
         r = { id : i; };
-        print(r);
         i = i + 1;
     }
 };

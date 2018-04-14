@@ -116,7 +116,7 @@ function
 			]
 		}
 	],
-	constants = [0, None, None, 1, 10000],
+	constants = [0, None, None, 1, 100000],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],

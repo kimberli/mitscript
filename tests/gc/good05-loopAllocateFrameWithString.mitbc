@@ -59,7 +59,7 @@ function
 			]
 		}
 	],
-	constants = [0, 10000],
+	constants = [0, 1, 10000],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
@@ -81,14 +81,18 @@ function
 		load_func	3
 		alloc_closure	0
 		store_global	0
-		goto	4
+		goto	8
 		load_global	0
 		call	0
 		pop
 		load_global	1
 		load_const	1
+		add
+		store_global	1
+		load_global	1
+		load_const	2
 		swap
 		gt
-		if	-7
+		if	-11
 	]
 }

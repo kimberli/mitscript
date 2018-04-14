@@ -49,21 +49,17 @@ function
 			local_vars = [i, r],
 			local_ref_vars = [],
 			free_vars = [],
-			names = [print, id],
+			names = [id],
 			instructions = 
 			[
 				load_const	0
 				store_local	0
-				goto	14
+				goto	10
 				alloc_record
 				dup
 				load_local	0
-				field_store	1
+				field_store	0
 				store_local	1
-				load_global	0
-				load_local	1
-				call	1
-				pop
 				load_local	0
 				load_const	1
 				add
@@ -72,7 +68,7 @@ function
 				load_const	2
 				swap
 				gt
-				if	-17
+				if	-13
 				load_const	3
 				return
 			]
