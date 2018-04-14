@@ -11,7 +11,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
-			instructions =
+			instructions = 
 			[
 			]
 		},
@@ -48,7 +48,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [],
+					constants = [None],
 					parameter_count = 1,
 					local_vars = [z],
 					local_ref_vars = [],
@@ -56,12 +56,14 @@ function
 					names = [x],
 					instructions = 
 					[
-						load_global 0
+						load_global	0
 						push_ref	0
 						load_ref
 						add
 						load_local	0
 						add
+						return
+						load_const	0
 						return
 					]
 				}
@@ -74,10 +76,10 @@ function
 			names = [],
 			instructions = 
 			[
-				load_func 0
+				load_func	0
 				push_ref	0
-				alloc_closure 1
-				store_local 1
+				alloc_closure	1
+				store_local	1
 				load_const	0
 				return
 			]
@@ -88,22 +90,22 @@ function
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [x, f, print, input, intcast],
+	names = [f, input, intcast, print, x],
 	instructions = 
 	[
-		load_func 0
-		alloc_closure 0
-		store_global	2
-		load_func 1
-		alloc_closure 0
+		load_func	0
+		alloc_closure	0
 		store_global	3
-		load_func 2
-		alloc_closure 0
-		store_global	4
-		load_const	0
-		store_global	0
-		load_func 3
-		alloc_closure 0
+		load_func	1
+		alloc_closure	0
 		store_global	1
+		load_func	2
+		alloc_closure	0
+		store_global	2
+		load_const	0
+		store_global	4
+		load_func	3
+		alloc_closure	0
+		store_global	0
 	]
 }
