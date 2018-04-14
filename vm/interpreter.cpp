@@ -251,9 +251,7 @@ void Interpreter::executeStep() {
 				vptr<NativeFunction> nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
 				if (nativeFunc != NULL) {
 					vptr<Constant> val = nativeFunc->evalNativeFunction(*newFrame, *collector);
-					if (dynamic_cast<None*>(val) == NULL) {
-						frame->opStackPush(val);
-					}
+                    frame->opStackPush(val);
 				} else {
 					newOffset = 0;
                     frames.push_back(newFrame);
