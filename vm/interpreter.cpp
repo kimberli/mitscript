@@ -245,9 +245,7 @@ void Interpreter::executeStep() {
 				auto nativeFunc = dynamic_pointer_cast<NativeFunction>(clos->func);
 				if (nativeFunc != NULL) {
 					shared_ptr<Constant> val = nativeFunc->evalNativeFunction(*newFrame);
-					if (dynamic_pointer_cast<None>(val) == NULL) {
-						frame->opStackPush(val);
-					}
+                    frame->opStackPush(val);
 				} else {
 					newOffset = 0;
                     frames.push(newFrame);
