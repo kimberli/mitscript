@@ -58,6 +58,8 @@ protected:
 	virtual void follow(CollectedHeap& heap) = 0;
     virtual size_t getSize() = 0;
 	friend CollectedHeap;
+public:
+    virtual ~Collectable() {};
 };
 
 /*

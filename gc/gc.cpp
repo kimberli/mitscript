@@ -108,17 +108,16 @@ void CollectedHeap::gc() {
         }
         // sweep stage
         // we recount the data we are using to get a more accurate tally
-        //currentSizeBytes = 0;
         auto it = allocated.begin();
         while (it != allocated.end()) {
             Collectable* c = *it;
             if (!c->marked) {
-                // LOG("\tdecreased size by " << c->getSize());
+                // LOG("\tdecreased size by " << c->getSize() << " @ " << c);
                 currentSizeBytes -= c->getSize();
                 it = allocated.erase(it);
                 delete c;
             } else {
-                //currentSizeBytes += c->getSize();
+                // LOG("\tskipped @ " << c);
                 c->marked = false;
                 ++it;
             }

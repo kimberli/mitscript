@@ -28,7 +28,7 @@ class Collectable;
 struct Value : public Collectable {
     // Abstract class for program values that can be stored on a frame's
     // operand stack
-    virtual ~Value() {};
+    virtual ~Value() {}
 
     // instance function that returns type of value as a string
     virtual string type() = 0;
@@ -118,9 +118,9 @@ struct ValuePtr: public Value {
     // Class for reference variables
     vptr<Constant> ptr;
 
-    ValuePtr() {};
+    ValuePtr() {}
     ValuePtr(vptr<Constant> ptr): ptr(ptr) {};
-    virtual ~ValuePtr() {};
+    virtual ~ValuePtr() {}
 
     static const string typeS;
     string type() {
@@ -238,7 +238,7 @@ struct Closure: public Constant {
 
     Closure(vector<vptr<ValuePtr>> refs, vptr<Function> func):
         refs(refs), func(func) {};
-    virtual ~Closure() {};
+    virtual ~Closure() {}
 
     static const string typeS;
     string type() {

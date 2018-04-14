@@ -36,8 +36,9 @@ public:
     // garbage collector
     CollectedHeap* collector;
 
-    Frame(vptr<Function> func): func(func) {
-	};
+    Frame(vptr<Function> func): func(func) {};
+
+    virtual ~Frame() {}
 
     // instruction helpers
     int numInstructions();

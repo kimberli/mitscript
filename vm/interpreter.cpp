@@ -435,5 +435,4 @@ void Interpreter::run() {
     while (!finished) {
         executeStep();
     }
-    // LOG("program finished");
 };
