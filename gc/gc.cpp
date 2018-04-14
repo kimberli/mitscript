@@ -40,7 +40,7 @@ CollectedHeap::CollectedHeap(int maxmem, int currentSize, list<Frame*>* frames) 
     rootset = frames;
 }
 void CollectedHeap::increment(int newMem) {
-    LOG("\tincreased size by " << newMem);
+    // LOG("\tincreased size by " << newMem);
     currentSizeBytes += newMem;
 }
 int CollectedHeap::count() {
@@ -55,7 +55,7 @@ void CollectedHeap::checkSize() {
     }
 }
 void CollectedHeap::registerCollectable(Collectable* c) {
-    LOG("\tincreased size by " << c->getSize());
+    // LOG("\tincreased size by " << c->getSize());
     currentSizeBytes += c->getSize();
     allocated.push_back(c);
 }
@@ -100,7 +100,7 @@ T* CollectedHeap::allocate(vector<ValuePtr*> refs, Function* func) {
 void CollectedHeap::gc() {
     // calls markSuccessors on everything in the root set
     // loop through the allocated ll. if marked = False, deallocate, decrement the size of the collector, and remove from ll. Else, set marked to False
-    //if (currentSizeBytes > maxSizeBytes / 2) {
+    if (currentSizeBytes > maxSizeBytes / 2) {
         LOG("STARTING GC: size = " << currentSizeBytes << "/" << maxSizeBytes << ", count = " << count());
         // mark stage
         for (auto frame = rootset->begin(); frame != rootset->end(); ++frame) {
@@ -113,7 +113,7 @@ void CollectedHeap::gc() {
         while (it != allocated.end()) {
             Collectable* c = *it;
             if (!c->marked) {
-                LOG("\tdecreased size by " << c->getSize());
+                // LOG("\tdecreased size by " << c->getSize());
                 currentSizeBytes -= c->getSize();
                 it = allocated.erase(it);
                 delete c;
@@ -127,7 +127,7 @@ void CollectedHeap::gc() {
             (*frame)->func->marked = false;
         }
         LOG("ENDING GC: size = " << currentSizeBytes << ", count = " << count());
-    //}
+    }
     checkSize();
 }
 
