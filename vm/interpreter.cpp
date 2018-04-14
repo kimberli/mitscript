@@ -59,7 +59,7 @@ void Interpreter::executeStep() {
     fptr frame = frames.back();
     Instruction& inst = frame->getCurrInstruction();
     int newOffset = 1;
-    // LOG("\nexecuting instruction " + to_string(frame->instructionIndex));
+    LOG("\nexecuting instruction " + to_string(frame->instructionIndex));
     switch (inst.operation) {
         case Operation::LoadConst:
             {
@@ -234,7 +234,7 @@ void Interpreter::executeStep() {
                 int numLocals = clos->func->local_vars_.size();
                 int numRefs = clos->func->free_vars_.size();
                 fptr newFrame = collector->allocate<Frame>(clos->func);
-                frame->collector = collector;
+                newFrame->collector = collector;
 				for (int i = 0; i < numLocals; i++) {
                     if (i < numArgs) {
                         string name = clos->func->local_vars_[i];
@@ -418,6 +418,7 @@ void Interpreter::executeStep() {
         default:
             throw RuntimeException("should never get here - invalid instruction");
     }
+	collector->gc();
     if (frames.size() == 1 && frame->instructionIndex + newOffset == frame->numInstructions()) {
         // last instruction of the whole program
         finished = true;
@@ -429,7 +430,6 @@ void Interpreter::executeStep() {
         frame = frames.back();
     }
     frame->moveToInstruction(newOffset);
-	collector->gc();
 };
 
 void Interpreter::run() {
