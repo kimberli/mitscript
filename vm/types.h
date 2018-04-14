@@ -214,7 +214,6 @@ struct Record : public Constant {
     Record() {
 		value = *(new map<string, vptr<Value>>());
 	}
-    Record(map<string, vptr<Value>> value): value(value) {}
     vptr<Value> get(string key);
     void set(string key, vptr<Value> value, CollectedHeap& collector);
 

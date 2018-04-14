@@ -47,11 +47,8 @@ protected:
 	template<typename T>
     size_t getVecSize(vector<T> v);
 
-    template<typename KEY, typename VAL>
-    size_t getMapSize(map<KEY, VAL> m);
-
-//    template<typename VAL>
-//    size_t getStringMapSize(map<string, VAL> m);
+    template<typename VAL>
+    size_t getMapSize(map<string, VAL> m);
 
     template<typename T>
     size_t getStackSize(list<T> s);

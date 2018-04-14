@@ -160,7 +160,9 @@ vptr<Value> Record::get(string key) {
     return value[key];
 }
 void Record::set(string key, vptr<Value> val, CollectedHeap& collector) {
-    collector.increment(sizeof(key) + key.size() + sizeof(val));
+    if (value.count(key) == 0) {
+        collector.increment(sizeof(key) + key.size() + sizeof(val));
+    }
     value[key] = val;
 }
 bool Record::equals(vptr<Value> other) {

@@ -12,22 +12,15 @@ size_t Collectable::getVecSize(vector<T> v) {
     size_t vecSize = v.capacity()*sizeof(T);
     return overhead + vecSize;
 }
-template<typename KEY, typename VAL>
-size_t Collectable::getMapSize(map<KEY, VAL> m) {
-    size_t overhead = sizeof(m);
-    size_t mapSize = m.size()*(sizeof(KEY) + sizeof(VAL));
-    return overhead + mapSize;
+template<typename VAL>
+size_t Collectable::getMapSize(map<string, VAL> m) {
+    size_t result = sizeof(m);
+    result += m.size()*(sizeof(string) + sizeof(VAL));
+    for (auto it = m.begin(); it != m.end(); ++it) {
+        result += it->first.size();
+    }
+    return result;
 }
-//template<typename VAL>
-//size_t getStringMapSize(map<string, VAL> m) {
-//    size_t overhead = sizeof(m);
-//    size_t mapSize = m.size()*(sizeof(string) + sizeof(VAL));
-//    size_t stringSize = 0; 
-//    for (map<string, VAL>::iterator it != map.begin(); it < map.end(); it++) {
-//        stringSize += getStringSize(it->first);
-//    }
-//    return overhead + mapSize + stringSize;
-//}
 template<typename T>
 size_t Collectable::getStackSize(list<T> s) {
     size_t overhead = sizeof(s);
