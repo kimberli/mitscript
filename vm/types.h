@@ -211,9 +211,6 @@ struct Record : public Constant {
     // Class for record type (note that this is mutable)
 	map<string, vptr<Value>> value;
 
-    Record() {
-		value = *(new map<string, vptr<Value>>());
-	}
     vptr<Value> get(string key);
     void set(string key, vptr<Value> value, CollectedHeap& collector);
 
