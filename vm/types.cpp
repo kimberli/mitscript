@@ -95,21 +95,21 @@ size_t Integer::getSize() {
 /* String */
 const string String::typeS = "String";
 string String::toString() {
-    string* replaced = new string(value);
-    auto pos = replaced->find("\\");
+    string replaced(value);
+    auto pos = replaced.find("\\");
     while (pos != string::npos) {
-        if (replaced->at(pos + 1) == 'n') {
-            replaced->replace(pos, 2, "\n");
-        } else if (replaced->at(pos + 1) == 't') {
-            replaced->replace(pos, 2, "\t");
-        } else if (replaced->at(pos + 1) == '\\') {
-            replaced->replace(pos, 2, "\\");
-        } else if (replaced->at(pos + 1) == '"') {
-            replaced->replace(pos, 2, "\"");
+        if (replaced.at(pos + 1) == 'n') {
+            replaced.replace(pos, 2, "\n");
+        } else if (replaced.at(pos + 1) == 't') {
+            replaced.replace(pos, 2, "\t");
+        } else if (replaced.at(pos + 1) == '\\') {
+            replaced.replace(pos, 2, "\\");
+        } else if (replaced.at(pos + 1) == '"') {
+            replaced.replace(pos, 2, "\"");
         }
-        pos = replaced->find("\\", pos + 1);
+        pos = replaced.find("\\", pos + 1);
     }
-    return *replaced;
+    return replaced;
 }
 bool String::equals(vptr<Value> other) {
     auto otherV = dynamic_cast<vptr<String>>(other);
