@@ -59,7 +59,7 @@ void Interpreter::executeStep() {
     fptr frame = frames.back();
     Instruction& inst = frame->getCurrInstruction();
     int newOffset = 1;
-    // LOG("\nexecuting instruction " + to_string(frame->instructionIndex));
+    LOG("executing instruction " + to_string(frame->instructionIndex));
     switch (inst.operation) {
         case Operation::LoadConst:
             {
@@ -252,9 +252,12 @@ void Interpreter::executeStep() {
 				if (nativeFunc != NULL) {
 					vptr<Constant> val = nativeFunc->evalNativeFunction(*newFrame, *collector);
                     frame->opStackPush(val);
-				} else {
+				} else if (newFrame->numInstructions() != 0) {
 					newOffset = 0;
                     frames.push_back(newFrame);
+				} else {
+        			vptr<Value> returnVal = collector->allocate<None>();
+					frame->opStackPush(returnVal);
 				}
                 break;
             }
@@ -424,8 +427,12 @@ void Interpreter::executeStep() {
     }
     if (frame->instructionIndex + newOffset == frame->numInstructions()) {
         // last instruction of current function
+        vptr<Value> returnVal = collector->allocate<None>();
         frames.pop_back();
         frame = frames.back();
+        // push return val to top of new parent frame
+        frame->opStackPush(returnVal);
+		newOffset = 1;
     }
     frame->moveToInstruction(newOffset);
 };

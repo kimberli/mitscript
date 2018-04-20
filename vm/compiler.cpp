@@ -319,12 +319,7 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
 
     // run
     exp.body.accept(*this);
-    // if there is no explicit return statement, add a return None
-    // add a return None
-    constptr_t n = new None();
-    loadConstant(n);
-    Instruction* ret = new Instruction(Operation::Return, optint_t());
-    retFunc->instructions.push_back(*ret);
+
     // reinstall parent state
     retFunc = parentFunc;
     curTable = parentTable;
