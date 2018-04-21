@@ -110,17 +110,17 @@ void Interpreter::executeStep() {
         case Operation::PushReference:
             {
                 string name = frame->getRefByIndex(inst.operand0.value());
-                auto valuePtr = frame->getRefVar(name);
-                frame->opStackPush(valuePtr);
+                auto valWrapper = frame->getRefVar(name);
+                frame->opStackPush(valWrapper);
                 break;
             }
         case Operation::LoadReference:
             {
-                vptr<ValuePtr> valuePtr = dynamic_cast<ValuePtr*>(frame->opStackPop());
-                if (valuePtr == NULL) {
-                    throw RuntimeException("expected ValuePtr on the stack for LoadReference");
+                vptr<ValWrapper> valWrapper = dynamic_cast<ValWrapper*>(frame->opStackPop());
+                if (valWrapper == NULL) {
+                    throw RuntimeException("expected ValWrapper on the stack for LoadReference");
                 }
-                frame->opStackPush(valuePtr->ptr);
+                frame->opStackPush(valWrapper->ptr);
                 break;
             }
         case Operation::StoreReference:
@@ -129,11 +129,11 @@ void Interpreter::executeStep() {
                 if (value == NULL) {
                     throw RuntimeException("expected Constant on the stack for StoreReference");
                 }
-                vptr<ValuePtr> valuePtr = dynamic_cast<ValuePtr*>(frame->opStackPop());
-                if (valuePtr == NULL) {
-                    throw RuntimeException("expected ValuePtr on the stack for StoreReference");
+                vptr<ValWrapper> valWrapper = dynamic_cast<ValWrapper*>(frame->opStackPop());
+                if (valWrapper == NULL) {
+                    throw RuntimeException("expected ValWrapper on the stack for StoreReference");
                 }
-				*valuePtr->ptr = *value;
+				*valWrapper->ptr = *value;
                 break;
             }
         case Operation::AllocRecord:
@@ -189,12 +189,12 @@ void Interpreter::executeStep() {
             {
                 // read num free vars, ref vars, and function off the stack
                 int numFreeVars = inst.operand0.value();
-                vector<vptr<ValuePtr>> refList;
+                vector<vptr<ValWrapper>> refList;
                 for (int i = 0; i < numFreeVars; i++) {
                     auto top = frame->opStackPop();
-                    vptr<ValuePtr> value = dynamic_cast<ValuePtr*>(top);
+                    vptr<ValWrapper> value = dynamic_cast<ValWrapper*>(top);
                     if (value == NULL) {
-                        throw RuntimeException("expected ValuePtr on the stack for AllocClosure");
+                        throw RuntimeException("expected ValWrapper on the stack for AllocClosure");
                     }
                     refList.push_back(value);
                 }

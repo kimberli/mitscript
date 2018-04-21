@@ -8,18 +8,18 @@
 #include "../gc/gc.h"
 
 
-/* ValuePtr */
-const string ValuePtr::typeS = "ValuePtr";
-string ValuePtr::toString() {
-    throw RuntimeException("can't cast ValuePtr to String");
+/* ValWrapper */
+const string ValWrapper::typeS = "ValWrapper";
+string ValWrapper::toString() {
+    throw RuntimeException("can't cast ValWrapper to String");
 }
-size_t ValuePtr::getSize() {
-    return sizeof(ValuePtr);
+size_t ValWrapper::getSize() {
+    return sizeof(ValWrapper);
 }
-bool ValuePtr::equals(vptr<Value> other) {
-    throw RuntimeException("can't call equals on ValuePtr");
+bool ValWrapper::equals(vptr<Value> other) {
+    throw RuntimeException("can't call equals on ValWrapper");
 }
-void ValuePtr::follow(CollectedHeap& heap){
+void ValWrapper::follow(CollectedHeap& heap){
     // mark the value this points to
     if (ptr) {
         heap.markSuccessors(ptr);
@@ -214,7 +214,7 @@ size_t Closure::getSize() {
 }
 void Closure::follow(CollectedHeap& heap) {
     // follow the refs and the function
-    for (vptr<ValuePtr> v : refs) {
+    for (vptr<ValWrapper> v : refs) {
         heap.markSuccessors(v);
     }
     heap.markSuccessors(func);

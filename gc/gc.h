@@ -13,7 +13,7 @@ class Record;
 class Function;
 class Constant;
 class Instruction;
-class ValuePtr;
+class ValWrapper;
 class Value;
 class None;
 class Boolean;
@@ -153,7 +153,7 @@ public:
 
     // for closures
     template<typename T>
-    T* allocate(vector<ValuePtr*> refs, Function* func);
+    T* allocate(vector<ValWrapper*> refs, Function* func);
 
 	/*
      * The gc method should be called by your VM (or by other methods

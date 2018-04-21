@@ -1,1 +1,1 @@
-RuntimeException: expected ValuePtr on the stack for AllocClosure
+RuntimeException: expected ValWrapper on the stack for AllocClosure

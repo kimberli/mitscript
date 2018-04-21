@@ -52,4 +52,4 @@ Optionally, the `Function` can be pretty-printed out as bytecode (as done in `co
 ## 
 The interpreter runs in an execution loop, where each instruction is executed in sequence (jumping and calling subfunctions as necessary) until the program is deemed to have terminated.
 
-Its main state is emcompassed in stack frames, represented as `Frame` objects. Datatypes in the program are stored as `Value` objects, where program values are stored in the `Constant` datatype and variable references (used in closures) are stored in `ValuePtr`.
+Its main state is emcompassed in stack frames, represented as `Frame` objects. Datatypes in the program are stored as `Value` objects, where program values are stored in the `Constant` datatype and variable references (used in closures) are stored in `ValWrapper`.

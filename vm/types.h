@@ -114,17 +114,17 @@ struct Function : public Value {
     size_t getSize() override;
 };
 
-struct ValuePtr: public Value {
+struct ValWrapper: public Value {
     // Class for reference variables
     vptr<Constant> ptr;
 
-    ValuePtr() {}
-    ValuePtr(vptr<Constant> ptr): ptr(ptr) {};
-    virtual ~ValuePtr() {}
+    ValWrapper() {}
+    ValWrapper(vptr<Constant> ptr): ptr(ptr) {};
+    virtual ~ValWrapper() {}
 
     static const string typeS;
     string type() {
-        return "ValuePtr";
+        return "ValWrapper";
     }
 
     string toString();
@@ -231,12 +231,12 @@ struct Closure: public Constant {
 
     // list of reference variables, in the same order as listed in the function's
     // free_vars_ list
-    vector<vptr<ValuePtr>> refs;
+    vector<vptr<ValWrapper>> refs;
 
     // function that the closure is for
     vptr<Function> func;
 
-    Closure(vector<vptr<ValuePtr>> refs, vptr<Function> func):
+    Closure(vector<vptr<ValWrapper>> refs, vptr<Function> func):
         refs(refs), func(func) {};
     virtual ~Closure() {}
 

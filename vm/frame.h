@@ -15,17 +15,17 @@
 
 using namespace std;
 
-typedef map<string, vptr<ValuePtr>> VarMap;
+typedef map<string, vptr<ValWrapper>> VarMap;
 typedef Frame* fptr;
 
 class Frame : public Collectable {
     // Class representing a stack frame in interpreter execution
 
-    // and local reference names to shared ValuePtrs
+    // and local reference names to shared ValWrappers
     void follow(CollectedHeap& heap) override;
     size_t getSize() override;
 public:
-    // vector of local variable names to values (stored in ValuePtr)
+    // vector of local variable names to values (stored in ValWrapper)
     VarMap vars;
     // function that the frame is for
     vptr<Function> func;
@@ -54,10 +54,10 @@ public:
 
     // var map helpers
     vptr<Constant> getLocalVar(string name);
-    vptr<ValuePtr> getRefVar(string name);
+    vptr<ValWrapper> getRefVar(string name);
 
     void setLocalVar(string name, vptr<Constant> val);
-    void setRefVar(string name, vptr<ValuePtr> val);
+    void setRefVar(string name, vptr<ValWrapper> val);
 
     // operand stack helpers
     void opStackPush(vptr<Value> val);

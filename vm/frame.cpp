@@ -73,7 +73,7 @@ vptr<Constant> Frame::getLocalVar(string name) {
     throw UninitializedVariableException(name + " is not defined");
 }
 
-vptr<ValuePtr> Frame::getRefVar(string name) {
+vptr<ValWrapper> Frame::getRefVar(string name) {
     if (vars.count(name) != 0) {
         return vars[name];
     }
@@ -82,14 +82,14 @@ vptr<ValuePtr> Frame::getRefVar(string name) {
 
 void Frame::setLocalVar(string name, vptr<Constant> val) {
     if (vars.count(name) == 0) {
-        vars[name] = collector->allocate<ValuePtr>(val);
+        vars[name] = collector->allocate<ValWrapper>(val);
         collector->increment(sizeof(name) + name.size() + sizeof(val));
     } else {
         vars[name]->ptr = val;
     }
 }
 
-void Frame::setRefVar(string name, vptr<ValuePtr> val) {
+void Frame::setRefVar(string name, vptr<ValWrapper> val) {
     if (vars.count(name) == 0) {
         collector->increment(sizeof(name) + name.size() + sizeof(val));
     }
