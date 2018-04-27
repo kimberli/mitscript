@@ -50,7 +50,7 @@ private:
     void loadBuiltIns();
 
     // helper to move funcs from st to function
-    void putVarInFunc(std::string& varName, stptr_t table, funcptr_t func);
+    bool putVarInFunc(std::string& varName, stptr_t table, funcptr_t func);
 
     // Symbol Table state
     stvec_t symbolTables;

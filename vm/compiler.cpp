@@ -150,24 +150,7 @@ funcptr_t BytecodeCompiler::evaluate(Expression& exp) {
     // load up retFunc with vars from symbol table
     for (std::map<std::string, desc_t>::iterator it = curTable->vars.begin(); it != curTable->vars.end(); it ++) {
         std::string varName = it->first;
-        desc_t d = it->second;
-        switch (d->type) {
-            case GLOBAL:
-                d->index = retFunc->names_.size();
-                retFunc->names_.push_back(varName);
-                break;
-            case LOCAL:
-                d->index = retFunc->local_vars_.size();
-                retFunc->local_vars_.push_back(varName);
-                if (d->isReferenced) {
-                    d->refIndex = retFunc->local_reference_vars_.size();
-                    retFunc->local_reference_vars_.push_back(varName);
-                }
-                break;
-            case FREE:
-                d->index = retFunc->free_vars_.size();
-                retFunc->free_vars_.push_back(varName);
-        }
+        putVarInFunc(varName, curTable, retFunc);
     }
 
     // load built-in functions
@@ -263,13 +246,14 @@ void BytecodeCompiler::visit(Return& exp) {
     retFunc->instructions.push_back(*instr);
 }
 
-void BytecodeCompiler::putVarInFunc(std::string& varName, stptr_t table, funcptr_t func) {
+bool BytecodeCompiler::putVarInFunc(std::string& varName, stptr_t table, funcptr_t func) {
+    // returns true if the bool was put in the local array, false else
     desc_t d = table->vars.at(varName);
     switch (d->type) {
         case GLOBAL:
             d->index = func->names_.size();
             func->names_.push_back(varName);
-            break;
+            return false;
         case LOCAL:
             d->index = func->local_vars_.size();
             func->local_vars_.push_back(varName);
@@ -277,11 +261,11 @@ void BytecodeCompiler::putVarInFunc(std::string& varName, stptr_t table, funcptr
                 d->refIndex = func->local_reference_vars_.size();
                 func->local_reference_vars_.push_back(varName);
             }
-            break;
+            return true;
         case FREE:
             d->index = func->free_vars_.size();
             func->free_vars_.push_back(varName);
-            break;
+            return false;
     }
 }
 
@@ -300,7 +284,11 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
     for (Identifier* arg : exp.args) {
         std::string argName = arg->name;
         argNames.insert(argName);
-        putVarInFunc(argName, childTable, childFunc);
+        bool wasLocal = putVarInFunc(argName, childTable, childFunc);
+        // if the arg was global, we need to push its name as a placeholder
+        if (!wasLocal) { 
+            childFunc->local_vars_.push_back(argName);
+        }
     }
 
     for (std::map<std::string, desc_t>::iterator it = childTable->vars.begin(); it != childTable->vars.end(); it ++) {
