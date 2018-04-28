@@ -13,6 +13,48 @@ typedef std::vector<IrFunc> IrProgram;
 enum class IrOp {
    // TODO: finalize operation set
    
+   // Description: Move a constant from constants array into temp var
+   // Operand 1: index into the constants array of the constant to move
+   // Operand 2: N/A
+   // target: number of the temp to store the constant in 
+   // Result: target stores func.constants_[operand1]
+   LoadConst,
+
+   // Description: Load a function from functions list into temp 
+   // Operand 1: index into functions array to move
+   // Operand 2: N/A
+   // target: number of the temp to store the funtion in 
+   // Result: target stores the specified function
+   LoadFunc,  
+
+   // Description: Load a local into a temp
+   // Operand 1: index of the local to load
+   // Operand 2: N/A
+   // target: index of the temp to store into 
+   // Result: target stores the desired local 
+   LoadLocal,  
+
+   // Description: Store a value from a temp into a local 
+   // Operand 1: index of the temp containing the value to store
+   // Operand 2: index of the local to store into 
+   // target: N/A
+   // Result: the local at index operand2 contains the value stored by operand1
+   StoreLocal,  
+
+   // Description: Load a global into a temp 
+   // Operand 1: index of the global to load
+   // Operand 2: N/A
+   // target: index of the temp to load into 
+   // Result: target contains the global var at index operand1
+   LoadGlobal,
+
+   // Description: Store a value from a temp into a global
+   // Operand 1: index of the temp containing the value to store 
+   // Operand 2: index of the global to store into 
+   // target: N/A
+   // Result: the global at index operand2 contains the value stored by operand1
+   StoreGlobal,
+
    // Description: add the constants in two temps 
    // Operand 1: temp index holding right value
    // Operand 2: temp index holding left value
@@ -111,11 +153,14 @@ struct IrFunc {
     IrInstList instructions; 
     vector<vptr<Constant>> constants_;
     int32_t parameter_count_;
+    int32_t local_count_;
 
     IrFunc(IrInstList instructions, 
         vector<vptr<Constant>> constants_,
-        int32_t parameter_count_) : 
+        int32_t parameter_count_,
+        int32_t local_count_) : 
         instructions(instructions), 
         constants_(constants_), 
-        parameter_count_(parameter_count_) {};
+        parameter_count_(parameter_count_), 
+        local_count_(local_count_) {};
 };
