@@ -8,6 +8,7 @@ struct IrFunc;
 
 typedef std::vector<IrInstruction> IrInstList;
 typedef std::experimental::optional<int32_t> optint_t;
+typedef std::vector<IrFunc> IrProgram;
 
 enum class IrOp {
    // TODO: finalize operation set
@@ -87,15 +88,13 @@ struct IrInstruction {
 
 struct IrFunc {
     IrInstList instructions; 
-    vector<vptr<IrFunc>> functions_;
     vector<vptr<Constant>> constants_;
     int32_t parameter_count_;
+
     IrFunc(IrInstList instructions, 
-        vector<vptr<IrFunc>> functions_,
         vector<vptr<Constant>> constants_,
         int32_t parameter_count_) : 
         instructions(instructions), 
-        functions_(functions_),
         constants_(constants_), 
         parameter_count_(parameter_count_) {};
 };
