@@ -66,12 +66,33 @@ enum class IrOp {
    // Result: target stores !operand1
    Not,
 
-   // Description: move to a given offset
-   // Operand 1: stores the offset to move to 
+   // Description: move to a given label 
+   // Operand 1: index of the label to jump to; should be unique 
    // Operand 2: N/A
    // target: N/A
-   // Result: execution transfers to the offset
+   // Result: execution transfers to the label
    Goto,
+
+   // Description: move to a given label 
+   // Operand 1: index of the label to jump to; should be unique 
+   // Operand 2: N/A
+   // target: N/A
+   // Result: execution transfers to the label
+   If,
+
+   // Description: swap the values in two temps 
+   // Operand 1: index of one temp to swap
+   // Operand 2: index of the other temp to swap
+   // target: N/A
+   // Result: values in the temps are swapped 
+   Swap,
+
+   // Description: pops and discards the top of the stack
+   // Operand 1:   N/A
+   // Operand 2:   N/A
+   // target: N/A
+   // Result: top element eliminated from stack
+   Pop
 };
 
 struct IrInstruction {
