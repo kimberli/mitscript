@@ -10,14 +10,67 @@ typedef std::vector<IrInstruction> IrInstList;
 typedef std::experimental::optional<int32_t> optint_t;
 
 enum class IrOp {
-   // TODO: add other ops  
+   // TODO: finalize operation set
    
-   // Description: subtract the constants in two temps 
-   // Operand 1: temp index holding left value
-   // Operand 2: temp index holding right value
+   // Description: add the constants in two temps 
+   // Operand 1: temp index holding right value
+   // Operand 2: temp index holding left value
    // target: number of the temp to store the value in 
-   // Result: tmp stores the result of doing op1 - op2
-   Sub
+   // Result: target stores the result of doing operand1 + operand2
+   Add,
+
+   // Description: performs arithmetic operation on two temps 
+   // Operand 1: temp index holding right value
+   // Operand 2: temp index holding left value
+   // target: number of the temp to store the value in 
+   // Result: target stores the result of doing op(operand2, operand1)
+   Sub, 
+   Mul, 
+   Div,
+
+   // Description: computes unary minus
+   // Operand 1: value to negate
+   // Operand 2: N/A
+   // target: number of the temp to store the result in 
+   // Result: target stores -operand1
+   Neg,
+
+   // Description: computes a comparison on ints
+   // Operand 1: right value
+   // Operand 2: left value
+   // target: number of the temp to store the result in 
+   // Result: target stores bool indicating result of comparison
+   Gt, 
+   Geq,
+
+   // Description: computes an equality between two vals (semantics from A2)
+   // Operand 1: right value
+   // Operand 2: left value
+   // target: number of the temp to store the result in 
+   // Result: target stores bool eq(operand2, operand1)
+   Eq, 
+
+   // Description: computes a boolean operation (semantics from A2)
+   // Operand 1: right value
+   // Operand 2: left value
+   // target: number of the temp to store the result in
+   // Result: target stores bool op(operand1, operand2)
+   And, 
+   Or,
+
+   // Description: computes local negation
+   // Operand 1: value to negate
+   // Operand 2: N/A
+   // target: number of the temp to store the result in
+   // Result: target stores !operand1
+   Not,
+
+   // Description: move to a given offset
+   // Operand 1: stores the offset to move to 
+   // Operand 2: N/A
+   // target: N/A
+   // Result: execution transfers to the offset
+   Goto,
 };
 
 struct IrInstruction {
