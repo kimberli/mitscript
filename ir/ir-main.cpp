@@ -1,5 +1,5 @@
-#include "ir.h"
-#include "ir_to_asm.h"
+#include "../ir.h"
+#include "../asm/ir_to_asm.h"
 
 using namespace std;
 

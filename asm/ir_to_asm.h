@@ -1,8 +1,7 @@
 # pragma once 
 
-#include "ir.h"
+#include "../ir.h"
 #include "include/x64asm.h"
-#include "machine_code_func.cpp"
 
 using namespace std; 
 using namespace x64asm; 

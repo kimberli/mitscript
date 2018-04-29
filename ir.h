@@ -1,7 +1,7 @@
 # pragma once
 
 #include <experimental/optional>
-#include "../vm/types.h"
+#include "types.h"
 
 struct IrInstruction;
 struct IrFunc;

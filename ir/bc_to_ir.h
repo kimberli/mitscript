@@ -6,7 +6,7 @@
  */
 #pragma once
 
-#include "ir.h"
+#include "../ir.h"
 #include <list>
 #include <iostream>
 #include <vector>
