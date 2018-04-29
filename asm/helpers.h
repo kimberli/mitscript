@@ -2,7 +2,7 @@
 
 #include "../vm/interpreter.h"
 
-vptr<Value> helper_store_global(vptr<Interpreter> interpreter, std::string* name, vptr<Value> val); 
+void helper_store_global(vptr<Interpreter> interpreter, std::string* name, vptr<Value> val); 
 
 vptr<Value> helper_load_global(vptr<Interpreter> interpreter, std::string* name); 
 

@@ -27,4 +27,6 @@ public:
 
     // asm helpers
     vptr<Value> add(vptr<Value> left, vptr<Value> right);
+    void storeGlobal(string name, vptr<Value> val);
+    vptr<Value> loadGlobal(string name);
 };

@@ -1,12 +1,12 @@
 #include "helpers.h"
 #include "../types.h"
 
-vptr<Value> helper_store_global(vptr<Interpreter> interpreter, std::string* name, vptr<Value> val) {
-    // TODO: call a function on the interpreter to store a global 
+void helper_store_global(vptr<Interpreter> interpreter, std::string* name, vptr<Value> val) {
+    interpreter->storeGlobal(name, val);
 }
 
 vptr<Value> helper_load_global(vptr<Interpreter> interpreter, std::string* name) {
-    // TODO: call an interpreter function to load a global
+    return interpreter->loadGlobal(name);
 }
 
 vptr<Value> helper_add(vptr<Interpreter> interpreter, Value* left, Value* right) {

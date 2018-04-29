@@ -93,18 +93,14 @@ void Interpreter::executeStep() {
             {
                 int index = inst.operand0.value();
                 string name = frame->getNameByIndex(index);
-                frame->opStackPush(globalFrame->getLocalVar(name));
+                frame->opStackPush(loadGlobal(name));
                 break;
             }
         case Operation::StoreGlobal:
             {
                 int index = inst.operand0.value();
-                vptr<Constant> value = dynamic_cast<Constant*>(frame->opStackPop());
-                if (value == NULL) {
-                    throw RuntimeException("expected Constant on the stack for StoreGlobal");
-                }
                 string name = frame->getNameByIndex(index);
-                globalFrame->setLocalVar(name, value);
+                storeGlobal(name, frame->opStackPop());
                 break;
             }
         case Operation::PushReference:
@@ -444,4 +440,16 @@ vptr<Value> Interpreter::add(vptr<Value> left, vptr<Value> right) {
         vptr<Value> ret = collector->allocate<Integer>(leftI + rightI);
         return ret;
     }
+};
+
+void Interpreter::storeGlobal(string name, vptr<Value> val) {
+    vptr<Constant> value = dynamic_cast<Constant*>(frame->opStackPop());
+    if (value == NULL) {
+        throw RuntimeException("expected Constant on the stack for StoreGlobal");
+    }
+    globalFrame->setLocalVar(name, value);
+};
+
+vptr<Value> Interpreter::loadGlobal(string name) {
+    return globalFrame->getLocalVar(name);
 };
