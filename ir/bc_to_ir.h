@@ -1,5 +1,5 @@
 /*
- * bc-to-ir.h
+ * bc_to_ir.h
  *
  * Defines an IRCompiler object which can convert bytecode instructions to
  * IR representation
