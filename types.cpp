@@ -4,7 +4,7 @@
  * Implements the Value, Constant, and Function types used in the interpreter
  */
 #include "types.h"
-#include "vm/frame.h"
+#include "frame.h"
 #include "gc/gc.h"
 
 

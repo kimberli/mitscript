@@ -1,7 +1,7 @@
 #include "gc.h"
 #include "../exception.h"
 #include "../types.h"
-#include "../vm/frame.h"
+#include "../frame.h"
 
 using namespace std;
 

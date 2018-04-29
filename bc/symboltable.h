@@ -12,8 +12,8 @@
 #include <set>
 #include <iterator>
 
-#include "../parser/Visitor.h" 
-#include "../parser/AST.h"
+#include "../Visitor.h" 
+#include "../AST.h"
 
 // have the eval return a list of symbol tables that correspond to all functions
 struct SymbolTable;
