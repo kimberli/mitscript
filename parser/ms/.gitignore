@@ -3,4 +3,4 @@ lexer.h
 parser.cpp
 parser.h
 parser.output
-mitscript-print
+ms-print
