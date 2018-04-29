@@ -1,10 +1,10 @@
 all: ir-compiler ir-interpreter
 
-ir-compiler: main.cpp 
-	g++ -g -std=c++1y main.cpp -o ir-compiler
+ir-compiler: main.cpp
+	g++ -g -std=c++1y main.cpp bc_to_ir.cpp -o ir-compiler
 
 ir-interpreter: main.cpp
 	g++ -g -std=c++1y main.cpp ir_to_asm.cpp -lstdc++ -Ix64asm -L ../asm/x64asm/lib -lx64asm -o ir-interpreter
 
-clean: 
+clean:
 	rm -f ir-compiler ir-interpreter
