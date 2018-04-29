@@ -10,6 +10,8 @@ vptr<Value> helper_add(vptr<Interpreter> interpreter, Value* left, Value* right)
 
 vptr<Value> helper_call(vptr<Interpreter> interpreter, vptr<Closure> closure); 
 
+void helper_gc(vptr<Interpreter> interpreter);
+
 void helper_assert_int(Value* v); 
 void helper_assert_str(Value* v); 
 void helper_assert_bool(Value* v); 

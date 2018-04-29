@@ -233,6 +233,9 @@ enum class IrOp {
     // temp0: index of value to cast
     // Result: stores closure in temp0
     CastClosure,
+
+    // Description: runs the garbage collector
+    GarbageCollect
 };
 
 

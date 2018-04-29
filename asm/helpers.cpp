@@ -17,6 +17,10 @@ vptr<Value> helper_call(vptr<Interpreter> interpreter, vptr<Closure> closure) {
     // this function needs to take in args and somehow put them in the right place. Maybe put them into a vector that could be used by the vm immediately or could be passed in the MachineCodeFunction from the example 
 }
 
+void helper_gc(vptr<Interpreter> interpreter) {
+    interpreter->collector->gc();
+}
+
 void helper_assert_int(Value* v) {
     v->cast<Integer>();
 }
