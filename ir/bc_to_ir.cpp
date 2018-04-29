@@ -14,10 +14,10 @@ using namespace std;
 
 IrCompiler::IrCompiler(vptr<Function> mainFunc, vptr<Interpreter> vmInterpreterPointer) {
     vmPointer = vmInterpreterPointer;
-	globalFunc = mainFunc;
+	func = mainFunc;
 };
 
-void IrCompiler::toIrFunc(vptr<Function> func) {
+IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 	IrInstList irInsts;
     for (int i = 0; i < func->instructions.size(); i++) {
 		Instruction inst = func->instructions[i];
@@ -160,14 +160,15 @@ void IrCompiler::toIrFunc(vptr<Function> func) {
 	    }
 	}
 	IrFunc irFunc = IrFunc(irInsts, func->constants_, func->parameter_count_, func->local_vars_.size());
-	irFuncs.push_back(irFunc);
-	for (vptr<Function> f: func->functions_) {
-		toIrFunc(f);
-	}
+	//irFuncs.push_back(irFunc);
+	//for (vptr<Function> f: func->functions_) {
+	//	toIrFunc(f);
+	//}
+    return irFunc;
 };
 
-IrProgram IrCompiler::toIr() {
-	irFuncs = vector<vptr<IrFunc>>();
-	toIrFunc(globalFunc);
-	return IrProgram(irFuncs);
+IrFunc IrCompiler::toIr() {
+	//irFuncs = vector<vptr<IrFunc>>();
+	return toIrFunc(func);
+	//return IrProgram(f);
 };

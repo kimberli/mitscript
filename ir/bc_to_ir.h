@@ -17,10 +17,10 @@ class IrCompiler {
     // class used to handle interpreter state
 private:
     vptr<Interpreter> vmPointer;
-    vptr<Function> globalFunc;  // root function
+    vptr<Function> func;  // root function
 	vector<vptr<IrFunc>> irFuncs;
 public:
     IrCompiler(vptr<Function> mainFunc, vptr<Interpreter> vmInterpreterPointer);
-	IrProgram toIr();
-	void toIrFunc(vptr<Function>);
+	IrFunc toIr();
+	IrFunc toIrFunc(vptr<Function>);
 };

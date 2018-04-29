@@ -269,7 +269,7 @@ struct IrFunc {
         local_count_(local_count_) {};
 };
 
-struct IrProgram {
-    vector<vptr<IrFunc>> functions;
-    IrProgram(vector<vptr<IrFunc>> functions): functions(functions) {};
-};
+//struct IrProgram {
+//    vector<vptr<IrFunc>> functions;
+//    IrProgram(vector<vptr<IrFunc>> functions): functions(functions) {};
+//};

@@ -443,7 +443,7 @@ vptr<Value> Interpreter::add(vptr<Value> left, vptr<Value> right) {
 };
 
 void Interpreter::storeGlobal(string name, vptr<Value> val) {
-    vptr<Constant> value = dynamic_cast<Constant*>(frame->opStackPop());
+    vptr<Constant> value = dynamic_cast<Constant*>(val);
     if (value == NULL) {
         throw RuntimeException("expected Constant on the stack for StoreGlobal");
     }

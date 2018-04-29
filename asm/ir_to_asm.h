@@ -16,13 +16,12 @@ private:
     x64asm::Assembler assm; 
     x64asm::Function asmFunc;
 
-    vptr<IrProgram> program;
-    vptr<IrFunc> curFunc;
+    vptr<IrFunc> func;
     int instructionIndex;
     bool finished;
 
     void executeStep();
 public: 
-    IrInterpreter(vptr<IrProgram> irProgram, vptr<Interpreter> vmInterpreterPointer); 
+    IrInterpreter(vptr<IrFunc> irFunction, vptr<Interpreter> vmInterpreterPointer); 
     void run(); // runs the program 
 };

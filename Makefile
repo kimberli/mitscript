@@ -27,7 +27,7 @@ bc-compiler: bc/* gc/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
 
 # MITScript -> bytecode -> IR -> vm
 interpreter: vm/* bc/* gc/* ir/* asm/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
-	g++ -g -std=c++1y -lstdc++ -Ix64asm -L -lx64asm vm/interpreter-main.cpp $(IR_SRC) $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) x64asm/lib -o mitscript
+	g++ -g -std=c++1y -lstdc++ -Ix64asm -L x64asm/lib -lx64asm vm/interpreter-main.cpp $(IR_SRC) $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) -o mitscript
 
 # reference interpreter (from a2)
 ref: $(REF)/ref-main.cpp $(REF)/* Visitor.h AST.h $(MS_PARSER_SRC)

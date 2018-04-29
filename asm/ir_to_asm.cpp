@@ -1,10 +1,9 @@
 #include "ir_to_asm.h"
 
-IrInterpreter::IrInterpreter(vptr<IrProgram> irProgram, vptr<Interpreter> vmInterpreterPointer) {
+IrInterpreter::IrInterpreter(vptr<IrFunc> irFunction, vptr<Interpreter> vmInterpreterPointer) {
     vmPointer = vmInterpreterPointer;
-    program = irProgram; 
+    func = irFunction; 
     // by convention, the first ir function is the main function
-    curFunc = program->functions.at(0); 
     instructionIndex = 0;
     finished = false;
 
@@ -27,7 +26,7 @@ void IrInterpreter::run() {
 
 void IrInterpreter::executeStep() {
 
-    IrInstruction inst = curFunc->instructions.at(instructionIndex);
+    IrInstruction inst = func->instructions.at(instructionIndex);
     switch(inst.operation) {
         case IrOp::LoadConst: 
             {
@@ -35,7 +34,7 @@ void IrInterpreter::executeStep() {
             }
     }
     instructionIndex += 1;
-    if (instructionIndex > curFunc->instructions.size()) {
+    if (instructionIndex > func->instructions.size()) {
         finished = true;
     }
 }
