@@ -4,9 +4,12 @@ BC_PARSER = parser/bc
 BC_PARSER_SRC = parser/bc/parser.cpp parser/bc/lexer.cpp
 BC_COMPILER_SRC = bc/bc-compiler.cpp bc/symboltable.cpp gc/gc.cpp frame.cpp types.cpp
 VM_SRC = vm/interpreter.cpp $(BC_COMPILER_SRC)
+IR_SRC = ir/bc_to_ir.cpp asm/ir_to_asm.cpp machine_code_func.cpp
 REF = ref
 
-clean: clean-ms-parser clean-bc-parser clean-ref clean-bc-compiler clean-vm
+default: interpreter
+
+clean: clean-ms-parser clean-bc-parser clean-ref clean-bc-compiler clean-interpreter
 
 ## EXECUTABLES
 
@@ -22,9 +25,9 @@ bc-print: $(BC_PARSER)/print_main.cpp $(BC_PARSER_SRC)
 bc-compiler: bc/* gc/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
 	g++ -g -std=c++1y bc/compiler-main.cpp $(BC_COMPILER_SRC) $(MS_PARSER_SRC) -o mitscriptc
 
-# MITScript -> bytecode -> vm
-vm: vm/* bc/* gc/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
-	g++ -g -std=c++1y vm/interpreter-main.cpp $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) -o mitscript
+# MITScript -> bytecode -> IR -> vm
+interpreter: vm/* bc/* gc/* ir/* asm/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
+	g++ -g -std=c++1y -lstdc++ -Ix64asm -L -lx64asm vm/interpreter-main.cpp $(IR_SRC) $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) x64asm/lib -o mitscript
 
 # reference interpreter (from a2)
 ref: $(REF)/ref-main.cpp $(REF)/* Visitor.h AST.h $(MS_PARSER_SRC)
@@ -59,5 +62,5 @@ clean-ref:
 clean-bc-compiler:
 	rm -f mitscriptc
 
-clean-vm:
+clean-interpreter:
 	rm -f mitscript

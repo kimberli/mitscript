@@ -3,10 +3,10 @@
  *
  * Convert bytecode to IR representation
  */
-#include "../vm/types.h"
 #include "../vm/interpreter.h"
+#include "../types.h"
+#include "../ir.h"
 #include "bc_to_ir.h"
-#include "ir.h"
 #include <algorithm>
 #include <stack>
 
@@ -24,7 +24,7 @@ void IrCompiler::toIrFunc(vptr<Function> func) {
 	    switch (inst.operation) {
 	        case Operation::LoadConst:
 	            {
-					irInsts.push_back(IrInstruction(LoadConst, inst->op0);
+					//irInsts.push_back(IrInstruction(Operation::LoadConst, inst->op0);
 	                break;
 	            }
 	        case Operation::LoadFunc:

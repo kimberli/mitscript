@@ -1,5 +1,5 @@
-#include "include/x64asm.h"
-#include "../vm/types.h"
+#include "x64asm/include/x64asm.h"
+#include "types.h"
 
 /**
 * This class is to help you get started with jumping into machine code from your VM interpreter

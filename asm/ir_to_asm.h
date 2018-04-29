@@ -1,9 +1,8 @@
 # pragma once 
 
-#include "ir.h"
+#include "../ir.h"
 #include "helpers.h"
 #include "include/x64asm.h"
-#include "machine_code_func.cpp"
 
 class Interpreter; 
 
