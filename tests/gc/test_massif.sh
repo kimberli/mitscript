@@ -1,0 +1,72 @@
+#!/bin/bash
+ROOT=$(git rev-parse --show-toplevel)
+LIMIT="4"  # in MB
+PROG="${ROOT}/mitscript -mem $LIMIT -s"
+TEST_FILE_EXT=".mit"
+THIS_FILE="test_massif.sh"
+
+TOTAL=0
+SUCCESS=0
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+regex="([\.0-9]+)\^"
+
+run_test() {
+    filename=$1
+    echo "==== TEST - $(basename $filename) ===="
+    TOTAL=$((TOTAL+1))
+    valgrind --tool=massif --log-file=tmp2.txt --massif-out-file=tmp.txt --threshold=100 $PROG $filename > /dev/null
+    ms_print --threshold=100 tmp.txt > graph.txt
+    if [[ $(cat graph.txt) =~ $regex ]]; then
+        mem_used="${BASH_REMATCH[1]}"
+    fi
+    sed -ne '7,30p' graph.txt
+    rm tmp.txt
+    rm tmp2.txt
+    rm graph.txt
+    echo -e "\nMax mem used: $mem_used (limit was $LIMIT MB)"
+    if (( $(echo "$mem_used < $LIMIT" | bc -l) )); then
+        SUCCESS=$((SUCCESS+1))
+        echo -e "${GREEN}Test Passed${NC}\n"
+        return 0
+    else
+        echo -e "${RED}Test Failed${NC}\n"
+        return 0
+    fi
+}
+
+if [ -n "$1" ]; then
+    if [ "$1" == "-h" ]; then
+        echo "Usage: $THIS_FILE (optional test name pattern)"
+        echo "running without a test name will run all tests"
+        echo "running with an argument will run all tests matching the argument's pattern"
+        exit 0
+    else
+        filepattern=$1
+        if ! [[ $filepattern =~ $TEST_FILE_EXT ]]; then
+            filepattern=$filepattern*$TEST_FILE_EXT
+        fi
+        echo "Testing all matches to $filepattern..."
+        count=0
+        for filename in *${filepattern}; do
+            count=$((count+1))
+        done
+        for filename in *${filepattern}; do
+            if [ ! -f $filename ]; then
+                echo "No files found"
+                exit 0
+            fi
+            run_test $filename
+        done
+    fi
+else
+    for filename in $DIR*$TEST_FILE_EXT; do
+        run_test $filename
+    done
+fi
+
+echo -e "\n\n----------"
+echo "Finished tests - ${SUCCESS}/${TOTAL} passed"
+
