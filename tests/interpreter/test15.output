@@ -1,6 +1,0 @@
-{age:32 getGrade:FUNCTION name:Alice student:true }
-{age:12 getGrade:FUNCTION name:Bob B. student:false }
-{age:-200 getGrade:FUNCTION name:Cathy student:false }
-counting 3 elements
-true
-total grades: 191

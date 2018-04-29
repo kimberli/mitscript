@@ -1,3 +1,0 @@
-print("hello");
-return "hi";
-print("don't print me");
