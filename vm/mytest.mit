@@ -1,9 +1,0 @@
-x = "I print first";
-
-f = fun(x, y) {
-    print(x);
-    print(y);
-    global x; 
-};
-
-f(x, "I print second");
