@@ -4,7 +4,7 @@ BC_PARSER = parser/bc
 BC_PARSER_SRC = parser/bc/parser.cpp parser/bc/lexer.cpp
 BC_COMPILER_SRC = bc/bc-compiler.cpp bc/symboltable.cpp gc/gc.cpp frame.cpp types.cpp
 VM_SRC = vm/interpreter.cpp $(BC_COMPILER_SRC)
-IR_SRC = ir/bc_to_ir.cpp asm/ir_to_asm.cpp
+IR_SRC = ir/bc_to_ir.cpp asm/ir_to_asm.cpp machine_code_func.cpp
 REF = ref
 
 default: interpreter
