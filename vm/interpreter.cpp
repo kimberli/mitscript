@@ -279,28 +279,8 @@ void Interpreter::executeStep() {
             {
                 auto right = frame->opStackPop();
                 auto left = frame->opStackPop();
-                // try adding strings if left or right is a string
-                vptr<String> leftStr = dynamic_cast<String*>(left);
-                if (leftStr != NULL) {
-                    frame->opStackPush(
-                        collector->allocate<String>(leftStr->value + right->toString()));
-                    break;
-                }
-                vptr<String> rightStr = dynamic_cast<String*>(right);
-                if (rightStr != NULL) {
-                    frame->opStackPush(
-                        collector->allocate<String>(left->toString() + rightStr->value));
-                    break;
-                }
-                // try adding integers if left is an int
-                vptr<Integer> leftInt = dynamic_cast<Integer*>(left);
-                if (leftInt != NULL) {
-                    int leftI = leftInt->value;
-                    int rightI = right->cast<Integer>()->value;
-                    frame->opStackPush(
-                        collector->allocate<Integer>(leftI + rightI));
-                    break;
-                }
+                vptr<Value> result = add(left, right);
+                frame->opStackPush(result);
                 break;
             }
         case Operation::Sub:
@@ -441,5 +421,27 @@ void Interpreter::run() {
     // runs program until termination (early return, end of statements)
     while (!finished) {
         executeStep();
+    }
+};
+
+vptr<Value> Interpreter::add(vptr<Value> left, vptr<Value> right) {
+    // try adding strings if left or right is a string
+    vptr<String> leftStr = dynamic_cast<String*>(left);
+    if (leftStr != NULL) {
+        vptr<Value> ret = collector->allocate<String>(leftStr->value + right->toString());
+        return ret;
+    }
+    vptr<String> rightStr = dynamic_cast<String*>(right);
+    if (rightStr != NULL) {
+        vptr<Value> ret = collector->allocate<String>(left->toString() + rightStr->value);
+        return ret;
+    }
+    // try adding integers if left is an int
+    vptr<Integer> leftInt = dynamic_cast<Integer*>(left);
+    if (leftInt != NULL) {
+        int leftI = leftInt->value;
+        int rightI = right->cast<Integer>()->value;
+        vptr<Value> ret = collector->allocate<Integer>(leftI + rightI);
+        return ret;
     }
 };

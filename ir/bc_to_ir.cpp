@@ -4,6 +4,7 @@
  * Convert bytecode to IR representation
  */
 #include "../vm/types.h"
+#include "../vm/interpreter.h"
 #include "bc_to_ir.h"
 #include "ir.h"
 #include <algorithm>
@@ -11,7 +12,8 @@
 
 using namespace std;
 
-IrCompiler::IrCompiler(vptr<Function> mainFunc) {
+IrCompiler::IrCompiler(vptr<Function> mainFunc, vptr<Interpreter> vmInterpreterPointer) {
+    vmPointer = vmInterpreterPointer;
 	globalFunc = mainFunc;
 };
 

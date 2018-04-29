@@ -1,14 +1,19 @@
 # pragma once 
 
 #include "ir.h"
+#include "helpers.h"
 #include "include/x64asm.h"
 #include "machine_code_func.cpp"
+
+class Interpreter; 
 
 using namespace std; 
 using namespace x64asm; 
 
 class IrInterpreter {
 private: 
+    vptr<Interpreter> vmPointer;
+
     x64asm::Assembler assm; 
     x64asm::Function asmFunc;
 
@@ -19,6 +24,6 @@ private:
 
     void executeStep();
 public: 
-    IrInterpreter(vptr<IrProgram> irProgram); 
+    IrInterpreter(vptr<IrProgram> irProgram, vptr<Interpreter> vmInterpreterPointer); 
     void run(); // runs the program 
 };

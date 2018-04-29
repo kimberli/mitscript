@@ -1,6 +1,7 @@
 #include "ir_to_asm.h"
 
-IrInterpreter::IrInterpreter(vptr<IrProgram> irProgram) {
+IrInterpreter::IrInterpreter(vptr<IrProgram> irProgram, vptr<Interpreter> vmInterpreterPointer) {
+    vmPointer = vmInterpreterPointer;
     program = irProgram; 
     // by convention, the first ir function is the main function
     curFunc = program->functions.at(0); 

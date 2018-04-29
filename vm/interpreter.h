@@ -24,4 +24,7 @@ private:
 public:
     Interpreter(vptr<Function> mainFunc, int maxmem);
     void run();  // executes all instructions until termination
+
+    // asm helpers
+    vptr<Value> add(vptr<Value> left, vptr<Value> right);
 };
