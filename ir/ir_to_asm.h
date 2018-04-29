@@ -1,6 +1,10 @@
 # pragma once 
 
 #include "ir.h"
+#include "include/x64asm.h"
+
+using namespace std; 
+using namespace x64asm; 
 
 class IrInterpreter {
 private: 
