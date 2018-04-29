@@ -9,14 +9,14 @@
  */
 #include <stdexcept>
 
-#include "../parser/parser.h"
-#include "../parser/lexer.h"
-#include "bc-parser.h"
-#include "bc-lexer.h"
+#include "../parser/ms/parser.h"
+#include "../parser/ms/lexer.h"
+#include "../parser/bc/parser.h"
+#include "../parser/bc/lexer.h"
 
-#include "compiler.h"
-#include "interpreter.h"
+#include "../bc/bc-compiler.h"
 #include "../gc/gc.h"
+#include "interpreter.h"
 
 #define MITSCRIPT 1
 #define BYTECODE 2

@@ -6,8 +6,8 @@
  */
 #pragma once
 
-#include "types.h"
-#include "frame.h"
+#include "../types.h"
+#include "../frame.h"
 #include <list>
 #include <iostream>
 

@@ -4,11 +4,11 @@
  * Implements an Interpreter object which can be used to step through
  * bytecode instructions and store interpreter state
  */
-#include "exception.h"
-#include "frame.h"
-#include "instructions.h"
+#include "../exception.h"
+#include "../frame.h"
+#include "../instructions.h"
+#include "../types.h"
 #include "interpreter.h"
-#include "types.h"
 #include <algorithm>
 #include <stack>
 
