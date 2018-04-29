@@ -9,8 +9,6 @@ struct IrFunc;
 typedef std::vector<IrInstruction> IrInstList;
 typedef std::experimental::optional<int32_t> optint_t;
 typedef std::vector<int32_t> TempList;
-typedef std::vector<IrFunc> IrProgram;
-
 
 enum class IrOp {
    // Description: Move a constant from constants array into temp var
@@ -206,4 +204,9 @@ struct IrFunc {
         constants_(constants_), 
         parameter_count_(parameter_count_), 
         local_count_(local_count_) {};
+};
+
+struct IrProgram {
+    vector<vptr<IrFunc>> functions; 
+    IrProgram(vector<vptr<IrFunc>> functions): functions(functions) {};
 };
