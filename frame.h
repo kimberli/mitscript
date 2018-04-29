@@ -8,7 +8,7 @@
 #pragma once
 
 #include "types.h"
-#include "../gc/gc.h"
+#include "gc/gc.h"
 #include <string>
 #include <map>
 #include <list>

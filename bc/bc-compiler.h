@@ -7,10 +7,10 @@
 
 # pragma once
 
-#include "../parser/AST.h"
-#include "../parser/Visitor.h"
-#include "instructions.h"
-#include "types.h"
+#include "../AST.h"
+#include "../Visitor.h"
+#include "../instructions.h"
+#include "../types.h"
 #include "symboltable.h"
 
 #include <memory>

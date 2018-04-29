@@ -1,5 +1,5 @@
 /*
- * bc-to-ir.cpp
+ * bc_to_ir.cpp
  *
  * Convert bytecode to IR representation
  */
@@ -24,6 +24,7 @@ void IrCompiler::toIrFunc(vptr<Function> func) {
 	    switch (inst.operation) {
 	        case Operation::LoadConst:
 	            {
+					irInsts.push_back(IrInstruction(LoadConst, inst->op0);
 	                break;
 	            }
 	        case Operation::LoadFunc:
@@ -158,8 +159,8 @@ void IrCompiler::toIrFunc(vptr<Function> func) {
 	            throw RuntimeException("should never get here - invalid instruction");
 	    }
 	}
-	// IrFunc irFunc = IrFunc(irInsts, constants, param_count, local_caunt);
-	// irFuncs.push_back(irFunc);
+	IrFunc irFunc = IrFunc(irInsts, func->constants_, func->parameter_count_, func->local_vars_.size());
+	irFuncs.push_back(irFunc);
 	for (vptr<Function> f: func->functions_) {
 		toIrFunc(f);
 	}
@@ -168,4 +169,5 @@ void IrCompiler::toIrFunc(vptr<Function> func) {
 IrProgram IrCompiler::toIr() {
 	irFuncs = vector<vptr<IrFunc>>();
 	toIrFunc(globalFunc);
+	return IrProgram(irFuncs);
 };

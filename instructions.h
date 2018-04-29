@@ -3,6 +3,8 @@
 #include <experimental/optional>
 #include <vector>
 
+using namespace std;
+
 enum class Operation
 {
     // Description: push a constant onto the operand stack

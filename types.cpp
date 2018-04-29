@@ -5,7 +5,7 @@
  */
 #include "types.h"
 #include "frame.h"
-#include "../gc/gc.h"
+#include "gc/gc.h"
 
 
 /* ValWrapper */

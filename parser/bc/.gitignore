@@ -1,4 +1,5 @@
-bc-lexer.cpp
-bc-lexer.h
-bc-parser.cpp
-bc-parser.h
+lexer.cpp
+lexer.h
+parser.cpp
+parser.h
+bc-print

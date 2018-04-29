@@ -11,7 +11,7 @@
 #undef YY_DECL
 #define YY_DECL int bclex (BCSTYPE* yylval, BCLTYPE * yylloc, yyscan_t yyscanner)
 #ifndef FLEX_SCANNER
-#include "bc-lexer.h"
+#include "lexer.h"
 #endif
 
 using namespace std;
@@ -33,8 +33,8 @@ using namespace std;
     }
 
 
-#include "instructions.h"
-#include "types.h"
+#include "../../instructions.h"
+#include "../../types.h"
 
 #include <cassert>
 
