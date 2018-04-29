@@ -58,7 +58,7 @@ void Interpreter::executeStep() {
     // executes a single instruction and updates state of interpreter
     fptr frame = frames.back();
     Instruction& inst = frame->getCurrInstruction();
-    int newOffset = 1;
+    newOffset = 1;
     LOG("executing instruction " + to_string(frame->instructionIndex));
     switch (inst.operation) {
         case Operation::LoadConst:
@@ -209,53 +209,8 @@ void Interpreter::executeStep() {
             {
                 // read num arguments, argument values, and closure off the stack
                 int numArgs = inst.operand0.value();
-                vector<vptr<Constant>> argsList;
-                for (int i = 0; i < numArgs; i++) {
-                    auto top = frame->opStackPop();
-                    vptr<Constant> value = dynamic_cast<Constant*>(top);
-                    if (value == NULL) {
-                        throw RuntimeException("expected Constant on the stack for Call");
-                    }
-                    argsList.push_back(value);
-                }
-				reverse(argsList.begin(), argsList.end());
-                vptr<Closure> clos = dynamic_cast<Closure*>(frame->opStackPop());
-                if (clos == NULL) {
-                    throw RuntimeException("expected Closure on operand stack for function call");
-                }
-                if (numArgs != clos->func->parameter_count_) {
-                    throw RuntimeException("expected " + to_string(clos->func->parameter_count_) + " arguments, got " + to_string(numArgs));
-                }
-                // process local refs and local vars
-                int numLocals = clos->func->local_vars_.size();
-                int numRefs = clos->func->free_vars_.size();
-                fptr newFrame = collector->allocate<Frame>(clos->func);
-                newFrame->collector = collector;
-				for (int i = 0; i < numLocals; i++) {
-                    if (i < numArgs) {
-                        string name = clos->func->local_vars_[i];
-                        newFrame->setLocalVar(name, argsList[i]);
-                    } else {
-                        string name = clos->func->local_vars_[i];
-                        newFrame->setLocalVar(name, collector->allocate<None>());
-                    }
-				}
-                for (int i = 0; i < numRefs; i++) {
-                    string name = clos->func->free_vars_[i];
-                    newFrame->setRefVar(name, clos->refs[i]);
-                }
-				vptr<NativeFunction> nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
-				if (nativeFunc != NULL) {
-					vptr<Constant> val = nativeFunc->evalNativeFunction(*newFrame, *collector);
-                    frame->opStackPush(val);
-				} else if (newFrame->numInstructions() != 0) {
-					newOffset = 0;
-                    frames.push_back(newFrame);
-				} else {
-        			vptr<Value> returnVal = collector->allocate<None>();
-					frame->opStackPush(returnVal);
-				}
-                break;
+                vptr<Value> retVal = callVM(frame, numArgs);
+                frame->opStackPush(retVal);
             }
         case Operation::Return:
             {
@@ -420,6 +375,61 @@ void Interpreter::run() {
     }
 };
 
+
+
+
+
+// Different call methods for vm execution and compilation to asm 
+vptr<Value> Interpreter::callVM(fptr frame, int numArgs) {
+    vector<vptr<Constant>> argsList;
+    for (int i = 0; i < numArgs; i++) {
+        auto top = frame->opStackPop();
+        vptr<Constant> value = dynamic_cast<Constant*>(top);
+        if (value == NULL) {
+            throw RuntimeException("expected Constant on the stack for Call");
+        }
+        argsList.push_back(value);
+    }
+    reverse(argsList.begin(), argsList.end());
+    vptr<Closure> clos = dynamic_cast<Closure*>(frame->opStackPop());
+    if (clos == NULL) {
+        throw RuntimeException("expected Closure on operand stack for function call");
+    }
+    if (numArgs != clos->func->parameter_count_) {
+        throw RuntimeException("expected " + to_string(clos->func->parameter_count_) + " arguments, got " + to_string(numArgs));
+    }
+    // process local refs and local vars
+    int numLocals = clos->func->local_vars_.size();
+    int numRefs = clos->func->free_vars_.size();
+    fptr newFrame = collector->allocate<Frame>(clos->func);
+    newFrame->collector = collector;
+    for (int i = 0; i < numLocals; i++) {
+        if (i < numArgs) {
+            string name = clos->func->local_vars_[i];
+            newFrame->setLocalVar(name, argsList[i]);
+        } else {
+            string name = clos->func->local_vars_[i];
+            newFrame->setLocalVar(name, collector->allocate<None>());
+        }
+    }
+    for (int i = 0; i < numRefs; i++) {
+        string name = clos->func->free_vars_[i];
+        newFrame->setRefVar(name, clos->refs[i]);
+    }
+    vptr<NativeFunction> nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
+    if (nativeFunc != NULL) {
+        vptr<Constant> val = nativeFunc->evalNativeFunction(*newFrame, *collector);
+        return val;
+    } else if (newFrame->numInstructions() != 0) {
+        newOffset = 0;
+        frames.push_back(newFrame);
+    } else {
+        vptr<Value> returnVal = collector->allocate<None>();
+        return returnVal;
+    }
+}
+
+// Asm helpers
 vptr<Value> Interpreter::add(vptr<Value> left, vptr<Value> right) {
     // try adding strings if left or right is a string
     vptr<String> leftStr = dynamic_cast<String*>(left);

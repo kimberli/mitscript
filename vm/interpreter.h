@@ -21,9 +21,14 @@ private:
     void executeStep();  // execute a single next instruction
     bool finished;  // true when the program has terminated
     CollectedHeap* collector;
+    int newOffset;
 public:
     Interpreter(vptr<Function> mainFunc, int maxmem);
     void run();  // executes all instructions until termination
+
+    // two different call methods for vm vs asm exeuction 
+    vptr<Value> callVM(fptr frame, int numArgs);
+    // TODO assembly compilation
 
     // asm helpers
     vptr<Value> add(vptr<Value> left, vptr<Value> right);
