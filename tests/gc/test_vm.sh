@@ -2,7 +2,7 @@
 ROOT=$(git rev-parse --show-toplevel)
 DIR=$ROOT/tests/gc/
 LIMIT="4"
-PROG="${ROOT}/vm/mitscript -mem $LIMIT -b"
+PROG="${ROOT}/mitscript -mem $LIMIT -b"
 TEST_FILE_EXT=".mitbc"
 TARGET_FILE_EXT=".output"
 THIS_FILE="test_vm.sh"

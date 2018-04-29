@@ -1,7 +1,0 @@
-f = fun() {
-    print("blah");
-};
-
-f();
-f();
-print(f());

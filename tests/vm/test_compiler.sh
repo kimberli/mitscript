@@ -1,7 +1,7 @@
 #!/bin/bash
 ROOT=$(git rev-parse --show-toplevel)
 DIR=$ROOT/tests/vm/
-PROG="${ROOT}/vm/mitscriptc"
+PROG="${ROOT}/mitscriptc"
 TEST_FILE_EXT=".mit"
 TARGET_FILE_EXT=".mitbc"
 THIS_FILE="test_compiler.sh"

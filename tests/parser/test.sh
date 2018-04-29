@@ -1,6 +1,6 @@
 #!/bin/bash
 ROOT=$(git rev-parse --show-toplevel)
-PARSER=$ROOT/parser/mitscript-print
+PARSER=$ROOT/parser/ms/ms-print
 TOTAL=0
 SUCCESS=0
 RED='\033[0;31m'
@@ -9,7 +9,7 @@ NC='\033[0m' # No Color
 
 for filename in $ROOT/tests/parser/input/*; do
     echo "==== TEST - $(basename $filename) ===="
-    cat $filename | $PARSER > tmp.out
+    $PARSER $filename > tmp.out
     TOTAL=$((TOTAL+1))
     if diff tmp.out $ROOT/tests/parser/output/$(basename $filename).out; then
         SUCCESS=$((SUCCESS+1))

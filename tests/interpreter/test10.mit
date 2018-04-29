@@ -1,5 +1,0 @@
-print("hi");
-if (true) {
-    return 1;
-}
-print("NO");
