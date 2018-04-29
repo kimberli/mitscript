@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-#include "../gc/gc.h"
+#include "gc/gc.h"
 
 #define LOG(msg) { if (false) std::cerr << msg << endl; }
 

@@ -7,7 +7,7 @@
  */
 #pragma once
 
-#include "types.h"
+#include "../types.h"
 #include "../gc/gc.h"
 #include <string>
 #include <map>

@@ -4,8 +4,8 @@
  * Implements the Value, Constant, and Function types used in the interpreter
  */
 #include "types.h"
-#include "frame.h"
-#include "../gc/gc.h"
+#include "vm/frame.h"
+#include "gc/gc.h"
 
 
 /* ValWrapper */

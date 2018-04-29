@@ -26,7 +26,7 @@ using namespace std;
     }
 
 
-#include "AST.h"
+#include "../../AST.h"
 // If you need additional header files, put them here.
 
 

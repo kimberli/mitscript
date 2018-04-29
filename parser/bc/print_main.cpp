@@ -1,8 +1,7 @@
-
-#include "bc-parser.h"
-#include "bc-lexer.h"
+#include "parser.h"
+#include "lexer.h"
+#include "printer.h"
 #include <iostream>
-#include "prettyprinter.h"
 
 using namespace std;
 

@@ -5,7 +5,7 @@
  * Function node) and prints it out in human-readable bytecode format
  */
 #include "assert.h"
-#include "types.h"
+#include "../../types.h"
 #include <memory>
 #include <iostream>
 

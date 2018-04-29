@@ -1,7 +1,7 @@
 #include "parser.h"
 #include "lexer.h"
-#include "AST.h"
-#include "PrettyPrinter.h"
+#include "printer.h"
+#include "../../AST.h"
 #include <iostream>
 
 using namespace std;

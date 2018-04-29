@@ -7,7 +7,7 @@
 %{
 
 #include <string>
-#include "bc-parser.h"
+#include "parser.h"
 using std::string;
 // You can put additional header files here.
 
