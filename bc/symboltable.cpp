@@ -3,8 +3,8 @@
  *
  * Implements a visitor that takes charge of figuring out scoping descriptors
  */
+#include "../exception.h"
 #include "symboltable.h" 
-#include "exception.h"
 
 stvec_t SymbolTableBuilder::eval(Expression& exp) {
     // create global symbol table

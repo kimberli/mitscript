@@ -1,5 +1,5 @@
 #include "frame.h"
-#include "../gc/gc.h"
+#include "gc/gc.h"
 
 #include <algorithm>
 

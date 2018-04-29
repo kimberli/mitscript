@@ -4,7 +4,7 @@
  * Implements a visitor that visits AST nodes generated in MITScript parsing
  * and outputs a root Function
  */
-#include "compiler.h"
+#include "bc-compiler.h"
 
 funcptr_t BytecodeCompiler::getFunction(AST_node& expr) {
     expr.accept(*this);
