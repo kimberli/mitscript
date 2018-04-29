@@ -15,6 +15,12 @@ vptr<Value> helper_add(vptr<Interpreter> interpreter, Value* left, Value* right)
 
 vptr<Value> helper_call(vptr<Interpreter> interpreter, vptr<Closure> closure) {
     // this function needs to take in args and somehow put them in the right place. Maybe put them into a vector that could be used by the vm immediately or could be passed in the MachineCodeFunction from the example 
+    // this function takes the args from the assembly stack and puts them in a vector 
+    // and then 
+    //
+    //
+    //
+    // So the helper in the vm should take A) a closure and B) a list of args.
 }
 
 void helper_gc(vptr<Interpreter> interpreter) {

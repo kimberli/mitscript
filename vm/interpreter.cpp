@@ -390,7 +390,6 @@ void Interpreter::run() {
 vptr<Value> Interpreter::call(vector<vptr<Constant>> argsList, vptr<Value> closure) {
     // this function takes care of figuring out whether to dispatch to 
     // the vm or assembly 
-    //
     vptr<Closure> clos = dynamic_cast<Closure*>(closure);
     if (clos == NULL) {
         throw RuntimeException("expected Closure on operand stack for function call");
