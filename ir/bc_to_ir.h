@@ -9,6 +9,7 @@
 #include "ir.h"
 #include <list>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -16,8 +17,9 @@ class IrCompiler {
     // class used to handle interpreter state
 private:
     vptr<Function> globalFunc;  // root function
+	vector<vptr<IrFunc>> irFuncs;
 public:
     IrCompiler(vptr<Function> mainFunc);
 	IrProgram toIr();
-	IrFunc toIrFunc();
+	void toIrFunc(vptr<Function>);
 };
