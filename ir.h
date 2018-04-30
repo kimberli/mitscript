@@ -11,6 +11,10 @@ typedef std::experimental::optional<int32_t> optint_t;
 typedef std::experimental::optional<std::string> optstr_t;
 typedef std::vector<int32_t> TempList;
 
+struct Temp {
+    int stackOffset;
+};
+
 enum class IrOp {
     // Description: Move a constant from constants array into temp var
     // op0: index into the constants array of the constant to move
@@ -272,7 +276,3 @@ struct IrFunc {
         local_count_(local_count_) {};
 };
 
-//struct IrProgram {
-//    vector<vptr<IrFunc>> functions;
-//    IrProgram(vector<vptr<IrFunc>> functions): functions(functions) {};
-//};

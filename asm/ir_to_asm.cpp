@@ -23,9 +23,15 @@ void IrInterpreter::run() {
     asmFunc.call<Value*>();
 }
 
-//IrInterpreter::loadTemp(int tmpIdx, R64 reg) {
-//    
-//}
+void IrInterpreter::storeTemp(R64 reg, int temp) {
+    // right now, put everything on the heap 
+    // find the temp's mem addres and move the reg val there 
+    // record 
+}
+
+void IrInterpreter::loadTemp(R64 reg, int temp) {
+    
+}
 
 void IrInterpreter::executeStep() {
     const static R64 argRegs[] = {rdi, rsi, rdx, rcx, r8, r9};
@@ -39,6 +45,8 @@ void IrInterpreter::executeStep() {
             }
         case IrOp::LoadGlobal: 
             {
+                // mov DEST, SRC
+
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], Imm64{vmPointer});
                 // load the string pointer into the second arg
@@ -48,6 +56,12 @@ void IrInterpreter::executeStep() {
                 void* fn = (void*) &(helper_load_global);
                 assm.mov(r12, Imm64{(uint64_t)fn});
                 assm.call(r12);
+                // the result is stored in rax
+                // put the return val in the temp
+                // storeTemp(register, tempIdx)
+                storeTemp(rax, inst.temp0.value());
+                // TODO: update temp metadata
+
                 break;
             }
         case IrOp::StoreGlobal:
