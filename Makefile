@@ -8,6 +8,7 @@ BC_PARSER_SRC = parser/bc/parser.cpp parser/bc/lexer.cpp
 BC_COMPILER_SRC = bc/bc-compiler.cpp bc/symboltable.cpp gc/gc.cpp frame.cpp types.cpp
 VM_SRC = vm/interpreter.cpp $(BC_COMPILER_SRC)
 IR_SRC = ir/bc_to_ir.cpp asm/ir_to_asm.cpp asm/helpers.cpp machine_code_func.cpp
+ROOT_FILES = *.h *.cpp
 REF = ref
 
 default: interpreter
@@ -28,12 +29,12 @@ $(BC_PARSER)/bc-print: $(BC_PARSER)/print_main.cpp $(BC_PARSER_SRC)
 
 # MITScript -> bytecode compiler
 bc-compiler: mitscriptc
-mitscriptc: bc/* gc/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
+mitscriptc: bc/* gc/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp $(ROOT_FILES)
 	$(CC) $(CC_FLAGS) bc/compiler-main.cpp $(BC_COMPILER_SRC) $(MS_PARSER_SRC) -o $@
 
 # MITScript -> bytecode -> IR -> vm
 interpreter: mitscript
-mitscript: bc/* gc/* ir/* asm/* vm/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
+mitscript: bc/* gc/* ir/* asm/* vm/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp $(ROOT_FILES)
 	$(CC) $(CC_FLAGS) vm/interpreter-main.cpp $(IR_SRC) $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) -lstdc++ -Ix64asm -L x64asm/lib -lx64asm -o $@
 	
 # reference interpreter (from a2)

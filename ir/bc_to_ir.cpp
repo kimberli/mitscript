@@ -82,8 +82,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					Temp field = popTemp();
 					pushTemp(currentTemp);
 					TempList instTemps{currentTemp, record, field};
-					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record);
-					pushInstruction(IrInstruction(IrOp::AssertString, inst.operand0, field);
+					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record));
+					pushInstruction(IrInstruction(IrOp::AssertString, inst.operand0, field));
 					pushInstruction(IrInstruction(IrOp::RecordLoad, inst.operand0, instTemps));
 					currentTemp++;
 	                break;
@@ -94,8 +94,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					Temp field = popTemp();
 					Temp value = popTemp();
 					TempList instTemps{record, field, value};
-					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record);
-					pushInstruction(IrInstruction(IrOp::AssertString, inst.operand0, field);
+					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record));
+					pushInstruction(IrInstruction(IrOp::AssertString, inst.operand0, field));
 					pushInstruction(IrInstruction(IrOp::RecordLoad, inst.operand0, instTemps));
 	                break;
 	            }
@@ -104,9 +104,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					Temp record = popTemp();
 					Temp index = popTemp();
 					pushTemp(currentTemp);
-					TempList instTemps{currentTemp, record, field};
-					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record);
-					pushInstruction(IrInstruction(IrOp::CastString, inst.operand0, field);
+					TempList instTemps{currentTemp, record, index};
+					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record));
+					pushInstruction(IrInstruction(IrOp::CastString, inst.operand0, index));
 					pushInstruction(IrInstruction(IrOp::RecordLoad, inst.operand0, instTemps));
 					currentTemp++;
 	                break;
@@ -116,9 +116,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					Temp record = popTemp();
 					Temp index = popTemp();
 					Temp value = popTemp();
-					TempList instTemps{record, field, value};
-					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record);
-					pushInstruction(IrInstruction(IrOp::CastString, inst.operand0, field);
+					TempList instTemps{record, index, value};
+					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record));
+					pushInstruction(IrInstruction(IrOp::CastString, inst.operand0, index));
 					pushInstruction(IrInstruction(IrOp::RecordLoad, inst.operand0, instTemps));
 	                break;
 	            }
