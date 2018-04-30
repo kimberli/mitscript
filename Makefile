@@ -1,3 +1,6 @@
+CC = g++
+CC_FLAGS = -O2 -g -std=c++1y
+
 MS_PARSER = parser/ms
 MS_PARSER_SRC = parser/ms/parser.cpp parser/ms/lexer.cpp
 BC_PARSER = parser/bc
@@ -15,23 +18,23 @@ clean: clean-ms-parser clean-bc-parser clean-ref clean-bc-compiler clean-interpr
 
 # make the MITScript pretty printer
 ms-print: $(MS_PARSER)/print_main.cpp $(MS_PARSER_SRC)
-	g++ -O2 -g -std=c++1y $(MS_PARSER)/print_main.cpp $(MS_PARSER_SRC) -o $(MS_PARSER)/ms-print
+	$(CC) $(CC_FLAGS) $(MS_PARSER)/print_main.cpp $(MS_PARSER_SRC) -o $(MS_PARSER)/ms-print
 
 # make the bytecode pretty printer
 bc-print: $(BC_PARSER)/print_main.cpp $(BC_PARSER_SRC)
-	g++ -O2 -g -std=c++1y $(BC_PARSER)/print_main.cpp $(BC_PARSER_SRC) types.cpp frame.cpp gc/gc.cpp -o $(BC_PARSER)/bc-print
+	$(CC) $(CC_FLAGS) $(BC_PARSER)/print_main.cpp $(BC_PARSER_SRC) types.cpp frame.cpp gc/gc.cpp -o $(BC_PARSER)/bc-print
 
 # MITScript -> bytecode compiler
 bc-compiler: bc/* gc/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
-	g++ -g -std=c++1y bc/compiler-main.cpp $(BC_COMPILER_SRC) $(MS_PARSER_SRC) -o mitscriptc
+	$(CC) $(CC_FLAGS) bc/compiler-main.cpp $(BC_COMPILER_SRC) $(MS_PARSER_SRC) -o mitscriptc
 
 # MITScript -> bytecode -> IR -> vm
 interpreter: vm/* bc/* gc/* ir/* asm/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
-	g++ -g -std=c++1y -lstdc++ -Ix64asm -L x64asm/lib -lx64asm vm/interpreter-main.cpp $(IR_SRC) $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) -o mitscript
+	$(CC) $(CC_FLAGS) -lstdc++ -Ix64asm -L x64asm/lib -lx64asm vm/interpreter-main.cpp $(IR_SRC) $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) -o mitscript
 
 # reference interpreter (from a2)
 ref: $(REF)/ref-main.cpp $(REF)/* Visitor.h AST.h $(MS_PARSER_SRC)
-	g++ -O2 -g -std=c++1y $(REF)/*.cpp $(MS_PARSER_SRC) -o ref/mitscript
+	$(CC) $(CC_FLAGS) $(REF)/*.cpp $(MS_PARSER_SRC) -o ref/mitscript
 
 
 ## TESTS

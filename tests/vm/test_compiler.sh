@@ -5,6 +5,10 @@ PROG="${ROOT}/mitscriptc"
 TEST_FILE_EXT=".mit"
 TARGET_FILE_EXT=".mitbc"
 THIS_FILE="test_compiler.sh"
+DIFF=$DIR/diff.txt
+TEST_OUT=$DIR/tmp.out
+
+VERBOSE=false
 
 TOTAL=0
 SUCCESS=0
@@ -25,28 +29,34 @@ run_test() {
         TARGET_FILE_EXT=".mitbc"
     fi
 
-    echo "==== TEST - $(basename $filename) ===="
     TOTAL=$((TOTAL+1))
-    $PROG $filename > tmp.out
+    $PROG $filename > $TEST_OUT
     if [[ $? -eq 139 ]]; then
-        echo -e "${RED}Test Failed${NC}\n"
+        echo -e "TEST $TOTAL - $(basename $filename): ${RED}Failed${NC}"
         return 0
     fi
     target=$DIR$(basename $filename $TEST_FILE_EXT)$TARGET_FILE_EXT
     if [ ! -e $target ]; then
-        echo -e "Target file $target not found"
-        echo -e "${RED}Test Failed${NC}\n"
-        echo "GOT:"
-        cat tmp.out
-        echo ""
+        echo -e "TEST $TOTAL - $(basename $filename): ${RED}Failed${NC} (target file not found)"
+        if $VERBOSE; then
+            echo "GOT:"
+            cat $TEST_OUT
+            echo ""
+        fi
         return 1
     else
-        if diff tmp.out $target; then
+        diff $TEST_OUT $target > $DIFF
+        if [ ! -s $DIFF ]; then
             SUCCESS=$((SUCCESS+1))
-            echo -e "${GREEN}Test Passed${NC}\n"
+            if $VERBOSE; then
+                echo -e "TEST $TOTAL - $(basename $filename): ${GREEN}Passed${NC}"
+            fi
             return 0
         else
-            echo -e "${RED}Test Failed${NC}\n"
+            if $VERBOSE; then
+                cat $DIFF
+            fi
+            echo -e "TEST $TOTAL - $(basename $filename): ${RED}Failed${NC}"
             return 1
         fi
     fi
@@ -65,26 +75,26 @@ if [ -n "$1" ]; then
         fi
         echo "Testing all matches to $filepattern..."
         count=0
-        for filename in *${filepattern}; do
+        for filename in $DIR/*${filepattern}; do
             count=$((count+1))
         done
-        for filename in *${filepattern}; do
+        for filename in $DIR/*${filepattern}; do
             if [ ! -f $filename ]; then
                 echo "No files found"
                 exit 0
             fi
             if run_test $filename; then
-                rm tmp.out
+                rm $TEST_OUT
             else
-                if [ $count == 1 ]; then
+                if $VERBOSE; then
                     echo -ne "${BLUE}IMPORTANT: if you believe the interpreter is in fact behaving correctly, do you want to update the ${TARGET_FILE_EXT} file? (Y/n):${NC} "
                     read resp
                     if [ "$resp" == "Y" ]; then
                         new_file=$DIR$(basename $filename $TEST_FILE_EXT)$TARGET_FILE_EXT
                         echo -e "\t${BLUE}writing new output to $new_file${NC}"
-                        mv tmp.out $new_file
+                        mv $TEST_OUT $new_file
                     else
-                        rm tmp.out
+                        rm $TEST_OUT
                     fi
                 fi
             fi
@@ -94,8 +104,8 @@ else
     for filename in $DIR*$TEST_FILE_EXT; do
         run_test $filename
     done
-    rm tmp.out
+    rm $TEST_OUT
 fi
 
-echo -e "\n\n----------"
-echo "Finished tests - ${SUCCESS}/${TOTAL} passed"
+echo -e "\n----------"
+echo "Finished $THIS_FILE - ${SUCCESS}/${TOTAL} passed"
