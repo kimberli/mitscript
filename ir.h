@@ -32,226 +32,217 @@ enum class IrOp {
 
     // Description: Load a local into a temp
     // op0: index of the local to load
-    // temp0: index of the temp to store into
+    // temp0: temp index to store into
     // Result: temp0 stores the desired local
     LoadLocal,
 
-    // Description: Store a value from a temp into a local
-    // op0: index of the local to store into
-    // temp0: index of the temp containing the value to store
-    // Result: the local at index operand2 contains the value stored by operand1
-    StoreLocal,
-
     // Description: Load a global into a temp
+    // op0: N/A
     // global: name of the global to load
-    // temp0: index of the temp to load into
-    // Result: temp0 contains the global var at index operand1
+    // temp0: temp index to store into
+    // Result: temp at temp0 contains the global var indicated by its name
     LoadGlobal,
 
+    // Description: Store a value from a temp into a local
+    // op0: index of the local to store into
+    // temp0: temp index containing the value to store
+    // Result: the local at index op0 contains the value stored by the temp at temp0
+    StoreLocal,
+
     // Description: Store a value from a temp into a global
-    // temp0: index of the temp containing the value to store
+    // op0: N/A
     // global: name of the global to store into
-    // Result: the global at index operand2 contains the value stored by operand1
+    // temp0: temp index containing the value to store
+    // Result: the global named contains the value stored by temp0
     StoreGlobal,
 
     // Description: Allocate a record and store it to a temp
     // op0: N/A
-    // temp0: the index of the temp to store the record into
-    // Result: the temp0 contains a new empty record
+    // temp0: temp index to allocate the record in
+    // Result: temp at temp0 contains a new empty record
     AllocRecord,
 
-    // Description: Load a field from a record and store it into a temp
+    // Description: Load a value from a record and store it into a temp
     // op0: N/A
-    // temp0: the index of the temp to store the field value into
-    // temp1: index of the temp containing the record to look in
-    // temp2: index of the temp containing the field name
-    // Result: the temp0 contains the value of the field
-    FieldLoad,
+    // temp0: temp index to store the field's value into
+    // temp1: temp index containing the record to look in (must be record)
+    // temp2: temp index containing the field name (must be string)
+    // Result: temp at temp0 contains the value of the field
+    RecordLoad,
 
-    // Description: Store a value into the field of a record
-    // op0: N/A
-    // temp0: the index of the temp containing the record to store into
-    // temp1: index of the temp containing the field name
-    // temp2: index of the temp containing the field value
-    // Result: the temp0 record now has the new field set
-    FieldStore,
-
-    // Description: Load an index from a record and store it into a temp
-    // temp0: the index of the temp to store the index value into
-    // temp1: index of the temp containing the record to look in
-    // temp2: index of the temp containing the index
-    // Result: the temp0 contains the value of the index
-    IndexLoad,
-
-    // Description: Store a value into the index of a record
-    // temp0: the index of the temp containing the record to store into
-    // temp1: index of the temp containing the index
-    // temp2: index of the temp containing the index's new value
-    // Result: the temp0 record now has the new index set
-    IndexStore,
+    // Description: Store a value into a record's field
+    // temp0: temp index containing the record to store into (must be record)
+    // temp1: temp index containing the field name (must be string)
+    // temp2: temp index containing the field's new value
+    // Result: temp at temp0 points to record with the new value set
+    RecordStore,
 
     // Description: Allocate a new closure
-    // op0: Number of free vars passed to the closure
-    // temp0: index of temp containing the new closure
-    // temps 1-m: Contains references to the free vars we are going to pass
-    // Result: the temp0 now contains the new closure
+    // op0: number of free vars passed to the closure
+    // temp0: temp index containing the new closure
+    // temps 1-m: temps containing references to the free vars we are going to pass
+    // Result: temp at temp0 now contains the new closure
     AllocClosure,
 
     // Description: call a closure
-    // op0: Number of args passed to the function
-    // temp0: the index of the temp to contain the return val
-    // temp1: index of temp storing the closure to call
-    // temp 2-m: Contains values of the args we are passing
-    // Result: the temp0 contains the result of calling the function
+    // op0: number of args passed to the function
+    // temp0: temp index that will contain the return val
+    // temp1: temp index containing the closure to call (must be closure)
+    // temp 2-m: temps containing values of the args we are passing
+    // Result: temp at temp0 contains the result of calling the function
     Call,
 
     // Description: return from a function
-    // temp0: index of temp containing return value
+    // op0: N/A
+    // temp0: temp index containing return value
     // Result: return from the function
     Return,
 
-    // Description: add the constants in two temps
-    // temp0: temp index to store the value in
+    // Description: add the constants in two temps (semantics from A2)
+    // op0: N/A
+    // temp0: temp index to store the result value in
     // temp1: temp index holding right value
     // temp2: temp index holding left value
-    // Result: temp0 stores the result of doing operand1 + operand2
+    // Result: temp at temp0 stores the result of doing temp2 + temp1
     Add,
 
     // Description: performs arithmetic operation on two temps
-    // temp0: temp index to store the value in
-    // temp1: temp index holding right value
-    // temp2: temp index holding left value
-    // Result: temp0 stores the result of doing op(operand2, operand1)
+    // op0: N/A
+    // temp0: temp index to store the result value in
+    // temp1: temp index holding right value (must be int)
+    // temp2: temp index holding left value (must be int)
+    // Result: temp at temp0 stores the result of doing op(temp2, temp1)
     Sub,
     Mul,
     Div,
 
     // Description: computes unary minus
-    // temp0: temp index to store the result in
-    // temp1: value to negate
-    // Result: temp0 stores -operand1
+    // op0: N/A
+    // temp0: temp index to store the result value in
+    // temp1: value to negate (must be int)
+    // Result: temp at temp0 stores -temp1
     Neg,
 
     // Description: computes a comparison on ints
-    // temp1: right value
-    // temp2: left value
-    // temp0: temp index to store the result in
-    // Result: temp0 stores bool indicating result of comparison
+    // op0: N/A
+    // temp0: temp index to store the result value in
+    // temp1: temp index holding right value (must be int)
+    // temp2: temp index holding left value (must be int)
+    // Result: temp at temp0 stores bool indicating result of comparison
     Gt,
     Geq,
 
     // Description: computes an equality between two vals (semantics from A2)
-    // temp1: right value
-    // temp2: left value
-    // temp0: temp index to store the result in
-    // Result: temp0 stores bool eq(operand2, operand1)
+    // op0: N/A
+    // temp0: temp index to store the result value in
+    // temp1: temp index holding right value
+    // temp2: temp index holding left value
+    // Result: temp at temp0 stores bool eq(temp2, temp1)
     Eq,
 
-    // Description: computes a boolean operation (semantics from A2)
-    // temp1: right value
-    // temp2: left value
-    // temp0: temp index to store the result in
-    // Result: temp0 stores bool op(operand1, operand2)
+    // Description: computes a boolean operation
+    // op0: N/A
+    // temp0: temp index to store the result value in
+    // temp1: temp index holding right value (must be bool)
+    // temp2: temp index holding left value (must be bool)
+    // Result: temp at temp0 stores bool op(temp2, temp1)
     And,
     Or,
 
-    // Description: computes local negation
-    // temp1: value to negate
-    // temp0: temp index to store the result in
-    // Result: temp0 stores !operand1
+    // Description: computes boolean negation
+    // op0: N/A
+    // temp0: temp index to store the result value in
+    // temp1: temp index holding value to negate (must be bool)
+    // Result: temp at temp0 stores !operand1
     Not,
 
     // Description: move to a given label
     // op0: index of the label to jump to; should be unique
-    // Result: execution transfers to the label
+    // Result: transfers execution to the label
     Goto,
 
     // Description: move to a given label
-    // op0: index of the label to jump to; should be unique
-    // Result: execution transfers to the label
+    // op0: index of the label to jump to conditionally; should be unique
+    // temp0: temp index holding value to check (must be bool)
+    // Result: transfers execution to the label if temp at temp0 is true
     If,
 
     // Description: duplicate the value in a temp
-    // temp1: index of temp to dup
-    // temp0: index to dup temp into
+    // op0: N/A
+    // temp0: temp index to dup temp1's value into
+    // temp1: temp index of value to dup
     // Result: value is in temp1 and temp0
     Dup,
 
     // Description: swap the values in two temps
-    // temp0: index of one temp to swap
-    // temp1: index of the other temp to swap
-    // Result: values in the temps are swapped
+    // op0: N/A
+    // temp0: temp index of one value to swap
+    // temp1: temp index of other value to swap
+    // Result: swaps values in the temps
     Swap,
 
     // Description: pops and discards the top of the stack
-    // Result: top element eliminated from stack
+    // op0: N/A
+    // Result: eliminates top element from stack
     Pop,
 
-    // Description: asserts that the first temp is an integer
-    // temp0: index of value to check
-    // Result: throw RuntimeError if the temp is not an integer
+    // Description: asserts that a temp is an integer
+    // op0: N/A
+    // temp0: temp index of value to check
+    // Result: throws RuntimeError if the temp is not an integer
     AssertInteger,
 
-    // Description: asserts that the first temp is a bool
-    // temp0: index of value to check
-    // Result: throw RuntimeError if the temp is not a bool
+    // Description: asserts that a temp is a bool
+    // op0: N/A
+    // temp0: temp index of value to check
+    // Result: throws RuntimeError if the temp is not a bool
     AssertBool,
 
-    // Description: asserts that the first temp is a string
-    // temp0: index of value to check
-    // Result: throw RuntimeError if the temp is not a string
+    // Description: asserts that a temp is a string
+    // op0: N/A
+    // temp0: temp index of value to check
+    // Result: throws RuntimeError if the temp is not a string
     AssertString,
 
-    // Description: asserts that the first temp is an record
-    // temp0: index of value to check
-    // Result: throw RuntimeError if the temp is not an record
+    // Description: asserts that a temp is an record
+    // op0: N/A
+    // temp0: temp index of value to check
+    // Result: throws RuntimeError if the temp is not an record
     AssertRecord,
 
-    // Description: asserts that the first temp is a function
-    // temp0: index of value to check
-    // Result: throw RuntimeError if the temp is not a function
+    // Description: asserts that a temp is a function
+    // op0: N/A
+    // temp0: temp index of value to check
+    // Result: throws RuntimeError if the temp is not a function
     AssertFunction,
 
-    // Description: asserts that the first temp is a closure
-    // temp0: index of value to check
-    // Result: throw RuntimeError if the temp is not a closure
+    // Description: asserts that a temp is a closure
+    // op0: N/A
+    // temp0: temp index of value to check
+    // Result: throws RuntimeError if the temp is not a closure
     AssertClosure,
 
-    // Description: casts the first temp to integer
-    // temp0: index of value to cast
-    // temp0: temp index to store result of cast in
-    // Result: stores integer in temp0
+    // Description: casts a temp to integer
+    // op0: N/A
+    // temp0: temp index of value to cast
+    // Result: stores int(temp0) in temp0, throws IllegalCastException if not possible
     CastInteger,
 
-    // Description: casts the first temp to bool
-    // temp0: index of value to cast
-    // temp0: temp index to store result of cast in
-    // Result: stores bool in temp0
+    // Description: casts a temp to bool
+    // op0: N/A
+    // temp0: temp index of value to cast
+    // Result: stores bool(temp0) in temp0, throws IllegalCastException if not possible
     CastBool,
 
-    // Description: casts the first temp to string
-    // temp0: index of value to cast
-    // temp0: temp index to store result of cast in
-    // Result: stores string in temp0
+    // Description: casts a temp to string
+    // op0: N/A
+    // temp0: temp index of value to cast
+    // Result: stores str(temp0) in temp0, throws IllegalCastException if not possible
     CastString,
-
-    // Description: casts the first temp to record
-    // temp0: index of value to cast
-    // temp0: temp index to store result of cast in
-    // Result: stores record in temp0
-    CastRecord,
-
-    // Description: casts the first temp to function
-    // temp0: index of value to cast
-    // temp0: temp index to store result of cast in
-    // Result: stores function in temp0
-    CastFunction,
-
-    // Description: casts the first temp to closure
-    // temp0: index of value to cast
-    // temp0: temp index to store result of cast in
-    // Result: stores closure in temp0
-    CastClosure,
+    
+    // Description: add a label at this point in the generated asm
+    // op0: index of label to add
+    // Result: adds label_op0 to this point in asm execution
 
     // Description: runs the garbage collector
     GarbageCollect
@@ -266,12 +257,10 @@ struct IrInstruction {
     IrOp op;
     optint_t op0;
     optstr_t global;
-    optstr_t label;
     TempList& tempIndices;
-    IrInstruction(const IrOp op, optint_t op0, optstr_t global, optstr_t label, TempList& tempIndices):
+    IrInstruction(const IrOp op, optint_t op0, optstr_t global, TempList& tempIndices):
         op(op),
         global(global),
-        label(label),
         op0(op0),
         tempIndices(tempIndices) {};
     IrInstruction(const IrOp op, optint_t op0, TempList& tempIndices):
@@ -279,7 +268,6 @@ struct IrInstruction {
         op0(op0),
         tempIndices(tempIndices) {
             global = optstr_t();
-            label = optstr_t();
         };
 };
 
@@ -298,4 +286,3 @@ struct IrFunc {
         parameter_count_(parameter_count_),
         local_count_(local_count_) {};
 };
-
