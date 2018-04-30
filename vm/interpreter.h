@@ -20,8 +20,8 @@ private:
     list<fptr> frames;  // stack of frames
     void executeStep();  // execute a single next instruction
     bool finished;  // true when the program has terminated
-    CollectedHeap* collector;
 public:
+    CollectedHeap* collector;
     Interpreter(vptr<Function> mainFunc, int maxmem);
     void run();  // executes all instructions until termination
 

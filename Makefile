@@ -4,7 +4,7 @@ BC_PARSER = parser/bc
 BC_PARSER_SRC = parser/bc/parser.cpp parser/bc/lexer.cpp
 BC_COMPILER_SRC = bc/bc-compiler.cpp bc/symboltable.cpp gc/gc.cpp frame.cpp types.cpp
 VM_SRC = vm/interpreter.cpp $(BC_COMPILER_SRC)
-IR_SRC = ir/bc_to_ir.cpp asm/ir_to_asm.cpp machine_code_func.cpp
+IR_SRC = ir/bc_to_ir.cpp asm/ir_to_asm.cpp asm/helpers.cpp machine_code_func.cpp
 REF = ref
 
 default: interpreter
@@ -27,7 +27,7 @@ bc-compiler: bc/* gc/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
 
 # MITScript -> bytecode -> IR -> vm
 interpreter: vm/* bc/* gc/* ir/* asm/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
-	g++ -g -std=c++1y -lstdc++ -Ix64asm -L x64asm/lib -lx64asm vm/interpreter-main.cpp $(IR_SRC) $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) -o mitscript
+	g++ -g vm/interpreter-main.cpp $(IR_SRC) $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) -std=c++1y -lstdc++ -Ix64asm -L x64asm/lib -lx64asm -o mitscript
 
 # reference interpreter (from a2)
 ref: $(REF)/ref-main.cpp $(REF)/* Visitor.h AST.h $(MS_PARSER_SRC)

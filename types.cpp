@@ -27,6 +27,7 @@ void ValWrapper::follow(CollectedHeap& heap){
 }
 
 /* Function */
+const string Function::typeS = "Function";
 string Function::toString() {
     throw RuntimeException("can't cast Function to a String (try Closure instead)");
 }
