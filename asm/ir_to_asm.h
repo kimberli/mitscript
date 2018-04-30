@@ -4,7 +4,6 @@
 #include "helpers.h"
 #include "include/x64asm.h"
 #include <experimental/optional>
-#include <map>
 
 class Interpreter; 
 
@@ -19,11 +18,14 @@ private:
     x64asm::Function asmFunc;
 
     vptr<IrFunc> func;
+    int stackSize = 0;
     int instructionIndex;
     bool finished;
-    map<int, TempLocation> temps;
 
     void executeStep();
+    void getTempLocation(int offset);
+    void loadTemp(R64 reg, Temp &temp);
+    void storeTemp(R64 reg, Temp &temp);
 public: 
     IrInterpreter(vptr<IrFunc> irFunction, vptr<Interpreter> vmInterpreterPointer); 
     void run(); // runs the program 

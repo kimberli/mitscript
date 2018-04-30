@@ -23,14 +23,30 @@ void IrInterpreter::run() {
     asmFunc.call<Value*>();
 }
 
-void IrInterpreter::storeTemp(R64 reg, int temp) {
-    // right now, put everything on the heap 
-    // find the temp's mem addres and move the reg val there 
-    // record 
+void IrInterpreter::getTempLocation(int offset) {
+    // use r10 and r11 for these calcs
+    assm.mov(r10, rbp); // move rbp into r10
+    assm.mov(r11, Imm64{8*offset}); // move 8*offset into another reg
+    assm.sub(r10, r11); // sub r11 from r10. now the correct mem is in r10
 }
 
-void IrInterpreter::loadTemp(R64 reg, int temp) {
-    
+void IrInterpreter::storeTemp(R64 reg, Temp &temp) {
+    // right now, put everything on the stack 
+    // assign the temp an offset (from rbp)
+    // Assume we are not saving any callee save. 
+    temp.stackOffset = func->parameter_count_ +  stackSize;
+    // in assembly, calculate where this var is located 
+    getTempLocation(temp.stackOffset); // leaves correct address into r10
+    // Move the val in reg into the mem address stored in r10 
+    assm.mov(M64{r10}, reg);
+    stackSize++; //inc stack size for next temp
+}
+
+void IrInterpreter::loadTemp(R64 reg, Temp &temp) {
+    // figure out where the temp is stored 
+    getTempLocation(temp.stackOffset); // location in r10 
+    // put the thing from that mem addres into the reg 
+    assm.mov(reg, M64{r10});
 }
 
 void IrInterpreter::executeStep() {
@@ -46,7 +62,6 @@ void IrInterpreter::executeStep() {
         case IrOp::LoadGlobal: 
             {
                 // mov DEST, SRC
-
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], Imm64{vmPointer});
                 // load the string pointer into the second arg
@@ -54,14 +69,12 @@ void IrInterpreter::executeStep() {
                 assm.mov(argRegs[1], Imm64{&name});
                 // call a helper 
                 void* fn = (void*) &(helper_load_global);
-                assm.mov(r12, Imm64{(uint64_t)fn});
-                assm.call(r12);
+                // assume that all locals are saved to the stack
+                assm.mov(r10, Imm64{(uint64_t)fn});
+                assm.call(r10);
                 // the result is stored in rax
                 // put the return val in the temp
-                // storeTemp(register, tempIdx)
-                storeTemp(rax, inst.temp0.value());
-                // TODO: update temp metadata
-
+                storeTemp(rax, inst.tempIndices.at(0).value());
                 break;
             }
         case IrOp::StoreGlobal:
