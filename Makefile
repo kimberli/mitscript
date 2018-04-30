@@ -29,7 +29,7 @@ bc-compiler: bc/* gc/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
 	$(CC) $(CC_FLAGS) bc/compiler-main.cpp $(BC_COMPILER_SRC) $(MS_PARSER_SRC) -o mitscriptc
 
 # MITScript -> bytecode -> IR -> vm
-interpreter: vm/* bc/* gc/* ir/* asm/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
+interpreter: $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
 	$(CC) $(CC_FLAGS) -lstdc++ -Ix64asm -L x64asm/lib -lx64asm vm/interpreter-main.cpp $(IR_SRC) $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) -o mitscript
 
 # reference interpreter (from a2)

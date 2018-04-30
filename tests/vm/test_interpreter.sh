@@ -36,10 +36,8 @@ run_test() {
     target=$DIR$(basename $filename $TEST_FILE_EXT)$TARGET_FILE_EXT
     if [ ! -e $target ]; then
         echo -e "TEST $TOTAL - $(basename $filename): ${RED}Failed${NC} (target file not found)"
-        if $VERBOSE; then
-            echo "GOT:"
-            cat $TEST_OUT
-            echo ""
+        if [ $count == 1 ]; then
+            cat $TEST_OUT > $DIFF
         fi
         return 1
     else
@@ -51,9 +49,6 @@ run_test() {
             fi
             return 0
         else
-            if $VERBOSE; then
-                cat $DIFF
-            fi
             echo -e "TEST $TOTAL - $(basename $filename): ${RED}Failed${NC}"
             return 1
         fi
@@ -78,6 +73,10 @@ else
     echo "Testing all files..."
 fi
 
+count=0
+for filename in $DIR/*${filepattern}; do
+    count=$((count+1))
+done
 for filename in $DIR/*${filepattern}; do
     if [ ! -f $filename ]; then
         echo "No files found"
@@ -85,7 +84,8 @@ for filename in $DIR/*${filepattern}; do
     fi
     if run_test $filename; then
         rm $TEST_OUT
-    elif $VERBOSE; then
+    elif [ $VERBOSE ] || [ $count == 1 ]; then
+        cat $DIFF
         echo -ne "${BLUE}IMPORTANT: if you believe the interpreter is in fact behaving correctly, do you want to update the ${TARGET_FILE_EXT} file? (Y/n):${NC} "
         read resp
         if [ "$resp" == "Y" ]; then
