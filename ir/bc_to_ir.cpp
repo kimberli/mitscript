@@ -8,6 +8,7 @@
 #include "../ir.h"
 #include "bc_to_ir.h"
 #include <algorithm>
+#include <stack>
 
 using namespace std;
 
@@ -19,26 +20,30 @@ IrCompiler::IrCompiler(vptr<Function> mainFunc, vptr<Interpreter> vmInterpreterP
 IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 	IrInstList irInsts;
 	int32_t currentTemp = 0;
+	stack<Temp> tempStack;
     for (int i = 0; i < func->instructions.size(); i++) {
 		TempList temps;
 		Instruction inst = func->instructions[i];
 	    switch (inst.operation) {
 	        case Operation::LoadConst:
 	            {
+					tempStack.push(Temp(currentTemp));
 					temps.push_back(currentTemp);
-					irInsts.push_back(IrInstruction(IrOp::LoadConst, inst.operand0, temps));
 					currentTemp++;
+					irInsts.push_back(IrInstruction(IrOp::LoadConst, inst.operand0, temps));
 	                break;
 	            }
 	        case Operation::LoadFunc:
 	            {
+					tempStack.push(Temp(currentTemp));
 					temps.push_back(currentTemp);
-					irInsts.push_back(IrInstruction(IrOp::LoadFunc, inst.operand0, temps));
 					currentTemp++;
+					irInsts.push_back(IrInstruction(IrOp::LoadFunc, inst.operand0, temps));
 	                break;
 	            }
 	        case Operation::LoadLocal:
 	            {
+					tempStack.push(Temp(currentTemp));
 					temps.push_back(currentTemp);
 					irInsts.push_back(IrInstruction(IrOp::LoadLocal, inst.operand0, temps));
 					currentTemp++;
@@ -46,13 +51,15 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 	            }
 	        case Operation::StoreLocal:
 	            {
-					temps.push_back(currentTemp);
+					Temp temp = tempStack.top();
+					tempStack.pop();
+					temps.push_back(temp.stackOffset);
 					irInsts.push_back(IrInstruction(IrOp::StoreLocal, inst.operand0, temps));
-					currentTemp--;
 	                break;
 	            }
 	        case Operation::LoadGlobal:
 	            {
+					tempStack.push(Temp(currentTemp));
 					temps.push_back(currentTemp);
 					irInsts.push_back(IrInstruction(IrOp::LoadGlobal, inst.operand0, temps));
 					currentTemp++;
@@ -60,9 +67,10 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 	            }
 	        case Operation::StoreGlobal:
 	            {
-					temps.push_back(currentTemp);
+					Temp temp = tempStack.top();
+					tempStack.pop();
+					temps.push_back(temp.stackOffset);
 					irInsts.push_back(IrInstruction(IrOp::StoreGlobal, inst.operand0, temps));
-					currentTemp--;
 	                break;
 	            }
 	        case Operation::PushReference:

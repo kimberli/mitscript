@@ -13,7 +13,8 @@ typedef std::experimental::optional<std::string> optstr_t;
 typedef std::vector<Temp> TempList;
 
 struct Temp {
-    int stackOffset = -1; // starts out invalid
+    int32_t stackOffset = -1;
+	Temp(int32_t offset) : stackOffset(offset) {}
 };
 
 enum class IrOp {
