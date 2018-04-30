@@ -281,6 +281,7 @@ void IrInterpreter::executeStep() {
         default: 
             throw RuntimeException("Should not get here: invalid ir inst");
     }
+    LOG(inst.getInfo());
     instructionIndex += 1;
     if (instructionIndex >= func->instructions.size()) {
         finished = true;

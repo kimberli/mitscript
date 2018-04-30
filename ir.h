@@ -273,6 +273,20 @@ struct IrInstruction {
         op0(),
         global(),
         tempIndices(TempList{temp}) {};
+    std::string getInfo() {
+        std::string s;
+        if (op0) {
+            s += "\top0: " + std::to_string(op0.value()) + "\n";
+        }
+        if (global) {
+            s += "\tglobal: " + global.value() + "\n";
+        }
+        s += "\ttemps: ";
+        for (Temp t: tempIndices) {
+            s += std::to_string(t.stackOffset) + " ";
+        }
+        return s;
+    }
 };
 
 struct IrFunc {
