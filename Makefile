@@ -1,15 +1,28 @@
-CC = g++
-CC_FLAGS = -O2 -g -std=c++1y
+CXX = g++
+CXXFLAGS ?= -O2 -g -std=c++1y -Wreturn-type -Ix64asm
+
+SRC_DIRS = ./parser/ms ./parser/bc ./asm ./bc ./gc ./ir ./vm ./
+SRCS := $(shell find $(SRC_DIRS) -name \"*.cpp\")
+OBJS := $(SRCS)/%.o
+DEPS := $(OBJS:.o=.d)
 
 MS_PARSER = parser/ms
-MS_PARSER_SRC = parser/ms/parser.cpp parser/ms/lexer.cpp
+MS_PARSER_OBJS = parser/ms/parser.o parser/ms/lexer.o
 BC_PARSER = parser/bc
-BC_PARSER_SRC = parser/bc/parser.cpp parser/bc/lexer.cpp
-BC_COMPILER_SRC = bc/bc-compiler.cpp bc/symboltable.cpp gc/gc.cpp frame.cpp types.cpp
-VM_SRC = vm/interpreter.cpp $(BC_COMPILER_SRC)
-IR_SRC = ir/bc_to_ir.cpp asm/ir_to_asm.cpp asm/helpers.cpp machine_code_func.cpp
-ROOT_FILES = *.h *.cpp
+BC_PARSER_OBJS = parser/bc/parser.o parser/bc/lexer.o
+BC_COMPILER_OBJS = bc/bc-compiler.o bc/symboltable.o gc/gc.o frame.o types.o
+BC_COMPILER_HEADERS = bc/*.h gc/*.h frame.h types.h exception.h instructions.h
+VM_OBJS = vm/interpreter.o ir/bc_to_ir.o asm/ir_to_asm.o asm/helpers.o machine_code_func.o $(BC_COMPILER_OBJS)
+VM_HEADERS = vm/*.h ir/*.h asm/*.h ir.h $(BC_COMPILER_HEADERS)
+ROOT_FILES = $(shell find . -name \"*.o\")
 REF = ref
+REF_OBJS = ref/Value.o
+
+.PHONY: clean-ms-parser
+.PHONY: clean-bc-parser
+.PHONY: clean-ref
+.PHONY: clean-bc-compiler
+.PHONY: clean-interpreter
 
 default: interpreter
 
@@ -19,28 +32,28 @@ clean: clean-ms-parser clean-bc-parser clean-ref clean-bc-compiler clean-interpr
 
 # make the MITScript pretty printer
 ms-print: $(MS_PARSER)/ms-print
-$(MS_PARSER)/ms-print: $(MS_PARSER)/print_main.cpp $(MS_PARSER_SRC)
-	$(CC) $(CC_FLAGS) $(MS_PARSER)/print_main.cpp $(MS_PARSER_SRC) -o $@
+$(MS_PARSER)/ms-print: $(MS_PARSER)/print_main.cpp $(MS_PARSER_OBJS)
+	$(CXX) $(CXXFLAGS) $(MS_PARSER)/print_main.cpp $(MS_PARSER_OBJS) -o $@
 
 # make the bytecode pretty printer
 bc-print: $(BC_PARSER)/bc-print
-$(BC_PARSER)/bc-print: $(BC_PARSER)/print_main.cpp $(BC_PARSER_SRC)
-	$(CC) $(CC_FLAGS) $(BC_PARSER)/print_main.cpp $(BC_PARSER_SRC) types.cpp frame.cpp gc/gc.cpp -o $@
+$(BC_PARSER)/bc-print: $(BC_PARSER)/print_main.cpp $(BC_PARSER_OBJS)
+	$(CXX) $(CXXFLAGS) $(BC_PARSER)/print_main.cpp $(BC_PARSER_OBJS) types.cpp frame.cpp gc/gc.cpp -o $@
 
 # MITScript -> bytecode compiler
 bc-compiler: mitscriptc
-mitscriptc: bc/* gc/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp $(ROOT_FILES)
-	$(CC) $(CC_FLAGS) bc/compiler-main.cpp $(BC_COMPILER_SRC) $(MS_PARSER_SRC) -o $@
+mitscriptc: $(MS_PARSER_OBJS) $(BC_COMPILER_OBJS) $(BC_COMPILER_HEADERS)
+	$(CXX) $(CXXFLAGS) bc/compiler-main.cpp $(BC_COMPILER_OBJS) $(MS_PARSER_OBJS) -o $@
 
 # MITScript -> bytecode -> IR -> vm
 interpreter: mitscript
-mitscript: bc/* gc/* ir/* asm/* vm/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp $(ROOT_FILES)
-	$(CC) $(CC_FLAGS) vm/interpreter-main.cpp $(IR_SRC) $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) -lstdc++ -Ix64asm -L x64asm/lib -lx64asm -o $@
+mitscript: $(MS_PARSER_OBJS) $(BC_PARSER_OBJS) $(ROOT_FILES) $(VM_OBJS) $(VM_HEADERS)
+	$(CXX) $(CXXFLAGS) vm/interpreter-main.cpp $(VM_OBJS) $(BC_PARSER_OBJS) $(MS_PARSER_OBJS) -lstdc++ -L x64asm/lib -lx64asm -o $@
 	
 # reference interpreter (from a2)
 ref: ref/mitscript
-ref/mitscript: $(REF)/ref-main.cpp $(REF)/*.cpp $(REF)/*.h Visitor.h AST.h $(MS_PARSER_SRC)
-	$(CC) $(CC_FLAGS) $(REF)/*.cpp $(MS_PARSER_SRC) -o $@
+ref/mitscript: $(REF)/ref-main.cpp $(REF_OBJS) $(MS_PARSER_OBJS)
+	$(CXX) $(CXXFLAGS) $(REF)/ref-main.cpp $(REF_OBJS) $(MS_PARSER_OBJS) -o $@
 
 
 ## TESTS
@@ -81,16 +94,18 @@ $(BC_PARSER)/lexer.cpp: $(BC_PARSER)/lexer.lex
 
 ## CLEAN UP
 clean-ms-parser:
-	rm -f $(MS_PARSER)/lexer.cpp $(MS_PARSER)/lexer.h $(MS_PARSER)/parser.cpp $(MS_PARSER)/parser.h $(MS_PARSER)/parser.output $(MS_PARSER)/ms-print
+	rm -f $(MS_PARSER)/lexer.cpp $(MS_PARSER)/lexer.h $(MS_PARSER)/parser.cpp $(MS_PARSER)/parser.h $(MS_PARSER)/parser.output $(MS_PARSER_OBJS) $(MS_PARSER)/ms-print
 
 clean-bc-parser:
-	rm -f $(BC_PARSER)/lexer.cpp $(BC_PARSER)/lexer.h $(BC_PARSER)/parser.cpp $(BC_PARSER)/parser.h $(BC_PARSER)/parser.output $(BC_PARSER)/bc-print
+	rm -f $(BC_PARSER)/lexer.cpp $(BC_PARSER)/lexer.h $(BC_PARSER)/parser.cpp $(BC_PARSER)/parser.h $(BC_PARSER)/parser.output $(BC_PARSER_OBJS) $(BC_PARSER)/bc-print
 
 clean-ref:
-	rm -f ref/mitscript
+	rm -f ref/mitscript $(REF_OBJS)
 
 clean-bc-compiler:
-	rm -f mitscriptc
+	rm -f mitscriptc $(BC_COMPILER_OBJS)
 
 clean-interpreter:
-	rm -f mitscript
+	rm -f mitscript $(VM_OBJS)
+
+-include $(DEPS)
