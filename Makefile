@@ -33,7 +33,27 @@ interpreter: vm/* bc/* gc/* ir/* asm/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/pars
 ref: $(REF)/ref-main.cpp $(REF)/* Visitor.h AST.h $(MS_PARSER_SRC)
 	g++ -O2 -g -std=c++1y $(REF)/*.cpp $(MS_PARSER_SRC) -o ref/mitscript
 
-## OTHER FORMULAS:
+
+## TESTS
+test: test-compiler test-vm test-interpreter
+
+test-compiler: bc-compiler
+	tests/vm/test_compiler.sh
+
+test-vm: interpreter
+	tests/vm/test_vm.sh
+
+test-interpreter: interpreter
+	tests/vm/test_interpreter.sh
+
+test-mem: interpreter
+	tests/gc/test_massif.sh
+
+test-parser: ms-print
+	tests/parser/test_parser.sh
+
+
+## OTHER FORMULAS
 
 # MITScript parser
 $(MS_PARSER)/parser.cpp: $(MS_PARSER)/parser.yy $(MS_PARSER)/lexer.cpp
@@ -49,7 +69,8 @@ $(BC_PARSER)/parser.cpp: $(BC_PARSER)/parser.yy $(BC_PARSER)/lexer.cpp
 $(BC_PARSER)/lexer.cpp: $(BC_PARSER)/lexer.lex
 	flex -P bc --outfile=$(BC_PARSER)/lexer.cpp --header-file=$(BC_PARSER)/lexer.h $(BC_PARSER)/lexer.lex
 
-# cleanup
+
+## CLEAN UP
 clean-ms-parser:
 	rm -f $(MS_PARSER)/lexer.cpp $(MS_PARSER)/lexer.h $(MS_PARSER)/parser.cpp $(MS_PARSER)/parser.h $(MS_PARSER)/parser.output $(MS_PARSER)/ms-print
 
