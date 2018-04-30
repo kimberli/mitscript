@@ -1,19 +1,20 @@
 #include "helpers.h"
-#include "../types.h"
+// this needs to be here to break a circular dependency loop
+#include "../vm/interpreter.h"
 
-void helper_store_global(vptr<Interpreter> interpreter, std::string &name, vptr<Value> val) {
+void helper_store_global(Interpreter* interpreter, std::string &name, Value* val) {
     interpreter->storeGlobal(name, val);
 }
 
-vptr<Value> helper_load_global(vptr<Interpreter> interpreter, std::string &name) {
+Value* helper_load_global(Interpreter* interpreter, std::string &name) {
     return interpreter->loadGlobal(name);
 }
 
-vptr<Value> helper_add(vptr<Interpreter> interpreter, Value* left, Value* right) {
+Value* helper_add(Interpreter* interpreter, Value* left, Value* right) {
     return interpreter->add(left, right);
 }
 
-vptr<Value> helper_call(vptr<Interpreter> interpreter, vptr<Closure> closure) {
+Value* helper_call(Interpreter* interpreter, Closure* closure) {
     // this function needs to take in args and somehow put them in the right place. Maybe put them into a vector that could be used by the vm immediately or could be passed in the MachineCodeFunction from the example 
     // this function takes the args from the assembly stack and puts them in a vector 
     // and then 
@@ -23,7 +24,7 @@ vptr<Value> helper_call(vptr<Interpreter> interpreter, vptr<Closure> closure) {
     // So the helper in the vm should take A) a closure and B) a list of args.
 }
 
-void helper_gc(vptr<Interpreter> interpreter) {
+void helper_gc(Interpreter* interpreter) {
     interpreter->collector->gc();
 }
 

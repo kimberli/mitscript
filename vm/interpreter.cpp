@@ -471,10 +471,10 @@ vptr<Value> Interpreter::callVM(vector<vptr<Constant>> argsList, vptr<Closure> c
 
 vptr<Value> Interpreter::callAsm(vector<vptr<Constant>> argsList, vptr<Closure> clos) {
     // convert the bc function to the ir
-    IrCompiler irc = IrCompiler(clos->func, *this);
-    IrFunc* irf = *(irc.toIr());
+    IrCompiler irc = IrCompiler(clos->func, this);
+    IrFunc irf = irc.toIr();
     // convert the ir to assembly
-    IrInterpreter iri = IrInterpreter(irf, *this);
+    IrInterpreter iri = IrInterpreter(&irf, this);
     x64asm::Function asmFunc = iri.run();
     // create a MachineCodeFunction object
     MachineCodeFunction mcf = MachineCodeFunction(clos->func->parameter_count_, asmFunc);
@@ -482,7 +482,9 @@ vptr<Value> Interpreter::callAsm(vector<vptr<Constant>> argsList, vptr<Closure> 
     // TODO: be more intelligent about how you're compiling stuff
     // TODO: this obeys NO conventions about passing refs
     mcf.compile();
-    vptr<Value> result = mcf.call(argsList);
+    // we need to pass the args as Values
+    vector<vptr<Value>> argsVals (argsList.begin(), argsList.end());
+    vptr<Value> result = mcf.call(argsVals);
     return result;
 }
 

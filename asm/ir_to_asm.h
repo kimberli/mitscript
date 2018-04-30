@@ -6,6 +6,7 @@
 #include <experimental/optional>
 
 class Interpreter; 
+class IrInterpreter;
 
 using namespace std; 
 //using namespace x64asm; 
