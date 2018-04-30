@@ -57,28 +57,28 @@ void Interpreter::executeStep() {
     LOG("executing instruction " + to_string(frame->instructionIndex));
     LOG("from frame" + to_string(frames.size()));
     switch (inst.operation) {
-        case Operation::LoadConst:
+        case BcOp::LoadConst:
             {
                 auto constant = frame->getConstantByIndex(inst.operand0.value());
                 frame->opStackPush(constant);
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::LoadFunc:
+        case BcOp::LoadFunc:
             {
                 auto func = frame->getFunctionByIndex(inst.operand0.value());
                 frame->opStackPush(func);
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::LoadLocal:
+        case BcOp::LoadLocal:
             {
                 string name = frame->getLocalByIndex(inst.operand0.value());
                 frame->opStackPush(frame->getLocalVar(name));
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::StoreLocal:
+        case BcOp::StoreLocal:
             {
                 string name = frame->getLocalByIndex(inst.operand0.value());
                 vptr<Constant> value = dynamic_cast<Constant*>(frame->opStackPop());
@@ -89,7 +89,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::LoadGlobal:
+        case BcOp::LoadGlobal:
             {
                 int index = inst.operand0.value();
                 string name = frame->getNameByIndex(index);
@@ -97,7 +97,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::StoreGlobal:
+        case BcOp::StoreGlobal:
             {
                 int index = inst.operand0.value();
                 string name = frame->getNameByIndex(index);
@@ -105,7 +105,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::PushReference:
+        case BcOp::PushReference:
             {
                 string name = frame->getRefByIndex(inst.operand0.value());
                 auto valWrapper = frame->getRefVar(name);
@@ -113,7 +113,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::LoadReference:
+        case BcOp::LoadReference:
             {
                 vptr<ValWrapper> valWrapper = dynamic_cast<ValWrapper*>(frame->opStackPop());
                 if (valWrapper == NULL) {
@@ -123,7 +123,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::StoreReference:
+        case BcOp::StoreReference:
             {
                 vptr<Constant> value = dynamic_cast<Constant*>(frame->opStackPop());
                 if (value == NULL) {
@@ -137,13 +137,13 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::AllocRecord:
+        case BcOp::AllocRecord:
             {
 				frame->opStackPush(collector->allocate<Record>());
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::FieldLoad:
+        case BcOp::FieldLoad:
             {
 				vptr<Record> record = frame->opStackPop()->cast<Record>();
 				string field = frame->getNameByIndex(inst.operand0.value());
@@ -155,7 +155,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::FieldStore:
+        case BcOp::FieldStore:
             {
 				vptr<Constant> value = dynamic_cast<Constant*>(frame->opStackPop());
                 if (value == NULL) {
@@ -167,7 +167,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::IndexLoad:
+        case BcOp::IndexLoad:
             {
 				string index = frame->opStackPop()->toString();
 				vptr<Record> record = frame->opStackPop()->cast<Record>();
@@ -179,7 +179,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::IndexStore:
+        case BcOp::IndexStore:
             // items are popped off in this order: value to store,
             // index
             // record
@@ -191,7 +191,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::AllocClosure:
+        case BcOp::AllocClosure:
             {
                 // read num free vars, ref vars, and function off the stack
                 int numFreeVars = inst.operand0.value();
@@ -216,7 +216,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::Call:
+        case BcOp::Call:
             {
                 // read num arguments, argument values, and closure off the stack
                 int numArgs = inst.operand0.value();
@@ -237,7 +237,7 @@ void Interpreter::executeStep() {
 				frame = frames.back();
                 break;
             }
-        case Operation::Return:
+        case BcOp::Return:
             {
                 // take return val from top of stack & discard current frame
                 auto returnVal = frame->opStackPeek();
@@ -252,7 +252,7 @@ void Interpreter::executeStep() {
                 //frame->instructionIndex ++;
                 break;
             }
-        case Operation::Add:
+        case BcOp::Add:
             {
                 auto right = frame->opStackPop();
                 auto left = frame->opStackPop();
@@ -261,7 +261,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::Sub:
+        case BcOp::Sub:
             {
                 int right = frame->opStackPop()->cast<Integer>()->value;
                 int left = frame->opStackPop()->cast<Integer>()->value;
@@ -270,7 +270,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::Mul:
+        case BcOp::Mul:
             {
                 int right = frame->opStackPop()->cast<Integer>()->value;
                 int left = frame->opStackPop()->cast<Integer>()->value;
@@ -279,7 +279,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::Div:
+        case BcOp::Div:
             {
                 int right = frame->opStackPop()->cast<Integer>()->value;
                 int left = frame->opStackPop()->cast<Integer>()->value;
@@ -291,7 +291,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::Neg:
+        case BcOp::Neg:
             {
                 int top = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
@@ -299,7 +299,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::Gt:
+        case BcOp::Gt:
             {
                 int right = frame->opStackPop()->cast<Integer>()->value;
                 int left = frame->opStackPop()->cast<Integer>()->value;
@@ -308,7 +308,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::Geq:
+        case BcOp::Geq:
             {
                 int right = frame->opStackPop()->cast<Integer>()->value;
                 int left = frame->opStackPop()->cast<Integer>()->value;
@@ -317,7 +317,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::Eq:
+        case BcOp::Eq:
             {
                 vptr<Value> right = frame->opStackPop();
                 auto left = frame->opStackPop();
@@ -326,7 +326,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::And:
+        case BcOp::And:
             {
                 bool right = frame->opStackPop()->cast<Boolean>()->value;
                 bool left = frame->opStackPop()->cast<Boolean>()->value;
@@ -335,7 +335,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::Or:
+        case BcOp::Or:
             {
                 bool right = frame->opStackPop()->cast<Boolean>()->value;
                 bool left = frame->opStackPop()->cast<Boolean>()->value;
@@ -344,7 +344,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::Not:
+        case BcOp::Not:
             {
                 bool top = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
@@ -352,12 +352,12 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::Goto:
+        case BcOp::Goto:
             {
                 frame->instructionIndex += inst.operand0.value();
                 break;
             }
-        case Operation::If:
+        case BcOp::If:
             {
                 auto e = frame->opStackPop()->cast<Boolean>();
                 if (e->value) {
@@ -367,14 +367,14 @@ void Interpreter::executeStep() {
                 }
                 break;
             }
-        case Operation::Dup:
+        case BcOp::Dup:
             {
                 auto top = frame->opStackPeek();
                 frame->opStackPush(top);
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::Swap:
+        case BcOp::Swap:
             {
                 auto top = frame->opStackPop();
                 auto next = frame->opStackPop();
@@ -383,7 +383,7 @@ void Interpreter::executeStep() {
                 frame->instructionIndex ++;
                 break;
             }
-        case Operation::Pop:
+        case BcOp::Pop:
             {
                 frame->opStackPop();
                 frame->instructionIndex ++;

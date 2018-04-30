@@ -5,7 +5,7 @@
 
 using namespace std;
 
-enum class Operation
+enum class BcOp
 {
     // Description: push a constant onto the operand stack
     // Mnemonic:    load_const i
@@ -230,14 +230,14 @@ enum class Operation
 
 struct Instruction
 {
-    Instruction(const Operation operation, std::experimental::optional<int32_t> operand0)
+    Instruction(const BcOp operation, std::experimental::optional<int32_t> operand0)
     : operation(operation),
     operand0(operand0)
     {
 
     }
 
-    Operation operation;
+    BcOp operation;
     std::experimental::optional<int32_t> operand0;
 };
 

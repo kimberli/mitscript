@@ -274,136 +274,136 @@ Constant
 Instruction:
   T_load_const T_int
 {
-	$$ = new Instruction(Operation::LoadConst, safe_cast($2));
+	$$ = new Instruction(BcOp::LoadConst, safe_cast($2));
 }
 | T_load_func T_int
 {
-	$$ = new Instruction(Operation::LoadFunc, safe_cast($2));
+	$$ = new Instruction(BcOp::LoadFunc, safe_cast($2));
 }
 
 | T_load_local T_int
 {
-	$$ = new Instruction(Operation::LoadLocal, safe_cast($2));
+	$$ = new Instruction(BcOp::LoadLocal, safe_cast($2));
 }
 | T_store_local T_int
 {
-	$$ = new Instruction(Operation::StoreLocal, safe_cast($2));
+	$$ = new Instruction(BcOp::StoreLocal, safe_cast($2));
 }
 | T_load_global T_int
 {
-	$$ = new Instruction(Operation::LoadGlobal, safe_cast($2));
+	$$ = new Instruction(BcOp::LoadGlobal, safe_cast($2));
 }
 | T_store_global T_int
 {
-	$$ = new Instruction(Operation::StoreGlobal, safe_cast($2));
+	$$ = new Instruction(BcOp::StoreGlobal, safe_cast($2));
 }
 | T_push_ref T_int
 {
-	$$ = new Instruction(Operation::PushReference, safe_cast($2));
+	$$ = new Instruction(BcOp::PushReference, safe_cast($2));
 }
 | T_load_ref
 {
-	$$ = new Instruction(Operation::LoadReference, { });
+	$$ = new Instruction(BcOp::LoadReference, { });
 }
 | T_store_ref
 {
-	$$ = new Instruction(Operation::StoreReference, { });
+	$$ = new Instruction(BcOp::StoreReference, { });
 }
 | T_alloc_record
 {
-	$$ = new Instruction(Operation::AllocRecord, { });
+	$$ = new Instruction(BcOp::AllocRecord, { });
 }
 | T_field_load T_int
 {
-	$$ = new Instruction(Operation::FieldLoad, safe_cast($2));
+	$$ = new Instruction(BcOp::FieldLoad, safe_cast($2));
 }
 | T_field_store T_int
 {
-	$$ = new Instruction(Operation::FieldStore, safe_cast($2));
+	$$ = new Instruction(BcOp::FieldStore, safe_cast($2));
 }
 | T_index_load
 {
-	$$ = new Instruction(Operation::IndexLoad, { });
+	$$ = new Instruction(BcOp::IndexLoad, { });
 }
 | T_index_store
 {
-	$$ = new Instruction(Operation::IndexStore, { });
+	$$ = new Instruction(BcOp::IndexStore, { });
 }
 | T_alloc_closure T_int
 {
-	$$ = new Instruction(Operation::AllocClosure, safe_cast($2));
+	$$ = new Instruction(BcOp::AllocClosure, safe_cast($2));
 }
 | T_call T_int
 {
-	$$ = new Instruction(Operation::Call, safe_cast($2));
+	$$ = new Instruction(BcOp::Call, safe_cast($2));
 }
 | T_return
 {
-	$$ = new Instruction(Operation::Return, { });
+	$$ = new Instruction(BcOp::Return, { });
 }
 | T_add
 {
-	$$ = new Instruction(Operation::Add, { });
+	$$ = new Instruction(BcOp::Add, { });
 }
 | T_sub
 {
-	$$ = new Instruction(Operation::Sub, { });
+	$$ = new Instruction(BcOp::Sub, { });
 }
 | T_mul
 {
-	$$ = new Instruction(Operation::Mul, { });
+	$$ = new Instruction(BcOp::Mul, { });
 }
 | T_div
 {
-	$$ = new Instruction(Operation::Div, { });
+	$$ = new Instruction(BcOp::Div, { });
 }
 | T_neg
 {
-	$$ = new Instruction(Operation::Neg, { });
+	$$ = new Instruction(BcOp::Neg, { });
 }
 | T_gt
 {
-	$$ = new Instruction(Operation::Gt, { });
+	$$ = new Instruction(BcOp::Gt, { });
 }
 | T_geq
 {
-	$$ = new Instruction(Operation::Geq, { });
+	$$ = new Instruction(BcOp::Geq, { });
 }
 | T_eq
 {
-	$$ = new Instruction(Operation::Eq, { });
+	$$ = new Instruction(BcOp::Eq, { });
 }
 | T_and
 {
-	$$ = new Instruction(Operation::And, { });
+	$$ = new Instruction(BcOp::And, { });
 }
 | T_or
 {
-	$$ = new Instruction(Operation::Or, { });
+	$$ = new Instruction(BcOp::Or, { });
 }
 | T_not
 {
-	$$ = new Instruction(Operation::Not, { });
+	$$ = new Instruction(BcOp::Not, { });
 }
 | T_goto T_int
 {
-	$$ = new Instruction(Operation::Goto, safe_cast($2));
+	$$ = new Instruction(BcOp::Goto, safe_cast($2));
 }
 | T_if T_int
 {
-	$$ = new Instruction(Operation::If, safe_cast($2));
+	$$ = new Instruction(BcOp::If, safe_cast($2));
 }
 | T_dup
 {
-	$$ = new Instruction(Operation::Dup, { });
+	$$ = new Instruction(BcOp::Dup, { });
 }
 | T_swap
 {
-	$$ = new Instruction(Operation::Swap, { });
+	$$ = new Instruction(BcOp::Swap, { });
 }
 | T_pop
 {
-	$$ = new Instruction(Operation::Pop, { });
+	$$ = new Instruction(BcOp::Pop, { });
 }
 
 InstructionList:

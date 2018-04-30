@@ -26,7 +26,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 		TempList temps;
 		Instruction inst = func->instructions[i];
 	    switch (inst.operation) {
-	        case Operation::LoadConst:
+	        case BcOp::LoadConst:
 	            {
 					tempStack.push(Temp(currentTemp));
 					temps.push_back(currentTemp);
@@ -34,7 +34,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::LoadConst, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::LoadFunc:
+	        case BcOp::LoadFunc:
 	            {
 					tempStack.push(Temp(currentTemp));
 					temps.push_back(currentTemp);
@@ -42,7 +42,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::LoadFunc, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::LoadLocal:
+	        case BcOp::LoadLocal:
 	            {
 					tempStack.push(Temp(currentTemp));
 					temps.push_back(currentTemp);
@@ -50,7 +50,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					currentTemp++;
 	                break;
 	            }
-	        case Operation::StoreLocal:
+	        case BcOp::StoreLocal:
 	            {
 					Temp temp = tempStack.top();
 					tempStack.pop();
@@ -58,7 +58,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::StoreLocal, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::LoadGlobal:
+	        case BcOp::LoadGlobal:
 	            {
 					tempStack.push(Temp(currentTemp));
 					temps.push_back(currentTemp);
@@ -66,7 +66,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					currentTemp++;
 	                break;
 	            }
-	        case Operation::StoreGlobal:
+	        case BcOp::StoreGlobal:
 	            {
 					Temp temp = tempStack.top();
 					tempStack.pop();
@@ -74,47 +74,47 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::StoreGlobal, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::PushReference:
+	        case BcOp::PushReference:
 	            {
 	                break;
 	            }
-	        case Operation::LoadReference:
+	        case BcOp::LoadReference:
 	            {
 	                break;
 	            }
-	        case Operation::AllocRecord:
+	        case BcOp::AllocRecord:
 	            {
 	                break;
 	            }
-	        case Operation::FieldLoad:
+	        case BcOp::FieldLoad:
 	            {
 	                break;
 	            }
-	        case Operation::FieldStore:
+	        case BcOp::FieldStore:
 	            {
 	                break;
 	            }
-	        case Operation::IndexLoad:
+	        case BcOp::IndexLoad:
 	            {
 	                break;
 	            }
-	        case Operation::IndexStore:
+	        case BcOp::IndexStore:
 	            {
 	                break;
 	            }
-	        case Operation::AllocClosure:
+	        case BcOp::AllocClosure:
 	            {
 	                break;
 	            }
-	        case Operation::Call:
+	        case BcOp::Call:
 	            {
 	                break;
 	            }
-	        case Operation::Return:
+	        case BcOp::Return:
 	            {
 	                break;
 	            }
-	        case Operation::Add:
+	        case BcOp::Add:
 	            {
 					Temp temp1 = tempStack.top();
 					tempStack.pop();
@@ -127,7 +127,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::Add, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::Sub:
+	        case BcOp::Sub:
 	            {
 					Temp temp1 = tempStack.top();
 					tempStack.pop();
@@ -146,7 +146,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::Sub, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::Mul:
+	        case BcOp::Mul:
 	            {
 					Temp temp1 = tempStack.top();
 					tempStack.pop();
@@ -165,7 +165,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::Mul, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::Div:
+	        case BcOp::Div:
 	            {
 					Temp temp1 = tempStack.top();
 					tempStack.pop();
@@ -184,7 +184,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::Div, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::Neg:
+	        case BcOp::Neg:
 	            {
 					Temp temp1 = tempStack.top();
 					tempStack.pop();
@@ -195,7 +195,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::Neg, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::Gt:
+	        case BcOp::Gt:
 	            {
 					Temp temp1 = tempStack.top();
 					tempStack.pop();
@@ -214,7 +214,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::Gt, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::Geq:
+	        case BcOp::Geq:
 	            {
 					Temp temp1 = tempStack.top();
 					tempStack.pop();
@@ -233,7 +233,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::Geq, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::Eq:
+	        case BcOp::Eq:
 	            {
 					Temp temp1 = tempStack.top();
 					tempStack.pop();
@@ -246,7 +246,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::Eq, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::And:
+	        case BcOp::And:
 	            {
 					Temp temp1 = tempStack.top();
 					tempStack.pop();
@@ -265,7 +265,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::And, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::Or:
+	        case BcOp::Or:
 	            {
 					Temp temp1 = tempStack.top();
 					tempStack.pop();
@@ -284,7 +284,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::Or, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::Not:
+	        case BcOp::Not:
 	            {
 					Temp temp = tempStack.top();
 					tempStack.pop();
@@ -295,20 +295,20 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					irInsts.push_back(IrInstruction(IrOp::Not, inst.operand0, temps));
 	                break;
 	            }
-	        case Operation::Goto:
+	        case BcOp::Goto:
 	            {
 	                break;
 	            }
-	        case Operation::If:
+	        case BcOp::If:
 	            {
 	                break;
 	            }
-	        case Operation::Dup:
+	        case BcOp::Dup:
 	            {
 					tempStack.push(Temp(tempStack.top()));
 	                break;
 	            }
-	        case Operation::Swap:
+	        case BcOp::Swap:
 	            {
 					Temp temp1 = tempStack.top();
 					tempStack.pop();
@@ -318,7 +318,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 					tempStack.push(temp2);
 	                break;
 	            }
-	        case Operation::Pop:
+	        case BcOp::Pop:
 	            {
 					tempStack.pop();
 	                break;

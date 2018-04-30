@@ -162,35 +162,35 @@ private:
 
         switch (inst.operation)
         {
-        case Operation::LoadConst:
+        case BcOp::LoadConst:
         {
             os << "load_const"
                << "\t" << inst.operand0.value();
 
             break;
         }
-        case Operation::LoadFunc:
+        case BcOp::LoadFunc:
         {
             os << "load_func"
                << "\t" << inst.operand0.value();
 
             break;
         }
-        case Operation::LoadLocal:
+        case BcOp::LoadLocal:
         {
             os << "load_local"
                << "\t" << inst.operand0.value();
 
             break;
         }
-        case Operation::StoreLocal:
+        case BcOp::StoreLocal:
         {
             os << "store_local"
                << "\t" << inst.operand0.value();
 
             break;
         }
-        case Operation::LoadGlobal:
+        case BcOp::LoadGlobal:
         {
             os << "load_global"
                << "\t" << inst.operand0.value();
@@ -198,7 +198,7 @@ private:
             break;
         }
 
-        case Operation::StoreGlobal:
+        case BcOp::StoreGlobal:
         {
             os << "store_global"
                << "\t" << inst.operand0.value();
@@ -206,170 +206,170 @@ private:
             break;
         }
 
-        case Operation::PushReference:
+        case BcOp::PushReference:
         {
             os << "push_ref"
                << "\t" << inst.operand0.value();
 
             break;
         }
-        case Operation::LoadReference:
+        case BcOp::LoadReference:
         {
             os << "load_ref";
 
             break;
         }
-        case Operation::StoreReference:
+        case BcOp::StoreReference:
         {
             os << "store_ref";
 
             break;
         }
-         case Operation::AllocRecord:
+         case BcOp::AllocRecord:
         {
             os << "alloc_record";
 
             break;
         }
-        case Operation::FieldLoad:
+        case BcOp::FieldLoad:
         {
             os << "field_load"
                << "\t" << inst.operand0.value();
 
             break;
         }
-        case Operation::FieldStore:
+        case BcOp::FieldStore:
         {
             os << "field_store"
                << "\t" << inst.operand0.value();
 
             break;
         }
-        case Operation::IndexLoad:
+        case BcOp::IndexLoad:
         {
             os << "index_load";
 
             break;
         }
-        case Operation::IndexStore:
+        case BcOp::IndexStore:
         {
             os << "index_store";
 
             break;
         }
-        case Operation::AllocClosure:
+        case BcOp::AllocClosure:
         {
             os << "alloc_closure"
                << "\t" << inst.operand0.value();
 
             break;
         }
-        case Operation::Call:
+        case BcOp::Call:
         {
             os << "call"
                << "\t" << inst.operand0.value();
 
             break;
         }
-        case Operation::Return:
+        case BcOp::Return:
         {
             os << "return";
 
             break;
         }
-        case Operation::Add:
+        case BcOp::Add:
         {
             os << "add";
 
             break;
         }
-        case Operation::Sub:
+        case BcOp::Sub:
         {
             os << "sub";
 
             break;
         }
 
-        case Operation::Mul:
+        case BcOp::Mul:
         {
             os << "mul";
 
             break;
         }
-        case Operation::Div:
+        case BcOp::Div:
         {
             os << "div";
 
             break;
         }
-        case Operation::Neg:
+        case BcOp::Neg:
         {
             os << "neg";
 
             break;
         }
-        case Operation::Gt:
+        case BcOp::Gt:
         {
             os << "gt";
 
             break;
         }
-        case Operation::Geq:
+        case BcOp::Geq:
         {
             os << "geq";
 
             break;
         }
-        case Operation::Eq:
+        case BcOp::Eq:
         {
             os << "eq";
 
             break;
         }
-        case Operation::And:
+        case BcOp::And:
         {
             os << "and";
 
             break;
         }
-        case Operation::Or:
+        case BcOp::Or:
         {
             os << "or";
 
             break;
         }
-        case Operation::Not:
+        case BcOp::Not:
         {
             os << "not";
             break;
         }
-        case Operation::Goto:
+        case BcOp::Goto:
         {
             os << "goto"
                << "\t" << inst.operand0.value();
 
             break;
         }
-        case Operation::If:
+        case BcOp::If:
         {
             os << "if"
             << "\t" << inst.operand0.value();
 
             break;
         }
-        case Operation::Dup:
+        case BcOp::Dup:
         {
             os << "dup";
 
             break;
         }
-        case Operation::Swap:
+        case BcOp::Swap:
         {
             os << "swap";
 
             break;
         }
-        case Operation::Pop:
+        case BcOp::Pop:
         {
             os << "pop";
 
@@ -377,7 +377,7 @@ private:
         }
 
         default:
-            assert(false && "Unhandled Operation");
+            assert(false && "Unhandled BcOp");
         }
     }
 
