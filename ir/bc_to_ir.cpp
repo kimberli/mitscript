@@ -44,7 +44,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        case BcOp::LoadGlobal:
 	            {
                     pushTemp(currentTemp);
-                    
+
                     optstr_t global = func->names_[inst.operand0.value()];
 					pushInstruction(IrInstruction(IrOp::LoadGlobal, global, currentTemp));
 					currentTemp++;
@@ -71,22 +71,55 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::AllocRecord:
 	            {
+                    pushTemp(currentTemp);
+					pushInstruction(IrInstruction(IrOp::AllocRecord, inst.operand0, currentTemp));
+					currentTemp++;
 	                break;
 	            }
 	        case BcOp::FieldLoad:
 	            {
+					Temp record = popTemp();
+					Temp field = popTemp();
+					pushTemp(currentTemp);
+					TempList instTemps{currentTemp, record, field};
+					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record);
+					pushInstruction(IrInstruction(IrOp::AssertString, inst.operand0, field);
+					pushInstruction(IrInstruction(IrOp::RecordLoad, inst.operand0, instTemps));
+					currentTemp++;
 	                break;
 	            }
 	        case BcOp::FieldStore:
 	            {
+					Temp record = popTemp();
+					Temp field = popTemp();
+					Temp value = popTemp();
+					TempList instTemps{record, field, value};
+					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record);
+					pushInstruction(IrInstruction(IrOp::AssertString, inst.operand0, field);
+					pushInstruction(IrInstruction(IrOp::RecordLoad, inst.operand0, instTemps));
 	                break;
 	            }
 	        case BcOp::IndexLoad:
 	            {
+					Temp record = popTemp();
+					Temp index = popTemp();
+					pushTemp(currentTemp);
+					TempList instTemps{currentTemp, record, field};
+					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record);
+					pushInstruction(IrInstruction(IrOp::CastString, inst.operand0, field);
+					pushInstruction(IrInstruction(IrOp::RecordLoad, inst.operand0, instTemps));
+					currentTemp++;
 	                break;
 	            }
 	        case BcOp::IndexStore:
 	            {
+					Temp record = popTemp();
+					Temp index = popTemp();
+					Temp value = popTemp();
+					TempList instTemps{record, field, value};
+					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record);
+					pushInstruction(IrInstruction(IrOp::CastString, inst.operand0, field);
+					pushInstruction(IrInstruction(IrOp::RecordLoad, inst.operand0, instTemps));
 	                break;
 	            }
 	        case BcOp::AllocClosure:
