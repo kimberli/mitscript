@@ -11,7 +11,8 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
-regex="([\.0-9]+)\^"
+TOTAL_USED=0
+mem_regex="([\.0-9]+)\^"
 
 run_test() {
     filename=$1
@@ -19,14 +20,20 @@ run_test() {
     TOTAL=$((TOTAL+1))
     valgrind --tool=massif --log-file=tmp2.txt --massif-out-file=tmp.txt --threshold=100 $PROG $filename > /dev/null
     ms_print --threshold=100 tmp.txt > graph.txt
-    if [[ $(cat graph.txt) =~ $regex ]]; then
+    if [[ $(cat graph.txt) =~ $mem_regex ]]; then
         mem_used="${BASH_REMATCH[1]}"
+    fi
+    if [[ $(cat graph.txt) =~ "KB" ]]; then
+        mem_used=$(echo "$mem_used / 1024" | bc -l)
+    elif [[ $(cat graph.txt) =~ "GB" ]]; then
+        mem_used=$(echo "$mem_used * 1024" | bc -l)
     fi
     sed -ne '7,30p' graph.txt
     rm tmp.txt
     rm tmp2.txt
     rm graph.txt
-    echo -e "\nMax mem used: $mem_used (limit was $LIMIT MB)"
+    printf "\nMax mem used: %0.2f (limit was %d MB)\n" $mem_used $LIMIT
+    TOTAL_USED=$(echo "$TOTAL_USED + $mem_used" | bc -l)
     if (( $(echo "$mem_used < $LIMIT" | bc -l) )); then
         SUCCESS=$((SUCCESS+1))
         echo -e "${GREEN}Test Passed${NC}\n"
@@ -69,4 +76,5 @@ fi
 
 echo -e "\n\n----------"
 echo "Finished tests - ${SUCCESS}/${TOTAL} passed"
-
+average=$(echo "$TOTAL_USED / $TOTAL" | bc -l)
+printf "Total memory used: %0.2f MB, average used: %0.2f MB\n" $TOTAL_USED $average
