@@ -6,72 +6,59 @@
 #include "../types.h"
 #include "../ir.h"
 #include "bc_to_ir.h"
-#include <algorithm>
-#include <stack>
 
 using namespace std;
 
 class Interpreter;
 
-IrCompiler::IrCompiler(Function* mainFunc, Interpreter* vmInterpreterPointer) {
-    vmPointer = vmInterpreterPointer;
-	func = mainFunc;
-};
-
 IrFunc IrCompiler::toIrFunc(Function* func) {
-	IrInstList irInsts;
-	int32_t currentTemp = 0;
-	stack<Temp> tempStack;
+    func = func;
+    tempStack = stack<Temp>();  // are we gonna garbage collect this?
+    irInsts = IrInstList();
+	temp_t currentTemp = 0;
+
     for (int i = 0; i < func->instructions.size(); i++) {
-		TempList temps;
 		BcInstruction inst = func->instructions[i];
 	    switch (inst.operation) {
 	        case BcOp::LoadConst:
 	            {
-					tempStack.push(Temp(currentTemp));
-					temps.push_back(currentTemp);
+                    pushTemp(currentTemp);
+					pushInstruction(IrInstruction(IrOp::LoadConst, inst.operand0, currentTemp));
 					currentTemp++;
-					irInsts.push_back(IrInstruction(IrOp::LoadConst, inst.operand0, temps));
 	                break;
 	            }
 	        case BcOp::LoadFunc:
 	            {
-					tempStack.push(Temp(currentTemp));
-					temps.push_back(currentTemp);
+                    pushTemp(currentTemp);
+					pushInstruction(IrInstruction(IrOp::LoadFunc, inst.operand0, currentTemp));
 					currentTemp++;
-					irInsts.push_back(IrInstruction(IrOp::LoadFunc, inst.operand0, temps));
 	                break;
 	            }
 	        case BcOp::LoadLocal:
 	            {
-					tempStack.push(Temp(currentTemp));
-					temps.push_back(currentTemp);
-					irInsts.push_back(IrInstruction(IrOp::LoadLocal, inst.operand0, temps));
+                    pushTemp(currentTemp);
+					pushInstruction(IrInstruction(IrOp::LoadLocal, inst.operand0, currentTemp));
+					currentTemp++;
+	                break;
+	            }
+	        case BcOp::LoadGlobal:
+	            {
+                    pushTemp(currentTemp);
+                    
+                    optstr_t global = func->names_[inst.operand0.value()];
+					pushInstruction(IrInstruction(IrOp::LoadGlobal, global, currentTemp));
 					currentTemp++;
 	                break;
 	            }
 	        case BcOp::StoreLocal:
 	            {
-					Temp temp = tempStack.top();
-					tempStack.pop();
-					temps.push_back(temp);
-					irInsts.push_back(IrInstruction(IrOp::StoreLocal, inst.operand0, temps));
-	                break;
-	            }
-	        case BcOp::LoadGlobal:
-	            {
-					tempStack.push(Temp(currentTemp));
-					temps.push_back(currentTemp);
-					irInsts.push_back(IrInstruction(IrOp::LoadGlobal, inst.operand0, temps));
-					currentTemp++;
+					pushInstruction(IrInstruction(IrOp::StoreLocal, inst.operand0, popTemp()));
 	                break;
 	            }
 	        case BcOp::StoreGlobal:
 	            {
-					Temp temp = tempStack.top();
-					tempStack.pop();
-					temps.push_back(temp);
-					irInsts.push_back(IrInstruction(IrOp::StoreGlobal, inst.operand0, temps));
+                    optstr_t global = func->names_[inst.operand0.value()];
+					pushInstruction(IrInstruction(IrOp::StoreGlobal, global, popTemp()));
 	                break;
 	            }
 	        case BcOp::PushReference:
@@ -112,187 +99,118 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Return:
 	            {
+                    pushInstruction(IrInstruction(IrOp::Return, popTemp()));
 	                break;
 	            }
 	        case BcOp::Add:
 	            {
-					Temp temp1 = tempStack.top();
-					tempStack.pop();
-					Temp temp2 = tempStack.top();
-					tempStack.pop();
-					temps.push_back(currentTemp);
+                    Temp tempRight = popTemp();
+                    Temp tempLeft = popTemp();
+                    TempList instTemps{currentTemp, tempRight, tempLeft};
+					pushInstruction(IrInstruction(IrOp::Add, inst.operand0, instTemps));
 					currentTemp++;
-					temps.push_back(temp1.stackOffset);
-					temps.push_back(temp2.stackOffset);
-					irInsts.push_back(IrInstruction(IrOp::Add, inst.operand0, temps));
 	                break;
 	            }
 	        case BcOp::Sub:
 	            {
-					Temp temp1 = tempStack.top();
-					tempStack.pop();
-					Temp temp2 = tempStack.top();
-					tempStack.pop();
-					temps.push_back(currentTemp);
+                    Temp tempRight = popTemp();
+                    Temp tempLeft = popTemp();
+                    TempList instTemps{currentTemp, tempRight, tempLeft};
+					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempRight));
+					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempLeft));
+					pushInstruction(IrInstruction(IrOp::Sub, inst.operand0, instTemps));
 					currentTemp++;
-					temps.push_back(temp1.stackOffset);
-					temps.push_back(temp2.stackOffset);
-					TempList first;
-					first.push_back(temp1.stackOffset);
-					TempList second;
-					second.push_back(temp2.stackOffset);
-					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, first));
-					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, second));
-					irInsts.push_back(IrInstruction(IrOp::Sub, inst.operand0, temps));
 	                break;
 	            }
 	        case BcOp::Mul:
 	            {
-					Temp temp1 = tempStack.top();
-					tempStack.pop();
-					Temp temp2 = tempStack.top();
-					tempStack.pop();
-					temps.push_back(currentTemp);
+                    Temp tempRight = popTemp();
+                    Temp tempLeft = popTemp();
+                    TempList instTemps{currentTemp, tempRight, tempLeft};
+					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempRight));
+					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempLeft));
+					pushInstruction(IrInstruction(IrOp::Mul, inst.operand0, instTemps));
 					currentTemp++;
-					temps.push_back(temp1.stackOffset);
-					temps.push_back(temp2.stackOffset);
-					TempList first;
-					first.push_back(temp1.stackOffset);
-					TempList second;
-					second.push_back(temp2.stackOffset);
-					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, first));
-					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, second));
-					irInsts.push_back(IrInstruction(IrOp::Mul, inst.operand0, temps));
 	                break;
 	            }
 	        case BcOp::Div:
 	            {
-					Temp temp1 = tempStack.top();
-					tempStack.pop();
-					Temp temp2 = tempStack.top();
-					tempStack.pop();
-					temps.push_back(currentTemp);
+                    Temp tempRight = popTemp();
+                    Temp tempLeft = popTemp();
+                    TempList instTemps{currentTemp, tempRight, tempLeft};
+					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempRight));
+					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempLeft));
+					pushInstruction(IrInstruction(IrOp::Div, inst.operand0, instTemps));
 					currentTemp++;
-					temps.push_back(temp1.stackOffset);
-					temps.push_back(temp2.stackOffset);
-					TempList first;
-					first.push_back(temp1.stackOffset);
-					TempList second;
-					second.push_back(temp2.stackOffset);
-					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, first));
-					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, second));
-					irInsts.push_back(IrInstruction(IrOp::Div, inst.operand0, temps));
 	                break;
 	            }
 	        case BcOp::Neg:
 	            {
-					Temp temp1 = tempStack.top();
-					tempStack.pop();
-					temps.push_back(currentTemp);
+                    Temp val = popTemp();
+					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, val));
+					pushInstruction(IrInstruction(IrOp::Neg, inst.operand0, val));
 					currentTemp++;
-					temps.push_back(temp1.stackOffset);
-					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, temps));
-					irInsts.push_back(IrInstruction(IrOp::Neg, inst.operand0, temps));
 	                break;
 	            }
 	        case BcOp::Gt:
 	            {
-					Temp temp1 = tempStack.top();
-					tempStack.pop();
-					Temp temp2 = tempStack.top();
-					tempStack.pop();
-					temps.push_back(currentTemp);
+                    Temp tempRight = popTemp();
+                    Temp tempLeft = popTemp();
+                    TempList instTemps{currentTemp, tempRight, tempLeft};
+					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempRight));
+					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempLeft));
+					pushInstruction(IrInstruction(IrOp::Gt, inst.operand0, instTemps));
 					currentTemp++;
-					temps.push_back(temp1.stackOffset);
-					temps.push_back(temp2.stackOffset);
-					TempList first;
-					first.push_back(temp1.stackOffset);
-					TempList second;
-					second.push_back(temp2.stackOffset);
-					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, first));
-					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, second));
-					irInsts.push_back(IrInstruction(IrOp::Gt, inst.operand0, temps));
 	                break;
 	            }
 	        case BcOp::Geq:
 	            {
-					Temp temp1 = tempStack.top();
-					tempStack.pop();
-					Temp temp2 = tempStack.top();
-					tempStack.pop();
-					temps.push_back(currentTemp);
+                    Temp tempRight = popTemp();
+                    Temp tempLeft = popTemp();
+                    TempList instTemps{currentTemp, tempRight, tempLeft};
+					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempRight));
+					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempLeft));
+					pushInstruction(IrInstruction(IrOp::Geq, inst.operand0, instTemps));
 					currentTemp++;
-					temps.push_back(temp1.stackOffset);
-					temps.push_back(temp2.stackOffset);
-					TempList first;
-					first.push_back(temp1.stackOffset);
-					TempList second;
-					second.push_back(temp2.stackOffset);
-					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, first));
-					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, second));
-					irInsts.push_back(IrInstruction(IrOp::Geq, inst.operand0, temps));
 	                break;
 	            }
 	        case BcOp::Eq:
 	            {
-					Temp temp1 = tempStack.top();
-					tempStack.pop();
-					Temp temp2 = tempStack.top();
-					tempStack.pop();
-					temps.push_back(currentTemp);
+                    Temp tempRight = popTemp();
+                    Temp tempLeft = popTemp();
+                    TempList instTemps{currentTemp, tempRight, tempLeft};
+					pushInstruction(IrInstruction(IrOp::Eq, inst.operand0, instTemps));
 					currentTemp++;
-					temps.push_back(temp1.stackOffset);
-					temps.push_back(temp2.stackOffset);
-					irInsts.push_back(IrInstruction(IrOp::Eq, inst.operand0, temps));
 	                break;
 	            }
 	        case BcOp::And:
 	            {
-					Temp temp1 = tempStack.top();
-					tempStack.pop();
-					Temp temp2 = tempStack.top();
-					tempStack.pop();
-					temps.push_back(currentTemp);
+                    Temp tempRight = popTemp();
+                    Temp tempLeft = popTemp();
+                    TempList instTemps{currentTemp, tempRight, tempLeft};
+					pushInstruction(IrInstruction(IrOp::AssertBool, inst.operand0, tempRight));
+					pushInstruction(IrInstruction(IrOp::AssertBool, inst.operand0, tempLeft));
+					pushInstruction(IrInstruction(IrOp::And, inst.operand0, instTemps));
 					currentTemp++;
-					temps.push_back(temp1.stackOffset);
-					temps.push_back(temp2.stackOffset);
-					TempList first;
-					first.push_back(temp1.stackOffset);
-					TempList second;
-					second.push_back(temp2.stackOffset);
-					irInsts.push_back(IrInstruction(IrOp::AssertBool, inst.operand0, first));
-					irInsts.push_back(IrInstruction(IrOp::AssertBool, inst.operand0, second));
-					irInsts.push_back(IrInstruction(IrOp::And, inst.operand0, temps));
 	                break;
 	            }
 	        case BcOp::Or:
 	            {
-					Temp temp1 = tempStack.top();
-					tempStack.pop();
-					Temp temp2 = tempStack.top();
-					tempStack.pop();
-					temps.push_back(currentTemp);
+                    Temp tempRight = popTemp();
+                    Temp tempLeft = popTemp();
+                    TempList instTemps{currentTemp, tempRight, tempLeft};
+					pushInstruction(IrInstruction(IrOp::AssertBool, inst.operand0, tempRight));
+					pushInstruction(IrInstruction(IrOp::AssertBool, inst.operand0, tempLeft));
+					pushInstruction(IrInstruction(IrOp::Or, inst.operand0, instTemps));
 					currentTemp++;
-					temps.push_back(temp1.stackOffset);
-					temps.push_back(temp2.stackOffset);
-					TempList first;
-					first.push_back(temp1.stackOffset);
-					TempList second;
-					second.push_back(temp2.stackOffset);
-					irInsts.push_back(IrInstruction(IrOp::AssertBool, inst.operand0, first));
-					irInsts.push_back(IrInstruction(IrOp::AssertBool, inst.operand0, second));
-					irInsts.push_back(IrInstruction(IrOp::Or, inst.operand0, temps));
 	                break;
 	            }
 	        case BcOp::Not:
 	            {
-					Temp temp = tempStack.top();
-					tempStack.pop();
-					temps.push_back(currentTemp);
+                    Temp val = popTemp();
+					pushInstruction(IrInstruction(IrOp::AssertBool, inst.operand0, val));
+					pushInstruction(IrInstruction(IrOp::Not, inst.operand0, val));
 					currentTemp++;
-					temps.push_back(temp.stackOffset);
-					irInsts.push_back(IrInstruction(IrOp::AssertBool, inst.operand0, temps));
-					irInsts.push_back(IrInstruction(IrOp::Not, inst.operand0, temps));
 	                break;
 	            }
 	        case BcOp::Goto:
@@ -305,22 +223,20 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Dup:
 	            {
-					tempStack.push(Temp(tempStack.top()));
+                    pushTemp(tempStack.top());
 	                break;
 	            }
 	        case BcOp::Swap:
 	            {
-					Temp temp1 = tempStack.top();
-					tempStack.pop();
-					Temp temp2 = tempStack.top();
-					tempStack.pop();
-					tempStack.push(temp1);
-					tempStack.push(temp2);
+                    Temp temp1 = popTemp();
+                    Temp temp2 = popTemp();
+                    pushTemp(temp1);
+                    pushTemp(temp2);
 	                break;
 	            }
 	        case BcOp::Pop:
 	            {
-					tempStack.pop();
+                    popTemp();
 	                break;
 	            }
 	        default:
@@ -328,15 +244,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	    }
 	}
 	IrFunc irFunc = IrFunc(irInsts, func->constants_, func->parameter_count_, func->local_vars_.size());
-	//irFuncs.push_back(irFunc);
-	//for (Function* f: func->functions_) {
-	//	toIrFunc(f);
-	//}
     return irFunc;
 };
 
 IrFunc IrCompiler::toIr() {
-	//irFuncs = vector<IrFunc*>();
 	return toIrFunc(func);
-	//return IrProgram(f);
 };
