@@ -19,9 +19,6 @@
 
 #define LOG(msg) { if (false) std::cerr << msg << endl; }
 
-template<typename T>
-using vptr = T*;
-
 class Frame;
 class Collectable;
 
@@ -36,7 +33,7 @@ struct Value : public Collectable {
     // instance function that returns printable representation of this value's data
     virtual string toString() = 0;
     // instance function to determine whether this value is equal to another one
-    virtual bool equals(vptr<Value> other) = 0;
+    virtual bool equals(Value* other) = 0;
 
     // helper function to dynamically cast value to a specific subclass type
     // and raise an IllegalCastException if the cast fails
@@ -59,10 +56,10 @@ struct Function : public Value {
     // Class for function type; produced by bytecode compiler
 
     // functions defined within this function (but not inside nested functions)
-    vector<vptr<Function>> functions_;
+    vector<Function*> functions_;
 
     // constants used by the instructions within this function (but not inside nested functions)
-    vector<vptr<Constant>> constants_;
+    vector<Constant*> constants_;
 
     // number of parameters to the function
     int32_t parameter_count_;
@@ -86,8 +83,8 @@ struct Function : public Value {
     Function() {};
     virtual ~Function() {};
 
-    Function(vector<vptr<Function>> functions_,
-            vector<vptr<Constant>> constants_,
+    Function(vector<Function*> functions_,
+            vector<Constant*> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -104,7 +101,7 @@ struct Function : public Value {
         instructions(instructions) {};
 
     string toString();
-    bool equals(vptr<Value> other);
+    bool equals(Value* other);
     static const string typeS;
     string type() {
         return "Function";
@@ -116,10 +113,10 @@ struct Function : public Value {
 
 struct ValWrapper: public Value {
     // Class for reference variables
-    vptr<Constant> ptr;
+    Constant* ptr;
 
     ValWrapper() {}
-    ValWrapper(vptr<Constant> ptr): ptr(ptr) {};
+    ValWrapper(Constant* ptr): ptr(ptr) {};
     virtual ~ValWrapper() {}
 
     static const string typeS;
@@ -128,7 +125,7 @@ struct ValWrapper: public Value {
     }
 
     string toString();
-    bool equals(vptr<Value> other);
+    bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
     size_t getSize() override;
@@ -144,7 +141,7 @@ struct None : public Constant {
     }
 
     string toString();
-    bool equals(vptr<Value> other);
+    bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
     size_t getSize() override;
@@ -163,7 +160,7 @@ struct Integer : public Constant {
     }
 
     string toString();
-    bool equals(vptr<Value> other);
+    bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
     size_t getSize() override;
@@ -182,7 +179,7 @@ struct String : public Constant {
     }
 
     string toString();
-    bool equals(vptr<Value> other);
+    bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
     size_t getSize() override;
@@ -201,7 +198,7 @@ struct Boolean : public Constant{
     }
 
     string toString();
-    bool equals(vptr<Value> other);
+    bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
     size_t getSize() override;
@@ -209,14 +206,14 @@ struct Boolean : public Constant{
 
 struct Record : public Constant {
     // Class for record type (note that this is mutable)
-	map<string, vptr<Value>> value;
+	map<string, Value*> value;
 
-    vptr<Value> get(string key);
-    void set(string key, vptr<Value> value, CollectedHeap& collector);
+    Value* get(string key);
+    void set(string key, Value* value, CollectedHeap& collector);
 
     virtual ~Record() {}
     string toString();
-    bool equals(vptr<Value> other);
+    bool equals(Value* other);
     static const string typeS;
     string type() {
         return "Record";
@@ -231,12 +228,12 @@ struct Closure: public Constant {
 
     // list of reference variables, in the same order as listed in the function's
     // free_vars_ list
-    vector<vptr<ValWrapper>> refs;
+    vector<ValWrapper*> refs;
 
     // function that the closure is for
-    vptr<Function> func;
+    Function* func;
 
-    Closure(vector<vptr<ValWrapper>> refs, vptr<Function> func):
+    Closure(vector<ValWrapper*> refs, Function* func):
         refs(refs), func(func) {};
     virtual ~Closure() {}
 
@@ -246,7 +243,7 @@ struct Closure: public Constant {
     }
 
     string toString();
-    bool equals(vptr<Value> other);
+    bool equals(Value* other);
 
     void follow(CollectedHeap& heap) override;
     size_t getSize() override;
@@ -255,8 +252,8 @@ struct Closure: public Constant {
 class NativeFunction : public Function {
     // Abstract class for native functions
 public:
-    NativeFunction(vector<vptr<Function>> functions_,
-            vector<vptr<Constant>> constants_,
+    NativeFunction(vector<Function*> functions_,
+            vector<Constant*> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -266,14 +263,14 @@ public:
 			Function(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-    virtual vptr<Constant> evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) = 0;
+    virtual Constant* evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) = 0;
 };
 
 class PrintNativeFunction : public NativeFunction {
     // Class for print native function
 public:
-    PrintNativeFunction(vector<vptr<Function>> functions_,
-            vector<vptr<Constant>> constants_,
+    PrintNativeFunction(vector<Function*> functions_,
+            vector<Constant*> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -283,14 +280,14 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-   vptr<Constant> evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
+   Constant* evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
 };
 
 class InputNativeFunction : public NativeFunction {
     // Class for input native function
 public:
-    InputNativeFunction(vector<vptr<Function>> functions_,
-            vector<vptr<Constant>> constants_,
+    InputNativeFunction(vector<Function*> functions_,
+            vector<Constant*> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -300,14 +297,14 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-    vptr<Constant> evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
+    Constant* evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
 };
 
 class IntcastNativeFunction : public NativeFunction {
     // Class for intcast native function
 public:
-    IntcastNativeFunction(vector<vptr<Function>> functions_,
-            vector<vptr<Constant>> constants_,
+    IntcastNativeFunction(vector<Function*> functions_,
+            vector<Constant*> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -317,5 +314,5 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-    vptr<Constant> evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
+    Constant* evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
 };

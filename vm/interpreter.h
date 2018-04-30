@@ -28,18 +28,18 @@ private:
     bool shouldCallAsm = false;
 public:
     CollectedHeap* collector;
-    Interpreter(vptr<Function> mainFunc, int maxmem);
+    Interpreter(Function* mainFunc, int maxmem);
     void run();  // executes all instructions until termination
 
     // handle different call methods for vm vs asm exeuction 
-    vptr<Value> call(vector<vptr<Constant>> argsList, vptr<Value> closure);
+    Value* call(vector<Constant*> argsList, Value* closure);
     // handles calling from the vm 
-    vptr<Value> callVM(vector<vptr<Constant>> argsList, vptr<Closure> clos);
+    Value* callVM(vector<Constant*> argsList, Closure* clos);
     // handles calling from asm 
-    vptr<Value> callAsm(vector<vptr<Constant>> argsList, vptr<Closure> clos);
+    Value* callAsm(vector<Constant*> argsList, Closure* clos);
 
     // asm helpers
-    vptr<Value> add(vptr<Value> left, vptr<Value> right);
-    void storeGlobal(string name, vptr<Value> val);
-    vptr<Value> loadGlobal(string name);
+    Value* add(Value* left, Value* right);
+    void storeGlobal(string name, Value* val);
+    Value* loadGlobal(string name);
 };

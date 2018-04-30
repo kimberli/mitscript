@@ -273,12 +273,12 @@ struct IrInstruction {
 
 struct IrFunc {
     IrInstList instructions;
-    vector<vptr<Constant>> constants_;
+    vector<Constant*> constants_;
     int32_t parameter_count_;
     int32_t local_count_;
 
     IrFunc(IrInstList instructions,
-        vector<vptr<Constant>> constants_,
+        vector<Constant*> constants_,
         int32_t parameter_count_,
         int32_t local_count_) :
         instructions(instructions),

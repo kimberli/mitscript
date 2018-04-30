@@ -13,12 +13,12 @@ using namespace std;
 
 class Interpreter;
 
-IrCompiler::IrCompiler(vptr<Function> mainFunc, vptr<Interpreter> vmInterpreterPointer) {
+IrCompiler::IrCompiler(Function* mainFunc, Interpreter* vmInterpreterPointer) {
     vmPointer = vmInterpreterPointer;
 	func = mainFunc;
 };
 
-IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
+IrFunc IrCompiler::toIrFunc(Function* func) {
 	IrInstList irInsts;
 	int32_t currentTemp = 0;
 	stack<Temp> tempStack;
@@ -329,14 +329,14 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 	}
 	IrFunc irFunc = IrFunc(irInsts, func->constants_, func->parameter_count_, func->local_vars_.size());
 	//irFuncs.push_back(irFunc);
-	//for (vptr<Function> f: func->functions_) {
+	//for (Function* f: func->functions_) {
 	//	toIrFunc(f);
 	//}
     return irFunc;
 };
 
 IrFunc IrCompiler::toIr() {
-	//irFuncs = vector<vptr<IrFunc>>();
+	//irFuncs = vector<IrFunc*>();
 	return toIrFunc(func);
 	//return IrProgram(f);
 };

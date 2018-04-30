@@ -15,7 +15,7 @@
 
 using namespace std;
 
-typedef map<string, vptr<ValWrapper>> VarMap;
+typedef map<string, ValWrapper*> VarMap;
 typedef Frame* fptr;
 
 class Frame : public Collectable {
@@ -28,9 +28,9 @@ public:
     // vector of local variable names to values (stored in ValWrapper)
     VarMap vars;
     // function that the frame is for
-    vptr<Function> func;
+    Function* func;
     // operand stack
-    list<vptr<Value>> opStack;
+    list<Value*> opStack;
     // index of current instruction in func's instructions list
     int instructionIndex = 0;
     // garbage collector
@@ -38,7 +38,7 @@ public:
     // offset to keep track of stuff
     int offset = 0;
 
-    Frame(vptr<Function> func): func(func) {};
+    Frame(Function* func): func(func) {};
 
     virtual ~Frame() {}
 
@@ -48,23 +48,23 @@ public:
     void checkLegalInstruction();
 
     // function value helpers
-    vptr<Constant> getConstantByIndex(int index);
-    vptr<Function> getFunctionByIndex(int index);
+    Constant* getConstantByIndex(int index);
+    Function* getFunctionByIndex(int index);
     string getLocalByIndex(int index);
     string getNameByIndex(int index);
     string getRefByIndex(int index);
 
     // var map helpers
-    vptr<Constant> getLocalVar(string name);
-    vptr<ValWrapper> getRefVar(string name);
+    Constant* getLocalVar(string name);
+    ValWrapper* getRefVar(string name);
 
-    void setLocalVar(string name, vptr<Constant> val);
-    void setRefVar(string name, vptr<ValWrapper> val);
+    void setLocalVar(string name, Constant* val);
+    void setRefVar(string name, ValWrapper* val);
 
     // operand stack helpers
-    void opStackPush(vptr<Value> val);
-    vptr<Value> opStackPeek();
-    vptr<Value> opStackPop();
+    void opStackPush(Value* val);
+    Value* opStackPeek();
+    Value* opStackPop();
 
     void opStackPrint() {
         for (Value* v : opStack) {

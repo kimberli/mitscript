@@ -13,12 +13,12 @@ using namespace std;
 
 class IrInterpreter {
 private: 
-    vptr<Interpreter> vmPointer;
+    Interpreter* vmPointer;
 
     x64asm::Assembler assm; 
     x64asm::Function asmFunc;
 
-    vptr<IrFunc> func;
+    IrFunc* func;
     int stackSize = 0;
     int instructionIndex;
     bool finished;
@@ -28,6 +28,6 @@ private:
     void loadTemp(x64asm::R64 reg, Temp &temp);
     void storeTemp(x64asm::R64 reg, Temp &temp);
 public: 
-    IrInterpreter(vptr<IrFunc> irFunction, vptr<Interpreter> vmInterpreterPointer); 
+    IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPointer); 
     x64asm::Function run(); // runs the program 
 };

@@ -19,8 +19,8 @@
 
 using namespace std;
 
-typedef vptr<Constant> constptr_t;
-typedef vptr<Function> funcptr_t;
+typedef Constant* constptr_t;
+typedef Function* funcptr_t;
 typedef std::experimental::optional<int32_t> optint_t;
 
 class BytecodeCompiler : public Visitor {

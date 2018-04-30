@@ -1,6 +1,6 @@
 #include "ir_to_asm.h"
 
-IrInterpreter::IrInterpreter(vptr<IrFunc> irFunction, vptr<Interpreter> vmInterpreterPointer) {
+IrInterpreter::IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPointer) {
     vmPointer = vmInterpreterPointer;
     func = irFunction; 
     // by convention, the first ir function is the main function

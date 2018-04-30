@@ -21,14 +21,14 @@ void Frame::checkLegalInstruction() {
 }
 
 // function value helpers
-vptr<Constant> Frame::getConstantByIndex(int index) {
+Constant* Frame::getConstantByIndex(int index) {
     if (index < 0 || index >= func->constants_.size()) {
         throw RuntimeException("constant " + to_string(index) + " out of bounds");
     }
     return func->constants_[index];
 }
 
-vptr<Function> Frame::getFunctionByIndex(int index) {
+Function* Frame::getFunctionByIndex(int index) {
     if (index < 0 || index >= func->functions_.size()) {
         throw RuntimeException("function " + to_string(index) + " out of bounds");
     }
@@ -60,9 +60,9 @@ string Frame::getRefByIndex(int index) {
 }
 
 // var map helpers
-vptr<Constant> Frame::getLocalVar(string name) {
+Constant* Frame::getLocalVar(string name) {
     if (vars.count(name) != 0) {
-        vptr<Constant> result = vars[name]->ptr;
+        Constant* result = vars[name]->ptr;
         if (result == NULL) {
             throw UninitializedVariableException(name + " is not defined");
         }
@@ -71,14 +71,14 @@ vptr<Constant> Frame::getLocalVar(string name) {
     throw UninitializedVariableException(name + " is not defined");
 }
 
-vptr<ValWrapper> Frame::getRefVar(string name) {
+ValWrapper* Frame::getRefVar(string name) {
     if (vars.count(name) != 0) {
         return vars[name];
     }
     throw RuntimeException(name + " has not been created in its frame's vars");
 }
 
-void Frame::setLocalVar(string name, vptr<Constant> val) {
+void Frame::setLocalVar(string name, Constant* val) {
     if (vars.count(name) == 0) {
         vars[name] = collector->allocate<ValWrapper>(val);
         collector->increment(sizeof(name) + name.size() + sizeof(val));
@@ -87,7 +87,7 @@ void Frame::setLocalVar(string name, vptr<Constant> val) {
     }
 }
 
-void Frame::setRefVar(string name, vptr<ValWrapper> val) {
+void Frame::setRefVar(string name, ValWrapper* val) {
     if (vars.count(name) == 0) {
         collector->increment(sizeof(name) + name.size() + sizeof(val));
     }
@@ -95,23 +95,23 @@ void Frame::setRefVar(string name, vptr<ValWrapper> val) {
 }
 
 // operand stack helpers
-void Frame::opStackPush(vptr<Value> val) {
+void Frame::opStackPush(Value* val) {
     collector->increment(sizeof(val));
     opStack.push_back(val);
 }
 
-vptr<Value> Frame::opStackPeek() {
+Value* Frame::opStackPeek() {
     if (opStack.empty()) {
         throw InsufficientStackException("peek at empty stack");
     }
     return opStack.back();
 }
 
-vptr<Value> Frame::opStackPop() {
+Value* Frame::opStackPop() {
     if (opStack.empty()) {
         throw InsufficientStackException("pop from empty stack");
     }
-    vptr<Value> top = opStack.back();
+    Value* top = opStack.back();
     int size = sizeof(top);
     collector->increment(-size);
     opStack.pop_back();
