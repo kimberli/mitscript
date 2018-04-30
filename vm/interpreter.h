@@ -25,6 +25,7 @@ private:
     list<fptr> frames;  // stack of frames
     void executeStep();  // execute a single next instruction
     bool finished;  // true when the program has terminated
+    bool shouldCallAsm = false;
 public:
     CollectedHeap* collector;
     Interpreter(vptr<Function> mainFunc, int maxmem);

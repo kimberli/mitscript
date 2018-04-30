@@ -414,8 +414,20 @@ void Interpreter::executeStep() {
 
 void Interpreter::run() {
     // runs program until termination (early return, end of statements)
-    while (!finished) {
-        executeStep();
+    if (shouldCallAsm) {
+        // create a closure objec to wrap the main function 
+        vector<vptr<ValWrapper>> emptyRefs;
+        vector<vptr<Constant>> emptyArgs;
+        vptr<Function> mainFunc = globalFrame->func;
+        // TODO: this is not on the stack anywhere. it could get spontaneously
+        // garbage-collected. How do we handle this? 
+        vptr<Closure> mainClosure = collector->allocate<Closure>(emptyRefs, mainFunc);
+        callAsm(emptyArgs, mainClosure);
+    } else {
+        // the global frame has already been created; you're ready to go 
+        while (!finished) {
+            executeStep();
+        }
     }
 };
 
@@ -429,7 +441,6 @@ vptr<Value> Interpreter::call(vector<vptr<Constant>> argsList, vptr<Value> closu
     if (argsList.size() != clos->func->parameter_count_) {
         throw RuntimeException("expected " + to_string(clos->func->parameter_count_) + " arguments, got " + to_string(argsList.size()));
     }
-    bool shouldCallAsm = false;
     if (shouldCallAsm) {
         callAsm(argsList, clos);
     } else {
