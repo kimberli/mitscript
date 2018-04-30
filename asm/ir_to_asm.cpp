@@ -68,6 +68,11 @@ void IrInterpreter::executeStep() {
         case IrOp::LoadFunc: 
             {
                 LOG("LoadFunc");
+                int funcIndex = inst.op0.value();
+                // load the func pointer into a register
+                assm.mov(x64asm::rdi, x64asm::Imm64{func->functions_.at(funcIndex)});
+                // move from the register into a temp on the stack 
+                storeTemp(x64asm::rdi, inst.tempIndices.at(0));
                 break;
             }
         case IrOp::LoadLocal: 
