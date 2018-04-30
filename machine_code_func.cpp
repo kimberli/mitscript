@@ -106,13 +106,13 @@ public:
     compiled_ = true;
   }
 
-  Value *call(const std::vector<Value *> args)
+  Value *call(const vector<Value *> args)
   {
     assert(compiled_);
     assert(args.size() == parameter_count_);
 
     // copy contents into buffer
-    std::copy(args.begin(), args.end(), buffer_.begin());
+    copy(args.begin(), args.end(), buffer_.begin());
 
     Value *result = trampoline_.call<Value *>();
 
@@ -121,7 +121,7 @@ public:
 
 private:
   bool compiled_;
-  std::vector<Value *> buffer_;
+  vector<Value *> buffer_;
   size_t parameter_count_;
 
   x64asm::Function trampoline_;

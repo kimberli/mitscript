@@ -230,7 +230,7 @@ enum class BcOp
 
 struct BcInstruction
 {
-    BcInstruction(const BcOp operation, std::experimental::optional<int32_t> operand0)
+    BcInstruction(const BcOp operation, experimental::optional<int32_t> operand0)
     : operation(operation),
     operand0(operand0)
     {
@@ -238,7 +238,7 @@ struct BcInstruction
     }
 
     BcOp operation;
-    std::experimental::optional<int32_t> operand0;
+    experimental::optional<int32_t> operand0;
 };
 
-typedef std::vector<BcInstruction> BcInstructionList;
+typedef vector<BcInstruction> BcInstructionList;

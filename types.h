@@ -17,7 +17,9 @@
 
 #include "gc/gc.h"
 
-#define LOG(msg) { if (true) std::cerr << msg << endl; }
+using namespace std;
+
+#define LOG(msg) { if (true) cerr << msg << endl; }
 
 class Frame;
 class Collectable;

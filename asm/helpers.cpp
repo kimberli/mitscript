@@ -2,11 +2,11 @@
 // this needs to be here to break a circular dependency loop
 #include "../vm/interpreter.h"
 
-void helper_store_global(Interpreter* interpreter, std::string &name, Value* val) {
+void helper_store_global(Interpreter* interpreter, string &name, Value* val) {
     interpreter->storeGlobal(name, val);
 }
 
-Value* helper_load_global(Interpreter* interpreter, std::string &name) {
+Value* helper_load_global(Interpreter* interpreter, string &name) {
     return interpreter->loadGlobal(name);
 }
 

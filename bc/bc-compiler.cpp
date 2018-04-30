@@ -25,7 +25,7 @@ int BytecodeCompiler::allocConstant(constptr_t c) {
     return i;
 }
 
-int BytecodeCompiler::allocName(std::string name) {
+int BytecodeCompiler::allocName(string name) {
     int i = retFunc->names_.size();
     retFunc->names_.push_back(name);
     return i;
@@ -77,7 +77,7 @@ void BytecodeCompiler::addWriteInstructions(Expression* lhs) {
     }
 }
 
-void BytecodeCompiler::addWriteVarInstructions(std::string varName) {
+void BytecodeCompiler::addWriteVarInstructions(string varName) {
     desc_t d = curTable->vars.at(varName);
     BcInstructionList iList;
     switch (d->type) {
@@ -148,8 +148,8 @@ funcptr_t BytecodeCompiler::evaluate(Expression& exp) {
     curTable = symbolTables.at(0);
 
     // load up retFunc with vars from symbol table
-    for (std::map<std::string, desc_t>::iterator it = curTable->vars.begin(); it != curTable->vars.end(); it ++) {
-        std::string varName = it->first;
+    for (map<string, desc_t>::iterator it = curTable->vars.begin(); it != curTable->vars.end(); it ++) {
+        string varName = it->first;
         putVarInFunc(varName, curTable, retFunc);
     }
 
@@ -246,7 +246,7 @@ void BytecodeCompiler::visit(Return& exp) {
     retFunc->instructions.push_back(*instr);
 }
 
-bool BytecodeCompiler::putVarInFunc(std::string& varName, stptr_t table, funcptr_t func) {
+bool BytecodeCompiler::putVarInFunc(string& varName, stptr_t table, funcptr_t func) {
     // returns true if the bool was put in the local array, false else
     desc_t d = table->vars.at(varName);
     switch (d->type) {
@@ -280,9 +280,9 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
 
     // load up childFunc with vars from symbol table
     // start with args in order
-    std::set<std::string> argNames;
+    set<string> argNames;
     for (Identifier* arg : exp.args) {
-        std::string argName = arg->name;
+        string argName = arg->name;
         argNames.insert(argName);
         bool wasLocal = putVarInFunc(argName, childTable, childFunc);
         // if the arg was global, we need to push its name as a placeholder
@@ -291,8 +291,8 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
         }
     }
 
-    for (std::map<std::string, desc_t>::iterator it = childTable->vars.begin(); it != childTable->vars.end(); it ++) {
-        std::string varName = it->first;
+    for (map<string, desc_t>::iterator it = childTable->vars.begin(); it != childTable->vars.end(); it ++) {
+        string varName = it->first;
         bool isArg = argNames.find(varName) != argNames.end();
         if (!isArg) {
             putVarInFunc(varName, childTable, childFunc);
@@ -322,12 +322,12 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
 
     // 6) load refs to all the child's free vars.
     // THESE NEED TO GO ON BACKWARDS
-    //for (std::string var : childFunc->free_vars_) {
+    //for (string var : childFunc->free_vars_) {
     vector<string> freeVars = childFunc->free_vars_;
     for (vector<string>::reverse_iterator it = freeVars.rbegin();
          it != freeVars.rend();
          it++) {
-        std::string var = *it;
+        string var = *it;
         // get that var's description in the parent
         desc_t d = curTable->vars.at(var);
         int i;
@@ -461,14 +461,14 @@ void BytecodeCompiler::visit(RecordExpr& exp) {
     BcInstruction* alloc = new BcInstruction(BcOp::AllocRecord, noArg0);
     retFunc->instructions.push_back(*alloc);
 
-    for (std::map<Identifier*, Expression*>::iterator it = exp.record.begin(); it != exp.record.end(); it ++) {
+    for (map<Identifier*, Expression*>::iterator it = exp.record.begin(); it != exp.record.end(); it ++) {
         // dup instruction
         BcInstruction* dup = new BcInstruction(BcOp::Dup, noArg0);
         retFunc->instructions.push_back(*dup);
         // eval the value and add those instructions
         addInstructions(*(it->second));
         // add the name to the names array
-        std::string field = it->first->name;
+        string field = it->first->name;
         int i = allocName(field);
         // compose the instruction
         BcInstruction* store = new BcInstruction(BcOp::FieldStore, optint_t(i));

@@ -87,7 +87,7 @@ void IrInterpreter::executeStep() {
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
                 // load the string pointer into the second arg
-                std::string name = inst.global.value();
+                string name = inst.global.value();
                 assm.mov(argRegs[1], x64asm::Imm64{&name});
                 // call a helper 
                 void* fn = (void*) &(helper_load_global);
@@ -117,7 +117,7 @@ void IrInterpreter::executeStep() {
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
                 // load the string pointer into the second arg
-                std::string name = inst.global.value();
+                string name = inst.global.value();
                 assm.mov(argRegs[1], x64asm::Imm64{&name});
                 // load the value into the third arg 
                 loadTemp(argRegs[2], inst.tempIndices.at(0));

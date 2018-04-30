@@ -6,7 +6,9 @@
 #include <map>
 #include "Visitor.h"
 
-#define Assert(cond, msg) if(!(cond)){ std::cerr<<msg<<endl; throw SystemException("Bad stuff"); }
+using namespace std;
+
+#define Assert(cond, msg) if(!(cond)){ cerr<<msg<<endl; throw SystemException("Bad stuff"); }
 
 enum UnOp {
     Not,

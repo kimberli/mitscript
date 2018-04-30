@@ -21,7 +21,7 @@ using namespace std;
 
 typedef Constant* constptr_t;
 typedef Function* funcptr_t;
-typedef std::experimental::optional<int32_t> optint_t;
+typedef experimental::optional<int32_t> optint_t;
 
 class BytecodeCompiler : public Visitor {
     /*
@@ -35,7 +35,7 @@ private:
 
     // same as defined in lecture
     int allocConstant(constptr_t c);
-    int allocName(std::string name);
+    int allocName(string name);
 
     // helper that takes in a constant pointer, takes care of allocation
     // and creating the appropriate bb
@@ -44,13 +44,13 @@ private:
     // takes care of writing assignments
     void addWriteInstructions(Expression* lhs);
     // writes variables (does not handle records)
-    void addWriteVarInstructions(std::string varName);
+    void addWriteVarInstructions(string varName);
 
     // helper to load builtins to a scope
     void loadBuiltIns();
 
     // helper to move funcs from st to function
-    bool putVarInFunc(std::string& varName, stptr_t table, funcptr_t func);
+    bool putVarInFunc(string& varName, stptr_t table, funcptr_t func);
 
     // Symbol Table state
     stvec_t symbolTables;
