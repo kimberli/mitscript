@@ -8,7 +8,7 @@ THIS_FILE="test_vm.sh"
 DIFF=$DIR/diff.txt
 TEST_OUT=$DIR/tmp.out
 
-VERBOSE=true
+VERBOSE=false
 
 TOTAL=0
 SUCCESS=0
@@ -84,7 +84,7 @@ for filename in $DIR/*${filepattern}; do
     fi
     if run_test $filename; then
         rm $TEST_OUT
-    elif [ $VERBOSE ] || [ $count == 1 ]; then
+    elif [ $count == 1 ] || $VERBOSE ; then
         cat $DIFF
         echo -ne "${BLUE}IMPORTANT: if you believe the interpreter is in fact behaving correctly, do you want to update the ${TARGET_FILE_EXT} file? (Y/n):${NC} "
         read resp
