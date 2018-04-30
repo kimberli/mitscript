@@ -171,6 +171,12 @@ enum class IrOp {
     // Result: execution transfers to the label
     If,
 
+    // Description: duplicate the value in a temp
+    // temp1: index of temp to dup
+    // temp0: index to dup temp into
+    // Result: value is in temp1 and temp0
+    Dup,
+
     // Description: swap the values in two temps
     // temp0: index of one temp to swap
     // temp1: index of the other temp to swap
@@ -182,67 +188,67 @@ enum class IrOp {
     Pop,
 
     // Description: asserts that the first temp is an integer
-    // op0: index of value to check
+    // temp0: index of value to check
     // Result: throw RuntimeError if the temp is not an integer
     AssertInteger,
 
     // Description: asserts that the first temp is a bool
-    // op0: index of value to check
+    // temp0: index of value to check
     // Result: throw RuntimeError if the temp is not a bool
     AssertBool,
 
     // Description: asserts that the first temp is a string
-    // op0: index of value to check
+    // temp0: index of value to check
     // Result: throw RuntimeError if the temp is not a string
     AssertString,
 
     // Description: asserts that the first temp is an record
-    // op0: index of value to check
+    // temp0: index of value to check
     // Result: throw RuntimeError if the temp is not an record
     AssertRecord,
 
     // Description: asserts that the first temp is a function
-    // op0: index of value to check
+    // temp0: index of value to check
     // Result: throw RuntimeError if the temp is not a function
     AssertFunction,
 
     // Description: asserts that the first temp is a closure
-    // op0: index of value to check
+    // temp0: index of value to check
     // Result: throw RuntimeError if the temp is not a closure
     AssertClosure,
 
     // Description: casts the first temp to integer
-    // op0: index of value to cast
+    // temp0: index of value to cast
     // temp0: temp index to store result of cast in
     // Result: stores integer in temp0
     CastInteger,
 
     // Description: casts the first temp to bool
-    // op0: index of value to cast
+    // temp0: index of value to cast
     // temp0: temp index to store result of cast in
     // Result: stores bool in temp0
     CastBool,
 
     // Description: casts the first temp to string
-    // op0: index of value to cast
+    // temp0: index of value to cast
     // temp0: temp index to store result of cast in
     // Result: stores string in temp0
     CastString,
 
     // Description: casts the first temp to record
-    // op0: index of value to cast
+    // temp0: index of value to cast
     // temp0: temp index to store result of cast in
     // Result: stores record in temp0
     CastRecord,
 
     // Description: casts the first temp to function
-    // op0: index of value to cast
+    // temp0: index of value to cast
     // temp0: temp index to store result of cast in
     // Result: stores function in temp0
     CastFunction,
 
     // Description: casts the first temp to closure
-    // op0: index of value to cast
+    // temp0: index of value to cast
     // temp0: temp index to store result of cast in
     // Result: stores closure in temp0
     CastClosure,
