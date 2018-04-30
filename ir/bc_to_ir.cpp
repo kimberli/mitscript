@@ -53,7 +53,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 	            {
 					Temp temp = tempStack.top();
 					tempStack.pop();
-					temps.push_back(temp.stackOffset);
+					temps.push_back(temp);
 					irInsts.push_back(IrInstruction(IrOp::StoreLocal, inst.operand0, temps));
 	                break;
 	            }
@@ -69,7 +69,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 	            {
 					Temp temp = tempStack.top();
 					tempStack.pop();
-					temps.push_back(temp.stackOffset);
+					temps.push_back(temp);
 					irInsts.push_back(IrInstruction(IrOp::StoreGlobal, inst.operand0, temps));
 	                break;
 	            }
@@ -115,46 +115,183 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 	            }
 	        case Operation::Add:
 	            {
+					Temp temp1 = tempStack.top();
+					tempStack.pop();
+					Temp temp2 = tempStack.top();
+					tempStack.pop();
+					temps.push_back(currentTemp);
+					currentTemp++;
+					temps.push_back(temp1.stackOffset);
+					temps.push_back(temp2.stackOffset);
+					irInsts.push_back(IrInstruction(IrOp::Add, inst.operand0, temps));
 	                break;
 	            }
 	        case Operation::Sub:
 	            {
+					Temp temp1 = tempStack.top();
+					tempStack.pop();
+					Temp temp2 = tempStack.top();
+					tempStack.pop();
+					temps.push_back(currentTemp);
+					currentTemp++;
+					temps.push_back(temp1.stackOffset);
+					temps.push_back(temp2.stackOffset);
+					TempList first;
+					first.push_back(temp1.stackOffset);
+					TempList second;
+					second.push_back(temp2.stackOffset);
+					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, first));
+					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, second));
+					irInsts.push_back(IrInstruction(IrOp::Sub, inst.operand0, temps));
 	                break;
 	            }
 	        case Operation::Mul:
 	            {
+					Temp temp1 = tempStack.top();
+					tempStack.pop();
+					Temp temp2 = tempStack.top();
+					tempStack.pop();
+					temps.push_back(currentTemp);
+					currentTemp++;
+					temps.push_back(temp1.stackOffset);
+					temps.push_back(temp2.stackOffset);
+					TempList first;
+					first.push_back(temp1.stackOffset);
+					TempList second;
+					second.push_back(temp2.stackOffset);
+					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, first));
+					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, second));
+					irInsts.push_back(IrInstruction(IrOp::Mul, inst.operand0, temps));
 	                break;
 	            }
 	        case Operation::Div:
 	            {
+					Temp temp1 = tempStack.top();
+					tempStack.pop();
+					Temp temp2 = tempStack.top();
+					tempStack.pop();
+					temps.push_back(currentTemp);
+					currentTemp++;
+					temps.push_back(temp1.stackOffset);
+					temps.push_back(temp2.stackOffset);
+					TempList first;
+					first.push_back(temp1.stackOffset);
+					TempList second;
+					second.push_back(temp2.stackOffset);
+					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, first));
+					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, second));
+					irInsts.push_back(IrInstruction(IrOp::Div, inst.operand0, temps));
 	                break;
 	            }
 	        case Operation::Neg:
 	            {
+					Temp temp1 = tempStack.top();
+					tempStack.pop();
+					temps.push_back(currentTemp);
+					currentTemp++;
+					temps.push_back(temp1.stackOffset);
+					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, temps));
+					irInsts.push_back(IrInstruction(IrOp::Neg, inst.operand0, temps));
 	                break;
 	            }
 	        case Operation::Gt:
 	            {
+					Temp temp1 = tempStack.top();
+					tempStack.pop();
+					Temp temp2 = tempStack.top();
+					tempStack.pop();
+					temps.push_back(currentTemp);
+					currentTemp++;
+					temps.push_back(temp1.stackOffset);
+					temps.push_back(temp2.stackOffset);
+					TempList first;
+					first.push_back(temp1.stackOffset);
+					TempList second;
+					second.push_back(temp2.stackOffset);
+					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, first));
+					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, second));
+					irInsts.push_back(IrInstruction(IrOp::Gt, inst.operand0, temps));
 	                break;
 	            }
 	        case Operation::Geq:
 	            {
+					Temp temp1 = tempStack.top();
+					tempStack.pop();
+					Temp temp2 = tempStack.top();
+					tempStack.pop();
+					temps.push_back(currentTemp);
+					currentTemp++;
+					temps.push_back(temp1.stackOffset);
+					temps.push_back(temp2.stackOffset);
+					TempList first;
+					first.push_back(temp1.stackOffset);
+					TempList second;
+					second.push_back(temp2.stackOffset);
+					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, first));
+					irInsts.push_back(IrInstruction(IrOp::AssertInteger, inst.operand0, second));
+					irInsts.push_back(IrInstruction(IrOp::Geq, inst.operand0, temps));
 	                break;
 	            }
 	        case Operation::Eq:
 	            {
+					Temp temp1 = tempStack.top();
+					tempStack.pop();
+					Temp temp2 = tempStack.top();
+					tempStack.pop();
+					temps.push_back(currentTemp);
+					currentTemp++;
+					temps.push_back(temp1.stackOffset);
+					temps.push_back(temp2.stackOffset);
+					irInsts.push_back(IrInstruction(IrOp::Eq, inst.operand0, temps));
 	                break;
 	            }
 	        case Operation::And:
 	            {
+					Temp temp1 = tempStack.top();
+					tempStack.pop();
+					Temp temp2 = tempStack.top();
+					tempStack.pop();
+					temps.push_back(currentTemp);
+					currentTemp++;
+					temps.push_back(temp1.stackOffset);
+					temps.push_back(temp2.stackOffset);
+					TempList first;
+					first.push_back(temp1.stackOffset);
+					TempList second;
+					second.push_back(temp2.stackOffset);
+					irInsts.push_back(IrInstruction(IrOp::AssertBool, inst.operand0, first));
+					irInsts.push_back(IrInstruction(IrOp::AssertBool, inst.operand0, second));
+					irInsts.push_back(IrInstruction(IrOp::And, inst.operand0, temps));
 	                break;
 	            }
 	        case Operation::Or:
 	            {
+					Temp temp1 = tempStack.top();
+					tempStack.pop();
+					Temp temp2 = tempStack.top();
+					tempStack.pop();
+					temps.push_back(currentTemp);
+					currentTemp++;
+					temps.push_back(temp1.stackOffset);
+					temps.push_back(temp2.stackOffset);
+					TempList first;
+					first.push_back(temp1.stackOffset);
+					TempList second;
+					second.push_back(temp2.stackOffset);
+					irInsts.push_back(IrInstruction(IrOp::AssertBool, inst.operand0, first));
+					irInsts.push_back(IrInstruction(IrOp::AssertBool, inst.operand0, second));
+					irInsts.push_back(IrInstruction(IrOp::Or, inst.operand0, temps));
 	                break;
 	            }
 	        case Operation::Not:
 	            {
+					Temp temp = tempStack.top();
+					tempStack.pop();
+					temps.push_back(currentTemp);
+					currentTemp++;
+					temps.push_back(temp.stackOffset);
+					irInsts.push_back(IrInstruction(IrOp::AssertBool, inst.operand0, temps));
+					irInsts.push_back(IrInstruction(IrOp::Not, inst.operand0, temps));
 	                break;
 	            }
 	        case Operation::Goto:
@@ -167,14 +304,22 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 	            }
 	        case Operation::Dup:
 	            {
+					tempStack.push(Temp(tempStack.top()));
 	                break;
 	            }
 	        case Operation::Swap:
 	            {
+					Temp temp1 = tempStack.top();
+					tempStack.pop();
+					Temp temp2 = tempStack.top();
+					tempStack.pop();
+					tempStack.push(temp1);
+					tempStack.push(temp2);
 	                break;
 	            }
 	        case Operation::Pop:
 	            {
+					tempStack.pop();
 	                break;
 	            }
 	        default:
