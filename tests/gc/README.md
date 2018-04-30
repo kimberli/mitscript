@@ -1,29 +1,15 @@
-# VM Testing
+# GC Testing
 
-This folder has a lot of files, but the testing framework should make running and deciphering tests easier.
+This folder is primarily used to test garbage collection.
 
-We test three components here: the compiler, VM, and interpreter:
+## Testing garbage collection
+This will test the entire interpreter, which compiles MITScript to bytecode then executes the bytecode, using the binary `vm/mitscript` and flag `-s`, using massif, a Valgrind tool for profiling heap memory usage.
 
-## Testing the compiler
-This tests compilation of MITScript to bytecode, using the binary `vm/mitscriptc`.
+Run `test_massif.sh`, optionally followed by a string that matches all tests you want to run. If the string matches exactly one filename, and the test fails, you will have the option to overwrite the expected test output file with the actual output just obtained.
 
-Run `test_compiler.sh`, optionally followed by a string that matches all tests you want to run. If the string matches exactly one filename, and the test fails, you will have the option to overwrite the expected test output file with the actual output just obtained.
+To change the memory limit, set `$LIMIT` inside the script to be your intended limit in MB (default is 4 MB).
 
-Running the command with no argument will run all matching tests.
-
-## Testing the VM
-This tests bytecode execution, using the binary `vm/mitscript` and flag `-b`.
-
-Run `test_vm.sh`, optionally followed by a string that matches all tests you want to run. If the string matches exactly one filename, and the test fails, you will have the option to overwrite the expected test output file with the actual output just obtained.
-
-Running the command with no argument will run all matching tests.
-
-## Testing the interpreter
-This will test the entire interpreter, which compiles MITScript to bytecode then executes the bytecode, using the binary `vm/mitscript` and flag `-s`.
-
-Run `test_interpreter.sh`, optionally followed by a string that matches all tests you want to run. If the string matches exactly one filename, and the test fails, you will have the option to overwrite the expected test output file with the actual output just obtained.
-
-Running the command with no argument will run all matching tests.
+Running the command with no argument will run all tests.
 
 ## Test File Organization
 Tests in this folder are organized according to the following convention:
