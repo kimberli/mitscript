@@ -33,7 +33,7 @@ mitscriptc: bc/* gc/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
 
 # MITScript -> bytecode -> IR -> vm
 interpreter: mitscript
-mitscript: $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
+mitscript: bc/* gc/* ir/* asm/* vm/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
 	$(CC) $(CC_FLAGS) -lstdc++ -Ix64asm -L x64asm/lib -lx64asm vm/interpreter-main.cpp $(IR_SRC) $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) -o $@
 
 # reference interpreter (from a2)
@@ -45,19 +45,19 @@ ref/mitscript: $(REF)/ref-main.cpp $(REF)/*.cpp $(REF)/*.h Visitor.h AST.h $(MS_
 ## TESTS
 test: test-compiler test-vm test-interpreter
 
-test-compiler: bc-compiler
+test-compiler: mitscriptc
 	tests/vm/test_compiler.sh
 
-test-vm: interpreter
+test-vm: mitscript
 	tests/vm/test_vm.sh
 
-test-interpreter: interpreter
+test-interpreter: mitscript
 	tests/vm/test_interpreter.sh
 
-test-mem: interpreter
+test-mem: mitscript
 	tests/gc/test_massif.sh
 
-test-parser: ms-print
+test-parser: $(MS_PARSER)/ms-print
 	tests/parser/test_parser.sh
 
 
