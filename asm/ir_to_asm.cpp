@@ -60,8 +60,9 @@ void IrInterpreter::executeStep() {
             {
                 LOG("LoadConst");
                 int constIndex = inst.op0.value(); 
+                Constant* c = func->constants_.at(constIndex);
                 // load a constant into a register 
-                assm.mov(x64asm::rdi, x64asm::Imm64{func->constants_.at(constIndex)}); 
+                assm.mov(x64asm::rdi, x64asm::Imm64{(uint64_t)c}); 
                 // move from the register into a temp on the stack
                 storeTemp(x64asm::rdi, inst.tempIndices->at(0));
                 break;
