@@ -167,25 +167,6 @@ enum class IrOp {
     // Result: transfers execution to the label if temp at temp0 is true
     If,
 
-    // Description: duplicate the value in a temp
-    // op0: N/A
-    // temp0: temp index to dup temp1's value into
-    // temp1: temp index of value to dup
-    // Result: value is in temp1 and temp0
-    Dup,
-
-    // Description: swap the values in two temps
-    // op0: N/A
-    // temp0: temp index of one value to swap
-    // temp1: temp index of other value to swap
-    // Result: swaps values in the temps
-    Swap,
-
-    // Description: pops and discards the top of the stack
-    // op0: N/A
-    // Result: eliminates top element from stack
-    Pop,
-
     // Description: asserts that a temp is an integer
     // op0: N/A
     // temp0: temp index of value to check

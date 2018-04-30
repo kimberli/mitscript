@@ -57,6 +57,7 @@ void IrInterpreter::executeStep() {
     switch(inst.op) {
         case IrOp::LoadConst: 
             {
+                LOG("LoadConst");
                 int constIndex = inst.op0.value(); 
                 // load a constant into a register 
                 assm.mov(x64asm::rdi, x64asm::Imm64{func->constants_.at(constIndex)}); 
@@ -64,8 +65,14 @@ void IrInterpreter::executeStep() {
                 storeTemp(x64asm::rdi, inst.tempIndices.at(0));
                 break;
             }
+        case IrOp::LoadFunc: 
+            {
+                LOG("LoadFunc");
+                break;
+            }
         case IrOp::LoadLocal: 
             {
+                LOG("LoadLocal");
                 int64_t offset = inst.op0.value();
                 getRbpOffset(offset); // puts the address of the local in r10
                 assm.mov(x64asm::rdi, x64asm::r10); // r10 will be used later in storeTemp
@@ -73,19 +80,9 @@ void IrInterpreter::executeStep() {
                 storeTemp(x64asm::rdi, inst.tempIndices.at(0));
                 break;
             }
-        case IrOp::StoreLocal: 
-            {
-                // first put the temp val in a reg
-                loadTemp(x64asm::rdi, inst.tempIndices.at(0));
-                // put find out where the constant is located
-                int64_t offset = inst.op0.value();
-                getRbpOffset(offset); // address of local in r10 
-                // move the val from the reg to memory
-                assm.mov(x64asm::M64{x64asm::r10}, x64asm::rdi);
-                break;
-            }
         case IrOp::LoadGlobal: 
             {
+                LOG("LoadGlobal");
                 // mov DEST, SRC
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
@@ -102,8 +99,21 @@ void IrInterpreter::executeStep() {
                 storeTemp(x64asm::rax, inst.tempIndices.at(0));
                 break;
             }
-        case IrOp::StoreGlobal:
+        case IrOp::StoreLocal: 
             {
+                LOG("StoreLocal");
+                // first put the temp val in a reg
+                loadTemp(x64asm::rdi, inst.tempIndices.at(0));
+                // put find out where the constant is located
+                int64_t offset = inst.op0.value();
+                getRbpOffset(offset); // address of local in r10 
+                // move the val from the reg to memory
+                assm.mov(x64asm::M64{x64asm::r10}, x64asm::rdi);
+                break;
+            }
+       case IrOp::StoreGlobal:
+            {
+                LOG("StoreGlobal");
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
                 // load the string pointer into the second arg
@@ -118,9 +128,156 @@ void IrInterpreter::executeStep() {
                 // no return val given. 
                 break;
             }
+        case IrOp::AllocRecord:
+            {
+                LOG("AllocRecord");
+                break;
+            };
+        case IrOp::RecordLoad: 
+            {
+                LOG("RecordLoad");
+                break;
+            };
+        case IrOp::RecordStore: 
+            {
+                LOG("RecordStore");
+                break;
+            };
+        case IrOp::AllocClosure: 
+            {
+                LOG("AllocClosure");
+                break;
+            };
+        case IrOp::Call: 
+            {
+                LOG("Call");
+                break;
+            };
+        case IrOp::Return: 
+            {
+                LOG("Return");
+                break;
+            };
+        case IrOp::Add: 
+            {
+                LOG("Add");
+                break;
+            };
+        case IrOp::Sub: 
+            {
+                LOG("Sub");
+                break;
+            };
+        case IrOp::Mul: 
+            {
+                LOG("Mul");
+                break;
+            };
+        case IrOp::Div: 
+            {
+                LOG("Div");
+                break;
+            };
+        case IrOp::Neg: 
+            {
+                LOG("Neg");
+                break;
+            };
+        case IrOp::Gt: 
+            {
+                LOG("Gt");
+                break;
+            };
+        case IrOp::Geq : 
+            {
+                LOG("Geq");
+                break;
+            };
+        case IrOp::Eq: 
+            {
+                LOG("Eq");
+                break;
+            };
+        case IrOp::And: 
+            {
+                LOG("And");
+                break;
+            };
+        case IrOp::Or: 
+            {
+                LOG("Or");
+                break;
+            };
+        case IrOp::Not: 
+            {
+                LOG("Not");
+                break;
+            };
+        case IrOp::Goto: 
+            {
+                LOG("Goto");
+                break;
+            };
+        case IrOp::If: 
+            {
+                LOG("If");
+                break;
+            };
+       case IrOp::AssertInteger: 
+            {
+                LOG("AssertInteger");
+                break;
+            };
+        case IrOp::AssertBool: 
+            {
+                LOG("AssertBool");
+                break;
+            };
+        case IrOp::AssertString: 
+            {
+                LOG("AssertString");
+                break;
+            };
+        case IrOp::AssertRecord: 
+            {
+                LOG("AssertRecord");
+                break;
+            };
+        case IrOp::AssertFunction: 
+            {
+                LOG("AssertFunction");
+                break;
+            };
+        case IrOp::AssertClosure: 
+            {
+                LOG("AssertClosure");
+                break;
+            };
+        case IrOp::CastInteger: 
+            {
+                LOG("CastInteger");
+                break;
+            };
+        case IrOp::CastBool: 
+            {
+                LOG("CastBool");
+                break;
+            };
+        case IrOp::CastString: 
+            {
+                LOG("CastString");
+                break;
+            };
+        case IrOp::GarbageCollect: 
+            {
+                LOG("GarbageCollect");
+                break;
+            };
+        default: 
+            throw RuntimeException("Should not get here: invalid ir inst");
     }
     instructionIndex += 1;
-    if (instructionIndex > func->instructions.size()) {
+    if (instructionIndex >= func->instructions.size()) {
         finished = true;
     }
 }
