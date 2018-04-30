@@ -246,6 +246,7 @@ enum class IrOp {
     // Description: add a label at this point in the generated asm
     // op0: index of label to add
     // Result: adds label_op0 to this point in asm execution
+    AddLabel,
 
     // Description: runs the garbage collector
     GarbageCollect
@@ -284,6 +285,11 @@ struct IrInstruction {
     IrInstruction(const IrOp op, optint_t op0, Temp temp):
         op(op),
         op0(op0),
+        global(),
+        tempIndices(TempList{temp}) {};
+    IrInstruction(const IrOp op, Temp temp):
+        op(op),
+        op0(),
         global(),
         tempIndices(TempList{temp}) {};
 };

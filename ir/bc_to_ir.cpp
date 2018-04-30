@@ -99,6 +99,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Return:
 	            {
+                    pushInstruction(IrInstruction(IrOp::Return, popTemp()));
 	                break;
 	            }
 	        case BcOp::Add:
