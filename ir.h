@@ -18,13 +18,13 @@ struct Temp {
 enum class IrOp {
     // Description: Move a constant from constants array into temp var
     // op0: index into the constants array of the constant to move
-    // temp0: number of the temp to store the constant in
+    // temp0: temp index to store the constant in
     // Result: temp0 stores func.constants_[operand1]
     LoadConst,
 
     // Description: Load a function from functions list into temp
     // op0: index into functions array to move
-    // temp0: number of the temp to store the funtion in
+    // temp0: temp index to store the funtion in
     // Result: temp0 stores the specified function
     LoadFunc,
 
@@ -41,14 +41,14 @@ enum class IrOp {
     StoreLocal,
 
     // Description: Load a global into a temp
-    // name0: name of the global to load
+    // global: name of the global to load
     // temp0: index of the temp to load into
     // Result: temp0 contains the global var at index operand1
     LoadGlobal,
 
     // Description: Store a value from a temp into a global
     // temp0: index of the temp containing the value to store
-    // name0: name of the global to store into
+    // global: name of the global to store into
     // Result: the global at index operand2 contains the value stored by operand1
     StoreGlobal,
 
@@ -109,14 +109,14 @@ enum class IrOp {
     Return,
 
     // Description: add the constants in two temps
-    // temp0: number of the temp to store the value in
+    // temp0: temp index to store the value in
     // temp1: temp index holding right value
     // temp2: temp index holding left value
     // Result: temp0 stores the result of doing operand1 + operand2
     Add,
 
     // Description: performs arithmetic operation on two temps
-    // temp0: number of the temp to store the value in
+    // temp0: temp index to store the value in
     // temp1: temp index holding right value
     // temp2: temp index holding left value
     // Result: temp0 stores the result of doing op(operand2, operand1)
@@ -125,7 +125,7 @@ enum class IrOp {
     Div,
 
     // Description: computes unary minus
-    // temp0: number of the temp to store the result in
+    // temp0: temp index to store the result in
     // temp1: value to negate
     // Result: temp0 stores -operand1
     Neg,
@@ -133,7 +133,7 @@ enum class IrOp {
     // Description: computes a comparison on ints
     // temp1: right value
     // temp2: left value
-    // temp0: number of the temp to store the result in
+    // temp0: temp index to store the result in
     // Result: temp0 stores bool indicating result of comparison
     Gt,
     Geq,
@@ -141,21 +141,21 @@ enum class IrOp {
     // Description: computes an equality between two vals (semantics from A2)
     // temp1: right value
     // temp2: left value
-    // temp0: number of the temp to store the result in
+    // temp0: temp index to store the result in
     // Result: temp0 stores bool eq(operand2, operand1)
     Eq,
 
     // Description: computes a boolean operation (semantics from A2)
     // temp1: right value
     // temp2: left value
-    // temp0: number of the temp to store the result in
+    // temp0: temp index to store the result in
     // Result: temp0 stores bool op(operand1, operand2)
     And,
     Or,
 
     // Description: computes local negation
     // temp1: value to negate
-    // temp0: number of the temp to store the result in
+    // temp0: temp index to store the result in
     // Result: temp0 stores !operand1
     Not,
 
@@ -180,62 +180,68 @@ enum class IrOp {
     Pop,
 
     // Description: asserts that the first temp is an integer
-    // temp0: index of value to check
+    // op0: index of value to check
     // Result: throw RuntimeError if the temp is not an integer
     AssertInteger,
 
     // Description: asserts that the first temp is a bool
-    // temp0: index of value to check
+    // op0: index of value to check
     // Result: throw RuntimeError if the temp is not a bool
     AssertBool,
 
     // Description: asserts that the first temp is a string
-    // temp0: index of value to check
+    // op0: index of value to check
     // Result: throw RuntimeError if the temp is not a string
     AssertString,
 
     // Description: asserts that the first temp is an record
-    // temp0: index of value to check
+    // op0: index of value to check
     // Result: throw RuntimeError if the temp is not an record
     AssertRecord,
 
     // Description: asserts that the first temp is a function
-    // temp0: index of value to check
+    // op0: index of value to check
     // Result: throw RuntimeError if the temp is not a function
     AssertFunction,
 
     // Description: asserts that the first temp is a closure
-    // temp0: index of value to check
+    // op0: index of value to check
     // Result: throw RuntimeError if the temp is not a closure
     AssertClosure,
 
     // Description: casts the first temp to integer
-    // temp0: index of value to cast
+    // op0: index of value to cast
+    // temp0: temp index to store result of cast in
     // Result: stores integer in temp0
     CastInteger,
 
     // Description: casts the first temp to bool
-    // temp0: index of value to cast
+    // op0: index of value to cast
+    // temp0: temp index to store result of cast in
     // Result: stores bool in temp0
     CastBool,
 
     // Description: casts the first temp to string
-    // temp0: index of value to cast
+    // op0: index of value to cast
+    // temp0: temp index to store result of cast in
     // Result: stores string in temp0
     CastString,
 
     // Description: casts the first temp to record
-    // temp0: index of value to cast
+    // op0: index of value to cast
+    // temp0: temp index to store result of cast in
     // Result: stores record in temp0
     CastRecord,
 
     // Description: casts the first temp to function
-    // temp0: index of value to cast
+    // op0: index of value to cast
+    // temp0: temp index to store result of cast in
     // Result: stores function in temp0
     CastFunction,
 
     // Description: casts the first temp to closure
-    // temp0: index of value to cast
+    // op0: index of value to cast
+    // temp0: temp index to store result of cast in
     // Result: stores closure in temp0
     CastClosure,
 
@@ -245,19 +251,28 @@ enum class IrOp {
 
 
 // Each instruction contains an optional op0 and an array of temps storing its
-// other operands.
+// return value and other operands.
 // By convention, if the operation stores a value somewhere, it is put in
-// temp 0.
+// extraTemps[0].
 struct IrInstruction {
-    IrOp operation;
+    IrOp op;
     optint_t op0;
-    optstr_t name0;
-    TempList templist;
-    IrInstruction(const IrOp operation, optint_t op0, optstr_t name0, TempList templist):
-        operation(operation),
-        name0(name0),
+    optstr_t global;
+    optstr_t label;
+    TempList& tempIndices;
+    IrInstruction(const IrOp op, optint_t op0, optstr_t global, optstr_t label, TempList& tempIndices):
+        op(op),
+        global(global),
+        label(label),
         op0(op0),
-        templist(templist) {};
+        tempIndices(tempIndices) {};
+    IrInstruction(const IrOp op, optint_t op0, TempList& tempIndices):
+        op(op),
+        op0(op0),
+        tempIndices(tempIndices) {
+            global = optstr_t();
+            label = optstr_t();
+        };
 };
 
 struct IrFunc {

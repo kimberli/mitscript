@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = ["Point(", ", ", ", ", ")", None],
+			constants = ["Point(", ", ", ", ", ")"],
 			parameter_count = 1,
 			local_vars = [pt],
 			local_ref_vars = [],
@@ -71,8 +71,6 @@ function
 				add
 				call	1
 				pop
-				load_const	4
-				return
 			]
 		}
 	],

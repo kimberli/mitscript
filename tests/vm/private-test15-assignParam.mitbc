@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = ["gets here", 1, None],
+			constants = ["gets here", 1],
 			parameter_count = 1,
 			local_vars = [n, carmap],
 			local_ref_vars = [],
@@ -73,8 +73,6 @@ function
 				load_local	0
 				call	1
 				pop
-				load_const	2
-				return
 			]
 		}
 	],

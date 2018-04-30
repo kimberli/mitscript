@@ -37,7 +37,7 @@ void IrInterpreter::executeStep() {
     const static R64 argRegs[] = {rdi, rsi, rdx, rcx, r8, r9};
 
     IrInstruction inst = func->instructions.at(instructionIndex);
-    switch(inst.operation) {
+    switch(inst.op) {
         case IrOp::LoadConst: 
             {
                 // TODO 

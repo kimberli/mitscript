@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = [0, 1, None],
+			constants = [0, 1],
 			parameter_count = 2,
 			local_vars = [c, f, i, n],
 			local_ref_vars = [],
@@ -73,14 +73,12 @@ function
 				swap
 				gt
 				if	-14
-				load_const	2
-				return
 			]
 		},
 		function
 		{
 			functions = [],
-			constants = [1, "Error", 0, 1, 2, 1, None],
+			constants = [1, "Error", 0, 1, 2, 1],
 			parameter_count = 3,
 			local_vars = [c, m, r, i, n, res],
 			local_ref_vars = [],
@@ -135,14 +133,12 @@ function
 				if	-17
 				load_local	5
 				return
-				load_const	6
-				return
 			]
 		},
 		function
 		{
 			functions = [],
-			constants = [0, 0, None],
+			constants = [0, 0],
 			parameter_count = 2,
 			local_vars = [x, y],
 			local_ref_vars = [],
@@ -164,14 +160,12 @@ function
 				load_const	1
 				field_store	3
 				return
-				load_const	2
-				return
 			]
 		},
 		function
 		{
 			functions = [],
-			constants = [0, 0, 0, 0, 1, 10, 0, 10, 1, 1, 2, 0, 1, 2, 0, 0, None],
+			constants = [0, 0, 0, 0, 1, 10, 0, 10, 1, 1, 2, 0, 1, 2, 0, 0],
 			parameter_count = 2,
 			local_vars = [n, xbnd, c, carmap, vx, vy, x, y],
 			local_ref_vars = [],
@@ -263,8 +257,6 @@ function
 				if	-63
 				load_local	3
 				return
-				load_const	16
-				return
 			]
 		},
 		function
@@ -278,7 +270,7 @@ function
 						function
 						{
 							functions = [],
-							constants = [None],
+							constants = [],
 							parameter_count = 2,
 							local_vars = [c1, c2],
 							local_ref_vars = [],
@@ -298,14 +290,12 @@ function
 								eq
 								and
 								return
-								load_const	0
-								return
 							]
 						},
 						function
 						{
 							functions = [],
-							constants = [None],
+							constants = [],
 							parameter_count = 1,
 							local_vars = [c],
 							local_ref_vars = [],
@@ -320,14 +310,12 @@ function
 								load_local	0
 								call	2
 								return
-								load_const	0
-								return
 							]
 						},
 						function
 						{
 							functions = [],
-							constants = [None],
+							constants = [],
 							parameter_count = 2,
 							local_vars = [a, b],
 							local_ref_vars = [],
@@ -339,12 +327,10 @@ function
 								load_local	1
 								and
 								return
-								load_const	0
-								return
 							]
 						}
 					],
-					constants = [None],
+					constants = [],
 					parameter_count = 1,
 					local_vars = [car, checkColision, colided],
 					local_ref_vars = [car, checkColision],
@@ -413,12 +399,10 @@ function
 						load_local	0
 						swap
 						field_store	16
-						load_const	0
-						return
 					]
 				}
 			],
-			constants = [None],
+			constants = [],
 			parameter_count = 1,
 			local_vars = [carmap, f],
 			local_ref_vars = [carmap],
@@ -435,8 +419,6 @@ function
 				load_local	1
 				call	2
 				pop
-				load_const	0
-				return
 			]
 		}
 	],

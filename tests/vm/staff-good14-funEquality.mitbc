@@ -48,7 +48,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [None],
+					constants = [],
 					parameter_count = 1,
 					local_vars = [x],
 					local_ref_vars = [],
@@ -61,12 +61,10 @@ function
 						load_ref
 						add
 						return
-						load_const	0
-						return
 					]
 				}
 			],
-			constants = [5, None],
+			constants = [5],
 			parameter_count = 0,
 			local_vars = [t],
 			local_ref_vars = [t],
@@ -79,8 +77,6 @@ function
 				load_func	0
 				push_ref	0
 				alloc_closure	1
-				return
-				load_const	1
 				return
 			]
 		}

@@ -43,59 +43,32 @@ function
 		},
 		function
 		{
-			functions =
-			[
-				function
-				{
-					functions = [],
-					constants = [1],
-					parameter_count = 0,
-					local_vars = [y],
-					local_ref_vars = [],
-					free_vars = [],
-					names = [print],
-					instructions = 
-					[
-						load_global	0
-						load_local	0
-						call	1
-						pop
-						load_const	0
-						store_local	0
-						load_global	0
-						load_local	0
-						call	1
-						pop
-					]
-				}
-			],
-			constants = [4, 5],
-			parameter_count = 0,
-			local_vars = [g, y],
+			functions = [],
+			constants = [],
+			parameter_count = 2,
+			local_vars = [x, y],
 			local_ref_vars = [],
 			free_vars = [],
-			names = [],
+			names = [x, print],
 			instructions = 
 			[
-				load_const	0
-				store_local	1
-				load_func	0
-				alloc_closure	0
-				store_local	0
-				load_const	1
-				store_local	1
-				load_local	0
-				call	0
+				load_global	1
+				load_global	0
+				call	1
+				pop
+				load_global	1
+				load_local	1
+				call	1
 				pop
 			]
 		}
 	],
-	constants = [],
+	constants = ["I print first", "I print second"],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [f, input, intcast, print],
+	names = [f, input, intcast, print, x],
 	instructions = 
 	[
 		load_func	0
@@ -107,11 +80,15 @@ function
 		load_func	2
 		alloc_closure	0
 		store_global	2
+		load_const	0
+		store_global	4
 		load_func	3
 		alloc_closure	0
 		store_global	0
 		load_global	0
-		call	0
+		load_global	4
+		load_const	1
+		call	2
 		pop
 	]
 }

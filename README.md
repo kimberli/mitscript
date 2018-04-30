@@ -19,6 +19,9 @@
 * `make bc-parser` - makes the MITScript compilation to bytecode pretty printer (`mitscriptc`)
 * `make interpreter` - makes the whole interpreter (which includes a flag allowing you to either read in MITScript or bytecode) (`mitscript`)
 * `make ref` - makes the reference interpreter implementation (`ref/mitscript`)
+* `make test` - runs all correctness tests (in `tests/vm`)
+* `make test-parser` - runs all parser tests (in `tests/parser`)
+* `make test-mem` - runs heap memory usage tests (in `tests/gc`)
 
 `make` by default makes the whole interpreter, producing the `mitscript` binary.
 

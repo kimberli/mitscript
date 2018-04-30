@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = [1, 1, "fac of ", 1, " is ", None],
+			constants = [1, 1, "fac of ", 1, " is "],
 			parameter_count = 1,
 			local_vars = [x, v],
 			local_ref_vars = [],
@@ -81,8 +81,6 @@ function
 				load_local	0
 				load_local	1
 				mul
-				return
-				load_const	5
 				return
 			]
 		}

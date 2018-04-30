@@ -48,7 +48,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [None],
+					constants = [],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -60,14 +60,12 @@ function
 						load_ref
 						neg
 						return
-						load_const	0
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [10, None],
+					constants = [10],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -80,12 +78,10 @@ function
 						load_const	0
 						div
 						return
-						load_const	1
-						return
 					]
 				}
 			],
-			constants = ["nothing", None],
+			constants = ["nothing"],
 			parameter_count = 3,
 			local_vars = [name, age, student, this],
 			local_ref_vars = [age],
@@ -136,14 +132,12 @@ function
 				load_const	0
 				call	1
 				pop
-				load_const	1
-				return
 			]
 		},
 		function
 		{
 			functions = [],
-			constants = [3, None],
+			constants = [3],
 			parameter_count = 0,
 			local_vars = [],
 			local_ref_vars = [],
@@ -152,8 +146,6 @@ function
 			instructions = 
 			[
 				load_const	0
-				return
-				load_const	1
 				return
 			]
 		},
@@ -164,7 +156,7 @@ function
 				function
 				{
 					functions = [],
-					constants = ["counting ", " elements", None],
+					constants = ["counting ", " elements"],
 					parameter_count = 3,
 					local_vars = [a, b, c],
 					local_ref_vars = [],
@@ -188,12 +180,10 @@ function
 						load_local	2
 						add
 						return
-						load_const	2
-						return
 					]
 				}
 			],
-			constants = [0, None],
+			constants = [0],
 			parameter_count = 3,
 			local_vars = [name1, name2, name3, ans, p1, p2, p3, sum, total],
 			local_ref_vars = [],
@@ -255,8 +245,6 @@ function
 				call	1
 				pop
 				load_local	3
-				return
-				load_const	1
 				return
 			]
 		}

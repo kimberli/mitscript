@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = [None],
+			constants = [],
 			parameter_count = 0,
 			local_vars = [y],
 			local_ref_vars = [],
@@ -55,8 +55,6 @@ function
 				alloc_record
 				store_local	0
 				load_local	0
-				return
-				load_const	0
 				return
 			]
 		}

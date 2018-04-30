@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = ["", None],
+			constants = [""],
 			parameter_count = 0,
 			local_vars = [],
 			local_ref_vars = [],
@@ -53,15 +53,13 @@ function
 			instructions = 
 			[
 				load_const	0
-				return
-				load_const	1
 				return
 			]
 		},
 		function
 		{
 			functions = [],
-			constants = ["[]", None],
+			constants = ["[]"],
 			parameter_count = 0,
 			local_vars = [],
 			local_ref_vars = [],
@@ -70,8 +68,6 @@ function
 			instructions = 
 			[
 				load_const	0
-				return
-				load_const	1
 				return
 			]
 		},
@@ -82,7 +78,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [None],
+					constants = [],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -93,14 +89,12 @@ function
 						push_ref	0
 						load_ref
 						return
-						load_const	0
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [None],
+					constants = [],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -111,14 +105,12 @@ function
 						push_ref	0
 						load_ref
 						return
-						load_const	0
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [", ", None],
+					constants = [", "],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -136,14 +128,12 @@ function
 						call	0
 						add
 						return
-						load_const	1
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = ["[", "]", None],
+					constants = ["[", "]"],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -160,12 +150,10 @@ function
 						load_const	1
 						add
 						return
-						load_const	2
-						return
 					]
 				}
 			],
-			constants = [None],
+			constants = [],
 			parameter_count = 2,
 			local_vars = [h, t, this],
 			local_ref_vars = [h, t, this],
@@ -198,14 +186,12 @@ function
 				store_local	2
 				load_local	2
 				return
-				load_const	0
-				return
 			]
 		},
 		function
 		{
 			functions = [],
-			constants = [None],
+			constants = [],
 			parameter_count = 2,
 			local_vars = [list, f],
 			local_ref_vars = [],
@@ -231,8 +217,6 @@ function
 				call	2
 				pop
 				goto	1
-				load_const	0
-				return
 			]
 		},
 		function
@@ -242,7 +226,7 @@ function
 				function
 				{
 					functions = [],
-					constants = ["Bigger ", 1, None],
+					constants = ["Bigger ", 1],
 					parameter_count = 1,
 					local_vars = [x],
 					local_ref_vars = [],
@@ -258,12 +242,10 @@ function
 						add
 						call	1
 						pop
-						load_const	2
-						return
 					]
 				}
 			],
-			constants = [None],
+			constants = [],
 			parameter_count = 1,
 			local_vars = [l],
 			local_ref_vars = [],
@@ -278,8 +260,6 @@ function
 				call	2
 				pop
 				load_local	0
-				return
-				load_const	0
 				return
 			]
 		}

@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = [None],
+			constants = [],
 			parameter_count = 1,
 			local_vars = [x],
 			local_ref_vars = [],
@@ -53,8 +53,6 @@ function
 			instructions = 
 			[
 				load_local	0
-				return
-				load_const	0
 				return
 			]
 		}

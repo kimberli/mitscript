@@ -1,5 +1,6 @@
 #!/bin/bash
 ROOT=$(git rev-parse --show-toplevel)
+DIR=$ROOT/tests/gc/
 LIMIT="4"  # in MB
 PROG="${ROOT}/mitscript -mem $LIMIT -s"
 TEST_FILE_EXT=".mit"
@@ -18,20 +19,20 @@ run_test() {
     filename=$1
     echo "==== TEST - $(basename $filename) ===="
     TOTAL=$((TOTAL+1))
-    valgrind --tool=massif --log-file=tmp2.txt --massif-out-file=tmp.txt --threshold=100 $PROG $filename > /dev/null
-    ms_print --threshold=100 tmp.txt > graph.txt
-    if [[ $(cat graph.txt) =~ $mem_regex ]]; then
+    valgrind --tool=massif --log-file=$DIR/tmp2.txt --massif-out-file=$DIR/tmp.txt --threshold=100 $PROG $filename > /dev/null
+    ms_print --threshold=100 $DIR/tmp.txt > $DIR/graph.txt
+    if [[ $(cat $DIR/graph.txt) =~ $mem_regex ]]; then
         mem_used="${BASH_REMATCH[1]}"
     fi
-    if [[ $(cat graph.txt) =~ "KB" ]]; then
+    if [[ $(cat $DIR/graph.txt) =~ "KB" ]]; then
         mem_used=$(echo "$mem_used / 1024" | bc -l)
-    elif [[ $(cat graph.txt) =~ "GB" ]]; then
+    elif [[ $(cat $DIR/graph.txt) =~ "GB" ]]; then
         mem_used=$(echo "$mem_used * 1024" | bc -l)
     fi
-    sed -ne '7,30p' graph.txt
-    rm tmp.txt
-    rm tmp2.txt
-    rm graph.txt
+    sed -ne '7,30p' $DIR/graph.txt
+    rm $DIR/tmp.txt
+    rm $DIR/tmp2.txt
+    rm $DIR/graph.txt
     printf "\nMax mem used: %0.2f (limit was %d MB)\n" $mem_used $LIMIT
     TOTAL_USED=$(echo "$TOTAL_USED + $mem_used" | bc -l)
     if (( $(echo "$mem_used < $LIMIT" | bc -l) )); then

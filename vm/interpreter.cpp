@@ -59,6 +59,7 @@ void Interpreter::executeStep() {
     fptr frame = frames.back();
     Instruction& inst = frame->getCurrInstruction();
     LOG("executing instruction " + to_string(frame->instructionIndex));
+    LOG("from frame" + to_string(frames.size()));
     switch (inst.operation) {
         case Operation::LoadConst:
             {
@@ -237,6 +238,7 @@ void Interpreter::executeStep() {
                 vptr<Value> closure = frame->opStackPop();
                 frame->instructionIndex++;
                 call(argsList, closure);
+				frame = frames.back();
                 break;
             }
         case Operation::Return:
@@ -395,6 +397,9 @@ void Interpreter::executeStep() {
             throw RuntimeException("should never get here - invalid instruction");
     }
 	collector->gc();
+    LOG("instructionIndex = " + to_string(frame->instructionIndex));
+    LOG("numInstructions = " + to_string(frame->numInstructions()));
+    LOG("frames.size = " + to_string(frames.size()));
     if (frames.size() == 1 && frame->instructionIndex == frame->numInstructions()) {
         // last instruction of the whole program
         finished = true;
@@ -419,8 +424,8 @@ void Interpreter::run() {
 };
 
 vptr<Value> Interpreter::call(vector<vptr<Constant>> argsList, vptr<Value> closure) {
-    // this function takes care of figuring out whether to dispatch to 
-    // the vm or assembly 
+    // this function takes care of figuring out whether to dispatch to
+    // the vm or assembly
     vptr<Closure> clos = dynamic_cast<Closure*>(closure);
     if (clos == NULL) {
         throw RuntimeException("expected Closure on operand stack for function call");
@@ -436,7 +441,7 @@ vptr<Value> Interpreter::call(vector<vptr<Constant>> argsList, vptr<Value> closu
     }
 }
 
-// Different call methods for vm execution and compilation to asm 
+// Different call methods for vm execution and compilation to asm
 vptr<Value> Interpreter::callVM(vector<vptr<Constant>> argsList, vptr<Closure> clos) {
     // process local refs and local vars
     int numLocals = clos->func->local_vars_.size();
@@ -470,12 +475,12 @@ vptr<Value> Interpreter::callVM(vector<vptr<Constant>> argsList, vptr<Closure> c
 
 vptr<Value> Interpreter::callAsm(vector<vptr<Constant>> argsList, vptr<Closure> clos) {
     throw RuntimeException("please implement your asm first");
-    // steps: 
+    // steps:
     //
-    // convert the bc function to the ir 
-    // convert the ir to assembly 
-    // create a MachineCodeFunction object 
-    // call mcf.call(args) and it will run properly in assembly presumably 
+    // convert the bc function to the ir
+    // convert the ir to assembly
+    // create a MachineCodeFunction object
+    // call mcf.call(args) and it will run properly in assembly presumably
 }
 
 // Asm helpers

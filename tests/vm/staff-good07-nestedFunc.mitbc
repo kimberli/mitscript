@@ -52,7 +52,7 @@ function
 						function
 						{
 							functions = [],
-							constants = ["x should be ", " is ", None],
+							constants = ["x should be ", " is "],
 							parameter_count = 1,
 							local_vars = [v],
 							local_ref_vars = [],
@@ -71,12 +71,10 @@ function
 								add
 								call	1
 								pop
-								load_const	2
-								return
 							]
 						}
 					],
-					constants = [3, 3, 2, 2, None],
+					constants = [3, 3, 2, 2],
 					parameter_count = 1,
 					local_vars = [u, boo, x],
 					local_ref_vars = [x],
@@ -102,12 +100,10 @@ function
 						pop
 						load_local	1
 						return
-						load_const	4
-						return
 					]
 				}
 			],
-			constants = [4, 2, 2, " this x should be ", " is ", None],
+			constants = [4, 2, 2, " this x should be ", " is "],
 			parameter_count = 1,
 			local_vars = [t, f, moo, x],
 			local_ref_vars = [],
@@ -143,8 +139,6 @@ function
 				add
 				call	1
 				pop
-				load_const	5
-				return
 			]
 		}
 	],

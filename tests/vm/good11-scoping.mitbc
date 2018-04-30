@@ -52,7 +52,7 @@ function
 						function
 						{
 							functions = [],
-							constants = [" inside c", None],
+							constants = [" inside c"],
 							parameter_count = 1,
 							local_vars = [z],
 							local_ref_vars = [],
@@ -78,14 +78,12 @@ function
 								load_local	0
 								call	1
 								pop
-								load_const	1
-								return
 							]
 						},
 						function
 						{
 							functions = [],
-							constants = [None],
+							constants = [],
 							parameter_count = 1,
 							local_vars = [x],
 							local_ref_vars = [],
@@ -102,12 +100,10 @@ function
 								load_ref
 								call	1
 								pop
-								load_const	0
-								return
 							]
 						}
 					],
-					constants = [" inside b", None],
+					constants = [" inside b"],
 					parameter_count = 1,
 					local_vars = [y, c, d],
 					local_ref_vars = [y],
@@ -137,12 +133,10 @@ function
 						load_local	0
 						call	1
 						pop
-						load_const	1
-						return
 					]
 				}
 			],
-			constants = ["B", None],
+			constants = ["B"],
 			parameter_count = 1,
 			local_vars = [x],
 			local_ref_vars = [x],
@@ -164,8 +158,6 @@ function
 				pop
 				load_const	0
 				store_local	0
-				load_const	1
-				return
 			]
 		}
 	],

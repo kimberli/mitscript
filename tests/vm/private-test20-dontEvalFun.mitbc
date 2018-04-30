@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = [5, 4, None],
+			constants = [5, 4],
 			parameter_count = 0,
 			local_vars = [x, y],
 			local_ref_vars = [],
@@ -62,8 +62,6 @@ function
 				eq
 				call	1
 				pop
-				load_const	2
-				return
 			]
 		}
 	],
