@@ -23,7 +23,7 @@ void IrInterpreter::run() {
     asmFunc.call<Value*>();
 }
 
-void IrInterpreter::getTempLocation(uint64_t offset) {
+void IrInterpreter::getRbpOffset(uint64_t offset) {
     // use r10 and r11 for these calcs
     assm.mov(r10, rbp); // move rbp into r10
     assm.mov(r11, Imm64{8*offset}); // move 8*offset into another reg
@@ -36,7 +36,7 @@ void IrInterpreter::storeTemp(R64 reg, Temp &temp) {
     // Assume we are not saving any callee save. 
     temp.stackOffset = func->parameter_count_ +  stackSize;
     // in assembly, calculate where this var is located 
-    getTempLocation(temp.stackOffset); // leaves correct address into r10
+    getRbpOffset(temp.stackOffset); // leaves correct address into r10
     // Move the val in reg into the mem address stored in r10 
     assm.mov(M64{r10}, reg);
     stackSize++; //inc stack size for next temp
@@ -44,7 +44,7 @@ void IrInterpreter::storeTemp(R64 reg, Temp &temp) {
 
 void IrInterpreter::loadTemp(R64 reg, Temp &temp) {
     // figure out where the temp is stored 
-    getTempLocation(temp.stackOffset); // location in r10 
+    getRbpOffset(temp.stackOffset); // location in r10 
     // put the thing from that mem addres into the reg 
     assm.mov(reg, M64{r10});
 }
@@ -56,7 +56,31 @@ void IrInterpreter::executeStep() {
     switch(inst.op) {
         case IrOp::LoadConst: 
             {
-                // TODO 
+                int constIndex = inst.op0.value(); 
+                // load a constant into a register 
+                assm.mov(rdi, Imm64{func->constants_.at(constIndex)}); 
+                // move from the register into a temp on the stack
+                storeTemp(rdi, inst.tempIndices.at(0));
+                break;
+            }
+        case IrOp::LoadLocal: 
+            {
+                int64_t offset = inst.op0.value();
+                getRbpOffset(offset); // puts the address of the local in r10
+                assm.mov(rdi, r10); // r10 will be used later in storeTemp
+                assm.mov(rdi, M64{r10}); // hopefully this loads the actual val
+                storeTemp(rdi, inst.tempIndices.at(0));
+                break;
+            }
+        case IrOp::StoreLocal: 
+            {
+                // first put the temp val in a reg
+                loadTemp(rdi, inst.tempIndices.at(0));
+                // put find out where the constant is located
+                int64_t offset = inst.op0.value();
+                getRbpOffset(offset); // address of local in r10 
+                // move the val from the reg to memory
+                assm.mov(M64{r10}, rdi);
                 break;
             }
         case IrOp::LoadGlobal: 
