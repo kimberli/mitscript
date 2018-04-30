@@ -27,7 +27,7 @@ void IrInterpreter::run() {
 void IrInterpreter::executeStep() {
 
     IrInstruction inst = func->instructions.at(instructionIndex);
-    switch(inst.operation) {
+    switch(inst.op) {
         case IrOp::LoadConst: 
             {
                 // implementation 

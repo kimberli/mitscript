@@ -8,7 +8,6 @@
 #include "../ir.h"
 #include "bc_to_ir.h"
 #include <algorithm>
-#include <stack>
 
 using namespace std;
 
@@ -21,48 +20,48 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 	IrInstList irInsts;
 	int32_t currentTemp = 0;
     for (int i = 0; i < func->instructions.size(); i++) {
-		TempList temp;
+		TempList temps;
 		Instruction inst = func->instructions[i];
 	    switch (inst.operation) {
 	        case Operation::LoadConst:
 	            {
-					temp.push_back(currentTemp);
-					irInsts.push_back(IrInstruction(IrOp::LoadConst, inst.operand0, optstr_t(), temp));
+					temps.push_back(currentTemp);
+					irInsts.push_back(IrInstruction(IrOp::LoadConst, inst.operand0, temps));
 					currentTemp++;
 	                break;
 	            }
 	        case Operation::LoadFunc:
 	            {
-					temp.push_back(currentTemp);
-					irInsts.push_back(IrInstruction(IrOp::LoadFunc, inst.operand0, optstr_t(), temp));
+					temps.push_back(currentTemp);
+					irInsts.push_back(IrInstruction(IrOp::LoadFunc, inst.operand0, temps));
 					currentTemp++;
 	                break;
 	            }
 	        case Operation::LoadLocal:
 	            {
-					temp.push_back(currentTemp);
-					irInsts.push_back(IrInstruction(IrOp::LoadLocal, inst.operand0, optstr_t(), temp));
+					temps.push_back(currentTemp);
+					irInsts.push_back(IrInstruction(IrOp::LoadLocal, inst.operand0, temps));
 					currentTemp++;
 	                break;
 	            }
 	        case Operation::StoreLocal:
 	            {
-					temp.push_back(currentTemp);
-					irInsts.push_back(IrInstruction(IrOp::StoreLocal, inst.operand0, optstr_t(), temp));
+					temps.push_back(currentTemp);
+					irInsts.push_back(IrInstruction(IrOp::StoreLocal, inst.operand0, temps));
 					currentTemp--;
 	                break;
 	            }
 	        case Operation::LoadGlobal:
 	            {
-					temp.push_back(currentTemp);
-					irInsts.push_back(IrInstruction(IrOp::LoadGlobal, inst.operand0, optstr_t(), temp));
+					temps.push_back(currentTemp);
+					irInsts.push_back(IrInstruction(IrOp::LoadGlobal, inst.operand0, temps));
 					currentTemp++;
 	                break;
 	            }
 	        case Operation::StoreGlobal:
 	            {
-					temp.push_back(currentTemp);
-					irInsts.push_back(IrInstruction(IrOp::StoreGlobal, inst.operand0, optstr_t(), temp));
+					temps.push_back(currentTemp);
+					irInsts.push_back(IrInstruction(IrOp::StoreGlobal, inst.operand0, temps));
 					currentTemp--;
 	                break;
 	            }
