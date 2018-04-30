@@ -8,6 +8,7 @@ struct IrFunc;
 
 typedef std::vector<IrInstruction> IrInstList;
 typedef std::experimental::optional<int32_t> optint_t;
+typedef std::experimental::optional<std::string> optstr_t;
 typedef std::vector<int32_t> TempList;
 
 enum class IrOp {
@@ -36,14 +37,14 @@ enum class IrOp {
     StoreLocal,
 
     // Description: Load a global into a temp
-    // op0: index of the global to load
+    // name0: name of the global to load
     // temp0: index of the temp to load into
     // Result: temp0 contains the global var at index operand1
     LoadGlobal,
 
     // Description: Store a value from a temp into a global
     // temp0: index of the temp containing the value to store
-    // op0: index of the global to store into
+    // name0: name of the global to store into
     // Result: the global at index operand2 contains the value stored by operand1
     StoreGlobal,
 
@@ -246,9 +247,11 @@ enum class IrOp {
 struct IrInstruction {
     IrOp operation;
     optint_t op0;
+    optstr_t name0;
     TempList templist;
-    IrInstruction(const IrOp operation, optint_t op0, TempList templist):
+    IrInstruction(const IrOp operation, optint_t op0, optstr_t name0, TempList templist):
         operation(operation),
+        name0(name0),
         op0(op0),
         templist(templist) {};
 };
