@@ -21,8 +21,8 @@ using namespace std;
 class Interpreter {
     // class used to handle interpreter state
 private:
-    fptr globalFrame;  // root function frame
-    list<fptr> frames;  // stack of frames
+    Frame* globalFrame;  // root function frame
+    list<Frame*> frames;  // stack of frames
     void executeStep();  // execute a single next instruction
     bool finished;  // true when the program has terminated
     bool shouldCallAsm = false;

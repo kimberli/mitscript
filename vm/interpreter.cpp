@@ -29,7 +29,7 @@ Interpreter::Interpreter(Function* mainFunc, int maxmem) {
         throw RuntimeException("can't initialize root frame w/ nonzero local vars");
     }
     mainFunc->local_vars_ = mainFunc->names_;
-    fptr frame = collector->allocate<Frame, Function*>(mainFunc);
+    Frame* frame = collector->allocate<Frame, Function*>(mainFunc);
     frame->collector = collector;
     globalFrame = frame;
     frames.push_back(frame);
@@ -52,7 +52,7 @@ Interpreter::Interpreter(Function* mainFunc, int maxmem) {
 
 void Interpreter::executeStep() {
     // executes a single instruction and updates state of interpreter
-    fptr frame = frames.back();
+    Frame* frame = frames.back();
     BcInstruction& inst = frame->getCurrInstruction();
     LOG("executing instruction " + to_string(frame->instructionIndex));
     LOG("from frame" + to_string(frames.size()));
@@ -453,7 +453,7 @@ Value* Interpreter::callVM(vector<Constant*> argsList, Closure* clos) {
     // process local refs and local vars
     int numLocals = clos->func->local_vars_.size();
     int numRefs = clos->func->free_vars_.size();
-    fptr newFrame = collector->allocate<Frame>(clos->func);
+    Frame* newFrame = collector->allocate<Frame>(clos->func);
     newFrame->collector = collector;
     for (int i = 0; i < numLocals; i++) {
         if (i < argsList.size()) {

@@ -16,7 +16,6 @@
 using namespace std;
 
 typedef map<string, ValWrapper*> VarMap;
-typedef Frame* fptr;
 
 class Frame : public Collectable {
     // Class representing a stack frame in interpreter execution
