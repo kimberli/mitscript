@@ -48,7 +48,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [None],
+					constants = [],
 					parameter_count = 1,
 					local_vars = [z],
 					local_ref_vars = [],
@@ -63,12 +63,10 @@ function
 						load_local	0
 						add
 						return
-						load_const	0
-						return
 					]
 				}
 			],
-			constants = [None],
+			constants = [],
 			parameter_count = 1,
 			local_vars = [y, g],
 			local_ref_vars = [y],
@@ -80,8 +78,6 @@ function
 				push_ref	0
 				alloc_closure	1
 				store_local	1
-				load_const	0
-				return
 			]
 		}
 	],

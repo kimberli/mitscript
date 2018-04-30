@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = ["Inside S1", "--> ", None],
+			constants = ["Inside S1", "--> "],
 			parameter_count = 1,
 			local_vars = [x],
 			local_ref_vars = [],
@@ -62,8 +62,6 @@ function
 				add
 				call	1
 				pop
-				load_const	2
-				return
 			]
 		},
 		function
@@ -73,7 +71,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [None],
+					constants = [],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -82,8 +80,6 @@ function
 					instructions = 
 					[
 						load_global	0
-						return
-						load_const	0
 						return
 					]
 				},
@@ -94,7 +90,7 @@ function
 						function
 						{
 							functions = [],
-							constants = ["Inside S2", "--> ", None],
+							constants = ["Inside S2", "--> "],
 							parameter_count = 1,
 							local_vars = [x],
 							local_ref_vars = [],
@@ -113,12 +109,10 @@ function
 								add
 								call	1
 								pop
-								load_const	2
-								return
 							]
 						}
 					],
-					constants = ["Here we go!", None],
+					constants = ["Here we go!"],
 					parameter_count = 1,
 					local_vars = [x, oldprint, print],
 					local_ref_vars = [oldprint],
@@ -151,14 +145,12 @@ function
 						load_global	1
 						call	1
 						pop
-						load_const	1
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = ["--> ", None],
+					constants = ["--> "],
 					parameter_count = 1,
 					local_vars = [x],
 					local_ref_vars = [],
@@ -173,12 +165,10 @@ function
 						add
 						call	1
 						pop
-						load_const	1
-						return
 					]
 				}
 			],
-			constants = ["?", 234, "Hello", "???", "And now?", "is this for real?", "This is getting confusing.", None],
+			constants = ["?", 234, "Hello", "???", "And now?", "is this for real?", "This is getting confusing."],
 			parameter_count = 1,
 			local_vars = [x, f, getprint, oldprint, y],
 			local_ref_vars = [getprint, oldprint, y],
@@ -229,8 +219,6 @@ function
 				call	1
 				pop
 				load_local	1
-				return
-				load_const	7
 				return
 			]
 		}

@@ -48,7 +48,7 @@ function
 				function
 				{
 					functions = [],
-					constants = ["Index ", " out of bounds ", None],
+					constants = ["Index ", " out of bounds "],
 					parameter_count = 2,
 					local_vars = [idx, val],
 					local_ref_vars = [],
@@ -78,14 +78,12 @@ function
 						load_local	0
 						swap
 						index_store
-						load_const	2
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = ["Index ", " out of bounds ", None],
+					constants = ["Index ", " out of bounds "],
 					parameter_count = 1,
 					local_vars = [idx],
 					local_ref_vars = [],
@@ -113,14 +111,12 @@ function
 						load_local	0
 						index_load
 						return
-						load_const	2
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [0, "", " ", 1, "[", "]", None],
+					constants = [0, "", " ", 1, "[", "]"],
 					parameter_count = 0,
 					local_vars = [i, out],
 					local_ref_vars = [],
@@ -161,12 +157,10 @@ function
 						add
 						call	1
 						pop
-						load_const	6
-						return
 					]
 				}
 			],
-			constants = [None],
+			constants = [],
 			parameter_count = 1,
 			local_vars = [size, this],
 			local_ref_vars = [size, this],
@@ -195,8 +189,6 @@ function
 				field_store	2
 				store_local	1
 				load_local	1
-				return
-				load_const	0
 				return
 			]
 		}

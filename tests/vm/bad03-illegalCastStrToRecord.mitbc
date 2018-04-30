@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = ["hi", 3, None],
+			constants = ["hi", 3],
 			parameter_count = 0,
 			local_vars = [x],
 			local_ref_vars = [],
@@ -58,8 +58,6 @@ function
 				load_local	0
 				swap
 				field_store	0
-				load_const	2
-				return
 			]
 		}
 	],

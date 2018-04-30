@@ -48,7 +48,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [None],
+					constants = [],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -59,14 +59,12 @@ function
 						push_ref	0
 						load_ref
 						return
-						load_const	0
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [None],
+					constants = [],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -77,14 +75,12 @@ function
 						push_ref	0
 						load_ref
 						return
-						load_const	0
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = ["(", ", ", ")", None],
+					constants = ["(", ", ", ")"],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -106,14 +102,12 @@ function
 						add
 						call	1
 						pop
-						load_const	3
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [None],
+					constants = [],
 					parameter_count = 1,
 					local_vars = [that],
 					local_ref_vars = [],
@@ -135,14 +129,12 @@ function
 						eq
 						and
 						return
-						load_const	0
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [None],
+					constants = [],
 					parameter_count = 1,
 					local_vars = [that],
 					local_ref_vars = [],
@@ -165,12 +157,10 @@ function
 						add
 						call	2
 						return
-						load_const	0
-						return
 					]
 				}
 			],
-			constants = [None],
+			constants = [],
 			parameter_count = 2,
 			local_vars = [x, y, this],
 			local_ref_vars = [x, y],
@@ -209,8 +199,6 @@ function
 				field_store	4
 				store_local	2
 				load_local	2
-				return
-				load_const	0
 				return
 			]
 		}

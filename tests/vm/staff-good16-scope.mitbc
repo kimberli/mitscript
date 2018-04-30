@@ -52,7 +52,7 @@ function
 						function
 						{
 							functions = [],
-							constants = ["Inside fun x: ", None],
+							constants = ["Inside fun x: "],
 							parameter_count = 1,
 							local_vars = [x],
 							local_ref_vars = [],
@@ -66,14 +66,12 @@ function
 								add
 								call	1
 								pop
-								load_const	1
-								return
 							]
 						}
 					],
-					constants = ["Hello", "What?", None],
+					constants = ["Hello", "What?"],
 					parameter_count = 1,
-					local_vars = [],
+					local_vars = [x],
 					local_ref_vars = [],
 					free_vars = [],
 					names = [x, print],
@@ -94,12 +92,10 @@ function
 						pop
 						load_global	0
 						return
-						load_const	2
-						return
 					]
 				}
 			],
-			constants = [25, 10, 10, None],
+			constants = [25, 10, 10],
 			parameter_count = 1,
 			local_vars = [x, g, u],
 			local_ref_vars = [],
@@ -124,8 +120,6 @@ function
 				load_const	2
 				call	1
 				pop
-				load_const	3
-				return
 			]
 		}
 	],

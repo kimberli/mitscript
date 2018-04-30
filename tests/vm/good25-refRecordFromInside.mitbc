@@ -48,7 +48,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [None],
+					constants = [],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -62,12 +62,10 @@ function
 						field_load	1
 						call	1
 						pop
-						load_const	0
-						return
 					]
 				}
 			],
-			constants = [1, None],
+			constants = [1],
 			parameter_count = 0,
 			local_vars = [this],
 			local_ref_vars = [this],
@@ -85,8 +83,6 @@ function
 				alloc_closure	1
 				field_store	1
 				store_local	0
-				load_const	1
-				return
 			]
 		}
 	],

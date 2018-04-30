@@ -52,7 +52,7 @@ function
 						function
 						{
 							functions = [],
-							constants = ["c", " ", None],
+							constants = ["c", " "],
 							parameter_count = 1,
 							local_vars = [z],
 							local_ref_vars = [],
@@ -71,12 +71,10 @@ function
 								add
 								call	1
 								pop
-								load_const	2
-								return
 							]
 						}
 					],
-					constants = ["b", None],
+					constants = ["b"],
 					parameter_count = 1,
 					local_vars = [x],
 					local_ref_vars = [x],
@@ -94,12 +92,10 @@ function
 						push_ref	0
 						alloc_closure	1
 						store_global	0
-						load_const	1
-						return
 					]
 				}
 			],
-			constants = ["a", 3, 2, None],
+			constants = ["a", 3, 2],
 			parameter_count = 1,
 			local_vars = [x, b],
 			local_ref_vars = [],
@@ -124,8 +120,6 @@ function
 				load_const	2
 				call	1
 				pop
-				load_const	3
-				return
 			]
 		}
 	],

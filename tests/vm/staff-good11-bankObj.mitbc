@@ -48,7 +48,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [0, None],
+					constants = [0],
 					parameter_count = 1,
 					local_vars = [name],
 					local_ref_vars = [],
@@ -64,14 +64,12 @@ function
 						load_local	0
 						swap
 						index_store
-						load_const	1
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [None, 1, None],
+					constants = [None, 1],
 					parameter_count = 1,
 					local_vars = [name],
 					local_ref_vars = [],
@@ -108,14 +106,12 @@ function
 						load_local	0
 						swap
 						index_store
-						load_const	2
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = ["Balance for ", " is ", None],
+					constants = ["Balance for ", " is "],
 					parameter_count = 1,
 					local_vars = [name],
 					local_ref_vars = [],
@@ -137,12 +133,10 @@ function
 						add
 						call	1
 						pop
-						load_const	2
-						return
 					]
 				}
 			],
-			constants = [None],
+			constants = [],
 			parameter_count = 0,
 			local_vars = [private, this],
 			local_ref_vars = [private, this],
@@ -174,8 +168,6 @@ function
 				field_store	3
 				store_local	1
 				load_local	1
-				return
-				load_const	0
 				return
 			]
 		}

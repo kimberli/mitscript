@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = [None],
+			constants = [],
 			parameter_count = 3,
 			local_vars = [a, b, c],
 			local_ref_vars = [],
@@ -60,14 +60,12 @@ function
 				add
 				call	1
 				pop
-				load_const	0
-				return
 			]
 		},
 		function
 		{
 			functions = [],
-			constants = [None],
+			constants = [],
 			parameter_count = 3,
 			local_vars = [a, b, c],
 			local_ref_vars = [],
@@ -83,14 +81,12 @@ function
 				add
 				call	1
 				pop
-				load_const	0
-				return
 			]
 		},
 		function
 		{
 			functions = [],
-			constants = ["hi", None],
+			constants = ["hi"],
 			parameter_count = 0,
 			local_vars = [],
 			local_ref_vars = [],
@@ -102,14 +98,12 @@ function
 				load_const	0
 				call	1
 				pop
-				load_const	1
-				return
 			]
 		},
 		function
 		{
 			functions = [],
-			constants = ["log [", "] ", None],
+			constants = ["log [", "] "],
 			parameter_count = 2,
 			local_vars = [lvl, s],
 			local_ref_vars = [],
@@ -132,8 +126,6 @@ function
 				add
 				call	1
 				pop
-				load_const	2
-				return
 			]
 		},
 		function
@@ -143,7 +135,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [0, "setting debug lvl to ", None],
+					constants = [0, "setting debug lvl to "],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -159,12 +151,10 @@ function
 						add
 						call	1
 						pop
-						load_const	2
-						return
 					]
 				}
 			],
-			constants = ["starting at debug lvl ", 1, "hello", 3, "PRINT ME", 0, 1, "DONEEEE", None, None],
+			constants = ["starting at debug lvl ", 1, "hello", 3, "PRINT ME", 0, 1, "DONEEEE", None],
 			parameter_count = 0,
 			local_vars = [setLogOn],
 			local_ref_vars = [],
@@ -209,8 +199,6 @@ function
 				load_global	1
 				call	0
 				pop
-				load_const	9
-				return
 			]
 		}
 	],

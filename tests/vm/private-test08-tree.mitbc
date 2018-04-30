@@ -52,7 +52,7 @@ function
 						function
 						{
 							functions = [],
-							constants = [1, None, None, None],
+							constants = [1, None, None],
 							parameter_count = 0,
 							local_vars = [count],
 							local_ref_vars = [],
@@ -96,14 +96,12 @@ function
 								store_local	0
 								load_local	0
 								return
-								load_const	3
-								return
 							]
 						},
 						function
 						{
 							functions = [],
-							constants = [true, None, false, None, false, None],
+							constants = [true, None, false, None, false],
 							parameter_count = 1,
 							local_vars = [x],
 							local_ref_vars = [],
@@ -160,14 +158,12 @@ function
 								goto	3
 								load_const	4
 								return
-								load_const	5
-								return
 							]
 						},
 						function
 						{
 							functions = [],
-							constants = [None, None, None],
+							constants = [None, None],
 							parameter_count = 1,
 							local_vars = [x],
 							local_ref_vars = [],
@@ -234,14 +230,12 @@ function
 								load_ref
 								swap
 								field_store	9
-								load_const	2
-								return
 							]
 						},
 						function
 						{
 							functions = [],
-							constants = [None, None],
+							constants = [None],
 							parameter_count = 0,
 							local_vars = [],
 							local_ref_vars = [],
@@ -266,14 +260,12 @@ function
 								load_ref
 								field_load	3
 								return
-								load_const	1
-								return
 							]
 						},
 						function
 						{
 							functions = [],
-							constants = [None, None],
+							constants = [None],
 							parameter_count = 0,
 							local_vars = [],
 							local_ref_vars = [],
@@ -298,14 +290,12 @@ function
 								load_ref
 								field_load	3
 								return
-								load_const	1
-								return
 							]
 						},
 						function
 						{
 							functions = [],
-							constants = [None, None, None],
+							constants = [None, None],
 							parameter_count = 1,
 							local_vars = [f],
 							local_ref_vars = [],
@@ -349,12 +339,10 @@ function
 								load_local	0
 								call	1
 								pop
-								load_const	2
-								return
 							]
 						}
 					],
-					constants = [None, None, None],
+					constants = [None, None],
 					parameter_count = 1,
 					local_vars = [v, this],
 					local_ref_vars = [this],
@@ -406,14 +394,12 @@ function
 						store_local	1
 						load_local	1
 						return
-						load_const	2
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [None, false, None],
+					constants = [None, false],
 					parameter_count = 1,
 					local_vars = [x],
 					local_ref_vars = [],
@@ -437,14 +423,12 @@ function
 						goto	3
 						load_const	1
 						return
-						load_const	2
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [None, None],
+					constants = [None],
 					parameter_count = 1,
 					local_vars = [x],
 					local_ref_vars = [],
@@ -474,14 +458,12 @@ function
 						load_ref
 						swap
 						field_store	3
-						load_const	1
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [None, "Error", None],
+					constants = [None, "Error"],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -504,14 +486,12 @@ function
 						goto	3
 						load_const	1
 						return
-						load_const	2
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [None, "Error", None],
+					constants = [None, "Error"],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -534,14 +514,12 @@ function
 						goto	3
 						load_const	1
 						return
-						load_const	2
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [None, 0, None],
+					constants = [None, 0],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -564,14 +542,12 @@ function
 						goto	3
 						load_const	1
 						return
-						load_const	2
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [None, None],
+					constants = [None],
 					parameter_count = 1,
 					local_vars = [f],
 					local_ref_vars = [],
@@ -593,12 +569,10 @@ function
 						call	1
 						pop
 						goto	1
-						load_const	1
-						return
 					]
 				}
 			],
-			constants = [None, None],
+			constants = [None],
 			parameter_count = 0,
 			local_vars = [Node, this],
 			local_ref_vars = [Node, this],
@@ -647,8 +621,6 @@ function
 				field_store	6
 				store_local	1
 				load_local	1
-				return
-				load_const	1
 				return
 			]
 		}

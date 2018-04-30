@@ -72,38 +72,31 @@ if [ -n "$1" ]; then
             filepattern=$filepattern*$TEST_FILE_EXT
         fi
         echo "Testing all matches to $filepattern..."
-        count=0
-        for filename in $DIR/*${filepattern}; do
-            count=$((count+1))
-        done
-        for filename in $DIR/*${filepattern}; do
-            if [ ! -f $filename ]; then
-                echo "No files found"
-                exit 0
-            fi
-            if run_test $filename; then
-                rm $TEST_OUT
-            else
-                if $VERBOSE; then
-                    echo -ne "${BLUE}IMPORTANT: if you believe the interpreter is in fact behaving correctly, do you want to update the ${TARGET_FILE_EXT} file? (Y/n):${NC} "
-                    read resp
-                    if [ "$resp" == "Y" ]; then
-                        new_file=$DIR$(basename $filename $TEST_FILE_EXT)$TARGET_FILE_EXT
-                        echo -e "\t${BLUE}writing new output to $new_file${NC}"
-                        mv $TEST_OUT $new_file
-                    else
-                        rm $TEST_OUT
-                    fi
-                fi
-            fi
-        done
     fi
 else
-    for filename in $DIR*$TEST_FILE_EXT; do
-        run_test $filename
-    done
-    rm $TEST_OUT
+    filepattern=$TEST_FILE_EXT
+    echo "Testing all files..."
 fi
+
+for filename in $DIR/*${filepattern}; do
+    if [ ! -f $filename ]; then
+        echo "No files found"
+        exit 0
+    fi
+    if run_test $filename; then
+        rm $TEST_OUT
+    elif $VERBOSE; then
+        echo -ne "${BLUE}IMPORTANT: if you believe the interpreter is in fact behaving correctly, do you want to update the ${TARGET_FILE_EXT} file? (Y/n):${NC} "
+        read resp
+        if [ "$resp" == "Y" ]; then
+            new_file=$DIR$(basename $filename $TEST_FILE_EXT)$TARGET_FILE_EXT
+            echo -e "\t${BLUE}writing new output to $new_file${NC}"
+            mv $TEST_OUT $new_file
+        else
+            rm $TEST_OUT
+        fi
+    fi
+done
 
 echo -e "\n----------"
 echo "Finished $THIS_FILE - ${SUCCESS}/${TOTAL} passed"

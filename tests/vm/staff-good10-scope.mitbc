@@ -48,7 +48,7 @@ function
 				function
 				{
 					functions = [],
-					constants = ["Value = ", 10, None],
+					constants = ["Value = ", 10],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -67,12 +67,10 @@ function
 						eq
 						if	2
 						goto	1
-						load_const	2
-						return
 					]
 				}
 			],
-			constants = [7, None],
+			constants = [7],
 			parameter_count = 0,
 			local_vars = [g, x],
 			local_ref_vars = [],
@@ -86,8 +84,6 @@ function
 				alloc_closure	0
 				store_local	0
 				load_local	0
-				return
-				load_const	1
 				return
 			]
 		}

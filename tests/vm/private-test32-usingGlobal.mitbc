@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = [7, 4, None],
+			constants = [7, 4],
 			parameter_count = 0,
 			local_vars = [],
 			local_ref_vars = [],
@@ -55,8 +55,6 @@ function
 				load_const	0
 				store_global	0
 				load_const	1
-				return
-				load_const	2
 				return
 			]
 		}

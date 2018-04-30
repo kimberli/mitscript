@@ -48,7 +48,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [None, 0, None],
+					constants = [None, 0],
 					parameter_count = 0,
 					local_vars = [],
 					local_ref_vars = [],
@@ -70,14 +70,12 @@ function
 						goto	3
 						load_const	1
 						return
-						load_const	2
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [1, None],
+					constants = [1],
 					parameter_count = 1,
 					local_vars = [v],
 					local_ref_vars = [],
@@ -106,14 +104,12 @@ function
 						load_ref
 						swap
 						field_store	5
-						load_const	1
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = ["", ", ", None, None],
+					constants = ["", ", ", None],
 					parameter_count = 0,
 					local_vars = [s, t],
 					local_ref_vars = [],
@@ -147,14 +143,12 @@ function
 						load_local	0
 						call	1
 						pop
-						load_const	3
-						return
 					]
 				},
 				function
 				{
 					functions = [],
-					constants = [None, None],
+					constants = [None],
 					parameter_count = 1,
 					local_vars = [f, t],
 					local_ref_vars = [],
@@ -180,8 +174,6 @@ function
 						eq
 						not
 						if	-12
-						load_const	1
-						return
 					]
 				},
 				function
@@ -191,7 +183,7 @@ function
 						function
 						{
 							functions = [],
-							constants = [None, None, None],
+							constants = [None, None],
 							parameter_count = 1,
 							local_vars = [n],
 							local_ref_vars = [],
@@ -223,12 +215,10 @@ function
 								goto	3
 								load_const	1
 								return
-								load_const	2
-								return
 							]
 						}
 					],
-					constants = [None],
+					constants = [],
 					parameter_count = 0,
 					local_vars = [clone, rv],
 					local_ref_vars = [clone],
@@ -253,12 +243,10 @@ function
 						field_store	2
 						load_local	1
 						return
-						load_const	0
-						return
 					]
 				}
 			],
-			constants = [None, None],
+			constants = [None],
 			parameter_count = 0,
 			local_vars = [this],
 			local_ref_vars = [this],
@@ -298,8 +286,6 @@ function
 				store_local	0
 				load_local	0
 				return
-				load_const	1
-				return
 			]
 		},
 		function
@@ -309,7 +295,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [None],
+					constants = [],
 					parameter_count = 1,
 					local_vars = [n],
 					local_ref_vars = [],
@@ -334,12 +320,10 @@ function
 						load_local	0
 						call	1
 						pop
-						load_const	0
-						return
 					]
 				}
 			],
-			constants = [None],
+			constants = [],
 			parameter_count = 2,
 			local_vars = [lst, N, rv],
 			local_ref_vars = [N, rv],
@@ -360,8 +344,6 @@ function
 				pop
 				load_local	2
 				return
-				load_const	0
-				return
 			]
 		},
 		function
@@ -371,7 +353,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [None],
+					constants = [],
 					parameter_count = 1,
 					local_vars = [v],
 					local_ref_vars = [],
@@ -402,12 +384,10 @@ function
 						load_ref
 						swap
 						field_store	7
-						load_const	0
-						return
 					]
 				}
 			],
-			constants = [0, 0, None],
+			constants = [0, 0],
 			parameter_count = 2,
 			local_vars = [l1, l2, rv, state],
 			local_ref_vars = [rv, state],
@@ -462,8 +442,6 @@ function
 				pop
 				load_local	2
 				return
-				load_const	2
-				return
 			]
 		},
 		function
@@ -473,7 +451,7 @@ function
 				function
 				{
 					functions = [],
-					constants = [0, 1, None],
+					constants = [0, 1],
 					parameter_count = 1,
 					local_vars = [pair, v],
 					local_ref_vars = [],
@@ -522,12 +500,10 @@ function
 						load_local	1
 						call	1
 						pop
-						load_const	2
-						return
 					]
 				}
 			],
-			constants = [0, 0, None],
+			constants = [0, 0],
 			parameter_count = 3,
 			local_vars = [a, b, N, rv, state, temp],
 			local_ref_vars = [N, rv, state],
@@ -572,14 +548,12 @@ function
 				pop
 				load_local	3
 				return
-				load_const	2
-				return
 			]
 		},
 		function
 		{
 			functions = [],
-			constants = [0, 0, 1, None],
+			constants = [0, 0, 1],
 			parameter_count = 3,
 			local_vars = [a, smallb, N, i, v],
 			local_ref_vars = [],
@@ -614,8 +588,6 @@ function
 				gt
 				if	-14
 				load_local	4
-				return
-				load_const	3
 				return
 			]
 		}

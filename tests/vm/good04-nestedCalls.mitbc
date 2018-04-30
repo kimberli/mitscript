@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = [None],
+			constants = [],
 			parameter_count = 1,
 			local_vars = [hi2],
 			local_ref_vars = [],
@@ -52,14 +52,12 @@ function
 			names = [],
 			instructions = 
 			[
-				load_const	0
-				return
 			]
 		},
 		function
 		{
 			functions = [],
-			constants = [None],
+			constants = [],
 			parameter_count = 1,
 			local_vars = [hi],
 			local_ref_vars = [],
@@ -72,8 +70,6 @@ function
 				call	1
 				pop
 				load_local	0
-				return
-				load_const	0
 				return
 			]
 		}

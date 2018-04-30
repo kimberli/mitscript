@@ -44,7 +44,7 @@ function
 		function
 		{
 			functions = [],
-			constants = [0, 0, "", 1, 1, None],
+			constants = [0, 0, "", 1, 1],
 			parameter_count = 3,
 			local_vars = [im, x, y, ch, i, j, line],
 			local_ref_vars = [],
@@ -91,14 +91,12 @@ function
 				swap
 				gt
 				if	-35
-				load_const	5
-				return
 			]
 		},
 		function
 		{
 			functions = [],
-			constants = ["x", " ", None],
+			constants = ["x", " "],
 			parameter_count = 2,
 			local_vars = [x, y],
 			local_ref_vars = [],
@@ -120,8 +118,6 @@ function
 				load_const	0
 				return
 				load_const	1
-				return
-				load_const	2
 				return
 			]
 		}
