@@ -17,24 +17,29 @@ clean: clean-ms-parser clean-bc-parser clean-ref clean-bc-compiler clean-interpr
 ## EXECUTABLES
 
 # make the MITScript pretty printer
-ms-print: $(MS_PARSER)/print_main.cpp $(MS_PARSER_SRC)
-	$(CC) $(CC_FLAGS) $(MS_PARSER)/print_main.cpp $(MS_PARSER_SRC) -o $(MS_PARSER)/ms-print
+ms-print: $(MS_PARSER)/ms-print
+$(MS_PARSER)/ms-print: $(MS_PARSER)/print_main.cpp $(MS_PARSER_SRC)
+	$(CC) $(CC_FLAGS) $(MS_PARSER)/print_main.cpp $(MS_PARSER_SRC) -o $@
 
 # make the bytecode pretty printer
-bc-print: $(BC_PARSER)/print_main.cpp $(BC_PARSER_SRC)
-	$(CC) $(CC_FLAGS) $(BC_PARSER)/print_main.cpp $(BC_PARSER_SRC) types.cpp frame.cpp gc/gc.cpp -o $(BC_PARSER)/bc-print
+bc-print: $(BC_PARSER)/bc-print
+$(BC_PARSER)/bc-print: $(BC_PARSER)/print_main.cpp $(BC_PARSER_SRC)
+	$(CC) $(CC_FLAGS) $(BC_PARSER)/print_main.cpp $(BC_PARSER_SRC) types.cpp frame.cpp gc/gc.cpp -o $@
 
 # MITScript -> bytecode compiler
-bc-compiler: bc/* gc/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
-	$(CC) $(CC_FLAGS) bc/compiler-main.cpp $(BC_COMPILER_SRC) $(MS_PARSER_SRC) -o mitscriptc
+bc-compiler: mitscriptc
+mitscriptc: bc/* gc/* $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
+	$(CC) $(CC_FLAGS) bc/compiler-main.cpp $(BC_COMPILER_SRC) $(MS_PARSER_SRC) -o $@
 
 # MITScript -> bytecode -> IR -> vm
-interpreter: $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
-	$(CC) $(CC_FLAGS) -lstdc++ -Ix64asm -L x64asm/lib -lx64asm vm/interpreter-main.cpp $(IR_SRC) $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) -o mitscript
+interpreter: mitscript
+mitscript: $(MS_PARSER)/parser.cpp $(BC_PARSER)/parser.cpp
+	$(CC) $(CC_FLAGS) -lstdc++ -Ix64asm -L x64asm/lib -lx64asm vm/interpreter-main.cpp $(IR_SRC) $(VM_SRC) $(BC_PARSER_SRC) $(MS_PARSER_SRC) -o $@
 
 # reference interpreter (from a2)
-ref: $(REF)/ref-main.cpp $(REF)/* Visitor.h AST.h $(MS_PARSER_SRC)
-	$(CC) $(CC_FLAGS) $(REF)/*.cpp $(MS_PARSER_SRC) -o ref/mitscript
+ref: ref/mitscript
+ref/mitscript: $(REF)/ref-main.cpp $(REF)/*.cpp $(REF)/*.h Visitor.h AST.h $(MS_PARSER_SRC)
+	$(CC) $(CC_FLAGS) $(REF)/*.cpp $(MS_PARSER_SRC) -o $@
 
 
 ## TESTS
