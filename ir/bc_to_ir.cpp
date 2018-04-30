@@ -276,7 +276,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            throw RuntimeException("should never get here - invalid instruction");
 	    }
 	}
-	IrFunc irFunc = IrFunc(irInsts, func->constants_, func->parameter_count_, func->local_vars_.size());
+	IrFunc irFunc = IrFunc(irInsts, func->constants_, func->functions_, func->parameter_count_, func->local_vars_.size());
     return irFunc;
 };
 

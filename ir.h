@@ -278,14 +278,17 @@ struct IrInstruction {
 struct IrFunc {
     IrInstList instructions;
     vector<Constant*> constants_;
+    vector<Function*> functions_;
     int32_t parameter_count_;
     int32_t local_count_;
 
     IrFunc(IrInstList instructions,
         vector<Constant*> constants_,
+        vector<Function*> functions_,
         int32_t parameter_count_,
         int32_t local_count_) :
         instructions(instructions),
+        functions_(functions_),
         constants_(constants_),
         parameter_count_(parameter_count_),
         local_count_(local_count_) {};
