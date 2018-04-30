@@ -158,7 +158,7 @@ enum class IrOp {
     // Description: move to a given label
     // op0: index of the label to jump to; should be unique
     // Result: execution transfers to the label
-    Jump,
+    Goto,
 
     // Description: move to a given label
     // op0: index of the label to jump to; should be unique
