@@ -17,10 +17,10 @@ using namespace std;
 class Interpreter;
 
 class IrCompiler {
-    // class used to handle interpreter state
+    // class used to handle ir state per function
 private:
     Interpreter* vmPointer;
-    Function* func;  // root function
+    Function* func;  // current function
 	vector<IrFunc*> irFuncs;
 	stack<Temp> tempStack;
 	IrInstList irInsts;

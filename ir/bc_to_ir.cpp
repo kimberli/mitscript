@@ -12,6 +12,7 @@ using namespace std;
 class Interpreter;
 
 IrFunc IrCompiler::toIrFunc(Function* func) {
+    func = func;
     tempStack = stack<Temp>();  // are we gonna garbage collect this?
     irInsts = IrInstList();
 	temp_t currentTemp = 0;
@@ -43,7 +44,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        case BcOp::LoadGlobal:
 	            {
                     pushTemp(currentTemp);
-					pushInstruction(IrInstruction(IrOp::LoadGlobal, inst.operand0, currentTemp));
+                    
+                    optstr_t global = func->names_[inst.operand0.value()];
+					pushInstruction(IrInstruction(IrOp::LoadGlobal, global, currentTemp));
 					currentTemp++;
 	                break;
 	            }
@@ -54,7 +57,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::StoreGlobal:
 	            {
-					pushInstruction(IrInstruction(IrOp::StoreGlobal, inst.operand0, popTemp()));
+                    optstr_t global = func->names_[inst.operand0.value()];
+					pushInstruction(IrInstruction(IrOp::StoreGlobal, global, popTemp()));
 	                break;
 	            }
 	        case BcOp::PushReference:

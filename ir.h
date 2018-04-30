@@ -261,11 +261,16 @@ struct IrInstruction {
     optint_t op0;
     optstr_t global;
     TempList tempIndices;
-    IrInstruction(const IrOp op, optint_t op0, optstr_t global, TempList tempIndices):
+    IrInstruction(const IrOp op, optstr_t global, temp_t tempIndex):
         op(op),
         global(global),
-        op0(op0),
-        tempIndices(tempIndices) {};
+        op0(),
+        tempIndices(TempList{Temp(tempIndex)}) {};
+    IrInstruction(const IrOp op, optstr_t global, Temp temp):
+        op(op),
+        global(global),
+        op0(),
+        tempIndices(TempList{temp}) {};
     IrInstruction(const IrOp op, optint_t op0, TempList tempIndices):
         op(op),
         op0(op0),
