@@ -7,14 +7,17 @@ struct IrInstruction;
 struct IrFunc;
 struct Temp;
 
-typedef std::vector<IrInstruction> IrInstList;
-typedef std::experimental::optional<int32_t> optint_t;
-typedef std::experimental::optional<std::string> optstr_t;
-typedef std::vector<Temp> TempList;
+using namespace std;
+
+typedef vector<IrInstruction> IrInstList;
+typedef experimental::optional<int32_t> optint_t;
+typedef experimental::optional<string> optstr_t;
+typedef vector<Temp> TempList;
+typedef int64_t temp_t;
 
 struct Temp {
-    int64_t stackOffset = -1;
-	Temp(int64_t offset) : stackOffset(offset) {}
+    temp_t stackOffset = -1;
+	Temp(temp_t offset) : stackOffset(offset) {}
 };
 
 enum class IrOp {
@@ -257,18 +260,27 @@ struct IrInstruction {
     IrOp op;
     optint_t op0;
     optstr_t global;
-    TempList& tempIndices;
-    IrInstruction(const IrOp op, optint_t op0, optstr_t global, TempList& tempIndices):
+    TempList tempIndices;
+    IrInstruction(const IrOp op, optint_t op0, optstr_t global, TempList tempIndices):
         op(op),
         global(global),
         op0(op0),
         tempIndices(tempIndices) {};
-    IrInstruction(const IrOp op, optint_t op0, TempList& tempIndices):
+    IrInstruction(const IrOp op, optint_t op0, TempList tempIndices):
         op(op),
         op0(op0),
-        tempIndices(tempIndices) {
-            global = optstr_t();
-        };
+        global(),
+        tempIndices(tempIndices) {};
+    IrInstruction(const IrOp op, optint_t op0, temp_t tempIndex):
+        op(op),
+        op0(op0),
+        global(),
+        tempIndices(TempList{Temp(tempIndex)}) {};
+    IrInstruction(const IrOp op, optint_t op0, Temp temp):
+        op(op),
+        op0(op0),
+        global(),
+        tempIndices(TempList{temp}) {};
 };
 
 struct IrFunc {
