@@ -14,12 +14,10 @@ Instruction& Frame::getCurrInstruction() {
     return func->instructions[instructionIndex];
 }
 
-void Frame::moveToInstruction(int offset) {
-    int newOffset = instructionIndex + offset;
-    if (newOffset < 0 || newOffset >= numInstructions()) {
-        throw RuntimeException("instruction " + to_string(instructionIndex + newOffset) + " out of bounds");
+void Frame::checkLegalInstruction() {
+    if (instructionIndex < 0 || instructionIndex >= numInstructions()) {
+        throw RuntimeException("instruction " + to_string(instructionIndex) + " out of bounds");
     }
-    instructionIndex += offset;
 }
 
 // function value helpers

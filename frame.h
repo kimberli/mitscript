@@ -35,6 +35,8 @@ public:
     int instructionIndex = 0;
     // garbage collector
     CollectedHeap* collector;
+    // offset to keep track of stuff
+    int offset = 0;
 
     Frame(vptr<Function> func): func(func) {};
 
@@ -43,7 +45,7 @@ public:
     // instruction helpers
     int numInstructions();
     Instruction& getCurrInstruction();
-    void moveToInstruction(int offset);
+    void checkLegalInstruction();
 
     // function value helpers
     vptr<Constant> getConstantByIndex(int index);

@@ -58,25 +58,27 @@ void Interpreter::executeStep() {
     // executes a single instruction and updates state of interpreter
     fptr frame = frames.back();
     Instruction& inst = frame->getCurrInstruction();
-    newOffset = 1;
     LOG("executing instruction " + to_string(frame->instructionIndex));
     switch (inst.operation) {
         case Operation::LoadConst:
             {
                 auto constant = frame->getConstantByIndex(inst.operand0.value());
                 frame->opStackPush(constant);
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::LoadFunc:
             {
                 auto func = frame->getFunctionByIndex(inst.operand0.value());
                 frame->opStackPush(func);
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::LoadLocal:
             {
                 string name = frame->getLocalByIndex(inst.operand0.value());
                 frame->opStackPush(frame->getLocalVar(name));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::StoreLocal:
@@ -87,6 +89,7 @@ void Interpreter::executeStep() {
                     throw RuntimeException("expected Constant on the stack for StoreLocal");
                 }
                 frame->setLocalVar(name, value);
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::LoadGlobal:
@@ -94,6 +97,7 @@ void Interpreter::executeStep() {
                 int index = inst.operand0.value();
                 string name = frame->getNameByIndex(index);
                 frame->opStackPush(loadGlobal(name));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::StoreGlobal:
@@ -101,6 +105,7 @@ void Interpreter::executeStep() {
                 int index = inst.operand0.value();
                 string name = frame->getNameByIndex(index);
                 storeGlobal(name, frame->opStackPop());
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::PushReference:
@@ -108,6 +113,7 @@ void Interpreter::executeStep() {
                 string name = frame->getRefByIndex(inst.operand0.value());
                 auto valWrapper = frame->getRefVar(name);
                 frame->opStackPush(valWrapper);
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::LoadReference:
@@ -117,6 +123,7 @@ void Interpreter::executeStep() {
                     throw RuntimeException("expected ValWrapper on the stack for LoadReference");
                 }
                 frame->opStackPush(valWrapper->ptr);
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::StoreReference:
@@ -130,11 +137,13 @@ void Interpreter::executeStep() {
                     throw RuntimeException("expected ValWrapper on the stack for StoreReference");
                 }
 				*valWrapper->ptr = *value;
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::AllocRecord:
             {
 				frame->opStackPush(collector->allocate<Record>());
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::FieldLoad:
@@ -146,6 +155,7 @@ void Interpreter::executeStep() {
                     record->set(field, val, *collector);
                 }
 				frame->opStackPush(record->get(field));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::FieldStore:
@@ -157,6 +167,7 @@ void Interpreter::executeStep() {
 				vptr<Record> record = frame->opStackPop()->cast<Record>();
 				string field = frame->getNameByIndex(inst.operand0.value());
                 record->set(field, value, *collector);
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::IndexLoad:
@@ -168,6 +179,7 @@ void Interpreter::executeStep() {
                     record->set(index, val, *collector);
                 }
 				frame->opStackPush(record->get(index));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::IndexStore:
@@ -179,6 +191,7 @@ void Interpreter::executeStep() {
 				string index = frame->opStackPop()->toString();
 				vptr<Record> record = frame->opStackPop()->cast<Record>();
                 record->set(index, value, *collector);
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::AllocClosure:
@@ -203,6 +216,7 @@ void Interpreter::executeStep() {
                 }
                 // push new closure onto the stack
                 frame->opStackPush(collector->allocate<Closure>(refList, func));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::Call:
@@ -221,8 +235,9 @@ void Interpreter::executeStep() {
                 reverse(argsList.begin(), argsList.end());
 
                 vptr<Value> closure = frame->opStackPop();
-                vptr<Value> retVal = call(argsList, closure);
-                frame->opStackPush(retVal);
+                frame->instructionIndex++;
+                call(argsList, closure);
+                break;
             }
         case Operation::Return:
             {
@@ -236,6 +251,7 @@ void Interpreter::executeStep() {
                 frame = frames.back();
                 // push return val to top of new parent frame
                 frame->opStackPush(returnVal);
+                //frame->instructionIndex ++;
                 break;
             }
         case Operation::Add:
@@ -244,6 +260,7 @@ void Interpreter::executeStep() {
                 auto left = frame->opStackPop();
                 vptr<Value> result = add(left, right);
                 frame->opStackPush(result);
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::Sub:
@@ -252,6 +269,7 @@ void Interpreter::executeStep() {
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
                         collector->allocate<Integer>(left - right));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::Mul:
@@ -260,6 +278,7 @@ void Interpreter::executeStep() {
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
                        collector->allocate<Integer>(left * right));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::Div:
@@ -271,6 +290,7 @@ void Interpreter::executeStep() {
                 }
                 frame->opStackPush(
                         collector->allocate<Integer>(left / right));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::Neg:
@@ -278,6 +298,7 @@ void Interpreter::executeStep() {
                 int top = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
                         collector->allocate<Integer>(-top));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::Gt:
@@ -286,6 +307,7 @@ void Interpreter::executeStep() {
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
                         collector->allocate<Boolean>(left > right));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::Geq:
@@ -294,6 +316,7 @@ void Interpreter::executeStep() {
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
                         collector->allocate<Boolean>(left >= right));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::Eq:
@@ -302,6 +325,7 @@ void Interpreter::executeStep() {
                 auto left = frame->opStackPop();
                 frame->opStackPush(
                         collector->allocate<Boolean>(left->equals(right)));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::And:
@@ -310,6 +334,7 @@ void Interpreter::executeStep() {
                 bool left = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
                         collector->allocate<Boolean>(left && right));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::Or:
@@ -318,6 +343,7 @@ void Interpreter::executeStep() {
                 bool left = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
                         collector->allocate<Boolean>(left || right));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::Not:
@@ -325,18 +351,21 @@ void Interpreter::executeStep() {
                 bool top = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
                         collector->allocate<Boolean>(!top));
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::Goto:
             {
-                newOffset = inst.operand0.value();
+                frame->instructionIndex += inst.operand0.value();
                 break;
             }
         case Operation::If:
             {
                 auto e = frame->opStackPop()->cast<Boolean>();
                 if (e->value) {
-                    newOffset = inst.operand0.value();
+                    frame->instructionIndex += inst.operand0.value();
+                } else {
+                    frame->instructionIndex ++;
                 }
                 break;
             }
@@ -344,6 +373,7 @@ void Interpreter::executeStep() {
             {
                 auto top = frame->opStackPeek();
                 frame->opStackPush(top);
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::Swap:
@@ -352,32 +382,33 @@ void Interpreter::executeStep() {
                 auto next = frame->opStackPop();
                 frame->opStackPush(top);
                 frame->opStackPush(next);
+                frame->instructionIndex ++;
                 break;
             }
         case Operation::Pop:
             {
                 frame->opStackPop();
+                frame->instructionIndex ++;
                 break;
             }
         default:
             throw RuntimeException("should never get here - invalid instruction");
     }
 	collector->gc();
-    if (frames.size() == 1 && frame->instructionIndex + newOffset == frame->numInstructions()) {
+    if (frames.size() == 1 && frame->instructionIndex == frame->numInstructions()) {
         // last instruction of the whole program
         finished = true;
         return;
     }
-    if (frame->instructionIndex + newOffset == frame->numInstructions()) {
+    if (frame->instructionIndex == frame->numInstructions()) {
         // last instruction of current function
         vptr<Value> returnVal = collector->allocate<None>();
         frames.pop_back();
         frame = frames.back();
         // push return val to top of new parent frame
         frame->opStackPush(returnVal);
-		newOffset = 1;
     }
-    frame->moveToInstruction(newOffset);
+    frame->checkLegalInstruction();
 };
 
 void Interpreter::run() {
@@ -399,9 +430,9 @@ vptr<Value> Interpreter::call(vector<vptr<Constant>> argsList, vptr<Value> closu
     }
     bool shouldCallAsm = false;
     if (shouldCallAsm) {
-        return callAsm(argsList, clos);
+        callAsm(argsList, clos);
     } else {
-        return callVM(argsList, clos);
+        callVM(argsList, clos);
     }
 }
 
@@ -428,13 +459,12 @@ vptr<Value> Interpreter::callVM(vector<vptr<Constant>> argsList, vptr<Closure> c
     vptr<NativeFunction> nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
     if (nativeFunc != NULL) {
         vptr<Constant> val = nativeFunc->evalNativeFunction(*newFrame, *collector);
-        return val;
+        frames.back()->opStackPush(val);
     } else if (newFrame->numInstructions() != 0) {
-        newOffset = 0;
         frames.push_back(newFrame);
     } else {
         vptr<Value> returnVal = collector->allocate<None>();
-        return returnVal;
+        frames.back()->opStackPush(returnVal);
     }
 }
 
