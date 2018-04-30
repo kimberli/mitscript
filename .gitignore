@@ -16,3 +16,4 @@ MITScriptParser.cpp
 MITScriptParser.h
 MITScriptVisitor.cpp
 MITScriptVisitor.h
+.gdb_history
