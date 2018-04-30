@@ -5,6 +5,7 @@
 
 struct IrInstruction;
 struct IrFunc;
+struct Temp;
 
 typedef std::vector<IrInstruction> IrInstList;
 typedef std::experimental::optional<int32_t> optint_t;
@@ -12,7 +13,8 @@ typedef std::experimental::optional<std::string> optstr_t;
 typedef std::vector<Temp> TempList;
 
 struct Temp {
-    int stackOffset;
+    int32_t stackOffset;
+	Temp(int32_t offset) : stackOffset(offset) {}
 };
 
 enum class IrOp {
