@@ -17,7 +17,7 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "Testing compiler from MITScript to bytecode...\n"
+echo -e "Testing compiler from MITScript to bytecode..."
 
 run_test() {
     # filename is the filename of the test with the appropriate file ext
@@ -101,4 +101,4 @@ for filename in $DIR/*${filepattern}; do
 done
 
 echo -e "\n----------"
-echo "Finished $THIS_FILE - ${SUCCESS}/${TOTAL} passed"
+echo -e "Finished $THIS_FILE - ${SUCCESS}/${TOTAL} passed\n"
