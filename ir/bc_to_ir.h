@@ -22,25 +22,15 @@ private:
     Interpreter* vmPointer;
     Function* func;  // current function
 	vector<IrFunc*> irFuncs;
-	stack<Temp> tempStack;
+	stack<tempptr_t> tempStack;
 	IrInstList irInsts;
+	offset_t currentTemp = 0;
 
-    void pushTemp(temp_t index) {
-        tempStack.push(Temp(index));
-    }
-
-    void pushTemp(Temp temp) {
-        tempStack.push(temp);
-    }
-
-    Temp popTemp() {
-		Temp temp = tempStack.top();
-        tempStack.pop();
-    }
-
-    void pushInstruction(IrInstruction inst) {
-        irInsts.push_back(inst);
-    }
+    // helpers
+    tempptr_t pushNewTemp();
+    void pushTemp(tempptr_t temp);
+    tempptr_t popTemp();
+    void pushInstruction(IrInstruction inst);
 public:
     IrCompiler(Function* mainFunc, Interpreter* vmInterpreterPointer):
         func(mainFunc),

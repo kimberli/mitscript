@@ -11,43 +11,58 @@ using namespace std;
 
 class Interpreter;
 
+// Helpers
+tempptr_t IrCompiler::pushNewTemp() {
+    tempptr_t newTemp = make_shared<Temp>(currentTemp);
+    tempStack.push(newTemp);
+    currentTemp++;
+    return newTemp;
+}
+void IrCompiler::pushTemp(tempptr_t temp) {
+    tempStack.push(temp);
+}
+tempptr_t IrCompiler::popTemp() {
+    tempptr_t temp = tempStack.top();
+    tempStack.pop();
+    return temp;
+}
+void IrCompiler::pushInstruction(IrInstruction inst) {
+    irInsts.push_back(inst);
+}
+
+// Main functionality
 IrFunc IrCompiler::toIrFunc(Function* func) {
     func = func;
-    tempStack = stack<Temp>();  // are we gonna garbage collect this?
+    tempStack = stack<tempptr_t>();
     irInsts = IrInstList();
-	temp_t currentTemp = 0;
+	currentTemp = 0;
 
     for (int i = 0; i < func->instructions.size(); i++) {
 		BcInstruction inst = func->instructions[i];
 	    switch (inst.operation) {
 	        case BcOp::LoadConst:
 	            {
-                    pushTemp(currentTemp);
-					pushInstruction(IrInstruction(IrOp::LoadConst, inst.operand0, currentTemp));
-					currentTemp++;
+                    tempptr_t curr = pushNewTemp();
+					pushInstruction(IrInstruction(IrOp::LoadConst, inst.operand0, curr));
 	                break;
 	            }
 	        case BcOp::LoadFunc:
 	            {
-                    pushTemp(currentTemp);
-					pushInstruction(IrInstruction(IrOp::LoadFunc, inst.operand0, currentTemp));
-					currentTemp++;
+                    tempptr_t curr = pushNewTemp();
+					pushInstruction(IrInstruction(IrOp::LoadFunc, inst.operand0, curr));
 	                break;
 	            }
 	        case BcOp::LoadLocal:
 	            {
-                    pushTemp(currentTemp);
-					pushInstruction(IrInstruction(IrOp::LoadLocal, inst.operand0, currentTemp));
-					currentTemp++;
+                    tempptr_t curr = pushNewTemp();
+					pushInstruction(IrInstruction(IrOp::LoadLocal, inst.operand0, curr));
 	                break;
 	            }
 	        case BcOp::LoadGlobal:
 	            {
-                    pushTemp(currentTemp);
-
+                    tempptr_t curr = pushNewTemp();
                     optstr_t global = func->names_[inst.operand0.value()];
-					pushInstruction(IrInstruction(IrOp::LoadGlobal, global, currentTemp));
-					currentTemp++;
+					pushInstruction(IrInstruction(IrOp::LoadGlobal, global, curr));
 	                break;
 	            }
 	        case BcOp::StoreLocal:
@@ -71,29 +86,29 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::AllocRecord:
 	            {
-                    pushTemp(currentTemp);
-					pushInstruction(IrInstruction(IrOp::AllocRecord, inst.operand0, currentTemp));
-					currentTemp++;
+                    tempptr_t curr = pushNewTemp();
+					pushInstruction(IrInstruction(IrOp::AllocRecord, inst.operand0, curr));
 	                break;
 	            }
 	        case BcOp::FieldLoad:
 	            {
-					Temp record = popTemp();
-					Temp field = popTemp();
-					pushTemp(currentTemp);
-					TempList instTemps{currentTemp, record, field};
+					tempptr_t record = popTemp();
+					tempptr_t field = popTemp();
+                    tempptr_t curr = pushNewTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, record, field});
 					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record));
 					pushInstruction(IrInstruction(IrOp::AssertString, inst.operand0, field));
 					pushInstruction(IrInstruction(IrOp::RecordLoad, inst.operand0, instTemps));
-					currentTemp++;
 	                break;
 	            }
 	        case BcOp::FieldStore:
 	            {
-					Temp record = popTemp();
-					Temp field = popTemp();
-					Temp value = popTemp();
-					TempList instTemps{record, field, value};
+					tempptr_t record = popTemp();
+					tempptr_t field = popTemp();
+					tempptr_t value = popTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{record, field, value});
 					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record));
 					pushInstruction(IrInstruction(IrOp::AssertString, inst.operand0, field));
 					pushInstruction(IrInstruction(IrOp::RecordLoad, inst.operand0, instTemps));
@@ -101,22 +116,23 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::IndexLoad:
 	            {
-					Temp record = popTemp();
-					Temp index = popTemp();
-					pushTemp(currentTemp);
-					TempList instTemps{currentTemp, record, index};
+					tempptr_t record = popTemp();
+					tempptr_t index = popTemp();
+                    tempptr_t curr = pushNewTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, record, index});
 					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record));
 					pushInstruction(IrInstruction(IrOp::CastString, inst.operand0, index));
 					pushInstruction(IrInstruction(IrOp::RecordLoad, inst.operand0, instTemps));
-					currentTemp++;
 	                break;
 	            }
 	        case BcOp::IndexStore:
 	            {
-					Temp record = popTemp();
-					Temp index = popTemp();
-					Temp value = popTemp();
-					TempList instTemps{record, index, value};
+					tempptr_t record = popTemp();
+					tempptr_t index = popTemp();
+					tempptr_t value = popTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{record, index, value});
 					pushInstruction(IrInstruction(IrOp::AssertRecord, inst.operand0, record));
 					pushInstruction(IrInstruction(IrOp::CastString, inst.operand0, index));
 					pushInstruction(IrInstruction(IrOp::RecordLoad, inst.operand0, instTemps));
@@ -137,113 +153,126 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Add:
 	            {
-                    Temp tempRight = popTemp();
-                    Temp tempLeft = popTemp();
-                    TempList instTemps{currentTemp, tempRight, tempLeft};
+                    tempptr_t tempRight = popTemp();
+                    tempptr_t tempLeft = popTemp();
+                    tempptr_t curr = pushNewTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, tempRight, tempLeft});
 					pushInstruction(IrInstruction(IrOp::Add, inst.operand0, instTemps));
-					currentTemp++;
 	                break;
 	            }
 	        case BcOp::Sub:
 	            {
-                    Temp tempRight = popTemp();
-                    Temp tempLeft = popTemp();
-                    TempList instTemps{currentTemp, tempRight, tempLeft};
+                    tempptr_t tempRight = popTemp();
+                    tempptr_t tempLeft = popTemp();
+                    tempptr_t curr = pushNewTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, tempRight, tempLeft});
 					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempRight));
 					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempLeft));
 					pushInstruction(IrInstruction(IrOp::Sub, inst.operand0, instTemps));
-					currentTemp++;
 	                break;
 	            }
 	        case BcOp::Mul:
 	            {
-                    Temp tempRight = popTemp();
-                    Temp tempLeft = popTemp();
-                    TempList instTemps{currentTemp, tempRight, tempLeft};
+                    tempptr_t tempRight = popTemp();
+                    tempptr_t tempLeft = popTemp();
+                    tempptr_t curr = pushNewTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, tempRight, tempLeft});
 					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempRight));
 					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempLeft));
 					pushInstruction(IrInstruction(IrOp::Mul, inst.operand0, instTemps));
-					currentTemp++;
 	                break;
 	            }
 	        case BcOp::Div:
 	            {
-                    Temp tempRight = popTemp();
-                    Temp tempLeft = popTemp();
-                    TempList instTemps{currentTemp, tempRight, tempLeft};
+                    tempptr_t tempRight = popTemp();
+                    tempptr_t tempLeft = popTemp();
+                    tempptr_t curr = pushNewTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, tempRight, tempLeft});
 					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempRight));
 					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempLeft));
 					pushInstruction(IrInstruction(IrOp::Div, inst.operand0, instTemps));
-					currentTemp++;
 	                break;
 	            }
 	        case BcOp::Neg:
 	            {
-                    Temp val = popTemp();
+                    tempptr_t val = popTemp();
+                    tempptr_t curr = pushNewTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, val});
 					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, val));
-					pushInstruction(IrInstruction(IrOp::Neg, inst.operand0, val));
-					currentTemp++;
+					pushInstruction(IrInstruction(IrOp::Neg, inst.operand0, instTemps));
 	                break;
 	            }
 	        case BcOp::Gt:
 	            {
-                    Temp tempRight = popTemp();
-                    Temp tempLeft = popTemp();
-                    TempList instTemps{currentTemp, tempRight, tempLeft};
+                    tempptr_t tempRight = popTemp();
+                    tempptr_t tempLeft = popTemp();
+                    tempptr_t curr = pushNewTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, tempRight, tempLeft});
 					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempRight));
 					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempLeft));
 					pushInstruction(IrInstruction(IrOp::Gt, inst.operand0, instTemps));
-					currentTemp++;
 	                break;
 	            }
 	        case BcOp::Geq:
 	            {
-                    Temp tempRight = popTemp();
-                    Temp tempLeft = popTemp();
-                    TempList instTemps{currentTemp, tempRight, tempLeft};
+                    tempptr_t tempRight = popTemp();
+                    tempptr_t tempLeft = popTemp();
+                    tempptr_t curr = pushNewTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, tempRight, tempLeft});
 					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempRight));
 					pushInstruction(IrInstruction(IrOp::AssertInteger, inst.operand0, tempLeft));
 					pushInstruction(IrInstruction(IrOp::Geq, inst.operand0, instTemps));
-					currentTemp++;
 	                break;
 	            }
 	        case BcOp::Eq:
 	            {
-                    Temp tempRight = popTemp();
-                    Temp tempLeft = popTemp();
-                    TempList instTemps{currentTemp, tempRight, tempLeft};
+                    tempptr_t tempRight = popTemp();
+                    tempptr_t tempLeft = popTemp();
+                    tempptr_t curr = pushNewTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, tempRight, tempLeft});
 					pushInstruction(IrInstruction(IrOp::Eq, inst.operand0, instTemps));
-					currentTemp++;
 	                break;
 	            }
 	        case BcOp::And:
 	            {
-                    Temp tempRight = popTemp();
-                    Temp tempLeft = popTemp();
-                    TempList instTemps{currentTemp, tempRight, tempLeft};
+                    tempptr_t tempRight = popTemp();
+                    tempptr_t tempLeft = popTemp();
+                    tempptr_t curr = pushNewTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, tempRight, tempLeft});
 					pushInstruction(IrInstruction(IrOp::AssertBool, inst.operand0, tempRight));
 					pushInstruction(IrInstruction(IrOp::AssertBool, inst.operand0, tempLeft));
 					pushInstruction(IrInstruction(IrOp::And, inst.operand0, instTemps));
-					currentTemp++;
 	                break;
 	            }
 	        case BcOp::Or:
 	            {
-                    Temp tempRight = popTemp();
-                    Temp tempLeft = popTemp();
-                    TempList instTemps{currentTemp, tempRight, tempLeft};
+                    tempptr_t tempRight = popTemp();
+                    tempptr_t tempLeft = popTemp();
+                    tempptr_t curr = pushNewTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, tempRight, tempLeft});
 					pushInstruction(IrInstruction(IrOp::AssertBool, inst.operand0, tempRight));
 					pushInstruction(IrInstruction(IrOp::AssertBool, inst.operand0, tempLeft));
 					pushInstruction(IrInstruction(IrOp::Or, inst.operand0, instTemps));
-					currentTemp++;
 	                break;
 	            }
 	        case BcOp::Not:
 	            {
-                    Temp val = popTemp();
+                    tempptr_t val = popTemp();
+                    tempptr_t curr = pushNewTemp();
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, val});
 					pushInstruction(IrInstruction(IrOp::AssertBool, inst.operand0, val));
-					pushInstruction(IrInstruction(IrOp::Not, inst.operand0, val));
-					currentTemp++;
+					pushInstruction(IrInstruction(IrOp::Not, inst.operand0, instTemps));
 	                break;
 	            }
 	        case BcOp::Goto:
@@ -261,8 +290,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Swap:
 	            {
-                    Temp temp1 = popTemp();
-                    Temp temp2 = popTemp();
+                    tempptr_t temp1 = popTemp();
+                    tempptr_t temp2 = popTemp();
                     pushTemp(temp1);
                     pushTemp(temp2);
 	                break;

@@ -31,21 +31,21 @@ void IrInterpreter::getRbpOffset(uint64_t offset) {
     assm.sub(x64asm::r10, x64asm::r11); // sub r11 from r10. now the correct mem is in r10
 }
 
-void IrInterpreter::storeTemp(x64asm::R64 reg, Temp &temp) {
+void IrInterpreter::storeTemp(x64asm::R64 reg, tempptr_t temp) {
     // right now, put everything on the stack 
     // assign the temp an offset (from rbp)
     // Assume we are not saving any callee save. 
-    temp.stackOffset = func->parameter_count_ +  stackSize;
+    temp->stackOffset = func->parameter_count_ +  stackSize;
     // in assembly, calculate where this var is located 
-    getRbpOffset(temp.stackOffset); // leaves correct address into r10
+    getRbpOffset(temp->stackOffset); // leaves correct address into r10
     // Move the val in reg into the mem address stored in r10 
     assm.mov(x64asm::M64{x64asm::r10}, reg);
     stackSize++; //inc stack size for next temp
 }
 
-void IrInterpreter::loadTemp(x64asm::R64 reg, Temp &temp) {
+void IrInterpreter::loadTemp(x64asm::R64 reg, tempptr_t temp) {
     // figure out where the temp is stored 
-    getRbpOffset(temp.stackOffset); // location in r10 
+    getRbpOffset(temp->stackOffset); // location in r10 
     // put the thing from that mem addres into the reg 
     assm.mov(reg, x64asm::M64{x64asm::r10});
 }
@@ -62,7 +62,7 @@ void IrInterpreter::executeStep() {
                 // load a constant into a register 
                 assm.mov(x64asm::rdi, x64asm::Imm64{func->constants_.at(constIndex)}); 
                 // move from the register into a temp on the stack
-                storeTemp(x64asm::rdi, inst.tempIndices.at(0));
+                storeTemp(x64asm::rdi, inst.tempIndices->at(0));
                 break;
             }
         case IrOp::LoadFunc: 
@@ -72,7 +72,7 @@ void IrInterpreter::executeStep() {
                 // load the func pointer into a register
                 assm.mov(x64asm::rdi, x64asm::Imm64{func->functions_.at(funcIndex)});
                 // move from the register into a temp on the stack 
-                storeTemp(x64asm::rdi, inst.tempIndices.at(0));
+                storeTemp(x64asm::rdi, inst.tempIndices->at(0));
                 break;
             }
         case IrOp::LoadLocal: 
@@ -82,7 +82,7 @@ void IrInterpreter::executeStep() {
                 getRbpOffset(offset); // puts the address of the local in r10
                 assm.mov(x64asm::rdi, x64asm::r10); // r10 will be used later in storeTemp
                 assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // hopefully this loads the actual val
-                storeTemp(x64asm::rdi, inst.tempIndices.at(0));
+                storeTemp(x64asm::rdi, inst.tempIndices->at(0));
                 break;
             }
         case IrOp::LoadGlobal: 
@@ -101,14 +101,14 @@ void IrInterpreter::executeStep() {
                 assm.call(x64asm::r10);
                 // the result is stored in rax
                 // put the return val in the temp
-                storeTemp(x64asm::rax, inst.tempIndices.at(0));
+                storeTemp(x64asm::rax, inst.tempIndices->at(0));
                 break;
             }
         case IrOp::StoreLocal: 
             {
                 LOG("StoreLocal");
                 // first put the temp val in a reg
-                loadTemp(x64asm::rdi, inst.tempIndices.at(0));
+                loadTemp(x64asm::rdi, inst.tempIndices->at(0));
                 // put find out where the constant is located
                 int64_t offset = inst.op0.value();
                 getRbpOffset(offset); // address of local in r10 
@@ -125,7 +125,7 @@ void IrInterpreter::executeStep() {
                 string name = inst.global.value();
                 assm.mov(argRegs[1], x64asm::Imm64{&name});
                 // load the value into the third arg 
-                loadTemp(argRegs[2], inst.tempIndices.at(0));
+                loadTemp(argRegs[2], inst.tempIndices->at(0));
                 // call a helper 
                 void* fn = (void*) &(helper_store_global);
                 assm.mov(x64asm::r10, x64asm::Imm64{(uint64_t)fn});

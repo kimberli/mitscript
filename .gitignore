@@ -18,3 +18,4 @@ MITScriptVisitor.cpp
 MITScriptVisitor.h
 .gdb_history
 .gdbinit
+.syntastic_cpp_config

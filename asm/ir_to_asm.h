@@ -25,8 +25,8 @@ private:
 
     void executeStep();
     void getRbpOffset(uint64_t offset);
-    void loadTemp(x64asm::R64 reg, Temp &temp);
-    void storeTemp(x64asm::R64 reg, Temp &temp);
+    void loadTemp(x64asm::R64 reg, tempptr_t temp);
+    void storeTemp(x64asm::R64 reg, tempptr_t temp);
 public: 
     IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPointer); 
     x64asm::Function run(); // runs the program 

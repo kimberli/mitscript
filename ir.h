@@ -12,12 +12,14 @@ using namespace std;
 typedef vector<IrInstruction> IrInstList;
 typedef experimental::optional<int32_t> optint_t;
 typedef experimental::optional<string> optstr_t;
-typedef vector<Temp> TempList;
-typedef int64_t temp_t;
+typedef int64_t offset_t;
+typedef shared_ptr<Temp> tempptr_t;
+typedef vector<tempptr_t> TempList;
+typedef shared_ptr<TempList> TempListPtr;
 
 struct Temp {
-    temp_t stackOffset = -1;
-	Temp(temp_t offset) : stackOffset(offset) {}
+    offset_t stackOffset = -1;
+	Temp(offset_t offset) : stackOffset(offset) {}
 };
 
 enum class IrOp {
@@ -242,48 +244,38 @@ struct IrInstruction {
     IrOp op;
     optint_t op0;
     optstr_t global;
-    TempList tempIndices;
-    IrInstruction(const IrOp op, optstr_t global, temp_t tempIndex):
+    TempListPtr tempIndices;
+    IrInstruction(const IrOp op, optstr_t global, tempptr_t temp):
         op(op),
         global(global),
         op0(),
-        tempIndices(TempList{Temp(tempIndex)}) {};
-    IrInstruction(const IrOp op, optstr_t global, Temp temp):
-        op(op),
-        global(global),
-        op0(),
-        tempIndices(TempList{temp}) {};
-    IrInstruction(const IrOp op, optint_t op0, TempList tempIndices):
+        tempIndices(make_shared<TempList>(TempList{temp})) {};
+    IrInstruction(const IrOp op, optint_t op0, TempListPtr tempIndices):
         op(op),
         op0(op0),
         global(),
         tempIndices(tempIndices) {};
-    IrInstruction(const IrOp op, optint_t op0, temp_t tempIndex):
+    IrInstruction(const IrOp op, optint_t op0, tempptr_t temp):
         op(op),
         op0(op0),
         global(),
-        tempIndices(TempList{Temp(tempIndex)}) {};
-    IrInstruction(const IrOp op, optint_t op0, Temp temp):
-        op(op),
-        op0(op0),
-        global(),
-        tempIndices(TempList{temp}) {};
-    IrInstruction(const IrOp op, Temp temp):
+        tempIndices(make_shared<TempList>(TempList{temp})) {};
+    IrInstruction(const IrOp op, tempptr_t temp):
         op(op),
         op0(),
         global(),
-        tempIndices(TempList{temp}) {};
-    std::string getInfo() {
-        std::string s;
+        tempIndices(make_shared<TempList>(TempList{temp})) {};
+    string getInfo() {
+        string s;
         if (op0) {
-            s += "\top0: " + std::to_string(op0.value()) + "\n";
+            s += "\top0: " + to_string(op0.value()) + "\n";
         }
         if (global) {
             s += "\tglobal: " + global.value() + "\n";
         }
         s += "\ttemps: ";
-        for (Temp t: tempIndices) {
-            s += std::to_string(t.stackOffset) + " ";
+        for (tempptr_t t : *tempIndices) {
+            s += to_string(t->stackOffset) + " ";
         }
         return s;
     }
