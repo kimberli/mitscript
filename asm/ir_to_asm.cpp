@@ -8,7 +8,7 @@ IrInterpreter::IrInterpreter(vptr<IrFunc> irFunction, vptr<Interpreter> vmInterp
     finished = false;
 }
 
-void IrInterpreter::run() {
+x64asm::Function IrInterpreter::run() {
     // start the assembler on the function 
     assm.start(asmFunc);
 
@@ -19,8 +19,9 @@ void IrInterpreter::run() {
 
     // finish compiling 
     assm.finish();
-    // call the asmFunc. Since this is main, presumably there are no args
-    asmFunc.call<Value*>();
+    // return the asmFunc
+    return asmFunc;
+    //asmFunc.call<Value*>();
 }
 
 void IrInterpreter::getRbpOffset(uint64_t offset) {

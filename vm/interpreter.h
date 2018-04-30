@@ -8,6 +8,11 @@
 
 #include "../types.h"
 #include "../frame.h"
+#include "../instructions.h"
+#include "../exception.h"
+#include "../machine_code_func.cpp"
+#include "../ir/bc_to_ir.cpp"
+#include "../asm/ir_to_asm.cpp"
 #include <list>
 #include <iostream>
 

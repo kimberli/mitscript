@@ -13,6 +13,8 @@
 
 using namespace std;
 
+class Interpreter;
+
 class IrCompiler {
     // class used to handle interpreter state
 private:

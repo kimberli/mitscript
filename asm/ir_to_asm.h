@@ -28,5 +28,5 @@ private:
     void storeTemp(R64 reg, Temp &temp);
 public: 
     IrInterpreter(vptr<IrFunc> irFunction, vptr<Interpreter> vmInterpreterPointer); 
-    void run(); // runs the program 
+    x64asm::Function run(); // runs the program 
 };

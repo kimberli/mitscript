@@ -4,10 +4,6 @@
  * Implements an Interpreter object which can be used to step through
  * bytecode instructions and store interpreter state
  */
-#include "../exception.h"
-#include "../frame.h"
-#include "../instructions.h"
-#include "../types.h"
 #include "interpreter.h"
 #include <algorithm>
 #include <stack>
@@ -474,13 +470,20 @@ vptr<Value> Interpreter::callVM(vector<vptr<Constant>> argsList, vptr<Closure> c
 }
 
 vptr<Value> Interpreter::callAsm(vector<vptr<Constant>> argsList, vptr<Closure> clos) {
-    throw RuntimeException("please implement your asm first");
-    // steps:
-    //
     // convert the bc function to the ir
+    IrCompiler irc = IrCompiler(clos->func, *this);
+    IrFunc* irf = *(irc.toIr());
     // convert the ir to assembly
+    IrInterpreter iri = IrInterpreter(irf, *this);
+    x64asm::Function asmFunc = iri.run();
     // create a MachineCodeFunction object
+    MachineCodeFunction mcf = MachineCodeFunction(clos->func->parameter_count_, asmFunc);
     // call mcf.call(args) and it will run properly in assembly presumably
+    // TODO: be more intelligent about how you're compiling stuff
+    // TODO: this obeys NO conventions about passing refs
+    mcf.compile();
+    vptr<Value> result = mcf.call(argsList);
+    return result;
 }
 
 // Asm helpers
