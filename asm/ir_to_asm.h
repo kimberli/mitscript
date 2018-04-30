@@ -8,7 +8,7 @@
 class Interpreter; 
 
 using namespace std; 
-using namespace x64asm; 
+//using namespace x64asm; 
 
 class IrInterpreter {
 private: 
@@ -24,8 +24,8 @@ private:
 
     void executeStep();
     void getRbpOffset(uint64_t offset);
-    void loadTemp(R64 reg, Temp &temp);
-    void storeTemp(R64 reg, Temp &temp);
+    void loadTemp(x64asm::R64 reg, Temp &temp);
+    void storeTemp(x64asm::R64 reg, Temp &temp);
 public: 
     IrInterpreter(vptr<IrFunc> irFunction, vptr<Interpreter> vmInterpreterPointer); 
     x64asm::Function run(); // runs the program 
