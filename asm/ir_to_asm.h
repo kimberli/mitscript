@@ -23,7 +23,7 @@ private:
     bool finished;
 
     void executeStep();
-    void getTempLocation(int offset);
+    void getTempLocation(uint64_t offset);
     void loadTemp(R64 reg, Temp &temp);
     void storeTemp(R64 reg, Temp &temp);
 public: 

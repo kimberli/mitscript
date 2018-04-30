@@ -23,7 +23,7 @@ void IrInterpreter::run() {
     asmFunc.call<Value*>();
 }
 
-void IrInterpreter::getTempLocation(int offset) {
+void IrInterpreter::getTempLocation(uint64_t offset) {
     // use r10 and r11 for these calcs
     assm.mov(r10, rbp); // move rbp into r10
     assm.mov(r11, Imm64{8*offset}); // move 8*offset into another reg
@@ -65,7 +65,7 @@ void IrInterpreter::executeStep() {
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], Imm64{vmPointer});
                 // load the string pointer into the second arg
-                std::string name = inst.name0.value();
+                std::string name = inst.global.value();
                 assm.mov(argRegs[1], Imm64{&name});
                 // call a helper 
                 void* fn = (void*) &(helper_load_global);
@@ -74,7 +74,7 @@ void IrInterpreter::executeStep() {
                 assm.call(r10);
                 // the result is stored in rax
                 // put the return val in the temp
-                storeTemp(rax, inst.tempIndices.at(0).value());
+                storeTemp(rax, inst.tempIndices.at(0));
                 break;
             }
         case IrOp::StoreGlobal:
@@ -82,15 +82,15 @@ void IrInterpreter::executeStep() {
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], Imm64{vmPointer});
                 // load the string pointer into the second arg
-                std::string name = inst.name0.value();
+                std::string name = inst.global.value();
                 assm.mov(argRegs[1], Imm64{&name});
                 // load the value into the third arg 
-                // FIGURE OUT A DISCIPLINED WAY OF ASSIGNING TEMPS
-                //assm.mov(argRegs[2], );
+                loadTemp(argRegs[2], inst.tempIndices.at(0));
                 // call a helper 
                 void* fn = (void*) &(helper_store_global);
-                assm.mov(r12, Imm64{(uint64_t)fn});
-                assm.call(r12);
+                assm.mov(r10, Imm64{(uint64_t)fn});
+                assm.call(r10);
+                // no return val given. 
                 break;
             }
     }
