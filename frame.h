@@ -44,7 +44,7 @@ public:
 
     // instruction helpers
     int numInstructions();
-    Instruction& getCurrInstruction();
+    BcInstruction& getCurrInstruction();
     void checkLegalInstruction();
 
     // function value helpers

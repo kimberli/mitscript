@@ -51,7 +51,7 @@ size_t Function::getSize() {
     size_t refsSize = getVecSize(local_reference_vars_);
     size_t freeSize = getVecSize(free_vars_);
     size_t namesSize = getVecSize(names_);
-    size_t instrSize = sizeof(instructions) + instructions.capacity()*sizeof(Instruction);
+    size_t instrSize = sizeof(instructions) + instructions.capacity()*sizeof(BcInstruction);
     return overhead + funcsSize + consSize + localsSize + refsSize + freeSize + namesSize + instrSize;
 }
 

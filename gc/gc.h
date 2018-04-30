@@ -12,7 +12,7 @@ class CollectedHeap;
 class Record;
 class Function;
 class Constant;
-class Instruction;
+class BcInstruction;
 class ValWrapper;
 class Value;
 class None;
@@ -149,7 +149,7 @@ public:
             vector<string> local_reference_vars_,
             vector<string> free_vars_,
             vector<string> names_,
-            vector<Instruction> instructions);
+            vector<BcInstruction> instructions);
 
     // for closures
     template<typename T>

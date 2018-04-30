@@ -81,7 +81,7 @@ struct Function : public Value {
     // list of global variable and field names used inside the function
     vector<string> names_;
 
-    InstructionList instructions;
+    BcInstructionList instructions;
 
     Function() {};
     virtual ~Function() {};
@@ -93,7 +93,7 @@ struct Function : public Value {
             vector<string> local_reference_vars_,
             vector<string> free_vars_,
 	        vector<string> names_,
-            InstructionList instructions):
+            BcInstructionList instructions):
         functions_(functions_),
         constants_(constants_),
 	    parameter_count_(parameter_count_),
@@ -262,7 +262,7 @@ public:
             vector<string> local_reference_vars_,
             vector<string> free_vars_,
 	        vector<string> names_,
-            InstructionList instructions):
+            BcInstructionList instructions):
 			Function(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
@@ -279,7 +279,7 @@ public:
             vector<string> local_reference_vars_,
             vector<string> free_vars_,
 	        vector<string> names_,
-            InstructionList instructions):
+            BcInstructionList instructions):
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
@@ -296,7 +296,7 @@ public:
             vector<string> local_reference_vars_,
             vector<string> free_vars_,
 	        vector<string> names_,
-            InstructionList instructions):
+            BcInstructionList instructions):
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
@@ -313,7 +313,7 @@ public:
             vector<string> local_reference_vars_,
             vector<string> free_vars_,
 	        vector<string> names_,
-            InstructionList instructions):
+            BcInstructionList instructions):
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};

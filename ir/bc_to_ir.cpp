@@ -24,7 +24,7 @@ IrFunc IrCompiler::toIrFunc(vptr<Function> func) {
 	stack<Temp> tempStack;
     for (int i = 0; i < func->instructions.size(); i++) {
 		TempList temps;
-		Instruction inst = func->instructions[i];
+		BcInstruction inst = func->instructions[i];
 	    switch (inst.operation) {
 	        case BcOp::LoadConst:
 	            {

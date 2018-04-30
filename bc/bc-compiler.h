@@ -28,7 +28,7 @@ class BytecodeCompiler : public Visitor {
      * Visitor that converts the AST to a CFG
      */
 private: 
-    InstructionList retInstr;  // expressions update this
+    BcInstructionList retInstr;  // expressions update this
 
     void addInstructions(AST_node& expr);
     funcptr_t getFunction(AST_node& expr);

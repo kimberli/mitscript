@@ -43,7 +43,7 @@ Interpreter::Interpreter(vptr<Function> mainFunc, int maxmem) {
     vector<string> local_reference_vars_;
     vector<string> free_vars_;
 	vector<string> names_;
-    InstructionList instructions;
+    BcInstructionList instructions;
 	vector<shared_ptr<Function>> frameFuncs;
 	frame->func->functions_[0] = collector->allocate<PrintNativeFunction>(functions_, constants_, 1, args1, local_reference_vars_, free_vars_, names_, instructions);
 	frame->func->functions_[1] = collector->allocate<InputNativeFunction>(functions_, constants_, 0, args0, local_reference_vars_, free_vars_, names_, instructions);
@@ -53,7 +53,7 @@ Interpreter::Interpreter(vptr<Function> mainFunc, int maxmem) {
 void Interpreter::executeStep() {
     // executes a single instruction and updates state of interpreter
     fptr frame = frames.back();
-    Instruction& inst = frame->getCurrInstruction();
+    BcInstruction& inst = frame->getCurrInstruction();
     LOG("executing instruction " + to_string(frame->instructionIndex));
     LOG("from frame" + to_string(frames.size()));
     switch (inst.operation) {

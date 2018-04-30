@@ -10,7 +10,7 @@ int Frame::numInstructions() {
     return func->instructions.size();
 }
 
-Instruction& Frame::getCurrInstruction() {
+BcInstruction& Frame::getCurrInstruction() {
     return func->instructions[instructionIndex];
 }
 

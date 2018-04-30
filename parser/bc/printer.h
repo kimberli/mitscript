@@ -157,7 +157,7 @@ private:
         }
     }
 
-    void print(const Instruction &inst, std::ostream &os)
+    void print(const BcInstruction &inst, std::ostream &os)
     {
 
         switch (inst.operation)
@@ -381,7 +381,7 @@ private:
         }
     }
 
-    void print(const InstructionList &ilist, std::ostream &os)
+    void print(const BcInstructionList &ilist, std::ostream &os)
     {
         for (size_t i = 0; i < ilist.size(); ++i)
         {

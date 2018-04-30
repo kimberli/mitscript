@@ -65,8 +65,8 @@ int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* me
 
     vector<string>* identlist;
 
-	Instruction* inst;
-	vector<Instruction>* instlist;
+	BcInstruction* inst;
+	vector<BcInstruction>* instlist;
 
 
     Constant* constant;
@@ -274,144 +274,144 @@ Constant
 Instruction:
   T_load_const T_int
 {
-	$$ = new Instruction(BcOp::LoadConst, safe_cast($2));
+	$$ = new BcInstruction(BcOp::LoadConst, safe_cast($2));
 }
 | T_load_func T_int
 {
-	$$ = new Instruction(BcOp::LoadFunc, safe_cast($2));
+	$$ = new BcInstruction(BcOp::LoadFunc, safe_cast($2));
 }
 
 | T_load_local T_int
 {
-	$$ = new Instruction(BcOp::LoadLocal, safe_cast($2));
+	$$ = new BcInstruction(BcOp::LoadLocal, safe_cast($2));
 }
 | T_store_local T_int
 {
-	$$ = new Instruction(BcOp::StoreLocal, safe_cast($2));
+	$$ = new BcInstruction(BcOp::StoreLocal, safe_cast($2));
 }
 | T_load_global T_int
 {
-	$$ = new Instruction(BcOp::LoadGlobal, safe_cast($2));
+	$$ = new BcInstruction(BcOp::LoadGlobal, safe_cast($2));
 }
 | T_store_global T_int
 {
-	$$ = new Instruction(BcOp::StoreGlobal, safe_cast($2));
+	$$ = new BcInstruction(BcOp::StoreGlobal, safe_cast($2));
 }
 | T_push_ref T_int
 {
-	$$ = new Instruction(BcOp::PushReference, safe_cast($2));
+	$$ = new BcInstruction(BcOp::PushReference, safe_cast($2));
 }
 | T_load_ref
 {
-	$$ = new Instruction(BcOp::LoadReference, { });
+	$$ = new BcInstruction(BcOp::LoadReference, { });
 }
 | T_store_ref
 {
-	$$ = new Instruction(BcOp::StoreReference, { });
+	$$ = new BcInstruction(BcOp::StoreReference, { });
 }
 | T_alloc_record
 {
-	$$ = new Instruction(BcOp::AllocRecord, { });
+	$$ = new BcInstruction(BcOp::AllocRecord, { });
 }
 | T_field_load T_int
 {
-	$$ = new Instruction(BcOp::FieldLoad, safe_cast($2));
+	$$ = new BcInstruction(BcOp::FieldLoad, safe_cast($2));
 }
 | T_field_store T_int
 {
-	$$ = new Instruction(BcOp::FieldStore, safe_cast($2));
+	$$ = new BcInstruction(BcOp::FieldStore, safe_cast($2));
 }
 | T_index_load
 {
-	$$ = new Instruction(BcOp::IndexLoad, { });
+	$$ = new BcInstruction(BcOp::IndexLoad, { });
 }
 | T_index_store
 {
-	$$ = new Instruction(BcOp::IndexStore, { });
+	$$ = new BcInstruction(BcOp::IndexStore, { });
 }
 | T_alloc_closure T_int
 {
-	$$ = new Instruction(BcOp::AllocClosure, safe_cast($2));
+	$$ = new BcInstruction(BcOp::AllocClosure, safe_cast($2));
 }
 | T_call T_int
 {
-	$$ = new Instruction(BcOp::Call, safe_cast($2));
+	$$ = new BcInstruction(BcOp::Call, safe_cast($2));
 }
 | T_return
 {
-	$$ = new Instruction(BcOp::Return, { });
+	$$ = new BcInstruction(BcOp::Return, { });
 }
 | T_add
 {
-	$$ = new Instruction(BcOp::Add, { });
+	$$ = new BcInstruction(BcOp::Add, { });
 }
 | T_sub
 {
-	$$ = new Instruction(BcOp::Sub, { });
+	$$ = new BcInstruction(BcOp::Sub, { });
 }
 | T_mul
 {
-	$$ = new Instruction(BcOp::Mul, { });
+	$$ = new BcInstruction(BcOp::Mul, { });
 }
 | T_div
 {
-	$$ = new Instruction(BcOp::Div, { });
+	$$ = new BcInstruction(BcOp::Div, { });
 }
 | T_neg
 {
-	$$ = new Instruction(BcOp::Neg, { });
+	$$ = new BcInstruction(BcOp::Neg, { });
 }
 | T_gt
 {
-	$$ = new Instruction(BcOp::Gt, { });
+	$$ = new BcInstruction(BcOp::Gt, { });
 }
 | T_geq
 {
-	$$ = new Instruction(BcOp::Geq, { });
+	$$ = new BcInstruction(BcOp::Geq, { });
 }
 | T_eq
 {
-	$$ = new Instruction(BcOp::Eq, { });
+	$$ = new BcInstruction(BcOp::Eq, { });
 }
 | T_and
 {
-	$$ = new Instruction(BcOp::And, { });
+	$$ = new BcInstruction(BcOp::And, { });
 }
 | T_or
 {
-	$$ = new Instruction(BcOp::Or, { });
+	$$ = new BcInstruction(BcOp::Or, { });
 }
 | T_not
 {
-	$$ = new Instruction(BcOp::Not, { });
+	$$ = new BcInstruction(BcOp::Not, { });
 }
 | T_goto T_int
 {
-	$$ = new Instruction(BcOp::Goto, safe_cast($2));
+	$$ = new BcInstruction(BcOp::Goto, safe_cast($2));
 }
 | T_if T_int
 {
-	$$ = new Instruction(BcOp::If, safe_cast($2));
+	$$ = new BcInstruction(BcOp::If, safe_cast($2));
 }
 | T_dup
 {
-	$$ = new Instruction(BcOp::Dup, { });
+	$$ = new BcInstruction(BcOp::Dup, { });
 }
 | T_swap
 {
-	$$ = new Instruction(BcOp::Swap, { });
+	$$ = new BcInstruction(BcOp::Swap, { });
 }
 | T_pop
 {
-	$$ = new Instruction(BcOp::Pop, { });
+	$$ = new BcInstruction(BcOp::Pop, { });
 }
 
 InstructionList:
-  %empty { $$ = new vector<Instruction>(); }
+  %empty { $$ = new vector<BcInstruction>(); }
 | Instruction InstructionList
 {
 	auto list = $2;
-	list->insert(list->begin(), Instruction(*$1));
+	list->insert(list->begin(), BcInstruction(*$1));
 
 	delete $1;
 
