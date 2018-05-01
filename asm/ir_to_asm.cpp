@@ -34,6 +34,8 @@ void IrInterpreter::getRbpOffset(uint64_t offset) {
     assm.sub(x64asm::r10, x64asm::r11); // sub r11 from r10. now the correct mem is in r10
 }
 
+// storeTemp puts a reg value into a temp
+// TODO fix how temps are assigned; these should be pushed onto the stack.
 void IrInterpreter::storeTemp(x64asm::R64 reg, tempptr_t temp) {
     // right now, put everything on the stack 
     // assign the temp an offset (from rbp)
@@ -46,6 +48,7 @@ void IrInterpreter::storeTemp(x64asm::R64 reg, tempptr_t temp) {
     stackSize++; //inc stack size for next temp
 }
 
+// loadTemp takes a temp value and puts it in a register
 void IrInterpreter::loadTemp(x64asm::R64 reg, tempptr_t temp) {
     // figure out where the temp is stored 
     getRbpOffset(temp->stackOffset); // location in r10 
@@ -180,66 +183,167 @@ void IrInterpreter::executeStep() {
         case IrOp::Add: 
             {
                 LOG("Add");
+                // call a helper to do add
+                // load the interpreter pointer into the first arg 
+                assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
+                // load the left operand into the second arg
+                loadTemp(argRegs[1], inst.tempIndices->at(2));
+                // load the value into the third arg 
+                loadTemp(argRegs[2], inst.tempIndices->at(1));
+                
+                // now we need to call our helper 
+                void* fn = (void*) &(helper_add);
+                assm.mov(x64asm::r10, x64asm::Imm64{(uint64_t)fn});
+                assm.call(x64asm::r10);
+                // the result is stored in rax
+                // put the return val in the temp
+                storeTemp(x64asm::rax, inst.tempIndices->at(0));
                 break;
             };
         case IrOp::Sub: 
             {
                 LOG("Sub");
+                //rdi and rsi
+                // load the left temp into a reg 
+                x64asm::R64 left = x64asm::rdi;
+                x64asm::R64 right = x64asm::rsi;
+                loadTemp(left, inst.tempIndices->at(2));
+                // load right temp into a reg 
+                loadTemp(right, inst.tempIndices->at(1));
+                // perform the sub; result stored in left 
+                assm.sub(left, right);
+                // put the value back in the temp
+                storeTemp(left, inst.tempIndices->at(0));
                 break;
             };
         case IrOp::Mul: 
             {
                 LOG("Mul");
+                x64asm::R64 left = x64asm::rdi;
+                x64asm::R64 right = x64asm::rsi;
+                loadTemp(left, inst.tempIndices->at(2));
+                // load right temp into a reg 
+                loadTemp(right, inst.tempIndices->at(1));
+                // perform the sub; result stored in left 
+                assm.imul(left, right);
+                // put the value back in the temp
+                storeTemp(left, inst.tempIndices->at(0));
                 break;
             };
         case IrOp::Div: 
             {
                 LOG("Div");
+//                x64asm::R64 left = x64asm::rdi;
+//                x64asm::R64 right = x64asm::rsi;
+//                loadTemp(left, inst.tempIndices->at(2));
+//                // load right temp into a reg 
+//                loadTemp(right, inst.tempIndices->at(1));
+//                // perform the sub; result stored in left 
+//                //assm.div(left, right);
+//                assm.assemble({IDIV_R64, {}});
+//                // put the value back in the temp
+//                storeTemp(left, inst.tempIndices->at(0));
                 break;
-            };
-        case IrOp::Neg: 
-            {
+            }; case IrOp::Neg: {
                 LOG("Neg");
+                x64asm::R64 operand = x64asm::rdi;
+                loadTemp(operand, inst.tempIndices->at(1));
+                assm.neg(operand);
+                storeTemp(operand, inst.tempIndices->at(0));
                 break;
             };
         case IrOp::Gt: 
             {
                 LOG("Gt");
+                // use a conditional move to put the bool in the right place
+                // right(1) gets moved into left(0) if left was greater
+                x64asm::R64 left = x64asm::rdi;
+                x64asm::R64 right = x64asm::rsi;
+                comparisonSetup(left, right, inst);
+                assm.cmovg(left, right);
+                storeTemp(left, inst.tempIndices->at(0));
                 break;
             };
         case IrOp::Geq : 
             {
                 LOG("Geq");
+                x64asm::R64 left = x64asm::rdi;
+                x64asm::R64 right = x64asm::rsi;
+                // use a conditional move to put the bool in the right place
+                // right(1) gets moved into left(0) if left was greater
+                comparisonSetup(left, right, inst);
+                assm.cmovge(left, right);
+                storeTemp(left, inst.tempIndices->at(0));
                 break;
             };
         case IrOp::Eq: 
             {
                 LOG("Eq");
+                x64asm::R64 left = x64asm::rdi;
+                x64asm::R64 right = x64asm::rsi;
+                comparisonSetup(left, right, inst);
+                assm.cmove(left, right);
+                storeTemp(left, inst.tempIndices->at(0));
                 break;
             };
         case IrOp::And: 
             {
                 LOG("And");
+                x64asm::R64 left = x64asm::rdi;
+                x64asm::R64 right = x64asm::rsi;
+                loadTemp(left, inst.tempIndices->at(2));
+                // load right temp into a reg 
+                loadTemp(right, inst.tempIndices->at(1));
+                // perform the sub; result stored in left 
+                //assm.AND(left, right);
+                assm.assemble({x64asm::AND_R64_R64, {left, right}});
+                // put the value back in the temp
+                storeTemp(left, inst.tempIndices->at(0));
                 break;
             };
         case IrOp::Or: 
             {
                 LOG("Or");
+                x64asm::R64 left = x64asm::rdi;
+                x64asm::R64 right = x64asm::rsi;
+                loadTemp(left, inst.tempIndices->at(2));
+                // load right temp into a reg 
+                loadTemp(right, inst.tempIndices->at(1));
+                // perform the sub; result stored in left 
+                assm.assemble({x64asm::OR_R64_R64, {left, right}});
+                //assm.or(left, right);
+                // put the value back in the temp
+                storeTemp(left, inst.tempIndices->at(0));
                 break;
             };
         case IrOp::Not: 
             {
                 LOG("Not");
+                x64asm::R64 operand = x64asm::rdi;
+                loadTemp(operand, inst.tempIndices->at(1));
+                //assm.not(operand);
+                assm.assemble({x64asm::NOT_R64, {operand}});
+                storeTemp(operand, inst.tempIndices->at(0));
                 break;
             };
         case IrOp::Goto: 
             {
                 LOG("Goto");
+                int32_t labelIdx = inst.op0.value();
+                assm.jmp(x64asm::Label{std::to_string(labelIdx)});
                 break;
             };
         case IrOp::If: 
             {
                 LOG("If");
+                int32_t labelIdx = inst.op0.value();
+                // load the temp into a reg 
+                x64asm::R64 left = x64asm::rdi;
+                x64asm::R64 right = x64asm::rsi;
+                loadTemp(left, inst.tempIndices->at(0));
+                assm.mov(right, x64asm::Imm64{1});
+                assm.cmp(left, right);
+                assm.je(x64asm::Label{std::to_string(labelIdx)});
                 break;
             };
        case IrOp::AssertInteger: 
@@ -307,4 +411,14 @@ void IrInterpreter::executeStep() {
     }
 }
 
-
+void IrInterpreter::comparisonSetup(x64asm::R64 left, x64asm::R64 right, IrInstruction inst) {
+    // load right temp into a reg 
+    loadTemp(right, inst.tempIndices->at(1));
+    // load left temp into a reg 
+    loadTemp(left, inst.tempIndices->at(2));
+    // perform the sub; result stored in left 
+    assm.cmp(left, right); // this sets flags
+    // load 0 and 1 into two diff regs 
+    assm.mov(right, x64asm::Imm64{1});
+    assm.mov(left, x64asm::Imm64{0});
+};
