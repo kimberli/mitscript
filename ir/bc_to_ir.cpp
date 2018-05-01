@@ -169,7 +169,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					instTemps->push_back(curr);
 					reverse(instTemps->begin(), instTemps->end());
 					pushInstruction(IrInstruction(IrOp::AssertFunction, func));
-					pushInstruction(IrInstruction(IrOp::Call, instTemps));
+					pushInstruction(IrInstruction(IrOp::AllocClosure, instTemps));
 	                break;
 	            }
 	        case BcOp::Call:
