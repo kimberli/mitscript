@@ -63,7 +63,7 @@ void IrInterpreter::executeStep() {
     switch(inst.op) {
         case IrOp::LoadConst: 
             {
-                LOG("LoadConst");
+                LOG(to_string(instructionIndex) + ": LoadConst");
                 int constIndex = inst.op0.value(); 
                 Constant* c = func->constants_.at(constIndex);
                 // load a constant into a register 
@@ -74,7 +74,7 @@ void IrInterpreter::executeStep() {
             }
         case IrOp::LoadFunc: 
             {
-                LOG("LoadFunc");
+                LOG(to_string(instructionIndex) + ": LoadFunc");
                 int funcIndex = inst.op0.value();
                 // load the func pointer into a register
                 assm.mov(x64asm::rdi, x64asm::Imm64{func->functions_.at(funcIndex)});
@@ -84,7 +84,7 @@ void IrInterpreter::executeStep() {
             }
         case IrOp::LoadLocal: 
             {
-                LOG("LoadLocal");
+                LOG(to_string(instructionIndex) + ": LoadLocal");
                 int64_t offset = inst.op0.value();
                 getRbpOffset(offset); // puts the address of the local in r10
                 assm.mov(x64asm::rdi, x64asm::r10); // r10 will be used later in storeTemp
@@ -94,7 +94,7 @@ void IrInterpreter::executeStep() {
             }
         case IrOp::LoadGlobal: 
             {
-                LOG("LoadGlobal");
+                LOG(to_string(instructionIndex) + ": LoadGlobal");
                 // mov DEST, SRC
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
@@ -113,7 +113,7 @@ void IrInterpreter::executeStep() {
             }
         case IrOp::StoreLocal: 
             {
-                LOG("StoreLocal");
+                LOG(to_string(instructionIndex) + ": StoreLocal");
                 // first put the temp val in a reg
                 loadTemp(x64asm::rdi, inst.tempIndices->at(0));
                 // put find out where the constant is located
@@ -125,7 +125,7 @@ void IrInterpreter::executeStep() {
             }
        case IrOp::StoreGlobal:
             {
-                LOG("StoreGlobal");
+                LOG(to_string(instructionIndex) + ": StoreGlobal");
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
                 // load the string pointer into the second arg
@@ -142,47 +142,47 @@ void IrInterpreter::executeStep() {
             }
         case IrOp::AllocRecord:
             {
-                LOG("AllocRecord");
+                LOG(to_string(instructionIndex) + ": AllocRecord");
                 break;
             };
         case IrOp::FieldLoad:
             {
-                LOG("FieldLoad");
+                LOG(to_string(instructionIndex) + ": FieldLoad");
                 break;
             };
         case IrOp::FieldStore:
             {
-                LOG("FieldStore");
+                LOG(to_string(instructionIndex) + ": FieldStore");
                 break;
             };
         case IrOp::IndexLoad:
             {
-                LOG("IndexLoad");
+                LOG(to_string(instructionIndex) + ": IndexLoad");
                 break;
             };
         case IrOp::IndexStore:
             {
-                LOG("IndexStore");
+                LOG(to_string(instructionIndex) + ": IndexStore");
                 break;
             };
         case IrOp::AllocClosure: 
             {
-                LOG("AllocClosure");
+                LOG(to_string(instructionIndex) + ": AllocClosure");
                 break;
             };
         case IrOp::Call: 
             {
-                LOG("Call");
+                LOG(to_string(instructionIndex) + ": Call");
                 break;
             };
         case IrOp::Return: 
             {
-                LOG("Return");
+                LOG(to_string(instructionIndex) + ": Return");
                 break;
             };
         case IrOp::Add: 
             {
-                LOG("Add");
+                LOG(to_string(instructionIndex) + ": Add");
                 // call a helper to do add
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
@@ -202,7 +202,7 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Sub: 
             {
-                LOG("Sub");
+                LOG(to_string(instructionIndex) + ": Sub");
                 //rdi and rsi
                 // load the left temp into a reg 
                 x64asm::R64 left = x64asm::rdi;
@@ -218,7 +218,7 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Mul: 
             {
-                LOG("Mul");
+                LOG(to_string(instructionIndex) + ": Mul");
                 x64asm::R64 left = x64asm::rdi;
                 x64asm::R64 right = x64asm::rsi;
                 loadTemp(left, inst.tempIndices->at(2));
@@ -232,7 +232,7 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Div: 
             {
-                LOG("Div");
+                LOG(to_string(instructionIndex) + ": Div");
 //                x64asm::R64 left = x64asm::rdi;
 //                x64asm::R64 right = x64asm::rsi;
 //                loadTemp(left, inst.tempIndices->at(2));
@@ -245,7 +245,7 @@ void IrInterpreter::executeStep() {
 //                storeTemp(left, inst.tempIndices->at(0));
                 break;
             }; case IrOp::Neg: {
-                LOG("Neg");
+                LOG(to_string(instructionIndex) + ": Neg");
                 x64asm::R64 operand = x64asm::rdi;
                 loadTemp(operand, inst.tempIndices->at(1));
                 assm.neg(operand);
@@ -254,7 +254,7 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Gt: 
             {
-                LOG("Gt");
+                LOG(to_string(instructionIndex) + ": Gt");
                 // use a conditional move to put the bool in the right place
                 // right(1) gets moved into left(0) if left was greater
                 x64asm::R64 left = x64asm::rdi;
@@ -266,7 +266,7 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Geq : 
             {
-                LOG("Geq");
+                LOG(to_string(instructionIndex) + ": Geq");
                 x64asm::R64 left = x64asm::rdi;
                 x64asm::R64 right = x64asm::rsi;
                 // use a conditional move to put the bool in the right place
@@ -278,7 +278,7 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Eq: 
             {
-                LOG("Eq");
+                LOG(to_string(instructionIndex) + ": Eq");
                 x64asm::R64 left = x64asm::rdi;
                 x64asm::R64 right = x64asm::rsi;
                 comparisonSetup(left, right, inst);
@@ -288,7 +288,7 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::And: 
             {
-                LOG("And");
+                LOG(to_string(instructionIndex) + ": And");
                 x64asm::R64 left = x64asm::rdi;
                 x64asm::R64 right = x64asm::rsi;
                 loadTemp(left, inst.tempIndices->at(2));
@@ -303,7 +303,7 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Or: 
             {
-                LOG("Or");
+                LOG(to_string(instructionIndex) + ": Or");
                 x64asm::R64 left = x64asm::rdi;
                 x64asm::R64 right = x64asm::rsi;
                 loadTemp(left, inst.tempIndices->at(2));
@@ -318,7 +318,7 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Not: 
             {
-                LOG("Not");
+                LOG(to_string(instructionIndex) + ": Not");
                 x64asm::R64 operand = x64asm::rdi;
                 loadTemp(operand, inst.tempIndices->at(1));
                 //assm.not(operand);
@@ -328,14 +328,14 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Goto: 
             {
-                LOG("Goto");
+                LOG(to_string(instructionIndex) + ": Goto");
                 int32_t labelIdx = inst.op0.value();
                 assm.jmp(x64asm::Label{to_string(labelIdx)});
                 break;
             };
         case IrOp::If: 
             {
-                LOG("If");
+                LOG(to_string(instructionIndex) + ": If");
                 int32_t labelIdx = inst.op0.value();
                 // load the temp into a reg 
                 x64asm::R64 left = x64asm::rdi;
@@ -348,57 +348,57 @@ void IrInterpreter::executeStep() {
             };
        case IrOp::AssertInteger: 
             {
-                LOG("AssertInteger");
+                LOG(to_string(instructionIndex) + ": AssertInteger");
                 break;
             };
         case IrOp::AssertBool: 
             {
-                LOG("AssertBool");
+                LOG(to_string(instructionIndex) + ": AssertBool");
                 break;
             };
         case IrOp::AssertString: 
             {
-                LOG("AssertString");
+                LOG(to_string(instructionIndex) + ": AssertString");
                 break;
             };
         case IrOp::AssertRecord: 
             {
-                LOG("AssertRecord");
+                LOG(to_string(instructionIndex) + ": AssertRecord");
                 break;
             };
         case IrOp::AssertFunction: 
             {
-                LOG("AssertFunction");
+                LOG(to_string(instructionIndex) + ": AssertFunction");
                 break;
             };
         case IrOp::AssertClosure: 
             {
-                LOG("AssertClosure");
+                LOG(to_string(instructionIndex) + ": AssertClosure");
                 break;
             };
         case IrOp::CastInteger: 
             {
-                LOG("CastInteger");
+                LOG(to_string(instructionIndex) + ": CastInteger");
                 break;
             };
         case IrOp::CastBool: 
             {
-                LOG("CastBool");
+                LOG(to_string(instructionIndex) + ": CastBool");
                 break;
             };
         case IrOp::CastString: 
             {
-                LOG("CastString");
+                LOG(to_string(instructionIndex) + ": CastString");
                 break;
             };
         case IrOp::AddLabel:
             {
-                LOG("AddLabel");
+                LOG(to_string(instructionIndex) + ": AddLabel");
                 break;
             };
         case IrOp::GarbageCollect: 
             {
-                LOG("GarbageCollect");
+                LOG(to_string(instructionIndex) + ": GarbageCollect");
                 break;
             };
         default: 
