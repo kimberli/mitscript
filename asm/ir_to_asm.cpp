@@ -99,8 +99,8 @@ void IrInterpreter::executeStep() {
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
                 // load the string pointer into the second arg
-                string name = inst.name0.value();
-                assm.mov(argRegs[1], x64asm::Imm64{&name});
+                string* name = new string(inst.name0.value());  // TODO: fix memory leak?
+                assm.mov(argRegs[1], x64asm::Imm64{name});
                 // call a helper 
                 void* fn = (void*) &(helper_load_global);
                 // assume that all locals are saved to the stack
@@ -129,8 +129,8 @@ void IrInterpreter::executeStep() {
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
                 // load the string pointer into the second arg
-                string name = inst.name0.value();
-                assm.mov(argRegs[1], x64asm::Imm64{&name});
+                string* name = new string(inst.name0.value());
+                assm.mov(argRegs[1], x64asm::Imm64{name});  // TODO: fix memory leak?
                 // load the value into the third arg 
                 loadTemp(argRegs[2], inst.tempIndices->at(0));
                 // call a helper 

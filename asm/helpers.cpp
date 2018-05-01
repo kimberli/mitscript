@@ -2,12 +2,12 @@
 // this needs to be here to break a circular dependency loop
 #include "../vm/interpreter.h"
 
-void helper_store_global(Interpreter* interpreter, string &name, Value* val) {
-    interpreter->storeGlobal(name, val);
+void helper_store_global(Interpreter* interpreter, string* name, Value* val) {
+    interpreter->storeGlobal(*name, val);
 }
 
-Value* helper_load_global(Interpreter* interpreter, string &name) {
-    return interpreter->loadGlobal(name);
+Value* helper_load_global(Interpreter* interpreter, string* name) {
+    return interpreter->loadGlobal(*name);
 }
 
 Value* helper_add(Interpreter* interpreter, Value* left, Value* right) {
@@ -22,6 +22,7 @@ Value* helper_call(Interpreter* interpreter, Closure* closure) {
     //
     //
     // So the helper in the vm should take A) a closure and B) a list of args.
+    // TODO
 }
 
 void helper_gc(Interpreter* interpreter) {
