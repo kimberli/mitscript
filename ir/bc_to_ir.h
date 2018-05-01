@@ -33,7 +33,7 @@ private:
     tempptr_t pushNewTemp();
     void pushTemp(tempptr_t temp);
     tempptr_t popTemp();
-    void pushInstruction(IrInstruction inst);
+    void pushInstruction(instptr_t inst);
     void decLabelOffsets();
     int32_t addLabelOffset(int32_t offset);
 public:

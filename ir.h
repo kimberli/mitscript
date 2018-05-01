@@ -9,7 +9,8 @@ struct Temp;
 
 using namespace std;
 
-typedef vector<IrInstruction> IrInstList;
+typedef shared_ptr<IrInstruction> instptr_t;
+typedef vector<instptr_t> IrInstList;
 typedef experimental::optional<int32_t> optint_t;
 typedef experimental::optional<string> optstr_t;
 typedef int64_t offset_t;

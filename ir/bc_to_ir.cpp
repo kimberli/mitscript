@@ -27,7 +27,7 @@ tempptr_t IrCompiler::popTemp() {
     tempStack.pop();
     return temp;
 }
-void IrCompiler::pushInstruction(IrInstruction inst) {
+void IrCompiler::pushInstruction(instptr_t inst) {
     irInsts.push_back(inst);
 }
 void IrCompiler::decLabelOffsets() {
@@ -54,55 +54,55 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        case BcOp::LoadConst:
 	            {
                     tempptr_t curr = pushNewTemp();
-					pushInstruction(IrInstruction(IrOp::LoadConst, inst.operand0, curr));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::LoadConst, inst.operand0, curr)));
 	                break;
 	            }
 	        case BcOp::LoadFunc:
 	            {
                     tempptr_t curr = pushNewTemp();
-					pushInstruction(IrInstruction(IrOp::LoadFunc, inst.operand0, curr));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::LoadFunc, inst.operand0, curr)));
 	                break;
 	            }
 	        case BcOp::LoadLocal:
 	            {
                     tempptr_t curr = pushNewTemp();
-					pushInstruction(IrInstruction(IrOp::LoadLocal, inst.operand0, curr));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::LoadLocal, inst.operand0, curr)));
 	                break;
 	            }
 	        case BcOp::LoadGlobal:
 	            {
                     tempptr_t curr = pushNewTemp();
                     optstr_t global = func->names_[inst.operand0.value()];
-					pushInstruction(IrInstruction(IrOp::LoadGlobal, global, curr));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::LoadGlobal, global, curr)));
 	                break;
 	            }
 	        case BcOp::StoreLocal:
 	            {
-					pushInstruction(IrInstruction(IrOp::StoreLocal, inst.operand0, popTemp()));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::StoreLocal, inst.operand0, popTemp())));
 	                break;
 	            }
 	        case BcOp::StoreGlobal:
 	            {
                     optstr_t global = func->names_[inst.operand0.value()];
-					pushInstruction(IrInstruction(IrOp::StoreGlobal, global, popTemp()));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::StoreGlobal, global, popTemp())));
 	                break;
 	            }
 	        case BcOp::PushReference:
 	            {
                     tempptr_t curr = pushNewTemp();
-					pushInstruction(IrInstruction(IrOp::PushReference, inst.operand0, curr));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::PushReference, inst.operand0, curr)));
 	                break;
 	            }
 	        case BcOp::LoadReference:
 	            {
                     tempptr_t curr = pushNewTemp();
-					pushInstruction(IrInstruction(IrOp::LoadReference, inst.operand0, curr));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::LoadReference, inst.operand0, curr)));
 	                break;
 	            }
 	        case BcOp::AllocRecord:
 	            {
                     tempptr_t curr = pushNewTemp();
-					pushInstruction(IrInstruction(IrOp::AllocRecord, curr));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AllocRecord, curr)));
 	                break;
 	            }
 	        case BcOp::FieldLoad:
@@ -112,8 +112,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, record});
-					pushInstruction(IrInstruction(IrOp::AssertRecord, record));
-					pushInstruction(IrInstruction(IrOp::FieldLoad, field, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertRecord, record)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::FieldLoad, field, instTemps)));
 	                break;
 	            }
 	        case BcOp::FieldStore:
@@ -123,8 +123,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					tempptr_t value = popTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{record, value});
-					pushInstruction(IrInstruction(IrOp::AssertRecord, record));
-					pushInstruction(IrInstruction(IrOp::FieldStore, field, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertRecord, record)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::FieldStore, field, instTemps)));
 	                break;
 	            }
 	        case BcOp::IndexLoad:
@@ -134,9 +134,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, record, index});
-					pushInstruction(IrInstruction(IrOp::AssertRecord, record));
-					pushInstruction(IrInstruction(IrOp::CastString, index));
-					pushInstruction(IrInstruction(IrOp::IndexLoad, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertRecord, record)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::CastString, index)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::IndexLoad, instTemps)));
 	                break;
 	            }
 	        case BcOp::IndexStore:
@@ -146,9 +146,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					tempptr_t value = popTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{record, value, index});
-					pushInstruction(IrInstruction(IrOp::AssertRecord, record));
-					pushInstruction(IrInstruction(IrOp::CastString, index));
-					pushInstruction(IrInstruction(IrOp::IndexStore, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertRecord, record)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::CastString, index)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::IndexStore, instTemps)));
 	                break;
 	            }
 	        case BcOp::AllocClosure:
@@ -162,8 +162,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					tempptr_t curr = pushNewTemp();
 					instTemps->push_back(curr);
 					reverse(instTemps->begin(), instTemps->end());
-					pushInstruction(IrInstruction(IrOp::AssertFunction, func));
-					pushInstruction(IrInstruction(IrOp::AllocClosure, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertFunction, func)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AllocClosure, instTemps)));
 	                break;
 	            }
 	        case BcOp::Call:
@@ -177,13 +177,13 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					tempptr_t curr = pushNewTemp();
 					instTemps->push_back(curr);
 					reverse(instTemps->begin(), instTemps->end());
-					pushInstruction(IrInstruction(IrOp::AssertClosure, clos));
-					pushInstruction(IrInstruction(IrOp::Call, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertClosure, clos)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Call, instTemps)));
 	                break;
 	            }
 	        case BcOp::Return:
 	            {
-                    pushInstruction(IrInstruction(IrOp::Return, popTemp()));
+                    pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Return, popTemp())));
 	                break;
 	            }
 	        case BcOp::Add:
@@ -193,7 +193,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, tempRight, tempLeft});
-					pushInstruction(IrInstruction(IrOp::Add, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Add, instTemps)));
 	                break;
 	            }
 	        case BcOp::Sub:
@@ -203,9 +203,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, tempRight, tempLeft});
-					pushInstruction(IrInstruction(IrOp::AssertInteger, tempRight));
-					pushInstruction(IrInstruction(IrOp::AssertInteger, tempLeft));
-					pushInstruction(IrInstruction(IrOp::Sub, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertInteger, tempRight)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertInteger, tempLeft)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Sub, instTemps)));
 	                break;
 	            }
 	        case BcOp::Mul:
@@ -215,9 +215,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, tempRight, tempLeft});
-					pushInstruction(IrInstruction(IrOp::AssertInteger, tempRight));
-					pushInstruction(IrInstruction(IrOp::AssertInteger, tempLeft));
-					pushInstruction(IrInstruction(IrOp::Mul, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertInteger, tempRight)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertInteger, tempLeft)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Mul, instTemps)));
 	                break;
 	            }
 	        case BcOp::Div:
@@ -227,9 +227,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, tempRight, tempLeft});
-					pushInstruction(IrInstruction(IrOp::AssertInteger, tempRight));
-					pushInstruction(IrInstruction(IrOp::AssertInteger, tempLeft));
-					pushInstruction(IrInstruction(IrOp::Div, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertInteger, tempRight)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertInteger, tempLeft)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Div, instTemps)));
 	                break;
 	            }
 	        case BcOp::Neg:
@@ -238,8 +238,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, val});
-					pushInstruction(IrInstruction(IrOp::AssertInteger, val));
-					pushInstruction(IrInstruction(IrOp::Neg, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertInteger, val)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Neg, instTemps)));
 	                break;
 	            }
 	        case BcOp::Gt:
@@ -249,9 +249,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, tempRight, tempLeft});
-					pushInstruction(IrInstruction(IrOp::AssertInteger, tempRight));
-					pushInstruction(IrInstruction(IrOp::AssertInteger, tempLeft));
-					pushInstruction(IrInstruction(IrOp::Gt, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertInteger, tempRight)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertInteger, tempLeft)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Gt, instTemps)));
 	                break;
 	            }
 	        case BcOp::Geq:
@@ -261,9 +261,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, tempRight, tempLeft});
-					pushInstruction(IrInstruction(IrOp::AssertInteger, tempRight));
-					pushInstruction(IrInstruction(IrOp::AssertInteger, tempLeft));
-					pushInstruction(IrInstruction(IrOp::Geq, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertInteger, tempRight)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertInteger, tempLeft)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Geq, instTemps)));
 	                break;
 	            }
 	        case BcOp::Eq:
@@ -273,7 +273,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, tempRight, tempLeft});
-					pushInstruction(IrInstruction(IrOp::Eq, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Eq, instTemps)));
 	                break;
 	            }
 	        case BcOp::And:
@@ -283,9 +283,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, tempRight, tempLeft});
-					pushInstruction(IrInstruction(IrOp::AssertBool, tempRight));
-					pushInstruction(IrInstruction(IrOp::AssertBool, tempLeft));
-					pushInstruction(IrInstruction(IrOp::And, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertBool, tempRight)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertBool, tempLeft)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::And, instTemps)));
 	                break;
 	            }
 	        case BcOp::Or:
@@ -295,9 +295,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, tempRight, tempLeft});
-					pushInstruction(IrInstruction(IrOp::AssertBool, tempRight));
-					pushInstruction(IrInstruction(IrOp::AssertBool, tempLeft));
-					pushInstruction(IrInstruction(IrOp::Or, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertBool, tempRight)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertBool, tempLeft)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Or, instTemps)));
 	                break;
 	            }
 	        case BcOp::Not:
@@ -306,21 +306,21 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, val});
-					pushInstruction(IrInstruction(IrOp::AssertBool, val));
-					pushInstruction(IrInstruction(IrOp::Not, instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertBool, val)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Not, instTemps)));
 	                break;
 	            }
 	        case BcOp::Goto:
 	            {
                     int32_t label = addLabelOffset(inst.operand0.value());
-                    pushInstruction(IrInstruction(IrOp::Goto, label));
+                    pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Goto, label)));
 	                break;
 	            }
 	        case BcOp::If:
 	            {
                     tempptr_t expr = popTemp();
                     int32_t label = addLabelOffset(inst.operand0.value());
-                    pushInstruction(IrInstruction(IrOp::If, label, expr));
+                    pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::If, label, expr)));
 	                break;
 	            }
 	        case BcOp::Dup:
@@ -347,7 +347,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
         decLabelOffsets();  // decrease remaining BcInstruction count for all labels
         for (auto item : labelOffsets) {  // check if any labels need to be inserted now
             if (item.second == 0) {
-                pushInstruction(IrInstruction(IrOp::AddLabel, item.first));
+                pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AddLabel, item.first)));
                 labelOffsets.erase(item.first);
             }
         }

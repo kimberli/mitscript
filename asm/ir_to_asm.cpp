@@ -59,37 +59,37 @@ void IrInterpreter::loadTemp(x64asm::R64 reg, tempptr_t temp) {
 void IrInterpreter::executeStep() {
     const static x64asm::R64 argRegs[] = {x64asm::rdi, x64asm::rsi, x64asm::rdx, x64asm::rcx, x64asm::r8, x64asm::r9};
 
-    IrInstruction inst = func->instructions.at(instructionIndex);
-    switch(inst.op) {
+    instptr_t inst = func->instructions.at(instructionIndex);
+    switch(inst->op) {
         case IrOp::LoadConst: 
             {
                 LOG(to_string(instructionIndex) + ": LoadConst");
-                int constIndex = inst.op0.value(); 
+                int constIndex = inst->op0.value(); 
                 Constant* c = func->constants_.at(constIndex);
                 // load a constant into a register 
                 assm.mov(x64asm::rdi, x64asm::Imm64{(uint64_t)c}); 
                 // move from the register into a temp on the stack
-                storeTemp(x64asm::rdi, inst.tempIndices->at(0));
+                storeTemp(x64asm::rdi, inst->tempIndices->at(0));
                 break;
             }
         case IrOp::LoadFunc: 
             {
                 LOG(to_string(instructionIndex) + ": LoadFunc");
-                int funcIndex = inst.op0.value();
+                int funcIndex = inst->op0.value();
                 // load the func pointer into a register
                 assm.mov(x64asm::rdi, x64asm::Imm64{func->functions_.at(funcIndex)});
                 // move from the register into a temp on the stack 
-                storeTemp(x64asm::rdi, inst.tempIndices->at(0));
+                storeTemp(x64asm::rdi, inst->tempIndices->at(0));
                 break;
             }
         case IrOp::LoadLocal: 
             {
                 LOG(to_string(instructionIndex) + ": LoadLocal");
-                int64_t offset = inst.op0.value();
+                int64_t offset = inst->op0.value();
                 getRbpOffset(offset); // puts the address of the local in r10
                 assm.mov(x64asm::rdi, x64asm::r10); // r10 will be used later in storeTemp
                 assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // hopefully this loads the actual val
-                storeTemp(x64asm::rdi, inst.tempIndices->at(0));
+                storeTemp(x64asm::rdi, inst->tempIndices->at(0));
                 break;
             }
         case IrOp::LoadGlobal: 
@@ -99,7 +99,7 @@ void IrInterpreter::executeStep() {
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
                 // load the string pointer into the second arg
-                string* name = new string(inst.name0.value());  // TODO: fix memory leak?
+                string* name = new string(inst->name0.value());  // TODO: fix memory leak?
                 assm.mov(argRegs[1], x64asm::Imm64{name});
                 // call a helper 
                 void* fn = (void*) &(helper_load_global);
@@ -108,16 +108,16 @@ void IrInterpreter::executeStep() {
                 assm.call(x64asm::r10);
                 // the result is stored in rax
                 // put the return val in the temp
-                storeTemp(x64asm::rax, inst.tempIndices->at(0));
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             }
         case IrOp::StoreLocal: 
             {
                 LOG(to_string(instructionIndex) + ": StoreLocal");
                 // first put the temp val in a reg
-                loadTemp(x64asm::rdi, inst.tempIndices->at(0));
+                loadTemp(x64asm::rdi, inst->tempIndices->at(0));
                 // put find out where the constant is located
-                int64_t offset = inst.op0.value();
+                int64_t offset = inst->op0.value();
                 getRbpOffset(offset); // address of local in r10 
                 // move the val from the reg to memory
                 assm.mov(x64asm::M64{x64asm::r10}, x64asm::rdi);
@@ -129,10 +129,10 @@ void IrInterpreter::executeStep() {
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
                 // load the string pointer into the second arg
-                string* name = new string(inst.name0.value());
+                string* name = new string(inst->name0.value());
                 assm.mov(argRegs[1], x64asm::Imm64{name});  // TODO: fix memory leak?
                 // load the value into the third arg 
-                loadTemp(argRegs[2], inst.tempIndices->at(0));
+                loadTemp(argRegs[2], inst->tempIndices->at(0));
                 // call a helper 
                 void* fn = (void*) &(helper_store_global);
                 assm.mov(x64asm::r10, x64asm::Imm64{(uint64_t)fn});
@@ -187,9 +187,9 @@ void IrInterpreter::executeStep() {
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
                 // load the left operand into the second arg
-                loadTemp(argRegs[1], inst.tempIndices->at(2));
+                loadTemp(argRegs[1], inst->tempIndices->at(2));
                 // load the value into the third arg 
-                loadTemp(argRegs[2], inst.tempIndices->at(1));
+                loadTemp(argRegs[2], inst->tempIndices->at(1));
                 
                 // now we need to call our helper 
                 void* fn = (void*) &(helper_add);
@@ -197,7 +197,7 @@ void IrInterpreter::executeStep() {
                 assm.call(x64asm::r10);
                 // the result is stored in rax
                 // put the return val in the temp
-                storeTemp(x64asm::rax, inst.tempIndices->at(0));
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::Sub: 
@@ -207,13 +207,13 @@ void IrInterpreter::executeStep() {
                 // load the left temp into a reg 
                 x64asm::R64 left = x64asm::rdi;
                 x64asm::R64 right = x64asm::rsi;
-                loadTemp(left, inst.tempIndices->at(2));
+                loadTemp(left, inst->tempIndices->at(2));
                 // load right temp into a reg 
-                loadTemp(right, inst.tempIndices->at(1));
+                loadTemp(right, inst->tempIndices->at(1));
                 // perform the sub; result stored in left 
                 assm.sub(left, right);
                 // put the value back in the temp
-                storeTemp(left, inst.tempIndices->at(0));
+                storeTemp(left, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::Mul: 
@@ -221,13 +221,13 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": Mul");
                 x64asm::R64 left = x64asm::rdi;
                 x64asm::R64 right = x64asm::rsi;
-                loadTemp(left, inst.tempIndices->at(2));
+                loadTemp(left, inst->tempIndices->at(2));
                 // load right temp into a reg 
-                loadTemp(right, inst.tempIndices->at(1));
+                loadTemp(right, inst->tempIndices->at(1));
                 // perform the sub; result stored in left 
                 assm.imul(left, right);
                 // put the value back in the temp
-                storeTemp(left, inst.tempIndices->at(0));
+                storeTemp(left, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::Div: 
@@ -235,21 +235,21 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": Div");
 //                x64asm::R64 left = x64asm::rdi;
 //                x64asm::R64 right = x64asm::rsi;
-//                loadTemp(left, inst.tempIndices->at(2));
+//                loadTemp(left, inst->tempIndices->at(2));
 //                // load right temp into a reg 
-//                loadTemp(right, inst.tempIndices->at(1));
+//                loadTemp(right, inst->tempIndices->at(1));
 //                // perform the sub; result stored in left 
 //                //assm.div(left, right);
 //                assm.assemble({IDIV_R64, {}});
 //                // put the value back in the temp
-//                storeTemp(left, inst.tempIndices->at(0));
+//                storeTemp(left, inst->tempIndices->at(0));
                 break;
             }; case IrOp::Neg: {
                 LOG(to_string(instructionIndex) + ": Neg");
                 x64asm::R64 operand = x64asm::rdi;
-                loadTemp(operand, inst.tempIndices->at(1));
+                loadTemp(operand, inst->tempIndices->at(1));
                 assm.neg(operand);
-                storeTemp(operand, inst.tempIndices->at(0));
+                storeTemp(operand, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::Gt: 
@@ -261,7 +261,7 @@ void IrInterpreter::executeStep() {
                 x64asm::R64 right = x64asm::rsi;
                 comparisonSetup(left, right, inst);
                 assm.cmovg(left, right);
-                storeTemp(left, inst.tempIndices->at(0));
+                storeTemp(left, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::Geq : 
@@ -273,7 +273,7 @@ void IrInterpreter::executeStep() {
                 // right(1) gets moved into left(0) if left was greater
                 comparisonSetup(left, right, inst);
                 assm.cmovge(left, right);
-                storeTemp(left, inst.tempIndices->at(0));
+                storeTemp(left, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::Eq: 
@@ -283,7 +283,7 @@ void IrInterpreter::executeStep() {
                 x64asm::R64 right = x64asm::rsi;
                 comparisonSetup(left, right, inst);
                 assm.cmove(left, right);
-                storeTemp(left, inst.tempIndices->at(0));
+                storeTemp(left, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::And: 
@@ -291,14 +291,14 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": And");
                 x64asm::R64 left = x64asm::rdi;
                 x64asm::R64 right = x64asm::rsi;
-                loadTemp(left, inst.tempIndices->at(2));
+                loadTemp(left, inst->tempIndices->at(2));
                 // load right temp into a reg 
-                loadTemp(right, inst.tempIndices->at(1));
+                loadTemp(right, inst->tempIndices->at(1));
                 // perform the sub; result stored in left 
                 //assm.AND(left, right);
                 assm.assemble({x64asm::AND_R64_R64, {left, right}});
                 // put the value back in the temp
-                storeTemp(left, inst.tempIndices->at(0));
+                storeTemp(left, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::Or: 
@@ -306,41 +306,41 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": Or");
                 x64asm::R64 left = x64asm::rdi;
                 x64asm::R64 right = x64asm::rsi;
-                loadTemp(left, inst.tempIndices->at(2));
+                loadTemp(left, inst->tempIndices->at(2));
                 // load right temp into a reg 
-                loadTemp(right, inst.tempIndices->at(1));
+                loadTemp(right, inst->tempIndices->at(1));
                 // perform the sub; result stored in left 
                 assm.assemble({x64asm::OR_R64_R64, {left, right}});
                 //assm.or(left, right);
                 // put the value back in the temp
-                storeTemp(left, inst.tempIndices->at(0));
+                storeTemp(left, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::Not: 
             {
                 LOG(to_string(instructionIndex) + ": Not");
                 x64asm::R64 operand = x64asm::rdi;
-                loadTemp(operand, inst.tempIndices->at(1));
+                loadTemp(operand, inst->tempIndices->at(1));
                 //assm.not(operand);
                 assm.assemble({x64asm::NOT_R64, {operand}});
-                storeTemp(operand, inst.tempIndices->at(0));
+                storeTemp(operand, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::Goto: 
             {
                 LOG(to_string(instructionIndex) + ": Goto");
-                int32_t labelIdx = inst.op0.value();
+                int32_t labelIdx = inst->op0.value();
                 assm.jmp(x64asm::Label{to_string(labelIdx)});
                 break;
             };
         case IrOp::If: 
             {
                 LOG(to_string(instructionIndex) + ": If");
-                int32_t labelIdx = inst.op0.value();
+                int32_t labelIdx = inst->op0.value();
                 // load the temp into a reg 
                 x64asm::R64 left = x64asm::rdi;
                 x64asm::R64 right = x64asm::rsi;
-                loadTemp(left, inst.tempIndices->at(0));
+                loadTemp(left, inst->tempIndices->at(0));
                 assm.mov(right, x64asm::Imm64{1});
                 assm.cmp(left, right);
                 assm.je(x64asm::Label{to_string(labelIdx)});
@@ -404,18 +404,18 @@ void IrInterpreter::executeStep() {
         default: 
             throw RuntimeException("Should not get here: invalid ir inst");
     }
-    LOG(inst.getInfo());
+    LOG(inst->getInfo());
     instructionIndex += 1;
     if (instructionIndex >= func->instructions.size()) {
         finished = true;
     }
 }
 
-void IrInterpreter::comparisonSetup(x64asm::R64 left, x64asm::R64 right, IrInstruction inst) {
+void IrInterpreter::comparisonSetup(x64asm::R64 left, x64asm::R64 right, instptr_t inst) {
     // load right temp into a reg 
-    loadTemp(right, inst.tempIndices->at(1));
+    loadTemp(right, inst->tempIndices->at(1));
     // load left temp into a reg 
-    loadTemp(left, inst.tempIndices->at(2));
+    loadTemp(left, inst->tempIndices->at(2));
     // perform the sub; result stored in left 
     assm.cmp(left, right); // this sets flags
     // load 0 and 1 into two diff regs 
