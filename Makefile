@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS ?= -O2 -g -std=c++1y -Wreturn-type -Ix64asm
+CXXFLAGS ?= -O0 -g -std=c++1y -Wreturn-type -Ix64asm
 
 SRC_DIRS = ./parser/ms ./parser/bc ./asm ./bc ./gc ./ir ./vm ./
 SRCS := $(shell find $(SRC_DIRS) -name \"*.cpp\")

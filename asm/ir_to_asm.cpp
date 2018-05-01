@@ -18,6 +18,7 @@ x64asm::Function IrInterpreter::run() {
     }
 
     // finish compiling 
+    assm.ret();
     assm.finish();
     LOG("done compiling asm");
     // return the asmFunc
@@ -27,6 +28,7 @@ x64asm::Function IrInterpreter::run() {
 
 void IrInterpreter::getRbpOffset(uint64_t offset) {
     // use r10 and r11 for these calcs
+    offset = offset + 1;
     assm.mov(x64asm::r10, x64asm::rbp); // move rbp into r10
     assm.mov(x64asm::r11, x64asm::Imm64{8*offset}); // move 8*offset into another reg
     assm.sub(x64asm::r10, x64asm::r11); // sub r11 from r10. now the correct mem is in r10
