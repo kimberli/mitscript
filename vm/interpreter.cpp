@@ -414,6 +414,18 @@ void Interpreter::executeStep() {
 };
 
 void Interpreter::run() {
+    // catch exceptions thrown in helpers called from asm
+    set_terminate([](){
+        try {
+            exception_ptr eptr = current_exception();
+            if (eptr) {
+                rethrow_exception(eptr);
+            }
+        } catch (InterpreterException& exception) {
+            cout << exception.toString() << endl;
+            exit(1);
+        }
+    });
     // runs program until termination (early return, end of statements)
     if (shouldCallAsm) {
         // create a closure objec to wrap the main function
