@@ -49,12 +49,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	currentTemp = 0;
 
     for (int i = 0; i < func->instructions.size(); i++) {
-        decLabelOffsets();  // decrease remaining BcInstruction count for all labels
-        for (auto item : labelOffsets) {  // check if any labels need to be inserted now
-            if (item.second == 0) {
-                pushInstruction(IrInstruction(IrOp::AddLabel, item.first));
-            }
-        }
 		BcInstruction inst = func->instructions[i];
 	    switch (inst.operation) {
 	        case BcOp::LoadConst:
@@ -350,6 +344,13 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        default:
 	            throw RuntimeException("should never get here - invalid instruction");
 	    }
+        decLabelOffsets();  // decrease remaining BcInstruction count for all labels
+        for (auto item : labelOffsets) {  // check if any labels need to be inserted now
+            if (item.second == 0) {
+                pushInstruction(IrInstruction(IrOp::AddLabel, item.first));
+                labelOffsets.erase(item.first);
+            }
+        }
 	}
 	IrFunc irFunc = IrFunc(irInsts, func->constants_, func->functions_, func->parameter_count_, func->local_vars_.size(), labelCounter);
     return irFunc;
