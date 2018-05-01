@@ -330,7 +330,7 @@ void IrInterpreter::executeStep() {
             {
                 LOG("Goto");
                 int32_t labelIdx = inst.op0.value();
-                assm.jmp(x64asm::Label{std::to_string(labelIdx)});
+                assm.jmp(x64asm::Label{to_string(labelIdx)});
                 break;
             };
         case IrOp::If: 
@@ -343,7 +343,7 @@ void IrInterpreter::executeStep() {
                 loadTemp(left, inst.tempIndices->at(0));
                 assm.mov(right, x64asm::Imm64{1});
                 assm.cmp(left, right);
-                assm.je(x64asm::Label{std::to_string(labelIdx)});
+                assm.je(x64asm::Label{to_string(labelIdx)});
                 break;
             };
        case IrOp::AssertInteger: 

@@ -26,7 +26,7 @@ private:
 	stack<tempptr_t> tempStack;
 	IrInstList irInsts;
 	offset_t currentTemp = 0;
-    map<string, int32_t> labelOffsets;  // map of string label to remaining BcInstruction offset
+    map<int32_t, int32_t> labelOffsets;  // map of string label to remaining BcInstruction offset
     int32_t labelCounter;  // initial label index for this instance of IrCompiler
 
     // helpers
@@ -35,7 +35,7 @@ private:
     tempptr_t popTemp();
     void pushInstruction(IrInstruction inst);
     void decLabelOffsets();
-    string addLabelOffset(int32_t offset);
+    int32_t addLabelOffset(int32_t offset);
 public:
     IrCompiler(Function* mainFunc, int32_t labelCounter, Interpreter* vmInterpreterPointer):
         func(mainFunc),

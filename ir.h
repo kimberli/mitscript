@@ -271,10 +271,10 @@ struct IrInstruction {
     optint_t op0;
     optstr_t name0;
     TempListPtr tempIndices;
-    IrInstruction(const IrOp op, optstr_t name0):
+    IrInstruction(const IrOp op, optint_t op0):
         op(op),
-        name0(name0),
-        op0(),
+        name0(),
+        op0(op0),
         tempIndices(make_shared<TempList>()) {};
     IrInstruction(const IrOp op, optstr_t name0, tempptr_t temp):
         op(op),

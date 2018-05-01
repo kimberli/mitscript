@@ -35,11 +35,10 @@ void IrCompiler::decLabelOffsets() {
         labelOffsets[item.first] = item.second - 1;
     }
 }
-string IrCompiler::addLabelOffset(int32_t offset) {
-    string newLabel = "label" + to_string(labelCounter);
-    labelOffsets[newLabel] = offset;
+int32_t IrCompiler::addLabelOffset(int32_t offset) {
+    labelOffsets[labelCounter] = offset;
     labelCounter++;
-    return newLabel;
+    return labelCounter;
 }
 
 // Main functionality
@@ -318,14 +317,14 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Goto:
 	            {
-                    string label = addLabelOffset(inst.operand0.value());
+                    int32_t label = addLabelOffset(inst.operand0.value());
                     pushInstruction(IrInstruction(IrOp::Goto, label));
 	                break;
 	            }
 	        case BcOp::If:
 	            {
                     tempptr_t expr = popTemp();
-                    string label = addLabelOffset(inst.operand0.value());
+                    int32_t label = addLabelOffset(inst.operand0.value());
                     pushInstruction(IrInstruction(IrOp::If, label, expr));
 	                break;
 	            }
