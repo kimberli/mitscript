@@ -210,20 +210,23 @@ enum class IrOp {
 
     // Description: casts a temp to integer
     // op0: N/A
-    // temp0: temp index of value to cast
-    // Result: stores int(temp0) in temp0, throws IllegalCastException if not possible
+    // temp0: temp index where the int will be stored
+    // temp1: temp index of the value to cast
+    // Result: stores int(temp1) in temp0, throws IllegalCastException if not possible
     CastInteger,
 
     // Description: casts a temp to bool
     // op0: N/A
-    // temp0: temp index of value to cast
-    // Result: stores bool(temp0) in temp0, throws IllegalCastException if not possible
+    // temp0: temp index where bool will be stored
+    // temp1: temp index of the value to cast
+    // Result: stores bool(temp1) in temp0, throws IllegalCastException if not possible
     CastBool,
 
     // Description: casts a temp to string
     // op0: N/A
-    // temp0: temp index of value to cast
-    // Result: stores str(temp0) in temp0, throws IllegalCastException if not possible
+    // temp0: temp index where the string is stored
+    // temp1: temp index of the value to cast
+    // Result: stores str(temp1) in temp0, throws IllegalCastException if not possible
     CastString,
     
     // Description: add a label at this point in the generated asm
