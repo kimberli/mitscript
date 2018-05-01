@@ -6,6 +6,7 @@
 #include "../types.h"
 #include "../ir.h"
 #include "bc_to_ir.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -140,7 +141,17 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::AllocClosure:
 	            {
-                    // TODO
+					TempListPtr instTemps = make_shared<TempList>();
+					for (int i = 0; i < inst.operand0; i++) {
+						instTemps->push_back(popTemp());
+					}
+					tempptr_t func = popTemp();
+					instTemps->push_back(func);
+					tempptr_t curr = pushNewTemp();
+					instTemps->push_back(curr);
+					reverse(instTemps->begin(), instTemps->end());
+					pushInstruction(IrInstruction(IrOp::AssertFunction, func));
+					pushInstruction(IrInstruction(IrOp::Call, instTemps));
 	                break;
 	            }
 	        case BcOp::Call:
@@ -153,7 +164,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					instTemps->push_back(clos);
 					tempptr_t curr = pushNewTemp();
 					instTemps->push_back(curr);
-					reverse(instTemps.begin(), instTemps.end());
+					reverse(instTemps->begin(), instTemps->end());
 					pushInstruction(IrInstruction(IrOp::AssertClosure, clos));
 					pushInstruction(IrInstruction(IrOp::Call, instTemps));
 	                break;
