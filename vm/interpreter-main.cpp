@@ -24,8 +24,9 @@
 using namespace std;
 
 int main(int argc, char** argv) {
+    string usage = "Usage: interpreter [--opt=<opt flag>] [-b|-s] <FILENAME> -mem <mem in MB>";
     if (argc < 2) {
-        cout << "Usage: interpreter [-b|-s] <FILENAME> -mem <mem in MB>" << endl;
+        cout << usage << endl;
         return 1;
     }
 
@@ -55,6 +56,9 @@ int main(int argc, char** argv) {
             i++; // skip an arg
         } else if (strcmp(argv[i], "--opt=machine-code-only") == 0) { // TODO: add other opt flags
 			shouldCallAsm = true;
+        } else if (strcmp(argv[i], "--opt=all") == 0) {
+			shouldCallAsm = true;
+            // TODO: add other optimizations
 		} else {
             infile = fopen(argv[i], "r");
             if (infile == NULL) {
@@ -65,7 +69,7 @@ int main(int argc, char** argv) {
     }
 
     if (!file_type) {
-        cout << "Usage: interpreter [-b|-s] <FILENAME>" << endl;
+        cout << usage << endl;
         return 1;
     }
 
