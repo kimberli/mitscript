@@ -30,6 +30,17 @@ tempptr_t IrCompiler::popTemp() {
 void IrCompiler::pushInstruction(IrInstruction inst) {
     irInsts.push_back(inst);
 }
+void IrCompiler::decLabelOffsets() {
+    for (auto item : labelOffsets) {
+        labelOffsets[item.first] = item.second - 1;
+    }
+}
+string IrCompiler::addLabelOffset(int32_t offset) {
+    string newLabel = "label" + to_string(labelCounter);
+    labelOffsets[newLabel] = offset;
+    labelCounter++;
+    return newLabel;
+}
 
 // Main functionality
 IrFunc IrCompiler::toIrFunc(Function* func) {
@@ -39,6 +50,12 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	currentTemp = 0;
 
     for (int i = 0; i < func->instructions.size(); i++) {
+        decLabelOffsets();  // decrease remaining BcInstruction count for all labels
+        for (auto item : labelOffsets) {  // check if any labels need to be inserted now
+            if (item.second == 0) {
+                pushInstruction(IrInstruction(IrOp::AddLabel, item.first));
+            }
+        }
 		BcInstruction inst = func->instructions[i];
 	    switch (inst.operation) {
 	        case BcOp::LoadConst:
@@ -301,12 +318,15 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Goto:
 	            {
-                    // TODO
+                    string label = addLabelOffset(inst.operand0.value());
+                    pushInstruction(IrInstruction(IrOp::Goto, label));
 	                break;
 	            }
 	        case BcOp::If:
 	            {
-                    // TODO
+                    tempptr_t expr = popTemp();
+                    string label = addLabelOffset(inst.operand0.value());
+                    pushInstruction(IrInstruction(IrOp::If, label, expr));
 	                break;
 	            }
 	        case BcOp::Dup:
@@ -331,7 +351,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            throw RuntimeException("should never get here - invalid instruction");
 	    }
 	}
-	IrFunc irFunc = IrFunc(irInsts, func->constants_, func->functions_, func->parameter_count_, func->local_vars_.size());
+	IrFunc irFunc = IrFunc(irInsts, func->constants_, func->functions_, func->parameter_count_, func->local_vars_.size(), labelCounter);
     return irFunc;
 };
 

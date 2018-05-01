@@ -287,6 +287,11 @@ void IrInterpreter::executeStep() {
                 LOG("CastString");
                 break;
             };
+        case IrOp::AddLabel:
+            {
+                LOG("AddLabel");
+                break;
+            };
         case IrOp::GarbageCollect: 
             {
                 LOG("GarbageCollect");

@@ -271,6 +271,11 @@ struct IrInstruction {
     optint_t op0;
     optstr_t name0;
     TempListPtr tempIndices;
+    IrInstruction(const IrOp op, optstr_t name0):
+        op(op),
+        name0(name0),
+        op0(),
+        tempIndices(make_shared<TempList>()) {};
     IrInstruction(const IrOp op, optstr_t name0, tempptr_t temp):
         op(op),
         name0(name0),
@@ -323,15 +328,18 @@ struct IrFunc {
     vector<Function*> functions_;
     int32_t parameter_count_;
     int32_t local_count_;
+    int32_t label_offset_;
 
     IrFunc(IrInstList instructions,
         vector<Constant*> constants_,
         vector<Function*> functions_,
         int32_t parameter_count_,
-        int32_t local_count_) :
+        int32_t local_count_,
+        int32_t label_offset_) :
         instructions(instructions),
         functions_(functions_),
         constants_(constants_),
         parameter_count_(parameter_count_),
-        local_count_(local_count_) {};
+        local_count_(local_count_),
+        label_offset_(label_offset_) {};
 };

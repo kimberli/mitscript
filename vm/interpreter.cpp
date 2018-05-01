@@ -482,8 +482,9 @@ Value* Interpreter::callVM(vector<Constant*> argsList, Closure* clos) {
 
 Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
     // convert the bc function to the ir
-    IrCompiler irc = IrCompiler(clos->func, this);
+    IrCompiler irc = IrCompiler(clos->func, labelCounter, this);
     IrFunc irf = irc.toIr();
+    labelCounter = irf.label_offset_;  // update interpreter state tracking label offset
     // convert the ir to assembly
     IrInterpreter iri = IrInterpreter(&irf, this);
     x64asm::Function asmFunc = iri.run();
