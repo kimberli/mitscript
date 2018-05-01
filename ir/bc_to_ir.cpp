@@ -145,7 +145,17 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Call:
 	            {
-                    // TODO
+					TempListPtr instTemps = make_shared<TempList>();
+					for (int i = 0; i < inst.operand0; i++) {
+                    	instTemps->push_back(popTemp());
+					}
+					tempptr_t clos = popTemp();
+					instTemps->push_back(clos);
+					tempptr_t curr = pushNewTemp();
+					instTemps->push_back(curr);
+					reverse(instTemps.begin(), instTemps.end());
+					pushInstruction(IrInstruction(IrOp::AssertClosure, clos));
+					pushInstruction(IrInstruction(IrOp::Call, instTemps));
 	                break;
 	            }
 	        case BcOp::Return:
@@ -289,13 +299,11 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Dup:
 	            {
-                    // TODO: do we need this?
                     pushTemp(tempStack.top());
 	                break;
 	            }
 	        case BcOp::Swap:
 	            {
-                    // TODO: do we need this?
                     tempptr_t temp1 = popTemp();
                     tempptr_t temp2 = popTemp();
                     pushTemp(temp1);
