@@ -95,13 +95,14 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::PushReference:
 	            {
-                    // TODO
+                    tempptr_t curr = pushNewTemp();
+					pushInstruction(IrInstruction(IrOp::PushReference, inst.operand0, curr));
 	                break;
 	            }
 	        case BcOp::LoadReference:
 	            {
                     tempptr_t curr = pushNewTemp();
-					pushInstruction(IrInstruction(IrOp::LoadLocal, inst.operand0.value_or(0) + func->local_vars_.size(), curr));
+					pushInstruction(IrInstruction(IrOp::LoadReference, inst.operand0, curr));
 	                break;
 	            }
 	        case BcOp::AllocRecord:
