@@ -48,6 +48,12 @@ enum class IrOp {
     // Result: temp at temp0 contains the global var indicated by its name
     LoadGlobal,
 
+    // Description: Load the value of a reference into a temp
+    // op0: index of the reference to load
+    // temp0: temp index to store into
+    // Result: temp at temp0 contains value of the reference
+    LoadReference,
+
     // Description: Store a value from a temp into a local
     // op0: index of the local to store into
     // temp0: temp index containing the value to store
