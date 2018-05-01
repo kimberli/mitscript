@@ -19,6 +19,7 @@ x64asm::Function IrInterpreter::run() {
 
     // finish compiling 
     assm.finish();
+    LOG("done compiling asm");
     // return the asmFunc
     return asmFunc;
     //asmFunc.call<Value*>();

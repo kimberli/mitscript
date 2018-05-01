@@ -78,20 +78,24 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::PushReference:
 	            {
+                    // TODO
 	                break;
 	            }
 	        case BcOp::LoadReference:
 	            {
+                    // TODO
 	                break;
 	            }
 	        case BcOp::AllocRecord:
 	            {
+                    // TODO
                     tempptr_t curr = pushNewTemp();
 					pushInstruction(IrInstruction(IrOp::AllocRecord, inst.operand0, curr));
 	                break;
 	            }
 	        case BcOp::FieldLoad:
 	            {
+                    // TODO: fix this
 					tempptr_t record = popTemp();
 					tempptr_t field = popTemp();
                     tempptr_t curr = pushNewTemp();
@@ -104,6 +108,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::FieldStore:
 	            {
+                    // TODO: fix this
 					tempptr_t record = popTemp();
 					tempptr_t field = popTemp();
 					tempptr_t value = popTemp();
@@ -116,6 +121,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::IndexLoad:
 	            {
+                    // TODO: fix this
 					tempptr_t record = popTemp();
 					tempptr_t index = popTemp();
                     tempptr_t curr = pushNewTemp();
@@ -128,6 +134,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::IndexStore:
 	            {
+                    // TODO: fix this
 					tempptr_t record = popTemp();
 					tempptr_t index = popTemp();
 					tempptr_t value = popTemp();
@@ -140,10 +147,12 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::AllocClosure:
 	            {
+                    // TODO
 	                break;
 	            }
 	        case BcOp::Call:
 	            {
+                    // TODO
 	                break;
 	            }
 	        case BcOp::Return:
@@ -277,19 +286,23 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Goto:
 	            {
+                    // TODO
 	                break;
 	            }
 	        case BcOp::If:
 	            {
+                    // TODO
 	                break;
 	            }
 	        case BcOp::Dup:
 	            {
+                    // TODO: do we need this?
                     pushTemp(tempStack.top());
 	                break;
 	            }
 	        case BcOp::Swap:
 	            {
+                    // TODO: do we need this?
                     tempptr_t temp1 = popTemp();
                     tempptr_t temp2 = popTemp();
                     pushTemp(temp1);

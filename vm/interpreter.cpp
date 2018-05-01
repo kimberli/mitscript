@@ -442,9 +442,9 @@ Value* Interpreter::call(vector<Constant*> argsList, Value* closure) {
         throw RuntimeException("expected " + to_string(clos->func->parameter_count_) + " arguments, got " + to_string(argsList.size()));
     }
     if (shouldCallAsm) {
-        callAsm(argsList, clos);
+        return callAsm(argsList, clos);
     } else {
-        callVM(argsList, clos);
+        return callVM(argsList, clos);
     }
 }
 
@@ -493,9 +493,11 @@ Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
     // TODO: be more intelligent about how you're compiling stuff
     // TODO: this obeys NO conventions about passing refs
     mcf.compile();
+    LOG("done compiling mcf");
     // we need to pass the args as Values
     vector<Value*> argsVals (argsList.begin(), argsList.end());
     Value* result = mcf.call(argsVals);
+    LOG("done calling mcf");
     return result;
 }
 
@@ -513,13 +515,10 @@ Value* Interpreter::add(Value* left, Value* right) {
         return ret;
     }
     // try adding integers if left is an int
-    Integer* leftInt = dynamic_cast<Integer*>(left);
-    if (leftInt != NULL) {
-        int leftI = leftInt->value;
-        int rightI = right->cast<Integer>()->value;
-        Value* ret = collector->allocate<Integer>(leftI + rightI);
-        return ret;
-    }
+    int leftI = left->cast<Integer>()->value;
+    int rightI = right->cast<Integer>()->value;
+    Value* ret = collector->allocate<Integer>(leftI + rightI);
+    return ret;
 };
 
 void Interpreter::storeGlobal(string name, Value* val) {
