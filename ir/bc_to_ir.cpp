@@ -88,40 +88,34 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::AllocRecord:
 	            {
-                    // TODO
                     tempptr_t curr = pushNewTemp();
 					pushInstruction(IrInstruction(IrOp::AllocRecord, curr));
 	                break;
 	            }
 	        case BcOp::FieldLoad:
 	            {
-                    // TODO: fix this
 					tempptr_t record = popTemp();
-					tempptr_t field = popTemp();
+                    optstr_t field = func->names_[inst.operand0.value()];
                     tempptr_t curr = pushNewTemp();
                     TempListPtr instTemps = make_shared<TempList>(
-                                TempList{curr, record, field});
+                                TempList{curr, record});
 					pushInstruction(IrInstruction(IrOp::AssertRecord, record));
-					pushInstruction(IrInstruction(IrOp::AssertString, field));
-					pushInstruction(IrInstruction(IrOp::RecordLoad, instTemps));
+					pushInstruction(IrInstruction(IrOp::FieldLoad, field, instTemps));
 	                break;
 	            }
 	        case BcOp::FieldStore:
 	            {
-                    // TODO: fix this
 					tempptr_t record = popTemp();
-					tempptr_t field = popTemp();
+                    optstr_t field = func->names_[inst.operand0.value()];
 					tempptr_t value = popTemp();
                     TempListPtr instTemps = make_shared<TempList>(
-                                TempList{record, field, value});
+                                TempList{record, value});
 					pushInstruction(IrInstruction(IrOp::AssertRecord, record));
-					pushInstruction(IrInstruction(IrOp::AssertString, field));
-					pushInstruction(IrInstruction(IrOp::RecordLoad, instTemps));
+					pushInstruction(IrInstruction(IrOp::FieldStore, field, instTemps));
 	                break;
 	            }
 	        case BcOp::IndexLoad:
 	            {
-                    // TODO: fix this
 					tempptr_t record = popTemp();
 					tempptr_t index = popTemp();
                     tempptr_t curr = pushNewTemp();
@@ -129,20 +123,19 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                                 TempList{curr, record, index});
 					pushInstruction(IrInstruction(IrOp::AssertRecord, record));
 					pushInstruction(IrInstruction(IrOp::CastString, index));
-					pushInstruction(IrInstruction(IrOp::RecordLoad, instTemps));
+					pushInstruction(IrInstruction(IrOp::IndexLoad, instTemps));
 	                break;
 	            }
 	        case BcOp::IndexStore:
 	            {
-                    // TODO: fix this
 					tempptr_t record = popTemp();
 					tempptr_t index = popTemp();
 					tempptr_t value = popTemp();
                     TempListPtr instTemps = make_shared<TempList>(
-                                TempList{record, index, value});
+                                TempList{record, value, index});
 					pushInstruction(IrInstruction(IrOp::AssertRecord, record));
 					pushInstruction(IrInstruction(IrOp::CastString, index));
-					pushInstruction(IrInstruction(IrOp::RecordLoad, instTemps));
+					pushInstruction(IrInstruction(IrOp::IndexStore, instTemps));
 	                break;
 	            }
 	        case BcOp::AllocClosure:

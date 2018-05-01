@@ -43,7 +43,7 @@ enum class IrOp {
 
     // Description: Load a global into a temp
     // op0: N/A
-    // global: name of the global to load
+    // name0: name of the global to load
     // temp0: temp index to store into
     // Result: temp at temp0 contains the global var indicated by its name
     LoadGlobal,
@@ -62,7 +62,7 @@ enum class IrOp {
 
     // Description: Store a value from a temp into a global
     // op0: N/A
-    // global: name of the global to store into
+    // name0: name of the global to store into
     // temp0: temp index containing the value to store
     // Result: the global named contains the value stored by temp0
     StoreGlobal,
@@ -75,18 +75,35 @@ enum class IrOp {
 
     // Description: Load a value from a record and store it into a temp
     // op0: N/A
+    // name0: name of the field to load from
     // temp0: temp index to store the field's value into
     // temp1: temp index containing the record to look in (must be record)
-    // temp2: temp index containing the field name (must be string)
     // Result: temp at temp0 contains the value of the field
-    RecordLoad,
+    FieldLoad,
 
     // Description: Store a value into a record's field
+    // op0: N/A
+    // name0: name of the field to store into
     // temp0: temp index containing the record to store into (must be record)
-    // temp1: temp index containing the field name (must be string)
-    // temp2: temp index containing the field's new value
+    // temp1: temp index containing the field's new value
     // Result: temp at temp0 points to record with the new value set
-    RecordStore,
+    FieldStore,
+
+    // Description: Load a value from a record and store it into a temp
+    // op0: N/A
+    // temp0: temp index to store the field's value into
+    // temp1: temp index containing the record to look in (must be record)
+    // temp2: temp index containing the field
+    // Result: temp at temp0 contains the value of the field
+    IndexLoad,
+
+    // Description: Store a value into a record's field
+    // op0: N/A
+    // temp0: temp index containing the record to store into (must be record)
+    // temp1: temp index containing the field's new value
+    // temp2: temp index containing the field
+    // Result: temp at temp0 points to record with the new value set
+    IndexStore,
 
     // Description: Allocate a new closure
     // op0: number of free vars passed to the closure
@@ -252,40 +269,45 @@ enum class IrOp {
 struct IrInstruction {
     IrOp op;
     optint_t op0;
-    optstr_t global;
+    optstr_t name0;
     TempListPtr tempIndices;
-    IrInstruction(const IrOp op, optstr_t global, tempptr_t temp):
+    IrInstruction(const IrOp op, optstr_t name0, tempptr_t temp):
         op(op),
-        global(global),
+        name0(name0),
         op0(),
         tempIndices(make_shared<TempList>(TempList{temp})) {};
+    IrInstruction(const IrOp op, optstr_t name0, TempListPtr tempIndices):
+        op(op),
+        name0(name0),
+        op0(),
+        tempIndices(tempIndices) {};
     IrInstruction(const IrOp op, optint_t op0, TempListPtr tempIndices):
         op(op),
         op0(op0),
-        global(),
+        name0(),
         tempIndices(tempIndices) {};
     IrInstruction(const IrOp op, optint_t op0, tempptr_t temp):
         op(op),
         op0(op0),
-        global(),
+        name0(),
         tempIndices(make_shared<TempList>(TempList{temp})) {};
     IrInstruction(const IrOp op, tempptr_t temp):
         op(op),
         op0(),
-        global(),
+        name0(),
         tempIndices(make_shared<TempList>(TempList{temp})) {};
     IrInstruction(const IrOp op, TempListPtr tempIndices):
         op(op),
         op0(),
-        global(),
+        name0(),
         tempIndices(tempIndices) {};
     string getInfo() {
         string s;
         if (op0) {
             s += "\top0: " + to_string(op0.value()) + "\n";
         }
-        if (global) {
-            s += "\tglobal: " + global.value() + "\n";
+        if (name0) {
+            s += "\tname0: " + name0.value() + "\n";
         }
         s += "\ttemps: ";
         for (tempptr_t t : *tempIndices) {

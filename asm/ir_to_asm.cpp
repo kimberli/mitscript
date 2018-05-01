@@ -96,7 +96,7 @@ void IrInterpreter::executeStep() {
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
                 // load the string pointer into the second arg
-                string name = inst.global.value();
+                string name = inst.name0.value();
                 assm.mov(argRegs[1], x64asm::Imm64{&name});
                 // call a helper 
                 void* fn = (void*) &(helper_load_global);
@@ -126,7 +126,7 @@ void IrInterpreter::executeStep() {
                 // load the interpreter pointer into the first arg 
                 assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
                 // load the string pointer into the second arg
-                string name = inst.global.value();
+                string name = inst.name0.value();
                 assm.mov(argRegs[1], x64asm::Imm64{&name});
                 // load the value into the third arg 
                 loadTemp(argRegs[2], inst.tempIndices->at(0));
@@ -142,14 +142,24 @@ void IrInterpreter::executeStep() {
                 LOG("AllocRecord");
                 break;
             };
-        case IrOp::RecordLoad: 
+        case IrOp::FieldLoad:
             {
-                LOG("RecordLoad");
+                LOG("FieldLoad");
                 break;
             };
-        case IrOp::RecordStore: 
+        case IrOp::FieldStore:
             {
-                LOG("RecordStore");
+                LOG("FieldStore");
+                break;
+            };
+        case IrOp::IndexLoad:
+            {
+                LOG("IndexLoad");
+                break;
+            };
+        case IrOp::IndexStore:
+            {
+                LOG("IndexStore");
                 break;
             };
         case IrOp::AllocClosure: 
