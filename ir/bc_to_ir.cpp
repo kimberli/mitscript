@@ -84,7 +84,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::LoadReference:
 	            {
-                    // TODO
+                    tempptr_t curr = pushNewTemp();
+					pushInstruction(IrInstruction(IrOp::LoadLocal, inst.operand0.value_or(0) + func->local_vars_.size(), curr));
 	                break;
 	            }
 	        case BcOp::AllocRecord:
