@@ -1,0 +1,13 @@
+i = 1000;
+
+while (i >= 0) {
+  x = fun() {
+        obj = {
+          y: i;
+          z: 2*i;
+        };
+        return obj.z;
+  };
+  print(x());
+  i = i - 1;
+}

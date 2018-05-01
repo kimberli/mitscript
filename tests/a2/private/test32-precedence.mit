@@ -1,0 +1,6 @@
+x = ! 5 == 7;
+print("x is True: " + x);
+y = - 3 - 2;
+print("y is -5: " + y);
+z = ! true | true;
+print("z is True: " + z);

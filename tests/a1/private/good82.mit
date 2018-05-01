@@ -1,0 +1,5 @@
+x = {};
+x.z = 10;
+print(x);
+print(x.z);
+print(x.z.y);

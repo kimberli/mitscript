@@ -1,0 +1,21 @@
+i = 0;
+j = 0;
+
+f = fun(x, y) {
+  g = fun(z) {
+    global j;
+    j = x + z;
+    return j;
+  };
+  h = fun(func, val) {
+    returning = func(val) + y;
+    return returning;
+  };
+  return h(g, 2);
+};
+
+while (i < 20000) {
+  print(f(i, i));
+  i = i + 2;
+}
+

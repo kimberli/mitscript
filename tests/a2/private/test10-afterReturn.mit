@@ -1,0 +1,9 @@
+f = fun() {
+  print("here");
+  return None;
+};
+
+print(f());
+print("here2");
+return 1;
+print("bad");

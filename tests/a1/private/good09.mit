@@ -1,0 +1,5 @@
+rec = {
+  print : fun(){ print(1); };
+};
+
+rec.print();

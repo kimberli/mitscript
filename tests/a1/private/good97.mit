@@ -1,0 +1,10 @@
+x = fun(t) {
+  print(t);
+  if (t < 5) {
+    return 5;
+  }
+};
+x(4);
+x(6);
+
+print("hello");

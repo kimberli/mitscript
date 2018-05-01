@@ -1,0 +1,23 @@
+List = fun(){ 
+  this = {
+    head:None; 
+    len: fun(){ 
+      return 0; 
+    };
+	  add: fun(v){ 
+      this.head = {
+        len:this.len()+1; 
+        car:v; 
+        cdr:this.head;
+      };
+    };
+  };
+  return this;
+};
+
+l = List();
+i=0;
+while(i < N){
+	l.add(input());
+	i = i + 1;
+}

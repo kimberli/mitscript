@@ -1,0 +1,51 @@
+LETTERS = {
+    l_0:"a";
+    l_1:"b";
+    l_2:"c";
+    l_3:"d";
+    l_4:"e";
+    l_5:"f";
+    l_6:"g";
+    l_7:"h";
+    l_8:"i";
+    l_9:"j";
+    l_10:"k";
+    l_11:"l";
+    l_12:"m";
+    l_13:"n";
+    l_14:"o";
+    l_15:"p";
+    l_16:"q";
+    l_17:"r";
+    l_18:"s";
+    l_19:"t";
+    l_20:"u";
+    l_21:"v";
+    l_22:"w";
+    l_23:"x";
+    l_24:"y";
+    l_25:"z";
+};
+
+letter_replicate = fun(letter, count) {
+    return_val = "";
+    c = 0;
+    while(c < count) {
+        return_val = return_val + letter;
+        c = c + 1;
+    }
+    return return_val;
+};
+
+i=0;
+letter_index=0;
+while(i < 10000) {
+    letter = LETTERS["_" + letter_index];
+    my_string = letter_replicate(letter, 27);
+    print(my_string);
+    letter_index = letter_index + 1;
+    if(letter_index == 26) {
+        letter_index = 0;
+    }
+    i = i + 1;
+}

@@ -1,0 +1,9 @@
+iterations = 200000;
+
+i = 0;
+x = "";
+
+while (i < iterations) {
+    x = x + "x";
+    i = i + 1;
+}

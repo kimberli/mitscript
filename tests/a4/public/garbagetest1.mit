@@ -1,0 +1,9 @@
+iterations = 200000;
+
+i = 0;
+
+while (i < iterations) {
+    x = { y: {}; };
+    x.y.x = x;
+    i = i + 1;  
+}

@@ -1,0 +1,45 @@
+//Benchmark mirrored from https://www.hboehm.info/gc/gc_bench.html
+
+kStretchTreeDepth  = 14;	// about 10Mb
+
+Node = fun() {
+	this = {
+		left: None;
+		right: None;
+		setLeft: fun(leftNode){
+			this.left = leftNode;
+		};
+		setRight: fun(rightNode){
+			this.right = rightNode;
+		};
+		getLeft: fun(){
+			return this.left;
+		};
+		getRight: fun(){
+			return this.right;
+		};
+	};
+	return this;
+};
+
+
+maketree = fun(depth){
+	if (depth <= 0) {
+		newNode = Node();
+		return newNode;
+	} else {
+		newNode = Node();
+		newNode.setLeft(maketree(depth-1));
+		newNode.setRight(maketree(depth-1));
+		return newNode;
+	}
+};
+
+
+print("Garbage collector bench5.mit");
+
+print("Stretching memory with a binary tree of depth " + kStretchTreeDepth);
+temp = maketree(kStretchTreeDepth);
+temp = None;
+
+

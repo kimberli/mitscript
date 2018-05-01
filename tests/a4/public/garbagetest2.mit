@@ -1,0 +1,15 @@
+iterations = 200000;
+
+i = 0;
+
+while (i < iterations) {
+    y = fun() {
+        z = fun(x) {
+            if (!(x == None)) {
+                z(None);
+            }
+        };
+    };
+    q = y();
+    i = i + 1;
+}

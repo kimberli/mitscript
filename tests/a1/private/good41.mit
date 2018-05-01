@@ -1,0 +1,20 @@
+plus = fun(a, b, N){
+  temp = pair(a, b);
+  state = {carry:0;};
+  rv = List();  
+  temp.forall(
+    fun(pair){
+	    v = pair.v1 + pair.v2 + state.carry;
+      state.carry = 0;
+      while(v >= N){ 
+        v = v - N; 
+        state.carry = state.carry + 1; 
+      } 
+      rv.add(v);	
+    }
+  ); 
+  if(!(state.carry == 0)){
+     rv.add(state.carry);
+  }
+  return rv;
+};

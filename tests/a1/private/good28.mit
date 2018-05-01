@@ -1,0 +1,5 @@
+x = "a" + "b";
+y = fun(s) {
+  return s + 1;
+};
+y(x);

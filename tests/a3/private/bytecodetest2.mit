@@ -1,0 +1,14 @@
+a = fun() {
+    x = 1;
+    b = fun(q) {
+        c = fun() {
+            print(x);
+            z1 = 23;
+            print(q);
+        };
+        c();
+        print(q);
+    };
+    b("foo");
+};
+a();

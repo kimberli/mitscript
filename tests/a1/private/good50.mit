@@ -1,0 +1,32 @@
+
+
+Ncars = 300;
+Nsteps = 500;
+
+
+Car = fun(x, y){
+   return { x:x; y:y; vx:0; vy:0; };
+};
+
+
+manycars = fun(n, xbnd ){
+  carmap = {n:n;};
+  x = 0;
+  y = 0;
+  vx = 0;
+  vy = 0;
+  n = n-1;
+  while(n >= 0){
+    c = Car(x,y);
+    carmap[n] = c;
+    x = x + 10;
+    if(x > xbnd){ x = 0; y = y + 10; }
+    c.vx = vx;
+    c.vy = vy;
+    n = n - 1;
+    vx = vx + 1;
+    if(vx > 2){ vx = 0; vy = vy + 1; }
+    if(vy > 2){ vy = 0; }
+  }
+  return carmap;
+};

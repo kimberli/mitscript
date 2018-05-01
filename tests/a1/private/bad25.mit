@@ -1,0 +1,3 @@
+b = 6;
+return = 7;
+print(b + return);

@@ -1,0 +1,400 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [None],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+				load_const	0
+				return
+			]
+		}
+	],
+	constants = ["Should print: 1hi", 1, "hi", "Should print: 2", "Should print: hi1", "Should print: 3", 9, 3, "Should print: 9", "Should print: {hello:9 }", 5, 2, "Should print: FUNCTION", "Should print: True", true, false, 100, 30, 4, 134, "hello", "hell", "o", None, "yep", "nes", "ted", "Should print: False", "hel", 0],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [print, input, intcast, hello, x, derp, herp, nested, still, yep, still_nested, mega_nested, y],
+	instructions = 
+	[
+		load_func	-1
+		store_global	0
+		load_func	-2
+		store_global	1
+		load_func	-3
+		store_global	2
+		load_const	0
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	1
+		load_const	2
+		add
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	3
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	1
+		load_const	1
+		add
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	4
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	2
+		load_const	1
+		add
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	5
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	6
+		load_const	7
+		div
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	8
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	7
+		load_const	7
+		mul
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	9
+		load_global	0
+		call	1
+		pop
+		gc
+		alloc_record
+		dup
+		load_const	10
+		load_const	11
+		mul
+		load_const	1
+		sub
+		field_store	3
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	12
+		load_global	0
+		call	1
+		pop
+		gc
+		load_global	0
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	13
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	14
+		load_const	14
+		eq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	15
+		load_const	15
+		eq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	16
+		load_const	17
+		add
+		load_const	18
+		add
+		load_const	19
+		eq
+		load_global	0
+		call	1
+		pop
+		gc
+		alloc_record
+		store_global	4
+		load_global	4
+		load_global	4
+		eq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_global	0
+		load_global	0
+		eq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_func	0
+		alloc_closure	0
+		store_global	4
+		load_global	4
+		load_global	4
+		eq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	11
+		load_const	1
+		gt
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	11
+		load_const	1
+		gt
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	11
+		load_const	1
+		geq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	11
+		load_const	1
+		geq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	20
+		load_const	21
+		load_const	22
+		add
+		eq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	15
+		not
+		load_global	0
+		call	1
+		pop
+		gc
+		alloc_record
+		dup
+		alloc_record
+		dup
+		alloc_record
+		dup
+		alloc_record
+		dup
+		alloc_record
+		dup
+		alloc_record
+		dup
+		load_const	23
+		field_store	5
+		field_store	6
+		field_store	7
+		field_store	8
+		field_store	9
+		field_store	10
+		store_global	11
+		load_global	11
+		load_global	11
+		field_load	10
+		load_const	24
+		index_load
+		field_load	8
+		load_const	25
+		load_const	26
+		add
+		index_load
+		field_load	6
+		swap
+		field_store	5
+		load_global	11
+		field_load	10
+		field_load	9
+		field_load	8
+		field_load	7
+		field_load	6
+		field_load	5
+		load_global	11
+		eq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_global	11
+		field_load	10
+		field_load	9
+		field_load	8
+		field_load	7
+		field_load	6
+		field_load	5
+		field_load	10
+		field_load	9
+		field_load	8
+		field_load	7
+		field_load	6
+		field_load	5
+		field_load	10
+		field_load	9
+		field_load	8
+		field_load	7
+		field_load	6
+		field_load	5
+		field_load	10
+		field_load	9
+		field_load	8
+		field_load	7
+		field_load	6
+		field_load	5
+		field_load	10
+		field_load	9
+		field_load	8
+		field_load	7
+		field_load	6
+		field_load	5
+		field_load	10
+		field_load	9
+		field_load	8
+		field_load	7
+		field_load	6
+		field_load	5
+		field_load	10
+		field_load	9
+		field_load	8
+		field_load	7
+		field_load	6
+		field_load	5
+		field_load	10
+		field_load	9
+		field_load	8
+		field_load	7
+		field_load	6
+		field_load	5
+		field_load	10
+		field_load	9
+		field_load	8
+		field_load	7
+		field_load	6
+		field_load	5
+		load_global	11
+		eq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	27
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	1
+		load_const	1
+		gt
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	11
+		load_const	11
+		gt
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	1
+		load_const	11
+		geq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	1
+		load_const	11
+		geq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	1
+		load_global	4
+		eq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_global	4
+		load_global	0
+		eq
+		load_global	0
+		call	1
+		pop
+		gc
+		alloc_record
+		store_global	12
+		load_global	4
+		load_global	12
+		eq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	20
+		load_const	28
+		eq
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	14
+		not
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	29
+		return
+	]
+}

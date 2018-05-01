@@ -1,0 +1,238 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions =
+			[
+				function
+				{
+					functions = [],
+					constants = ["_"],
+					parameter_count = 1,
+					local_vars = [index],
+					local_ref_vars = [],
+					free_vars = [this],
+					names = [array],
+					instructions = 
+					[
+						push_ref	0
+						load_ref
+						field_load	0
+						load_const	0
+						load_local	0
+						add
+						index_load
+						return
+					]
+				},
+				function
+				{
+					functions = [],
+					constants = [1, "_"],
+					parameter_count = 2,
+					local_vars = [index, value],
+					local_ref_vars = [],
+					free_vars = [this],
+					names = [array, arraySize],
+					instructions = 
+					[
+						load_local	1
+						push_ref	0
+						load_ref
+						field_load	0
+						swap
+						load_const	1
+						load_local	0
+						add
+						swap
+						index_store
+						load_local	0
+						push_ref	0
+						load_ref
+						field_load	1
+						load_const	0
+						sub
+						gt
+						if	2
+						goto	8
+						load_local	0
+						load_const	0
+						add
+						push_ref	0
+						load_ref
+						swap
+						field_store	1
+					]
+				},
+				function
+				{
+					functions = [],
+					constants = [1, "_"],
+					parameter_count = 1,
+					local_vars = [value],
+					local_ref_vars = [],
+					free_vars = [this],
+					names = [array, arraySize],
+					instructions = 
+					[
+						load_local	0
+						push_ref	0
+						load_ref
+						field_load	0
+						swap
+						load_const	1
+						push_ref	0
+						load_ref
+						field_load	1
+						add
+						swap
+						index_store
+						push_ref	0
+						load_ref
+						field_load	1
+						load_const	0
+						add
+						push_ref	0
+						load_ref
+						swap
+						field_store	1
+					]
+				},
+				function
+				{
+					functions = [],
+					constants = [],
+					parameter_count = 0,
+					local_vars = [],
+					local_ref_vars = [],
+					free_vars = [this],
+					names = [arraySize],
+					instructions = 
+					[
+						push_ref	0
+						load_ref
+						field_load	0
+						return
+					]
+				}
+			],
+			constants = [0, 1],
+			parameter_count = 0,
+			local_vars = [this],
+			local_ref_vars = [this],
+			free_vars = [],
+			names = [append, array, arraySize, get, set, size],
+			instructions = 
+			[
+				alloc_record
+				dup
+				push_ref	0
+				load_const	1
+				load_func	0
+				alloc_closure
+				field_store	3
+				dup
+				push_ref	0
+				load_const	1
+				load_func	1
+				alloc_closure
+				field_store	4
+				dup
+				push_ref	0
+				load_const	1
+				load_func	2
+				alloc_closure
+				field_store	0
+				dup
+				push_ref	0
+				load_const	1
+				load_func	3
+				alloc_closure
+				field_store	5
+				dup
+				alloc_record
+				field_store	1
+				dup
+				load_const	0
+				field_store	2
+				push_ref	0
+				swap
+				store_ref
+				push_ref	0
+				load_ref
+				return
+			]
+		}
+	],
+	constants = [0, 1, 100, 160, "i: "],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [Array, append, arraySize, i, input, intcast, j, myArray, print, size],
+	instructions = 
+	[
+		load_const	0
+		load_func	0
+		alloc_closure
+		store_global	8
+		load_const	0
+		load_func	1
+		alloc_closure
+		store_global	4
+		load_const	0
+		load_func	2
+		alloc_closure
+		store_global	5
+		load_const	0
+		load_func	3
+		alloc_closure
+		store_global	0
+		load_const	3
+		store_global	3
+		load_global	3
+		load_const	0
+		geq
+		if	2
+		goto	38
+		load_const	0
+		load_global	0
+		call
+		store_global	7
+		load_const	2
+		store_global	6
+		load_global	6
+		load_const	0
+		geq
+		if	2
+		goto	16
+		load_const	0
+		load_global	7
+		field_load	9
+		call
+		store_global	2
+		load_global	2
+		load_const	1
+		load_global	7
+		field_load	1
+		call
+		load_global	6
+		load_const	1
+		sub
+		store_global	6
+		goto	-19
+		load_const	4
+		load_global	3
+		add
+		load_const	1
+		load_global	8
+		call
+		load_global	3
+		load_const	1
+		sub
+		store_global	3
+		goto	-41
+	]
+}

@@ -1,0 +1,6 @@
+x = 1 + 2;
+print(x);
+print("just printed " + x);
+print(false | true);
+print(true & false);
+print(true & true);

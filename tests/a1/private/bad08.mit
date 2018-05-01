@@ -1,0 +1,5 @@
+a = fun(){
+  global "a";
+  return "a";
+}
+a();

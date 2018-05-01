@@ -1,0 +1,10 @@
+// Google Analytics JS modified to fit MITScript
+// Provides nice coverage of chaining of indexing/field dereference and mixing
+// them with (a little) arithmetic.
+a = fun(i, s, o, g, r, a, m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]|i[fun(){
+i[r].q=i[r].q.push(arguments);}];i[r].l=1*Date();a=s.createElement(o);
+m=s.getElementsByTagName(o);m=m[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+;};a(window,document,"script","https://www.google-analytics.com/analytics.js","ga");
+
+ga("create", "UA-XXXXX-Y", "auto");
+ga("send", "pageview");

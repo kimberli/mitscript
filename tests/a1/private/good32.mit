@@ -1,0 +1,11 @@
+x = input();
+print("should be 10: " + (intcast(x) + 5));
+x = input();
+print("should be -3: " + intcast(x));
+x = input();
+print("should be 0: " + intcast(x));
+x = input();
+print("should be 0: " + intcast(x));
+x = input();
+print("about to throw exception");
+intcast(x);

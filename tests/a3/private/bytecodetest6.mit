@@ -1,0 +1,8 @@
+f = fun(x) {
+  f2 = fun(y) {
+    print(y);
+  };
+  f2("STRING2");
+  print = fun(z) {};
+};
+f("STRING2");

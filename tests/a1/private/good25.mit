@@ -1,0 +1,15 @@
+x = 3;
+if (x == 3) {
+  print("This should be printed.");
+}
+
+if (false) {
+  print("This should not be printed.");
+} else {
+  print("This should be printed.");
+}
+
+while (x > 0) {
+  print(x);
+  x = x - 1;
+}

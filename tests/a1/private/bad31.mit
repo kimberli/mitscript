@@ -1,0 +1,3 @@
+c = fun(a {
+  return a;
+};

@@ -1,0 +1,13 @@
+z = 3;
+x = fun(){
+	global y;
+	y = 7;
+	return 4;
+};
+z = z + x();
+print("Should be 7");
+print(y);
+y = 2;
+x();
+print("Should still be 7");
+print(z == y);

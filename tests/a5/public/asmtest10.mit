@@ -1,0 +1,10 @@
+t = fun(x) {
+    return fun() {
+        return x;
+    };
+};
+
+z = t(1);
+z = t(2);
+
+print(z());

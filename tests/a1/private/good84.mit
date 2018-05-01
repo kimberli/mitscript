@@ -1,0 +1,33 @@
+x = -1;
+b = "foobar";
+r = {y:"foo"; x:"bar";};
+
+if (r == r) {
+  print(r);
+} else {
+  print("nope");
+}
+
+f = fun (a, b) {
+  print(a + " foobar " + b);
+};
+
+while (x < 5) {
+  f(x, x-1);
+  x = x + 1;
+}
+
+while (false) {
+  x = x / 0;
+}
+
+z = 1;
+f2 = fun() {
+  global z;
+
+  z = z + 1;
+  f(z, z);
+};
+
+print(f2());
+print(z);

@@ -1,0 +1,175 @@
+Hangman = fun(word, wordSize) {
+    this = 
+    {
+        guess: fun(letter) {
+            if(this.guesses[letter] == None) {
+                this.guesses[letter] = true;
+                this.guessesString = this.guessesString + letter;
+            } else {
+                print("You already guessed " + letter);
+                print("Previous guesses: " + this.guessesString);
+                return None;
+            }
+            
+            i = this.wordSize - 1;
+            foundSomething = false;
+            
+            lettersFound = 0;
+            
+            while(i >= 0) {
+                if(this.word["_" + i].letter == letter & !this.word["_" + i].found) {
+                    this.word["_" + i].found = true;
+                    foundSomething = true;
+                    lettersFound = lettersFound + 1;
+                } else {
+                    if(this.word["_" + i].found) {
+                        lettersFound = lettersFound + 1;
+                    }
+                }
+                i = i - 1;
+            }
+            
+            if(!foundSomething) {
+                print(this.man["_" + this.nGuesses]);
+                this.nGuesses = this.nGuesses + 1;
+            }
+            
+            guessesLeft = 6 - this.nGuesses;
+            
+            this.printWord(guessesLeft, lettersFound);
+            
+            if(lettersFound == this.wordSize) {
+                print("You win!");
+                return true;
+            } else {
+                if(guessesLeft <= 0) {
+                    print("You lose!");
+                    return false;
+                } else {
+                    print("You have " + guessesLeft + " guess(es) left");
+                    return None;
+                }
+            }
+        };
+        
+        printWord: fun(guessesLeft, lettersFound) {
+            i = 0;
+            output = "";
+            while(i < this.wordSize) {
+                if(this.word["_" + i].found | guessesLeft <= 0 | lettersFound == this.wordSize) {
+                    output = output + this.word["_" + i].letter;
+                } else {
+                    output = output + "_";
+                }
+                i = i + 1;
+            }
+            print(output);
+        };
+        
+        man: {
+           _0:       "        \n"
+                + "        \n"
+                + "        \n"
+                + "        \n"
+                + "        \n"
+                + "        \n"
+                + " _______\n";
+
+           _1:     "        \n"
+                + "|       \n"
+                + "|       \n"
+                + "|       \n"
+                + "|       \n"
+                + "|       \n"
+                + "|       \n"
+                + "|_______\n";
+
+           _2:     " ____   \n"
+                + "|       \n"  
+                + "|       \n"
+                + "|       \n"
+                + "|       \n"
+                + "|       \n"
+                + "|       \n"
+                + "|_______\n";
+
+           _3:     " ____    \n"
+                + "|    |  \n"
+                + "|    |  \n"
+                + "|    O  \n"
+                + "|       \n"
+                + "|       \n"
+                + "|       \n"
+                + "|_______\n";
+                 
+           _4:     " ____    \n"
+                + "|    |  \n"
+                + "|    |  \n"
+                + "|    O  \n"
+                + "|   /|\\ \n"
+                + "|    |  \n"
+                + "|       \n"
+                + "|_______\n";
+
+           _5:     " ____    \n"
+                + "|    |  \n"
+                + "|    |  \n"
+                + "|    O  \n"
+                + "|   /|\\ \n"
+                + "|    |  \n"
+                + "|   / \\ \n"
+                + "|_______\n";
+        };
+        
+        nGuesses: 0;
+                
+        guessesString: "";
+        guesses: {};
+       
+    };
+    
+    this.word = word;
+    this.wordSize = wordSize;
+    
+    return this;
+};
+
+word = {
+    _0: {
+        found: false;
+        letter: "h";
+    };
+    
+    _1: {
+        found: false;
+        letter: "e";
+    };
+    
+    _2: {
+        found: false;
+        letter: "l";
+    };
+    
+    _3: {
+        found: false;
+        letter: "l";
+    };
+    
+    _4: {
+        found: false;
+        letter: "o";
+    };
+};
+
+hangman = Hangman(word, 5);
+running = true;
+hangman.printWord(1, 0);
+while(running) { 
+    print("Enter a guess letter: ");
+    guess = input();
+    print("");
+    result = hangman.guess(guess);
+    if(result == false | result == true) {
+        running = false;
+    }
+}

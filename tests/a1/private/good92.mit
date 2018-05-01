@@ -1,0 +1,11 @@
+manycars = fun(n ){
+  carmap = {n:n;};
+  print("gets here");
+  print(carmap);
+  n = n - 1;
+  print(n);
+};
+
+cars = manycars(10);
+
+print("hello");

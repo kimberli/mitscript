@@ -1,0 +1,3 @@
+b = 6;
+fun = 7;
+print(b + fun);

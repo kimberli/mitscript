@@ -1,0 +1,16 @@
+i = 0;
+j = 0;
+
+f = fun(x, y) {
+  g = fun(z) {
+    global j;
+    j = x + z;
+    return 2*j;
+  };
+  return g(4) + y;
+};
+
+while (i < 1000) {
+  print(f(i, i));
+  i = i + 1;
+}

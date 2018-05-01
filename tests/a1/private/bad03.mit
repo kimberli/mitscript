@@ -1,0 +1,3 @@
+x = fun(){
+	return 2
+};

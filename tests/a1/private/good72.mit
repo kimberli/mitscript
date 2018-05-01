@@ -1,0 +1,11 @@
+rec = {
+    x: 5;
+    y: 10;
+};
+
+i = 10000;
+while(i > 0){
+    rec.x = rec.y;
+    rec.y = rec.x - rec.y + i;
+    i = i - 1;
+}

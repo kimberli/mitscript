@@ -1,0 +1,7 @@
+x = 8;
+y = fun() {
+  print(x);
+  print(y);
+  print(z);
+};
+y();

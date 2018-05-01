@@ -1,0 +1,49 @@
+//Benchmark mirrored from https://www.hboehm.info/gc/gc_bench.html
+
+kLongLivedTreeDepth  = 16;  // about 4Mb
+
+
+Node = fun() {
+	this = {
+		left: None;
+		right: None;
+		setLeft: fun(leftNode){
+			this.left = leftNode;
+		};
+		setRight: fun(rightNode){
+			this.right = rightNode;
+		};
+		getLeft: fun(){
+			return this.left;
+		};
+		getRight: fun(){
+			return this.right;
+		};
+	};
+	return this;
+};
+
+
+populate = fun(depth, node){
+	if (depth <= 0) {
+		return None;
+	} else {
+		depth = depth - 1;
+		newLeft = Node();
+		newRight = Node();
+
+		node.setLeft(newLeft);
+		node.setRight(newRight);
+
+		populate(depth, node.getLeft());
+		populate(depth, node.getRight());
+	}
+};
+
+
+print("Garbage collector bench1.mit");
+
+print("Creating a long-lived binary tree of depth " + kLongLivedTreeDepth);
+root = Node();
+populate(kLongLivedTreeDepth, root);
+

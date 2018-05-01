@@ -1,0 +1,23 @@
+f = fun(rec) {
+    rec = {};
+    rec.x = "jdaskjkldsfjklasjdklfjaskldfjkajf;ljdskljf;lajsdl;fjal;ksdjfkajsdlk;fjlaksdjfklajsdfljaslk;djadkjf";
+    rec.y = rec.x;
+    rec.nums = {};
+    i = 100;
+    while(i > 0) {
+        rec.nums["_jsdvksdfhajksfhjkashfjkashlfjafddshjklfasdljkfsdjkfhalk" + i] = {
+                                x: rec.x; 
+                                y: rec.y;
+                            };
+        i = i - 1;
+        print("inner: " + i);
+    }
+    return rec;
+};
+
+i = 5000;
+rec = {};
+while(i > 0) {
+    rec = f(rec);
+    i = i - 1;
+}

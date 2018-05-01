@@ -1,0 +1,12 @@
+calls = 0;
+hi = fun(x, y) {
+    global calls;
+    out = x + calls;
+    print(out);
+    calls = calls + 1;
+    return(out);
+    print("lol");
+    return(1/0);
+};
+
+hi(hi(hi("5", 1), hi("6", 1)), "3");

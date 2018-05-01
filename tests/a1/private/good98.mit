@@ -1,0 +1,9 @@
+x = fun() {
+  if (true) {
+    x = 2;
+  } else {
+    return 1;
+  }
+};
+
+print(x());

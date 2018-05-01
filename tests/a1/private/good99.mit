@@ -1,0 +1,81 @@
+Array = fun() {
+  this = {
+    length: 0;
+    append: fun(item) {
+      this[this.length] = item;
+      this.length = this.length + 1;
+    };
+    string: fun() {
+        i = 0;
+        x = "[";
+        while (i < this.length) {
+            x = x + this[i];
+            if (!(i == this.length - 1)) {
+                x = x + ", ";
+            }
+            i = i + 1;
+        }
+        return x + "]";
+    };
+    splice: fun(start, stop) {
+        result = Array();
+        while (start < stop) {
+            result.append(this[start]);
+            start = start + 1;
+        }
+        return result;
+    };
+  };
+  return this;
+};
+
+mergesort = fun(arr) {
+    if (arr.length < 2) {
+        return arr;
+    }
+    first_half = mergesort(arr.splice(0, arr.length/2));
+    second_half = mergesort(arr.splice(arr.length/2, arr.length));
+    result = Array();
+    first_i = 0;
+    second_i = 0;
+    while (first_i < first_half.length & second_i < second_half.length) {
+        if (first_half[first_i] < second_half[second_i]) {
+            result.append(first_half[first_i]);
+            first_i = first_i + 1;
+        } else {
+            result.append(second_half[second_i]);
+            second_i = second_i + 1;
+        }
+    }
+    while (first_i < first_half.length) {
+        result.append(first_half[first_i]);
+        first_i = first_i + 1;
+    }
+    while (second_i < second_half.length) {
+        result.append(second_half[second_i]);
+        second_i = second_i + 1;
+    }
+    return result;
+};
+
+unsorted = Array();
+unsorted.append(5);
+unsorted.append(59);
+unsorted.append(-1);
+unsorted.append(3);
+unsorted.append(2);
+unsorted.append(5);
+unsorted.append(30);
+unsorted.append(1);
+
+N = 500;
+while (N > 0) {
+  unsorted.append(N);
+  N = N - 1;
+}
+
+print("Unsorted array");
+print(unsorted.string());
+sorted = mergesort(unsorted);
+print("Sorted array");
+print(sorted.string());

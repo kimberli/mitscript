@@ -1,0 +1,5 @@
+x = fun(y, w) 
+  return y + w
+};
+
+z = x(3 2);

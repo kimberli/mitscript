@@ -1,0 +1,38 @@
+thingsILike = {
+	eating : 4;
+	doinghw: -1;
+	drawing:4;
+	wo: fun() {
+		return 5;
+	};
+};
+
+print(thingsILike.wo());
+
+
+thingsILike.wo = fun(x) {
+	return x + "hey";
+};
+print(thingsILike.wo("sup"));
+
+str = "wo";
+thingsILike[str] = fun(x) {
+	return x;
+};
+print(thingsILike.wo(None));
+print(thingsILike[str](None));
+print(thingsILike[str](thingsILike.wo(None)));
+
+thingsILike.wo = {};
+print(thingsILike.wo);
+
+cat = thingsILike.wo;
+if(cat == thingsILike.wo) {
+	print("they equal");
+} else{
+	
+}
+
+thingsILike.wo = 5;
+print(thingsILike.wo);
+

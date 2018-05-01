@@ -1,0 +1,122 @@
+List = fun(){ this = {head:None;
+        len: fun(){ if(this.head == None){ return 0; }else{ return this.head.len; }};
+        plus: fun(v){ this.head = {len:this.len()+1 ; car:v; cdr:this.head;}; };
+
+        print: fun(){
+                t = this.head;
+                s = "";
+                while(!(t == None)){
+                        s = s + (t.car)+ ", ";
+                        t = t.cdr;
+                }
+                print(s);
+        };
+        forall: fun(f){ t = this.head;
+                while(!(t == None)){
+                        f(t.car);
+                        t = t.cdr;
+                }
+        };
+        clone: fun(){
+              rv = List();
+                clone = fun(n){
+      if(n == None){
+      return None;
+      }else{
+      return {len:n.len; car:n.car; cdr:clone(n.cdr);};
+      }
+                } ;
+                rv.head = clone(this.head);
+                return rv;
+        };
+};
+return this;
+ };
+
+
+modN = fun(lst, N){
+  rv = List();
+
+  lst.forall(fun(n){
+     while(n >= N){ n = n - N; }
+     rv.plus(n);
+   });
+   return rv;
+};
+
+pair = fun(l1, l2){
+   while(l1.len() > l2.len()){
+  l2.plus(0);
+   }
+   while(l2.len() > l1.len()){
+  l1.plus(0);
+   }
+   state = {node:l1.head;};
+   rv = List();
+   l2.forall(
+     fun(v){
+       rv.plus({v1:v; v2:state.node.car;});
+       state.node = state.node.cdr;
+     }
+   );
+   return rv;
+};
+
+plus = fun( a, b, N){
+  temp = pair(a, b);
+  state = {carry:0;};
+  rv = List();
+  temp.forall(
+    fun(pair){
+  v = pair.v1 + pair.v2 + state.carry;
+        state.carry = 0;
+        while(v >= N){ v = v - N; state.carry = state.carry + 1; }
+        rv.plus(v);
+    }
+  );
+  if(!(state.carry == 0)){
+     rv.plus(state.carry);
+  }
+  return rv;
+};
+
+
+mult = fun(a, smallb, N){
+   i=0;
+   v = List();
+   v.plus(0);
+   while(i < smallb){
+       v = plus(v, a, N);
+      i = i + 1;
+   }
+   return v;
+};
+
+
+N = 10;
+l = List();
+i=0;
+l.plus(5);
+l.plus(15);
+l.plus(6);
+BASE = 10;
+print("After read");
+l = modN(l, BASE);
+print("After Mod");
+l.print();
+l2 = plus(l, l, BASE);
+print("After plus");
+l4 = plus(l2, l2, BASE);
+l.print();
+l2.print();
+l4.print();
+
+i=0;
+while(i < 60){
+  print(" x " + i);
+  l5 = mult(l4, i, BASE);
+  l5.print();
+  i = i + 1;
+}
+
+

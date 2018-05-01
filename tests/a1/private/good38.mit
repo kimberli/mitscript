@@ -1,0 +1,52 @@
+kArraySize  = 500000;  // about 4Mb
+
+Array = fun(size){
+  this = {
+	put: fun(idx, val){
+            if( idx < size){
+		this[idx] = val;
+	    }else{
+		print("Index " + idx + " out of bounds ");
+            }
+	};
+	get: fun(idx){
+	    if( idx < size){
+		return this[idx];
+            }else{
+                print("Index " + idx + " out of bounds ");
+            }
+	};	
+	getSize: fun(){
+	    return size;
+	};
+	print: fun(){
+	    i = 0;
+	    out = "";
+	    while(i<size){
+		out = out + this.get(i) + " ";
+		i = i + 1;
+            }
+	    print("[" + out + "]");
+	};
+
+  };
+  return this;
+};
+
+
+fillArray = fun(arr){
+	i = 0;
+	while (i < arr.getSize()){
+		arr.put(i, "hi");
+		i = i+1;
+	}
+};
+
+
+print("Garbage collector bench3.mit");
+
+// Create long-lived array
+print(" Creating a long-lived array of "
+	+ kArraySize);
+arr = Array(kArraySize);
+fillArray(arr);

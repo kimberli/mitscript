@@ -1,0 +1,36 @@
+_print = print;
+print = fun(s) {
+    _print("Otherprint: " + s);
+};
+
+depth = 0;
+
+add_depth = fun() {
+    global print;
+    global depth;
+    d = depth + "";
+    oldprint = print;
+    print = fun(s) {
+        oldprint(intcast(d) + ": " + s);
+    };
+    depth = depth + 1;
+};
+
+_print("Should print: Otherprint: hello");
+print("hello");
+
+add_depth();
+add_depth();
+add_depth();
+add_depth();
+_print("Should print: Otherprint: 0: 1: 2: 3: hello");
+print("hello");
+
+_print("Should print: <newline>");
+_print("\n");
+
+_print("Should print: \\");
+_print("\\");
+
+_print("Should print: \\\"\\\"\\\"");
+_print("\\\"\\\"\\\"");

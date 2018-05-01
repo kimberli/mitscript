@@ -1,0 +1,35 @@
+x = (5 == "5");
+if (x) {
+    print("x is true");
+} else {
+    print("x is false");
+}
+print(5 == intcast("5"));
+
+if (!x) {
+    print("x is still false");
+}
+
+while (x) {
+    print("Loop!");
+}
+
+i = 0;
+while (!x) {
+    print("Loop " + i);
+    x = i >= 5;
+    i = i + 1;
+}
+
+arr = {};
+i = 0;
+while (i < 4) {
+    arr[i] = "value " + i;
+    i = i + 1;
+}
+print(arr);
+arr["1"] = "foo";
+print(arr);
+print(arr.cat);
+print(arr[2]);
+print(arr[5]);

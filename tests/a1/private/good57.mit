@@ -1,0 +1,4 @@
+x = 1;
+print("calling x");
+x();
+print("called x");

@@ -1,0 +1,17 @@
+iterations = 50;
+
+i = 0;
+
+while (i < iterations) {
+    map_key_size = 20000;
+    large_map = {};
+
+    j = 0;
+    key = "";
+    while (j < map_key_size) { key = key + "x"; j = j + 1; }
+
+    large_map[key] = large_map;
+    large_map[key + key] = large_map;
+    large_map[key + key + key + key] = large_map;
+    i = i + 1;
+}

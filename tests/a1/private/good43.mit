@@ -1,0 +1,35 @@
+x = 5;
+foo = fun(a, s, df) {
+    print(a);
+    print(s);
+    print(df);
+    print(x);
+    x = 3;
+    print(x);
+    foo2 = fun() {
+        print(x);
+        foo3 = fun(x) {
+            print(x);
+            foo4 = fun() {
+                print(x);
+                x = 9;
+                while (false) {
+                    global x;
+                }
+                foo5 = fun() {
+                    print(x + 1);
+                    if (false) {
+                        foo6 = fun() {};
+                    }
+                    return foo6;
+                };
+                return foo5;
+            };
+            return foo4;
+        };
+        return foo3;
+    };
+    x = 4;
+    return foo2;
+};
+a = foo;

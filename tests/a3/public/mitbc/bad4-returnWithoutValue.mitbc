@@ -1,0 +1,55 @@
+function
+{
+  functions =
+  [
+    function
+    {
+      functions = [],
+      constants = [],
+      parameter_count = 1,
+      local_vars = [],
+      local_ref_vars = [],
+      free_vars = [],
+      names = [],
+      instructions =
+      [
+      ]
+    },
+    function
+    {
+      functions = [],
+      constants = [],
+      parameter_count = 0,
+      local_vars = [],
+      local_ref_vars = [],
+      free_vars = [],
+      names = [],
+      instructions =
+      [
+      ]
+    },
+    function
+    {
+      functions = [],
+      constants = [],
+      parameter_count = 1,
+      local_vars = [],
+      local_ref_vars = [],
+      free_vars = [],
+      names = [],
+      instructions =
+      [
+      ]
+    }
+  ],
+  constants = [],
+  parameter_count = 0,
+  local_vars = [],
+  local_ref_vars = [],
+  free_vars = [],
+  names = [print, input, intcast],
+  instructions =
+  [
+    return
+  ]
+}

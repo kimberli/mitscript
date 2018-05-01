@@ -1,0 +1,4 @@
+x = "foo";
+print("setting beginning of x");
+x[0] = 4;
+print("beginning is now " + x[0]);

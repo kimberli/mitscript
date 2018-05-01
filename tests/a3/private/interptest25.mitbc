@@ -1,0 +1,518 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [0, 1, None],
+			parameter_count = 2,
+			local_vars = [c, f, i, n],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [n],
+			instructions = 
+			[
+				load_local	0
+				field_load	0
+				store_local	3
+				load_const	0
+				store_local	2
+				0:
+				gc
+				load_local	3
+				load_local	2
+				gt
+				if	1
+				goto	2
+				1:
+				load_local	0
+				load_local	2
+				index_load
+				load_local	1
+				call	1
+				pop
+				gc
+				load_local	2
+				load_const	1
+				add
+				store_local	2
+				goto	0
+				2:
+				load_const	2
+				return
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [1, "Error", 0, 2, None],
+			parameter_count = 3,
+			local_vars = [c, m, r, i, n, res],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [n],
+			instructions = 
+			[
+				load_local	0
+				field_load	0
+				store_local	4
+				load_const	0
+				load_local	4
+				geq
+				if	3
+				goto	4
+				3:
+				load_const	1
+				return
+				goto	5
+				4:
+				5:
+				load_local	0
+				load_const	2
+				index_load
+				load_local	1
+				call	1
+				load_local	0
+				load_const	0
+				index_load
+				load_local	1
+				call	1
+				load_local	2
+				call	2
+				store_local	5
+				load_const	3
+				store_local	3
+				6:
+				gc
+				load_local	4
+				load_local	3
+				gt
+				if	7
+				goto	8
+				7:
+				load_local	5
+				load_local	0
+				load_local	3
+				index_load
+				load_local	1
+				call	1
+				load_local	2
+				call	2
+				store_local	5
+				load_local	3
+				load_const	0
+				add
+				store_local	3
+				goto	6
+				8:
+				load_local	5
+				return
+				load_const	4
+				return
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [0, None],
+			parameter_count = 2,
+			local_vars = [x, y],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [x, y, vx, vy],
+			instructions = 
+			[
+				alloc_record
+				dup
+				load_local	0
+				field_store	0
+				dup
+				load_local	1
+				field_store	1
+				dup
+				load_const	0
+				field_store	2
+				dup
+				load_const	0
+				field_store	3
+				return
+				load_const	1
+				return
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [0, 1, 10, 2, None],
+			parameter_count = 2,
+			local_vars = [n, xbnd, c, carmap, vx, vy, x, y],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [Car, n, vx, vy],
+			instructions = 
+			[
+				alloc_record
+				dup
+				load_local	0
+				field_store	1
+				store_local	3
+				load_const	0
+				store_local	6
+				load_const	0
+				store_local	7
+				load_const	0
+				store_local	4
+				load_const	0
+				store_local	5
+				load_local	0
+				load_const	1
+				sub
+				store_local	0
+				9:
+				gc
+				load_local	0
+				load_const	0
+				geq
+				if	10
+				goto	11
+				10:
+				load_local	6
+				load_local	7
+				load_global	0
+				call	2
+				store_local	2
+				load_local	2
+				load_local	3
+				swap
+				load_local	0
+				swap
+				index_store
+				load_local	6
+				load_const	2
+				add
+				store_local	6
+				load_local	6
+				load_local	1
+				gt
+				if	12
+				goto	13
+				12:
+				load_const	0
+				store_local	6
+				load_local	7
+				load_const	2
+				add
+				store_local	7
+				goto	14
+				13:
+				14:
+				load_local	4
+				load_local	2
+				swap
+				field_store	2
+				load_local	5
+				load_local	2
+				swap
+				field_store	3
+				load_local	0
+				load_const	1
+				sub
+				store_local	0
+				load_local	4
+				load_const	1
+				add
+				store_local	4
+				load_local	4
+				load_const	3
+				gt
+				if	15
+				goto	16
+				15:
+				load_const	0
+				store_local	4
+				load_local	5
+				load_const	1
+				add
+				store_local	5
+				goto	17
+				16:
+				17:
+				load_local	5
+				load_const	3
+				gt
+				if	18
+				goto	19
+				18:
+				load_const	0
+				store_local	5
+				goto	20
+				19:
+				20:
+				goto	9
+				11:
+				load_local	3
+				return
+				load_const	4
+				return
+			]
+		},
+		function
+		{
+			functions =
+			[
+				function
+				{
+					functions =
+					[
+						function
+						{
+							functions = [],
+							constants = [None],
+							parameter_count = 2,
+							local_vars = [c1, c2],
+							local_ref_vars = [],
+							free_vars = [],
+							names = [x, y],
+							instructions = 
+							[
+								load_local	0
+								field_load	0
+								load_local	1
+								field_load	0
+								eq
+								load_local	0
+								field_load	1
+								load_local	1
+								field_load	1
+								eq
+								and
+								return
+								load_const	0
+								return
+							]
+						},
+						function
+						{
+							functions = [],
+							constants = [None],
+							parameter_count = 1,
+							local_vars = [c],
+							local_ref_vars = [],
+							free_vars = [car, checkColision],
+							names = [],
+							instructions = 
+							[
+								load_ref	0
+								load_local	0
+								load_ref	1
+								call	2
+								return
+								load_const	0
+								return
+							]
+						},
+						function
+						{
+							functions = [],
+							constants = [None],
+							parameter_count = 2,
+							local_vars = [a, b],
+							local_ref_vars = [],
+							free_vars = [],
+							names = [],
+							instructions = 
+							[
+								load_local	0
+								load_local	1
+								and
+								return
+								load_const	0
+								return
+							]
+						}
+					],
+					constants = [None],
+					parameter_count = 1,
+					local_vars = [car, checkColision, colided],
+					local_ref_vars = [car, checkColision],
+					free_vars = [carmap],
+					names = [mapreduce, x, vx, y, vy],
+					instructions = 
+					[
+						load_func	0
+						alloc_closure	0
+						store_ref	1
+						load_ref	0
+						field_load	1
+						load_ref	0
+						field_load	2
+						add
+						load_ref	0
+						swap
+						field_store	1
+						load_ref	0
+						field_load	3
+						load_ref	0
+						field_load	4
+						add
+						load_ref	0
+						swap
+						field_store	3
+						load_ref	2
+						push_ref	1
+						push_ref	0
+						load_func	1
+						alloc_closure	2
+						load_func	2
+						alloc_closure	0
+						load_global	0
+						call	3
+						store_local	2
+						load_local	2
+						if	21
+						goto	22
+						21:
+						load_ref	0
+						field_load	1
+						load_ref	0
+						field_load	2
+						sub
+						load_ref	0
+						swap
+						field_store	1
+						load_ref	0
+						field_load	3
+						load_ref	0
+						field_load	4
+						sub
+						load_ref	0
+						swap
+						field_store	3
+						load_ref	0
+						field_load	2
+						neg
+						load_ref	0
+						swap
+						field_store	2
+						load_ref	0
+						field_load	4
+						neg
+						load_ref	0
+						swap
+						field_store	4
+						goto	23
+						22:
+						23:
+						load_const	0
+						return
+					]
+				}
+			],
+			constants = [None],
+			parameter_count = 1,
+			local_vars = [carmap, f],
+			local_ref_vars = [carmap],
+			free_vars = [],
+			names = [forall],
+			instructions = 
+			[
+				push_ref	0
+				load_func	0
+				alloc_closure	1
+				store_local	1
+				load_ref	0
+				load_local	1
+				load_global	0
+				call	2
+				pop
+				gc
+				load_const	0
+				return
+			]
+		}
+	],
+	constants = [50, 20, "Before sim", 100, "During sim 
+", 0, 1, "In the end 
+"],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [print, input, intcast, Ncars, Nsteps, forall, mapreduce, Car, manycars, step, cars, i],
+	instructions = 
+	[
+		load_func	-1
+		store_global	0
+		load_func	-2
+		store_global	1
+		load_func	-3
+		store_global	2
+		load_const	0
+		store_global	3
+		load_const	1
+		store_global	4
+		load_func	0
+		alloc_closure	0
+		store_global	5
+		load_func	1
+		alloc_closure	0
+		store_global	6
+		load_func	2
+		alloc_closure	0
+		store_global	7
+		load_func	3
+		alloc_closure	0
+		store_global	8
+		load_func	4
+		alloc_closure	0
+		store_global	9
+		load_const	2
+		load_global	0
+		call	1
+		pop
+		gc
+		load_global	3
+		load_const	3
+		load_global	8
+		call	2
+		store_global	10
+		load_const	4
+		load_global	10
+		add
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	5
+		store_global	11
+		24:
+		gc
+		load_global	4
+		load_global	11
+		gt
+		if	25
+		goto	26
+		25:
+		load_global	10
+		load_global	9
+		call	1
+		pop
+		gc
+		load_global	11
+		load_const	6
+		add
+		store_global	11
+		goto	24
+		26:
+		load_const	7
+		load_global	10
+		add
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	5
+		return
+	]
+}

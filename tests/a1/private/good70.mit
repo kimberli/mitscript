@@ -1,0 +1,41 @@
+Array = fun() {
+    this = {
+        get: fun(index) {
+            return this.array["_" + index];
+        };
+        
+        set: fun(index, value) {
+            this.array["_" + index] = value;
+            if(index > this.arraySize - 1) {
+                this.arraySize = index + 1; 
+            }
+        };
+        
+        append: fun(value) {
+            this.array["_" + this.arraySize] = value;
+            this.arraySize = this.arraySize + 1;
+        };
+        
+        size: fun() {
+            return this.arraySize;
+        };
+        
+        array: {};
+        arraySize: 0;
+    };
+    
+    return this;
+};
+
+i = 160;
+while(i >= 0) {
+    myArray = Array();
+    j = 100;
+    while(j >= 0) {
+        arraySize = myArray.size();
+        myArray.append(arraySize);
+        j = j - 1;
+    }
+    print("i: " + i);
+    i = i - 1;
+}

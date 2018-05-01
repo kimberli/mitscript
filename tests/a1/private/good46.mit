@@ -1,0 +1,15 @@
+f = fun() {
+	i = { v: 5000; };
+
+	sum = 0;
+	while(i.v > 0) {
+		g = fun(x) {
+			i.v = i.v - x;
+		};
+		g(2);
+		sum = sum + i.v;
+	}
+	return sum;
+};
+
+print(f());

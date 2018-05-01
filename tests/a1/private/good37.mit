@@ -1,0 +1,10 @@
+i = 100000;
+
+while(i > 0){
+  x = {v:i;};
+  y = {t:x;};
+  x.t = y;
+  i = i - 1;
+}
+print("Garbage collector bench2.mit");
+print(x.v);

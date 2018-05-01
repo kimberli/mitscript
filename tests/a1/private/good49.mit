@@ -1,0 +1,31 @@
+
+
+Ncars = 10;
+Nsteps = 500;
+
+
+
+forall = fun(c, f){
+   print("in for all");
+   n = c.n;
+   i=0;
+   while(i<n){
+      f(c[i]);
+      i = i + 1;
+   }
+};
+
+mapreduce = fun(c, m, r){
+   print("map reduce");
+   n = c.n;
+   if(n <= 1){
+       return "error";
+   }
+   res = r(m(c[0]), m(c[1]));
+   i = 2;
+   while(i<n){
+      res = r(res, m(c[i]));
+      i = i + 1;
+   }
+   return res;
+};

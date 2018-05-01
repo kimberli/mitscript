@@ -1,0 +1,86 @@
+kMinTreeDepth = 4;
+kMaxTreeDepth = 12;
+kNumIters = 1024;
+
+
+Node = fun() {
+	this = {
+		left: None;
+		right: None;
+		setLeft: fun(leftNode){
+			this.left = leftNode;
+		};
+		setRight: fun(rightNode){
+			this.right = rightNode;
+		};
+		getLeft: fun(){
+			return this.left;
+		};
+		getRight: fun(){
+			return this.right;
+		};
+	};
+	return this;
+};
+
+
+timeconstruction = fun(depth, iNumIters){
+	print("Creating " + iNumIters + " trees of depth " + depth);
+
+	i = 0;
+	while (i < iNumIters){
+		temproot = Node();
+		populate(depth, temproot);
+		temproot = None;
+		i = i + 1;
+	}
+	print("\tTop down construction");
+
+	i = 0;
+	while (i < iNumIters){
+		temproot = maketree(depth);
+		temproot = None;
+		i = i + 1;
+	}
+	print("\tBottom up construction");
+};
+
+
+populate = fun(depth, node){
+	if (depth <= 0) {
+		return None;
+	} else {
+		depth = depth - 1;
+		newLeft = Node();
+		newRight = Node();
+
+		node.setLeft(newLeft);
+		node.setRight(newRight);
+
+		populate(depth, node.getLeft());
+		populate(depth, node.getRight());
+	}
+};
+
+maketree = fun(depth){
+	if (depth <= 0) {
+		newNode = Node();
+		return newNode;
+	} else {
+		newNode = Node();
+		newNode.setLeft(maketree(depth-1));
+		newNode.setRight(maketree(depth-1));
+		return newNode;
+	}
+};
+
+
+print("Garbage collector bench4.mit");
+print("Starting timeconstruction tests...");
+d = kMinTreeDepth;
+numIters = kNumIters;
+while (d < kMaxTreeDepth){
+	timeconstruction(d, numIters);
+	d = d + 2;
+	numIters = numIters/4;
+}
