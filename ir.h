@@ -265,6 +265,11 @@ struct IrInstruction {
         op0(),
         global(),
         tempIndices(make_shared<TempList>(TempList{temp})) {};
+    IrInstruction(const IrOp op, TempListPtr tempIndices):
+        op(op),
+        op0(),
+        global(),
+        tempIndices(tempIndices) {};
     string getInfo() {
         string s;
         if (op0) {
