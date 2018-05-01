@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     int file_type = 0;
     int rvalue = 0;
     int maxmem = 10000;
-
+	bool shouldCallAsm = false;
     for (int i = 1; i < argc; ++i) {
         if (strcmp(argv[i], "-b") == 0) {
             file_type = BYTECODE;
@@ -53,8 +53,9 @@ int main(int argc, char** argv) {
                 return 1;
             }
             i++; // skip an arg
-        }
-        else {
+        } else if (strcmp(argv[i], "--opt=machine-code-only") == 0) { // TODO: add other opt flags
+			shouldCallAsm = true;
+		} else {
             infile = fopen(argv[i], "r");
             if (infile == NULL) {
                 cout << "Cannot open file " << argv[i] << endl;
@@ -96,9 +97,9 @@ int main(int argc, char** argv) {
             return 1;
         }
     }
-  
+
     try {
-        Interpreter* intp = new Interpreter(bc_output, maxmem);
+        Interpreter* intp = new Interpreter(bc_output, maxmem, shouldCallAsm);
         intp->run();
     } catch (InterpreterException& exception) {
         cout << exception.toString() << endl;

@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Interpreter::Interpreter(Function* mainFunc, int maxmem) {
+Interpreter::Interpreter(Function* mainFunc, int maxmem, bool callAsm) {
     // initialize the garbage collector
     // note that mainFunc is not included in the gc's allocated list because
     // we never have to deallocate it
@@ -34,6 +34,7 @@ Interpreter::Interpreter(Function* mainFunc, int maxmem) {
     globalFrame = frame;
     frames.push_back(frame);
     finished = false;
+    shouldCallAsm = callAsm;
 
     // set up native functions at the beginning of functions array
 	vector<Function*> functions_;
@@ -415,16 +416,16 @@ void Interpreter::executeStep() {
 void Interpreter::run() {
     // runs program until termination (early return, end of statements)
     if (shouldCallAsm) {
-        // create a closure objec to wrap the main function 
+        // create a closure objec to wrap the main function
         vector<ValWrapper*> emptyRefs;
         vector<Constant*> emptyArgs;
         Function* mainFunc = globalFrame->func;
         // TODO: this is not on the stack anywhere. it could get spontaneously
-        // garbage-collected. How do we handle this? 
+        // garbage-collected. How do we handle this?
         Closure* mainClosure = collector->allocate<Closure>(emptyRefs, mainFunc);
         callAsm(emptyArgs, mainClosure);
     } else {
-        // the global frame has already been created; you're ready to go 
+        // the global frame has already been created; you're ready to go
         while (!finished) {
             executeStep();
         }

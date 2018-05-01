@@ -25,18 +25,18 @@ private:
     list<Frame*> frames;  // stack of frames
     void executeStep();  // execute a single next instruction
     bool finished;  // true when the program has terminated
-    bool shouldCallAsm = true;
+    bool shouldCallAsm;
     int32_t labelCounter = 0;  // global label indexing for all generated asm
 public:
     CollectedHeap* collector;
-    Interpreter(Function* mainFunc, int maxmem);
+    Interpreter(Function* mainFunc, int maxmem, bool callAsm);
     void run();  // executes all instructions until termination
 
-    // handle different call methods for vm vs asm exeuction 
+    // handle different call methods for vm vs asm exeuction
     Value* call(vector<Constant*> argsList, Value* closure);
-    // handles calling from the vm 
+    // handles calling from the vm
     Value* callVM(vector<Constant*> argsList, Closure* clos);
-    // handles calling from asm 
+    // handles calling from asm
     Value* callAsm(vector<Constant*> argsList, Closure* clos);
 
     // asm helpers
