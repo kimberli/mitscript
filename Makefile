@@ -42,12 +42,12 @@ $(BC_PARSER)/bc-print: $(BC_PARSER)/print_main.cpp $(BC_PARSER_OBJS)
 
 # MITScript -> bytecode compiler
 bc-compiler: mitscriptc
-mitscriptc: $(MS_PARSER_OBJS) $(BC_COMPILER_OBJS) $(BC_COMPILER_HEADERS)
+mitscriptc: $(MS_PARSER_OBJS) $(BC_COMPILER_OBJS) $(BC_COMPILER_HEADERS) bc/compiler-main.cpp
 	$(CXX) $(CXXFLAGS) bc/compiler-main.cpp $(BC_COMPILER_OBJS) $(MS_PARSER_OBJS) -o $@
 
 # MITScript -> bytecode -> IR -> vm
 interpreter: mitscript
-mitscript: $(MS_PARSER_OBJS) $(BC_PARSER_OBJS) $(ROOT_FILES) $(VM_OBJS) $(VM_HEADERS)
+mitscript: $(MS_PARSER_OBJS) $(BC_PARSER_OBJS) $(ROOT_FILES) $(VM_OBJS) $(VM_HEADERS) vm/interpreter-main.cpp
 	$(CXX) $(CXXFLAGS) vm/interpreter-main.cpp $(VM_OBJS) $(BC_PARSER_OBJS) $(MS_PARSER_OBJS) -lstdc++ -L x64asm/lib -lx64asm -o $@
 	
 # reference interpreter (from a2)
