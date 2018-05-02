@@ -100,12 +100,12 @@ void IrCompiler::doBinaryArithmetic(IrOp operation, bool toBoolean) {
 
     // generate a list of operands for an arith operation
     tempptr_t result = getNewTemp(); 
-    TempListPtr operands = make_shared<TempList>(TempList{result, right, left});
+    TempListPtr operands = make_shared<TempList>(TempList{result, rightUnboxed, leftUnboxed});
     // perform the op 
     pushInstruction(make_shared<IrInstruction>(IrInstruction(operation, operands)));
     // cast back to the right type
     tempptr_t ret = getNewTemp();
-    pushInstruction(make_shared<IrInstruction>(IrInstruction(operation, ret, result)));
+    pushInstruction(make_shared<IrInstruction>(IrInstruction(castOp, ret, result)));
     pushTemp(ret);
     return;
 }
