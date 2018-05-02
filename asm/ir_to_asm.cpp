@@ -361,56 +361,138 @@ void IrInterpreter::executeStep() {
        case IrOp::AssertInteger:
             {
                 LOG(to_string(instructionIndex) + ": AssertInteger");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(0)
+                };
+                callHelper((void *) &(helper_assert_int), args, temps);
                 break;
             };
         case IrOp::AssertBoolean:
             {
                 LOG(to_string(instructionIndex) + ": AssertBool");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(0)
+                };
+                callHelper((void *) &(helper_assert_bool), args, temps);
                 break;
             };
         case IrOp::AssertString:
             {
                 LOG(to_string(instructionIndex) + ": AssertString");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(0)
+                };
+                callHelper((void *) &(helper_assert_str), args, temps);
                 break;
             };
         case IrOp::AssertRecord:
             {
                 LOG(to_string(instructionIndex) + ": AssertRecord");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(0)
+                };
+                callHelper((void *) &(helper_assert_record), args, temps);
                 break;
             };
         case IrOp::AssertFunction:
             {
                 LOG(to_string(instructionIndex) + ": AssertFunction");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(0)
+                };
+                callHelper((void *) &(helper_assert_func), args, temps);
                 break;
             };
         case IrOp::AssertClosure:
             {
                 LOG(to_string(instructionIndex) + ": AssertClosure");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(0)
+                };
+                callHelper((void *) &(helper_assert_closure), args, temps);
                 break;
             };
         case IrOp::UnboxInteger:
             {
                 LOG(to_string(instructionIndex) + ": UnboxInteger");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(1)
+                };
+                callHelper((void *) &(helper_unbox_int), args, temps);
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::UnboxBoolean:
             {
-                LOG(to_string(instructionIndex) + ": UnboxBool");
+                LOG(to_string(instructionIndex) + ": UnboxBoolean");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(1)
+                };
+                callHelper((void *) &(helper_unbox_bool), args, temps);
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::NewInteger:
             {
                 LOG(to_string(instructionIndex) + ": NewInteger");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(1)
+                };
+                callHelper((void *) &(helper_new_integer), args, temps);
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::NewBoolean:
             {
                 LOG(to_string(instructionIndex) + ": NewBoolean");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(1)
+                };
+                callHelper((void *) &(helper_new_boolean), args, temps);
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::CastString:
             {
                 LOG(to_string(instructionIndex) + ": CastString");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(1)
+                };
+                callHelper((void *) &(helper_cast_string), args, temps);
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::AddLabel:
