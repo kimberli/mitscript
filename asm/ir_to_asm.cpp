@@ -190,6 +190,10 @@ void IrInterpreter::executeStep() {
         case IrOp::AllocRecord:
             {
                 LOG(to_string(instructionIndex) + ": AllocRecord");
+                vector<x64asm::Imm64> args = {};
+                vector<tempptr_t> temps = {};
+                callHelper((void *) &(), args, temps);
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::FieldLoad:

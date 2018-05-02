@@ -15,9 +15,9 @@ Value* helper_add(Interpreter* interpreter, Value* left, Value* right) {
 }
 
 Value* helper_call(Interpreter* interpreter, Closure* closure) {
-    // this function needs to take in args and somehow put them in the right place. Maybe put them into a vector that could be used by the vm immediately or could be passed in the MachineCodeFunction from the example 
-    // this function takes the args from the assembly stack and puts them in a vector 
-    // and then 
+    // this function needs to take in args and somehow put them in the right place. Maybe put them into a vector that could be used by the vm immediately or could be passed in the MachineCodeFunction from the example
+    // this function takes the args from the assembly stack and puts them in a vector
+    // and then
     //
     //
     //
@@ -67,6 +67,10 @@ Integer* helper_new_integer(Interpreter* interpreter, int32_t val) {
 
 Boolean* helper_new_boolean(Interpreter* interpreter, bool val) {
     return interpreter->collector->allocate<Boolean>(val);
+}
+
+Record* helper_new_record(Interpreter* interpreter) {
+    return interpreter->collector->allocate<Record>();
 }
 
 String* helper_cast_string(Interpreter* interpreter, Value* val) {
