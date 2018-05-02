@@ -212,7 +212,7 @@ enum class IrOp {
     // op0: N/A
     // temp0: temp index of value to check
     // Result: throws RuntimeError if the temp is not a bool
-    AssertBool,
+    AssertBoolean,
 
     // Description: asserts that a temp is a string
     // op0: N/A
@@ -250,7 +250,7 @@ enum class IrOp {
     // temp0: temp index where bool will be stored
     // temp1: temp index of the value to unbox; must be a Boolean object
     // Result: stores bool(temp1) in temp0
-    UnboxBool,
+    UnboxBoolean,
     
     // Description: takes a raw int and creates an Integer object
     // temp0: temp to hold the new Integer object

@@ -44,8 +44,8 @@ void IrCompiler::doUnaryArithmetic(IrOp operation, bool toBoolean) {
     IrOp unboxOp;
     IrOp castOp;
     if (toBoolean) {
-        assertOp = IrOp::AssertBool;
-        unboxOp = IrOp::UnboxBool;
+        assertOp = IrOp::AssertBoolean;
+        unboxOp = IrOp::UnboxBoolean;
         castOp = IrOp::NewBoolean;
     } else {
         assertOp = IrOp::AssertInteger;
@@ -74,8 +74,8 @@ void IrCompiler::doBinaryArithmetic(IrOp operation, bool toBoolean) {
     IrOp unboxOp;
     IrOp castOp;
     if (toBoolean) {
-        assertOp = IrOp::AssertBool;
-        unboxOp = IrOp::UnboxBool;
+        assertOp = IrOp::AssertBoolean;
+        unboxOp = IrOp::UnboxBoolean;
         castOp = IrOp::NewBoolean;
     } else {
         assertOp = IrOp::AssertInteger;

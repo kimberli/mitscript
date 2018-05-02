@@ -358,7 +358,7 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": AssertInteger");
                 break;
             };
-        case IrOp::AssertBool:
+        case IrOp::AssertBoolean:
             {
                 LOG(to_string(instructionIndex) + ": AssertBool");
                 break;
@@ -383,14 +383,24 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": AssertClosure");
                 break;
             };
-        case IrOp::CastInteger:
+        case IrOp::UnboxInteger:
             {
-                LOG(to_string(instructionIndex) + ": CastInteger");
+                LOG(to_string(instructionIndex) + ": UnboxInteger");
                 break;
             };
-        case IrOp::CastBool:
+        case IrOp::UnboxBoolean:
             {
-                LOG(to_string(instructionIndex) + ": CastBool");
+                LOG(to_string(instructionIndex) + ": UnboxBool");
+                break;
+            };
+        case IrOp::NewInteger:
+            {
+                LOG(to_string(instructionIndex) + ": NewInteger");
+                break;
+            };
+        case IrOp::NewBoolean:
+            {
+                LOG(to_string(instructionIndex) + ": NewBoolean");
                 break;
             };
         case IrOp::CastString:
