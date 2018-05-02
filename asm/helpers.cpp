@@ -52,3 +52,23 @@ void helper_assert_func(Value* v) {
 void helper_assert_closure(Value* v) {
     v->cast<Closure>();
 }
+
+int32_t helper_unbox_int(Integer* v) {
+    return v->value;
+}
+
+bool helper_unbox_bool(Boolean* b) {
+    return b->value;
+}
+
+Integer* helper_new_integer(Interpreter* interpreter, int32_t val) {
+    return interpreter->collector->allocate<Integer>(val);
+}
+
+Boolean* helper_new_boolean(Interpreter* interpreter, bool val) {
+    return interpreter->collector->allocate<Boolean>(val);
+}
+
+String* helper_cast_string(Interpreter* interpreter, Value* val) {
+    return interpreter->collector->allocate<String>(val->toString());
+}
