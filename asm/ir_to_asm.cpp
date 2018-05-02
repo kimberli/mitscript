@@ -192,7 +192,7 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": AllocRecord");
                 vector<x64asm::Imm64> args = {};
                 vector<tempptr_t> temps = {};
-                callHelper((void *) &(), args, temps);
+                callHelper((void *) &(helper_new_record), args, temps);
                 storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             };
