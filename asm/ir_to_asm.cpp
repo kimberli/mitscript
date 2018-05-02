@@ -35,9 +35,11 @@ x64asm::Function IrInterpreter::run() {
     //asmFunc.call<Value*>();
 }
 
-void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args) {
-    // handles up to 6 helper args; should be enough
-    // args should contain pointers to objects
+void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps) {
+    // args + temps are put in that order as arguments for the function to call
+    // on the stack
+    // args should contain pointers to values or immediate numbers
+    // temps are pointers to Temps which store stack offsets
     int max = args.size() < 6? args.size() : 6;
     for (int i = 0; i < max; ++i) {
         assm.mov(argRegs[i], args[i]);
@@ -120,7 +122,8 @@ void IrInterpreter::executeStep() {
                     x64asm::Imm64{vmPointer},
                     x64asm::Imm64{name},
                 };
-                callHelper((void *) &(helper_load_global), args);
+                vector<tempptr_t> temps;
+                callHelper((void *) &(helper_load_global), args, temps);
 
                 // put the return val in the temp
                 storeTemp(x64asm::rax, inst->tempIndices->at(0));
@@ -147,8 +150,8 @@ void IrInterpreter::executeStep() {
                     x64asm::Imm64{vmPointer},
                     x64asm::Imm64{name},
                 };
-                loadTemp(argRegs[2], inst->tempIndices->at(0));
-                callHelper((void *) &(helper_store_global), args);
+                vector<tempptr_t> temps = {inst->tempIndices->at(0)};
+                callHelper((void *) &(helper_store_global), args, temps);
 
                 break;
             }
@@ -199,9 +202,11 @@ void IrInterpreter::executeStep() {
                 vector<x64asm::Imm64> args = {
                     x64asm::Imm64{vmPointer},
                 };
-                loadTemp(argRegs[1], inst->tempIndices->at(2));
-                loadTemp(argRegs[2], inst->tempIndices->at(1));
-                callHelper((void *) &(helper_add), args);
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(2),
+                    inst->tempIndices->at(1)
+                };
+                callHelper((void *) &(helper_add), args, temps);
                 // put the return val in the temp
                 storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;

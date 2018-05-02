@@ -23,7 +23,7 @@ private:
     int instructionIndex;
     bool finished;
 
-    void callHelper(void* fn, vector<x64asm::Imm64> args);
+    void callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temp);
 
     void executeStep();
     void getRbpOffset(uint64_t offset);
