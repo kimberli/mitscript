@@ -1,0 +1,34 @@
+Rect = fun(x, y, a, b){
+this = {
+  x:x;
+  y:y;
+  a:a;
+  b:b;
+  print: fun(){
+    print("Rect(" + this.x + ", " + this.y + ")");
+  };
+};
+return this;
+};
+
+p = Rect(5,5,4,1);
+p.print();
+print(p);
+
+mega_nested = {
+    still_nested: {
+        yep: {
+            still: {
+                nested: {
+                    herp: {
+                        derp: None;
+                    };
+                };
+            };
+        };
+    };
+};
+
+mega_nested.still_nested["yep"].still["nes" + "ted"].herp.derp = mega_nested;
+
+print(mega_nested.still_nested.yep.still.nested.herp.derp == mega_nested);

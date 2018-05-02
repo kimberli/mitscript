@@ -1,0 +1,67 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = ["OUTPUT: ", None],
+			parameter_count = 1,
+			local_vars = [s],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [oldprint],
+			instructions = 
+			[
+				load_const	0
+				load_local	0
+				add
+				load_global	0
+				call	1
+				pop
+				gc
+				load_const	1
+				return
+			]
+		}
+	],
+	constants = ["Hello", 7, 0],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [print, input, intcast, oldprint],
+	instructions = 
+	[
+		load_func	-1
+		store_global	0
+		load_func	-2
+		store_global	1
+		load_func	-3
+		store_global	2
+		load_const	0
+		load_global	0
+		call	1
+		pop
+		gc
+		load_global	0
+		store_global	3
+		load_func	0
+		alloc_closure	0
+		store_global	0
+		load_const	0
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	1
+		load_const	2
+		div
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	2
+		return
+	]
+}

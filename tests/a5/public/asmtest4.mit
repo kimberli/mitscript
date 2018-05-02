@@ -1,0 +1,8 @@
+x = "x";
+
+i = 0;
+while (i < 10) {
+    x = x + x;
+    i = i + 1;
+}
+print(i);

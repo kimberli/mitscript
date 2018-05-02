@@ -1,0 +1,368 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [None, " ", "failed", "passed", 1],
+			parameter_count = 2,
+			local_vars = [testName, result, resultstr],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [oldprint],
+			instructions = 
+			[
+				load_const	0
+				store_local	2
+				load_local	1
+				if	2
+				goto	4
+				load_const	3
+				store_local	2
+				goto	3
+				load_const	2
+				store_local	2
+				load_local	0
+				load_const	1
+				add
+				load_local	2
+				add
+				load_const	4
+				load_global	0
+				call
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [14, "7", false, true, 1],
+			parameter_count = 0,
+			local_vars = [y, z],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [intcast],
+			instructions = 
+			[
+				load_const	1
+				store_local	0
+				load_const	1
+				store_local	1
+				load_local	0
+				load_const	4
+				load_global	0
+				call
+				load_local	1
+				load_const	4
+				load_global	0
+				call
+				add
+				store_local	1
+				load_local	1
+				load_const	0
+				eq
+				not
+				if	2
+				goto	4
+				load_const	2
+				return
+				goto	3
+				load_const	3
+				return
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = ["Please type \"hello\":", "hello", 1],
+			parameter_count = 0,
+			local_vars = [inp],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [oldprint],
+			instructions = 
+			[
+				load_const	0
+				load_const	2
+				load_global	0
+				call
+				load_const	1
+				store_local	0
+				load_local	0
+				load_const	1
+				eq
+				return
+			]
+		},
+		function
+		{
+			functions =
+			[
+				function
+				{
+					functions = [],
+					constants = [],
+					parameter_count = 2,
+					local_vars = [x, y],
+					local_ref_vars = [],
+					free_vars = [z],
+					names = [y],
+					instructions = 
+					[
+						load_local	0
+						load_global	0
+						add
+						push_ref	0
+						load_ref
+						add
+						return
+					]
+				}
+			],
+			constants = [5, 6, 7, 9, 20, 1, 2],
+			parameter_count = 0,
+			local_vars = [func1, x, z],
+			local_ref_vars = [z],
+			free_vars = [],
+			names = [y],
+			instructions = 
+			[
+				load_const	0
+				store_local	1
+				load_const	3
+				push_ref	0
+				swap
+				store_ref
+				push_ref	0
+				load_const	5
+				load_func	0
+				alloc_closure
+				store_local	0
+				load_const	1
+				load_const	2
+				load_const	6
+				load_local	0
+				call
+				load_global	0
+				push_ref	0
+				load_ref
+				add
+				load_const	1
+				add
+				eq
+				load_const	1
+				load_const	2
+				load_const	6
+				load_local	0
+				call
+				load_const	4
+				load_const	3
+				add
+				load_const	1
+				add
+				eq
+				and
+				return
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [None],
+			parameter_count = 0,
+			local_vars = [funcs, inputTest, intcastTest, nestedFuncTest],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [inputTest, intcastTest, nestedFuncTest],
+			instructions = 
+			[
+				alloc_record
+				dup
+				load_global	1
+				field_store	1
+				dup
+				load_global	0
+				field_store	0
+				dup
+				load_global	2
+				field_store	2
+				store_local	0
+				load_const	0
+				store_global	1
+				load_const	0
+				store_global	0
+				load_const	0
+				store_global	2
+				load_local	0
+				return
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [None, false, 0],
+			parameter_count = 0,
+			local_vars = [funs],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [deleteFuns, inputTest, intcastTest, nestedFuncTest],
+			instructions = 
+			[
+				load_const	2
+				load_global	0
+				call
+				store_local	0
+				load_global	2
+				load_const	0
+				eq
+				load_global	1
+				load_const	0
+				eq
+				and
+				load_global	3
+				load_const	0
+				eq
+				and
+				not
+				if	2
+				goto	4
+				load_const	1
+				return
+				goto	16
+				load_const	2
+				load_local	0
+				field_load	2
+				call
+				load_const	2
+				load_local	0
+				field_load	1
+				call
+				and
+				load_const	2
+				load_local	0
+				field_load	3
+				call
+				and
+				return
+			]
+		}
+	],
+	constants = [20, "all tests", "input", "inputTest", "intcast", "intcastTest", "nestedFuncTest", "recordPreservationTest", 0, 2],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [deleteFuns, input, inputTest, intcast, intcastTest, nestedFuncTest, oldprint, print, recordPreservationTest, tests, y],
+	instructions = 
+	[
+		load_const	8
+		load_func	0
+		alloc_closure
+		store_global	7
+		load_const	8
+		load_func	1
+		alloc_closure
+		store_global	1
+		load_const	8
+		load_func	2
+		alloc_closure
+		store_global	3
+		load_global	7
+		store_global	6
+		load_const	8
+		load_func	3
+		alloc_closure
+		store_global	7
+		load_const	8
+		load_func	4
+		alloc_closure
+		store_global	4
+		load_const	8
+		load_func	5
+		alloc_closure
+		store_global	2
+		load_const	0
+		store_global	10
+		load_const	8
+		load_func	6
+		alloc_closure
+		store_global	5
+		load_const	8
+		load_func	7
+		alloc_closure
+		store_global	0
+		load_const	8
+		load_func	8
+		alloc_closure
+		store_global	8
+		alloc_record
+		dup
+		load_const	8
+		load_global	4
+		call
+		field_store	3
+		dup
+		load_const	8
+		load_global	2
+		call
+		field_store	1
+		dup
+		load_const	8
+		load_global	5
+		call
+		field_store	5
+		dup
+		load_const	8
+		load_global	8
+		call
+		field_store	8
+		store_global	9
+		load_const	5
+		load_global	9
+		load_const	4
+		index_load
+		load_const	9
+		load_global	7
+		call
+		load_const	3
+		load_global	9
+		load_const	2
+		index_load
+		load_const	9
+		load_global	7
+		call
+		load_const	6
+		load_global	9
+		load_const	6
+		index_load
+		load_const	9
+		load_global	7
+		call
+		load_const	7
+		load_global	9
+		load_const	7
+		index_load
+		load_const	9
+		load_global	7
+		call
+		load_const	1
+		load_global	9
+		load_const	7
+		index_load
+		load_global	9
+		load_const	6
+		index_load
+		and
+		load_global	9
+		load_const	2
+		index_load
+		and
+		load_global	9
+		load_const	4
+		index_load
+		and
+		load_const	9
+		load_global	7
+		call
+	]
+}

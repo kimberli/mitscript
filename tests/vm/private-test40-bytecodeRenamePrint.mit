@@ -1,0 +1,22 @@
+debugprint = print;
+oldprint = print;
+print = fun(x) {
+  debugprint("Inside S1 ");
+  oldprint(("--> ") + (x));
+};
+f = fun(x) {
+  print(x);
+  getprint = fun() {
+    return print;
+  };
+  f = fun(x) {
+    print(x);
+  };
+  global print;
+  oldprint = print;
+  print = fun(x) {
+    oldprint(("--> ") + (x));
+  };
+  f("This is getting confusing.");
+};
+f("TEST1");

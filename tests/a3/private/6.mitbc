@@ -1,0 +1,103 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions =
+			[
+				function
+				{
+					functions = [],
+					constants = [2],
+					parameter_count = 1,
+					local_vars = [z, j],
+					local_ref_vars = [],
+					free_vars = [x],
+					names = [j],
+					instructions = 
+					[
+						push_ref	0
+						load_ref
+						load_local	0
+						add
+						store_global	0
+						load_const	0
+						load_global	0
+						mul
+						return
+					]
+				}
+			],
+			constants = [4, 1],
+			parameter_count = 2,
+			local_vars = [x, y, g],
+			local_ref_vars = [x],
+			free_vars = [],
+			names = [],
+			instructions = 
+			[
+				push_ref	0
+				load_const	1
+				load_func	0
+				alloc_closure
+				store_local	2
+				load_const	0
+				load_const	1
+				load_local	2
+				call
+				load_local	1
+				add
+				return
+			]
+		}
+	],
+	constants = [0, 1, 1000, 2],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [f, i, input, intcast, j, print],
+	instructions = 
+	[
+		load_const	0
+		load_func	0
+		alloc_closure
+		store_global	5
+		load_const	0
+		load_func	1
+		alloc_closure
+		store_global	2
+		load_const	0
+		load_func	2
+		alloc_closure
+		store_global	3
+		load_const	0
+		store_global	1
+		load_const	0
+		store_global	4
+		load_const	0
+		load_func	3
+		alloc_closure
+		store_global	0
+		load_global	1
+		load_const	2
+		swap
+		gt
+		if	2
+		goto	14
+		load_global	1
+		load_global	1
+		load_const	3
+		load_global	0
+		call
+		load_const	1
+		load_global	5
+		call
+		load_global	1
+		load_const	1
+		add
+		store_global	1
+		goto	-18
+	]
+}

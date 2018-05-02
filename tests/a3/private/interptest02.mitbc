@@ -1,0 +1,157 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [" foobar ", None],
+			parameter_count = 2,
+			local_vars = [a, b],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [print],
+			instructions = 
+			[
+				load_local	0
+				load_const	0
+				add
+				load_local	1
+				add
+				load_global	0
+				call	1
+				pop
+				gc
+				load_const	1
+				return
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [1, None],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [z, f],
+			instructions = 
+			[
+				load_global	0
+				load_const	0
+				add
+				store_global	0
+				load_global	0
+				load_global	0
+				load_global	1
+				call	2
+				pop
+				gc
+				load_const	1
+				return
+			]
+		}
+	],
+	constants = [1, "foobar", "foo", "bar", "nope", 5, false, 0],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [print, input, intcast, x, b, y, r, f, z, f2],
+	instructions = 
+	[
+		load_func	-1
+		store_global	0
+		load_func	-2
+		store_global	1
+		load_func	-3
+		store_global	2
+		load_const	0
+		neg
+		store_global	3
+		load_const	1
+		store_global	4
+		alloc_record
+		dup
+		load_const	2
+		field_store	5
+		dup
+		load_const	3
+		field_store	3
+		store_global	6
+		load_global	6
+		load_global	6
+		eq
+		if	0
+		goto	1
+		0:
+		load_global	6
+		load_global	0
+		call	1
+		pop
+		gc
+		goto	2
+		1:
+		load_const	4
+		load_global	0
+		call	1
+		pop
+		gc
+		2:
+		load_func	0
+		alloc_closure	0
+		store_global	7
+		3:
+		gc
+		load_const	5
+		load_global	3
+		gt
+		if	4
+		goto	5
+		4:
+		load_global	3
+		load_global	3
+		load_const	0
+		sub
+		load_global	7
+		call	2
+		pop
+		gc
+		load_global	3
+		load_const	0
+		add
+		store_global	3
+		goto	3
+		5:
+		6:
+		gc
+		load_const	6
+		if	7
+		goto	8
+		7:
+		load_global	3
+		load_const	7
+		div
+		store_global	3
+		goto	6
+		8:
+		load_const	0
+		store_global	8
+		load_func	1
+		alloc_closure	0
+		store_global	9
+		load_global	9
+		call	0
+		load_global	0
+		call	1
+		pop
+		gc
+		load_global	8
+		load_global	0
+		call	1
+		pop
+		gc
+		load_const	7
+		return
+	]
+}

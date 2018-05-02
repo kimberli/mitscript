@@ -1,0 +1,14 @@
+iterations = 1000;
+
+call_depth = fun(depth) {
+    if (depth > 0) {
+        call_depth(depth - 1);
+    }
+};
+
+i = 0;
+
+while (i < iterations) {
+    call_depth(200);
+    i = i + 1;
+}
