@@ -36,22 +36,54 @@ x64asm::Function IrInterpreter::run() {
 }
 
 void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps) {
+    // STEP 1: save caller-saved registers to stack
+    // TODO: save caller-saved registers
+
+    // STEP 2: push first 6 arguments to registers, rest to stack
     // args + temps are put in that order as arguments for the function to call
     // on the stack
     // args should contain pointers to values or immediate numbers
     // temps are pointers to Temps which store stack offsets
-    int max = args.size() < 6? args.size() : 6;
-    for (int i = 0; i < max; ++i) {
-        assm.mov(argRegs[i], args[i]);
+    int numArgs = args.size() + temps.size();
+    int maxReg = numArgs < 6? numArgs : 6;
+    int argIndex = 0;
+    LOG("calling helper");
+    LOG("total args: " + to_string(numArgs));
+    LOG("total imms: " + to_string(args.size()));
+    LOG("total temps: " + to_string(temps.size()));
+    while (argIndex < numArgs) {
+        while (argIndex < args.size()) {
+            LOG("putting in " + to_string(argIndex));
+            if (argIndex < 6) {
+                assm.mov(argRegs[argIndex], args[argIndex]);
+            } else {
+                // TODO: push onto stack
+            }
+            argIndex++;
+        }
+        while (argIndex < numArgs) {
+            if (argIndex < 6) {
+                LOG("putting in " + to_string(argIndex));
+                getRbpOffset(temps[argIndex - args.size()]->stackOffset);
+                assm.mov(argRegs[argIndex], x64asm::M64{x64asm::r10});
+            } else {
+                // TODO: push onto stack
+            }
+            argIndex++;
+        }
     }
     assm.mov(x64asm::r10, x64asm::Imm64{fn});
     assm.call(x64asm::r10);
+
+    // STEP 3: restore caller-saved registers from stack
+    // TODO: restore caller-saved registers
+    // TODO: pop arguments from stack
 }
 
 void IrInterpreter::getRbpOffset(uint64_t offset) {
-    // use r10 and r11 for these calcs
+    // leaves result in r10
     offset = offset + 1;
-    assm.mov(x64asm::r10, x64asm::rbp); // move rbp into r10
+    assm.mov(x64asm::r10, x64asm::rbp);
     assm.mov(x64asm::r11, x64asm::Imm64{8*offset}); // move 8*offset into another reg
     assm.sub(x64asm::r10, x64asm::r11); // sub r11 from r10. now the correct mem is in r10
 }
