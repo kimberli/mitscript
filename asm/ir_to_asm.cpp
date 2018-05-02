@@ -1,5 +1,14 @@
 #include "ir_to_asm.h"
 
+const x64asm::R64 IrInterpreter::argRegs[] = {
+    x64asm::rdi,
+    x64asm::rsi,
+    x64asm::rdx,
+    x64asm::rcx,
+    x64asm::r8,
+    x64asm::r9
+};
+
 IrInterpreter::IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPointer) {
     vmPointer = vmInterpreterPointer;
     func = irFunction;
@@ -24,6 +33,17 @@ x64asm::Function IrInterpreter::run() {
     // return the asmFunc
     return asmFunc;
     //asmFunc.call<Value*>();
+}
+
+void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args) {
+    // handles up to 6 helper args; should be enough
+    // args should contain pointers to objects
+    int max = args.size() < 6? args.size() : 6;
+    for (int i = 0; i < max; ++i) {
+        assm.mov(argRegs[i], args[i]);
+    }
+    assm.mov(x64asm::r10, x64asm::Imm64{fn});
+    assm.call(x64asm::r10);
 }
 
 void IrInterpreter::getRbpOffset(uint64_t offset) {
@@ -57,7 +77,6 @@ void IrInterpreter::loadTemp(x64asm::R64 reg, tempptr_t temp) {
 }
 
 void IrInterpreter::executeStep() {
-    const static x64asm::R64 argRegs[] = {x64asm::rdi, x64asm::rsi, x64asm::rdx, x64asm::rcx, x64asm::r8, x64asm::r9};
 
     instptr_t inst = func->instructions.at(instructionIndex);
     switch(inst->op) {
@@ -96,17 +115,13 @@ void IrInterpreter::executeStep() {
             {
                 LOG(to_string(instructionIndex) + ": LoadGlobal");
                 // mov DEST, SRC
-                // load the interpreter pointer into the first arg
-                assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
-                // load the string pointer into the second arg
                 string* name = new string(inst->name0.value());  // TODO: fix memory leak?
-                assm.mov(argRegs[1], x64asm::Imm64{name});
-                // call a helper
-                void* fn = (void*) &(helper_load_global);
-                // assume that all locals are saved to the stack
-                assm.mov(x64asm::r10, x64asm::Imm64{(uint64_t)fn});
-                assm.call(x64asm::r10);
-                // the result is stored in rax
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                    x64asm::Imm64{name},
+                };
+                callHelper((void *) &(helper_load_global), args);
+
                 // put the return val in the temp
                 storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
@@ -126,18 +141,15 @@ void IrInterpreter::executeStep() {
        case IrOp::StoreGlobal:
             {
                 LOG(to_string(instructionIndex) + ": StoreGlobal");
-                // load the interpreter pointer into the first arg
-                assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
-                // load the string pointer into the second arg
                 string* name = new string(inst->name0.value());
-                assm.mov(argRegs[1], x64asm::Imm64{name});  // TODO: fix memory leak?
-                // load the value into the third arg
+
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                    x64asm::Imm64{name},
+                };
                 loadTemp(argRegs[2], inst->tempIndices->at(0));
-                // call a helper
-                void* fn = (void*) &(helper_store_global);
-                assm.mov(x64asm::r10, x64asm::Imm64{(uint64_t)fn});
-                assm.call(x64asm::r10);
-                // no return val given.
+                callHelper((void *) &(helper_store_global), args);
+
                 break;
             }
         case IrOp::AllocRecord:
@@ -184,18 +196,12 @@ void IrInterpreter::executeStep() {
             {
                 LOG(to_string(instructionIndex) + ": Add");
                 // call a helper to do add
-                // load the interpreter pointer into the first arg
-                assm.mov(argRegs[0], x64asm::Imm64{vmPointer});
-                // load the left operand into the second arg
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
                 loadTemp(argRegs[1], inst->tempIndices->at(2));
-                // load the value into the third arg
                 loadTemp(argRegs[2], inst->tempIndices->at(1));
-
-                // now we need to call our helper
-                void* fn = (void*) &(helper_add);
-                assm.mov(x64asm::r10, x64asm::Imm64{(uint64_t)fn});
-                assm.call(x64asm::r10);
-                // the result is stored in rax
+                callHelper((void *) &(helper_add), args);
                 // put the return val in the temp
                 storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;

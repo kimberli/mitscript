@@ -23,12 +23,15 @@ private:
     int instructionIndex;
     bool finished;
 
+    void callHelper(void* fn, vector<x64asm::Imm64> args);
+
     void executeStep();
     void getRbpOffset(uint64_t offset);
     void loadTemp(x64asm::R64 reg, tempptr_t temp);
     void storeTemp(x64asm::R64 reg, tempptr_t temp);
     void comparisonSetup(x64asm::R64 left, x64asm::R64 right, instptr_t inst);
 public: 
+    static const x64asm::R64 argRegs[];
     IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPointer); 
     x64asm::Function run(); // runs the program 
 };
