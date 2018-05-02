@@ -233,16 +233,17 @@ void IrInterpreter::executeStep() {
         case IrOp::Div:
             {
                 LOG(to_string(instructionIndex) + ": Div");
-//                x64asm::R64 left = x64asm::rdi;
-//                x64asm::R64 right = x64asm::rsi;
-//                loadTemp(left, inst->tempIndices->at(2));
-//                // load right temp into a reg
-//                loadTemp(right, inst->tempIndices->at(1));
-//                // perform the sub; result stored in left
-//                //assm.div(left, right);
+//                x64asm::R32 numerator_firsthalf = x64asm::rdx;
+                x64asm::R64 numerator_secondhalf = x64asm::rax;
+                loadTemp(numerator_secondhalf, inst->tempIndices->at(1));
+    			assm.cdq(); // weird asm thing to sign-extend rax into rdx
+                x64asm::R64 divisor = x64asm::rbx;
+				loadTemp(divisor, inst->tempIndices->at(2));
+                // perform the div; result stored in rax
+                assm.idiv(x64asm::ebx);
 //                assm.assemble({IDIV_R64, {}});
-//                // put the value back in the temp
-//                storeTemp(left, inst->tempIndices->at(0));
+                // put the value back in the temp
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             }; case IrOp::Neg: {
                 LOG(to_string(instructionIndex) + ": Neg");
