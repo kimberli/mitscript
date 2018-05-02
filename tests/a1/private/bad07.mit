@@ -1,2 +1,0 @@
-global = 5;
-global = global + 6;

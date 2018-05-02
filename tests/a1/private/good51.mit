@@ -1,3 +1,0 @@
-z = "Hello World";
-print(z.x);
-print("should have thrown illegal cast exception");

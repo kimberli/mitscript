@@ -1,9 +1,0 @@
-x = 0;
-y = fun() {
-  global x;
-  while (x < 100000000) {
-    x = x + 1;
-  }
-  return x;
-};
-print("y is " + y());

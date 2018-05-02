@@ -1,5 +1,0 @@
-x = "foo";
-print(x);
-while(x) {
-    print(x);
-}

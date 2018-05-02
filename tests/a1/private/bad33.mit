@@ -1,2 +1,0 @@
-b = true | false;
-c = b | { a: true;};

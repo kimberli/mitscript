@@ -1,2 +1,0 @@
-print("hello");
-bad = (4) / (0);

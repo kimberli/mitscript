@@ -1,4 +1,0 @@
-b = true & false;
-c = b & fun() {
-    return false;
-};

@@ -1,4 +1,0 @@
-a = fun(b){
-  return b();
-};
-a(b();
