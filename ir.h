@@ -238,25 +238,36 @@ enum class IrOp {
     // Result: throws RuntimeError if the temp is not a closure
     AssertClosure,
 
-    // Description: casts a temp to integer
+    // Description: unboxes a temp to integer
     // op0: N/A
     // temp0: temp index where the int will be stored
-    // temp1: temp index of the value to cast
-    // Result: stores int(temp1) in temp0, throws IllegalCastException if not possible
-    CastInteger,
+    // temp1: temp index of the value to unbox; must be an Integer object
+    // Result: stores int(temp1) in temp0
+    UnboxInteger,
 
-    // Description: casts a temp to bool
+    // Description: unboxes a temp to bool
     // op0: N/A
     // temp0: temp index where bool will be stored
-    // temp1: temp index of the value to cast
-    // Result: stores bool(temp1) in temp0, throws IllegalCastException if not possible
-    CastBool,
+    // temp1: temp index of the value to unbox; must be a Boolean object
+    // Result: stores bool(temp1) in temp0
+    UnboxBool,
+    
+    // Description: takes a raw int and creates an Integer object
+    // temp0: temp to hold the new Integer object
+    // temp1: holds the int value 
+    // Result: stores Integer(temp1) in temp0
+    NewInteger,
+ 
+    // Description: takes a raw bool and creates a Boolean object
+    // temp0: temp to hold the new Boolean object
+    // temp1: holds the bool value 
+    // Result: stores Boolean(temp1) in temp0
+    NewBoolean,
 
-    // Description: casts a temp to string
-    // op0: N/A
-    // temp0: temp index where the string is stored
-    // temp1: temp index of the value to cast
-    // Result: stores str(temp1) in temp0, throws IllegalCastException if not possible
+    // Description: takes an object and casts it to a string
+    // temp0: temp to hold the new String object
+    // temp1: holds the thing to cast
+    // Result: stores String(temp1) in temp0
     CastString,
     
     // Description: add a label at this point in the generated asm
@@ -283,6 +294,11 @@ struct IrInstruction {
         name0(),
         op0(op0),
         tempIndices(make_shared<TempList>()) {};
+    IrInstruction(const IrOp op, tempptr_t temp0, tempptr_t temp1): 
+        op(op),
+        name0(),
+        op0(),
+        tempIndices(make_shared<TempList>(TempList{temp0, temp1})) {};
     IrInstruction(const IrOp op, optstr_t name0, tempptr_t temp):
         op(op),
         name0(name0),

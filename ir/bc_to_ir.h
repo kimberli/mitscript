@@ -30,12 +30,14 @@ private:
     int32_t labelCounter;  // initial label index for this instance of IrCompiler
 
     // helpers
-    tempptr_t pushNewTemp();
+    tempptr_t getNewTemp();
     void pushTemp(tempptr_t temp);
     tempptr_t popTemp();
     void pushInstruction(instptr_t inst);
     void decLabelOffsets();
     int32_t addLabelOffset(int32_t offset);
+    void doUnaryArithmetic(IrOp operation, bool toBoolean);
+    void doBinaryArithmetic(IrOp operation, bool toBoolean);
 public:
     IrCompiler(Function* mainFunc, int32_t labelCounter, Interpreter* vmInterpreterPointer):
         func(mainFunc),
