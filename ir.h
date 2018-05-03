@@ -115,7 +115,8 @@ enum class IrOp {
     // Description: Allocate a new closure
     // op0: number of free vars passed to the closure
     // temp0: temp index containing the new closure
-    // temps 1-m: temps containing references to the free vars we are going to pass
+    // temp1: temp index containing the function 
+    // temps 2-m: temps containing references to the free vars we are going to pass
     // Result: temp at temp0 now contains the new closure
     AllocClosure,
 
@@ -237,6 +238,12 @@ enum class IrOp {
     // temp0: temp index of value to check
     // Result: throws RuntimeError if the temp is not a closure
     AssertClosure,
+
+    // Description: asserts that a temp is a val wrapper
+    // op0: N/A
+    // temp0: temp index of value to check
+    // Result: throws RuntimeError if the temp is not a val wrapper
+    AssertValWrapper,
 
     // Description: unboxes a temp to integer
     // op0: N/A

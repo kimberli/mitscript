@@ -234,7 +234,11 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            {
 					TempListPtr instTemps = make_shared<TempList>();
 					for (int i = 0; i < inst.operand0; i++) {
-						instTemps->push_back(popTemp());
+                        // pop args 
+                        tempptr_t t = popTemp();
+                        // add an instruction confirming that this is a ref
+                        pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertValWrapper, t)));
+						instTemps->push_back(t);
 					}
 					tempptr_t func = popTemp();
 					instTemps->push_back(func);
@@ -243,7 +247,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					instTemps->push_back(curr);
 					reverse(instTemps->begin(), instTemps->end());
 					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertFunction, func)));
-					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AllocClosure, instTemps)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AllocClosure, optint_t(inst.operand0), instTemps)));
 	                break;
 	            }
 	        case BcOp::Call:

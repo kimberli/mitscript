@@ -14,6 +14,17 @@ Value* helper_add(Interpreter* interpreter, Value* left, Value* right) {
     return interpreter->add(left, right);
 }
 
+Value* helper_alloc_closure(Interpreter* interpreter, int numRefs, Function* func, ValWrapper* refs...) {
+    va_list args;
+    va_start(args, refs);
+    vector<ValWrapper*> refVec;
+    for (int i = 0; i < numRefs; i++) {
+        refVec.push_back(va_arg(args, ValWrapper*)); 
+    }
+    va_end(args);
+    return interpreter->collector->allocate<Closure>(refVec, func);
+}
+
 Value* helper_call(Interpreter* interpreter, Closure* closure) {
     // this function needs to take in args and somehow put them in the right place. Maybe put them into a vector that could be used by the vm immediately or could be passed in the MachineCodeFunction from the example
     // this function takes the args from the assembly stack and puts them in a vector
@@ -51,6 +62,10 @@ void helper_assert_func(Value* v) {
 
 void helper_assert_closure(Value* v) {
     v->cast<Closure>();
+}
+
+void helper_assert_valwrapper(Value* v) {
+    v->cast<ValWrapper>();
 }
 
 int32_t helper_unbox_int(Integer* v) {

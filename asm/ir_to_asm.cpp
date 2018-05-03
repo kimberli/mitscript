@@ -68,7 +68,7 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
     while (argIndex < numArgs) {
         while (argIndex < args.size()) {
             if (argIndex < numArgRegs) {
-                assm.mov(argRegs[argIndex], args[argIndex]);
+               assm.mov(argRegs[argIndex], args[argIndex]);
             } else {
                 // TODO: can we do this without writing to a register?
                 assm.mov(x64asm::r10, args[argIndex]);
@@ -87,8 +87,7 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
             argIndex++;
         }
     }
-    assm.mov(x64asm::r10, x64asm::Imm64{fn});
-    assm.call(x64asm::r10);
+    assm.mov(x64asm::r10, x64asm::Imm64{fn}); assm.call(x64asm::r10);
 
     // STEP 3: restore caller-saved registers from stack
     for (int i = 0; i < numCallerSaved; ++i) {
@@ -207,7 +206,6 @@ void IrInterpreter::executeStep() {
                 };
                 vector<tempptr_t> temps = {inst->tempIndices->at(0)};
                 callHelper((void *) &(helper_store_global), args, temps);
-
                 break;
             }
         case IrOp::AllocRecord:
@@ -242,6 +240,17 @@ void IrInterpreter::executeStep() {
         case IrOp::AllocClosure:
             {
                 LOG(to_string(instructionIndex) + ": AllocClosure");
+                // the first two args to the helper are the 
+                // interpreter pointer and the num refs
+                int numRefs = inst->op0.value();
+                vector<x64asm::Imm64> immArgs = {
+                    x64asm::Imm64{vmPointer},
+                    x64asm::Imm64{(uint64_t)numRefs},
+                };
+                // the rest of the args are basically the temps minus temp0
+                vector<tempptr_t> temps(inst->tempIndices->begin() + 1, inst->tempIndices->end());
+                callHelper((void *) &(helper_alloc_closure), immArgs, temps);
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::Call:
@@ -475,6 +484,18 @@ void IrInterpreter::executeStep() {
                     inst->tempIndices->at(0)
                 };
                 callHelper((void *) &(helper_assert_closure), args, temps);
+                break;
+            };
+        case IrOp::AssertValWrapper: 
+            {
+                LOG(to_string(instructionIndex) + ": AssertValWrapper");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(0)
+                };
+                callHelper((void *) &(helper_assert_valwrapper), args, temps);
                 break;
             };
         case IrOp::UnboxInteger:
