@@ -19,7 +19,7 @@ Value* helper_alloc_closure(Interpreter* interpreter, int numRefs, Function* fun
     va_start(args, refs);
     vector<ValWrapper*> refVec;
     for (int i = 0; i < numRefs; i++) {
-        refVec.push_back(va_arg(args, ValWrapper*)); 
+        refVec.push_back(va_arg(args, ValWrapper*));
     }
     va_end(args);
     return interpreter->collector->allocate<Closure>(refVec, func);
@@ -90,4 +90,12 @@ Record* helper_new_record(Interpreter* interpreter) {
 
 String* helper_cast_string(Interpreter* interpreter, Value* val) {
     return interpreter->collector->allocate<String>(val->toString());
+}
+
+Value* helper_get_record(Interpreter* interpreter, Record* record, string* field) {
+	return record->get(*field);
+}
+
+void helper_set_record(Interpreter* interpreter, Record* record, string* field, Value* val) {
+	return record->set(*field, val, *interpreter->collector);
 }

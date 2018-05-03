@@ -20,13 +20,13 @@ Value* helper_call(Interpreter* interpreter, Closure* closure);
 
 void helper_gc(Interpreter* interpreter);
 
-void helper_assert_int(Value* v); 
-void helper_assert_str(Value* v); 
-void helper_assert_bool(Value* v); 
-void helper_assert_record(Value* v); 
-void helper_assert_func(Value* v); 
-void helper_assert_closure(Value* v); 
-void helper_assert_valwrapper(Value* v); 
+void helper_assert_int(Value* v);
+void helper_assert_str(Value* v);
+void helper_assert_bool(Value* v);
+void helper_assert_record(Value* v);
+void helper_assert_func(Value* v);
+void helper_assert_closure(Value* v);
+void helper_assert_valwrapper(Value* v);
 
 int32_t helper_unbox_int(Integer* v);
 bool helper_unbox_bool(Boolean* b);
@@ -36,3 +36,7 @@ Boolean* helper_new_boolean(Interpreter* interpreter, bool val);
 Record* helper_new_record(Interpreter* interpreter);
 
 String* helper_cast_string(Interpreter* interpreter, Value* val);
+
+Value* helper_get_record(Interpreter* interpreter, Record* record, string* field);
+void helper_set_record(Interpreter* interpreter, Record* record, string* field, Value* val);
+
