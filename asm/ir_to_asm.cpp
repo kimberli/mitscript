@@ -397,9 +397,7 @@ void IrInterpreter::executeStep() {
        case IrOp::AssertInteger:
             {
                 LOG(to_string(instructionIndex) + ": AssertInteger");
-                vector<x64asm::Imm64> args = {
-                    x64asm::Imm64{vmPointer},
-                };
+                vector<x64asm::Imm64> args;
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
@@ -409,9 +407,7 @@ void IrInterpreter::executeStep() {
         case IrOp::AssertBoolean:
             {
                 LOG(to_string(instructionIndex) + ": AssertBool");
-                vector<x64asm::Imm64> args = {
-                    x64asm::Imm64{vmPointer},
-                };
+                vector<x64asm::Imm64> args;
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
@@ -421,9 +417,7 @@ void IrInterpreter::executeStep() {
         case IrOp::AssertString:
             {
                 LOG(to_string(instructionIndex) + ": AssertString");
-                vector<x64asm::Imm64> args = {
-                    x64asm::Imm64{vmPointer},
-                };
+                vector<x64asm::Imm64> args;
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
@@ -433,9 +427,7 @@ void IrInterpreter::executeStep() {
         case IrOp::AssertRecord:
             {
                 LOG(to_string(instructionIndex) + ": AssertRecord");
-                vector<x64asm::Imm64> args = {
-                    x64asm::Imm64{vmPointer},
-                };
+                vector<x64asm::Imm64> args;
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
@@ -445,9 +437,7 @@ void IrInterpreter::executeStep() {
         case IrOp::AssertFunction:
             {
                 LOG(to_string(instructionIndex) + ": AssertFunction");
-                vector<x64asm::Imm64> args = {
-                    x64asm::Imm64{vmPointer},
-                };
+                vector<x64asm::Imm64> args;
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
@@ -457,9 +447,7 @@ void IrInterpreter::executeStep() {
         case IrOp::AssertClosure:
             {
                 LOG(to_string(instructionIndex) + ": AssertClosure");
-                vector<x64asm::Imm64> args = {
-                    x64asm::Imm64{vmPointer},
-                };
+                vector<x64asm::Imm64> args;
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
@@ -469,9 +457,7 @@ void IrInterpreter::executeStep() {
         case IrOp::UnboxInteger:
             {
                 LOG(to_string(instructionIndex) + ": UnboxInteger");
-                vector<x64asm::Imm64> args = {
-                    x64asm::Imm64{vmPointer},
-                };
+                vector<x64asm::Imm64> args;
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1)
                 };
@@ -482,9 +468,7 @@ void IrInterpreter::executeStep() {
         case IrOp::UnboxBoolean:
             {
                 LOG(to_string(instructionIndex) + ": UnboxBoolean");
-                vector<x64asm::Imm64> args = {
-                    x64asm::Imm64{vmPointer},
-                };
+                vector<x64asm::Imm64> args;
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1)
                 };
