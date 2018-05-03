@@ -9,6 +9,18 @@ const x64asm::R64 IrInterpreter::argRegs[] = {
     x64asm::r9
 };
 
+const x64asm::R64 IrInterpreter::callerSavedRegs[] = {
+    x64asm::rax,
+    x64asm::rcx,
+    x64asm::rdx,
+    x64asm::rsi,
+    x64asm::rdi,
+    x64asm::r8,
+    x64asm::r9,
+    x64asm::r10,
+    x64asm::r11
+};
+
 IrInterpreter::IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPointer) {
     vmPointer = vmInterpreterPointer;
     func = irFunction;
@@ -21,10 +33,14 @@ x64asm::Function IrInterpreter::run() {
     // start the assembler on the function
     assm.start(asmFunc);
 
+    // TODO: do prologue
+
     // translate to asm
     while (!finished) {
         executeStep();
     }
+
+    // TODO: do epilogue
 
     // finish compiling
     assm.ret();
@@ -37,7 +53,9 @@ x64asm::Function IrInterpreter::run() {
 
 void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps) {
     // STEP 1: save caller-saved registers to stack
-    // TODO: save caller-saved registers
+    for (int i = 0; i < numCallerSaved; ++i) {
+        assm.push(callerSavedRegs[i]);
+    }
 
     // STEP 2: push first 6 arguments to registers, rest to stack
     // args + temps are put in that order as arguments for the function to call
@@ -45,29 +63,26 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
     // args should contain pointers to values or immediate numbers
     // temps are pointers to Temps which store stack offsets
     int numArgs = args.size() + temps.size();
-    int maxReg = numArgs < 6? numArgs : 6;
     int argIndex = 0;
-    LOG("calling helper");
-    LOG("total args: " + to_string(numArgs));
-    LOG("total imms: " + to_string(args.size()));
-    LOG("total temps: " + to_string(temps.size()));
+    LOG("  calling helper w/ " + to_string(numArgs) + " total args");
     while (argIndex < numArgs) {
         while (argIndex < args.size()) {
-            LOG("putting in " + to_string(argIndex));
-            if (argIndex < 6) {
+            if (argIndex < numArgRegs) {
                 assm.mov(argRegs[argIndex], args[argIndex]);
             } else {
-                // TODO: push onto stack
+                // TODO: can we do this without writing to a register?
+                assm.mov(x64asm::r10, args[argIndex]);
+                assm.push(x64asm::r10);
             }
             argIndex++;
         }
         while (argIndex < numArgs) {
-            if (argIndex < 6) {
-                LOG("putting in " + to_string(argIndex));
+            if (argIndex < numArgRegs) {
                 getRbpOffset(temps[argIndex - args.size()]->stackOffset);
                 assm.mov(argRegs[argIndex], x64asm::M64{x64asm::r10});
             } else {
-                // TODO: push onto stack
+                getRbpOffset(temps[argIndex - args.size()]->stackOffset);
+                assm.push(x64asm::r10);
             }
             argIndex++;
         }
@@ -76,8 +91,16 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
     assm.call(x64asm::r10);
 
     // STEP 3: restore caller-saved registers from stack
-    // TODO: restore caller-saved registers
-    // TODO: pop arguments from stack
+    for (int i = 0; i < numCallerSaved; ++i) {
+        assm.pop(x64asm::r10);
+    }
+
+    // STEP 4: pop arguments from stack
+    if (numArgs > numArgRegs) {
+        for (int i = 0; i < numArgs - numArgRegs; ++i) {
+            assm.pop(x64asm::r10);
+        }
+    }
 }
 
 void IrInterpreter::getRbpOffset(uint64_t offset) {

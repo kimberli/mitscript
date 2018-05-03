@@ -32,6 +32,9 @@ private:
     void comparisonSetup(x64asm::R64 left, x64asm::R64 right, instptr_t inst);
 public: 
     static const x64asm::R64 argRegs[];
+    static const x64asm::R64 callerSavedRegs[];
+    static const int numCallerSaved = 9;
+    static const int numArgRegs = 6;
     IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPointer); 
     x64asm::Function run(); // runs the program 
 };
