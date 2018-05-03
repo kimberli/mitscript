@@ -374,7 +374,10 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
             }
         }
 	}
-	IrFunc irFunc = IrFunc(irInsts, func->constants_, func->functions_, func->parameter_count_, func->local_vars_.size(), labelCounter);
+    int32_t temp_count = currentTemp;
+    // TODO: figure out how to make refs work
+    int32_t ref_count = 0; 
+	IrFunc irFunc = IrFunc(irInsts, func->constants_, func->functions_, func->parameter_count_, temp_count, ref_count, func->local_vars_.size(), labelCounter);
     return irFunc;
 };
 
