@@ -68,20 +68,24 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
     while (argIndex < numArgs) {
         while (argIndex < args.size()) {
             if (argIndex < numArgRegs) {
-               assm.mov(argRegs[argIndex], args[argIndex]);
+                // put args 1 - 6 into regs
+                assm.mov(argRegs[argIndex], args[argIndex]);
             } else {
-                // TODO: can we do this without writing to a register?
-                assm.mov(x64asm::r10, args[argIndex]);
+                // push args 7 - n on the stack; n gets pushed first
+                assm.mov(x64asm::r10, args[args.size() - argIndex - 1]);
                 assm.push(x64asm::r10);
             }
             argIndex++;
         }
         while (argIndex < numArgs) {
             if (argIndex < numArgRegs) {
+                // put args 1 - 6 into regs
                 getRbpOffset(temps[argIndex - args.size()]->stackOffset);
                 assm.mov(argRegs[argIndex], x64asm::M64{x64asm::r10});
             } else {
-                getRbpOffset(temps[argIndex - args.size()]->stackOffset);
+                int tempIndex = argIndex - args.size();
+                // push args 7 - n on the stack; n gets pushed first
+                getRbpOffset(temps[temps.size() - tempIndex - 1]->stackOffset);
                 assm.push(x64asm::r10);
             }
             argIndex++;
@@ -89,16 +93,16 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
     }
     assm.mov(x64asm::r10, x64asm::Imm64{fn}); assm.call(x64asm::r10);
 
-    // STEP 3: restore caller-saved registers from stack
-    for (int i = 0; i < numCallerSaved; ++i) {
-        assm.pop(x64asm::r10);
-    }
-
-    // STEP 4: pop arguments from stack
+    // STEP 3: pop arguments from stack
     if (numArgs > numArgRegs) {
         for (int i = 0; i < numArgs - numArgRegs; ++i) {
             assm.pop(x64asm::r10);
         }
+    }
+
+    // STEP 4: restore caller-saved registers from stack
+    for (int i = 1; i <= numCallerSaved; ++i) {
+        assm.pop(callerSavedRegs[numCallerSaved - i]);
     }
 }
 
