@@ -373,8 +373,8 @@ struct IrFunc {
         int32_t ref_count_,
         int32_t label_offset_) :
         instructions(instructions),
-        functions_(functions_),
         constants_(constants_),
+        functions_(functions_),
         parameter_count_(parameter_count_),
         local_count_(local_count_),
         temp_count_(temp_count_),
