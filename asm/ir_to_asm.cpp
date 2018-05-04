@@ -55,7 +55,7 @@ void IrInterpreter::prolog() {
 
     // allocate space for locals, refs, and temps on the stack
     // by decrementing rsp 
-    spaceToAllocate = 8*(func->parameter_count_ + func->ref_count_ + func->temp_count_); 
+    spaceToAllocate = 8*(func->local_count_ + func->ref_count_ + func->temp_count_); 
     assm.assemble({x64asm::SUB_R64_IMM32, {x64asm::rsp, x64asm::Imm32{spaceToAllocate}}});
 }
 
@@ -128,13 +128,15 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
         while (argIndex < numArgs) {
             if (argIndex < numArgRegs) {
                 // put args 1 - 6 into regs
-                getRbpOffset(temps[argIndex - args.size()]->stackOffset);
-                assm.mov(argRegs[argIndex], x64asm::M64{x64asm::r10});
+                tempptr_t tempToPush = temps[argIndex - args.size()];
+                loadTemp(x64asm::rax, tempToPush);
+                assm.mov(argRegs[argIndex], x64asm::rax);
             } else {
                 int tempIndex = argIndex - args.size();
                 // push args 7 - n on the stack; n gets pushed first
-                getRbpOffset(temps[temps.size() - tempIndex - 1]->stackOffset);
-                assm.push(x64asm::r10);
+                tempptr_t tempToPush = temps[temps.size() - tempIndex - 1];
+                loadTemp(x64asm::rax, tempToPush);
+                assm.push(x64asm::rax);
             }
             argIndex++;
         }
@@ -142,6 +144,7 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
     assm.mov(x64asm::r10, x64asm::Imm64{fn}); assm.call(x64asm::r10);
 
     // STEP 3: pop arguments from stack
+    // TODO: do this by just moving rsp
     if (numArgs > numArgRegs) {
         for (int i = 0; i < numArgs - numArgRegs; ++i) {
             assm.pop(x64asm::r10);
