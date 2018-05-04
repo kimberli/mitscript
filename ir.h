@@ -19,7 +19,7 @@ typedef vector<tempptr_t> TempList;
 typedef shared_ptr<TempList> TempListPtr;
 
 struct Temp {
-    offset_t stackOffset = -1;
+    offset_t stackOffset;
 	Temp(offset_t offset) : stackOffset(offset) {}
 };
 
