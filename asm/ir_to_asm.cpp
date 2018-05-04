@@ -21,6 +21,18 @@ const x64asm::R64 IrInterpreter::callerSavedRegs[] = {
     x64asm::r11
 };
 
+const x64asm::R64 IrInterpreter::calleeSavedRegs[] = {
+    // rbp and rsp are handled a little differently, so will not consider
+    // callee-saved
+    //x64asm::rbp,
+    //x64asm::rsp,
+    x64asm::rbx,
+    x64asm::r12,
+    x64asm::r13,
+    x64asm::r14,
+    x64asm::r15
+};
+
 IrInterpreter::IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPointer) {
     vmPointer = vmInterpreterPointer;
     func = irFunction;
@@ -29,21 +41,58 @@ IrInterpreter::IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPoint
     finished = false;
 }
 
+void IrInterpreter::prolog() {
+    // push old rbp 
+    assm.push(x64asm::rbp);
+
+    // move old rsp to rbp
+    assm.mov(x64asm::rbp, x64asm::rsp);
+
+    // push callee saved, including rbp
+    for (int i = 0; i < numCalleeSaved; ++i) {
+        assm.push(calleeSavedRegs[i]);
+    }
+
+    // allocate space for locals, refs, and temps on the stack
+    // by decrementing rsp 
+    spaceToAllocate = 8*(func->parameter_count_ + func->ref_count_ + func->temp_count_); 
+    assm.assemble({x64asm::SUB_R64_IMM32, {x64asm::rsp, x64asm::Imm32{spaceToAllocate}}});
+}
+
+void IrInterpreter::epilog() {
+    // TO USE THIS FUNCTION, FIRST MAKE SURE YOU HAVE CLEARED OUT THE STACK
+    // AND PUT THE RETURN VALUE IN THE RIGHT REG
+
+    // increment rsp again to deallocate locals, temps, etc
+    assm.assemble({x64asm::ADD_R64_IMM32, {x64asm::rsp, x64asm::Imm32{spaceToAllocate}}});
+
+    // in reverse order, restore the callee-save regs
+    for (int i = 1; i <= numCalleeSaved; ++i) {
+        assm.pop(calleeSavedRegs[numCalleeSaved - i]);
+    }
+    
+    // restore rsp and rbp 
+    assm.mov(x64asm::rsp, x64asm::rbp);
+    assm.pop(x64asm::rbp);
+
+    // return using the stored return address 
+    assm.ret();
+}
+
 x64asm::Function IrInterpreter::run() {
     // start the assembler on the function
     assm.start(asmFunc);
 
-    // TODO: do prologue
+    prolog();
 
     // translate to asm
     while (!finished) {
         executeStep();
     }
 
-    // TODO: do epilogue
+    epilog();
 
     // finish compiling
-    assm.ret();
     assm.finish();
     LOG("done compiling asm");
     return asmFunc;
@@ -104,32 +153,40 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
     }
 }
 
-void IrInterpreter::getRbpOffset(uint64_t offset) {
-    // leaves result in r10
-    offset = offset + 1;
+uint32_t IrInterpreter::getLocalOffset(uint32_t localIndex) {
+    return 8*(1 + numCalleeSaved + localIndex);
+}
+
+uint32_t IrInterpreter::getRefOffset(uint32_t refIndex) {
+    return 8*(1 + numCalleeSaved + func->local_count_ + refIndex);
+}
+
+uint32_t IrInterpreter::getTempOffset(tempptr_t temp) {
+    return 8*(1 + numCalleeSaved + func->local_count_ + func->ref_count_ + temp->stackOffset);
+}
+
+void IrInterpreter::getRbpOffset(uint32_t offset) {
+    // TODO: the following would be much more efficient, but how to use negative scales? 
+    //assm.mov(x64asm::r10, x64asm::M64{x64asm::Scale::TIMES_8, x64asm::rbp});
+    
+    // put rbp in a reg
     assm.mov(x64asm::r10, x64asm::rbp);
-    assm.mov(x64asm::r11, x64asm::Imm64{8*offset}); // move 8*offset into another reg
-    assm.sub(x64asm::r10, x64asm::r11); // sub r11 from r10. now the correct mem is in r10
+    // subtract the offset from rbp 
+    assm.assemble({x64asm::SUB_R64_IMM32, {x64asm::r10, x64asm::Imm32{offset}}});
 }
 
 // storeTemp puts a reg value into a temp
-// TODO fix how temps are assigned; these should be pushed onto the stack.
 void IrInterpreter::storeTemp(x64asm::R64 reg, tempptr_t temp) {
     // right now, put everything on the stack
     // assign the temp an offset (from rbp)
-    // Assume we are not saving any callee save.
-    temp->stackOffset = func->parameter_count_ +  stackSize;
-    // in assembly, calculate where this var is located
-    getRbpOffset(temp->stackOffset); // leaves correct address into r10
+    getRbpOffset(getTempOffset(temp)); // leaves correct address into r10
     // Move the val in reg into the mem address stored in r10
     assm.mov(x64asm::M64{x64asm::r10}, reg);
-    stackSize++; //inc stack size for next temp
 }
 
 // loadTemp takes a temp value and puts it in a register
 void IrInterpreter::loadTemp(x64asm::R64 reg, tempptr_t temp) {
-    // figure out where the temp is stored
-    getRbpOffset(temp->stackOffset); // location in r10
+    getRbpOffset(getTempOffset(temp)); // location in r10
     // put the thing from that mem addres into the reg
     assm.mov(reg, x64asm::M64{x64asm::r10});
 }
@@ -162,10 +219,10 @@ void IrInterpreter::executeStep() {
         case IrOp::LoadLocal:
             {
                 LOG(to_string(instructionIndex) + ": LoadLocal");
-                int64_t offset = inst->op0.value();
-                getRbpOffset(offset);
-                assm.mov(x64asm::rdi, x64asm::r10);
-                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10});
+                int64_t localIndex = inst->op0.value();
+                getRbpOffset(getLocalOffset(localIndex)); // puts the address of the local in r10
+                assm.mov(x64asm::rdi, x64asm::r10); // r10 will be used later in storeTemp
+                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // loads the actual value
                 storeTemp(x64asm::rdi, inst->tempIndices->at(0));
                 break;
             }
@@ -189,8 +246,8 @@ void IrInterpreter::executeStep() {
                 // first put the temp val in a reg
                 loadTemp(x64asm::rdi, inst->tempIndices->at(0));
                 // put find out where the constant is located
-                int64_t offset = inst->op0.value();
-                getRbpOffset(offset); // address of local in r10
+                int64_t localIndex = inst->op0.value();
+                getRbpOffset(getLocalOffset(localIndex)); // address of local in r10
                 // move the val from the reg to memory
                 assm.mov(x64asm::M64{x64asm::r10}, x64asm::rdi);
                 break;
