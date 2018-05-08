@@ -168,8 +168,7 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
             argIndex++;
         }
     }
-    assm.mov(x64asm::r10, x64asm::Imm64{fn});
-    assm.call(x64asm::r10);
+    assm.mov(x64asm::r10, x64asm::Imm64{fn}); assm.call(x64asm::r10);
 
     // STEP 3: pop arguments from stack
     // TODO: do this by just moving rsp
@@ -431,15 +430,13 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": Call");
                 int numArgs = inst->op0.value();
                 // push all the MITScript function arguments to the stack
-                // for (int i = 0; i < numArgs; ++i) {
-                //     getRbpOffset(inst->tempIndices->at(numArgs - i + 1)->stackOffset);
-                //     assm.push(x64asm::r10);
-                // }
+                // to make a contiguous array in memory
+                for (int i = 0; i < numArgs; ++i) {
+                    getRbpOffset(inst->tempIndices->at(numArgs - i + 1)->stackOffset);
+                    assm.push(x64asm::r10);
+                }
                 // putting rsp in temp0 for now because I don't want to have to
                 // write a new callHelper
-                getRbpOffset(getTempOffset(inst->tempIndices->at(2+(numArgs-1))));
-                assm.mov(x64asm::r11, x64asm::r10);
-                storeTemp(x64asm::r11, inst->tempIndices->at(0));
                 vector<x64asm::Imm64> immArgs = {
                     x64asm::Imm64{vmPointer},
                 };
@@ -768,12 +765,17 @@ void IrInterpreter::executeStep() {
             {
                 // TODO: implement
                 LOG(to_string(instructionIndex) + ": AddLabel");
+                string label = to_string(inst->op0.value());
+                assm.assemble({x64asm::LABEL_DEFN, {x64asm::Label{label}}});
                 break;
             };
         case IrOp::GarbageCollect:
             {
                 // TODO: implement
                 LOG(to_string(instructionIndex) + ": GarbageCollect");
+                vector<x64asm::Imm64> args = {x64asm::Imm64{vmPointer}};
+                vector<tempptr_t> temps; 
+                callHelper((void *) &(helper_gc), args, temps, opttemp_t());
                 break;
             };
         default:
