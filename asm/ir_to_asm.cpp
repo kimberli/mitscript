@@ -270,8 +270,10 @@ void IrInterpreter::executeStep() {
         case IrOp::AllocRecord:
             {
                 LOG(to_string(instructionIndex) + ": AllocRecord");
-                vector<x64asm::Imm64> args = {};
-                vector<tempptr_t> temps = {};
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+				};
+                vector<tempptr_t> temps;
                 callHelper((void *) &(helper_new_record), args, temps);
                 storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
@@ -279,21 +281,61 @@ void IrInterpreter::executeStep() {
         case IrOp::FieldLoad:
             {
                 LOG(to_string(instructionIndex) + ": FieldLoad");
+                string* name = new string(inst->name0.value());  // TODO: fix memory leak?
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                    x64asm::Imm64{name}
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(1),
+				};
+                callHelper((void *) &(helper_get_record_field), args, temps);
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::FieldStore:
             {
                 LOG(to_string(instructionIndex) + ": FieldStore");
+                string* name = new string(inst->name0.value());  // TODO: fix memory leak?
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                    x64asm::Imm64{name},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(0),
+                    inst->tempIndices->at(1),
+				};
+                callHelper((void *) &(helper_set_record_field), args, temps);
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::IndexLoad:
             {
                 LOG(to_string(instructionIndex) + ": IndexLoad");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(2),
+                    inst->tempIndices->at(1),
+				};
+                callHelper((void *) &(helper_get_record_index), args, temps);
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::IndexStore:
             {
                 LOG(to_string(instructionIndex) + ": IndexStore");
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(2),
+                    inst->tempIndices->at(0),
+                    inst->tempIndices->at(1),
+				};
+                callHelper((void *) &(helper_get_record_index), args, temps);
+                storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::AllocClosure:

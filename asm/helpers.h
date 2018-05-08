@@ -37,6 +37,7 @@ Record* helper_new_record(Interpreter* interpreter);
 
 String* helper_cast_string(Interpreter* interpreter, Value* val);
 
-Value* helper_get_record(Interpreter* interpreter, Record* record, string* field);
-void helper_set_record(Interpreter* interpreter, Record* record, string* field, Value* val);
-
+Value* helper_get_record_field(Interpreter* interpreter, string* field, Record* record);
+Record* helper_set_record_field(Interpreter* interpreter, string* field, Record* record, Value* val);
+Value* helper_get_record_index(Interpreter* interpreter, Value* index, Record* record);
+Record* helper_set_record_index(Interpreter* interpreter, Value* index, Record* record, Value* val);

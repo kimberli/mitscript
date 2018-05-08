@@ -92,10 +92,20 @@ String* helper_cast_string(Interpreter* interpreter, Value* val) {
     return interpreter->collector->allocate<String>(val->toString());
 }
 
-Value* helper_get_record(Interpreter* interpreter, Record* record, string* field) {
+Value* helper_get_record_field(Interpreter* interpreter, string* field, Record* record) {
 	return record->get(*field);
 }
 
-void helper_set_record(Interpreter* interpreter, Record* record, string* field, Value* val) {
-	return record->set(*field, val, *interpreter->collector);
+Record* helper_set_record_field(Interpreter* interpreter, string* field, Record* record, Value* val) {
+	record->set(*field, val, *interpreter->collector);
+	return record;
+}
+
+Value* helper_get_record_index(Interpreter* interpreter, Value* index, Record* record) {
+	return record->get(index->toString());
+}
+
+Record* helper_set_record_index(Interpreter* interpreter, Value* index, Record* record, Value* val) {
+	record->set(index->toString(), val, *interpreter->collector);
+	return record;
 }
