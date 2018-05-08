@@ -406,7 +406,6 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Sub:
             {
-                // TODO: I think this is broken
                 LOG(to_string(instructionIndex) + ": Sub");
                 //rdi and rsi
                 // load the left temp into a reg
@@ -423,7 +422,6 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Mul:
             {
-                // TODO: I think this is broken
                 LOG(to_string(instructionIndex) + ": Mul");
                 x64asm::R64 left = x64asm::rdi;
                 x64asm::R64 right = x64asm::rsi;
@@ -438,17 +436,14 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Div:
             {
-                // TODO: I think this is broken
                 LOG(to_string(instructionIndex) + ": Div");
-//                x64asm::R32 numerator_firsthalf = x64asm::rdx;
                 x64asm::R64 numerator_secondhalf = x64asm::rax;
-                loadTemp(numerator_secondhalf, inst->tempIndices->at(1));
+                loadTemp(numerator_secondhalf, inst->tempIndices->at(2));
     			assm.cdq(); // weird asm thing to sign-extend rax into rdx
                 x64asm::R64 divisor = x64asm::rbx;
-				loadTemp(divisor, inst->tempIndices->at(2));
+				loadTemp(divisor, inst->tempIndices->at(1));
                 // perform the div; result stored in rax
                 assm.idiv(x64asm::ebx);
-//                assm.assemble({IDIV_R64, {}});
                 // put the value back in the temp
                 storeTemp(x64asm::rax, inst->tempIndices->at(0));
                 break;
