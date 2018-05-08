@@ -263,7 +263,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					instTemps->push_back(curr);
 					reverse(instTemps->begin(), instTemps->end());
 					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertClosure, clos)));
-					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Call, instTemps)));
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Call, optint_t(inst.operand0), instTemps)));
 	                break;
 	            }
 	        case BcOp::Return:
