@@ -9,7 +9,6 @@ class Interpreter;
 class IrInterpreter;
 
 using namespace std; 
-//using namespace x64asm; 
 
 class IrInterpreter {
 private: 
@@ -22,7 +21,7 @@ private:
     int instructionIndex;
     bool finished;
 
-    void callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temp);
+    void callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temp, opttemp_t returnTemp);
     void prolog();
     void epilog();
     uint32_t spaceToAllocate;

@@ -98,7 +98,7 @@ x64asm::Function IrInterpreter::run() {
     return asmFunc;
 }
 
-void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps) {
+void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps, opttemp_t returnTemp) {
     // STEP 1: save caller-saved registers to stack
     for (int i = 0; i < numCallerSaved; ++i) {
         assm.push(callerSavedRegs[i]);
@@ -148,6 +148,10 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
         for (int i = 0; i < numArgs - numArgRegs; ++i) {
             assm.pop(x64asm::r10);
         }
+    }
+
+    if (returnTemp) {
+        storeTemp(x64asm::rax, returnTemp.value());
     }
 
     // STEP 4: restore caller-saved registers from stack
@@ -238,9 +242,8 @@ void IrInterpreter::executeStep() {
                     x64asm::Imm64{name},
                 };
                 vector<tempptr_t> temps;
-                callHelper((void *) &(helper_load_global), args, temps);
-                // put the return val in the temp
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_load_global), args, temps, returnTemp);
                 break;
             }
         case IrOp::StoreLocal:
@@ -264,7 +267,7 @@ void IrInterpreter::executeStep() {
                     x64asm::Imm64{name},
                 };
                 vector<tempptr_t> temps = {inst->tempIndices->at(0)};
-                callHelper((void *) &(helper_store_global), args, temps);
+                callHelper((void *) &(helper_store_global), args, temps, opttemp_t());
                 break;
             }
         case IrOp::AllocRecord:
@@ -274,8 +277,8 @@ void IrInterpreter::executeStep() {
                     x64asm::Imm64{vmPointer},
 				};
                 vector<tempptr_t> temps;
-                callHelper((void *) &(helper_new_record), args, temps);
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_new_record), args, temps, returnTemp);
                 break;
             };
         case IrOp::FieldLoad:
@@ -289,8 +292,8 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1),
 				};
-                callHelper((void *) &(helper_get_record_field), args, temps);
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_get_record_field), args, temps, returnTemp);
                 break;
             };
         case IrOp::FieldStore:
@@ -305,8 +308,8 @@ void IrInterpreter::executeStep() {
                     inst->tempIndices->at(0),
                     inst->tempIndices->at(1),
 				};
-                callHelper((void *) &(helper_set_record_field), args, temps);
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_set_record_field), args, temps, returnTemp);
                 break;
             };
         case IrOp::IndexLoad:
@@ -319,8 +322,8 @@ void IrInterpreter::executeStep() {
                     inst->tempIndices->at(2),
                     inst->tempIndices->at(1),
 				};
-                callHelper((void *) &(helper_get_record_index), args, temps);
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_get_record_index), args, temps, returnTemp);
                 break;
             };
         case IrOp::IndexStore:
@@ -334,8 +337,8 @@ void IrInterpreter::executeStep() {
                     inst->tempIndices->at(0),
                     inst->tempIndices->at(1),
 				};
-                callHelper((void *) &(helper_get_record_index), args, temps);
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_get_record_index), args, temps, returnTemp);
                 break;
             };
         case IrOp::AllocClosure:
@@ -350,8 +353,8 @@ void IrInterpreter::executeStep() {
                 };
                 // the rest of the args are basically the temps minus temp0
                 vector<tempptr_t> temps(inst->tempIndices->begin() + 1, inst->tempIndices->end());
-                callHelper((void *) &(helper_alloc_closure), immArgs, temps);
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_alloc_closure), immArgs, temps, returnTemp);
                 break;
             };
         case IrOp::Call:
@@ -376,8 +379,8 @@ void IrInterpreter::executeStep() {
                     inst->tempIndices->at(0),
                     inst->tempIndices->at(1)
                 };
-                callHelper((void *) &(helper_call), immArgs, temps);
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_call), immArgs, temps, returnTemp);
                 break;
             };
         case IrOp::Return:
@@ -397,9 +400,8 @@ void IrInterpreter::executeStep() {
                     inst->tempIndices->at(2),
                     inst->tempIndices->at(1)
                 };
-                callHelper((void *) &(helper_add), args, temps);
-                // put the return val in the temp
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_add), args, temps, returnTemp);
                 break;
             };
         case IrOp::Sub:
@@ -567,7 +569,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_int), args, temps);
+                callHelper((void *) &(helper_assert_int), args, temps, opttemp_t());
                 break;
             };
         case IrOp::AssertBoolean:
@@ -577,7 +579,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_bool), args, temps);
+                callHelper((void *) &(helper_assert_bool), args, temps, opttemp_t());
                 break;
             };
         case IrOp::AssertString:
@@ -587,7 +589,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_str), args, temps);
+                callHelper((void *) &(helper_assert_str), args, temps, opttemp_t());
                 break;
             };
         case IrOp::AssertRecord:
@@ -597,7 +599,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_record), args, temps);
+                callHelper((void *) &(helper_assert_record), args, temps, opttemp_t());
                 break;
             };
         case IrOp::AssertFunction:
@@ -607,7 +609,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_func), args, temps);
+                callHelper((void *) &(helper_assert_func), args, temps, opttemp_t());
                 break;
             };
         case IrOp::AssertClosure:
@@ -617,7 +619,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_closure), args, temps);
+                callHelper((void *) &(helper_assert_closure), args, temps, opttemp_t());
                 break;
             };
         case IrOp::AssertValWrapper: 
@@ -629,7 +631,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_valwrapper), args, temps);
+                callHelper((void *) &(helper_assert_valwrapper), args, temps, opttemp_t());
                 break;
             };
         case IrOp::UnboxInteger:
@@ -639,8 +641,8 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1)
                 };
-                callHelper((void *) &(helper_unbox_int), args, temps);
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_unbox_int), args, temps, returnTemp);
                 break;
             };
         case IrOp::UnboxBoolean:
@@ -650,8 +652,8 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1)
                 };
-                callHelper((void *) &(helper_unbox_bool), args, temps);
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_unbox_bool), args, temps, returnTemp);
                 break;
             };
         case IrOp::NewInteger:
@@ -663,8 +665,8 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1)
                 };
-                callHelper((void *) &(helper_new_integer), args, temps);
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_new_integer), args, temps, returnTemp);
                 break;
             };
         case IrOp::NewBoolean:
@@ -676,8 +678,8 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1)
                 };
-                callHelper((void *) &(helper_new_boolean), args, temps);
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_new_boolean), args, temps, returnTemp);
                 break;
             };
         case IrOp::CastString:
@@ -689,8 +691,8 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1)
                 };
-                callHelper((void *) &(helper_cast_string), args, temps);
-                storeTemp(x64asm::rax, inst->tempIndices->at(0));
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_cast_string), args, temps, returnTemp);
                 break;
             };
         case IrOp::AddLabel:

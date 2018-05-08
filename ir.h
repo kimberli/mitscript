@@ -15,6 +15,7 @@ typedef experimental::optional<int32_t> optint_t;
 typedef experimental::optional<string> optstr_t;
 typedef int64_t offset_t;
 typedef shared_ptr<Temp> tempptr_t;
+typedef experimental::optional<tempptr_t> opttemp_t;
 typedef vector<tempptr_t> TempList;
 typedef shared_ptr<TempList> TempListPtr;
 
