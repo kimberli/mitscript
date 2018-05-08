@@ -34,6 +34,7 @@ bool helper_unbox_bool(Boolean* b);
 Integer* helper_new_integer(Interpreter* interpreter, int32_t val);
 Boolean* helper_new_boolean(Interpreter* interpreter, bool val);
 Record* helper_new_record(Interpreter* interpreter);
+ValWrapper* helper_new_valwrapper(Interpreter* interpreter, Constant* ptr);
 
 String* helper_cast_string(Interpreter* interpreter, Value* val);
 

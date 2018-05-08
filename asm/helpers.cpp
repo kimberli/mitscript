@@ -88,6 +88,10 @@ Record* helper_new_record(Interpreter* interpreter) {
     return interpreter->collector->allocate<Record>();
 }
 
+ValWrapper* helper_new_valwrapper(Interpreter* interpreter, Constant* ptr) {
+    return interpreter->collector->allocate<ValWrapper>(ptr);
+}
+
 String* helper_cast_string(Interpreter* interpreter, Value* val) {
     return interpreter->collector->allocate<String>(val->toString());
 }
