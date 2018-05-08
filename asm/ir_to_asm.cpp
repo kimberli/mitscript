@@ -52,11 +52,37 @@ void IrInterpreter::prolog() {
     for (int i = 0; i < numCalleeSaved; ++i) {
         assm.push(calleeSavedRegs[i]);
     }
-
-    // allocate space for locals, refs, and temps on the stack
-    // by decrementing rsp 
-    spaceToAllocate = 8*(func->local_count_ + func->ref_count_ + func->temp_count_); 
+// allocate space for locals, refs, and temps on the stack // by decrementing rsp 
+// and note that we are only storing on ref pointer by pushing the pointer to
+// the array
+    spaceToAllocate = 8*(func->local_count_ + 1 + func->temp_count_); 
     assm.assemble({x64asm::SUB_R64_IMM32, {x64asm::rsp, x64asm::Imm32{spaceToAllocate}}});
+
+    // implement putting args in the correct locals
+    for (uint64_t i = 0; i < func->parameter_count_; i++) {
+        // rd1 stores arg0 which is the list of arguments to the MS func
+        // put the pointer to the start of the args in a reg
+        
+        // Calculate mem address for the local
+        getRbpOffset(getLocalOffset(i));
+        // syntax for scaling: base, offset, scale 
+        // move offset into r11
+        assm.mov(x64asm::r11, x64asm::Imm64{i});
+        // move val of arg into r11
+        assm.assemble({x64asm::MOV_R64_M64, {
+                x64asm::r11, 
+                x64asm::M64{x64asm::rdi, x64asm::r11, x64asm::Scale::TIMES_8}
+        }});
+        // move r11 into address stored in r10
+        assm.mov(x64asm::M64{x64asm::r10}, x64asm::r11);
+    }
+
+    // put a pointer to the references onto the stack
+    // ptr to ref array is the second arg
+    assm.mov(x64asm::r11, x64asm::Imm64{getRefArrayOffset()});
+    assm.mov(x64asm::M64{
+                x64asm::rbp, x64asm::r11, x64asm::Scale::TIMES_1
+            }, x64asm::rsi);
 }
 
 void IrInterpreter::epilog() {
@@ -164,8 +190,8 @@ uint32_t IrInterpreter::getLocalOffset(uint32_t localIndex) {
     return 8*(1 + numCalleeSaved + localIndex);
 }
 
-uint32_t IrInterpreter::getRefOffset(uint32_t refIndex) {
-    return 8*(1 + numCalleeSaved + func->local_count_ + refIndex);
+uint32_t IrInterpreter::getRefArrayOffset() {
+    return 8*(1 + numCalleeSaved + func->local_count_);
 }
 
 uint32_t IrInterpreter::getTempOffset(tempptr_t temp) {
@@ -251,7 +277,7 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": StoreLocal");
                 // first put the temp val in a reg
                 loadTemp(x64asm::rdi, inst->tempIndices->at(0));
-                // put find out where the constant is located
+                // put find out where the local is located
                 int64_t localIndex = inst->op0.value();
                 getRbpOffset(getLocalOffset(localIndex)); // address of local in r10
                 // move the val from the reg to memory
@@ -365,16 +391,22 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": Call");
                 int numArgs = inst->op0.value();
                 // push all the MITScript function arguments to the stack
+                // to make a contiguous array in memory
                 for (int i = 0; i < numArgs; ++i) {
                     getRbpOffset(inst->tempIndices->at(numArgs - i + 1)->stackOffset);
                     assm.push(x64asm::r10);
                 }
                 // putting rsp in temp0 for now because I don't want to have to
                 // write a new callHelper
-                storeTemp(x64asm::rsp, inst->tempIndices->at(0));
                 vector<x64asm::Imm64> immArgs = {
                     x64asm::Imm64{vmPointer},
                 };
+                // TODO: fix this convention
+                // rn we are putting rsp into temp 0 to easily pass 
+                // into our helper
+                // TODO: i think we need to inc rsp here cause I think rsp
+                // points to the last empty space
+                storeTemp(x64asm::rsp, inst->tempIndices->at(0));
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0),
                     inst->tempIndices->at(1)

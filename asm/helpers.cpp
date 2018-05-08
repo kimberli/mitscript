@@ -33,7 +33,7 @@ Value* helper_call(Interpreter* interpreter, Constant* args[], Closure* closure)
     //
     //
     // So the helper in the vm should take A) a closure and B) a list of args.
-    // TODO
+    // TODO reverse the args bc args[] gives them in the wrong order 
 }
 
 void helper_gc(Interpreter* interpreter) {

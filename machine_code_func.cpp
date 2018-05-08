@@ -106,7 +106,7 @@ public:
         compiled_ = true;
     }
 
-    Value *call(const vector<Value *> args) {
+    Value *call(const vector<Value**> args) {
         assert(compiled_);
         assert(args.size() == parameter_count_);
         // copy contents into buffer
@@ -117,7 +117,7 @@ public:
 
 private:
     bool compiled_;
-    vector<Value *> buffer_;
+    vector<Value **> buffer_;
     size_t parameter_count_;
 
     x64asm::Function trampoline_;

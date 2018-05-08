@@ -502,15 +502,22 @@ Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
     IrInterpreter iri = IrInterpreter(&irf, this);
     x64asm::Function asmFunc = iri.run();
     // create a MachineCodeFunction object
-    MachineCodeFunction mcf = MachineCodeFunction(clos->func->parameter_count_, asmFunc);
-    // call mcf.call(args) and it will run properly in assembly presumably
-    // TODO: be more intelligent about how you're compiling stuff
-    // TODO: this obeys NO conventions about passing refs
+    MachineCodeFunction mcf = MachineCodeFunction(2, asmFunc);
     mcf.compile();
     LOG("done compiling mcf");
-    // we need to pass the args as Values
-    vector<Value*> argsVals (argsList.begin(), argsList.end());
-    Value* result = mcf.call(argsVals);
+    // put the args in an array
+    Value** argsArray = new Value*[argsList.size()];
+    for (int i = 0; i < argsList.size(); i++) {
+        argsArray[i] = argsList[i];
+    }
+    // put the refs in an array 
+    vector<ValWrapper*> refs = clos->refs;
+    Value** refsArray = new Value*[refs.size()];
+    for (int i = 0; i < argsList.size(); i++) {
+        refsArray[i] = refs[i];
+    }
+    vector<Value**> mcfArgs = {argsArray, refsArray};
+    Value* result = mcf.call(mcfArgs);
     LOG("done calling mcf");
     return result;
 }

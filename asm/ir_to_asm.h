@@ -29,7 +29,7 @@ private:
     void executeStep();
     uint32_t getTempOffset(tempptr_t temp);
     uint32_t getLocalOffset(uint32_t localIndex);
-    uint32_t getRefOffset(uint32_t refIndex);
+    uint32_t getRefArrayOffset();
     void getRbpOffset(uint32_t offset);
     void loadTemp(x64asm::R64 reg, tempptr_t temp);
     void storeTemp(x64asm::R64 reg, tempptr_t temp);
