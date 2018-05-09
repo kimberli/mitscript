@@ -22,15 +22,13 @@ Value* helper_alloc_closure(Interpreter* interpreter, int numRefs, Function* fun
     return interpreter->collector->allocate<Closure>(refVec, func);
 }
 
-Value* helper_call(Interpreter* interpreter, Constant** args, Closure* closure) {
-    // this function needs to take in args and somehow put them in the right place. Maybe put them into a vector that could be used by the vm immediately or could be passed in the MachineCodeFunction from the example
-    // this function takes the args from the assembly stack and puts them in a vector
-    // and then
-    //
-    //
-    //
-    // So the helper in the vm should take A) a closure and B) a list of args.
-    // TODO reverse the args bc args[] gives them in the wrong order 
+Value* helper_call(Interpreter* interpreter, int numArgs, Constant** args, Closure* closure) {
+    // package this stuff into the right format and call back the vm 
+    vector<Constant*> argVec;
+    for (int i = 0; i < numArgs; i++) {
+        argVec.push_back(args[i]);
+    }
+    return interpreter->call(argVec, closure);
 }
 
 void helper_gc(Interpreter* interpreter) {

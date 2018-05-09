@@ -455,7 +455,13 @@ Value* Interpreter::call(vector<Constant*> argsList, Value* closure) {
         throw RuntimeException("expected " + to_string(clos->func->parameter_count_) + " arguments, got " + to_string(argsList.size()));
     }
     if (shouldCallAsm) {
-        return callAsm(argsList, clos);
+        // should still check for native functions
+        NativeFunction* nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
+        if (nativeFunc != NULL) {
+            callVM(argsList, clos);
+        } else {
+            return callAsm(argsList, clos);
+        }
     } else {
         return callVM(argsList, clos);
     }

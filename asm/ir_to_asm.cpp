@@ -465,6 +465,7 @@ void IrInterpreter::executeStep() {
                 // write a new callHelper
                 vector<x64asm::Imm64> immArgs = {
                     x64asm::Imm64{vmPointer},
+                    x64asm::Imm64{numArgs}
                 };
 
                 // TODO: we might need to inc rsp here cause I think rsp

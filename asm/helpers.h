@@ -16,7 +16,7 @@ Value* helper_add(Interpreter* interpreter, Value* left, Value* right);
 
 Value* helper_alloc_closure(Interpreter* interpreter, int numRefs, Function* func, ValWrapper** refs);
 
-Value* helper_call(Interpreter* interpreter, Constant* args[], Closure* closure);
+Value* helper_call(Interpreter* interpreter, int numArgs, Constant** args, Closure* closure);
 
 void helper_gc(Interpreter* interpreter);
 
