@@ -458,7 +458,7 @@ Value* Interpreter::call(vector<Constant*> argsList, Value* closure) {
         // should still check for native functions
         NativeFunction* nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
         if (nativeFunc != NULL) {
-            callVM(argsList, clos);
+            return callVM(argsList, clos);
         } else {
             return callAsm(argsList, clos);
         }
@@ -491,11 +491,13 @@ Value* Interpreter::callVM(vector<Constant*> argsList, Closure* clos) {
     if (nativeFunc != NULL) {
         Constant* val = nativeFunc->evalNativeFunction(*newFrame, *collector);
         frames.back()->opStackPush(val);
+		return val;
     } else if (newFrame->numInstructions() != 0) {
         frames.push_back(newFrame);
     } else {
         Value* returnVal = collector->allocate<None>();
         frames.back()->opStackPush(returnVal);
+		return returnVal;
     }
 }
 
