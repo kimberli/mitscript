@@ -649,21 +649,23 @@ void IrInterpreter::executeStep() {
         case IrOp::Goto:
             {
                 LOG(to_string(instructionIndex) + ": Goto");
-                int32_t labelIdx = inst->op0.value();
-                assm.jmp(x64asm::Label{to_string(labelIdx)});
+                string labelStr = to_string(inst->op0.value());
+                LOG("jumping to label " + labelStr);
+                assm.jmp_1(x64asm::Label{labelStr});
                 break;
             };
         case IrOp::If:
             {
                 LOG(to_string(instructionIndex) + ": If");
-                int32_t labelIdx = inst->op0.value();
+                string labelStr = to_string(inst->op0.value());
                 // load the temp into a reg
                 x64asm::R64 left = x64asm::rdi;
                 x64asm::R64 right = x64asm::rsi;
                 loadTemp(left, inst->tempIndices->at(0));
                 assm.mov(right, x64asm::Imm64{1});
                 assm.cmp(left, right);
-                assm.je(x64asm::Label{to_string(labelIdx)});
+                LOG("jumping if to label " + labelStr);
+                assm.je_1(x64asm::Label{labelStr});
                 break;
             };
        case IrOp::AssertInteger:
@@ -801,15 +803,14 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::AddLabel:
             {
-                // TODO: implement
                 LOG(to_string(instructionIndex) + ": AddLabel");
-                string label = to_string(inst->op0.value());
-                assm.assemble({x64asm::LABEL_DEFN, {x64asm::Label{label}}});
+                string labelStr = to_string(inst->op0.value());
+                LOG("adding label " + labelStr);
+                assm.bind(x64asm::Label{labelStr});
                 break;
             };
         case IrOp::GarbageCollect:
             {
-                // TODO: implement
                 LOG(to_string(instructionIndex) + ": GarbageCollect");
                 vector<x64asm::Imm64> args = {x64asm::Imm64{vmPointer}};
                 vector<tempptr_t> temps; 

@@ -35,8 +35,8 @@ void IrCompiler::decLabelOffsets() {
     }
 }
 int32_t IrCompiler::addLabelOffset(int32_t offset) {
-    labelOffsets[labelCounter] = offset;
     labelCounter++;
+    labelOffsets[labelCounter] = offset;
     return labelCounter;
 }
 void IrCompiler::doUnaryArithmetic(IrOp operation, bool toBoolean) {
