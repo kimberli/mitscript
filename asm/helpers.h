@@ -29,6 +29,7 @@ void helper_assert_record(Value* v);
 void helper_assert_func(Value* v);
 void helper_assert_closure(Value* v);
 void helper_assert_valwrapper(Value* v);
+void helper_assert_nonzero(int32_t v);
 
 int32_t helper_unbox_int(Integer* v);
 bool helper_unbox_bool(Boolean* b);

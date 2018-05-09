@@ -67,6 +67,12 @@ void helper_assert_valwrapper(Value* v) {
     v->cast<ValWrapper>();
 }
 
+void helper_assert_nonzero(int32_t v) {
+    if (v == 0) {
+		throw IllegalArithmeticException("cannot divide by 0");
+	};
+}
+
 int32_t helper_unbox_int(Integer* v) {
     return v->value;
 }

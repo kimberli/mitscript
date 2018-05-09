@@ -543,6 +543,11 @@ void IrInterpreter::executeStep() {
                 x64asm::R64 numerator_secondhalf = x64asm::rax;
                 loadTemp(numerator_secondhalf, inst->tempIndices->at(2));
     			assm.cdq(); // weird asm thing to sign-extend rax into rdx
+                vector<x64asm::Imm64> args = {};
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(1),
+                };
+                callHelper((void *) &(helper_assert_nonzero), args, temps, opttemp_t());
                 x64asm::R64 divisor = x64asm::rbx;
 				loadTemp(divisor, inst->tempIndices->at(1));
                 // perform the div; result stored in rax
