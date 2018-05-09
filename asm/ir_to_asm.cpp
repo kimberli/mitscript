@@ -197,7 +197,7 @@ uint32_t IrInterpreter::getRefArrayOffset() {
 }
 
 uint32_t IrInterpreter::getTempOffset(tempptr_t temp) {
-    return 8*(1 + numCalleeSaved + func->local_count_ + func->ref_count_ + temp->stackOffset);
+    return 8*(1 + numCalleeSaved + func->local_count_ + 1 + temp->stackOffset);
 }
 
 void IrInterpreter::getRbpOffset(uint32_t offset) {
@@ -421,8 +421,9 @@ void IrInterpreter::executeStep() {
                 tempptr_t refTemp;
                 for (int i = 0; i < numRefs; ++i) {
                     // push in reverse order, so first ref is lowest 
-                    refTemp = inst->tempIndices->at(numRefs - i - 1);
+                    refTemp = inst->tempIndices->at(2 + numRefs - i - 1);
                     getRbpOffset(getTempOffset(refTemp)); // leaves correct address into r10
+                    assm.mov(x64asm::r10, x64asm::M64{x64asm::r10});
                     assm.push(x64asm::r10);
                 }
 
@@ -450,28 +451,37 @@ void IrInterpreter::executeStep() {
                 int numArgs = inst->op0.value();
                 // push all the MITScript function arguments to the stack
                 // to make a contiguous array in memory
+                tempptr_t argTemp;
                 for (int i = 0; i < numArgs; ++i) {
+                    // push in reverse order, so first arg is lowest
                     // TODO: must use getTempOffset here! 
-                    getRbpOffset(inst->tempIndices->at(numArgs - i + 1)->stackOffset);
+                    argTemp = inst->tempIndices->at(2 + numArgs - i - 1);
+                    getRbpOffset(getTempOffset(argTemp)); // leaves correct address into r10
+                    assm.mov(x64asm::r10, x64asm::M64{x64asm::r10});
                     assm.push(x64asm::r10);
                 }
+
                 // putting rsp in temp0 for now because I don't want to have to
                 // write a new callHelper
                 vector<x64asm::Imm64> immArgs = {
                     x64asm::Imm64{vmPointer},
                 };
-                // TODO: fix this convention
-                // rn we are putting rsp into temp 0 to easily pass 
-                // into our helper
-                // TODO: i think we need to inc rsp here cause I think rsp
+
+                // TODO: we might need to inc rsp here cause I think rsp
                 // points to the last empty space
+                // put rsp into a temp to pas easily
                 storeTemp(x64asm::rsp, inst->tempIndices->at(0));
                 vector<tempptr_t> temps = {
-                    inst->tempIndices->at(0),
-                    inst->tempIndices->at(1)
+                    inst->tempIndices->at(0), // args 
+                    inst->tempIndices->at(1) // closure
                 };
                 tempptr_t returnTemp = inst->tempIndices->at(0);
                 callHelper((void *) &(helper_call), immArgs, temps, returnTemp);
+                // clear the stack
+                for (int i = 0; i < numArgs; i++) {
+                    assm.pop(x64asm::r10);
+                };
+                
                 break;
             };
         case IrOp::Return:
