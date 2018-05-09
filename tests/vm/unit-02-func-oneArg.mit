@@ -1,0 +1,4 @@
+f = fun(x) {
+    print(x);
+};
+f("hey");
