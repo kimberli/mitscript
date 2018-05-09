@@ -299,38 +299,51 @@ void IrInterpreter::executeStep() {
                 callHelper((void *) &(helper_store_global), args, temps, opttemp_t());
                 break;
             }
-        case IrOp::PushReference: 
+        case IrOp::PushLocalRef: 
             {
-                LOG(to_string(instructionIndex) + ": PushReference");
+                LOG(to_string(instructionIndex) + ": PushLocalRef");
                 vector<x64asm::Imm64> args = {x64asm::Imm64{vmPointer}};
 
                 int64_t localIndex = inst->op0.value();
                 getRbpOffset(getLocalOffset(localIndex)); // puts the address of the local in r10
-                assm.mov(x64asm::rdi, x64asm::r10); // r10 will be used later in storeTemp
-                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // loads the actual value
+                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // loads val into rdi
                 storeTemp(x64asm::rdi, inst->tempIndices->at(0));
      
                 vector<tempptr_t> temps = {inst->tempIndices->at(0)};
                 callHelper((void *) &(helper_new_valwrapper), args, temps, opttemp_t(inst->tempIndices->at(0)));
                 break;
             }
-        case IrOp::LoadReference:
+        case IrOp::PushFreeRef: 
             {
-                LOG(to_string(instructionIndex) + ": LoadReference");
-                // get the mem address of the ref array; put in rdi
+                LOG(to_string(instructionIndex) + ": PushFreeRef");
+                // the ValWrapper is already sitting in the refs array;
+                // just move it into the temp 
+                
+                // get address of ref array
                 getRbpOffset(getRefArrayOffset());
                 assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10});
                 // increment rdi to index into ref array
                 uint32_t offset = 8*inst->op0.value();
                 assm.assemble({x64asm::ADD_R64_IMM32, {x64asm::rdi, x64asm::Imm32{offset}}});
-                // now rdi holds the mem of the pointer; we gotta deref that
-                // dereferences to get the ValWrapper
-                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10});
-                // dereference to get the Value*
-                // TODO check if this works
-                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10});
-                // store the Value* in a temp 
+                // one deref gets us to the val wrapper
+                assm.mov(x64asm::rdi, x64asm::M64{x64asm::rdi});
+                // store this in a temp 
                 storeTemp(x64asm::rdi, inst->tempIndices->at(0));
+                break;
+            }
+        case IrOp::LoadReference:
+            {
+                LOG(to_string(instructionIndex) + ": LoadReference");
+                // dereferences to get to the object itself
+                vector<x64asm::Imm64> args;
+                vector<tempptr_t> temps = {inst->tempIndices->at(1)};
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_unbox_valwrapper), args, temps, returnTemp);
+ 
+                // TODO: make sure you can deref a val like this
+                //assm.mov(x64asm::rdi, x64asm::M64{x64asm::rdi});
+                // store the Value* in a temp 
+                //storeTemp(x64asm::rdi, inst->tempIndices->at(0));
                 break;
             }
         case IrOp::AllocRecord:
@@ -736,9 +749,7 @@ void IrInterpreter::executeStep() {
         case IrOp::AssertValWrapper: 
             {
                 LOG(to_string(instructionIndex) + ": AssertValWrapper");
-                vector<x64asm::Imm64> args = {
-                    x64asm::Imm64{vmPointer},
-                };
+                vector<x64asm::Imm64> args;
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };

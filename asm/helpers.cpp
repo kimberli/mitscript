@@ -81,6 +81,10 @@ bool helper_unbox_bool(Boolean* b) {
     return b->value;
 }
 
+Value* helper_unbox_valwrapper(ValWrapper* v) {
+    return v->ptr;
+}
+
 Integer* helper_new_integer(Interpreter* interpreter, int32_t val) {
     return interpreter->collector->allocate<Integer>(val);
 }

@@ -169,14 +169,32 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        case BcOp::PushReference:
 	            {
                     tempptr_t curr = getNewTemp();
-					pushInstruction(make_shared<IrInstruction>(IrOp::PushReference, inst.operand0, curr));
+                    int instrIdx = inst.operand0.value();
+                    // if the index falls within the locals array, 
+                    if (instrIdx < func->local_reference_vars_.size()) {
+                        // then generate a PushLocalRef instr 
+                        // TOD0: make this preprocessing more efficient
+                        optint_t localIndex; 
+                        for (int i = 0; i < func->local_vars_.size(); i++) {
+                            if (func->local_vars_.at(i) == func->local_reference_vars_.at(instrIdx)) {
+                                localIndex = optint_t(i);
+                                break;
+                            }
+                        } 
+					    pushInstruction(make_shared<IrInstruction>(IrOp::PushLocalRef, localIndex, curr));
+                    } else {
+                        // else, generate a PushFreeRef instruction
+                        optint_t refIndex = optint_t(instrIdx - func->local_reference_vars_.size()); 
+					    pushInstruction(make_shared<IrInstruction>(IrOp::PushFreeRef, refIndex, curr));
+                    }
                     pushTemp(curr);
 	                break;
 	            }
 	        case BcOp::LoadReference:
 	            {
+                    tempptr_t ref = popTemp();
                     tempptr_t curr = getNewTemp();
-					pushInstruction(make_shared<IrInstruction>(IrOp::LoadReference, inst.operand0, curr));
+					pushInstruction(make_shared<IrInstruction>(IrOp::LoadReference, curr, ref));
                     pushTemp(curr);
 	                break;
 	            }
@@ -418,5 +436,18 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 };
 
 IrFunc IrCompiler::toIr() {
+//    // do some preprocessing here 
+//    // loop through the locals list, create a map of local to index 
+//    map<string, int> localIndices; 
+//    for (int i = 0; i < func->local_vars_.size(); i++) {
+//        //localIndices[func->local_vars_.at(i)] =  i;
+//        localIndices.insert({func->local_vars_.at(i), i});
+//    }
+//    // create a vector same size as local_ref_vars_ but w/ indices instead
+//    // of strings
+//    for (string var : func->local_reference_vars_) {
+//        int idx = localIndices.at(var);
+//        local_ref_var_indices.push_back(0);
+//    }
 	return toIrFunc(func);
 };

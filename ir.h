@@ -67,11 +67,23 @@ enum class IrOp {
     // op0: index of the local to take the reference of
     // temp0: temp index to store reference into
     // Result: temp at temp0 contains reference to the local variable
-    PushReference,
+    //PushReference,
+
+    // Description: Store a reference to a local variable into a temp
+    // op0: index of the local to take the reference of
+    // temp0: temp index to store reference into
+    // Result: temp at temp0 contains reference to the local variable
+    PushLocalRef,
+
+    // Description: Store a reference to a free variable into a temp
+    // op0: index of the free var to store the reference of
+    // temp0: temp index to store reference into
+    // Result: temp at temp0 contains reference to the local variable
+    PushFreeRef,
 
     // Description: Load the value of a reference into a temp
-    // op0: index of the reference to load
     // temp0: temp index to store into
+    // temp1: the temp storing the reference to load
     // Result: temp at temp0 contains value of the reference
     LoadReference,
 

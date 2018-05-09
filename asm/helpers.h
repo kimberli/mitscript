@@ -33,6 +33,7 @@ void helper_assert_nonzero(int32_t v);
 
 int32_t helper_unbox_int(Integer* v);
 bool helper_unbox_bool(Boolean* b);
+Value* helper_unbox_valwrapper(ValWrapper* v);
 
 Integer* helper_new_integer(Interpreter* interpreter, int32_t val);
 Boolean* helper_new_boolean(Interpreter* interpreter, bool val);
