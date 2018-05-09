@@ -189,21 +189,24 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::FieldLoad:
 	            {
+                    // pop and assert record
 					tempptr_t record = popTemp();
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertRecord, record)));
+
                     optstr_t field = func->names_[inst.operand0.value()];
+
                     tempptr_t curr = getNewTemp();
                     pushTemp(curr);
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, record});
-					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertRecord, record)));
 					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::FieldLoad, field, instTemps)));
 	                break;
 	            }
 	        case BcOp::FieldStore:
 	            {
-					tempptr_t record = popTemp();
                     optstr_t field = func->names_[inst.operand0.value()];
 					tempptr_t value = popTemp();
+					tempptr_t record = popTemp();
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{record, value});
 					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertRecord, record)));
@@ -212,26 +215,39 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::IndexLoad:
 	            {
-					tempptr_t record = popTemp();
+                    // get index and cast to string
 					tempptr_t index = popTemp();
-                    tempptr_t curr = getNewTemp();
-                    pushTemp(curr);
+                    tempptr_t indexStr = getNewTemp();
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::CastString, indexStr, index)));
+
+                    // get and confirm record to load into
+					tempptr_t record = popTemp();
+                    pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertRecord, record)));
+                    
+                    // perform the operation 
+                    tempptr_t ret = getNewTemp();
+                    pushTemp(ret);
                     TempListPtr instTemps = make_shared<TempList>(
-                                TempList{curr, record, index});
-					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertRecord, record)));
-					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::CastString, index)));
+                                TempList{ret, record, indexStr});
 					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::IndexLoad, instTemps)));
 	                break;
 	            }
 	        case BcOp::IndexStore:
 	            {
-					tempptr_t record = popTemp();
-					tempptr_t index = popTemp();
 					tempptr_t value = popTemp();
-                    TempListPtr instTemps = make_shared<TempList>(
-                                TempList{record, value, index});
+
+                    // get pop and cast index to string
+					tempptr_t index = popTemp();
+                    tempptr_t indexStr = getNewTemp();
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::CastString, indexStr, index)));
+
+                    // get and assert record
+					tempptr_t record = popTemp();
 					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::AssertRecord, record)));
-					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::CastString, index)));
+
+                    // store value
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{record, value, indexStr});
 					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::IndexStore, instTemps)));
 	                break;
 	            }
