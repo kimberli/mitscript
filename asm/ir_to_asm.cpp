@@ -323,7 +323,7 @@ void IrInterpreter::executeStep() {
                         x64asm::M64{x64asm::rbp, x64asm::rdi, x64asm::Scale::TIMES_8}
                 }});
                 // increment rdi to index into ref array
-                int32_t offset = 8*inst->op0.value();
+                uint32_t offset = 8*inst->op0.value();
                 assm.assemble({x64asm::ADD_R64_IMM32, {x64asm::rdi, x64asm::Imm32{offset}}});
                 // now rdi holds the mem of the pointer; we gotta deref that
                 // dereferences to get the ValWrapper
@@ -417,9 +417,28 @@ void IrInterpreter::executeStep() {
                     x64asm::Imm64{(uint64_t)numRefs},
                 };
                 // the rest of the args are basically the temps minus temp0
-                vector<tempptr_t> temps(inst->tempIndices->begin() + 1, inst->tempIndices->end());
+                // create an "array" by pushing these to the stack 
+                tempptr_t refTemp;
+                for (int i = 0; i < numRefs; ++i) {
+                    // push in reverse order, so first ref is lowest 
+                    refTemp = inst->tempIndices->at(numRefs - i - 1);
+                    getRbpOffset(getTempOffset(refTemp)); // leaves correct address into r10
+                    assm.push(x64asm::r10);
+                }
+
+                // store the array pointer in a temp so callHelper can use it
+                storeTemp(x64asm::rsp, inst->tempIndices->at(0));
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(1), // function
+                    inst->tempIndices->at(0), // array of refs
+                };
+
                 tempptr_t returnTemp = inst->tempIndices->at(0);
                 callHelper((void *) &(helper_alloc_closure), immArgs, temps, returnTemp);
+                // clear the stack
+                for (int i = 0; i < numRefs; i++) {
+                    assm.pop(x64asm::r10);
+                };
                 break;
             };
         case IrOp::Call:
@@ -432,6 +451,7 @@ void IrInterpreter::executeStep() {
                 // push all the MITScript function arguments to the stack
                 // to make a contiguous array in memory
                 for (int i = 0; i < numArgs; ++i) {
+                    // TODO: must use getTempOffset here! 
                     getRbpOffset(inst->tempIndices->at(numArgs - i + 1)->stackOffset);
                     assm.push(x64asm::r10);
                 }

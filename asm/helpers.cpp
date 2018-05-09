@@ -14,14 +14,11 @@ Value* helper_add(Interpreter* interpreter, Value* left, Value* right) {
     return interpreter->add(left, right);
 }
 
-Value* helper_alloc_closure(Interpreter* interpreter, int numRefs, Function* func, ValWrapper* refs...) {
-    va_list args;
-    va_start(args, refs);
+Value* helper_alloc_closure(Interpreter* interpreter, int numRefs, Function* func, ValWrapper** refs) {
     vector<ValWrapper*> refVec;
     for (int i = 0; i < numRefs; i++) {
-        refVec.push_back(va_arg(args, ValWrapper*));
+        refVec.push_back(refs[i]); // these should be in order just like that
     }
-    va_end(args);
     return interpreter->collector->allocate<Closure>(refVec, func);
 }
 
