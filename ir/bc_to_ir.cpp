@@ -368,8 +368,10 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        case BcOp::If:
 	            {
                     tempptr_t expr = popTemp();
+                    tempptr_t exprVal = getNewTemp();
                     int32_t label = addLabelOffset(inst.operand0.value());
-                    pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::If, label, expr)));
+                    pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::UnboxBoolean, exprVal, expr)));
+                    pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::If, label, exprVal)));
 	                break;
 	            }
 	        case BcOp::Dup:
