@@ -634,9 +634,10 @@ void IrInterpreter::executeStep() {
                 // TODO: maybe also broken? untested
                 LOG(to_string(instructionIndex) + ": Not");
                 x64asm::R64 operand = x64asm::rdi;
+				x64asm::R64 one = x64asm::rsi;
                 loadTemp(operand, inst->tempIndices->at(1));
-                //assm.not(operand);
-                assm.assemble({x64asm::NOT_R64, {operand}});
+                assm.mov(one, x64asm::Imm64{1});
+				assm.xor_(operand,one);
                 storeTemp(operand, inst->tempIndices->at(0));
                 break;
             };
