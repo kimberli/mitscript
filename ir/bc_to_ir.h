@@ -37,7 +37,7 @@ private:
     void decLabelOffsets();
     int32_t addLabelOffset(int32_t offset);
     void doUnaryArithmetic(IrOp operation, bool toBoolean);
-    void doBinaryArithmetic(IrOp operation, bool toBoolean);
+    void doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoolean);
 public:
     IrCompiler(Function* mainFunc, int32_t labelCounter, Interpreter* vmInterpreterPointer):
         func(mainFunc),

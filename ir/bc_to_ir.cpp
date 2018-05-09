@@ -66,20 +66,25 @@ void IrCompiler::doUnaryArithmetic(IrOp operation, bool toBoolean) {
     pushInstruction(make_shared<IrInstruction>(IrInstruction(castOp, ret, result)));
     pushTemp(ret);
 }
-void IrCompiler::doBinaryArithmetic(IrOp operation, bool toBoolean) {
+void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoolean) {
     // takes in two unverified operands, asserts and casts the correct type, 
     // pushes a temp for the result of an operation, 
     // and returns a list of temps to use in the instruction 
     IrOp assertOp;
     IrOp unboxOp;
     IrOp castOp;
-    if (toBoolean) {
+
+    if (fromBoolean) {
         assertOp = IrOp::AssertBoolean;
         unboxOp = IrOp::UnboxBoolean;
-        castOp = IrOp::NewBoolean;
     } else {
         assertOp = IrOp::AssertInteger;
         unboxOp = IrOp::UnboxInteger;
+    }
+
+    if (toBoolean) {
+        castOp = IrOp::NewBoolean;
+    } else {
         castOp = IrOp::NewInteger;
     }
     tempptr_t right = popTemp();
@@ -284,17 +289,17 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Sub:
 	            {
-                    doBinaryArithmetic(IrOp::Sub, false);
+                    doBinaryArithmetic(IrOp::Sub, false, false);
 	                break;
 	            }
 	        case BcOp::Mul:
 	            {
-                    doBinaryArithmetic(IrOp::Mul, false);
+                    doBinaryArithmetic(IrOp::Mul, false, false);
 	                break;
 	            }
 	        case BcOp::Div:
 	            {
-                    doBinaryArithmetic(IrOp::Div, false);
+                    doBinaryArithmetic(IrOp::Div, false, false);
                     break;
 	            }
 	        case BcOp::Neg:
@@ -304,27 +309,27 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Gt:
 	            {
-                    doBinaryArithmetic(IrOp::Gt, true);
+                    doBinaryArithmetic(IrOp::Gt, false, true);
 	                break;
 	            }
 	        case BcOp::Geq:
 	            {
-                    doBinaryArithmetic(IrOp::Geq, true);
+                    doBinaryArithmetic(IrOp::Geq, false, true);
 	                break;
 	            }
 	        case BcOp::Eq:
 	            {
-                    doBinaryArithmetic(IrOp::Eq, true);
+                    doBinaryArithmetic(IrOp::Eq, false, true);
 	                break;
 	            }
 	        case BcOp::And:
 	            {
-                    doBinaryArithmetic(IrOp::And, true);
+                    doBinaryArithmetic(IrOp::And, true, true);
 	                break;
 	            }
 	        case BcOp::Or:
 	            {
-                    doBinaryArithmetic(IrOp::Or, true);
+                    doBinaryArithmetic(IrOp::Or, true, true);
 	                break;
 	            }
 	        case BcOp::Not:
