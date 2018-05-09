@@ -519,7 +519,7 @@ Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
     // put the refs in an array 
     vector<ValWrapper*> refs = clos->refs;
     Value** refsArray = new Value*[refs.size()];
-    for (int i = 0; i < argsList.size(); i++) {
+    for (int i = 0; i < refs.size(); i++) {
         refsArray[i] = refs[i];
     }
     vector<Value**> mcfArgs = {argsArray, refsArray};

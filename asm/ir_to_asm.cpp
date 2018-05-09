@@ -81,10 +81,8 @@ void IrInterpreter::prolog() {
 
     // put a pointer to the references onto the stack
     // ptr to ref array is the second arg
-    assm.mov(x64asm::r11, x64asm::Imm64{getRefArrayOffset()});
-    assm.mov(x64asm::M64{
-                x64asm::rbp, x64asm::r11, x64asm::Scale::TIMES_1
-            }, x64asm::rsi);
+    getRbpOffset(getRefArrayOffset());
+    assm.mov(x64asm::M64{x64asm::r10}, x64asm::rsi);
 }
 
 void IrInterpreter::epilog() {
@@ -317,11 +315,8 @@ void IrInterpreter::executeStep() {
             {
                 LOG(to_string(instructionIndex) + ": LoadReference");
                 // get the mem address of the ref array; put in rdi
-                assm.mov(x64asm::rdi, x64asm::Imm64{getRefArrayOffset()});
-                assm.assemble({x64asm::MOV_R64_M64, {
-                        x64asm::rdi, 
-                        x64asm::M64{x64asm::rbp, x64asm::rdi, x64asm::Scale::TIMES_8}
-                }});
+                getRbpOffset(getRefArrayOffset());
+                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10});
                 // increment rdi to index into ref array
                 uint32_t offset = 8*inst->op0.value();
                 assm.assemble({x64asm::ADD_R64_IMM32, {x64asm::rdi, x64asm::Imm32{offset}}});
@@ -478,6 +473,7 @@ void IrInterpreter::executeStep() {
                 };
                 tempptr_t returnTemp = inst->tempIndices->at(0);
                 callHelper((void *) &(helper_call), immArgs, temps, returnTemp);
+
                 // clear the stack
                 for (int i = 0; i < numArgs; i++) {
                     assm.pop(x64asm::r10);
