@@ -398,7 +398,7 @@ void IrInterpreter::executeStep() {
                     inst->tempIndices->at(1),
 				};
                 tempptr_t returnTemp = inst->tempIndices->at(0);
-                callHelper((void *) &(helper_get_record_index), args, temps, returnTemp);
+                callHelper((void *) &(helper_set_record_index), args, temps, returnTemp);
                 break;
             };
         case IrOp::AllocClosure:
@@ -443,7 +443,7 @@ void IrInterpreter::executeStep() {
                 // then pass %rsp (which points to the first element of that
                 // array) as an argument to helper_call
                 LOG(to_string(instructionIndex) + ": Call");
-                int numArgs = inst->op0.value();
+                uint64_t numArgs = inst->op0.value();
                 // push all the MITScript function arguments to the stack
                 // to make a contiguous array in memory
                 tempptr_t argTemp;
