@@ -1,6 +1,0 @@
-l.len() = 31
-big.len = 992
-Duplicates l other: 0
-Duplicates l l: 37
-Duplicates other other: 16
-Duplicates big big: 992

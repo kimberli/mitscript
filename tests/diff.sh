@@ -1,6 +1,6 @@
 #!/bin/bash
 ROOT=$(git rev-parse --show-toplevel)
-DIR=$ROOT/tests/vm/
+DIR=$ROOT/tests/gc/
 
 input_dir=$1
 
