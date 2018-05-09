@@ -1,0 +1,50 @@
+a = 3;
+b = 0;
+c = -5;
+d = 7;
+e = -9;
+
+true a>c should be T
+false b>a should be F
+true b>c should be T
+true d>a should be T
+false e>c should be F
+false e>a should be F
+true d>c should be T
+false a>a should be F
+false b>b should be F
+false c>c should be F
+
+true a>=c should be T
+false b>=a should be F
+true b>=c should be T
+true d>=a should be T
+false e>=c should be F
+false e>=a should be F
+true d>=c should be T
+true a>=a should be T
+true b>=b should be T
+true c>=c should be T
+
+false a<c should be F
+true b<a should be T
+false b<c should be F
+false d<a should be F
+true e<c should be T
+true e<a should be T
+false d<c should be F
+false a<a should be F
+false b<b should be F
+false c<c should be F
+
+false a<=c should be F
+true b<=a should be T
+false b<=c should be F
+false d<=a should be F
+true e<=c should be T
+true e<=a should be T
+false d<=c should be T
+true a<=a should be T
+true b<=b should be T
+true c<=c should be T
+
