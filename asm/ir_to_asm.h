@@ -1,5 +1,6 @@
 # pragma once 
 
+#include "../vm/interpreter.h"
 #include "../ir.h"
 #include "helpers.h"
 #include "include/x64asm.h"

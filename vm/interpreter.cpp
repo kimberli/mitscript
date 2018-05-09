@@ -16,6 +16,9 @@ Interpreter::Interpreter(Function* mainFunc, int maxmem, bool callAsm) {
     // we never have to deallocate it
     collector = new CollectedHeap(maxmem, mainFunc->getSize(), &frames);
 
+    // initialize a static none
+    NONE = new None();
+
     // initialize the root frame
     int numLocals = mainFunc->names_.size();
     int numRefs = 0;

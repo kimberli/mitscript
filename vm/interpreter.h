@@ -27,7 +27,11 @@ private:
     bool finished;  // true when the program has terminated
     bool shouldCallAsm;
     int32_t labelCounter = 0;  // global label indexing for all generated asm
-public:
+
+ public:
+    // static None
+    None* NONE;
+
     CollectedHeap* collector;
     Interpreter(Function* mainFunc, int maxmem, bool callAsm);
     void run();  // executes all instructions until termination

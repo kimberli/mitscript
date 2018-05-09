@@ -77,7 +77,12 @@ void IrInterpreter::prolog() {
         assm.mov(x64asm::M64{x64asm::r10}, x64asm::r11);
     }
 
-    // TODO: set all other args to None
+    // set all other locals to none
+    for (uint64_t i = func->parameter_count_; i < func->local_count_; i++) {
+        getRbpOffset(getLocalOffset(i));
+        assm.mov(x64asm::rdi, x64asm::Imm64{vmPointer->NONE});
+        assm.mov(x64asm::M64{x64asm::r10}, x64asm::rdi);
+    }
 
     // put a pointer to the references onto the stack
     // ptr to ref array is the second arg
