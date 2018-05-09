@@ -116,6 +116,7 @@ x64asm::Function IrInterpreter::run() {
         executeStep();
     }
 
+    // TODO: move None into rax. 
     epilog();
 
     // finish compiling
@@ -166,7 +167,9 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
             argIndex++;
         }
     }
-    assm.mov(x64asm::r10, x64asm::Imm64{fn}); assm.call(x64asm::r10);
+    assm.mov(x64asm::r10, x64asm::Imm64{fn}); 
+    
+    assm.call(x64asm::r10);
 
     // STEP 3: pop arguments from stack
     // TODO: do this by just moving rsp
@@ -483,8 +486,10 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Return:
             {
-                // TODO: post-return
                 LOG(to_string(instructionIndex) + ": Return");
+                getRbpOffset(getTempOffset(inst->tempIndices->at(0)));
+                assm.mov(x64asm::rax, x64asm::M64{x64asm::r10});
+                epilog();
                 break;
             };
         case IrOp::Add:
