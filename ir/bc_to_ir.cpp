@@ -319,7 +319,13 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Eq:
 	            {
-                    doBinaryArithmetic(IrOp::Eq, false, true);
+                    tempptr_t tempRight = popTemp();
+                    tempptr_t tempLeft = popTemp();
+                    tempptr_t curr = getNewTemp();
+                    pushTemp(curr);
+                    TempListPtr instTemps = make_shared<TempList>(
+                                TempList{curr, tempRight, tempLeft});
+					pushInstruction(make_shared<IrInstruction>(IrInstruction(IrOp::Eq, instTemps)));
 	                break;
 	            }
 	        case BcOp::And:

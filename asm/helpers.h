@@ -14,6 +14,8 @@ Value* helper_load_global(Interpreter* interpreter, string* name);
 
 Value* helper_add(Interpreter* interpreter, Value* left, Value* right);
 
+Boolean* helper_eq(Interpreter* interpreter, Value* left, Value* right);
+
 Value* helper_alloc_closure(Interpreter* interpreter, int numRefs, Function* func, ValWrapper** refs);
 
 Value* helper_call(Interpreter* interpreter, int numArgs, Constant** args, Closure* closure);

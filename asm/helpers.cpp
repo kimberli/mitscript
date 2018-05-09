@@ -14,6 +14,10 @@ Value* helper_add(Interpreter* interpreter, Value* left, Value* right) {
     return interpreter->add(left, right);
 }
 
+Boolean* helper_eq(Interpreter* interpreter, Value* left, Value* right) {
+    return interpreter->collector->allocate<Boolean>(left->equals(right));
+}
+
 Value* helper_alloc_closure(Interpreter* interpreter, int numRefs, Function* func, ValWrapper** refs) {
     vector<ValWrapper*> refVec;
     for (int i = 0; i < numRefs; i++) {

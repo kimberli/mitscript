@@ -585,11 +585,16 @@ void IrInterpreter::executeStep() {
             {
                 // TODO: maybe also broken? untested
                 LOG(to_string(instructionIndex) + ": Eq");
-                x64asm::R64 left = x64asm::rdi;
-                x64asm::R64 right = x64asm::rsi;
-                comparisonSetup(left, right, inst);
-                assm.cmove(left, right);
-                storeTemp(left, inst->tempIndices->at(0));
+                // call a helper to do equality 
+                vector<x64asm::Imm64> args = {
+                    x64asm::Imm64{vmPointer},
+                };
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(2),
+                    inst->tempIndices->at(1)
+                };
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_eq), args, temps, returnTemp);
                 break;
             };
         case IrOp::And:
