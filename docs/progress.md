@@ -42,10 +42,9 @@ Bugs we've found and fixed:
 * and many more...
 
 Remaining tasks to be tackled:
-* debug a few remaining failing tests
-* fix the bytecode parser to handle the `labels_` field OR rewrite our bytecode unit tests in MITScript and remove bytecode input altogether from our binary
+* debug a few remaining failing tests (we think it's a memory issue?)
 * change the `reserve()` heuristic to be more accurate and performant
-* figure out when to call the `GarbageCollect` IR instruction
+* figure out when to call the `GarbageCollect` IR instruction more effectively
 * optimizations!
 
 Our plan for optimization is to implement register allocation, then maybe other add-ons like constant propagation, generational garbage collection, selective assembly generation.
