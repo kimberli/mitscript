@@ -221,6 +221,15 @@ void IrInterpreter::getRbpOffset(uint32_t offset) {
 }
 
 // storeTemp puts a reg value into a temp
+void IrInterpreter::storeTemp(x64asm::R32 reg, tempptr_t temp) {
+    // right now, put everything on the stack
+    // assign the temp an offset (from rbp)
+    getRbpOffset(getTempOffset(temp)); // leaves correct address into r10
+    // Move the val in reg into the mem address stored in r10
+    assm.mov(x64asm::M64{x64asm::r10}, reg);
+}
+
+// storeTemp puts a reg value into a temp
 void IrInterpreter::storeTemp(x64asm::R64 reg, tempptr_t temp) {
     // right now, put everything on the stack
     // assign the temp an offset (from rbp)
@@ -230,9 +239,16 @@ void IrInterpreter::storeTemp(x64asm::R64 reg, tempptr_t temp) {
 }
 
 // loadTemp takes a temp value and puts it in a register
+void IrInterpreter::loadTemp(x64asm::R32 reg, tempptr_t temp) {
+    getRbpOffset(getTempOffset(temp)); // location in r10
+    // put the thing from that mem address into the reg
+    assm.mov(reg, x64asm::M64{x64asm::r10});
+}
+
+// loadTemp takes a temp value and puts it in a register
 void IrInterpreter::loadTemp(x64asm::R64 reg, tempptr_t temp) {
     getRbpOffset(getTempOffset(temp)); // location in r10
-    // put the thing from that mem addres into the reg
+    // put the thing from that mem address into the reg
     assm.mov(reg, x64asm::M64{x64asm::r10});
 }
 
@@ -592,10 +608,10 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": Gt");
                 // use a conditional move to put the bool in the right place
                 // right(1) gets moved into left(0) if left was greater
-                x64asm::R64 left = x64asm::rdi;
-                x64asm::R64 right = x64asm::rsi;
+                x64asm::R32 left = x64asm::edi;
+                x64asm::R32 right = x64asm::esi;
                 comparisonSetup(left, right, inst);
-                assm.cmovg(left, right);
+                assm.cmovnle(left, right);
                 storeTemp(left, inst->tempIndices->at(0));
                 break;
             };
@@ -603,12 +619,12 @@ void IrInterpreter::executeStep() {
             {
                 // TODO: maybe also broken? untested
                 LOG(to_string(instructionIndex) + ": Geq");
-                x64asm::R64 left = x64asm::rdi;
-                x64asm::R64 right = x64asm::rsi;
+                x64asm::R32 left = x64asm::edi;
+                x64asm::R32 right = x64asm::esi;
                 // use a conditional move to put the bool in the right place
                 // right(1) gets moved into left(0) if left was greater
                 comparisonSetup(left, right, inst);
-                assm.cmovge(left, right);
+                assm.cmovnl(left, right);
                 storeTemp(left, inst->tempIndices->at(0));
                 break;
             };
@@ -851,7 +867,7 @@ void IrInterpreter::executeStep() {
     }
 }
 
-void IrInterpreter::comparisonSetup(x64asm::R64 left, x64asm::R64 right, instptr_t inst) {
+void IrInterpreter::comparisonSetup(x64asm::R32 left, x64asm::R32 right, instptr_t inst) {
     // load right temp into a reg
     loadTemp(right, inst->tempIndices->at(1));
     // load left temp into a reg
@@ -859,6 +875,6 @@ void IrInterpreter::comparisonSetup(x64asm::R64 left, x64asm::R64 right, instptr
     // perform the sub; result stored in left
     assm.cmp(left, right); // this sets flags
     // load 0 and 1 into two diff regs
-    assm.mov(right, x64asm::Imm64{1});
-    assm.mov(left, x64asm::Imm64{0});
+    assm.mov(right, x64asm::Imm32{1});
+    assm.mov(left, x64asm::Imm32{0});
 };

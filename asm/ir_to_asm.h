@@ -32,9 +32,11 @@ private:
     uint32_t getLocalOffset(uint32_t localIndex);
     uint32_t getRefArrayOffset();
     void getRbpOffset(uint32_t offset);
+    void loadTemp(x64asm::R32 reg, tempptr_t temp);
     void loadTemp(x64asm::R64 reg, tempptr_t temp);
+    void storeTemp(x64asm::R32 reg, tempptr_t temp);
     void storeTemp(x64asm::R64 reg, tempptr_t temp);
-    void comparisonSetup(x64asm::R64 left, x64asm::R64 right, instptr_t inst);
+    void comparisonSetup(x64asm::R32 left, x64asm::R32 right, instptr_t inst);
 public: 
     static const x64asm::R64 argRegs[];
     static const x64asm::R64 callerSavedRegs[];
