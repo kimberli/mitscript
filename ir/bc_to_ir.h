@@ -39,6 +39,9 @@ private:
     void doUnaryArithmetic(IrOp operation, bool toBoolean);
     void doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoolean);
 public:
+    // vector of booleans corresponding to whether the local in the 
+    // corresponding index is a local ref var or not
+    vector<bool> isLocalRef;
     IrCompiler(Function* mainFunc, int32_t labelCounter, Interpreter* vmInterpreterPointer):
         func(mainFunc),
         labelCounter(labelCounter),

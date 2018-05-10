@@ -144,10 +144,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            {
                     // if the local at index i is also a ref var, generate PushLocalRef, LoadRef
                     int localIndex = inst.operand0.value();
-                    if (find(func->local_reference_vars_.begin(), 
-                             func->local_reference_vars_.end(), 
-                             func->local_vars_.at(localIndex)) 
-                        != func->local_reference_vars_.end()) {
+                    if (isLocalRef.at(localIndex)) {
                         // it is a local ref var; generate PushLocalRef, LoadRef
                         tempptr_t ref = getNewTemp();
                         pushInstruction(make_shared<IrInstruction>(IrOp::PushLocalRef, inst.operand0, ref));
@@ -174,10 +171,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            {
                     IrOp op;
                     int localIndex = inst.operand0.value();
-                    if (find(func->local_reference_vars_.begin(), 
-                             func->local_reference_vars_.end(), 
-                             func->local_vars_.at(localIndex)) 
-                        != func->local_reference_vars_.end()) {
+                    if (isLocalRef.at(localIndex)) {
                         // the local is a ref var; generate storelocalref
                         op = IrOp::StoreLocalRef;
                     } else {
@@ -463,17 +457,15 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 
 IrFunc IrCompiler::toIr() {
 //    // do some preprocessing here 
-//    // loop through the locals list, create a map of local to index 
-//    map<string, int> localIndices; 
-//    for (int i = 0; i < func->local_vars_.size(); i++) {
-//        //localIndices[func->local_vars_.at(i)] =  i;
-//        localIndices.insert({func->local_vars_.at(i), i});
-//    }
-//    // create a vector same size as local_ref_vars_ but w/ indices instead
-//    // of strings
-//    for (string var : func->local_reference_vars_) {
-//        int idx = localIndices.at(var);
-//        local_ref_var_indices.push_back(0);
-//    }
+    for (string local : func->local_vars_) {
+        if (find(func->local_reference_vars_.begin(), 
+                 func->local_reference_vars_.end(), 
+                 local) != func->local_reference_vars_.end()) {
+            // this local is a local ref var 
+            isLocalRef.push_back(true);
+        } else {
+            isLocalRef.push_back(false);
+        }
+    }
 	return toIrFunc(func);
 };
