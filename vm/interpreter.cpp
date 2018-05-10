@@ -504,6 +504,7 @@ Value* Interpreter::callVM(vector<Constant*> argsList, Closure* clos) {
 		return val;
     } else if (newFrame->numInstructions() != 0) {
         frames.push_back(newFrame);
+        // TODO: do we need to return something here?
     } else {
         Value* returnVal = collector->allocate<None>();
         frames.back()->opStackPush(returnVal);

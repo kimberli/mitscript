@@ -30,13 +30,17 @@ int BytecodeCompiler::allocName(string name) {
     return i;
 }
 
+void BytecodeCompiler::addInstruction(BcOp op, optint_t op0) {
+    BcInstruction *instr = new BcInstruction(op, op0);
+    retFunc->instructions.push_back(*instr);
+}
+
 void BytecodeCompiler::loadConstant(constptr_t c) {
     // add the constant to the constants list
     int constIdx = allocConstant(c);
     // make the LoadConst instruction
     optint_t op0 = optint_t(constIdx);
-    BcInstruction* instr = new BcInstruction(BcOp::LoadConst, op0);
-    retFunc->instructions.push_back(*instr);
+    addInstruction(BcOp::LoadConst, op0);
 }
 
 void BytecodeCompiler::addWriteInstructions(Expression* lhs) {
@@ -52,26 +56,22 @@ void BytecodeCompiler::addWriteInstructions(Expression* lhs) {
         // allocate a name
         int i = allocName(fieldD->field.name);
         // we need to swap the order: we want s :: record :: value
-        BcInstruction* swapInstr = new BcInstruction(BcOp::Swap, optint_t());
-        retFunc->instructions.push_back(*swapInstr);
+        addInstruction(BcOp::Swap, optint_t());
         // FieldStore instruction
-        BcInstruction* storeInstr = new BcInstruction(BcOp::FieldStore, optint_t(i));
-        retFunc->instructions.push_back(*storeInstr);
+        addInstruction(BcOp::FieldStore, i);
         return;
     }
     auto indexE = dynamic_cast<IndexExpr*>(lhs);
     if (indexE != NULL) {
-        BcInstruction* swap = new BcInstruction(BcOp::Swap, optint_t());
         // we need S :: record :: index :: value, so we need 2 swaps
         // load the record
         addInstructions(indexE->base);
-        retFunc->instructions.push_back(*swap);
+        addInstruction(BcOp::Swap, optint_t());
         // load the index
         addInstructions(indexE->index);
-        retFunc->instructions.push_back(*swap);
+        addInstruction(BcOp::Swap, optint_t());
         // store
-        BcInstruction* store = new BcInstruction(BcOp::IndexStore, optint_t());
-        retFunc->instructions.push_back(*store);
+        addInstruction(BcOp::IndexStore, optint_t());
         return;
     }
 }
@@ -82,14 +82,12 @@ void BytecodeCompiler::addWriteVarInstructions(string varName) {
     switch (d->type) {
         case GLOBAL: {
             optint_t i = optint_t(d->index);
-            BcInstruction* instr = new BcInstruction(BcOp::StoreGlobal, i);
-            retFunc->instructions.push_back(*instr);
+            addInstruction(BcOp::StoreGlobal, i);
             return;
         }
         case LOCAL: {
             optint_t i = optint_t(d->index);
-            BcInstruction* instr = new BcInstruction(BcOp::StoreLocal, i);
-            retFunc->instructions.push_back(*instr);
+            addInstruction(BcOp::StoreLocal, i);
             return;
         }
         case FREE: {
@@ -107,10 +105,8 @@ void BytecodeCompiler::loadBuiltIns() {
     printFunc->parameter_count_ = 1;
     int printIdx = retFunc->functions_.size();
     retFunc->functions_.push_back(printFunc);
-    BcInstruction* loadPrint = new BcInstruction(BcOp::LoadFunc, optint_t(printIdx));
-    BcInstruction* allocPrint = new BcInstruction(BcOp::AllocClosure, optint_t(0));
-    retFunc->instructions.push_back(*loadPrint);
-    retFunc->instructions.push_back(*allocPrint);
+    addInstruction(BcOp::LoadFunc, optint_t(printIdx));
+    addInstruction(BcOp::AllocClosure, optint_t(0));
     addWriteVarInstructions("print");
 
     // input
@@ -118,10 +114,8 @@ void BytecodeCompiler::loadBuiltIns() {
     inputFunc->parameter_count_ = 0;
     int inputIdx = retFunc->functions_.size();
     retFunc->functions_.push_back(inputFunc);
-    BcInstruction* loadInp = new BcInstruction(BcOp::LoadFunc, optint_t(inputIdx));
-    BcInstruction* allocInp = new BcInstruction(BcOp::AllocClosure, optint_t(0));
-    retFunc->instructions.push_back(*loadInp);
-    retFunc->instructions.push_back(*allocInp);
+    addInstruction(BcOp::LoadFunc, optint_t(inputIdx));
+    addInstruction(BcOp::AllocClosure, optint_t(0));
     addWriteVarInstructions("input");
 
     // intcast
@@ -129,10 +123,8 @@ void BytecodeCompiler::loadBuiltIns() {
     intcastFunc->parameter_count_ = 1;
     int intcastIdx = retFunc->functions_.size();
     retFunc->functions_.push_back(intcastFunc);
-    BcInstruction* loadIntcast = new BcInstruction(BcOp::LoadFunc, optint_t(intcastIdx));
-    BcInstruction* allocIntcast = new BcInstruction(BcOp::AllocClosure, optint_t(0));
-    retFunc->instructions.push_back(*loadIntcast);
-    retFunc->instructions.push_back(*allocIntcast);
+    addInstruction(BcOp::LoadFunc, optint_t(intcastIdx));
+    addInstruction(BcOp::AllocClosure, optint_t(0));
     addWriteVarInstructions("intcast");
 }
 
@@ -180,8 +172,7 @@ void BytecodeCompiler::visit(Assignment& exp) {
 
 void BytecodeCompiler::visit(CallStatement& exp) {
     addInstructions(exp.call);
-    BcInstruction* popInstr = new BcInstruction(BcOp::Pop, optint_t());
-    retFunc->instructions.push_back(*popInstr);
+    addInstruction(BcOp::Pop, optint_t());
 }
 
 void BytecodeCompiler::visit(IfStatement& exp) {
@@ -195,8 +186,7 @@ void BytecodeCompiler::visit(IfStatement& exp) {
     addInstructions(exp.condition);
 
     // add the IF instruction that will jump to the then block if true
-    BcInstruction* ifJumpInstr = new BcInstruction(BcOp::If, ifLabel);
-    retFunc->instructions.push_back(*ifJumpInstr);
+    addInstruction(BcOp::If, ifLabel);
 
     // add in the else block
     if (exp.elseBlock) {
@@ -204,20 +194,17 @@ void BytecodeCompiler::visit(IfStatement& exp) {
     }
 
     // add the GOTO instruction that will break out of the if statement
-    BcInstruction* endElseInstr = new BcInstruction(BcOp::Goto, endLabel);
-    retFunc->instructions.push_back(*endElseInstr);
+    addInstruction(BcOp::Goto, endLabel);
 
     // add the LABEL instruction that marks where to jump to if condition is true
-    BcInstruction* ifLabelInstr = new BcInstruction(BcOp::Label, ifLabel);
-    retFunc->instructions.push_back(*ifLabelInstr);
+    addInstruction(BcOp::Label, ifLabel);
     retFunc->labels_[ifLabel] = retFunc->instructions.size();
 
     // add in the then block
     addInstructions(exp.thenBlock);
 
     // add the LABEL instruction that marks the end of the if statement
-    BcInstruction* endLabelInstr = new BcInstruction(BcOp::Label, endLabel);
-    retFunc->instructions.push_back(*endLabelInstr);
+    addInstruction(BcOp::Label, endLabel);
     retFunc->labels_[endLabel] = retFunc->instructions.size();
 }
 
@@ -229,34 +216,29 @@ void BytecodeCompiler::visit(WhileLoop& exp) {
     labelCounter++;
 
     // add the GOTO instruction that will jump to the condition
-    BcInstruction* condJumpInstr = new BcInstruction(BcOp::Goto, condLabel);
-    retFunc->instructions.push_back(*condJumpInstr);
+    addInstruction(BcOp::Goto, condLabel);
 
     // add the LABEL instruction that marks where to jump to get to the body
-    BcInstruction* bodyLabelInstr = new BcInstruction(BcOp::Label, bodyLabel);
-    retFunc->instructions.push_back(*bodyLabelInstr);
+    addInstruction(BcOp::Label, bodyLabel);
     retFunc->labels_[bodyLabel] = retFunc->instructions.size();
 
     // add the body
     addInstructions(exp.body);
 
     // add the LABEL instruction that marks where to jump to get to the condition
-    BcInstruction* condLabelInstr = new BcInstruction(BcOp::Label, condLabel);
-    retFunc->instructions.push_back(*condLabelInstr);
+    addInstruction(BcOp::Label, condLabel);
     retFunc->labels_[condLabel] = retFunc->instructions.size();
 
     // add instructions for evaluating the condition
     addInstructions(exp.condition);
 
     // add the IF instruction that will jump to the body if true
-    BcInstruction* ifJumpInstr = new BcInstruction(BcOp::If, bodyLabel);
-    retFunc->instructions.push_back(*ifJumpInstr);
+    addInstruction(BcOp::If, bodyLabel);
 }
 
 void BytecodeCompiler::visit(Return& exp) {
     addInstructions(exp.expr);
-    BcInstruction* instr = new BcInstruction(BcOp::Return, optint_t());
-    retFunc->instructions.push_back(*instr);
+    addInstruction(BcOp::Return, optint_t());
 }
 
 bool BytecodeCompiler::putVarInFunc(string& varName, stptr_t table, funcptr_t func) {
@@ -279,6 +261,8 @@ bool BytecodeCompiler::putVarInFunc(string& varName, stptr_t table, funcptr_t fu
             d->index = func->free_vars_.size();
             func->free_vars_.push_back(varName);
             return false;
+        default:
+            throw "unknown vartype";
     }
 }
 
@@ -330,8 +314,7 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
     retFunc->functions_.push_back(childFunc);
 
     // 5) load the recently created function onto the op stack
-    BcInstruction* loadF = new BcInstruction(BcOp::LoadFunc, optint_t(childFuncIdx));
-    retFunc->instructions.push_back(*loadF);
+    addInstruction(BcOp::LoadFunc, optint_t(childFuncIdx));
 
     // 6) load refs to all the child's free vars.
     // THESE NEED TO GO ON BACKWARDS
@@ -355,14 +338,12 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
             // this is an error, there is probably a bug.
             assert(false);
         }
-        BcInstruction* push = new BcInstruction(BcOp::PushReference, optint_t(i));
-        retFunc->instructions.push_back(*push);
+        addInstruction(BcOp::PushReference, i);
     }
 
     // 7) allocate the closure
     int numRefs = childFunc->free_vars_.size();
-    BcInstruction* allocC = new BcInstruction(BcOp::AllocClosure, optint_t(numRefs));
-    retFunc->instructions.push_back(*allocC);
+    addInstruction(BcOp::AllocClosure, optint_t(numRefs));
 }
 
 void BytecodeCompiler::visit(BinaryExpr& exp) {
@@ -370,8 +351,6 @@ void BytecodeCompiler::visit(BinaryExpr& exp) {
     addInstructions(exp.right);
     // concatenate two vecs
     BcOp op;
-    optint_t noArg0;
-    BcInstruction* swapOp = new BcInstruction(BcOp::Swap, noArg0);
     // choose the correct instruction
     switch (exp.op) {
         case Or:
@@ -382,7 +361,7 @@ void BytecodeCompiler::visit(BinaryExpr& exp) {
             break;
         case Lt:
             // no lt instr provided, so first switch op order.
-            retFunc->instructions.push_back(*swapOp);
+            addInstruction(BcOp::Swap, optint_t());
             op = BcOp::Gt;
             break;
         case Gt:
@@ -390,7 +369,7 @@ void BytecodeCompiler::visit(BinaryExpr& exp) {
             break;
         case Lt_eq:
             // same logic as for lt
-            retFunc->instructions.push_back(*swapOp);
+            addInstruction(BcOp::Swap, optint_t());
             op = BcOp::Geq;
             break;
         case Gt_eq:
@@ -412,14 +391,12 @@ void BytecodeCompiler::visit(BinaryExpr& exp) {
             op = BcOp::Div;
             break;
     }
-    BcInstruction* instr = new BcInstruction(op, noArg0);
-    retFunc->instructions.push_back(*instr);
+    addInstruction(op, optint_t());
 }
 
 void BytecodeCompiler::visit(UnaryExpr& exp) {
     addInstructions(exp.expr);
     BcOp op;
-    optint_t noArg0;
     // choose the correct instruction
     switch (exp.op) {
         case Not:
@@ -429,8 +406,7 @@ void BytecodeCompiler::visit(UnaryExpr& exp) {
             op = BcOp::Neg;
             break;
     }
-    BcInstruction* instr = new BcInstruction(op, noArg0);
-    retFunc->instructions.push_back(*instr);
+    addInstruction(op, optint_t());
 }
 
 void BytecodeCompiler::visit(FieldDeref& exp) {
@@ -439,8 +415,7 @@ void BytecodeCompiler::visit(FieldDeref& exp) {
     // add the field to the names list
     int i = allocName(exp.field.name);
     // compose instruction
-    BcInstruction* instr = new BcInstruction(BcOp::FieldLoad, optint_t(i));
-    retFunc->instructions.push_back(*instr);
+    addInstruction(BcOp::FieldLoad, i);
 }
 
 void BytecodeCompiler::visit(IndexExpr& exp) {
@@ -449,8 +424,7 @@ void BytecodeCompiler::visit(IndexExpr& exp) {
     // eval the index
     addInstructions(exp.index);
     // instruction
-    BcInstruction* instr = new BcInstruction(BcOp::IndexLoad, optint_t());
-    retFunc->instructions.push_back(*instr);
+    addInstruction(BcOp::IndexLoad, optint_t());
 }
 
 void BytecodeCompiler::visit(Call& exp) {
@@ -464,28 +438,23 @@ void BytecodeCompiler::visit(Call& exp) {
     }
 
     int numArgs = exp.args.size();
-    BcInstruction* call = new BcInstruction(BcOp::Call, optint_t(numArgs));
-    retFunc->instructions.push_back(*call);
+    addInstruction(BcOp::Call, optint_t(numArgs));
 }
 
 void BytecodeCompiler::visit(RecordExpr& exp) {
     // instr to allocate the record
-    optint_t noArg0;
-    BcInstruction* alloc = new BcInstruction(BcOp::AllocRecord, noArg0);
-    retFunc->instructions.push_back(*alloc);
+    addInstruction(BcOp::AllocRecord, optint_t());
 
     for (map<Identifier*, Expression*>::iterator it = exp.record.begin(); it != exp.record.end(); it ++) {
         // dup instruction
-        BcInstruction* dup = new BcInstruction(BcOp::Dup, noArg0);
-        retFunc->instructions.push_back(*dup);
+        addInstruction(BcOp::Dup, optint_t());
         // eval the value and add those instructions
         addInstructions(*(it->second));
         // add the name to the names array
         string field = it->first->name;
         int i = allocName(field);
         // compose the instruction
-        BcInstruction* store = new BcInstruction(BcOp::FieldStore, optint_t(i));
-        retFunc->instructions.push_back(*store);
+        addInstruction(BcOp::FieldStore, i);
     }
 }
 
@@ -495,25 +464,20 @@ void BytecodeCompiler::visit(Identifier& exp) {
         case GLOBAL: {
             // use load_global
             optint_t i = optint_t(d->index);
-            BcInstruction* instr = new BcInstruction(BcOp::LoadGlobal, i);
-            retFunc->instructions.push_back(*instr);
+            addInstruction(BcOp::LoadGlobal, i);
             break;
         }
         case LOCAL: {
             optint_t i = optint_t(d->index);
-            BcInstruction* instr = new BcInstruction(BcOp::LoadLocal, i);
-            retFunc->instructions.push_back(*instr);
+            addInstruction(BcOp::LoadLocal, i);
             break;
         }
         case FREE: {
             // recall d.index is an index into the free vars, so we have to
             // jump over local ref vars.
             optint_t i = optint_t(d->index + retFunc->local_reference_vars_.size());
-            optint_t noArg0;
-            BcInstruction* pushRefInstr = new BcInstruction(BcOp::PushReference, i);
-            BcInstruction* loadRefInstr = new BcInstruction(BcOp::LoadReference, noArg0);
-            retFunc->instructions.push_back(*pushRefInstr);
-            retFunc->instructions.push_back(*loadRefInstr);
+            addInstruction(BcOp::PushReference, i);
+            addInstruction(BcOp::LoadReference, optint_t());
             break;
         }
     }

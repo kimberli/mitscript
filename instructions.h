@@ -4,6 +4,7 @@
 #include <vector>
 
 using namespace std;
+typedef experimental::optional<int32_t> optint_t;
 
 enum class BcOp
 {
@@ -235,11 +236,11 @@ enum class BcOp
 
 struct BcInstruction
 {
-    BcInstruction(const BcOp operation, experimental::optional<int32_t> operand0)
+    BcInstruction(const BcOp operation, optint_t operand0)
     : operation(operation), operand0(operand0) {}
 
     BcOp operation;
-    experimental::optional<int32_t> operand0;
+    optint_t operand0;
 };
 
 typedef vector<BcInstruction> BcInstructionList;
