@@ -176,7 +176,7 @@ x64asm::Function IrInterpreter::run() {
 }
 
 void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps, opttemp_t returnTemp) {
-    callHelper(fn, args, temps, optreg_t(), returnTemp);
+    callHelper(fn, args, temps, nullopt, returnTemp);
 }
 
 
@@ -373,7 +373,7 @@ void IrInterpreter::executeStep() {
                     x64asm::Imm64{name},
                 };
                 vector<tempptr_t> temps = {inst->tempIndices->at(0)};
-                callHelper((void *) &(helper_store_global), args, temps, opttemp_t());
+                callHelper((void *) &(helper_store_global), args, temps, nullopt);
                 break;
             }
 		case IrOp::StoreLocalRef: 
@@ -648,7 +648,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1),
                 };
-                callHelper((void *) &(helper_assert_nonzero), args, temps, opttemp_t());
+                callHelper((void *) &(helper_assert_nonzero), args, temps, nullopt);
                 auto divisor = x64asm::ebx;
 				loadTemp(divisor, inst->tempIndices->at(1));
                 // perform the div; result stored in rax
@@ -772,7 +772,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_int), args, temps, opttemp_t());
+                callHelper((void *) &(helper_assert_int), args, temps, nullopt);
                 break;
             };
         case IrOp::AssertBoolean:
@@ -782,7 +782,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_bool), args, temps, opttemp_t());
+                callHelper((void *) &(helper_assert_bool), args, temps, nullopt);
                 break;
             };
         case IrOp::AssertString:
@@ -792,7 +792,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_str), args, temps, opttemp_t());
+                callHelper((void *) &(helper_assert_str), args, temps, nullopt);
                 break;
             };
         case IrOp::AssertRecord:
@@ -802,7 +802,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_record), args, temps, opttemp_t());
+                callHelper((void *) &(helper_assert_record), args, temps, nullopt);
                 break;
             };
         case IrOp::AssertFunction:
@@ -812,7 +812,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_func), args, temps, opttemp_t());
+                callHelper((void *) &(helper_assert_func), args, temps, nullopt);
                 break;
             };
         case IrOp::AssertClosure:
@@ -822,7 +822,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_closure), args, temps, opttemp_t());
+                callHelper((void *) &(helper_assert_closure), args, temps, nullopt);
                 break;
             };
         case IrOp::AssertValWrapper: 
@@ -832,7 +832,7 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
                 };
-                callHelper((void *) &(helper_assert_valwrapper), args, temps, opttemp_t());
+                callHelper((void *) &(helper_assert_valwrapper), args, temps, nullopt);
                 break;
             };
         case IrOp::UnboxInteger:
@@ -909,7 +909,7 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": GarbageCollect");
                 vector<x64asm::Imm64> args = {x64asm::Imm64{vmPointer}};
                 vector<tempptr_t> temps; 
-                callHelper((void *) &(helper_gc), args, temps, opttemp_t());
+                callHelper((void *) &(helper_gc), args, temps, nullopt);
                 break;
             };
         default:

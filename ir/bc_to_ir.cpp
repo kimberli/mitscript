@@ -203,17 +203,17 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     if (instrIdx < func->local_reference_vars_.size()) {
                         // then generate a PushLocalRef instr 
                         // TOD0: make this preprocessing more efficient
-                        optint_t localIndex; 
+                        int localIndex;
                         for (int i = 0; i < func->local_vars_.size(); i++) {
                             if (func->local_vars_.at(i) == func->local_reference_vars_.at(instrIdx)) {
-                                localIndex = optint_t(i);
+                                localIndex = i;
                                 break;
                             }
                         } 
 					    pushInstruction(make_shared<IrInstruction>(IrOp::PushLocalRef, localIndex, curr));
                     } else {
                         // else, generate a PushFreeRef instruction
-                        optint_t refIndex = optint_t(instrIdx - func->local_reference_vars_.size()); 
+                        int refIndex = instrIdx - func->local_reference_vars_.size();
 					    pushInstruction(make_shared<IrInstruction>(IrOp::PushFreeRef, refIndex, curr));
                     }
                     pushTemp(curr);
@@ -329,7 +329,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					instTemps->push_back(curr);
 					reverse(instTemps->begin(), instTemps->end());
 					pushInstruction(make_shared<IrInstruction>(IrOp::AssertFunction, func));
-					pushInstruction(make_shared<IrInstruction>(IrOp::AllocClosure, optint_t(inst.operand0), instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrOp::AllocClosure, inst.operand0, instTemps));
 	                break;
 	            }
 	        case BcOp::Call:
@@ -348,7 +348,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					instTemps->push_back(curr);
 					reverse(instTemps->begin(), instTemps->end());
 					pushInstruction(make_shared<IrInstruction>(IrOp::AssertClosure, clos));
-					pushInstruction(make_shared<IrInstruction>(IrOp::Call, optint_t(inst.operand0), instTemps));
+					pushInstruction(make_shared<IrInstruction>(IrOp::Call, inst.operand0, instTemps));
 	                break;
 	            }
 	        case BcOp::Return:
