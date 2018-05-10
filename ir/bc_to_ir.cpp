@@ -142,9 +142,24 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::LoadLocal:
 	            {
-                    tempptr_t curr = getNewTemp();
-					pushInstruction(make_shared<IrInstruction>(IrOp::LoadLocal, inst.operand0, curr));
-                    pushTemp(curr);
+                    // if the local at index i is also a ref var, generate PushLocalRef, LoadRef
+                    int localIndex = inst.operand0.value();
+                    if (find(func->local_reference_vars_.begin(), 
+                             func->local_reference_vars_.end(), 
+                             func->local_vars_.at(localIndex)) 
+                        != func->local_reference_vars_.end()) {
+                        // it is a local ref var; generate PushLocalRef, LoadRef
+                        tempptr_t ref = getNewTemp();
+                        pushInstruction(make_shared<IrInstruction>(IrOp::PushLocalRef, inst.operand0, ref));
+                        tempptr_t val = getNewTemp();
+                        pushInstruction(make_shared<IrInstruction>(IrOp::LoadReference, val, ref));
+                        pushTemp(val);
+                    } else {
+                        // it is not a local ref var; generate plain LoadLocal
+                        tempptr_t val = getNewTemp();
+                        pushInstruction(make_shared<IrInstruction>(IrOp::LoadLocal, inst.operand0, val));
+                        pushTemp(val);
+                    }
 	                break;
 	            }
 	        case BcOp::LoadGlobal:
