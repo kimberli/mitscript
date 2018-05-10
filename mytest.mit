@@ -3,6 +3,6 @@ f = fun() {
     g = fun() {
         print(y);
     };
-    g("b");
+    g();
 };
 f();
