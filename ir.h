@@ -87,6 +87,12 @@ enum class IrOp {
     // Result: temp at temp0 contains value of the reference
     LoadReference,
 
+    // Description: Store the value of a temp into a local ref
+    // op0: index of the local to load into 
+    // temp0: index of the temp w/ the val to store
+    // Result: local op0 contains the value in temp0
+    StoreLocalRef,
+
     // Description: Allocate a record and store it to a temp
     // op0: N/A
     // temp0: temp index to allocate the record in

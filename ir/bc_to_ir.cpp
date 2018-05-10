@@ -172,7 +172,18 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::StoreLocal:
 	            {
-					pushInstruction(make_shared<IrInstruction>(IrOp::StoreLocal, inst.operand0, popTemp()));
+                    IrOp op;
+                    int localIndex = inst.operand0.value();
+                    if (find(func->local_reference_vars_.begin(), 
+                             func->local_reference_vars_.end(), 
+                             func->local_vars_.at(localIndex)) 
+                        != func->local_reference_vars_.end()) {
+                        // the local is a ref var; generate storelocalref
+                        op = IrOp::StoreLocalRef;
+                    } else {
+                        op = IrOp::StoreLocal;
+                    }
+                    pushInstruction(make_shared<IrInstruction>(op, inst.operand0, popTemp()));
 	                break;
 	            }
 	        case BcOp::StoreGlobal:
