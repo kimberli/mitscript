@@ -1,10 +1,19 @@
-f = fun() {
-    y = 1;
-    z = 2;
-    g = fun() {
-        print(y);
-        print(z);
+y = {};
+print({ hello: (5*2 - 1); });
+x = fun() {};
+
+mega_nested = {
+    still_nested: {
+        yep: {
+            still: { nested: {
+                    herp: {
+                        derp: None;
+                    };
+                };
+            };
+        };
     };
-    g();
 };
-f();
+
+print(mega_nested.still_nested.yep.still.nested.herp.derp.still_nested.yep.still.nested.herp.derp.still_nested.yep.still.nested.herp.derp.still_nested.yep.still.nested.herp.derp.still_nested.yep.still.nested.herp.derp.still_nested.yep.still.nested.herp.derp.still_nested.yep.still.nested.herp.derp.still_nested.yep.still.nested.herp.derp.still_nested.yep.still.nested.herp.derp == mega_nested);
+
