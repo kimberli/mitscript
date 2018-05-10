@@ -24,6 +24,7 @@ private:
     Function* func;  // current function
 	vector<IrFunc*> irFuncs;
 	stack<tempptr_t> tempStack;
+	stack<tempptr_t> freeTemps;
 	IrInstList irInsts;
 	offset_t currentTemp = 0;
 
@@ -34,6 +35,7 @@ private:
     void pushInstruction(instptr_t inst);
     void doUnaryArithmetic(IrOp operation, bool toBoolean);
     void doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoolean);
+	void checkIfUsed(tempptr_t temp);
 public:
     // vector of booleans corresponding to whether the local in the 
     // corresponding index is a local ref var or not
