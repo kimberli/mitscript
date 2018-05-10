@@ -183,6 +183,7 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
 
 
 void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps, optreg_t lastArg, opttemp_t returnTemp) {
+    // IMPORTANT: the reg in lastArg should not be r10, rax, or any of the 6 argRegs
     // STEP 1: save caller-saved registers to stack
     for (int i = 0; i < numCallerSaved; ++i) {
         assm.push(callerSavedRegs[i]);
@@ -224,7 +225,7 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
     }
     // if the optional register argument is defined, push it as an arg
     if (lastArg) {
-        if (argIndex < numArgs) {
+        if (argIndex < numArgRegs) {
             assm.mov(argRegs[argIndex], lastArg.value());
         } else {
             assm.push(lastArg.value());
@@ -382,13 +383,14 @@ void IrInterpreter::executeStep() {
 				LOG(to_string(instructionIndex) + ": StoreLocalRef");
                 int64_t localIndex = inst->op0.value();
                 getRbpOffset(getLocalOffset(localIndex)); // puts the address of the valwrapper in r10
-                assm.mov(x64asm::r10, x64asm::M64{x64asm::r10}); //r10 contains the valwrapper
+                assm.mov(x64asm::rcx, x64asm::M64{x64asm::r10}); //r10 contains the valwrapper
                 vector<x64asm::Imm64> args = {
 				};
                 vector<tempptr_t> temps = {
 					inst->tempIndices->at(0)
 				};
-                callHelper((void *) &(helper_store_local_ref), args, temps, x64asm::r10, opttemp_t());
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                callHelper((void *) &(helper_store_local_ref), args, temps, x64asm::rcx, returnTemp);
                 break;
 			}
         case IrOp::PushLocalRef: 
