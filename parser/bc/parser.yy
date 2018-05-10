@@ -64,6 +64,7 @@ int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* me
 	vector<Function*>*   funclist;
 
     vector<string>* identlist;
+    map<int, int>* maplist;
 
 	BcInstruction* inst;
 	vector<BcInstruction>* instlist;
@@ -95,6 +96,7 @@ int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* me
 %token T_local_ref_vars;
 %token T_free_vars;
 %token T_names;
+%token T_labels;
 %token T_instructions;
 
 %token T_load_const
@@ -129,6 +131,7 @@ int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* me
 %token T_not
 %token T_goto
 %token T_if
+%token T_label
 %token T_dup
 %token T_swap
 %token T_pop
@@ -140,6 +143,9 @@ int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* me
 
 %type<identlist> IdentListStar
 %type<identlist> IdentListPlus
+
+%type<maplist> MapListStar
+%type<maplist> MapListPlus
 
 %type<constant> Constant
 %type<constantlist> ConstantListStar
@@ -162,10 +168,11 @@ Function:
   T_local_ref_vars '='  '[' IdentListStar ']'    ','
   T_free_vars '=' '[' IdentListStar ']'          ','
   T_names     '=' '[' IdentListStar ']'          ','
+  T_labels    '=' '{' MapListStar '}'          ','
   T_instructions '=' '[' InstructionList ']'
   '}'
 {
-	$$ = new Function{*$6, *$12, safe_cast($17), *$22, *$28, *$34, *$40, *$46};
+	$$ = new Function{*$6, *$12, safe_cast($17), *$22, *$28, *$34, *$40, *$46, *$52};
 
     out = $$;
 }
@@ -220,6 +227,31 @@ T_ident
 	delete $1;
 
 	$$ = list;
+}
+
+MapListStar:
+  %empty { $$ = new map<int, int>(); }
+| MapListPlus
+{
+    $$ = $1;
+}
+
+MapListPlus:
+T_int ':' T_int
+{
+    auto m = new map<int, int>();
+
+    m->insert(map<int, int>::value_type($1, $3));
+
+    $$ = m;
+}
+| T_int ':' T_int ';' MapListPlus
+{
+    auto m = $5;
+
+    m->insert(map<int, int>::value_type($1, $3));
+
+    $$ = m;
 }
 
 Constant :
@@ -392,6 +424,10 @@ Instruction:
 | T_if T_int
 {
 	$$ = new BcInstruction(BcOp::If, safe_cast($2));
+}
+| T_label T_int
+{
+	$$ = new BcInstruction(BcOp::Label, safe_cast($2));
 }
 | T_dup
 {
