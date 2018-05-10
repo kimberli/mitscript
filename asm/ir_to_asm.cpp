@@ -87,7 +87,16 @@ void IrInterpreter::prolog() {
         // move r11 into address stored in r10
         if (isLocalRef.at(i)) {
             // var is a ref; put in as a ref 
-            // TODO
+            // mov the valwrapper into r10 
+            assm.mov(x64asm::r10, x64asm::M64{x64asm::r10});
+            // pass to the helper
+            vector<x64asm::Imm64> args = {
+                x64asm::Imm64{x64asm::r10}, //load valwrapper
+                x64asm::Imm64{x64asm::r11}, //load value
+            };
+            vector<tempptr_t> temps;
+            callHelper((void *) &(helper_store_local_ref), args, temps, opttemp_t());
+
         } else {
             // move the val directly into the correct spot
             assm.mov(x64asm::M64{x64asm::r10}, x64asm::r11);
@@ -356,7 +365,7 @@ void IrInterpreter::executeStep() {
 					inst->tempIndices->at(0)
 				};
                 callHelper((void *) &(helper_store_local_ref), args, temps, opttemp_t());
-				
+                break;
 			}
         case IrOp::PushLocalRef: 
             {
