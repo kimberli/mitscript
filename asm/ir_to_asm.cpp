@@ -382,7 +382,7 @@ void IrInterpreter::executeStep() {
 				LOG(to_string(instructionIndex) + ": StoreLocalRef");
                 int64_t localIndex = inst->op0.value();
                 getRbpOffset(getLocalOffset(localIndex)); // puts the address of the valwrapper in r10
-                assm.mov(x64asm::r10, x64asm::M64{x64asm::r10});
+                assm.mov(x64asm::r10, x64asm::M64{x64asm::r10}); //r10 contains the valwrapper
                 vector<x64asm::Imm64> args = {
 				};
                 vector<tempptr_t> temps = {
@@ -399,6 +399,7 @@ void IrInterpreter::executeStep() {
                 int64_t localIndex = inst->op0.value();
                 getRbpOffset(getLocalOffset(localIndex)); // puts the address of the local in r10
                 assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // loads valwrapper
+                storeTemp(x64asm::rdi, inst->tempIndices->at(0));
                 break;
             }
         case IrOp::PushFreeRef: 
