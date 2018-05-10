@@ -21,6 +21,7 @@ private:
     IrFunc* func;
     int instructionIndex;
     bool finished;
+    vector<bool> isLocalRef;
 
     void callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temp, opttemp_t returnTemp);
     void prolog();
@@ -44,6 +45,6 @@ public:
     static const int numCallerSaved = 9;
     static const int numCalleeSaved = 5;
     static const int numArgRegs = 6;
-    IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPointer); 
+    IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPointer, vector<bool> isLocalRefVec); 
     x64asm::Function run(); // runs the program 
 };

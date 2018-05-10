@@ -31,9 +31,10 @@ const x64asm::R64 IrInterpreter::calleeSavedRegs[] = {
     x64asm::r15
 };
 
-IrInterpreter::IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPointer) {
+IrInterpreter::IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPointer, vector<bool> isLocalRefVec) {
     vmPointer = vmInterpreterPointer;
     func = irFunction;
+    isLocalRef = isLocalRefVec;
     // by convention, the first ir function is the main function
     instructionIndex = 0;
     finished = false;
@@ -75,7 +76,7 @@ void IrInterpreter::prolog() {
         
         // Calculate mem address for the local
         getRbpOffset(getLocalOffset(i));
-        // syntax for scaling: base, offset, scale 
+
         // move offset into r11
         assm.mov(x64asm::r11, x64asm::Imm64{i});
         // move val of arg into r11
@@ -84,14 +85,24 @@ void IrInterpreter::prolog() {
                 x64asm::M64{x64asm::rdi, x64asm::r11, x64asm::Scale::TIMES_8}
         }});
         // move r11 into address stored in r10
-        assm.mov(x64asm::M64{x64asm::r10}, x64asm::r11);
+        if (isLocalRef.at(i)) {
+            // var is a ref; put in as a ref 
+            // TODO
+        } else {
+            // move the val directly into the correct spot
+            assm.mov(x64asm::M64{x64asm::r10}, x64asm::r11);
+        }
     }
 
     // set all other locals to none
     for (uint64_t i = func->parameter_count_; i < func->local_count_; i++) {
         getRbpOffset(getLocalOffset(i));
         assm.mov(x64asm::rdi, x64asm::Imm64{vmPointer->NONE});
-        assm.mov(x64asm::M64{x64asm::r10}, x64asm::rdi);
+        if (isLocalRef.at(i)) {
+            // TODO: MAKE A REF AND MOVE
+        } else {
+            assm.mov(x64asm::M64{x64asm::r10}, x64asm::rdi);
+        }
     }
 
     // put a pointer to the references onto the stack

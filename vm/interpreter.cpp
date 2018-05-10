@@ -510,7 +510,7 @@ Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
     IrFunc irf = irc.toIr();
     labelCounter = irf.label_offset_;  // update interpreter state tracking label offset
     // convert the ir to assembly
-    IrInterpreter iri = IrInterpreter(&irf, this);
+    IrInterpreter iri = IrInterpreter(&irf, this, irc.isLocalRef);
     x64asm::Function asmFunc = iri.run();
     // create a MachineCodeFunction object
     MachineCodeFunction mcf = MachineCodeFunction(2, asmFunc);
