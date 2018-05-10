@@ -11,6 +11,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -37,6 +39,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -50,6 +53,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [n],
+			labels = {0 : 18; 1 : 7},
 			instructions = 
 			[
 				load_local	0
@@ -57,7 +61,8 @@ function
 				store_local	3
 				load_const	0
 				store_local	2
-				goto	11
+				goto	0
+				label	1
 				load_local	1
 				load_local	0
 				load_local	2
@@ -68,11 +73,12 @@ function
 				load_const	1
 				add
 				store_local	2
+				label	0
 				load_local	2
 				load_local	3
 				swap
 				gt
-				if	-14
+				if	1
 			]
 		},
 		function
@@ -84,6 +90,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [n],
+			labels = {2 : 10; 3 : 13; 4 : 44; 5 : 30},
 			instructions = 
 			[
 				load_local	0
@@ -95,8 +102,10 @@ function
 				geq
 				if	2
 				goto	3
+				label	2
 				load_const	1
 				return
+				label	3
 				load_local	2
 				load_local	1
 				load_local	0
@@ -112,7 +121,8 @@ function
 				store_local	5
 				load_const	4
 				store_local	3
-				goto	14
+				goto	4
+				label	5
 				load_local	2
 				load_local	5
 				load_local	1
@@ -126,11 +136,12 @@ function
 				load_const	5
 				add
 				store_local	3
+				label	4
 				load_local	3
 				load_local	4
 				swap
 				gt
-				if	-17
+				if	5
 				load_local	5
 				return
 			]
@@ -144,6 +155,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [x, y, vx, vy],
+			labels = {},
 			instructions = 
 			[
 				alloc_record
@@ -171,6 +183,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [Car, n, vx, vy],
+			labels = {6 : 86; 7 : 19; 8 : 40; 9 : 47; 10 : 69; 11 : 76; 12 : 82; 13 : 85},
 			instructions = 
 			[
 				alloc_record
@@ -190,7 +203,8 @@ function
 				load_const	4
 				sub
 				store_local	0
-				goto	61
+				goto	6
+				label	7
 				load_global	0
 				load_local	6
 				load_local	7
@@ -209,14 +223,16 @@ function
 				load_local	6
 				load_local	1
 				gt
-				if	2
-				goto	7
+				if	8
+				goto	9
+				label	8
 				load_const	6
 				store_local	6
 				load_local	7
 				load_const	7
 				add
 				store_local	7
+				label	9
 				load_local	4
 				load_local	2
 				swap
@@ -236,25 +252,30 @@ function
 				load_local	4
 				load_const	10
 				gt
-				if	2
-				goto	7
+				if	10
+				goto	11
+				label	10
 				load_const	11
 				store_local	4
 				load_local	5
 				load_const	12
 				add
 				store_local	5
+				label	11
 				load_local	5
 				load_const	13
 				gt
-				if	2
-				goto	3
+				if	12
+				goto	13
+				label	12
 				load_const	14
 				store_local	5
+				label	13
+				label	6
 				load_local	0
 				load_const	15
 				geq
-				if	-63
+				if	7
 				load_local	3
 				return
 			]
@@ -276,6 +297,7 @@ function
 							local_ref_vars = [],
 							free_vars = [],
 							names = [x, x, y, y],
+							labels = {},
 							instructions = 
 							[
 								load_local	0
@@ -301,6 +323,7 @@ function
 							local_ref_vars = [],
 							free_vars = [car, checkColision],
 							names = [],
+							labels = {},
 							instructions = 
 							[
 								push_ref	1
@@ -321,6 +344,7 @@ function
 							local_ref_vars = [],
 							free_vars = [],
 							names = [],
+							labels = {},
 							instructions = 
 							[
 								load_local	0
@@ -336,6 +360,7 @@ function
 					local_ref_vars = [car, checkColision],
 					free_vars = [carmap],
 					names = [mapreduce, x, vx, x, y, vy, y, x, vx, x, y, vy, y, vx, vx, vy, vy],
+					labels = {14 : 34; 15 : 63},
 					instructions = 
 					[
 						load_func	0
@@ -369,8 +394,9 @@ function
 						call	3
 						store_local	2
 						load_local	2
-						if	2
-						goto	29
+						if	14
+						goto	15
+						label	14
 						load_local	0
 						field_load	7
 						load_local	0
@@ -399,6 +425,7 @@ function
 						load_local	0
 						swap
 						field_store	16
+						label	15
 					]
 				}
 			],
@@ -408,6 +435,7 @@ function
 			local_ref_vars = [carmap],
 			free_vars = [],
 			names = [forall],
+			labels = {},
 			instructions = 
 			[
 				load_func	0
@@ -428,6 +456,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [Car, Ncars, Nsteps, cars, forall, i, input, intcast, manycars, mapreduce, print, step],
+	labels = {16 : 56; 17 : 47},
 	instructions = 
 	[
 		load_func	0
@@ -475,7 +504,8 @@ function
 		pop
 		load_const	5
 		store_global	5
-		goto	9
+		goto	16
+		label	17
 		load_global	11
 		load_global	3
 		call	1
@@ -484,11 +514,12 @@ function
 		load_const	6
 		add
 		store_global	5
+		label	16
 		load_global	5
 		load_global	2
 		swap
 		gt
-		if	-12
+		if	17
 		load_global	10
 		load_const	7
 		load_global	3

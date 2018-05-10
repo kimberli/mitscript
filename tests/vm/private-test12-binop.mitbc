@@ -11,6 +11,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -37,6 +39,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -50,6 +53,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -61,6 +65,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [input, intcast, mega_nested, print, x, y, hello, derp, herp, nested, still, yep, still_nested, still_nested, still, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp, still_nested, yep, still, nested, herp, derp],
+	labels = {},
 	instructions = 
 	[
 		load_func	0

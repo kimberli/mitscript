@@ -6,11 +6,12 @@ function
 		{
 			functions = [],
 			constants = [],
-			parameter_count = 0,
+			parameter_count = 1,
 			local_vars = [],
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -32,11 +34,12 @@ function
 		{
 			functions = [],
 			constants = [],
-			parameter_count = 0,
+			parameter_count = 1,
 			local_vars = [],
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -47,9 +50,19 @@ function
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [print, input, intcast, x, y, z],
+	names = [input, intcast, print, x, y, z],
+	labels = {},
 	instructions = 
 	[
+		load_func	0
+		alloc_closure	0
+		store_global	2
+		load_func	1
+		alloc_closure	0
+		store_global	0
+		load_func	2
+		alloc_closure	0
+		store_global	1
 		load_const	0
 		store_global	3
 		load_const	1
@@ -58,8 +71,9 @@ function
 		load_global	4
 		add
 		store_global	5
-		load_global	0
+		load_global	2
 		load_global	5
 		call	1
+		pop
 	]
 }

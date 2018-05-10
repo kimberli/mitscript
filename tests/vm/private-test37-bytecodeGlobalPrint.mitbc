@@ -6,11 +6,12 @@ function
 		{
 			functions = [],
 			constants = [],
-			parameter_count = 0,
+			parameter_count = 1,
 			local_vars = [],
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -32,11 +34,12 @@ function
 		{
 			functions = [],
 			constants = [],
-			parameter_count = 0,
+			parameter_count = 1,
 			local_vars = [],
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -56,8 +59,9 @@ function
 							parameter_count = 1,
 							local_vars = [v],
 							local_ref_vars = [],
-							free_vars = [],
-							names = [print, x],
+							free_vars = [x],
+							names = [print],
+							labels = {},
 							instructions = 
 							[
 								load_global	0
@@ -66,73 +70,87 @@ function
 								add
 								load_const	1
 								add
-								load_global	1
+								push_ref	0
+								load_ref
 								add
 								call	1
+								pop
 							]
 						}
 					],
-					constants = [3, 2],
+					constants = [3, 3, 2, 2],
 					parameter_count = 1,
-					local_vars = [u, boo],
-					local_ref_vars = [],
+					local_vars = [u, boo, x],
+					local_ref_vars = [x],
 					free_vars = [],
-					names = [x],
+					names = [],
+					labels = {},
 					instructions = 
 					[
 						load_const	0
-						store_global	0
+						store_local	2
 						load_func	0
+						push_ref	0
+						alloc_closure	1
 						store_local	1
 						load_local	1
-						load_const	0
-						call	1
 						load_const	1
-						store_global	0
+						call	1
+						pop
+						load_const	2
+						store_local	2
 						load_local	1
-						load_const	1
+						load_const	3
 						call	1
+						pop
 						load_local	1
 						return
 					]
 				}
 			],
-			constants = [4, 0, 2, "this x should be ", " is "],
+			constants = [4, 4, 0, 2, 2, "this x should be ", " is "],
 			parameter_count = 1,
-			local_vars = [t, bad, moo, f],
+			local_vars = [t, bad, f, moo],
 			local_ref_vars = [],
 			free_vars = [],
-			names = [x, print],
+			names = [print, x],
+			labels = {0 : 10; 1 : 34},
 			instructions = 
 			[
 				load_local	0
 				load_const	0
 				gt
-				if	4
-				load_const	0
+				if	0
 				load_const	1
+				load_const	2
 				div
 				store_local	1
+				goto	1
+				label	0
 				load_local	0
-				store_global	0
+				store_global	1
 				load_func	0
-				store_local	2
-				load_local	2
-				load_const	2
-				call	1
+				alloc_closure	0
 				store_local	3
 				load_local	3
-				load_const	2
-				call	1
-				load_global	1
 				load_const	3
+				call	1
+				store_local	2
+				load_local	2
+				load_const	4
+				call	1
+				pop
+				load_global	0
+				load_const	5
 				load_local	0
 				add
-				load_const	4
+				load_const	6
 				add
-				load_global	0
+				load_global	1
 				add
 				call	1
+				pop
+				label	1
 			]
 		}
 	],
@@ -141,15 +159,27 @@ function
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [print, input, intcast, x, foo],
+	names = [foo, input, intcast, print, x],
+	labels = {},
 	instructions = 
 	[
-		load_const	0
+		load_func	0
+		alloc_closure	0
 		store_global	3
-		load_func	3
+		load_func	1
+		alloc_closure	0
+		store_global	1
+		load_func	2
+		alloc_closure	0
+		store_global	2
+		load_const	0
 		store_global	4
-		load_global	4
+		load_func	3
+		alloc_closure	0
+		store_global	0
+		load_global	0
 		load_const	1
 		call	1
+		pop
 	]
 }

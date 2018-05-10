@@ -11,6 +11,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -37,6 +39,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -54,6 +57,7 @@ function
 					local_ref_vars = [],
 					free_vars = [this],
 					names = [head, head, len],
+					labels = {0 : 13; 1 : 16},
 					instructions = 
 					[
 						push_ref	0
@@ -61,15 +65,17 @@ function
 						field_load	0
 						load_const	0
 						eq
-						if	7
+						if	0
 						push_ref	0
 						load_ref
 						field_load	1
 						field_load	2
 						return
-						goto	3
+						goto	1
+						label	0
 						load_const	1
 						return
+						label	1
 					]
 				},
 				function
@@ -81,6 +87,7 @@ function
 					local_ref_vars = [],
 					free_vars = [this],
 					names = [len, len, car, head, cdr, head],
+					labels = {},
 					instructions = 
 					[
 						alloc_record
@@ -115,6 +122,7 @@ function
 					local_ref_vars = [],
 					free_vars = [this],
 					names = [print, head, car, cdr],
+					labels = {2 : 19; 3 : 8},
 					instructions = 
 					[
 						push_ref	0
@@ -123,7 +131,8 @@ function
 						store_local	1
 						load_const	0
 						store_local	0
-						goto	11
+						goto	2
+						label	3
 						load_local	0
 						load_local	1
 						field_load	2
@@ -134,11 +143,12 @@ function
 						load_local	1
 						field_load	3
 						store_local	1
+						label	2
 						load_local	1
 						load_const	2
 						eq
 						not
-						if	-14
+						if	3
 						load_global	0
 						load_local	0
 						call	1
@@ -154,13 +164,15 @@ function
 					local_ref_vars = [],
 					free_vars = [this],
 					names = [head, car, cdr],
+					labels = {4 : 15; 5 : 6},
 					instructions = 
 					[
 						push_ref	0
 						load_ref
 						field_load	0
 						store_local	1
-						goto	9
+						goto	4
+						label	5
 						load_local	0
 						load_local	1
 						field_load	1
@@ -169,11 +181,12 @@ function
 						load_local	1
 						field_load	2
 						store_local	1
+						label	4
 						load_local	1
 						load_const	0
 						eq
 						not
-						if	-12
+						if	5
 					]
 				},
 				function
@@ -189,12 +202,13 @@ function
 							local_ref_vars = [],
 							free_vars = [clone],
 							names = [len, len, car, car, cdr, cdr],
+							labels = {6 : 23; 7 : 26},
 							instructions = 
 							[
 								load_local	0
 								load_const	0
 								eq
-								if	19
+								if	6
 								alloc_record
 								dup
 								load_local	0
@@ -212,9 +226,11 @@ function
 								call	1
 								field_store	5
 								return
-								goto	3
+								goto	7
+								label	6
 								load_const	1
 								return
+								label	7
 							]
 						}
 					],
@@ -224,6 +240,7 @@ function
 					local_ref_vars = [clone],
 					free_vars = [this],
 					names = [List, head, head],
+					labels = {},
 					instructions = 
 					[
 						load_global	0
@@ -252,6 +269,7 @@ function
 			local_ref_vars = [this],
 			free_vars = [],
 			names = [head, len, addx, print, forall, clone],
+			labels = {},
 			instructions = 
 			[
 				alloc_record
@@ -301,19 +319,22 @@ function
 					local_ref_vars = [],
 					free_vars = [N, rv],
 					names = [addx],
+					labels = {8 : 8; 9 : 2},
 					instructions = 
 					[
-						goto	6
+						goto	8
+						label	9
 						load_local	0
 						push_ref	0
 						load_ref
 						sub
 						store_local	0
+						label	8
 						load_local	0
 						push_ref	0
 						load_ref
 						geq
-						if	-9
+						if	9
 						push_ref	1
 						load_ref
 						field_load	0
@@ -329,6 +350,7 @@ function
 			local_ref_vars = [N, rv],
 			free_vars = [],
 			names = [List, forall],
+			labels = {},
 			instructions = 
 			[
 				load_global	0
@@ -359,6 +381,7 @@ function
 					local_ref_vars = [],
 					free_vars = [rv, state],
 					names = [addx, v1, node, car, v2, node, cdr, node],
+					labels = {},
 					instructions = 
 					[
 						push_ref	0
@@ -393,14 +416,17 @@ function
 			local_ref_vars = [rv, state],
 			free_vars = [],
 			names = [List, addx, len, len, addx, len, len, head, node, forall],
+			labels = {10 : 8; 11 : 2; 12 : 24; 13 : 18},
 			instructions = 
 			[
-				goto	6
+				goto	10
+				label	11
 				load_local	1
 				field_load	1
 				load_const	0
 				call	1
 				pop
+				label	10
 				load_local	0
 				field_load	2
 				call	0
@@ -408,13 +434,15 @@ function
 				field_load	3
 				call	0
 				gt
-				if	-12
-				goto	6
+				if	11
+				goto	12
+				label	13
 				load_local	0
 				field_load	4
 				load_const	1
 				call	1
 				pop
+				label	12
 				load_local	1
 				field_load	5
 				call	0
@@ -422,7 +450,7 @@ function
 				field_load	6
 				call	0
 				gt
-				if	-12
+				if	13
 				alloc_record
 				dup
 				load_local	0
@@ -457,6 +485,7 @@ function
 					local_ref_vars = [],
 					free_vars = [N, rv, state],
 					names = [v1, v2, carry, carry, carry, carry, addx],
+					labels = {14 : 32; 15 : 17},
 					instructions = 
 					[
 						load_local	0
@@ -474,7 +503,8 @@ function
 						load_ref
 						swap
 						field_store	3
-						goto	15
+						goto	14
+						label	15
 						load_local	1
 						push_ref	0
 						load_ref
@@ -489,11 +519,12 @@ function
 						load_ref
 						swap
 						field_store	5
+						label	14
 						load_local	1
 						push_ref	0
 						load_ref
 						geq
-						if	-18
+						if	15
 						push_ref	1
 						load_ref
 						field_load	6
@@ -509,6 +540,7 @@ function
 			local_ref_vars = [N, rv, state],
 			free_vars = [],
 			names = [List, pair, carry, forall, carry, addx, carry],
+			labels = {16 : 30; 17 : 37},
 			instructions = 
 			[
 				load_global	1
@@ -538,14 +570,16 @@ function
 				load_const	1
 				eq
 				not
-				if	2
-				goto	7
+				if	16
+				goto	17
+				label	16
 				load_local	3
 				field_load	5
 				load_local	4
 				field_load	6
 				call	1
 				pop
+				label	17
 				load_local	3
 				return
 			]
@@ -559,6 +593,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [List, plus, addx],
+			labels = {18 : 23; 19 : 12},
 			instructions = 
 			[
 				load_const	0
@@ -571,7 +606,8 @@ function
 				load_const	1
 				call	1
 				pop
-				goto	11
+				goto	18
+				label	19
 				load_global	1
 				load_local	4
 				load_local	0
@@ -582,11 +618,12 @@ function
 				load_const	2
 				add
 				store_local	3
+				label	18
 				load_local	3
 				load_local	1
 				swap
 				gt
-				if	-14
+				if	19
 				load_local	4
 				return
 			]
@@ -598,6 +635,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [BASE, List, N, i, input, intcast, l, l2, l4, l5, modN, mult, pair, plus, print, addx, addx, addx, print, print, print, print, print],
+	labels = {20 : 118; 21 : 97},
 	instructions = 
 	[
 		load_func	0
@@ -695,7 +733,8 @@ function
 		pop
 		load_const	9
 		store_global	3
-		goto	21
+		goto	20
+		label	21
 		load_global	14
 		load_const	10
 		load_global	3
@@ -716,10 +755,11 @@ function
 		load_const	11
 		add
 		store_global	3
+		label	20
 		load_global	3
 		load_const	12
 		swap
 		gt
-		if	-24
+		if	21
 	]
 }

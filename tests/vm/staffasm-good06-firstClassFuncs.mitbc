@@ -1,0 +1,129 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			labels = {},
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			labels = {},
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			labels = {},
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions =
+			[
+				function
+				{
+					functions = [],
+					constants = [],
+					parameter_count = 1,
+					local_vars = [w],
+					local_ref_vars = [],
+					free_vars = [x],
+					names = [],
+					labels = {},
+					instructions = 
+					[
+						push_ref	0
+						load_ref
+						load_local	0
+						add
+						return
+					]
+				}
+			],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [x],
+			local_ref_vars = [x],
+			free_vars = [],
+			names = [],
+			labels = {},
+			instructions = 
+			[
+				load_func	0
+				push_ref	0
+				alloc_closure	1
+				return
+			]
+		}
+	],
+	constants = [10, 15, 20, "hello"],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [cool1, cool2, input, intcast, print, y],
+	labels = {},
+	instructions = 
+	[
+		load_func	0
+		alloc_closure	0
+		store_global	4
+		load_func	1
+		alloc_closure	0
+		store_global	2
+		load_func	2
+		alloc_closure	0
+		store_global	3
+		load_func	3
+		alloc_closure	0
+		store_global	5
+		load_global	5
+		load_const	0
+		call	1
+		store_global	0
+		load_global	5
+		load_const	1
+		call	1
+		store_global	1
+		load_global	4
+		load_global	0
+		load_const	2
+		call	1
+		call	1
+		pop
+		load_global	4
+		load_global	1
+		load_const	3
+		call	1
+		call	1
+		pop
+	]
+}

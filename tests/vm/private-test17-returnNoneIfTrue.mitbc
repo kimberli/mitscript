@@ -11,6 +11,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -37,6 +39,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -50,15 +53,18 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {0 : 6; 1 : 9},
 			instructions = 
 			[
 				load_const	0
-				if	4
+				if	0
 				load_const	1
 				return
-				goto	3
+				goto	1
+				label	0
 				load_const	2
 				store_local	0
+				label	1
 			]
 		}
 	],
@@ -68,6 +74,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [input, intcast, print, x],
+	labels = {},
 	instructions = 
 	[
 		load_func	0

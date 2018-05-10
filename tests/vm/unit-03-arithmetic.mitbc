@@ -1,0 +1,247 @@
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			labels = {},
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			labels = {},
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			labels = {},
+			instructions = 
+			[
+			]
+		}
+	],
+	constants = [3, 0, 5, 7, 9],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [a, b, c, d, e, input, intcast, print],
+	labels = {},
+	instructions = 
+	[
+		load_func	0
+		alloc_closure	0
+		store_global	7
+		load_func	1
+		alloc_closure	0
+		store_global	5
+		load_func	2
+		alloc_closure	0
+		store_global	6
+		load_const	0
+		store_global	0
+		load_const	1
+		store_global	1
+		load_const	2
+		neg
+		store_global	2
+		load_const	3
+		store_global	3
+		load_const	4
+		neg
+		store_global	4
+		load_global	7
+		load_global	0
+		load_global	2
+		add
+		call	1
+		pop
+		load_global	7
+		load_global	1
+		load_global	0
+		add
+		call	1
+		pop
+		load_global	7
+		load_global	1
+		load_global	2
+		add
+		call	1
+		pop
+		load_global	7
+		load_global	3
+		load_global	0
+		add
+		call	1
+		pop
+		load_global	7
+		load_global	4
+		load_global	2
+		add
+		call	1
+		pop
+		load_global	7
+		load_global	4
+		load_global	0
+		add
+		call	1
+		pop
+		load_global	7
+		load_global	3
+		load_global	2
+		add
+		call	1
+		pop
+		load_global	7
+		load_global	0
+		load_global	2
+		sub
+		call	1
+		pop
+		load_global	7
+		load_global	1
+		load_global	0
+		sub
+		call	1
+		pop
+		load_global	7
+		load_global	1
+		load_global	2
+		sub
+		call	1
+		pop
+		load_global	7
+		load_global	3
+		load_global	0
+		sub
+		call	1
+		pop
+		load_global	7
+		load_global	4
+		load_global	2
+		sub
+		call	1
+		pop
+		load_global	7
+		load_global	4
+		load_global	0
+		sub
+		call	1
+		pop
+		load_global	7
+		load_global	3
+		load_global	2
+		sub
+		call	1
+		pop
+		load_global	7
+		load_global	0
+		load_global	2
+		mul
+		call	1
+		pop
+		load_global	7
+		load_global	1
+		load_global	0
+		mul
+		call	1
+		pop
+		load_global	7
+		load_global	1
+		load_global	2
+		mul
+		call	1
+		pop
+		load_global	7
+		load_global	3
+		load_global	0
+		mul
+		call	1
+		pop
+		load_global	7
+		load_global	4
+		load_global	2
+		mul
+		call	1
+		pop
+		load_global	7
+		load_global	4
+		load_global	0
+		mul
+		call	1
+		pop
+		load_global	7
+		load_global	3
+		load_global	2
+		mul
+		call	1
+		pop
+		load_global	7
+		load_global	0
+		load_global	2
+		div
+		call	1
+		pop
+		load_global	7
+		load_global	1
+		load_global	0
+		div
+		call	1
+		pop
+		load_global	7
+		load_global	1
+		load_global	2
+		div
+		call	1
+		pop
+		load_global	7
+		load_global	3
+		load_global	0
+		div
+		call	1
+		pop
+		load_global	7
+		load_global	4
+		load_global	2
+		div
+		call	1
+		pop
+		load_global	7
+		load_global	4
+		load_global	0
+		div
+		call	1
+		pop
+		load_global	7
+		load_global	3
+		load_global	2
+		div
+		call	1
+		pop
+	]
+}

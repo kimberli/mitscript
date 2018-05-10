@@ -11,6 +11,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -37,6 +39,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -54,6 +57,7 @@ function
 					local_ref_vars = [],
 					free_vars = [x],
 					names = [],
+					labels = {},
 					instructions = 
 					[
 						push_ref	0
@@ -70,6 +74,7 @@ function
 					local_ref_vars = [],
 					free_vars = [y],
 					names = [],
+					labels = {},
 					instructions = 
 					[
 						push_ref	0
@@ -86,6 +91,7 @@ function
 					local_ref_vars = [],
 					free_vars = [x, y],
 					names = [print],
+					labels = {},
 					instructions = 
 					[
 						load_global	0
@@ -113,6 +119,7 @@ function
 					local_ref_vars = [],
 					free_vars = [x, y],
 					names = [getx, gety],
+					labels = {},
 					instructions = 
 					[
 						load_local	0
@@ -140,6 +147,7 @@ function
 					local_ref_vars = [],
 					free_vars = [x, y],
 					names = [Vector, getx, gety],
+					labels = {},
 					instructions = 
 					[
 						load_global	0
@@ -166,6 +174,7 @@ function
 			local_ref_vars = [x, y],
 			free_vars = [],
 			names = [getx, gety, print, eqx, plus],
+			labels = {},
 			instructions = 
 			[
 				alloc_record
@@ -209,6 +218,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [Vector, input, intcast, print, v1, v2, x, print, print, plus, eqx, print],
+	labels = {0 : 50; 1 : 59},
 	instructions = 
 	[
 		load_func	0
@@ -258,8 +268,9 @@ function
 		field_load	10
 		load_global	5
 		call	1
-		if	2
-		goto	9
+		if	0
+		goto	1
+		label	0
 		load_global	3
 		load_const	6
 		call	1
@@ -268,5 +279,6 @@ function
 		field_load	11
 		call	0
 		pop
+		label	1
 	]
 }

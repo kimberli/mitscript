@@ -11,6 +11,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -37,6 +39,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -54,6 +57,7 @@ function
 					local_ref_vars = [],
 					free_vars = [t],
 					names = [],
+					labels = {},
 					instructions = 
 					[
 						load_local	0
@@ -70,6 +74,7 @@ function
 			local_ref_vars = [t],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 				load_const	0
@@ -87,6 +92,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [a, b, c, f, g, h, input, intcast, print, q, x, y, x, y],
+	labels = {0 : 34; 1 : 39; 2 : 45; 3 : 50; 4 : 74; 5 : 79; 6 : 85; 7 : 90; 8 : 96; 9 : 101; 10 : 108; 11 : 117},
 	instructions = 
 	[
 		load_func	0
@@ -120,21 +126,25 @@ function
 		load_global	5
 		load_global	4
 		eq
-		if	2
-		goto	5
+		if	0
+		goto	1
+		label	0
 		load_global	8
 		load_const	2
 		call	1
 		pop
+		label	1
 		load_global	4
 		load_global	9
 		eq
 		if	2
-		goto	5
+		goto	3
+		label	2
 		load_global	8
 		load_const	3
 		call	1
 		pop
+		label	3
 		alloc_record
 		dup
 		load_const	4
@@ -156,36 +166,43 @@ function
 		load_global	0
 		load_global	2
 		eq
-		if	2
+		if	4
 		goto	5
+		label	4
 		load_global	8
 		load_const	8
 		call	1
 		pop
+		label	5
 		load_global	0
 		load_global	1
 		eq
-		if	2
-		goto	5
+		if	6
+		goto	7
+		label	6
 		load_global	8
 		load_const	9
 		call	1
 		pop
+		label	7
 		load_global	0
 		load_global	4
 		eq
-		if	2
-		goto	5
+		if	8
+		goto	9
+		label	8
 		load_global	8
 		load_const	10
 		call	1
 		pop
+		label	9
 		load_global	0
 		load_global	4
 		eq
 		not
-		if	2
-		goto	9
+		if	10
+		goto	11
+		label	10
 		load_global	8
 		load_const	11
 		load_global	0
@@ -194,6 +211,7 @@ function
 		add
 		call	1
 		pop
+		label	11
 		load_global	8
 		load_const	12
 		call	1

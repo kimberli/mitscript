@@ -1,1 +1,197 @@
-UninitializedVariableException: Variable this not found.
+function
+{
+	functions =
+	[
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			labels = {},
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 0,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			labels = {},
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 1,
+			local_vars = [],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			labels = {},
+			instructions = 
+			[
+			]
+		},
+		function
+		{
+			functions =
+			[
+				function
+				{
+					functions = [],
+					constants = ["Rect(", ", ", ")"],
+					parameter_count = 0,
+					local_vars = [],
+					local_ref_vars = [],
+					free_vars = [this],
+					names = [print, x, y],
+					labels = {},
+					instructions = 
+					[
+						load_global	0
+						load_const	0
+						push_ref	0
+						load_ref
+						field_load	1
+						add
+						load_const	1
+						add
+						push_ref	0
+						load_ref
+						field_load	2
+						add
+						load_const	2
+						add
+						call	1
+						pop
+					]
+				}
+			],
+			constants = [],
+			parameter_count = 4,
+			local_vars = [x, y, a, b, this],
+			local_ref_vars = [this],
+			free_vars = [],
+			names = [x, y, a, b, print],
+			labels = {},
+			instructions = 
+			[
+				alloc_record
+				dup
+				load_local	0
+				field_store	0
+				dup
+				load_local	1
+				field_store	1
+				dup
+				load_local	2
+				field_store	2
+				dup
+				load_local	3
+				field_store	3
+				dup
+				load_func	0
+				push_ref	0
+				alloc_closure	1
+				field_store	4
+				store_local	4
+				load_local	4
+				return
+			]
+		}
+	],
+	constants = [5, 5, 4, 1, None, "yep", "nes", "ted"],
+	parameter_count = 0,
+	local_vars = [],
+	local_ref_vars = [],
+	free_vars = [],
+	names = [Rect, input, intcast, mega_nested, p, print, print, derp, herp, nested, still, yep, still_nested, still_nested, still, herp, derp, still_nested, yep, still, nested, herp, derp],
+	labels = {},
+	instructions = 
+	[
+		load_func	0
+		alloc_closure	0
+		store_global	5
+		load_func	1
+		alloc_closure	0
+		store_global	1
+		load_func	2
+		alloc_closure	0
+		store_global	2
+		load_func	3
+		alloc_closure	0
+		store_global	0
+		load_global	0
+		load_const	0
+		load_const	1
+		load_const	2
+		load_const	3
+		call	4
+		store_global	4
+		load_global	4
+		field_load	6
+		call	0
+		pop
+		load_global	5
+		load_global	4
+		call	1
+		pop
+		alloc_record
+		dup
+		alloc_record
+		dup
+		alloc_record
+		dup
+		alloc_record
+		dup
+		alloc_record
+		dup
+		alloc_record
+		dup
+		load_const	4
+		field_store	7
+		field_store	8
+		field_store	9
+		field_store	10
+		field_store	11
+		field_store	12
+		store_global	3
+		load_global	3
+		load_global	3
+		field_load	13
+		load_const	5
+		index_load
+		field_load	14
+		load_const	6
+		load_const	7
+		add
+		index_load
+		field_load	15
+		swap
+		field_store	16
+		load_global	5
+		load_global	3
+		field_load	17
+		field_load	18
+		field_load	19
+		field_load	20
+		field_load	21
+		field_load	22
+		load_global	3
+		eq
+		call	1
+		pop
+	]
+}
