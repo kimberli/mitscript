@@ -340,11 +340,7 @@ void IrInterpreter::executeStep() {
 
                 int64_t localIndex = inst->op0.value();
                 getRbpOffset(getLocalOffset(localIndex)); // puts the address of the local in r10
-                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // loads val into rdi
-                storeTemp(x64asm::rdi, inst->tempIndices->at(0));
-     
-                vector<tempptr_t> temps = {inst->tempIndices->at(0)};
-                callHelper((void *) &(helper_new_valwrapper), args, temps, opttemp_t(inst->tempIndices->at(0)));
+                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // loads valwrapper
                 break;
             }
         case IrOp::PushFreeRef: 
