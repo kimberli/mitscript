@@ -10,7 +10,7 @@ Value* helper_load_global(Interpreter* interpreter, string* name) {
     return interpreter->loadGlobal(*name);
 }
 
-void helper_store_local_ref(ValWrapper* ref, Constant* val) {
+void helper_store_local_ref(Constant* val, ValWrapper* ref) {
 	ref->ptr = val;
 }
 

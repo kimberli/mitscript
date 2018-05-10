@@ -90,10 +90,9 @@ void IrInterpreter::prolog() {
             vector<tempptr_t> temps;
             vector<x64asm::Imm64> args = {
                 x64asm::Imm64{vmPointer},
-                x64asm::Imm64{x64asm::r11},
             };
             tempptr_t t = std::make_shared<Temp>(Temp(0));
-            callHelper((void*) &(helper_new_valwrapper), args, temps, t);
+            callHelper((void*) &(helper_new_valwrapper), args, temps, x64asm::r11, t);
             loadTemp(x64asm::rax, t);
             // store as a local 
             getRbpOffset(getLocalOffset(i));
@@ -115,10 +114,9 @@ void IrInterpreter::prolog() {
             vector<tempptr_t> temps;
             vector<x64asm::Imm64> args = {
                 x64asm::Imm64{vmPointer},
-                x64asm::Imm64{x64asm::rdi}
             };
             tempptr_t t = std::make_shared<Temp>(Temp(0));
-            callHelper((void*) &(helper_new_valwrapper), args, temps, t);
+            callHelper((void*) &(helper_new_valwrapper), args, temps, x64asm::rdi, t);
             loadTemp(x64asm::rax, t);
             // store as a local 
             getRbpOffset(getLocalOffset(i));

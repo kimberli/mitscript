@@ -12,7 +12,7 @@ void helper_store_global(Interpreter* interpreter, string* name, Value* val);
 
 Value* helper_load_global(Interpreter* interpreter, string* name);
 
-void helper_store_local_ref(ValWrapper* ref, Constant* val);
+void helper_store_local_ref(Constant* val, ValWrapper* ref);
 
 Value* helper_add(Interpreter* interpreter, Value* left, Value* right);
 
