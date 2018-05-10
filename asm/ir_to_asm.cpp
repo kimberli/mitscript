@@ -116,12 +116,16 @@ x64asm::Function IrInterpreter::run() {
     prolog();
 	asmFunc.reserve(func->instructions.size() * 100); // TODO: figure out how to allocate the right amount of memory
 
-    // translate to asm
-    while (!finished) {
-        executeStep();
+    if (func->instructions.size() > 0) {
+        // translate to asm
+        while (!finished) {
+            executeStep();
+        }
     }
-
-    // TODO: move None into rax. 
+    
+    //assm.mov(x64asm::rax, x64asm::Imm64{vmPointer->NONE});
+    // move None into rax
+    assm.assemble({x64asm::MOV_R64_IMM64, {x64asm::rax, x64asm::Imm64{vmPointer->NONE}}});
     epilog();
 
     // finish compiling
@@ -233,7 +237,6 @@ void IrInterpreter::loadTemp(x64asm::R64 reg, tempptr_t temp) {
 }
 
 void IrInterpreter::executeStep() {
-
     instptr_t inst = func->instructions.at(instructionIndex);
     switch(inst->op) {
         case IrOp::LoadConst:
