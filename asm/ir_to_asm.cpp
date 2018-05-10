@@ -97,7 +97,6 @@ void IrInterpreter::prolog() {
             // store as a local 
             getRbpOffset(getLocalOffset(i));
             assm.mov(x64asm::M64{x64asm::r10}, x64asm::rax);
-            break;
         } else {
             // move the val directly into the correct spot
             assm.mov(x64asm::M64{x64asm::r10}, x64asm::r11);
@@ -121,7 +120,6 @@ void IrInterpreter::prolog() {
             // store as a local 
             getRbpOffset(getLocalOffset(i));
             assm.mov(x64asm::M64{x64asm::r10}, x64asm::rax);
-            break;
         } else {
             assm.mov(x64asm::M64{x64asm::r10}, x64asm::rdi);
         }

@@ -110,6 +110,9 @@ String* helper_cast_string(Interpreter* interpreter, Value* val) {
 }
 
 Value* helper_get_record_field(Interpreter* interpreter, string* field, Record* record) {
+    if (record->value.count(*field) == 0) {
+        return interpreter->NONE;
+    }
 	return record->get(*field);
 }
 
@@ -119,7 +122,11 @@ Record* helper_set_record_field(Interpreter* interpreter, string* field, Record*
 }
 
 Value* helper_get_record_index(Interpreter* interpreter, Value* index, Record* record) {
-	return record->get(index->toString());
+    string key = index->toString();
+    if (record->value.count(key) == 0) {
+        return interpreter->NONE;
+    }
+	return record->get(key);
 }
 
 Record* helper_set_record_index(Interpreter* interpreter, Value* index, Record* record, Value* val) {

@@ -289,6 +289,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                         pushInstruction(make_shared<IrInstruction>(IrOp::AssertValWrapper, t));
 						instTemps->push_back(t);
 					}
+					reverse(instTemps->begin(), instTemps->end());
 					tempptr_t func = popTemp();
 					instTemps->push_back(func);
 					tempptr_t curr = getNewTemp();
