@@ -21,7 +21,6 @@ using namespace std;
 
 typedef Constant* constptr_t;
 typedef Function* funcptr_t;
-typedef experimental::optional<int32_t> optint_t;
 
 class BytecodeCompiler : public Visitor {
     /*
@@ -42,6 +41,8 @@ private:
     // and creating the appropriate bb
     void loadConstant(constptr_t c);
 
+    // helper to add a single bytecode instruction
+    void addInstruction(BcOp op, optint_t op0);
     // takes care of writing assignments
     void addWriteInstructions(Expression* lhs);
     // writes variables (does not handle records)
