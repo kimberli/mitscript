@@ -11,6 +11,8 @@ class IrInterpreter;
 
 using namespace std; 
 
+typedef experimental::optional<x64asm::R64> optreg_t;
+
 class IrInterpreter {
 private: 
     Interpreter* vmPointer;
@@ -24,6 +26,7 @@ private:
     vector<bool> isLocalRef;
 
     void callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temp, opttemp_t returnTemp);
+    void callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temp, optreg_t lastArg, opttemp_t returnTemp);
     void prolog();
     void epilog();
     uint32_t spaceToAllocate;

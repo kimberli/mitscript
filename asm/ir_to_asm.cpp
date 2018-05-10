@@ -180,6 +180,11 @@ x64asm::Function IrInterpreter::run() {
 }
 
 void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps, opttemp_t returnTemp) {
+    callHelper(fn, args, temps, optreg_t(), returnTemp);
+}
+
+
+void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps, optreg_t lastArg, opttemp_t returnTemp) {
     // STEP 1: save caller-saved registers to stack
     for (int i = 0; i < numCallerSaved; ++i) {
         assm.push(callerSavedRegs[i]);
@@ -193,32 +198,38 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
     int numArgs = args.size() + temps.size();
     int argIndex = 0;
     LOG("  calling helper w/ " + to_string(numArgs) + " total args");
-    while (argIndex < numArgs) {
-        while (argIndex < args.size()) {
-            if (argIndex < numArgRegs) {
-                // put args 1 - 6 into regs
-                assm.mov(argRegs[argIndex], args[argIndex]);
-            } else {
-                // push args 7 - n on the stack; n gets pushed first
-                assm.mov(x64asm::r10, args[args.size() - argIndex - 1]);
-                assm.push(x64asm::r10);
-            }
-            argIndex++;
+    while (argIndex < args.size()) {
+        if (argIndex < numArgRegs) {
+            // put args 1 - 6 into regs
+            assm.mov(argRegs[argIndex], args[argIndex]);
+        } else {
+            // push args 7 - n on the stack; n gets pushed first
+            assm.mov(x64asm::r10, args[args.size() - argIndex - 1]);
+            assm.push(x64asm::r10);
         }
-        while (argIndex < numArgs) {
-            if (argIndex < numArgRegs) {
-                // put args 1 - 6 into regs
-                tempptr_t tempToPush = temps[argIndex - args.size()];
-                loadTemp(x64asm::rax, tempToPush);
-                assm.mov(argRegs[argIndex], x64asm::rax);
-            } else {
-                int tempIndex = argIndex - args.size();
-                // push args 7 - n on the stack; n gets pushed first
-                tempptr_t tempToPush = temps[temps.size() - tempIndex - 1];
-                loadTemp(x64asm::rax, tempToPush);
-                assm.push(x64asm::rax);
-            }
-            argIndex++;
+        argIndex++;
+    }
+    while (argIndex < numArgs) {
+        if (argIndex < numArgRegs) {
+            // put args 1 - 6 into regs
+            tempptr_t tempToPush = temps[argIndex - args.size()];
+            loadTemp(x64asm::rax, tempToPush);
+            assm.mov(argRegs[argIndex], x64asm::rax);
+        } else {
+            int tempIndex = argIndex - args.size();
+            // push args 7 - n on the stack; n gets pushed first
+            tempptr_t tempToPush = temps[temps.size() - tempIndex - 1];
+            loadTemp(x64asm::rax, tempToPush);
+            assm.push(x64asm::rax);
+        }
+        argIndex++;
+    }
+    // if the optional register argument is defined, push it as an arg
+    if (lastArg) {
+        if (argIndex < numArgs) {
+            assm.mov(argRegs[argIndex], lastArg.value());
+        } else {
+            assm.push(lastArg.value());
         }
     }
     assm.mov(x64asm::r10, x64asm::Imm64{fn}); 
@@ -375,12 +386,11 @@ void IrInterpreter::executeStep() {
                 getRbpOffset(getLocalOffset(localIndex)); // puts the address of the valwrapper in r10
                 assm.mov(x64asm::r10, x64asm::M64{x64asm::r10});
                 vector<x64asm::Imm64> args = {
-					x64asm::Imm64{x64asm::r10} //load ValWrapper? TODO test
 				};
                 vector<tempptr_t> temps = {
 					inst->tempIndices->at(0)
 				};
-                callHelper((void *) &(helper_store_local_ref), args, temps, opttemp_t());
+                callHelper((void *) &(helper_store_local_ref), args, temps, x64asm::r10, opttemp_t());
                 break;
 			}
         case IrOp::PushLocalRef: 
