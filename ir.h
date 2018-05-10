@@ -21,6 +21,7 @@ typedef shared_ptr<TempList> TempListPtr;
 
 struct Temp {
     offset_t stackOffset;
+	int timesInUse = 0;
 	Temp(offset_t offset) : stackOffset(offset) {}
 };
 
