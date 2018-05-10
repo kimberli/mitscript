@@ -84,19 +84,21 @@ void IrInterpreter::prolog() {
                 x64asm::r11, 
                 x64asm::M64{x64asm::rdi, x64asm::r11, x64asm::Scale::TIMES_8}
         }});
-        // move r11 into address stored in r10
         if (isLocalRef.at(i)) {
             // var is a ref; put in as a ref 
-            // mov the valwrapper into r10 
-            assm.mov(x64asm::r10, x64asm::M64{x64asm::r10});
-            // pass to the helper
-            vector<x64asm::Imm64> args = {
-                x64asm::Imm64{x64asm::r10}, //load valwrapper
-                x64asm::Imm64{x64asm::r11}, //load value
-            };
+            // first, create a val wrapper
             vector<tempptr_t> temps;
-            callHelper((void *) &(helper_store_local_ref), args, temps, opttemp_t());
-
+            vector<x64asm::Imm64> args = {
+                x64asm::Imm64{vmPointer},
+                x64asm::Imm64{x64asm::r11},
+            };
+            tempptr_t t = std::make_shared<Temp>(Temp(0));
+            callHelper((void*) &(helper_new_valwrapper), args, temps, t);
+            loadTemp(x64asm::rax, t);
+            // store as a local 
+            getRbpOffset(getLocalOffset(i));
+            assm.mov(x64asm::M64{x64asm::r10}, x64asm::rax);
+            break;
         } else {
             // move the val directly into the correct spot
             assm.mov(x64asm::M64{x64asm::r10}, x64asm::r11);
@@ -108,7 +110,20 @@ void IrInterpreter::prolog() {
         getRbpOffset(getLocalOffset(i));
         assm.mov(x64asm::rdi, x64asm::Imm64{vmPointer->NONE});
         if (isLocalRef.at(i)) {
-            // TODO: MAKE A REF AND MOVE
+            // MAKE A REF AND MOVE
+            // first, create a val wrapper
+            vector<tempptr_t> temps;
+            vector<x64asm::Imm64> args = {
+                x64asm::Imm64{vmPointer},
+                x64asm::Imm64{x64asm::rdi}
+            };
+            tempptr_t t = std::make_shared<Temp>(Temp(0));
+            callHelper((void*) &(helper_new_valwrapper), args, temps, t);
+            loadTemp(x64asm::rax, t);
+            // store as a local 
+            getRbpOffset(getLocalOffset(i));
+            assm.mov(x64asm::M64{x64asm::r10}, x64asm::rax);
+            break;
         } else {
             assm.mov(x64asm::M64{x64asm::r10}, x64asm::rdi);
         }
@@ -357,7 +372,8 @@ void IrInterpreter::executeStep() {
 			{
 				LOG(to_string(instructionIndex) + ": StoreLocalRef");
                 int64_t localIndex = inst->op0.value();
-                getRbpOffset(getLocalOffset(localIndex)); // puts the address of the local in r10
+                getRbpOffset(getLocalOffset(localIndex)); // puts the address of the valwrapper in r10
+                assm.mov(x64asm::r10, x64asm::M64{x64asm::r10});
                 vector<x64asm::Imm64> args = {
 					x64asm::Imm64{x64asm::r10} //load ValWrapper? TODO test
 				};
