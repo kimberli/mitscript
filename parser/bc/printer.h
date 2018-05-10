@@ -80,6 +80,7 @@ public:
         print("local_ref_vars", function.local_reference_vars_, os);
         print("free_vars", function.free_vars_, os);
         print("names", function.names_, os);
+        print("labels", function.labels_, os);
 
         print_indent(os) << "instructions = \n";
 
@@ -135,6 +136,26 @@ private:
         }
         os << "],\n";
     }
+
+    void print(const std::string &name, const std::map<int, int> &labelMap, std::ostream &os)
+    {
+        print_indent(os) << name << " = {";
+
+        bool first = false;
+        for (auto const &it : labelMap) 
+        {
+            if (first)
+            {
+                os << "; ";
+            }
+            first = true;
+
+            os << it.first << " : " << it.second;
+
+        }
+        os << "},\n";
+    }
+
 
     void print(const Constant &constant, std::ostream &os)
     {
@@ -353,6 +374,13 @@ private:
         case BcOp::If:
         {
             os << "if"
+            << "\t" << inst.operand0.value();
+
+            break;
+        }
+        case BcOp::Label:
+        {
+            os << "label"
             << "\t" << inst.operand0.value();
 
             break;

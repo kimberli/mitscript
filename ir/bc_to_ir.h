@@ -26,25 +26,20 @@ private:
 	stack<tempptr_t> tempStack;
 	IrInstList irInsts;
 	offset_t currentTemp = 0;
-    map<int32_t, int32_t> labelOffsets;  // map of string label to remaining BcInstruction offset
-    int32_t labelCounter;  // initial label index for this instance of IrCompiler
 
     // helpers
     tempptr_t getNewTemp();
     void pushTemp(tempptr_t temp);
     tempptr_t popTemp();
     void pushInstruction(instptr_t inst);
-    void decLabelOffsets();
-    int32_t addLabelOffset(int32_t offset);
     void doUnaryArithmetic(IrOp operation, bool toBoolean);
     void doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoolean);
 public:
     // vector of booleans corresponding to whether the local in the 
     // corresponding index is a local ref var or not
     vector<bool> isLocalRef;
-    IrCompiler(Function* mainFunc, int32_t labelCounter, Interpreter* vmInterpreterPointer):
+    IrCompiler(Function* mainFunc, Interpreter* vmInterpreterPointer):
         func(mainFunc),
-        labelCounter(labelCounter),
         vmPointer(vmInterpreterPointer) {};
 	IrFunc toIr();
 	IrFunc toIrFunc(Function*);

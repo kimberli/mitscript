@@ -188,20 +188,25 @@ enum class BcOp
     // Stack:       S :: operand 1 => S:: op(operand 1)
     Not,
 
-    // Description: transfers execution of the function to a new instruction offset within the current function
+    // Description: transfers execution of the function to a label index
     // Mnemonic:    goto i
-    // Example: goto 0 jumps to the current instruction. goto 1 jumps to the following instruction. goto -1 jumps to the preceding instruction
-    // Operand 0: offset relative to the current instruction offset to jump to.
+    // Operand 0: label index to jump to
     // Stack:       S => S
     Goto,
 
-    // Description: transfers execution of the function to a new instruction offset within the current function if the operand evaluates to true.
+    // Description: transfers execution of the function to a label index if the operand evaluates to true.
     // Mnemonic:    if i
     // If operand evaluates to false, then execution continues at the next instruction
-    // Operand 0:   offset relative to the current instruction offset to jump to.
+    // Operand 0:   label index to jump to
     // Operand 1:   value
     // Stack:       S :: operand 1 => S
     If,
+
+    // Description: insert a label at this location in the generated code
+    // Mnemonic:    label i
+    // Operand 0:   index to reference this label with
+    // Stack:       S => S
+    Label,
 
     // Description: duplicates the element at the top of the stack.
     // Mnemonic:    dup
@@ -231,11 +236,7 @@ enum class BcOp
 struct BcInstruction
 {
     BcInstruction(const BcOp operation, experimental::optional<int32_t> operand0)
-    : operation(operation),
-    operand0(operand0)
-    {
-
-    }
+    : operation(operation), operand0(operand0) {}
 
     BcOp operation;
     experimental::optional<int32_t> operand0;

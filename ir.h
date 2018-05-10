@@ -381,7 +381,6 @@ struct IrFunc {
     // TODO: rn hard-coding this at 0, but we need to actually keep track 
     // of our refs somehow in the ir-interpreter
     int32_t ref_count_ = 0;
-    int32_t label_offset_;
 
     IrFunc(IrInstList instructions,
         vector<Constant*> constants_,
@@ -389,14 +388,12 @@ struct IrFunc {
         int32_t parameter_count_,
         int32_t local_count_,
         int32_t temp_count_,
-        int32_t ref_count_,
-        int32_t label_offset_) :
+        int32_t ref_count_) :
         instructions(instructions),
         constants_(constants_),
         functions_(functions_),
         parameter_count_(parameter_count_),
         local_count_(local_count_),
         temp_count_(temp_count_),
-        ref_count_(ref_count_),
-        label_offset_(label_offset_) {};
+        ref_count_(ref_count_) {};
 };

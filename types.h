@@ -80,6 +80,9 @@ struct Function : public Value {
     // list of global variable and field names used inside the function
     vector<string> names_;
 
+    // map of label indices to instruction indices
+    map<int, int> labels_;
+
     BcInstructionList instructions;
 
     Function() {};
@@ -100,6 +103,7 @@ struct Function : public Value {
         local_reference_vars_(local_reference_vars_),
 	    free_vars_(free_vars_),
         names_(names_),
+        labels_(),
         instructions(instructions) {};
 
     string toString();

@@ -59,27 +59,27 @@ void Interpreter::executeStep() {
     Frame* frame = frames.back();
     BcInstruction& inst = frame->getCurrInstruction();
     LOG("executing instruction " + to_string(frame->instructionIndex));
-    LOG("from frame" + to_string(frames.size()));
+    LOG("from frame " + to_string(frames.size()));
     switch (inst.operation) {
         case BcOp::LoadConst:
             {
                 auto constant = frame->getConstantByIndex(inst.operand0.value());
                 frame->opStackPush(constant);
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::LoadFunc:
             {
                 auto func = frame->getFunctionByIndex(inst.operand0.value());
                 frame->opStackPush(func);
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::LoadLocal:
             {
                 string name = frame->getLocalByIndex(inst.operand0.value());
                 frame->opStackPush(frame->getLocalVar(name));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::StoreLocal:
@@ -90,7 +90,7 @@ void Interpreter::executeStep() {
                     throw RuntimeException("expected Constant on the stack for StoreLocal");
                 }
                 frame->setLocalVar(name, value);
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::LoadGlobal:
@@ -98,7 +98,7 @@ void Interpreter::executeStep() {
                 int index = inst.operand0.value();
                 string name = frame->getNameByIndex(index);
                 frame->opStackPush(loadGlobal(name));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::StoreGlobal:
@@ -106,7 +106,7 @@ void Interpreter::executeStep() {
                 int index = inst.operand0.value();
                 string name = frame->getNameByIndex(index);
                 storeGlobal(name, frame->opStackPop());
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::PushReference:
@@ -114,7 +114,7 @@ void Interpreter::executeStep() {
                 string name = frame->getRefByIndex(inst.operand0.value());
                 auto valWrapper = frame->getRefVar(name);
                 frame->opStackPush(valWrapper);
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::LoadReference:
@@ -124,7 +124,7 @@ void Interpreter::executeStep() {
                     throw RuntimeException("expected ValWrapper on the stack for LoadReference");
                 }
                 frame->opStackPush(valWrapper->ptr);
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::StoreReference:
@@ -138,13 +138,13 @@ void Interpreter::executeStep() {
                     throw RuntimeException("expected ValWrapper on the stack for StoreReference");
                 }
 				*valWrapper->ptr = *value;
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::AllocRecord:
             {
 				frame->opStackPush(collector->allocate<Record>());
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::FieldLoad:
@@ -156,7 +156,7 @@ void Interpreter::executeStep() {
                     record->set(field, val, *collector);
                 }
 				frame->opStackPush(record->get(field));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::FieldStore:
@@ -168,7 +168,7 @@ void Interpreter::executeStep() {
 				Record* record = frame->opStackPop()->cast<Record>();
 				string field = frame->getNameByIndex(inst.operand0.value());
                 record->set(field, value, *collector);
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::IndexLoad:
@@ -180,7 +180,7 @@ void Interpreter::executeStep() {
                     record->set(index, val, *collector);
                 }
 				frame->opStackPush(record->get(index));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::IndexStore:
@@ -192,7 +192,7 @@ void Interpreter::executeStep() {
 				string index = frame->opStackPop()->toString();
 				Record* record = frame->opStackPop()->cast<Record>();
                 record->set(index, value, *collector);
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::AllocClosure:
@@ -217,7 +217,7 @@ void Interpreter::executeStep() {
                 }
                 // push new closure onto the stack
                 frame->opStackPush(collector->allocate<Closure>(refList, func));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Call:
@@ -253,7 +253,7 @@ void Interpreter::executeStep() {
                 frame = frames.back();
                 // push return val to top of new parent frame
                 frame->opStackPush(returnVal);
-                //frame->instructionIndex ++;
+                //frame->instructionIndex++;
                 break;
             }
         case BcOp::Add:
@@ -262,7 +262,7 @@ void Interpreter::executeStep() {
                 auto left = frame->opStackPop();
                 Value* result = add(left, right);
                 frame->opStackPush(result);
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Sub:
@@ -271,7 +271,7 @@ void Interpreter::executeStep() {
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
                         collector->allocate<Integer>(left - right));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Mul:
@@ -280,7 +280,7 @@ void Interpreter::executeStep() {
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
                        collector->allocate<Integer>(left * right));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Div:
@@ -292,7 +292,7 @@ void Interpreter::executeStep() {
                 }
                 frame->opStackPush(
                         collector->allocate<Integer>(left / right));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Neg:
@@ -300,7 +300,7 @@ void Interpreter::executeStep() {
                 int top = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
                         collector->allocate<Integer>(-top));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Gt:
@@ -309,7 +309,7 @@ void Interpreter::executeStep() {
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
                         collector->allocate<Boolean>(left > right));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Geq:
@@ -318,7 +318,7 @@ void Interpreter::executeStep() {
                 int left = frame->opStackPop()->cast<Integer>()->value;
                 frame->opStackPush(
                         collector->allocate<Boolean>(left >= right));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Eq:
@@ -327,7 +327,7 @@ void Interpreter::executeStep() {
                 auto left = frame->opStackPop();
                 frame->opStackPush(
                         collector->allocate<Boolean>(left->equals(right)));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::And:
@@ -336,7 +336,7 @@ void Interpreter::executeStep() {
                 bool left = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
                         collector->allocate<Boolean>(left && right));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Or:
@@ -345,7 +345,7 @@ void Interpreter::executeStep() {
                 bool left = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
                         collector->allocate<Boolean>(left || right));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Not:
@@ -353,29 +353,36 @@ void Interpreter::executeStep() {
                 bool top = frame->opStackPop()->cast<Boolean>()->value;
                 frame->opStackPush(
                         collector->allocate<Boolean>(!top));
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Goto:
             {
-                frame->instructionIndex += inst.operand0.value();
+                int labelIndex = inst.operand0.value();
+                frame->instructionIndex = frame->func->labels_[labelIndex];
                 break;
             }
         case BcOp::If:
             {
                 auto e = frame->opStackPop()->cast<Boolean>();
+                int labelIndex = inst.operand0.value();
                 if (e->value) {
-                    frame->instructionIndex += inst.operand0.value();
+                    frame->instructionIndex = frame->func->labels_[labelIndex];
                 } else {
-                    frame->instructionIndex ++;
+                    frame->instructionIndex++;
                 }
+                break;
+            }
+        case BcOp::Label:
+            {
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Dup:
             {
                 auto top = frame->opStackPeek();
                 frame->opStackPush(top);
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Swap:
@@ -384,13 +391,13 @@ void Interpreter::executeStep() {
                 auto next = frame->opStackPop();
                 frame->opStackPush(top);
                 frame->opStackPush(next);
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         case BcOp::Pop:
             {
                 frame->opStackPop();
-                frame->instructionIndex ++;
+                frame->instructionIndex++;
                 break;
             }
         default:
@@ -506,9 +513,9 @@ Value* Interpreter::callVM(vector<Constant*> argsList, Closure* clos) {
 
 Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
     // convert the bc function to the ir
-    IrCompiler irc = IrCompiler(clos->func, labelCounter, this);
+    IrCompiler irc = IrCompiler(clos->func, this);
     IrFunc irf = irc.toIr();
-    labelCounter = irf.label_offset_;  // update interpreter state tracking label offset
+
     // convert the ir to assembly
     IrInterpreter iri = IrInterpreter(&irf, this, irc.isLocalRef);
     x64asm::Function asmFunc = iri.run();

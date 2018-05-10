@@ -26,7 +26,6 @@ private:
     void executeStep();  // execute a single next instruction
     bool finished;  // true when the program has terminated
     bool shouldCallAsm;
-    int32_t labelCounter = 0;  // global label indexing for all generated asm
 
  public:
     // static None

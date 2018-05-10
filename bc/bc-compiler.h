@@ -29,6 +29,7 @@ class BytecodeCompiler : public Visitor {
      */
 private: 
     BcInstructionList retInstr;  // expressions update this
+    int labelCounter = 0;
 
     void addInstructions(AST_node& expr);
     funcptr_t getFunction(AST_node& expr);

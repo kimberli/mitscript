@@ -1,8 +1,16 @@
 f = fun() {
-    y = 1;
-    g = fun() {
-        print(y);
-    };
-    g("b");
+    if (true) {
+        print("hi");
+    }
+    else {
+        print("no");
+    }
 };
+
+x = 0;
+while (x < 2) {
+    print("blah");
+    x = x + 1;
+}
+
 f();

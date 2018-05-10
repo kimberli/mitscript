@@ -13,7 +13,6 @@ funcptr_t BytecodeCompiler::getFunction(AST_node& expr) {
 
 void BytecodeCompiler::addInstructions(AST_node& expr) {
     expr.accept(*this);
-    //retFunc->instructions.insert(retFunc->instructions.end(), retInstr.begin(), retInstr.end());
 }
 
 
@@ -186,58 +185,72 @@ void BytecodeCompiler::visit(CallStatement& exp) {
 }
 
 void BytecodeCompiler::visit(IfStatement& exp) {
+    // reserve 2 labels: 1 for then block, 1 for else block
+    int ifLabel = labelCounter;
+    labelCounter++;
+    int endLabel = labelCounter;
+    labelCounter++;
+
     // add instructions for evaluating the condition
     addInstructions(exp.condition);
 
-    int startSize = retFunc->instructions.size();
-    // add in the else block first
+    // add the IF instruction that will jump to the then block if true
+    BcInstruction* ifJumpInstr = new BcInstruction(BcOp::If, ifLabel);
+    retFunc->instructions.push_back(*ifJumpInstr);
+
+    // add in the else block
     if (exp.elseBlock) {
         addInstructions(*(exp.elseBlock));
     }
-    int elseSize = retFunc->instructions.size();
-    // calculate offset needed to skip else block and insert If instruction before it
 
-    // increment the count to the new end of the else block
-    elseSize++;
-    int offsetElse = elseSize - startSize;
-    BcInstructionList::iterator elsePos = retFunc->instructions.begin() + startSize;
-    BcInstruction* ifInstr = new BcInstruction(BcOp::If, offsetElse + 1);
-    retFunc->instructions.insert(elsePos, *ifInstr);
-    LOG("added " + to_string(offsetElse) + " else instructions");
+    // add the GOTO instruction that will break out of the if statement
+    BcInstruction* endElseInstr = new BcInstruction(BcOp::Goto, endLabel);
+    retFunc->instructions.push_back(*endElseInstr);
+
+    // add the LABEL instruction that marks where to jump to if condition is true
+    BcInstruction* ifLabelInstr = new BcInstruction(BcOp::Label, ifLabel);
+    retFunc->instructions.push_back(*ifLabelInstr);
+    retFunc->labels_[ifLabel] = retFunc->instructions.size();
 
     // add in the then block
     addInstructions(exp.thenBlock);
-    int thenSize = retFunc->instructions.size();
-    int offsetThen = thenSize - elseSize;
-    // calculate offset needed to skip then block and insert Goto instruction before it
-    BcInstructionList::iterator thenPos = retFunc->instructions.begin() + elseSize;
-    BcInstruction* gotoInstr = new BcInstruction(BcOp::Goto, offsetThen + 1);
-    retFunc->instructions.insert(thenPos, *gotoInstr);
-    LOG("added " + to_string(offsetThen) + " then instructions");
+
+    // add the LABEL instruction that marks the end of the if statement
+    BcInstruction* endLabelInstr = new BcInstruction(BcOp::Label, endLabel);
+    retFunc->instructions.push_back(*endLabelInstr);
+    retFunc->labels_[endLabel] = retFunc->instructions.size();
 }
 
 void BytecodeCompiler::visit(WhileLoop& exp) {
     // add instructions for evaluating the condition
-    int startsize = retFunc->instructions.size();
+    int condLabel = labelCounter;
+    labelCounter++;
+    int bodyLabel = labelCounter;
+    labelCounter++;
+
+    // add the GOTO instruction that will jump to the condition
+    BcInstruction* condJumpInstr = new BcInstruction(BcOp::Goto, condLabel);
+    retFunc->instructions.push_back(*condJumpInstr);
+
+    // add the LABEL instruction that marks where to jump to get to the body
+    BcInstruction* bodyLabelInstr = new BcInstruction(BcOp::Label, bodyLabel);
+    retFunc->instructions.push_back(*bodyLabelInstr);
+    retFunc->labels_[bodyLabel] = retFunc->instructions.size();
 
     // add the body
     addInstructions(exp.body);
-    int endBody = retFunc->instructions.size();
 
-    // insert the goto to skip to the condition
-    int bodySize = endBody - startsize;
-    BcInstructionList::iterator startPos = retFunc->instructions.begin() + startsize;
-    BcInstruction* goInstr = new BcInstruction(BcOp::Goto, optint_t(bodySize + 1));
-    retFunc->instructions.insert(startPos, *goInstr);
+    // add the LABEL instruction that marks where to jump to get to the condition
+    BcInstruction* condLabelInstr = new BcInstruction(BcOp::Label, condLabel);
+    retFunc->instructions.push_back(*condLabelInstr);
+    retFunc->labels_[condLabel] = retFunc->instructions.size();
 
-     // add the condition
+    // add instructions for evaluating the condition
     addInstructions(exp.condition);
-    int endCondition = retFunc->instructions.size();
 
-    int conditionAndBodySize = endCondition-startsize-1; // -1 for the goto
-    // add the if which takes you back to the start of the body
-    BcInstruction* ifInstr = new BcInstruction(BcOp::If, optint_t(-conditionAndBodySize));
-    retFunc->instructions.push_back(*ifInstr);
+    // add the IF instruction that will jump to the body if true
+    BcInstruction* ifJumpInstr = new BcInstruction(BcOp::If, bodyLabel);
+    retFunc->instructions.push_back(*ifJumpInstr);
 }
 
 void BytecodeCompiler::visit(Return& exp) {

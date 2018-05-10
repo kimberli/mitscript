@@ -29,16 +29,6 @@ tempptr_t IrCompiler::popTemp() {
 void IrCompiler::pushInstruction(instptr_t inst) {
     irInsts.push_back(inst);
 }
-void IrCompiler::decLabelOffsets() {
-    for (auto item : labelOffsets) {
-        labelOffsets[item.first] = item.second - 1;
-    }
-}
-int32_t IrCompiler::addLabelOffset(int32_t offset) {
-    labelCounter++;
-    labelOffsets[labelCounter] = offset;
-    return labelCounter;
-}
 void IrCompiler::doUnaryArithmetic(IrOp operation, bool toBoolean) {
     IrOp assertOp;
     IrOp unboxOp;
@@ -399,19 +389,22 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Goto:
 	            {
-                    int32_t label = addLabelOffset(inst.operand0.value());
-                    pushInstruction(make_shared<IrInstruction>(IrOp::Goto, label));
+                    pushInstruction(make_shared<IrInstruction>(IrOp::Goto, inst.operand0.value()));
 	                break;
 	            }
 	        case BcOp::If:
 	            {
                     tempptr_t expr = popTemp();
                     tempptr_t exprVal = getNewTemp();
-                    int32_t label = addLabelOffset(inst.operand0.value());
                     pushInstruction(make_shared<IrInstruction>(IrOp::UnboxBoolean, exprVal, expr));
-                    pushInstruction(make_shared<IrInstruction>(IrOp::If, label, exprVal));
+                    pushInstruction(make_shared<IrInstruction>(IrOp::If, inst.operand0.value(), exprVal));
 	                break;
 	            }
+            case BcOp::Label:
+                {
+                    pushInstruction(make_shared<IrInstruction>(IrOp::AddLabel, inst.operand0.value()));
+                    break;
+                }
 	        case BcOp::Dup:
 	            {
                     pushTemp(tempStack.top());
@@ -433,13 +426,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        default:
 	            throw RuntimeException("should never get here - invalid instruction");
 	    }
-        decLabelOffsets();  // decrease remaining BcInstruction count for all labels
-        for (auto item : labelOffsets) {  // check if any labels need to be inserted now
-            if (item.second == 0) {
-                pushInstruction(make_shared<IrInstruction>(IrOp::AddLabel, item.first));
-                labelOffsets.erase(item.first);
-            }
-        }
 	}
     int32_t temp_count = currentTemp;
     // TODO: figure out how to make refs work
@@ -450,8 +436,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
             func->parameter_count_, 
             func->local_vars_.size(), 
             temp_count, 
-            ref_count, 
-            labelCounter);
+            ref_count);
     return irFunc;
 };
 
