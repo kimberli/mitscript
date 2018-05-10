@@ -1,3 +1,8 @@
-x = {}; 
-x["a"] = "a";
-print(x);
+f = fun() {
+    y = 1;
+    g = fun() {
+        print(y);
+    };
+    g("b");
+};
+f();
