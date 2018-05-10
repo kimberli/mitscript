@@ -428,6 +428,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        default:
 	            throw RuntimeException("should never get here - invalid instruction");
 	    }
+        pushInstruction(make_shared<IrInstruction>(IrOp::GarbageCollect, optint_t()));
 	}
     int32_t temp_count = currentTemp;
     // TODO: figure out how to make refs work
