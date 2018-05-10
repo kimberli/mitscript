@@ -333,6 +333,20 @@ void IrInterpreter::executeStep() {
                 callHelper((void *) &(helper_store_global), args, temps, opttemp_t());
                 break;
             }
+		case IrOp::StoreLocalRef: 
+			{
+				LOG(to_string(instructionIndex) + ": StoreLocalRef");
+                int64_t localIndex = inst->op0.value();
+                getRbpOffset(getLocalOffset(localIndex)); // puts the address of the local in r10
+                vector<x64asm::Imm64> args = {
+					x64asm::Imm64{x64asm::r10} //load ValWrapper? TODO test
+				};
+                vector<tempptr_t> temps = {
+					inst->tempIndices->at(0)
+				};
+                callHelper((void *) &(helper_store_local_ref), args, temps, opttemp_t());
+				
+			}
         case IrOp::PushLocalRef: 
             {
                 LOG(to_string(instructionIndex) + ": PushLocalRef");
