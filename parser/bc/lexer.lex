@@ -91,6 +91,7 @@ comment      ("//"[^\n]*)
 "local_vars" { return T_local_vars; }
 "local_ref_vars" { return T_local_ref_vars; }
 "names" { return T_names; }
+"labels" { return T_labels; }
 "free_vars" { return T_free_vars; }
 "instructions" { return T_instructions; }
 
@@ -124,6 +125,7 @@ comment      ("//"[^\n]*)
 "not" { return T_not; }
 "goto" { return T_goto; }
 "if"  { return T_if; }
+"label"  { return T_label; }
 "dup" { return T_dup; }
 "swap" { return T_swap; }
 "pop" {return T_pop; }

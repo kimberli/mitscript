@@ -11,6 +11,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -37,6 +39,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -50,6 +53,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [debugprint, oldprint],
+			labels = {},
 			instructions = 
 			[
 				load_global	0
@@ -77,6 +81,7 @@ function
 					local_ref_vars = [],
 					free_vars = [],
 					names = [print],
+					labels = {},
 					instructions = 
 					[
 						load_global	0
@@ -96,6 +101,7 @@ function
 							local_ref_vars = [],
 							free_vars = [oldprint],
 							names = [debugprint],
+							labels = {},
 							instructions = 
 							[
 								load_global	0
@@ -118,6 +124,7 @@ function
 					local_ref_vars = [oldprint],
 					free_vars = [getprint, y],
 					names = [debugprint, z],
+					labels = {},
 					instructions = 
 					[
 						push_ref	1
@@ -156,6 +163,7 @@ function
 					local_ref_vars = [],
 					free_vars = [oldprint],
 					names = [],
+					labels = {},
 					instructions = 
 					[
 						push_ref	0
@@ -174,6 +182,7 @@ function
 			local_ref_vars = [getprint, oldprint, y],
 			free_vars = [],
 			names = [print, z],
+			labels = {},
 			instructions = 
 			[
 				load_global	0
@@ -229,6 +238,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [debugprint, f, g, input, intcast, oldprint, print, z],
+	labels = {},
 	instructions = 
 	[
 		load_func	0

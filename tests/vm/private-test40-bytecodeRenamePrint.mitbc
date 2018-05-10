@@ -6,11 +6,12 @@ function
 		{
 			functions = [],
 			constants = [],
-			parameter_count = 0,
+			parameter_count = 1,
 			local_vars = [],
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -32,11 +34,12 @@ function
 		{
 			functions = [],
 			constants = [],
-			parameter_count = 0,
+			parameter_count = 1,
 			local_vars = [],
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -50,16 +53,19 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [debugprint, oldprint],
+			labels = {},
 			instructions = 
 			[
 				load_global	0
 				load_const	0
 				call	1
+				pop
 				load_global	1
 				load_const	1
 				load_local	0
 				add
 				call	1
+				pop
 			]
 		},
 		function
@@ -75,6 +81,7 @@ function
 					local_ref_vars = [],
 					free_vars = [],
 					names = [print],
+					labels = {},
 					instructions = 
 					[
 						load_global	0
@@ -90,11 +97,13 @@ function
 					local_ref_vars = [],
 					free_vars = [],
 					names = [print],
+					labels = {},
 					instructions = 
 					[
 						load_global	0
 						load_local	0
 						call	1
+						pop
 					]
 				},
 				function
@@ -104,40 +113,50 @@ function
 					parameter_count = 1,
 					local_vars = [x],
 					local_ref_vars = [],
-					free_vars = [],
-					names = [oldprint],
+					free_vars = [oldprint],
+					names = [],
+					labels = {},
 					instructions = 
 					[
-						load_global	0
+						push_ref	0
+						load_ref
 						load_const	0
 						load_local	0
 						add
 						call	1
+						pop
 					]
 				}
 			],
 			constants = ["This is getting confusing."],
 			parameter_count = 1,
-			local_vars = [x, getprint, f],
-			local_ref_vars = [],
+			local_vars = [x, f, getprint, oldprint],
+			local_ref_vars = [oldprint],
 			free_vars = [],
-			names = [print, oldprint],
+			names = [print],
+			labels = {},
 			instructions = 
 			[
 				load_global	0
 				load_local	0
 				call	1
+				pop
 				load_func	0
-				store_local	1
-				load_func	1
+				alloc_closure	0
 				store_local	2
+				load_func	1
+				alloc_closure	0
+				store_local	1
 				load_global	0
-				store_global	1
+				store_local	3
 				load_func	2
+				push_ref	0
+				alloc_closure	1
 				store_global	0
-				load_local	2
+				load_local	1
 				load_const	0
 				call	1
+				pop
 			]
 		}
 	],
@@ -146,19 +165,32 @@ function
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [print, input, intcast, debugprint, oldprint, f],
+	names = [debugprint, f, input, intcast, oldprint, print],
+	labels = {},
 	instructions = 
 	[
-		load_global	0
+		load_func	0
+		alloc_closure	0
+		store_global	5
+		load_func	1
+		alloc_closure	0
+		store_global	2
+		load_func	2
+		alloc_closure	0
 		store_global	3
-		load_global	0
+		load_global	5
+		store_global	0
+		load_global	5
 		store_global	4
 		load_func	3
-		store_global	0
-		load_func	4
+		alloc_closure	0
 		store_global	5
-		load_global	5
+		load_func	4
+		alloc_closure	0
+		store_global	1
+		load_global	1
 		load_const	0
 		call	1
+		pop
 	]
 }

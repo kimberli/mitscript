@@ -11,6 +11,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -37,6 +39,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -54,6 +57,7 @@ function
 					local_ref_vars = [],
 					free_vars = [age],
 					names = [],
+					labels = {},
 					instructions = 
 					[
 						push_ref	0
@@ -71,6 +75,7 @@ function
 					local_ref_vars = [],
 					free_vars = [age],
 					names = [],
+					labels = {},
 					instructions = 
 					[
 						push_ref	0
@@ -87,10 +92,11 @@ function
 			local_ref_vars = [age],
 			free_vars = [],
 			names = [print, name, age, student, getGrade, name, age, student, getGrade],
+			labels = {0 : 22; 1 : 45},
 			instructions = 
 			[
 				load_local	2
-				if	20
+				if	0
 				alloc_record
 				dup
 				load_local	0
@@ -109,7 +115,8 @@ function
 				store_local	3
 				load_local	3
 				return
-				goto	23
+				goto	1
+				label	0
 				alloc_record
 				dup
 				load_local	0
@@ -132,6 +139,7 @@ function
 				load_const	0
 				call	1
 				pop
+				label	1
 			]
 		},
 		function
@@ -143,6 +151,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 				load_const	0
@@ -162,6 +171,7 @@ function
 					local_ref_vars = [],
 					free_vars = [],
 					names = [db, print, size],
+					labels = {},
 					instructions = 
 					[
 						load_global	1
@@ -189,6 +199,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [db, print, getGrade, getGrade, getGrade, getGrade, getGrade, getGrade],
+			labels = {},
 			instructions = 
 			[
 				load_const	0
@@ -255,6 +266,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [addGrades, database, db, input, intcast, person, print, alice, bob, cathy, size, alice, bob, cathy],
+	labels = {},
 	instructions = 
 	[
 		load_func	0

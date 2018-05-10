@@ -11,6 +11,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -37,6 +39,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -54,6 +57,7 @@ function
 					local_ref_vars = [],
 					free_vars = [size, this],
 					names = [print],
+					labels = {0 : 16; 1 : 24},
 					instructions = 
 					[
 						load_local	0
@@ -61,7 +65,7 @@ function
 						load_ref
 						swap
 						gt
-						if	10
+						if	0
 						load_global	0
 						load_const	0
 						load_local	0
@@ -70,7 +74,8 @@ function
 						add
 						call	1
 						pop
-						goto	8
+						goto	1
+						label	0
 						load_local	1
 						push_ref	1
 						load_ref
@@ -78,6 +83,7 @@ function
 						load_local	0
 						swap
 						index_store
+						label	1
 					]
 				},
 				function
@@ -89,6 +95,7 @@ function
 					local_ref_vars = [],
 					free_vars = [size, this],
 					names = [print],
+					labels = {2 : 16; 3 : 22},
 					instructions = 
 					[
 						load_local	0
@@ -96,7 +103,7 @@ function
 						load_ref
 						swap
 						gt
-						if	10
+						if	2
 						load_global	0
 						load_const	0
 						load_local	0
@@ -105,12 +112,14 @@ function
 						add
 						call	1
 						pop
-						goto	6
+						goto	3
+						label	2
 						push_ref	1
 						load_ref
 						load_local	0
 						index_load
 						return
+						label	3
 					]
 				},
 				function
@@ -122,13 +131,15 @@ function
 					local_ref_vars = [],
 					free_vars = [size, this],
 					names = [print, get],
+					labels = {4 : 21; 5 : 6},
 					instructions = 
 					[
 						load_const	0
 						store_local	0
 						load_const	1
 						store_local	1
-						goto	15
+						goto	4
+						label	5
 						load_local	1
 						push_ref	1
 						load_ref
@@ -143,12 +154,13 @@ function
 						load_const	3
 						add
 						store_local	0
+						label	4
 						load_local	0
 						push_ref	0
 						load_ref
 						swap
 						gt
-						if	-19
+						if	5
 						load_global	0
 						load_const	4
 						load_local	1
@@ -166,6 +178,7 @@ function
 			local_ref_vars = [size, this],
 			free_vars = [],
 			names = [put, get, print],
+			labels = {},
 			instructions = 
 			[
 				alloc_record
@@ -199,6 +212,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [Array, a1, a2, f, input, intcast, print, put, put, put, put, put, print, get, put, put, put, put, put, print],
+	labels = {},
 	instructions = 
 	[
 		load_func	0

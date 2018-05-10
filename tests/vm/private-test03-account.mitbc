@@ -11,6 +11,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -37,6 +39,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -54,6 +57,7 @@ function
 					local_ref_vars = [],
 					free_vars = [private],
 					names = [balances],
+					labels = {},
 					instructions = 
 					[
 						load_const	0
@@ -75,6 +79,7 @@ function
 					local_ref_vars = [],
 					free_vars = [private, this],
 					names = [balances, addClient, balances, balances],
+					labels = {0 : 10; 1 : 17},
 					instructions = 
 					[
 						push_ref	0
@@ -84,14 +89,16 @@ function
 						index_load
 						load_const	0
 						eq
-						if	2
-						goto	7
+						if	0
+						goto	1
+						label	0
 						push_ref	1
 						load_ref
 						field_load	1
 						load_local	0
 						call	1
 						pop
+						label	1
 						push_ref	0
 						load_ref
 						field_load	2
@@ -117,6 +124,7 @@ function
 					local_ref_vars = [],
 					free_vars = [private],
 					names = [print, balances],
+					labels = {},
 					instructions = 
 					[
 						load_global	0
@@ -142,6 +150,7 @@ function
 			local_ref_vars = [private, this],
 			free_vars = [],
 			names = [balances, addClient, increment, print],
+			labels = {},
 			instructions = 
 			[
 				alloc_record
@@ -178,6 +187,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [Account, acc, input, intcast, print, addClient, print, increment, print, increment, print],
+	labels = {},
 	instructions = 
 	[
 		load_func	0

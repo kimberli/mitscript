@@ -11,6 +11,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -24,6 +25,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -37,6 +39,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [],
+			labels = {},
 			instructions = 
 			[
 			]
@@ -50,16 +53,19 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [print],
+			labels = {0 : 38; 1 : 4; 2 : 24; 3 : 10},
 			instructions = 
 			[
 				load_const	0
 				store_local	4
-				goto	32
+				goto	0
+				label	1
 				load_const	1
 				store_local	5
 				load_const	2
 				store_local	6
-				goto	14
+				goto	2
+				label	3
 				load_local	0
 				load_local	4
 				load_local	5
@@ -73,11 +79,12 @@ function
 				load_const	3
 				add
 				store_local	5
+				label	2
 				load_local	5
 				load_local	2
 				swap
 				gt
-				if	-17
+				if	3
 				load_global	0
 				load_local	6
 				call	1
@@ -86,11 +93,12 @@ function
 				load_const	4
 				add
 				store_local	4
+				label	0
 				load_local	4
 				load_local	1
 				swap
 				gt
-				if	-35
+				if	1
 			]
 		},
 		function
@@ -102,6 +110,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [p, x, y],
+			labels = {4 : 12; 5 : 15},
 			instructions = 
 			[
 				load_local	0
@@ -113,10 +122,12 @@ function
 				field_load	2
 				eq
 				and
-				if	2
-				goto	3
+				if	4
+				goto	5
+				label	4
 				load_const	0
 				return
+				label	5
 				load_const	1
 				return
 			]
@@ -128,6 +139,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [consolePrint, i, im, input, intcast, p, print, x, y, x, y],
+	labels = {6 : 46; 7 : 27},
 	instructions = 
 	[
 		load_func	0
@@ -155,7 +167,8 @@ function
 		store_global	2
 		load_const	2
 		store_global	1
-		goto	19
+		goto	6
+		label	7
 		load_global	0
 		load_global	2
 		load_const	3
@@ -174,10 +187,11 @@ function
 		load_const	5
 		add
 		store_global	1
+		label	6
 		load_global	1
 		load_const	6
 		swap
 		gt
-		if	-22
+		if	7
 	]
 }
