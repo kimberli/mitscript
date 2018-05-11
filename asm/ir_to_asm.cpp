@@ -106,7 +106,7 @@ void IrInterpreter::prolog() {
     // set all other locals to none
     for (uint64_t i = func->parameter_count_; i < func->local_count_; i++) {
         getRbpOffset(getLocalOffset(i));
-        assm.mov(x64asm::rdi, x64asm::Imm64{vmPointer->NONE});
+        assm.mov(x64asm::r11, x64asm::Imm64{vmPointer->NONE});
         if (isLocalRef.at(i)) {
             // MAKE A REF AND MOVE
             // first, create a val wrapper
@@ -115,13 +115,13 @@ void IrInterpreter::prolog() {
                 x64asm::Imm64{vmPointer},
             };
             tempptr_t t = std::make_shared<Temp>(Temp(0));
-            callHelper((void*) &(helper_new_valwrapper), args, temps, x64asm::rdi, t);
+            callHelper((void*) &(helper_new_valwrapper), args, temps, x64asm::r11, t);
             loadTemp(x64asm::rax, t);
             // store as a local 
             getRbpOffset(getLocalOffset(i));
             assm.mov(x64asm::M64{x64asm::r10}, x64asm::rax);
         } else {
-            assm.mov(x64asm::M64{x64asm::r10}, x64asm::rdi);
+            assm.mov(x64asm::M64{x64asm::r10}, x64asm::r11);
         }
     }
 
