@@ -1,1 +1,1 @@
-RuntimeException: expected ValWrapper on the stack for AllocClosure
+IllegalCastException: cannot cast type Integer to ValWrapper

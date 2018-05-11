@@ -8,7 +8,7 @@ THIS_FILE="test_vm.sh"
 DIFF=$DIR/diff.txt
 TEST_OUT=$DIR/tmp.out
 
-VERBOSE=false
+VERBOSE=true
 
 TOTAL=0
 SUCCESS=0
