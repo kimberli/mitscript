@@ -42,9 +42,9 @@ Bugs we've found and fixed:
 * and many more...
 
 Remaining tasks to be tackled:
-* debug a few remaining failing tests (we think it's a memory issue?)
 * change the `reserve()` heuristic to be more accurate and performant
 * figure out when to call the `GarbageCollect` IR instruction more effectively
 * optimizations!
 
-Our plan for optimization is to implement register allocation, then maybe other add-ons like constant propagation, generational garbage collection, selective assembly generation.
+Optimization plan: 
+The two big things we want to tackle are: register allocation and using tagged pointers for certain values. Our plan is to all start working together on register allocation. If we feel like two people is enough to cover this, a third person will start on converting to tagged pointers. If we can get these optimizations working, we will work on low-hanging fruit like adding a constant cache, etc. 
