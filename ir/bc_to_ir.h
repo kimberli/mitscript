@@ -27,6 +27,7 @@ private:
 	stack<tempptr_t> freeTemps;
 	IrInstList irInsts;
 	offset_t currentTemp = 0;
+    vector<tempptr_t> localTemps;
 
     // helpers
     tempptr_t getNewTemp();

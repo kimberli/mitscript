@@ -42,7 +42,7 @@ enum class IrOp {
     LoadFunc,
 
     // Description: Load a local into a temp
-    // op0: index of the local to load
+    // temp1: temp representing the appropriate local 
     // temp0: temp index to store into
     // Result: temp0 stores the desired local
     LoadLocal,
@@ -55,8 +55,8 @@ enum class IrOp {
     LoadGlobal,
 
     // Description: Store a value from a temp into a local
-    // op0: index of the local to store into
-    // temp0: temp index containing the value to store
+    // temp1: temp representing the val to store
+    // temp0: temp representing the local to store into
     // Result: the local at index op0 contains the value stored by the temp at temp0
     StoreLocal,
 
