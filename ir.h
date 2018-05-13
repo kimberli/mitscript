@@ -45,7 +45,7 @@ enum class IrOp {
     // temp1: temp representing the appropriate local 
     // temp0: temp index to store into
     // Result: temp0 stores the desired local
-    LoadLocal,
+    // LoadLocal,
 
     // Description: Load a global into a temp
     // op0: N/A

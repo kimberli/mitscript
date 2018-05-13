@@ -149,6 +149,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        case BcOp::LoadLocal:
 	            {
                     // if the local at index i is also a ref var, generate PushLocalRef, LoadRef
+                    // TODO
                     int localIndex = inst.operand0.value();
                     if (isLocalRef.at(localIndex)) {
                         // it is a local ref var; generate PushLocalRef, LoadRef
@@ -159,9 +160,10 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                         pushTemp(val);
                     } else {
                         // it is not a local ref var; generate plain LoadLocal
-                        tempptr_t val = getNewTemp();
-                        pushInstruction(make_shared<IrInstruction>(IrOp::LoadLocal, inst.operand0, val));
-                        pushTemp(val);
+                        //tempptr_t val = getNewTemp();
+                        tempptr_t localTemp = localTemps.at(localIndex);
+                        //pushInstruction(make_shared<IrInstruction>(IrOp::LoadLocal, inst.operand0, val));
+                        pushTemp(localTemp);
                     }
 	                break;
 	            }
@@ -183,9 +185,10 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     } else {
                         op = IrOp::StoreLocal;
                     }
-					tempptr_t temp = popTemp();
-                    pushInstruction(make_shared<IrInstruction>(op, inst.operand0, temp));
-					checkIfUsed(temp);
+					tempptr_t val = popTemp();
+                    tempptr_t localTemp = localTemps.at(localIndex);
+                    pushInstruction(make_shared<IrInstruction>(op, localTemp, val));
+					checkIfUsed(val);
 	                break;
 	            }
 	        case BcOp::StoreGlobal:
