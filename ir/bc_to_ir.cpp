@@ -477,7 +477,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
     int32_t ref_count = 0; 
 	IrFunc irFunc = IrFunc(irInsts, 
             func->constants_, 
-            func->functions_, 
+            func->functions_,
+			temps,
             func->parameter_count_, 
             func->local_vars_.size(), 
             temp_count, 
