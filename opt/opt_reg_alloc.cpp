@@ -29,11 +29,11 @@ void RegOpt::executeStep() {
                 LOG(to_string(instructionIndex) + ": LoadFunc");
                 break;
             }
-        case IrOp::LoadLocal:
-            {
-                LOG(to_string(instructionIndex) + ": LoadLocal");
-               break;
-            }
+//        case IrOp::LoadLocal:
+//            {
+//                LOG(to_string(instructionIndex) + ": LoadLocal");
+//               break;
+//            }
         case IrOp::LoadGlobal:
             {
                 LOG(to_string(instructionIndex) + ": LoadGlobal");

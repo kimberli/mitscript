@@ -260,7 +260,7 @@ uint32_t IrInterpreter::getRefArrayOffset() {
 }
 
 uint32_t IrInterpreter::getTempOffset(tempptr_t temp) {
-    return 8*(1 + numCalleeSaved + func->local_count_ + 1 + temp->stackOffset);
+    return 8*(1 + numCalleeSaved + func->local_count_ + 1 + temp->index);
 }
 
 void IrInterpreter::getRbpOffset(uint32_t offset) {
@@ -329,16 +329,16 @@ void IrInterpreter::executeStep() {
                 storeTemp(x64asm::rdi, inst->tempIndices->at(0));
                 break;
             }
-        case IrOp::LoadLocal:
-            {
-                LOG(to_string(instructionIndex) + ": LoadLocal");
-                int64_t localIndex = inst->op0.value();
-                getRbpOffset(getLocalOffset(localIndex)); // puts the address of the local in r10
-                assm.mov(x64asm::rdi, x64asm::r10); // r10 will be used later in storeTemp
-                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // loads the actual value
-                storeTemp(x64asm::rdi, inst->tempIndices->at(0));
-                break;
-            }
+//        case IrOp::LoadLocal:
+//            {
+//                LOG(to_string(instructionIndex) + ": LoadLocal");
+//                int64_t localIndex = inst->op0.value();
+//                getRbpOffset(getLocalOffset(localIndex)); // puts the address of the local in r10
+//                assm.mov(x64asm::rdi, x64asm::r10); // r10 will be used later in storeTemp
+//                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // loads the actual value
+//                storeTemp(x64asm::rdi, inst->tempIndices->at(0));
+//                break;
+//            }
         case IrOp::LoadGlobal:
             {
                 LOG(to_string(instructionIndex) + ": LoadGlobal");
