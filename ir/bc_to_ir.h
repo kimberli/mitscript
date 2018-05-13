@@ -24,7 +24,6 @@ private:
     Function* func;  // current function
 	vector<IrFunc*> irFuncs;
 	stack<tempptr_t> tempStack;
-	stack<tempptr_t> freeTemps;
 	IrInstList irInsts;
 	offset_t currentTemp = 0;
     vector<tempptr_t> localTemps;
@@ -43,7 +42,13 @@ public:
     vector<bool> isLocalRef;
     IrCompiler(Function* mainFunc, Interpreter* vmInterpreterPointer):
         func(mainFunc),
-        vmPointer(vmInterpreterPointer) {};
+        vmPointer(vmInterpreterPointer) {
+        currentTemp = mainFunc->local_vars_.size();
+        for (int i = 0; i < mainFunc->local_vars_.size(); i++) {
+        	tempptr_t newTemp = make_shared<Temp>(i);
+            localTemps.push_back(newTemp);
+        }
+    };
 	IrFunc toIr();
 	IrFunc toIrFunc(Function*);
 };

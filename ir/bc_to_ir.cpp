@@ -15,11 +15,6 @@ class Interpreter;
 
 // Helpers
 tempptr_t IrCompiler::getNewTemp() {
-	if (freeTemps.size() > 0) {
-		tempptr_t free = freeTemps.top();
-		freeTemps.pop();
-		return free;
-	}
     tempptr_t newTemp = make_shared<Temp>(currentTemp);
     currentTemp ++; 
     return newTemp;
@@ -36,7 +31,7 @@ tempptr_t IrCompiler::popTemp() {
 }
 void IrCompiler::checkIfUsed(tempptr_t temp) {
 	if (temp->timesInUse == 0) {
-		freeTemps.push(temp);
+		// TODO do something here
 	}
 }
 void IrCompiler::pushInstruction(instptr_t inst) {
