@@ -23,6 +23,7 @@ typedef experimental::optional<x64asm::R64> optreg_t;
 
 struct Temp {
     offset_t stackOffset;
+	int timesInUse = 0;
 	optreg_t reg = nullopt;
 	Temp(offset_t offset) : stackOffset(offset) {}
 };
