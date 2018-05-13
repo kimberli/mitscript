@@ -3,15 +3,11 @@
 #include "../vm/interpreter.h"
 #include "../ir.h"
 #include "helpers.h"
-#include "include/x64asm.h"
-#include <experimental/optional>
 
 class Interpreter; 
 class IrInterpreter;
 
 using namespace std; 
-
-typedef experimental::optional<x64asm::R64> optreg_t;
 
 class IrInterpreter {
 private: 

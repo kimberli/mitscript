@@ -2,6 +2,7 @@
 
 #include <experimental/optional>
 #include "types.h"
+#include "include/x64asm.h"
 
 struct IrInstruction;
 struct IrFunc;
@@ -18,10 +19,12 @@ typedef shared_ptr<Temp> tempptr_t;
 typedef experimental::optional<tempptr_t> opttemp_t;
 typedef vector<tempptr_t> TempList;
 typedef shared_ptr<TempList> TempListPtr;
+typedef experimental::optional<x64asm::R64> optreg_t;
 
 struct Temp {
     offset_t stackOffset;
 	int timesInUse = 0;
+	optreg_t reg = nullopt;
 	Temp(offset_t offset) : stackOffset(offset) {}
 };
 
