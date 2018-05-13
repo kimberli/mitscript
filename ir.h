@@ -22,10 +22,10 @@ typedef shared_ptr<TempList> TempListPtr;
 typedef experimental::optional<x64asm::R64> optreg_t;
 
 struct Temp {
-    offset_t stackOffset;
+    int index;
 	int timesInUse = 0;
 	optreg_t reg = nullopt;
-	Temp(offset_t offset) : stackOffset(offset) {}
+	Temp(int i) : index(i) {}
 };
 
 enum class IrOp {
@@ -369,7 +369,7 @@ struct IrInstruction {
         }
         s += "\ttemps: ";
         for (tempptr_t t : *tempIndices) {
-            s += to_string(t->stackOffset) + " ";
+            s += to_string(t->index) + " ";
         }
         return s;
     }
