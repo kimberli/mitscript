@@ -6,6 +6,7 @@
 #include "../types.h"
 #include "../ir.h"
 #include "bc_to_ir.h"
+#include "opt_reg_alloc.h"
 #include <algorithm>
 
 using namespace std;
