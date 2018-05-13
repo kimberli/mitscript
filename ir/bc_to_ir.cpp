@@ -151,16 +151,17 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     if (isLocalRef.at(localIndex)) {
                         // it is a local ref var; generate PushLocalRef, LoadRef
                         tempptr_t ref = getNewTemp();
-                        pushInstruction(make_shared<IrInstruction>(IrOp::PushLocalRef, inst.operand0, ref));
+                        tempptr_t localTemp = temps.at(localIndex);
+                        pushInstruction(make_shared<IrInstruction>(IrOp::PushLocalRef, ref, localTemp));
                         tempptr_t val = getNewTemp();
                         pushInstruction(make_shared<IrInstruction>(IrOp::LoadReference, val, ref));
                         pushTemp(val);
                     } else {
                         // it is not a local ref var; generate plain LoadLocal
-                        //tempptr_t val = getNewTemp();
+                        tempptr_t val = getNewTemp();
                         tempptr_t localTemp = temps.at(localIndex);
-                        //pushInstruction(make_shared<IrInstruction>(IrOp::LoadLocal, inst.operand0, val));
-                        pushTemp(localTemp);
+                        pushInstruction(make_shared<IrInstruction>(IrOp::LoadLocal, val, localTemp));
+                        pushTemp(val);
                     }
 	                break;
 	            }

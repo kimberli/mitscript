@@ -48,7 +48,7 @@ enum class IrOp {
     // temp1: temp representing the appropriate local 
     // temp0: temp index to store into
     // Result: temp0 stores the desired local
-    // LoadLocal,
+    LoadLocal,
 
     // Description: Load a global into a temp
     // op0: N/A
@@ -77,7 +77,7 @@ enum class IrOp {
     //PushReference,
 
     // Description: Store a reference to a local variable into a temp
-    // op0: index of the local to take the reference of
+    // temp1: temp for the local to take the index of
     // temp0: temp index to store reference into
     // Result: temp at temp0 contains reference to the local variable
     PushLocalRef,
@@ -95,9 +95,9 @@ enum class IrOp {
     LoadReference,
 
     // Description: Store the value of a temp into a local ref
-    // op0: index of the local to load into 
+    // temp0: temp of the local to load into 
     // temp0: index of the temp w/ the val to store
-    // Result: local op0 contains the value in temp0
+    // Result: local temp0 contains the value in temp0
     StoreLocalRef,
 
     // Description: Allocate a record and store it to a temp
