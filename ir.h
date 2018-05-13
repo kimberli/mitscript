@@ -25,6 +25,7 @@ struct Temp {
     int index;
 	int timesInUse = 0;
 	optreg_t reg = nullopt;
+    optint_t stackOffset = nullopt;
 	Temp(int i) : index(i) {}
 };
 

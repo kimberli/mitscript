@@ -3,9 +3,12 @@
 #include "../vm/interpreter.h"
 #include "../ir.h"
 #include "helpers.h"
+#include <set>
 
 class Interpreter; 
 class IrInterpreter;
+
+typedef set<x64asm::R64> regset_t;
 
 using namespace std; 
 
@@ -37,6 +40,23 @@ private:
     void storeTemp(x64asm::R32 reg, tempptr_t temp);
     void storeTemp(x64asm::R64 reg, tempptr_t temp);
     void comparisonSetup(x64asm::R32 left, x64asm::R32 right, instptr_t inst);
+
+    // helpers and state to interface with register allocation
+    // stores a set of currently avlb regs 
+    regset_t freeRegs;
+    // helpers to update free regs 
+    void updateFreeRegs(instptr_t inst);
+    // returns a register containing the value of that temp 
+    x64asm::R64 getReg(tempptr_t temp); 
+    // makes sure the value in register reg is put in the right place for 
+    // the temp 
+    void setReg(tempptr_t temp, x64asm::R64 reg);
+    // gets a free reg from the pool (or generates a new one 
+    // by pushing/popping) and returns it 
+    x64asm::R64 getScratchReg();
+    // returns a scratch reg 
+    void returnScratchReg(x64asm::R64 reg);
+
 public: 
     static const x64asm::R64 argRegs[];
     static const x64asm::R64 callerSavedRegs[];

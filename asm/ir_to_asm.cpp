@@ -305,6 +305,62 @@ void IrInterpreter::loadTemp(x64asm::R64 reg, tempptr_t temp) {
     assm.mov(reg, x64asm::M64{x64asm::r10});
 }
 
+/////////// REG ALLOCATION HELPERS ////////////
+
+void IrInterpreter::updateFreeRegs(instptr_t inst) {
+    // TODO
+}
+
+x64asm::R64 IrInterpreter::getReg(tempptr_t temp) {
+    if (temp->reg) {
+        return temp->reg.value();
+    } else {
+        uint32_t offset = temp->stackOffset.value();
+        // our temp is on the stack
+        // get a temp to load it into 
+        x64asm::R64 reg = getScratchReg();
+        // mov it into the scratch reg
+        assm.mov(reg, x64asm::rbp);
+        assm.assemble({x64asm::SUB_R64_IMM32, {reg, x64asm::Imm32{offset}}});
+        return reg;
+    }
+} 
+
+void IrInterpreter::setReg(tempptr_t temp, x64asm::R64 reg) {
+    if (reg == temp->reg.value()) {
+        // it's already in the right reg
+        return;
+    }
+    if (temp->reg) {
+        // do a simple reg mov 
+        assm.mov(temp->reg.value(), reg);
+        return;
+    } else {
+        // gotta put it back onto the stack eww
+        // TODO
+    }
+}
+
+x64asm::R64 IrInterpreter::getScratchReg() {
+    for (x64asm::R64 reg : freeRegs) {
+        return reg; 
+    };
+    // there are no free regs avlb; we gotta dump something 
+    // for now just randomly dump r10 
+    x64asm::R64 toSpill = x64asm::r10; 
+    assm.push(toSpill); 
+    return toSpill;
+};
+
+void IrInterpreter::returnScratchReg(x64asm::R64 reg) {
+    // release a scratch reg for other uses and 
+    // restores the regiser to its previous value 
+    freeRegs.insert(reg);
+    assm.pop(reg);
+}
+
+/////////// END REG ALLOCATION HELPERS ////////////
+
 void IrInterpreter::executeStep() {
     instptr_t inst = func->instructions.at(instructionIndex);
     switch(inst->op) {
@@ -332,7 +388,7 @@ void IrInterpreter::executeStep() {
 //        case IrOp::LoadLocal:
 //            {
 //                LOG(to_string(instructionIndex) + ": LoadLocal");
-//                int64_t localIndex = inst->op0.value();
+///                int64_t localIndex = inst->op0.value();
 //                getRbpOffset(getLocalOffset(localIndex)); // puts the address of the local in r10
 //                assm.mov(x64asm::rdi, x64asm::r10); // r10 will be used later in storeTemp
 //                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // loads the actual value
@@ -567,7 +623,6 @@ void IrInterpreter::executeStep() {
                     x64asm::Imm64{numArgs}
                 };
 
-                // TODO: we might need to inc rsp here cause I think rsp
                 // points to the last empty space
                 // put rsp into a temp to pas easily
                 storeTemp(x64asm::rsp, inst->tempIndices->at(0));
@@ -582,7 +637,6 @@ void IrInterpreter::executeStep() {
                 for (int i = 0; i < numArgs; i++) {
                     assm.pop(x64asm::r10);
                 };
-                
                 break;
             };
         case IrOp::Return:
@@ -917,6 +971,10 @@ void IrInterpreter::executeStep() {
     }
     LOG(inst->getInfo());
     instructionIndex += 1;
+    
+    // run maintenance to figure out if regs are avlb 
+    updateFreeRegs(inst);
+
     if (instructionIndex >= func->instructions.size()) {
         finished = true;
     }
