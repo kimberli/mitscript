@@ -15,30 +15,19 @@ class Interpreter;
 
 // Helpers
 tempptr_t IrCompiler::getNewTemp() {
-	if (freeTemps.size() > 0) {
-		tempptr_t free = freeTemps.top();
-		freeTemps.pop();
-		return free;
-	}
     tempptr_t newTemp = make_shared<Temp>(currentTemp);
-    currentTemp ++; 
+    currentTemp++; 
     return newTemp;
 }
 void IrCompiler::pushTemp(tempptr_t temp) {
     tempStack.push(temp);
-	temp->timesInUse++;
 }
 tempptr_t IrCompiler::popTemp() {
     tempptr_t temp = tempStack.top();
     tempStack.pop();
-	temp->timesInUse--;
     return temp;
 }
-void IrCompiler::checkIfUsed(tempptr_t temp) {
-	if (temp->timesInUse == 0) {
-		freeTemps.push(temp);
-	}
-}
+
 void IrCompiler::pushInstruction(instptr_t inst) {
     irInsts.push_back(inst);
 }
@@ -68,7 +57,6 @@ void IrCompiler::doUnaryArithmetic(IrOp operation, bool toBoolean) {
     tempptr_t ret = getNewTemp(); 
     pushInstruction(make_shared<IrInstruction>(castOp, ret, result));
     pushTemp(ret);
-	checkIfUsed(val);
 }
 void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoolean) {
     // takes in two unverified operands, asserts and casts the correct type, 
@@ -116,8 +104,6 @@ void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoo
     tempptr_t ret = getNewTemp();
     pushInstruction(make_shared<IrInstruction>(castOp, ret, result));
     pushTemp(ret);
-	checkIfUsed(right);
-	checkIfUsed(left);
     return;
 }
 
@@ -188,7 +174,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					tempptr_t val = popTemp();
                     tempptr_t localTemp = localTemps.at(localIndex);
                     pushInstruction(make_shared<IrInstruction>(op, localTemp, val));
-					checkIfUsed(val);
 	                break;
 	            }
 	        case BcOp::StoreGlobal:
@@ -196,7 +181,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     optstr_t global = func->names_[inst.operand0.value()];
 					tempptr_t temp = popTemp();
 					pushInstruction(make_shared<IrInstruction>(IrOp::StoreGlobal, global, temp));
-					checkIfUsed(temp);
 	                break;
 	            }
 	        case BcOp::PushReference:
@@ -229,7 +213,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t curr = getNewTemp();
 					pushInstruction(make_shared<IrInstruction>(IrOp::LoadReference, curr, ref));
                     pushTemp(curr);
-                    checkIfUsed(ref);
 	                break;
 	            }
 	        case BcOp::AllocRecord:
@@ -252,7 +235,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, record});
 					pushInstruction(make_shared<IrInstruction>(IrOp::FieldLoad, field, instTemps));
-					checkIfUsed(record);
 	                break;
 	            }
 	        case BcOp::FieldStore:
@@ -264,8 +246,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                                 TempList{record, value});
 					pushInstruction(make_shared<IrInstruction>(IrOp::AssertRecord, record));
 					pushInstruction(make_shared<IrInstruction>(IrOp::FieldStore, field, instTemps));
-					checkIfUsed(value);
-					checkIfUsed(record);
 	                break;
 	            }
 	        case BcOp::IndexLoad:
@@ -285,9 +265,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{ret, record, indexStr});
 					pushInstruction(make_shared<IrInstruction>(IrOp::IndexLoad, instTemps));
-					checkIfUsed(index);
-					checkIfUsed(indexStr);
-					checkIfUsed(record);
 	                break;
 	            }
 	        case BcOp::IndexStore:
@@ -307,10 +284,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{record, value, indexStr});
 					pushInstruction(make_shared<IrInstruction>(IrOp::IndexStore, instTemps));
-					checkIfUsed(value);
-					checkIfUsed(index);
-					checkIfUsed(indexStr);
-					checkIfUsed(record);
 	                break;
 	            }
 	        case BcOp::AllocClosure:
@@ -323,11 +296,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                         // add an instruction confirming that this is a ref
                         pushInstruction(make_shared<IrInstruction>(IrOp::AssertValWrapper, t));
 						instTemps->push_back(t);
-						checkIfUsed(t);
 					}
 					reverse(instTemps->begin(), instTemps->end());
 					tempptr_t func = popTemp();
-					checkIfUsed(func);
 					instTemps->push_back(func);
                     pushTemp(curr);
 					instTemps->push_back(curr);
@@ -343,10 +314,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					for (int i = 0; i < inst.operand0; i++) {
                         tempptr_t t = popTemp();
                     	instTemps->push_back(t);
-						checkIfUsed(t);
 					}
 					tempptr_t clos = popTemp();
-					checkIfUsed(clos);
 					instTemps->push_back(clos);
                     pushTemp(curr);
 					instTemps->push_back(curr);
@@ -369,8 +338,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, tempRight, tempLeft});
 					pushInstruction(make_shared<IrInstruction>(IrOp::Add, instTemps));
-					checkIfUsed(tempRight);
-					checkIfUsed(tempLeft);
 	                break;
 	            }
 	        case BcOp::Sub:
@@ -412,8 +379,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     TempListPtr instTemps = make_shared<TempList>(
                                 TempList{curr, tempRight, tempLeft});
 					pushInstruction(make_shared<IrInstruction>(IrOp::Eq, instTemps));
-					checkIfUsed(tempRight);
-					checkIfUsed(tempLeft);
 	                break;
 	            }
 	        case BcOp::And:
@@ -443,7 +408,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     pushInstruction(make_shared<IrInstruction>(IrOp::AssertBoolean, expr));
                     pushInstruction(make_shared<IrInstruction>(IrOp::UnboxBoolean, exprVal, expr));
                     pushInstruction(make_shared<IrInstruction>(IrOp::If, inst.operand0.value(), exprVal));
-					checkIfUsed(expr);
 	                break;
 	            }
             case BcOp::Label:
@@ -467,7 +431,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        case BcOp::Pop:
 	            {
                     tempptr_t temp = popTemp();
-					checkIfUsed(temp);
 	                break;
 	            }
 	        default:
