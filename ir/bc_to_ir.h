@@ -26,7 +26,7 @@ private:
 	stack<tempptr_t> tempStack;
 	IrInstList irInsts;
 	offset_t currentTemp = 0;
-    vector<tempptr_t> localTemps;
+    vector<tempptr_t> temps;
 
     // helpers
     tempptr_t getNewTemp();
@@ -43,10 +43,9 @@ public:
     IrCompiler(Function* mainFunc, Interpreter* vmInterpreterPointer):
         func(mainFunc),
         vmPointer(vmInterpreterPointer) {
-        currentTemp = mainFunc->local_vars_.size();
         for (int i = 0; i < mainFunc->local_vars_.size(); i++) {
         	tempptr_t newTemp = make_shared<Temp>(i);
-            localTemps.push_back(newTemp);
+            temps.push_back(newTemp);
         }
     };
 	IrFunc toIr();

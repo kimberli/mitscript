@@ -15,8 +15,10 @@ class Interpreter;
 
 // Helpers
 tempptr_t IrCompiler::getNewTemp() {
+	currentTemp = temps.size();
     tempptr_t newTemp = make_shared<Temp>(currentTemp);
-    currentTemp ++; 
+	temps.push_back(newTemp);
+	newTemp->startInterval = irInsts.size();
     return newTemp;
 }
 void IrCompiler::pushTemp(tempptr_t temp) {
@@ -30,8 +32,8 @@ tempptr_t IrCompiler::popTemp() {
     return temp;
 }
 void IrCompiler::checkIfUsed(tempptr_t temp) {
-	if (temp->timesInUse == 0) {
-		// TODO do something here
+	if (temp->timesInUse == 0 || temp->index < func->local_vars_.size()) {
+		temp->endInterval = irInsts.size();	
 	}
 }
 void IrCompiler::pushInstruction(instptr_t inst) {
@@ -156,7 +158,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     } else {
                         // it is not a local ref var; generate plain LoadLocal
                         //tempptr_t val = getNewTemp();
-                        tempptr_t localTemp = localTemps.at(localIndex);
+                        tempptr_t localTemp = temps.at(localIndex);
                         //pushInstruction(make_shared<IrInstruction>(IrOp::LoadLocal, inst.operand0, val));
                         pushTemp(localTemp);
                     }
@@ -181,7 +183,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                         op = IrOp::StoreLocal;
                     }
 					tempptr_t val = popTemp();
-                    tempptr_t localTemp = localTemps.at(localIndex);
+                    tempptr_t localTemp = temps.at(localIndex);
                     pushInstruction(make_shared<IrInstruction>(op, localTemp, val));
 					checkIfUsed(val);
 	                break;
