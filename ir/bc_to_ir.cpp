@@ -123,7 +123,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
     func = func;
     tempStack = stack<tempptr_t>();
     irInsts = IrInstList();
-	currentTemp = 0;
 
     for (int i = 0; i < func->instructions.size(); i++) {
 		BcInstruction inst = func->instructions[i];
@@ -473,7 +472,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	    }
         pushInstruction(make_shared<IrInstruction>(IrOp::GarbageCollect, optint_t()));
 	}
-    int32_t temp_count = currentTemp;
     // TODO: figure out how to make refs work
     int32_t ref_count = 0; 
 	IrFunc irFunc = IrFunc(irInsts, 
@@ -482,7 +480,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 			temps,
             func->parameter_count_, 
             func->local_vars_.size(), 
-            temp_count, 
             ref_count);
     return irFunc;
 };

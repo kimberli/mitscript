@@ -385,7 +385,6 @@ struct IrFunc {
 	vector<tempptr_t> temps;
     int32_t parameter_count_;
     int32_t local_count_;
-    int32_t temp_count_;
     // TODO: rn hard-coding this at 0, but we need to actually keep track 
     // of our refs somehow in the ir-interpreter
     int32_t ref_count_ = 0;
@@ -396,7 +395,6 @@ struct IrFunc {
 		vector<tempptr_t> temps,
         int32_t parameter_count_,
         int32_t local_count_,
-        int32_t temp_count_,
         int32_t ref_count_) :
         instructions(instructions),
         constants_(constants_),
@@ -404,6 +402,5 @@ struct IrFunc {
         functions_(functions_),
         parameter_count_(parameter_count_),
         local_count_(local_count_),
-        temp_count_(temp_count_),
         ref_count_(ref_count_) {};
 };

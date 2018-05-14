@@ -66,7 +66,7 @@ void IrInterpreter::prolog() {
     // allocate space for locals, refs, and temps on the stack // by decrementing rsp 
     // and note that we are only storing on ref pointer by pushing the pointer to
     // the array
-    spaceToAllocate = 8*(1 + func->temp_count_); // locals are temps now
+    spaceToAllocate = 8*(1 + func->temps.size()); // locals are temps now
     assm.assemble({x64asm::SUB_R64_IMM32, {x64asm::rsp, x64asm::Imm32{spaceToAllocate}}});
 
     // implement putting args in the correct locals
