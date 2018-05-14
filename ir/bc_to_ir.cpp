@@ -148,24 +148,22 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::LoadLocal:
 	            {
-//                    // if the local at index i is also a ref var, generate PushLocalRef, LoadRef
-//                    // TODO
-//                    int localIndex = inst.operand0.value();
-//                    if (isLocalRef.at(localIndex)) {
-//                        // it is a local ref var; generate PushLocalRef, LoadRef
-//                        tempptr_t ref = getNewTemp();
-//                        tempptr_t localTemp = temps.at(localIndex);
-//                        pushInstruction(make_shared<IrInstruction>(IrOp::PushLocalRef, ref, localTemp));
-//                        tempptr_t val = getNewTemp();
-//                        pushInstruction(make_shared<IrInstruction>(IrOp::LoadReference, val, ref));
-//                        pushTemp(val);
-//                    } else {
-//                        // it is not a local ref var; generate plain LoadLocal
-//                        tempptr_t val = getNewTemp();
-//                        tempptr_t localTemp = temps.at(localIndex);
-//                        pushInstruction(make_shared<IrInstruction>(IrOp::LoadLocal, val, localTemp));
-//                        pushTemp(val);
-//                    }
+                    // if the local at index i is also a ref var, generate PushLocalRef, LoadRef
+                    int localIndex = inst.operand0.value();
+                    if (isLocalRef.at(localIndex)) {
+                        // it is a local ref var; generate PushLocalRef, LoadRef
+                        tempptr_t localTemp = temps.at(localIndex);
+                        tempptr_t val = getNewTemp();
+                        pushInstruction(make_shared<IrInstruction>(IrOp::LoadReference, val, localTemp));
+                        pushTemp(val);
+                    } else {
+                        // it is not a local ref var; generate plain LoadLocal
+                        //tempptr_t val = getNewTemp();
+                        tempptr_t localTemp = temps.at(localIndex);
+                        //pushInstruction(make_shared<IrInstruction>(IrOp::LoadLocal, val, localTemp));
+                        //pushTemp(val);
+                        pushTemp(localTemp);
+                    }
 	                break;
 	            }
 	        case BcOp::LoadGlobal:

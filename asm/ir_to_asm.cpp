@@ -54,8 +54,8 @@ void IrInterpreter::installLocalVar(tempptr_t temp, uint32_t localIdx) {
              temp->reg.value(),
              x64asm::M64{
                  x64asm::rdi, 
-                 x64asm::Scale::TIMES_8,
-                 x64asm::Imm32{localIdx}
+                 x64asm::Scale::TIMES_1,
+                 x64asm::Imm32{localIdx*8}
              }
         }});
     } else {
@@ -66,8 +66,8 @@ void IrInterpreter::installLocalVar(tempptr_t temp, uint32_t localIdx) {
              x64asm::rdi,
              x64asm::M64{
                  x64asm::rdi, 
-                 x64asm::Scale::TIMES_8,
-                 x64asm::Imm32{localIdx}
+                 x64asm::Scale::TIMES_1,
+                 x64asm::Imm32{localIdx*8}
              }
         }});
         // move rdi onto the right stack location 
@@ -112,8 +112,8 @@ void IrInterpreter::installLocalRefVar(tempptr_t temp, uint32_t localIdx) {
          reg,
          x64asm::M64{
              x64asm::rdi, 
-             x64asm::Scale::TIMES_8,
-             x64asm::Imm32{localIdx}
+             x64asm::Scale::TIMES_1,
+             x64asm::Imm32{8*localIdx}
          }
     }});
     // convert to a valwrapper
@@ -199,7 +199,7 @@ void IrInterpreter::prolog() {
            continue;  // the arg is never used, don't bother
         }
 
-        if (localTemp->reg && localTemp->reg.value() == x64asm::rdi) {
+        if (localTemp->reg && (localTemp->reg.value() == x64asm::rdi)) {
             // current arg is stored in a register; make sure it won't 
             // overwrite rdi 
             rdiTemp = i; 
@@ -208,9 +208,9 @@ void IrInterpreter::prolog() {
         }
 
         if (isLocalRef.at(i)) {
-            installLocalVar(localTemp, i);
-        } else {
             installLocalRefVar(localTemp, i);
+        } else {
+            installLocalVar(localTemp, i);
         }
     }
     // now do rdi, if applicable
@@ -226,9 +226,9 @@ void IrInterpreter::prolog() {
     for (uint64_t i = func->parameter_count_; i < func->local_count_; i++) {
         tempptr_t localTemp = func->temps.at(i);
         if (isLocalRef.at(i)) {
-            installLocalRefNone(localTemp);             
+            installLocalNone(localTemp);             
         } else {
-            installLocalNone(localTemp);
+            installLocalRefNone(localTemp);
         }
     }
 }
@@ -320,8 +320,8 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
                         regToStore,
                         x64asm::M64{
                             x64asm::rsp, 
-                            x64asm::Scale::TIMES_8,
-                            x64asm::Imm32{i}
+                            x64asm::Scale::TIMES_1,
+                            x64asm::Imm32{i*8}
                         }
                    }});
                    wasClobbered = true;
@@ -377,9 +377,6 @@ uint32_t IrInterpreter::getTempOffset(tempptr_t temp) {
 }
 
 void IrInterpreter::getRbpOffset(uint32_t offset) {
-    // TODO: the following would be much more efficient, but how to use negative scales? 
-    //assm.mov(x64asm::r10, x64asm::M64{x64asm::Scale::TIMES_8, x64asm::rbp});
-    
     // put rbp in a reg
     assm.mov(x64asm::r10, x64asm::rbp);
     // subtract the offset from rbp 
