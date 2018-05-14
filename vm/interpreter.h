@@ -13,6 +13,8 @@
 #include "../machine_code_func.cpp"
 #include "../ir/bc_to_ir.h"
 #include "../asm/ir_to_asm.h"
+#include "../opt/opt.h"
+#include "../opt/opt_reg_alloc.h"
 #include <list>
 #include <iostream>
 

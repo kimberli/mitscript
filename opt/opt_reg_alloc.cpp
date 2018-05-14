@@ -2,12 +2,8 @@
 #include <set>
 #include "include/x64asm.h"
 
-IrFunc* RegOpt::optimize(IrFunc* irFunc) {
+void RegOpt::optimize(IrFunc* irFunc) {
 	linearScan(irFunc);
-    func = irFunc;
-    run(); 
-    func->instructions = instructions;
-    return func;
 };
 
 struct compareIntervalEnd {
@@ -21,9 +17,10 @@ void RegOpt::linearScan(IrFunc* irFunc) {
 	int stackOffset = 0;
 	int numRegisters = freeRegisters.size();
 	for (tempptr_t temp_i: irFunc->temps) {
+		cout << temp_i->index << "start: " << temp_i->startInterval << ", end: " << temp_i->endInterval << endl;
 		for (tempptr_t temp_j: active) { // Expire old intervals
 			if (temp_j->endInterval >= temp_i->startInterval) {
-				return;
+				break;
 			}
 			active.erase(temp_j);
 			if (temp_j->reg) {

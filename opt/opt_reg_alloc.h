@@ -25,5 +25,5 @@ private:
     void executeStep();
 	void linearScan(IrFunc* irFunc);
 public: 
-    IrFunc* optimize(IrFunc* irFunc) override;
+    void optimize(IrFunc* irFunc) override;
 };

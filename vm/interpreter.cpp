@@ -516,6 +516,9 @@ Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
     // convert the bc function to the ir
     IrCompiler irc = IrCompiler(clos->func, this);
     IrFunc irf = irc.toIr();
+	//TODO make optimization toggleable?
+	RegOpt reg = RegOpt();
+	reg.optimize(&irf);
 
     // convert the ir to assembly
     IrInterpreter iri = IrInterpreter(&irf, this, irc.isLocalRef);

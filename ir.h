@@ -31,6 +31,69 @@ struct Temp {
 	Temp(int i) : index(i) {}
 };
 
+static string asmRegToString(x64asm::R64 reg) {
+	switch(reg) {
+		case x64asm::rdi:
+		{
+			return "rdi";
+		}
+	    case x64asm::rsi:
+		{
+			return "rsi";
+		}
+	    case x64asm::rax:
+		{
+			return "rax";
+		}
+	    case x64asm::rbx: 
+		{
+			return "rbx";
+		}
+	    case x64asm::rcx:
+		{
+			return "rcx";
+		}
+		case x64asm::rdx:
+		{
+			return "rdx";
+		}
+	    case x64asm::r8: 
+		{
+			return "r8";
+		}
+	    case x64asm::r9:
+		{
+			return "r9";
+		}
+	    case x64asm::r10:
+		{
+			return "r10";
+		}
+	    case x64asm::r11:
+		{
+			return "r11";
+		}
+	    case x64asm::r12:
+		{
+			return "r12";
+		}
+	    case x64asm::r13:
+		{
+			return "r13";
+		}
+	    case x64asm::r14: 
+		{
+			return "r14";
+		}
+	    case x64asm::r15: 
+		{
+			return "r15";
+		}
+		default: 
+			return "reg";
+	}
+}
+
 enum class IrOp {
     // Description: Move a constant from constants array into temp var
     // op0: index into the constants array of the constant to move
@@ -373,6 +436,11 @@ struct IrInstruction {
         s += "\ttemps: ";
         for (tempptr_t t : *tempIndices) {
             s += to_string(t->index) + " ";
+			if (t->reg) {
+				s += "Reg: " + asmRegToString(t->reg.value()) + " ";
+			} else if (t->stackOffset) {
+				s += "Stack: " + to_string(t->stackOffset.value()) + " ";
+			}
         }
         return s;
     }
@@ -404,3 +472,4 @@ struct IrFunc {
         local_count_(local_count_),
         ref_count_(ref_count_) {};
 };
+

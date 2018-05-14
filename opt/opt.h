@@ -8,5 +8,5 @@ protected:
     int32_t instructionIndex = 0;
     bool finished; 
 public: 
-    virtual IrFunc* optimize(IrFunc* irFunc) = 0;
+    virtual void optimize(IrFunc* irFunc) = 0;
 };
