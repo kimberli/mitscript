@@ -330,7 +330,7 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
             }
         } else { // the value is stored on the stack; move from mem
             // move to the right reg from mem
-            int32_t offset = getTempOffset(tempToPush);
+            uint32_t offset = getTempOffset(tempToPush);
             assm.assemble({x64asm::MOV_R64_M64, {
                 regToStore,
                 x64asm::M64{
@@ -856,27 +856,29 @@ void IrInterpreter::executeStep() {
                 for (int i = 0; i < numArgs; ++i) {
                     // push in reverse order, so first arg is lowest
                     argTemp = inst->tempIndices->at(2 + numArgs - i - 1);
-                    getRbpOffset(getTempOffset(argTemp)); // leaves correct address into r10
-                    assm.mov(x64asm::r10, x64asm::M64{x64asm::r10});
-                    assm.push(x64asm::r10);
+                    if (argTemp->reg) {
+                        assm.push(argTemp->reg.value());
+                    } else {
+                        // TODO don't use r10 as a lazy reg pls
+                        // on the stack; 
+                        getRbpOffset(getTempOffset(argTemp)); // leaves correct address into r10
+                        assm.mov(x64asm::r10, x64asm::M64{x64asm::r10});
+                        assm.push(x64asm::r10);
+                    }
                 }
 
-                // putting rsp in temp0 for now because I don't want to have to
-                // write a new callHelper
+                // helper_call takes args: vm pointer, numArgs, 
+                // closure, array of args
                 vector<x64asm::Imm64> immArgs = {
-                    x64asm::Imm64{vmPointer},
-                    x64asm::Imm64{numArgs}
+                    x64asm::Imm64{vmPointer}, // vm pointer
+                    x64asm::Imm64{numArgs}   // numArgs
                 };
-
-                // points to the last empty space
-                // put rsp into a temp to pas easily
-                storeTemp(x64asm::rsp, inst->tempIndices->at(0));
                 vector<tempptr_t> temps = {
-                    inst->tempIndices->at(0), // args 
                     inst->tempIndices->at(1) // closure
                 };
+                x64asm::R64 argsArray = x64asm::rsp; // args
                 tempptr_t returnTemp = inst->tempIndices->at(0);
-                callHelper((void *) &(helper_call), immArgs, temps, returnTemp);
+                callHelper((void *) &(helper_call), immArgs, temps, argsArray, returnTemp);
 
                 // clear the stack
                 for (int i = 0; i < numArgs; i++) {

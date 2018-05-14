@@ -30,7 +30,7 @@ Value* helper_alloc_closure(Interpreter* interpreter, int numRefs, Function* fun
     return interpreter->collector->allocate<Closure>(refVec, func);
 }
 
-Value* helper_call(Interpreter* interpreter, int numArgs, Constant** args, Closure* closure) {
+Value* helper_call(Interpreter* interpreter, int numArgs, Closure* closure, Constant** args) {
     // package this stuff into the right format and call back the vm 
     vector<Constant*> argVec;
     for (int i = 0; i < numArgs; i++) {
