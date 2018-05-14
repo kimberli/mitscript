@@ -12,6 +12,8 @@
 #include <map>
 #include <stack>
 #include <vector>
+#include <map>
+#include <set>
 
 using namespace std;
 
@@ -27,6 +29,8 @@ private:
 	IrInstList irInsts;
 	offset_t currentTemp = 0;
     vector<tempptr_t> temps;
+	int whileLevel = 0;
+	set<tempptr_t> tempsInWhile;
 
     // helpers
     tempptr_t getNewTemp();

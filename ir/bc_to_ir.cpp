@@ -35,6 +35,9 @@ void IrCompiler::checkIfUsed(tempptr_t temp) {
 	if (temp->timesInUse == 0 || temp->index < func->local_vars_.size()) {
 		temp->endInterval = irInsts.size();	
 	}
+	if (whileLevel > 0) {
+		tempsInWhile.insert(temp);
+	}
 }
 void IrCompiler::pushInstruction(instptr_t inst) {
     irInsts.push_back(inst);
@@ -428,6 +431,22 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        case BcOp::Not:
 	            {
                     doUnaryArithmetic(IrOp::Not, true);
+                    break;
+	            }
+	        case BcOp::StartWhile:
+	            {
+					whileLevel++;
+                    break;
+	            }
+	        case BcOp::EndWhile:
+	            {
+					whileLevel--;
+					if (whileLevel == 0) {
+						for (tempptr_t temp: tempsInWhile) {
+							temp->endInterval = irInsts.size();	
+						}
+						tempsInWhile.clear();
+					}
                     break;
 	            }
 	        case BcOp::Goto:

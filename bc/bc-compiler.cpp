@@ -212,6 +212,8 @@ void BytecodeCompiler::visit(WhileLoop& exp) {
     int bodyLabel = labelCounter;
     labelCounter++;
 
+	// Mark start of while loop
+	addInstruction(BcOp::StartWhile, nullopt);
     // add the GOTO instruction that will jump to the condition
     addInstruction(BcOp::Goto, condLabel);
 
@@ -231,6 +233,8 @@ void BytecodeCompiler::visit(WhileLoop& exp) {
 
     // add the IF instruction that will jump to the body if true
     addInstruction(BcOp::If, bodyLabel);
+	// Mark end of while loop
+	addInstruction(BcOp::EndWhile, nullopt);
 }
 
 void BytecodeCompiler::visit(Return& exp) {
