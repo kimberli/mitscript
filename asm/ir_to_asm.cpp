@@ -195,6 +195,9 @@ void IrInterpreter::prolog() {
     // rdi stores arg0 which is the list of arguments to the MS func
     for (uint64_t i = 0; i < func->parameter_count_; i++) {
         tempptr_t localTemp = func->temps.at(i);
+        if (localTemp->startInterval == -1 && localTemp->endInterval == -1) {
+           continue;  // the arg is never used, don't bother
+        }
 
         if (localTemp->reg && localTemp->reg.value() == x64asm::rdi) {
             // current arg is stored in a register; make sure it won't 
