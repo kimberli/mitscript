@@ -496,7 +496,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        default:
 	            throw RuntimeException("should never get here - invalid instruction");
 	    }
-        pushInstruction(make_shared<IrInstruction>(IrOp::GarbageCollect, optint_t()));
+        // TODO: PUT BACK 
+        //pushInstruction(make_shared<IrInstruction>(IrOp::GarbageCollect, optint_t()));
 	}
     // TODO: figure out how to make refs work
     int32_t ref_count = 0; 
@@ -511,7 +512,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 };
 
 IrFunc IrCompiler::toIr() {
-//    // do some preprocessing here 
+    // do some preprocessing here 
     for (string local : func->local_vars_) {
         if (find(func->local_reference_vars_.begin(), 
                  func->local_reference_vars_.end(), 

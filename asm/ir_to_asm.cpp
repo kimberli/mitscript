@@ -286,7 +286,7 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
     // IMPORTANT: the reg in lastArg should not be r10, rax, or any of the 6 argRegs
     // STEP 1: save caller-saved registers to stack, reverse order
     for (int i = 0; i < numCallerSaved; ++i) {
-        assm.push(callerSavedRegs[numCallerSaved - i]);
+        assm.push(callerSavedRegs[numCallerSaved -1 - i]);
     }
 
     // STEP 2: push first 6 arguments to registers, rest to stack
