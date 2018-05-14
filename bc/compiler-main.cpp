@@ -39,7 +39,7 @@ int main(int argc, char** argv)
     BytecodeCompiler* bc = new BytecodeCompiler();
 
     try {
-        funcptr_t rootFunc = bc->evaluate(*output);
+        Function* rootFunc = bc->evaluate(*output);
         PrettyPrinter printer;
         printer.print(*rootFunc, std::cout);
     } catch (InterpreterException& exception) {

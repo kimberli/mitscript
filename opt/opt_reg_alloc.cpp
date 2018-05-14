@@ -254,26 +254,6 @@ void RegOpt::executeStep() {
                 LOG(to_string(instructionIndex) + ": AssertValWrapper");
                 break;
             };
-        case IrOp::UnboxInteger:
-            {
-                LOG(to_string(instructionIndex) + ": UnboxInteger");
-                break;
-            };
-        case IrOp::UnboxBoolean:
-            {
-                LOG(to_string(instructionIndex) + ": UnboxBoolean");
-                break;
-            };
-        case IrOp::NewInteger:
-            {
-                LOG(to_string(instructionIndex) + ": NewInteger");
-                break;
-            };
-        case IrOp::NewBoolean:
-            {
-                LOG(to_string(instructionIndex) + ": NewBoolean");
-                break;
-            };
         case IrOp::CastString:
             {
                 LOG(to_string(instructionIndex) + ": CastString");

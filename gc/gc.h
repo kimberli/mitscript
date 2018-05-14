@@ -6,8 +6,10 @@
 #include <vector>
 
 using namespace std;
+typedef int64_t tagptr_t;
 
 class Frame;
+class Closure;
 class CollectedHeap;
 class Record;
 class Function;
@@ -44,7 +46,7 @@ protected:
      * points to. markSuccessors() is the one responsible for checking
      * if the object is marked and marking it.
 	 */
-	template<typename T>
+    template<typename T>
     size_t getVecSize(vector<T> v);
 
     template<typename VAL>
@@ -121,15 +123,21 @@ public:
      * so that it can be deallocated later.
 	 */
 	template<typename T>
-	T* allocate();
+	tagptr_t allocate();
 
-	/*
-	 * A variant of the method above; this version of allocate can be
-     * used to allocate objects whose constructor takes one parameter.
-     * Useful when allocating Integer or String objects.
-	*/
-	template<typename T, typename ARG>
-	T* allocate(ARG a);
+    /*
+     * This method allocates with a tagptr_t parameter, so it should return
+     * a tagptr_t to a ValWrapper or a Frame
+     */
+	template<typename T>
+	T* allocate(tagptr_t ptr);
+
+    /*
+     * This method allocates with a tagptr_t parameter, so it should return
+     * a tagptr_t to a ValWrapper or a Frame
+     */
+	template<typename T>
+	T* allocate(Function* ptr);
 
 	/*
 	 * For performance reasons, you may want to implement specialized
@@ -138,12 +146,12 @@ public:
 
     // for records
     template<typename T, typename KEY, typename VAL>
-    T* allocate(map<KEY, VAL> mapping);
+    tagptr_t allocate(map<KEY, VAL> mapping);
 
     // for functions
     template<typename T>
     T* allocate(vector<Function*> functions_,
-            vector<Constant*> constants_,
+            vector<tagptr_t> constants_,
             int32_t parameter_count_,
             vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -152,8 +160,7 @@ public:
             vector<BcInstruction> instructions);
 
     // for closures
-    template<typename T>
-    T* allocate(vector<ValWrapper*> refs, Function* func);
+    Closure* allocate(vector<ValWrapper*> refs, Function* func);
 
 	/*
      * The gc method should be called by your VM (or by other methods

@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "gc/gc.h"
+#include "opt/opt_tag_ptr.h"
 
 using namespace std;
 using experimental::nullopt;
@@ -54,6 +55,7 @@ struct Value : public Collectable {
 struct Constant: public Value {
     // Abstract class for constant program values
     virtual ~Constant() {};
+    static const string typeS;
 };
 
 struct Function : public Value {
@@ -63,7 +65,7 @@ struct Function : public Value {
     vector<Function*> functions_;
 
     // constants used by the instructions within this function (but not inside nested functions)
-    vector<Constant*> constants_;
+    vector<tagptr_t> constants_;
 
     // number of parameters to the function
     int32_t parameter_count_;
@@ -94,7 +96,7 @@ struct Function : public Value {
     virtual ~Function() {};
 
     Function(vector<Function*> functions_,
-            vector<Constant*> constants_,
+            vector<tagptr_t> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -112,7 +114,7 @@ struct Function : public Value {
         instructions(instructions) {};
 
     Function(vector<Function*> functions_,
-            vector<Constant*> constants_,
+            vector<tagptr_t> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -143,10 +145,10 @@ struct Function : public Value {
 
 struct ValWrapper: public Value {
     // Class for reference variables
-    Constant* ptr;
+    tagptr_t ptr;
 
     ValWrapper() {}
-    ValWrapper(Constant* ptr): ptr(ptr) {};
+    ValWrapper(tagptr_t ptr): ptr(ptr) {};
     virtual ~ValWrapper() {}
 
     static const string typeS;
@@ -178,6 +180,7 @@ struct None : public Constant {
 };
 
 struct Integer : public Constant {
+    // TODO: delete
     // Class for integer type
     int32_t value;
 
@@ -197,6 +200,7 @@ struct Integer : public Constant {
 };
 
 struct String : public Constant {
+    // TODO: delete
     // Class for string type
     string value;
 
@@ -216,6 +220,7 @@ struct String : public Constant {
 };
 
 struct Boolean : public Constant{
+    // TODO: delete
     // Class for boolean type
     bool value;
 
@@ -236,10 +241,10 @@ struct Boolean : public Constant{
 
 struct Record : public Constant {
     // Class for record type (note that this is mutable)
-	map<string, Value*> value;
+	map<string, tagptr_t> value;
 
-    Value* get(string key);
-    void set(string key, Value* value, CollectedHeap& collector);
+    tagptr_t get(string key);
+    void set(string key, tagptr_t value, CollectedHeap& collector);
 
     virtual ~Record() {}
     string toString();
@@ -283,7 +288,7 @@ class NativeFunction : public Function {
     // Abstract class for native functions
 public:
     NativeFunction(vector<Function*> functions_,
-            vector<Constant*> constants_,
+            vector<tagptr_t> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -293,14 +298,14 @@ public:
 			Function(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-    virtual Constant* evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) = 0;
+    virtual tagptr_t evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) = 0;
 };
 
 class PrintNativeFunction : public NativeFunction {
     // Class for print native function
 public:
     PrintNativeFunction(vector<Function*> functions_,
-            vector<Constant*> constants_,
+            vector<tagptr_t> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -310,14 +315,14 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-   Constant* evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
+   tagptr_t evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
 };
 
 class InputNativeFunction : public NativeFunction {
     // Class for input native function
 public:
     InputNativeFunction(vector<Function*> functions_,
-            vector<Constant*> constants_,
+            vector<tagptr_t> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -327,14 +332,14 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-    Constant* evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
+    tagptr_t evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
 };
 
 class IntcastNativeFunction : public NativeFunction {
     // Class for intcast native function
 public:
     IntcastNativeFunction(vector<Function*> functions_,
-            vector<Constant*> constants_,
+            vector<tagptr_t> constants_,
             int32_t parameter_count_,
 	        vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -344,5 +349,5 @@ public:
 			NativeFunction(functions_, constants_, parameter_count_,
 					 local_vars_, local_reference_vars_, free_vars_,
 					 names_, instructions) {};
-    Constant* evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
+    tagptr_t evalNativeFunction(Frame& currentFrame, CollectedHeap& ch);
 };

@@ -17,7 +17,7 @@ Interpreter::Interpreter(Function* mainFunc, int maxmem, bool callAsm) {
     collector = new CollectedHeap(maxmem, mainFunc->getSize(), &frames);
 
     // initialize a static none
-    NONE = new None();
+    NONE = make_ptr(new None());
 
     // initialize the root frame
     int numLocals = mainFunc->names_.size();
@@ -32,7 +32,7 @@ Interpreter::Interpreter(Function* mainFunc, int maxmem, bool callAsm) {
         throw RuntimeException("can't initialize root frame w/ nonzero local vars");
     }
     mainFunc->local_vars_ = mainFunc->names_;
-    Frame* frame = collector->allocate<Frame, Function*>(mainFunc);
+    Frame* frame = collector->allocate<Frame>(mainFunc);
     frame->collector = collector;
     globalFrame = frame;
     frames.push_back(frame);
@@ -41,7 +41,7 @@ Interpreter::Interpreter(Function* mainFunc, int maxmem, bool callAsm) {
 
     // set up native functions at the beginning of functions array
 	vector<Function*> functions_;
-    vector<Constant*> constants_;
+    vector<tagptr_t> constants_;
 	vector<string> args0 ;
 	vector<string> args1 = { string("s") };
     vector<string> local_reference_vars_;
@@ -58,8 +58,7 @@ void Interpreter::executeStep() {
     // executes a single instruction and updates state of interpreter
     Frame* frame = frames.back();
     BcInstruction& inst = frame->getCurrInstruction();
-    LOG("executing instruction " + to_string(frame->instructionIndex));
-    LOG("from frame " + to_string(frames.size()));
+    LOG("executing instruction " + to_string(frame->instructionIndex) + " from frame " + to_string(frames.size()));
     switch (inst.operation) {
         case BcOp::LoadConst:
             {
@@ -71,7 +70,7 @@ void Interpreter::executeStep() {
         case BcOp::LoadFunc:
             {
                 auto func = frame->getFunctionByIndex(inst.operand0.value());
-                frame->opStackPush(func);
+                frame->opStackPush(make_ptr(func));
                 frame->instructionIndex++;
                 break;
             }
@@ -85,11 +84,8 @@ void Interpreter::executeStep() {
         case BcOp::StoreLocal:
             {
                 string name = frame->getLocalByIndex(inst.operand0.value());
-                Constant* value = dynamic_cast<Constant*>(frame->opStackPop());
-                if (value == NULL) {
-                    throw RuntimeException("expected Constant on the stack for StoreLocal");
-                }
-                frame->setLocalVar(name, value);
+                tagptr_t ptr = frame->opStackPop();
+                frame->setLocalVar(name, ptr);
                 frame->instructionIndex++;
                 break;
             }
@@ -113,31 +109,14 @@ void Interpreter::executeStep() {
             {
                 string name = frame->getRefByIndex(inst.operand0.value());
                 auto valWrapper = frame->getRefVar(name);
-                frame->opStackPush(valWrapper);
+                frame->opStackPush(make_ptr(valWrapper));
                 frame->instructionIndex++;
                 break;
             }
         case BcOp::LoadReference:
             {
-                ValWrapper* valWrapper = dynamic_cast<ValWrapper*>(frame->opStackPop());
-                if (valWrapper == NULL) {
-                    throw RuntimeException("expected ValWrapper on the stack for LoadReference");
-                }
-                frame->opStackPush(valWrapper->ptr);
-                frame->instructionIndex++;
-                break;
-            }
-        case BcOp::StoreReference:
-            {
-                Constant* value = dynamic_cast<Constant*>(frame->opStackPop());
-                if (value == NULL) {
-                    throw RuntimeException("expected Constant on the stack for StoreReference");
-                }
-                ValWrapper* valWrapper = dynamic_cast<ValWrapper*>(frame->opStackPop());
-                if (valWrapper == NULL) {
-                    throw RuntimeException("expected ValWrapper on the stack for StoreReference");
-                }
-				*valWrapper->ptr = *value;
+                ValWrapper* v = cast_val<ValWrapper>(frame->opStackPop());  // will raise exception if invalid type
+                frame->opStackPush(v->ptr);
                 frame->instructionIndex++;
                 break;
             }
@@ -149,10 +128,10 @@ void Interpreter::executeStep() {
             }
         case BcOp::FieldLoad:
             {
-				Record* record = frame->opStackPop()->cast<Record>();
+                Record* record = cast_val<Record>(frame->opStackPop());
 				string field = frame->getNameByIndex(inst.operand0.value());
                 if (record->value.count(field) == 0) {
-                    Value* val = collector->allocate<None>();
+                    tagptr_t val = NONE;
                     record->set(field, val, *collector);
                 }
 				frame->opStackPush(record->get(field));
@@ -161,22 +140,19 @@ void Interpreter::executeStep() {
             }
         case BcOp::FieldStore:
             {
-				Constant* value = dynamic_cast<Constant*>(frame->opStackPop());
-                if (value == NULL) {
-                    throw RuntimeException("expected Constant on the stack for FieldStore");
-                }
-				Record* record = frame->opStackPop()->cast<Record>();
+                tagptr_t ptr = frame->opStackPop();
+                Record* record = cast_val<Record>(frame->opStackPop());
 				string field = frame->getNameByIndex(inst.operand0.value());
-                record->set(field, value, *collector);
+                record->set(field, ptr, *collector);
                 frame->instructionIndex++;
                 break;
             }
         case BcOp::IndexLoad:
             {
-				string index = frame->opStackPop()->toString();
-				Record* record = frame->opStackPop()->cast<Record>();
+                string index = *ptr_to_str(frame->opStackPop());
+                Record* record = cast_val<Record>(frame->opStackPop());
                 if (record->value.count(index) == 0) {
-                    Value* val = collector->allocate<None>();
+                    tagptr_t val = NONE;
                     record->set(index, val, *collector);
                 }
 				frame->opStackPush(record->get(index));
@@ -189,8 +165,8 @@ void Interpreter::executeStep() {
             // record
             {
 				auto value = frame->opStackPop();
-				string index = frame->opStackPop()->toString();
-				Record* record = frame->opStackPop()->cast<Record>();
+				string index = *ptr_to_str(frame->opStackPop());
+				Record* record = cast_val<Record>(frame->opStackPop());
                 record->set(index, value, *collector);
                 frame->instructionIndex++;
                 break;
@@ -202,13 +178,10 @@ void Interpreter::executeStep() {
                 vector<ValWrapper*> refList;
                 for (int i = 0; i < numFreeVars; i++) {
                     auto top = frame->opStackPop();
-                    ValWrapper* value = dynamic_cast<ValWrapper*>(top);
-                    if (value == NULL) {
-                        throw RuntimeException("expected ValWrapper on the stack for AllocClosure");
-                    }
+                    ValWrapper* value = cast_val<ValWrapper>(top);
                     refList.push_back(value);
                 }
-                Function* func = dynamic_cast<Function*>(frame->opStackPop());
+                Function* func = cast_val<Function>(frame->opStackPop());
                 if (func == NULL) {
                     throw RuntimeException("expected Function on the stack for AllocClosure");
                 }
@@ -216,7 +189,8 @@ void Interpreter::executeStep() {
                     throw RuntimeException("expected " + to_string(func->free_vars_.size()) + " reference variables but got " + to_string(numFreeVars));
                 }
                 // push new closure onto the stack
-                frame->opStackPush(collector->allocate<Closure>(refList, func));
+                auto clos = collector->allocate(refList, func);
+                frame->opStackPush(make_ptr(clos));
                 frame->instructionIndex++;
                 break;
             }
@@ -224,20 +198,19 @@ void Interpreter::executeStep() {
             {
                 // read num arguments, argument values, and closure off the stack
                 int numArgs = inst.operand0.value();
-                vector<Constant*> argsList;
+                vector<tagptr_t> argsList;
                 for (int i = 0; i < numArgs; i++) {
                     auto top = frame->opStackPop();
-                    Constant* value = dynamic_cast<Constant*>(top);
-                    if (value == NULL) {
-                        throw RuntimeException("expected Constant on the stack for Call");
+                    if (!is_tagged(top)) {
+                        cast_val<Constant>(top);  // will raise exception if not Constant
                     }
-                    argsList.push_back(value);
+                    argsList.push_back(top);
                 }
                 reverse(argsList.begin(), argsList.end());
 
-                Value* closure = frame->opStackPop();
+                Closure* closure = cast_val<Closure>(frame->opStackPop());
                 frame->instructionIndex++;
-                call(argsList, closure);
+                call(argsList, make_ptr(closure));
 				frame = frames.back();
                 break;
             }
@@ -253,106 +226,102 @@ void Interpreter::executeStep() {
                 frame = frames.back();
                 // push return val to top of new parent frame
                 frame->opStackPush(returnVal);
-                //frame->instructionIndex++;
                 break;
             }
         case BcOp::Add:
             {
                 auto right = frame->opStackPop();
                 auto left = frame->opStackPop();
-                Value* result = add(left, right);
+                tagptr_t result = ptr_add(left, right);
                 frame->opStackPush(result);
                 frame->instructionIndex++;
                 break;
             }
         case BcOp::Sub:
             {
-                int right = frame->opStackPop()->cast<Integer>()->value;
-                int left = frame->opStackPop()->cast<Integer>()->value;
-                frame->opStackPush(
-                        collector->allocate<Integer>(left - right));
+                auto right = frame->opStackPop();
+                auto left = frame->opStackPop();
+                tagptr_t result = make_ptr(get_int(left) - get_int(right));
+                frame->opStackPush(result);
                 frame->instructionIndex++;
                 break;
             }
         case BcOp::Mul:
             {
-                int right = frame->opStackPop()->cast<Integer>()->value;
-                int left = frame->opStackPop()->cast<Integer>()->value;
-                frame->opStackPush(
-                       collector->allocate<Integer>(left * right));
+                auto right = frame->opStackPop();
+                auto left = frame->opStackPop();
+                tagptr_t result = make_ptr(get_int(left) * get_int(right));
+                frame->opStackPush(result);
                 frame->instructionIndex++;
                 break;
             }
         case BcOp::Div:
             {
-                int right = frame->opStackPop()->cast<Integer>()->value;
-                int left = frame->opStackPop()->cast<Integer>()->value;
-                if (right == 0) {
+                auto right = frame->opStackPop();
+                auto left = frame->opStackPop();
+                if (get_int(right) == 0) {
                     throw IllegalArithmeticException("cannot divide by 0");
                 }
-                frame->opStackPush(
-                        collector->allocate<Integer>(left / right));
+                tagptr_t result = make_ptr(get_int(left) / get_int(right));
+                frame->opStackPush(result);
                 frame->instructionIndex++;
                 break;
             }
         case BcOp::Neg:
             {
-                int top = frame->opStackPop()->cast<Integer>()->value;
-                frame->opStackPush(
-                        collector->allocate<Integer>(-top));
+                auto top = frame->opStackPop();
+                frame->opStackPush(make_ptr(-get_int(top)));
                 frame->instructionIndex++;
                 break;
             }
         case BcOp::Gt:
             {
-                int right = frame->opStackPop()->cast<Integer>()->value;
-                int left = frame->opStackPop()->cast<Integer>()->value;
-                frame->opStackPush(
-                        collector->allocate<Boolean>(left > right));
+                auto right = frame->opStackPop();
+                auto left = frame->opStackPop();
+                tagptr_t result = make_ptr(get_int(left) > get_int(right));
+                frame->opStackPush(result);
                 frame->instructionIndex++;
                 break;
             }
         case BcOp::Geq:
             {
-                int right = frame->opStackPop()->cast<Integer>()->value;
-                int left = frame->opStackPop()->cast<Integer>()->value;
-                frame->opStackPush(
-                        collector->allocate<Boolean>(left >= right));
+                auto right = frame->opStackPop();
+                auto left = frame->opStackPop();
+                tagptr_t result = make_ptr(get_int(left) >= get_int(right));
+                frame->opStackPush(result);
                 frame->instructionIndex++;
                 break;
             }
         case BcOp::Eq:
             {
-                Value* right = frame->opStackPop();
+                auto right = frame->opStackPop();
                 auto left = frame->opStackPop();
-                frame->opStackPush(
-                        collector->allocate<Boolean>(left->equals(right)));
+                frame->opStackPush(ptr_equals(left, right));
                 frame->instructionIndex++;
                 break;
             }
         case BcOp::And:
             {
-                bool right = frame->opStackPop()->cast<Boolean>()->value;
-                bool left = frame->opStackPop()->cast<Boolean>()->value;
-                frame->opStackPush(
-                        collector->allocate<Boolean>(left && right));
+                auto right = frame->opStackPop();
+                auto left = frame->opStackPop();
+                tagptr_t result = make_ptr(get_bool(left) && get_bool(right));
+                frame->opStackPush(result);
                 frame->instructionIndex++;
                 break;
             }
         case BcOp::Or:
             {
-                bool right = frame->opStackPop()->cast<Boolean>()->value;
-                bool left = frame->opStackPop()->cast<Boolean>()->value;
-                frame->opStackPush(
-                        collector->allocate<Boolean>(left || right));
+                auto right = frame->opStackPop();
+                auto left = frame->opStackPop();
+                tagptr_t result = make_ptr(get_bool(left) || get_bool(right));
+                frame->opStackPush(result);
                 frame->instructionIndex++;
                 break;
             }
         case BcOp::Not:
             {
-                bool top = frame->opStackPop()->cast<Boolean>()->value;
-                frame->opStackPush(
-                        collector->allocate<Boolean>(!top));
+                auto top = frame->opStackPop();
+                frame->opStackPush(make_ptr(!get_bool(top)));
                 frame->instructionIndex++;
                 break;
             }
@@ -364,9 +333,9 @@ void Interpreter::executeStep() {
             }
         case BcOp::If:
             {
-                auto e = frame->opStackPop()->cast<Boolean>();
+                auto expr = frame->opStackPop();
                 int labelIndex = inst.operand0.value();
-                if (e->value) {
+                if (get_bool(expr)) {
                     frame->instructionIndex = frame->func->labels_[labelIndex];
                 } else {
                     frame->instructionIndex++;
@@ -415,11 +384,10 @@ void Interpreter::executeStep() {
     }
     if (frame->instructionIndex == frame->numInstructions()) {
         // last instruction of current function
-        Value* returnVal = collector->allocate<None>();
         frames.pop_back();
         frame = frames.back();
         // push return val to top of new parent frame
-        frame->opStackPush(returnVal);
+        frame->opStackPush(NONE);
     }
     frame->checkLegalInstruction();
 };
@@ -441,12 +409,12 @@ void Interpreter::run() {
     if (shouldCallAsm) {
         // create a closure objec to wrap the main function
         vector<ValWrapper*> emptyRefs;
-        vector<Constant*> emptyArgs;
+        vector<tagptr_t> emptyArgs;
         Function* mainFunc = globalFrame->func;
         // TODO: this is not on the stack anywhere. it could get spontaneously
         // garbage-collected. How do we handle this?
-        Closure* mainClosure = collector->allocate<Closure>(emptyRefs, mainFunc);
-        callAsm(emptyArgs, mainClosure);
+        Closure* mainClosure = collector->allocate(emptyRefs, mainFunc);
+        callAsm(emptyArgs, make_ptr(mainClosure));
     } else {
         // the global frame has already been created; you're ready to go
         while (!finished) {
@@ -455,13 +423,10 @@ void Interpreter::run() {
     }
 };
 
-Value* Interpreter::call(vector<Constant*> argsList, Value* closure) {
+tagptr_t Interpreter::call(vector<tagptr_t> argsList, tagptr_t clos_ptr) {
     // this function takes care of figuring out whether to dispatch to
     // the vm or assembly
-    Closure* clos = dynamic_cast<Closure*>(closure);
-    if (clos == NULL) {
-        throw RuntimeException("expected Closure on operand stack for function call");
-    }
+    Closure* clos = cast_val<Closure>(clos_ptr);
     if (argsList.size() != clos->func->parameter_count_) {
         throw RuntimeException("expected " + to_string(clos->func->parameter_count_) + " arguments, got " + to_string(argsList.size()));
     }
@@ -469,18 +434,19 @@ Value* Interpreter::call(vector<Constant*> argsList, Value* closure) {
         // should still check for native functions
         NativeFunction* nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
         if (nativeFunc != NULL) {
-            return callVM(argsList, clos);
+            return callVM(argsList, clos_ptr);
         } else {
-            return callAsm(argsList, clos);
+            return callAsm(argsList, clos_ptr);
         }
     } else {
-        return callVM(argsList, clos);
+        return callVM(argsList, clos_ptr);
     }
 }
 
 // Different call methods for vm execution and compilation to asm
-Value* Interpreter::callVM(vector<Constant*> argsList, Closure* clos) {
+tagptr_t Interpreter::callVM(vector<tagptr_t> argsList, tagptr_t clos_ptr) {
     // process local refs and local vars
+    Closure* clos = cast_val<Closure>(clos_ptr);
     int numLocals = clos->func->local_vars_.size();
     int numRefs = clos->func->free_vars_.size();
     Frame* newFrame = collector->allocate<Frame>(clos->func);
@@ -491,30 +457,31 @@ Value* Interpreter::callVM(vector<Constant*> argsList, Closure* clos) {
             newFrame->setLocalVar(name, argsList[i]);
         } else {
             string name = clos->func->local_vars_[i];
-            newFrame->setLocalVar(name, collector->allocate<None>());
+            newFrame->setLocalVar(name, NONE);
         }
     }
     for (int i = 0; i < numRefs; i++) {
         string name = clos->func->free_vars_[i];
-        newFrame->setRefVar(name, clos->refs[i]);
+        newFrame->setRefVar(name, make_ptr(clos->refs[i]));
     }
     NativeFunction* nativeFunc = dynamic_cast<NativeFunction*>(clos->func);
     if (nativeFunc != NULL) {
-        Constant* val = nativeFunc->evalNativeFunction(*newFrame, *collector);
+        tagptr_t val = nativeFunc->evalNativeFunction(*newFrame, *collector);
         frames.back()->opStackPush(val);
 		return val;
     } else if (newFrame->numInstructions() != 0) {
         frames.push_back(newFrame);
         // TODO: do we need to return something here?
     } else {
-        Value* returnVal = collector->allocate<None>();
+        tagptr_t returnVal = NONE;
         frames.back()->opStackPush(returnVal);
 		return returnVal;
     }
 }
 
-Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
+tagptr_t Interpreter::callAsm(vector<tagptr_t> argsList, tagptr_t clos_ptr) {
     Interpreter* self = this;
+    Closure* clos = cast_val<Closure>(clos_ptr);
     if (!(clos->func->mcf)) {
         // convert the bc function to the ir
         IrCompiler irc = IrCompiler(clos->func, self);
@@ -532,50 +499,26 @@ Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
         LOG("done compiling mcf");
     } // else, already compiled and should be there! 
     // put the args in an array
-    Value** argsArray = new Value*[argsList.size()];
+    tagptr_t* argsArray = new tagptr_t[argsList.size()];
     for (int i = 0; i < argsList.size(); i++) {
         argsArray[i] = argsList[i];
     }
     // put the refs in an array 
     vector<ValWrapper*> refs = clos->refs;
-    Value** refsArray = new Value*[refs.size()];
+    tagptr_t* refsArray = new tagptr_t[refs.size()];
     for (int i = 0; i < refs.size(); i++) {
-        refsArray[i] = refs[i];
+        refsArray[i] = make_ptr(refs[i]);
     }
-    vector<Value**> mcfArgs = {argsArray, refsArray};
-    Value* result = clos->func->mcf->call(mcfArgs);
+    vector<tagptr_t*> mcfArgs = {argsArray, refsArray};
+    tagptr_t result = clos->func->mcf->call(mcfArgs);
     LOG("done calling mcf");
     return result;
 }
 
-// Asm helpers
-Value* Interpreter::add(Value* left, Value* right) {
-    // try adding strings if left or right is a string
-    String* leftStr = dynamic_cast<String*>(left);
-    if (leftStr != NULL) {
-        Value* ret = collector->allocate<String>(leftStr->value + right->toString());
-        return ret;
-    }
-    String* rightStr = dynamic_cast<String*>(right);
-    if (rightStr != NULL) {
-        Value* ret = collector->allocate<String>(left->toString() + rightStr->value);
-        return ret;
-    }
-    // try adding integers if left is an int
-    int leftI = left->cast<Integer>()->value;
-    int rightI = right->cast<Integer>()->value;
-    Value* ret = collector->allocate<Integer>(leftI + rightI);
-    return ret;
+void Interpreter::storeGlobal(string name, tagptr_t val) {
+    globalFrame->setLocalVar(name, val);
 };
 
-void Interpreter::storeGlobal(string name, Value* val) {
-    Constant* value = dynamic_cast<Constant*>(val);
-    if (value == NULL) {
-        throw RuntimeException("expected Constant on the stack for StoreGlobal");
-    }
-    globalFrame->setLocalVar(name, value);
-};
-
-Value* Interpreter::loadGlobal(string name) {
+tagptr_t Interpreter::loadGlobal(string name) {
     return globalFrame->getLocalVar(name);
 };

@@ -68,7 +68,7 @@ public:
                     os << ", ";
                 }
 
-                print(*function.constants_[i], os);
+                print(function.constants_[i], os);
             }
         }
 
@@ -157,25 +157,9 @@ private:
     }
 
 
-    void print(const Constant &constant, std::ostream &os)
+    void print(const tagptr_t &constant, std::ostream &os)
     {
-        if (const auto *value = dynamic_cast<const None *>(&constant))
-        {
-            os << "None";
-        }
-        else if (const auto *value = dynamic_cast<const Boolean *>(&constant))
-        {
-            os << (value->value ? "true" : "false");
-        }
-        else if (const auto *value = dynamic_cast<const Integer *>(&constant))
-        {
-            os << value->value;
-        }
-        else if (const auto *value = dynamic_cast<const String *>(&constant))
-        {
-            //TODO: escape
-            os << '"' << value->value << '"';
-        }
+        os << ptr_to_str(constant);
     }
 
     void print(const BcInstruction &inst, std::ostream &os)
@@ -218,7 +202,6 @@ private:
 
             break;
         }
-
         case BcOp::StoreGlobal:
         {
             os << "store_global"
@@ -226,7 +209,6 @@ private:
 
             break;
         }
-
         case BcOp::PushReference:
         {
             os << "push_ref"
@@ -240,13 +222,7 @@ private:
 
             break;
         }
-        case BcOp::StoreReference:
-        {
-            os << "store_ref";
-
-            break;
-        }
-         case BcOp::AllocRecord:
+        case BcOp::AllocRecord:
         {
             os << "alloc_record";
 

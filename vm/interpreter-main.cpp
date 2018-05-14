@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
     }
 
     FILE* infile;
-    funcptr_t bc_output;
+    Function* bc_output;
     int file_type = 0;
     int rvalue = 0;
     int maxmem = 10000;

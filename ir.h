@@ -321,26 +321,30 @@ enum class IrOp {
     // temp0: temp index where the int will be stored
     // temp1: temp index of the value to unbox; must be an Integer object
     // Result: stores int(temp1) in temp0
-    UnboxInteger,
+    // DEPRECATED
+    // UnboxInteger,
 
     // Description: unboxes a temp to bool
     // op0: N/A
     // temp0: temp index where bool will be stored
     // temp1: temp index of the value to unbox; must be a Boolean object
     // Result: stores bool(temp1) in temp0
-    UnboxBoolean,
+    // DEPRECATED
+    // UnboxBoolean,
     
     // Description: takes a raw int and creates an Integer object
     // temp0: temp to hold the new Integer object
     // temp1: holds the int value 
     // Result: stores Integer(temp1) in temp0
-    NewInteger,
+    // DEPRECATED
+    // NewInteger,
  
     // Description: takes a raw bool and creates a Boolean object
     // temp0: temp to hold the new Boolean object
     // temp1: holds the bool value 
     // Result: stores Boolean(temp1) in temp0
-    NewBoolean,
+    // DEPRECATED
+    // NewBoolean,
 
     // Description: takes an object and casts it to a string
     // temp0: temp to hold the new String object
@@ -432,7 +436,7 @@ struct IrInstruction {
 
 struct IrFunc {
     IrInstList instructions;
-    vector<Constant*> constants_;
+    vector<tagptr_t> constants_;
     vector<Function*> functions_;
 	vector<tempptr_t> temps;
     int32_t parameter_count_;
@@ -442,7 +446,7 @@ struct IrFunc {
     int32_t ref_count_ = 0;
 
     IrFunc(IrInstList instructions,
-        vector<Constant*> constants_,
+        vector<tagptr_t> constants_,
         vector<Function*> functions_,
 		vector<tempptr_t> temps,
         int32_t parameter_count_,

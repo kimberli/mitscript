@@ -103,7 +103,6 @@ comment      ("//"[^\n]*)
 "store_global" { return T_store_global; }
 "push_ref"     { return T_push_ref; }
 "load_ref"     { return T_load_ref; }
-"store_ref"    { return T_store_ref; }
 "alloc_record" { return T_alloc_record; }
 "field_load"   { return T_field_load; }
 "field_store"  { return T_field_store; }

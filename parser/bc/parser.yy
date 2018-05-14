@@ -70,8 +70,8 @@ int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* me
 	vector<BcInstruction>* instlist;
 
 
-    Constant* constant;
-    vector<Constant*>* constantlist;
+    tagptr_t constant;
+    vector<tagptr_t>* constantlist;
 }
 
 //Below is where you define your tokens and their types.
@@ -108,7 +108,6 @@ int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* me
 
 %token T_push_ref
 %token T_load_ref
-%token T_store_ref
 
 %token T_alloc_record
 %token T_field_load
@@ -257,29 +256,29 @@ T_int ':' T_int
 Constant :
   T_none
 {
-	$$ = new None();
+	$$ = make_ptr(new None());
 }
 | T_true
 {
-	$$ = new Boolean(true);
+	$$ = make_ptr(true);
 }
 | T_false
 {
-	$$ = new Boolean(false);
+	$$ = make_ptr(false);
 }
 |  T_string
 {
-	$$ = new String(*$1);
+	$$ = make_ptr(new string(*$1));
 
 	delete $1;
 }
 | T_int
 {
-	$$ = new Integer{safe_cast($1)};
+	$$ = make_ptr(safe_cast($1));
 }
 
 ConstantListStar:
-%empty { $$ = new vector<Constant*>(); }
+%empty { $$ = new vector<tagptr_t>(); }
 | ConstantListPlus
 {
 	$$ = $1;
@@ -288,7 +287,7 @@ ConstantListStar:
 ConstantListPlus:
 Constant
 {
-	auto list = new vector<Constant*>();
+	auto list = new vector<tagptr_t>();
 
 	list->insert(list->begin(), $1);
 
@@ -336,10 +335,6 @@ Instruction:
 | T_load_ref
 {
 	$$ = new BcInstruction(BcOp::LoadReference, { });
-}
-| T_store_ref
-{
-	$$ = new BcInstruction(BcOp::StoreReference, { });
 }
 | T_alloc_record
 {

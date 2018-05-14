@@ -11,6 +11,7 @@ function
         local_ref_vars = [],
         free_vars = [],
         names = [],
+        labels = {},
         instructions =
         [
         ]
@@ -24,6 +25,7 @@ function
         local_ref_vars = [],
         free_vars = [],
         names = [],
+        labels = {},
         instructions =
         [
         ]
@@ -37,58 +39,47 @@ function
         local_ref_vars = [],
         free_vars = [],
         names = [],
+        labels = {},
         instructions =
         [
         ]
     },
     function
     {
-      functions = [],
-      constants = [4],
-      parameter_count = 1,
-      local_vars = [y, g],
-      local_ref_vars = [],
-      free_vars = [],
-      names = [print],
-      instructions = [
-		load_const    0
-		load_local    0
-        add
-        return
-       ]
+        functions = [],
+        constants = [],
+        parameter_count = 1,
+        local_vars = [x],
+        local_ref_vars = [x],
+        free_vars = [],
+        names = [],
+        labels = {},
+        instructions =
+        [
+            push_ref 0
+        ]
     }
   ],
-  constants = [3, 1],
+  constants = [3, None, -5, "hi", true, false],
   parameter_count = 0,
   local_vars = [],
   local_ref_vars = [],
   free_vars = [],
   names = [f, input, intcast, print, result, x],
+  labels = {},
   instructions =
   [
-    load_func 0
-    alloc_closure 0
-    store_global  3
-    load_func 1
-    alloc_closure 0
-    store_global  1
-    load_func 2
-    alloc_closure 0
-    store_global  2
+    load_const 0
+    load_const 1
+    load_const 2
+    load_const 3
+    load_const 4
+    load_const 5
+    alloc_record
 
-    load_const   1
-    store_global 5
-    load_func    3
+    load_func 3
     alloc_closure 0
-    store_global 0
-
-	load_global 0
-	load_global 5
-	call 1
-	store_global 4
-
-	load_global 3
-	load_global 4
-	call 1
+    load_const 4
+    call 1
   ]
 }
