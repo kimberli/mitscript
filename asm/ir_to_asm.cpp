@@ -71,7 +71,7 @@ void IrInterpreter::prolog() {
 
     // implement putting args in the correct locals
     for (uint64_t i = 0; i < func->parameter_count_; i++) {
-        // rd1 stores arg0 which is the list of arguments to the MS func
+        // rdi stores arg0 which is the list of arguments to the MS func
         // put the pointer to the start of the args in a reg
         tempptr_t localTemp = func->temps.at(i);
         
@@ -92,7 +92,7 @@ void IrInterpreter::prolog() {
             vector<x64asm::Imm64> args = {
                 x64asm::Imm64{vmPointer},
             };
-            tempptr_t t = std::make_shared<Temp>(Temp(0));
+            tempptr_t t = std::make_shared<Temp>(Temp(func->local_count_));
             callHelper((void*) &(helper_new_valwrapper), args, temps, x64asm::r11, t);
             loadTemp(x64asm::rax, t);
             // store as a local 
@@ -116,7 +116,7 @@ void IrInterpreter::prolog() {
             vector<x64asm::Imm64> args = {
                 x64asm::Imm64{vmPointer},
             };
-            tempptr_t t = std::make_shared<Temp>(Temp(0));
+            tempptr_t t = std::make_shared<Temp>(Temp(func->local_count_));
             callHelper((void*) &(helper_new_valwrapper), args, temps, x64asm::r11, t);
             loadTemp(x64asm::rax, t);
             // store as a local 
@@ -386,8 +386,7 @@ void IrInterpreter::executeStep() {
         case IrOp::LoadLocal:
             {
                 LOG(to_string(instructionIndex) + ": LoadLocal");
-                int64_t localIndex = inst->op0.value();
-                tempptr_t localTemp = func->temps.at(localIndex);
+                tempptr_t localTemp = inst->tempIndices->at(1);
                 getRbpOffset(getTempOffset(localTemp)); // puts the address of the local in r10
                 assm.mov(x64asm::rdi, x64asm::r10); // r10 will be used later in storeTemp
                 assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // loads the actual value
@@ -411,12 +410,13 @@ void IrInterpreter::executeStep() {
             {
                 LOG(to_string(instructionIndex) + ": StoreLocal");
                 // first put the temp val in a reg
-                loadTemp(x64asm::rdi, inst->tempIndices->at(0));
+                loadTemp(x64asm::rdi, inst->tempIndices->at(1));
                 // put find out where the local is located
-                tempptr_t localTemp = func->temps.at(inst->op0.value());
-                getRbpOffset(getTempOffset(localTemp)); // address of local in r10
+                tempptr_t localTemp = inst->tempIndices->at(0);
+                storeTemp(x64asm::rdi, localTemp);
+                //getRbpOffset(getTempOffset(localTemp)); // address of local in r10
                 // move the val from the reg to memory
-                assm.mov(x64asm::M64{x64asm::r10}, x64asm::rdi);
+                //assm.mov(x64asm::M64{x64asm::r10}, x64asm::rdi);
                 break;
             }
        case IrOp::StoreGlobal:
@@ -434,27 +434,24 @@ void IrInterpreter::executeStep() {
 		case IrOp::StoreLocalRef: 
 			{
 				LOG(to_string(instructionIndex) + ": StoreLocalRef");
-                int64_t localIndex = inst->op0.value();
-                tempptr_t localTemp = func->temps.at(inst->op0.value());
-                getRbpOffset(getTempOffset(localTemp)); // puts the address of the valwrapper in r10
-                assm.mov(x64asm::rcx, x64asm::M64{x64asm::r10}); //r10 contains the valwrapper
+                //tempptr_t localRef = inst->tempIndices->at(0);
+                //getRbpOffset(getTempOffset()); // puts the address of the valwrapper in r10
+                //assm.mov(x64asm::rcx, x64asm::M64{x64asm::r10}); //r10 contains the valwrapper
                 vector<x64asm::Imm64> args = {
 				};
                 vector<tempptr_t> temps = {
-					inst->tempIndices->at(0)
+                    inst->tempIndices->at(1), // value to store
+					inst->tempIndices->at(0) // local valwrapper
 				};
-                tempptr_t returnTemp = inst->tempIndices->at(0);
-                callHelper((void *) &(helper_store_local_ref), args, temps, x64asm::rcx, returnTemp);
+                tempptr_t returnTemp = inst->tempIndices->at(1);
+                callHelper((void *) &(helper_store_local_ref), args, temps, returnTemp);
                 break;
 			}
         case IrOp::PushLocalRef: 
             {
                 LOG(to_string(instructionIndex) + ": PushLocalRef");
-                vector<x64asm::Imm64> args = {x64asm::Imm64{vmPointer}};
-                int64_t localIndex = inst->op0.value();
-                tempptr_t localTemp = func->temps.at(inst->op0.value());
-                getRbpOffset(getTempOffset(localTemp)); // puts the address of the local in r10
-                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // loads valwrapper
+                tempptr_t localTemp = inst->tempIndices->at(1);
+                loadTemp(x64asm::rdi, localTemp);
                 storeTemp(x64asm::rdi, inst->tempIndices->at(0));
                 break;
             }

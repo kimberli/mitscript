@@ -211,7 +211,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                                 break;
                             }
                         } 
-					    pushInstruction(make_shared<IrInstruction>(IrOp::PushLocalRef, localIndex, curr));
+                        tempptr_t localTemp = temps.at(localIndex);
+					    pushInstruction(make_shared<IrInstruction>(IrOp::PushLocalRef, curr, localTemp));
                     } else {
                         // else, generate a PushFreeRef instruction
                         int refIndex = instrIdx - func->local_reference_vars_.size();
