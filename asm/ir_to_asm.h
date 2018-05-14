@@ -27,7 +27,14 @@ private:
 
     void callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temp, opttemp_t returnTemp);
     void callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temp, optreg_t lastArg, opttemp_t returnTemp);
+
+    // prolog and helpers
     void prolog();
+    void installLocalVar(tempptr_t temp, uint32_t localIdx);
+    void installLocalRefVar(tempptr_t temp, uint32_t localIdx);
+    void installLocalNone(tempptr_t temp);
+    void installLocalRefNone(tempptr_t temp);
+
     void epilog();
     uint32_t spaceToAllocate;
 
@@ -45,6 +52,8 @@ private:
     // helpers and state to interface with register allocation
     // stores a set of currently avlb regs 
     regset_t freeRegs;
+    // keeps track of whether the last scratch reg was spilled or not
+    bool spilled = false;
     // helpers to update free regs 
     void updateFreeRegs(instptr_t inst);
     // returns a register containing the value of that temp 
@@ -59,9 +68,11 @@ private:
     void returnScratchReg(x64asm::R64 reg);
     // moves a val between two temps efficiently given where they are currently
     void moveTemp(tempptr_t dest, tempptr_t src);
+    void moveTemp(x64asm::R64 dest, tempptr_t src);
+    void moveTemp(tempptr_t dest, x64asm::R64 src);
 
 public: 
-    static const x64asm::R64 argRegs[];
+    //static const x64asm::R64 argRegs[];
     static const x64asm::R64 callerSavedRegs[];
     static const x64asm::R64 calleeSavedRegs[];
     static const int numCallerSaved = 9;
