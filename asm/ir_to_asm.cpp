@@ -8,6 +8,7 @@ const x64asm::R64 IrInterpreter::callerSavedRegs[] = {
     x64asm::rcx,
     x64asm::r8,
     x64asm::r9,
+    // end arg regs
     x64asm::rax, 
     x64asm::r10, 
     x64asm::r11
@@ -360,7 +361,7 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
 
     // STEP 4: restore caller-saved registers from stack
     for (uint32_t i = 1; i <= numCallerSaved; ++i) {
-        assm.push(callerSavedRegs[i]);
+        assm.pop(callerSavedRegs[i]);
     }
 }
 
@@ -822,20 +823,33 @@ void IrInterpreter::executeStep() {
                 for (int i = 0; i < numRefs; ++i) {
                     // push in reverse order, so first ref is lowest 
                     refTemp = inst->tempIndices->at(2 + numRefs - i - 1);
-                    getRbpOffset(getTempOffset(refTemp)); // leaves correct address into r10
-                    assm.mov(x64asm::r10, x64asm::M64{x64asm::r10});
-                    assm.push(x64asm::r10);
+                    if (refTemp->reg) {
+                        assm.push(refTemp->reg.value());
+                    } else {
+                        // TODO don't use r10 as a lazy reg pls
+                        // on the stack; 
+                        uint32_t offset = getTempOffset(refTemp);
+                        assm.assemble({x64asm::MOV_R64_M64, {
+                            x64asm::r10,
+                            x64asm::M64{
+                                x64asm::rbp, 
+                                x64asm::Scale::TIMES_1,
+                                x64asm::Imm32{-offset}
+                            }
+                        }});
+                        assm.push(x64asm::r10);
+                    }
                 }
 
                 // store the array pointer in a temp so callHelper can use it
-                storeTemp(x64asm::rsp, inst->tempIndices->at(0));
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1), // function
-                    inst->tempIndices->at(0), // array of refs
                 };
+                x64asm::R64 refs = x64asm::r10; // array of regs
+                assm.mov(x64asm::r10, x64asm::rsp);
 
                 tempptr_t returnTemp = inst->tempIndices->at(0);
-                callHelper((void *) &(helper_alloc_closure), immArgs, temps, returnTemp);
+                callHelper((void *) &(helper_alloc_closure), immArgs, temps, refs, returnTemp);
                 // clear the stack
                 for (int i = 0; i < numRefs; i++) {
                     assm.pop(x64asm::r10);
@@ -861,8 +875,15 @@ void IrInterpreter::executeStep() {
                     } else {
                         // TODO don't use r10 as a lazy reg pls
                         // on the stack; 
-                        getRbpOffset(getTempOffset(argTemp)); // leaves correct address into r10
-                        assm.mov(x64asm::r10, x64asm::M64{x64asm::r10});
+                        uint32_t offset = getTempOffset(argTemp);
+                        assm.assemble({x64asm::MOV_R64_M64, {
+                            x64asm::r10,
+                            x64asm::M64{
+                                x64asm::rbp, 
+                                x64asm::Scale::TIMES_1,
+                                x64asm::Imm32{-offset}
+                            }
+                        }});
                         assm.push(x64asm::r10);
                     }
                 }
@@ -876,7 +897,8 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1) // closure
                 };
-                x64asm::R64 argsArray = x64asm::rsp; // args
+                x64asm::R64 argsArray = x64asm::r10; // args
+                assm.mov(x64asm::r10, x64asm::rsp);
                 tempptr_t returnTemp = inst->tempIndices->at(0);
                 callHelper((void *) &(helper_call), immArgs, temps, argsArray, returnTemp);
 
