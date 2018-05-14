@@ -22,9 +22,6 @@ void RegOpt::linearScan(IrFunc* irFunc) {
 //		temp_i->endInterval = irFunc->instructions.size();
 //	}
 	for (tempptr_t temp_i: irFunc->temps) {
-		cout << temp_i->index << "start: " << temp_i->startInterval << ", end: " << temp_i->endInterval << endl;
-		cout << "active: " << active.size() << endl;
-		cout << "free: " << freeRegisters.size() << endl;
 		if (temp_i->startInterval == -1 && temp_i->endInterval == -1) {
 			// TODO: creating global temps that do nothing
 			continue;
@@ -35,7 +32,6 @@ void RegOpt::linearScan(IrFunc* irFunc) {
 			if (temp_j->endInterval >= temp_i->startInterval) {
 				break;
 			}
-			cout << "erase" << endl;
 			if (temp_j->reg) {
 				freeRegisters.push_back(temp_j->reg.value());
 			}
