@@ -18,6 +18,12 @@ void RegOpt::linearScan(IrFunc* irFunc) {
 	int numRegisters = freeRegisters.size();
 	for (tempptr_t temp_i: irFunc->temps) {
 		cout << temp_i->index << "start: " << temp_i->startInterval << ", end: " << temp_i->endInterval << endl;
+		if (temp_i->startInterval == -1 && temp_i->endInterval == -1) {
+			continue;
+		}
+		if (temp_i->endInterval == -1) {
+			temp_i->endInterval = irFunc->instructions.size();
+		}
 		for (tempptr_t temp_j: active) { // Expire old intervals
 			if (temp_j->endInterval >= temp_i->startInterval) {
 				break;
