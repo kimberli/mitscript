@@ -1,5 +1,6 @@
 # pragma once
 # include "../ir.h"
+# include "../ir/bc_to_ir.h"
 
 class IrOpt {
 protected: 

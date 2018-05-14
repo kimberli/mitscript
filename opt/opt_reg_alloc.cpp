@@ -1,10 +1,56 @@
-# include "opt_reg_alloc.h"
+#include "opt_reg_alloc.h"
+#include <set>
+#include "include/x64asm.h"
 
 IrFunc* RegOpt::optimize(IrFunc* irFunc) {
+	linearScan(irFunc);
     func = irFunc;
     run(); 
     func->instructions = instructions;
     return func;
+};
+
+struct compareIntervalEnd {
+	bool operator()(const tempptr_t &a, const tempptr_t &b) {
+		return a->endInterval < b->endInterval;
+	};
+};
+
+void RegOpt::linearScan(IrFunc* irFunc) {
+	set<tempptr_t, compareIntervalEnd> active; // ordered by endInterval
+	int stackOffset = 0;
+	int numRegisters = freeRegisters.size();
+	for (tempptr_t temp_i: irFunc->temps) {
+		for (tempptr_t temp_j: active) { // Expire old intervals
+			if (temp_j->endInterval >= temp_i->startInterval) {
+				return;
+			}
+			active.erase(temp_j);
+			if (temp_j->reg) {
+				freeRegisters.push_back(temp_j->reg.value());
+			}
+		}
+		if (active.size() == numRegisters) {
+			// Spill this interval
+			tempptr_t spill = *active.end();
+			if (spill->endInterval > temp_i->endInterval) {
+				temp_i->reg = spill->reg;
+				spill->reg = nullopt;
+				spill->stackOffset = stackOffset;
+				stackOffset++;
+				active.insert(temp_i);
+				active.erase(spill);
+			} else {
+				temp_i->stackOffset = stackOffset;
+				stackOffset++;
+			}
+		} else {
+			// Allocate register to this temp
+			temp_i->reg = freeRegisters.back();
+			freeRegisters.pop_back();
+			active.insert(temp_i);
+		}
+	}
 };
 
 void RegOpt::run() {
