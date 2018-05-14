@@ -4,6 +4,7 @@
 #include "../ir.h"
 #include "helpers.h"
 #include <set>
+#include <cassert>
 
 class Interpreter; 
 class IrInterpreter;
@@ -56,6 +57,8 @@ private:
     x64asm::R64 getScratchReg();
     // returns a scratch reg 
     void returnScratchReg(x64asm::R64 reg);
+    // moves a val between two temps efficiently given where they are currently
+    void moveTemp(tempptr_t dest, tempptr_t src);
 
 public: 
     static const x64asm::R64 argRegs[];

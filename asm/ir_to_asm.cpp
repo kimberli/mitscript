@@ -306,7 +306,22 @@ void IrInterpreter::loadTemp(x64asm::R64 reg, tempptr_t temp) {
 /////////// REG ALLOCATION HELPERS ////////////
 
 void IrInterpreter::updateFreeRegs(instptr_t inst) {
-    // TODO
+    // for each temp in the instruction
+    for (int i = 0; i < inst->tempIndices->size(); i++) {
+        tempptr_t temp = inst->tempIndices->at(i);
+        if (!temp->reg) {
+            return;
+        }
+
+        if (temp->startInterval == instructionIndex) {
+            // if a temp started here, add its reg
+            freeRegs.insert(temp->reg.value());
+        }
+        if (temp->endInterval -1 == instructionIndex) {
+            // if the temp ended here, remove it from the set 
+            freeRegs.erase(temp->reg.value());
+        }
+    }
 }
 
 x64asm::R64 IrInterpreter::getReg(tempptr_t temp) {
@@ -345,6 +360,7 @@ x64asm::R64 IrInterpreter::getScratchReg() {
     };
     // there are no free regs avlb; we gotta dump something 
     // for now just randomly dump r10 
+    // TODO
     x64asm::R64 toSpill = x64asm::r10; 
     assm.push(toSpill); 
     return toSpill;
@@ -357,40 +373,132 @@ void IrInterpreter::returnScratchReg(x64asm::R64 reg) {
     assm.pop(reg);
 }
 
+void IrInterpreter::moveTemp(tempptr_t dest, tempptr_t src) {
+    if (src->reg) {
+        if (dest->reg) {
+            assm.mov(dest->reg.value(), src->reg.value());
+        } else { // dest is in memory
+            uint32_t offset = getTempOffset(dest);
+            assm.assemble({x64asm::MOV_M64_R64, {
+                x64asm::M64{
+                    x64asm::rbp, 
+                    x64asm::Scale::TIMES_1,
+                    x64asm::Imm32{-offset}
+                }, 
+                src->reg.value()
+            }});
+        }
+    } else { // src is in memory 
+        if (dest->reg) {
+            uint32_t offset = getTempOffset(src);
+            assm.assemble({x64asm::MOV_R64_M64, {
+                dest->reg.value(),
+                x64asm::M64{
+                    x64asm::rbp, 
+                    x64asm::Scale::TIMES_1,
+                    x64asm::Imm32{-offset}
+                }
+            }});
+        } else {
+            // both are in memory
+            // we need a scratch reg
+            x64asm::R64 reg = getScratchReg();
+            // move src into the reg
+            uint32_t srcOffset = getTempOffset(src);
+            assm.assemble({x64asm::MOV_R64_M64, {
+                reg,
+                x64asm::M64{
+                    x64asm::rbp, 
+                    x64asm::Scale::TIMES_1,
+                    x64asm::Imm32{-srcOffset}
+                }
+            }});
+            // move the reg into dest
+            uint32_t destOffset = getTempOffset(dest);
+            assm.assemble({x64asm::MOV_M64_R64, {
+                x64asm::M64{
+                    x64asm::rbp, 
+                    x64asm::Scale::TIMES_1,
+                    x64asm::Imm32{-destOffset}
+                }, 
+                reg
+            }});
+            // give back the reg
+            returnScratchReg(reg);
+        }
+    }
+}
+
 /////////// END REG ALLOCATION HELPERS ////////////
 
 void IrInterpreter::executeStep() {
     instptr_t inst = func->instructions.at(instructionIndex);
+    int freeRegsStartSize = freeRegs.size();
     switch(inst->op) {
         case IrOp::LoadConst:
             {
                 LOG(to_string(instructionIndex) + ": LoadConst");
                 int constIndex = inst->op0.value();
                 Constant* c = func->constants_.at(constIndex);
-                // load a constant into a register
-                assm.mov(x64asm::rdi, x64asm::Imm64{(uint64_t)c});
-                // move from the register into a temp on the stack
-                storeTemp(x64asm::rdi, inst->tempIndices->at(0));
+                tempptr_t t = inst->tempIndices->at(0);
+                if (t->reg) {
+                    assm.mov(t->reg.value(), x64asm::Imm64{(uint64_t)c});
+                } else {
+                    // get a scratch reg to store this 
+                    x64asm::R64 reg = getScratchReg();
+                    // move the val into the scratch reg
+                    assm.mov(t->reg.value(), x64asm::Imm64{(uint64_t)c});
+                    // get the offset of the temp on the stack
+                    uint32_t offset = getTempOffset(t);
+                    // this moves the val at reg into the right rbp offset
+                    assm.assemble({x64asm::MOV_M64_R64, {
+                        x64asm::M64{
+                            x64asm::rbp,
+                            x64asm::Scale::TIMES_1, 
+                            x64asm::Imm32{-offset},
+                        },
+                        reg
+                    }});
+                    // give back the scratch reg
+                    returnScratchReg(reg);
+                }
                 break;
             }
         case IrOp::LoadFunc:
             {
                 LOG(to_string(instructionIndex) + ": LoadFunc");
                 int funcIndex = inst->op0.value();
-                // load the func pointer into a register
-                assm.mov(x64asm::rdi, x64asm::Imm64{func->functions_.at(funcIndex)});
-                // move from the register into a temp on the stack
-                storeTemp(x64asm::rdi, inst->tempIndices->at(0));
+                Function* f = func->functions_.at(funcIndex);
+                tempptr_t t = inst->tempIndices->at(0);
+                if (t->reg) {
+                    assm.mov(t->reg.value(), x64asm::Imm64{(uint64_t)f});
+                } else {
+                    // get a scratch reg to store this 
+                    x64asm::R64 reg = getScratchReg();
+                    // move the val into the scratch reg
+                    assm.mov(t->reg.value(), x64asm::Imm64{(uint64_t)f});
+                    // get the offset of the temp on the stack
+                    uint32_t offset = getTempOffset(t);
+                    // this moves the val at reg into the right rbp offset
+                    assm.assemble({x64asm::MOV_M64_R64, {
+                        x64asm::M64{
+                            x64asm::rbp,
+                            x64asm::Scale::TIMES_1, 
+                            x64asm::Imm32{-offset},
+                        },
+                        reg
+                    }});
+                    // give back the scratch reg
+                    returnScratchReg(reg);
+                }
                 break;
             }
         case IrOp::LoadLocal:
             {
                 LOG(to_string(instructionIndex) + ": LoadLocal");
-                tempptr_t localTemp = inst->tempIndices->at(1);
-                getRbpOffset(getTempOffset(localTemp)); // puts the address of the local in r10
-                assm.mov(x64asm::rdi, x64asm::r10); // r10 will be used later in storeTemp
-                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10}); // loads the actual value
-                storeTemp(x64asm::rdi, inst->tempIndices->at(0));
+                tempptr_t src = inst->tempIndices->at(1);
+                tempptr_t dest = inst->tempIndices->at(0);
+                moveTemp(dest, src); 
                 break;
             }
         case IrOp::LoadGlobal:
@@ -409,14 +517,9 @@ void IrInterpreter::executeStep() {
         case IrOp::StoreLocal:
             {
                 LOG(to_string(instructionIndex) + ": StoreLocal");
-                // first put the temp val in a reg
-                loadTemp(x64asm::rdi, inst->tempIndices->at(1));
-                // put find out where the local is located
-                tempptr_t localTemp = inst->tempIndices->at(0);
-                storeTemp(x64asm::rdi, localTemp);
-                //getRbpOffset(getTempOffset(localTemp)); // address of local in r10
-                // move the val from the reg to memory
-                //assm.mov(x64asm::M64{x64asm::r10}, x64asm::rdi);
+                tempptr_t src = inst->tempIndices->at(1);
+                tempptr_t dest = inst->tempIndices->at(0);
+                moveTemp(dest, src);
                 break;
             }
        case IrOp::StoreGlobal:
@@ -434,9 +537,6 @@ void IrInterpreter::executeStep() {
 		case IrOp::StoreLocalRef: 
 			{
 				LOG(to_string(instructionIndex) + ": StoreLocalRef");
-                //tempptr_t localRef = inst->tempIndices->at(0);
-                //getRbpOffset(getTempOffset()); // puts the address of the valwrapper in r10
-                //assm.mov(x64asm::rcx, x64asm::M64{x64asm::r10}); //r10 contains the valwrapper
                 vector<x64asm::Imm64> args = {
 				};
                 vector<tempptr_t> temps = {
@@ -481,11 +581,6 @@ void IrInterpreter::executeStep() {
                 vector<tempptr_t> temps = {inst->tempIndices->at(1)};
                 tempptr_t returnTemp = inst->tempIndices->at(0);
                 callHelper((void *) &(helper_unbox_valwrapper), args, temps, returnTemp);
- 
-                // TODO: make sure you can deref a val like this
-                //assm.mov(x64asm::rdi, x64asm::M64{x64asm::rdi});
-                // store the Value* in a temp 
-                //storeTemp(x64asm::rdi, inst->tempIndices->at(0));
                 break;
             }
         case IrOp::AllocRecord:
@@ -967,11 +1062,12 @@ void IrInterpreter::executeStep() {
             throw RuntimeException("Should not get here: invalid ir inst");
     }
     LOG(inst->getInfo());
-    instructionIndex += 1;
-    
+    int freeRegsEndSize = freeRegs.size();
+    assert (freeRegsStartSize == freeRegsEndSize);
     // run maintenance to figure out if regs are avlb 
     updateFreeRegs(inst);
 
+    instructionIndex += 1;
     if (instructionIndex >= func->instructions.size()) {
         finished = true;
     }
