@@ -6,7 +6,7 @@
  */
 #include "bc-compiler.h"
 
-funcptr_t BytecodeCompiler::getFunction(AST_node& expr) {
+Function* BytecodeCompiler::getFunction(AST_node& expr) {
     expr.accept(*this);
     return retFunc;
 }
@@ -18,9 +18,9 @@ void BytecodeCompiler::addInstructions(AST_node& expr) {
 
 // TODO: These could be more efficient,
 // we could definitely have a static value for None.
-int BytecodeCompiler::allocConstant(constptr_t c) {
+int BytecodeCompiler::allocConstant(tagptr_t ptr) {
     int i = retFunc->constants_.size();
-    retFunc->constants_.push_back(c);
+    retFunc->constants_.push_back(ptr);
     return i;
 }
 
@@ -35,9 +35,9 @@ void BytecodeCompiler::addInstruction(BcOp op, optint_t op0) {
     retFunc->instructions.push_back(*instr);
 }
 
-void BytecodeCompiler::loadConstant(constptr_t c) {
+void BytecodeCompiler::loadConstant(tagptr_t ptr) {
     // add the constant to the constants list
-    int constIdx = allocConstant(c);
+    int constIdx = allocConstant(ptr);
     // make the LoadConst instruction
     addInstruction(BcOp::LoadConst, constIdx);
 }
@@ -98,7 +98,7 @@ void BytecodeCompiler::loadBuiltIns() {
     // for each func, create a func /w right amount of args,
     // add to the curent frame,
     // then generate code to load globally
-    funcptr_t printFunc = new Function();
+    Function* printFunc = new Function();
     printFunc->parameter_count_ = 1;
     int printIdx = retFunc->functions_.size();
     retFunc->functions_.push_back(printFunc);
@@ -107,7 +107,7 @@ void BytecodeCompiler::loadBuiltIns() {
     addWriteVarInstructions("print");
 
     // input
-    funcptr_t inputFunc = new Function();
+    Function* inputFunc = new Function();
     inputFunc->parameter_count_ = 0;
     int inputIdx = retFunc->functions_.size();
     retFunc->functions_.push_back(inputFunc);
@@ -116,7 +116,7 @@ void BytecodeCompiler::loadBuiltIns() {
     addWriteVarInstructions("input");
 
     // intcast
-    funcptr_t intcastFunc = new Function();
+    Function* intcastFunc = new Function();
     intcastFunc->parameter_count_ = 1;
     int intcastIdx = retFunc->functions_.size();
     retFunc->functions_.push_back(intcastFunc);
@@ -125,7 +125,7 @@ void BytecodeCompiler::loadBuiltIns() {
     addWriteVarInstructions("intcast");
 }
 
-funcptr_t BytecodeCompiler::evaluate(Expression& exp) {
+Function* BytecodeCompiler::evaluate(Expression& exp) {
     // set current function
     retFunc = new Function();
     retFunc->parameter_count_ = 0;
@@ -242,7 +242,7 @@ void BytecodeCompiler::visit(Return& exp) {
     addInstruction(BcOp::Return, nullopt);
 }
 
-bool BytecodeCompiler::putVarInFunc(string& varName, stptr_t table, funcptr_t func) {
+bool BytecodeCompiler::putVarInFunc(string& varName, stptr_t table, Function* func) {
     // returns true if the bool was put in the local array, false else
     desc_t d = table->vars.at(varName);
     switch (d->type) {
@@ -273,7 +273,7 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
     stptr_t childTable = symbolTables.at(stCounter);
 
     // 2) make the new function object
-    funcptr_t childFunc = new Function();
+    Function* childFunc = new Function();
     childFunc->parameter_count_ = exp.args.size();
 
     // load up childFunc with vars from symbol table
@@ -298,7 +298,7 @@ void BytecodeCompiler::visit(FunctionExpr& exp) {
     }
 
     // 3) install the child's state and run
-    funcptr_t parentFunc = retFunc;
+    Function* parentFunc = retFunc;
     retFunc = childFunc;
     stptr_t parentTable = curTable;
     curTable = childTable;
@@ -484,21 +484,21 @@ void BytecodeCompiler::visit(Identifier& exp) {
 }
 
 void BytecodeCompiler::visit(IntConst& exp) {
-    constptr_t i = new Integer(exp.val);
-    loadConstant(i);
+    tagptr_t ptr = make_ptr(exp.val);
+    loadConstant(ptr);
 }
 
 void BytecodeCompiler::visit(StrConst& exp) {
-    constptr_t s = new String(exp.val);
-    loadConstant(s);
+    tagptr_t ptr = make_ptr(&exp.val);
+    loadConstant(ptr);
 }
 
 void BytecodeCompiler::visit(BoolConst& exp) {
-    constptr_t b = new Boolean(exp.val);
-    loadConstant(b);
+    tagptr_t ptr = make_ptr(exp.val);
+    loadConstant(ptr);
 }
 
 void BytecodeCompiler::visit(NoneConst& exp) {
-    constptr_t n = new None();
-    loadConstant(n);
+    Constant* n = new None();
+    loadConstant(make_ptr(n));
 }

@@ -19,9 +19,6 @@
 
 using namespace std;
 
-typedef Constant* constptr_t;
-typedef Function* funcptr_t;
-
 class BytecodeCompiler : public Visitor {
     /*
      * Visitor that converts the AST to a CFG
@@ -31,15 +28,15 @@ private:
     int labelCounter = 0;
 
     void addInstructions(AST_node& expr);
-    funcptr_t getFunction(AST_node& expr);
+    Function* getFunction(AST_node& expr);
 
     // same as defined in lecture
-    int allocConstant(constptr_t c);
+    int allocConstant(tagptr_t ptr);
     int allocName(string name);
 
     // helper that takes in a constant pointer, takes care of allocation
     // and creating the appropriate bb
-    void loadConstant(constptr_t c);
+    void loadConstant(tagptr_t ptr);
 
     // helper to add a single bytecode instruction
     void addInstruction(BcOp op, optint_t op0);
@@ -52,7 +49,7 @@ private:
     void loadBuiltIns();
 
     // helper to move funcs from st to function
-    bool putVarInFunc(string& varName, stptr_t table, funcptr_t func);
+    bool putVarInFunc(string& varName, stptr_t table, Function* func);
 
     // Symbol Table state
     stvec_t symbolTables;
@@ -61,8 +58,8 @@ private:
 
 public:
     BytecodeCompiler() {};
-    funcptr_t evaluate(Expression& exp); // entrypoint of the visitor
-    funcptr_t retFunc;  // statements update this
+    Function* evaluate(Expression& exp); // entrypoint of the visitor
+    Function* retFunc;  // statements update this
 
     void visit(Block& exp) override;
     void visit(Global& exp) override;

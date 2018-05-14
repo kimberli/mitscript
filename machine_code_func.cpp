@@ -106,18 +106,18 @@ public:
         compiled_ = true;
     }
 
-    Value *call(const vector<Value**> args) {
+    tagptr_t call(const vector<tagptr_t*> args) {
         assert(compiled_);
         assert(args.size() == parameter_count_);
         // copy contents into buffer
         copy(args.begin(), args.end(), buffer_.begin());
-        Value* result = trampoline_.call<Value*>();
+        tagptr_t result = trampoline_.call<tagptr_t>();
         return result;
     }
 
 private:
     bool compiled_;
-    vector<Value **> buffer_;
+    vector<tagptr_t*> buffer_;
     size_t parameter_count_;
 
     x64asm::Function trampoline_;

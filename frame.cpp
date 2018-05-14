@@ -21,7 +21,7 @@ void Frame::checkLegalInstruction() {
 }
 
 // function value helpers
-Constant* Frame::getConstantByIndex(int index) {
+tagptr_t Frame::getConstantByIndex(int index) {
     if (index < 0 || index >= func->constants_.size()) {
         throw RuntimeException("constant " + to_string(index) + " out of bounds");
     }
@@ -60,10 +60,10 @@ string Frame::getRefByIndex(int index) {
 }
 
 // var map helpers
-Constant* Frame::getLocalVar(string name) {
+tagptr_t Frame::getLocalVar(string name) {
     if (vars.count(name) != 0) {
-        Constant* result = vars[name]->ptr;
-        if (result == NULL) {
+        tagptr_t result = vars[name]->ptr;
+        if (result == NULL_PTR) {
             throw UninitializedVariableException(name + " is not defined");
         }
         return result;
@@ -78,7 +78,7 @@ ValWrapper* Frame::getRefVar(string name) {
     throw RuntimeException(name + " has not been created in its frame's vars");
 }
 
-void Frame::setLocalVar(string name, Constant* val) {
+void Frame::setLocalVar(string name, tagptr_t val) {
     if (vars.count(name) == 0) {
         vars[name] = collector->allocate<ValWrapper>(val);
         collector->increment(sizeof(name) + name.size() + sizeof(val));
@@ -87,31 +87,32 @@ void Frame::setLocalVar(string name, Constant* val) {
     }
 }
 
-void Frame::setRefVar(string name, ValWrapper* val) {
+void Frame::setRefVar(string name, tagptr_t val) {
     if (vars.count(name) == 0) {
         collector->increment(sizeof(name) + name.size() + sizeof(val));
     }
-    vars[name] = val;
+    ValWrapper* v = cast_val<ValWrapper>(val);
+    vars[name] = v;
 }
 
 // operand stack helpers
-void Frame::opStackPush(Value* val) {
+void Frame::opStackPush(tagptr_t val) {
     collector->increment(sizeof(val));
     opStack.push_back(val);
 }
 
-Value* Frame::opStackPeek() {
+tagptr_t Frame::opStackPeek() {
     if (opStack.empty()) {
         throw InsufficientStackException("peek at empty stack");
     }
     return opStack.back();
 }
 
-Value* Frame::opStackPop() {
+tagptr_t Frame::opStackPop() {
     if (opStack.empty()) {
         throw InsufficientStackException("pop from empty stack");
     }
-    Value* top = opStack.back();
+    tagptr_t top = opStack.back();
     int size = sizeof(top);
     collector->increment(-size);
     opStack.pop_back();
@@ -122,8 +123,10 @@ void Frame::follow(CollectedHeap& heap) {
     // follow the function it contains
     // As well as all the stuff on the op stack?
     heap.markSuccessors(func);
-    for (Collectable* v : opStack) {
-        heap.markSuccessors(v);
+    for (tagptr_t v : opStack) {
+        if (!is_tagged(v)) {
+            heap.markSuccessors(get_collectable(v));
+        }
     }
    	for (string arg : func->local_vars_) {
 		if (vars.count(arg) != 0) {

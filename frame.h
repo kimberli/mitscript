@@ -29,7 +29,7 @@ public:
     // function that the frame is for
     Function* func;
     // operand stack
-    list<Value*> opStack;
+    list<tagptr_t> opStack;
     // index of current instruction in func's instructions list
     int instructionIndex = 0;
     // garbage collector
@@ -47,27 +47,21 @@ public:
     void checkLegalInstruction();
 
     // function value helpers
-    Constant* getConstantByIndex(int index);
+    tagptr_t getConstantByIndex(int index);
     Function* getFunctionByIndex(int index);
     string getLocalByIndex(int index);
     string getNameByIndex(int index);
     string getRefByIndex(int index);
 
     // var map helpers
-    Constant* getLocalVar(string name);
+    tagptr_t getLocalVar(string name);
     ValWrapper* getRefVar(string name);
 
-    void setLocalVar(string name, Constant* val);
-    void setRefVar(string name, ValWrapper* val);
+    void setLocalVar(string name, tagptr_t val);
+    void setRefVar(string name, tagptr_t val);
 
     // operand stack helpers
-    void opStackPush(Value* val);
-    Value* opStackPeek();
-    Value* opStackPop();
-
-    void opStackPrint() {
-        for (Value* v : opStack) {
-            LOG(v->toString());
-        }
-    }
+    void opStackPush(tagptr_t val);
+    tagptr_t opStackPeek();
+    tagptr_t opStackPop();
 };

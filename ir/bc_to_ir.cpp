@@ -41,32 +41,19 @@ void IrCompiler::pushInstruction(instptr_t inst) {
 }
 void IrCompiler::doUnaryArithmetic(IrOp operation, bool toBoolean) {
     IrOp assertOp;
-    IrOp unboxOp;
-    IrOp castOp;
     if (toBoolean) {
         assertOp = IrOp::AssertBoolean;
-        unboxOp = IrOp::UnboxBoolean;
-        castOp = IrOp::NewBoolean;
     } else {
         assertOp = IrOp::AssertInteger;
-        unboxOp = IrOp::UnboxInteger;
-        castOp = IrOp::NewInteger;
     }
     tempptr_t val = popTemp();
     // assert 
     pushInstruction(make_shared<IrInstruction>(assertOp, val)); 
-    // unbox 
-    tempptr_t unboxed = getNewTemp();
-    pushInstruction(make_shared<IrInstruction>(unboxOp, unboxed, val));
     // perform the operation
     tempptr_t result = getNewTemp();
-    pushInstruction(make_shared<IrInstruction>(operation, result, unboxed));
-    //
-    tempptr_t ret = getNewTemp(); 
-    pushInstruction(make_shared<IrInstruction>(castOp, ret, result));
-    pushTemp(ret);
+    pushInstruction(make_shared<IrInstruction>(operation, result, val));
+    pushTemp(result);
 	checkIfUsed(val);
-	checkIfUsed(unboxed);
 	checkIfUsed(result);
 }
 void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoolean) {
@@ -74,22 +61,13 @@ void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoo
     // pushes a temp for the result of an operation, 
     // and returns a list of temps to use in the instruction 
     IrOp assertOp;
-    IrOp unboxOp;
-    IrOp castOp;
 
     if (fromBoolean) {
         assertOp = IrOp::AssertBoolean;
-        unboxOp = IrOp::UnboxBoolean;
     } else {
         assertOp = IrOp::AssertInteger;
-        unboxOp = IrOp::UnboxInteger;
     }
 
-    if (toBoolean) {
-        castOp = IrOp::NewBoolean;
-    } else {
-        castOp = IrOp::NewInteger;
-    }
     tempptr_t right = popTemp();
     tempptr_t left = popTemp(); 
    
@@ -97,28 +75,14 @@ void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoo
     pushInstruction(make_shared<IrInstruction>(assertOp, right)); 
     pushInstruction(make_shared<IrInstruction>(assertOp, left)); 
 
-    // generate instructions to unbox right
-    tempptr_t rightUnboxed = getNewTemp();
-    TempListPtr rightOperands = make_shared<TempList>(TempList{rightUnboxed, right});
-    pushInstruction(make_shared<IrInstruction>(unboxOp, rightOperands));
-    // generate to unbox left
-    tempptr_t leftUnboxed = getNewTemp();
-    TempListPtr leftOperands = make_shared<TempList>(TempList{leftUnboxed, left});
-    pushInstruction(make_shared<IrInstruction>(unboxOp, leftOperands));
-
-    // generate a list of operands for an arith operation
+    // perform the operation
     tempptr_t result = getNewTemp(); 
-    TempListPtr operands = make_shared<TempList>(TempList{result, rightUnboxed, leftUnboxed});
-    // perform the op 
+    TempListPtr operands = make_shared<TempList>(TempList{result, right, left});
     pushInstruction(make_shared<IrInstruction>(operation, operands));
     // cast back to the right type
-    tempptr_t ret = getNewTemp();
-    pushInstruction(make_shared<IrInstruction>(castOp, ret, result));
-    pushTemp(ret);
+    pushTemp(result);
 	checkIfUsed(right);
 	checkIfUsed(left);
-	checkIfUsed(leftUnboxed);
-	checkIfUsed(rightUnboxed);
 	checkIfUsed(result);
     return;
 }
@@ -461,12 +425,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        case BcOp::If:
 	            {
                     tempptr_t expr = popTemp();
-                    tempptr_t exprVal = getNewTemp();
                     pushInstruction(make_shared<IrInstruction>(IrOp::AssertBoolean, expr));
-                    pushInstruction(make_shared<IrInstruction>(IrOp::UnboxBoolean, exprVal, expr));
-                    pushInstruction(make_shared<IrInstruction>(IrOp::If, inst.operand0.value(), exprVal));
+                    pushInstruction(make_shared<IrInstruction>(IrOp::If, inst.operand0.value(), expr));
 					checkIfUsed(expr);
-					checkIfUsed(exprVal);
 	                break;
 	            }
             case BcOp::Label:

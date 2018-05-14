@@ -2,11 +2,13 @@
 #include "../exception.h"
 #include "../types.h"
 #include "../frame.h"
+#include "../opt/opt_tag_ptr.h"
+
 
 using namespace std;
 
 /* Collectable */
-template<class T>
+template<typename T>
 size_t Collectable::getVecSize(vector<T> v) {
     size_t overhead = sizeof(v);
     size_t vecSize = v.capacity()*sizeof(T);
@@ -60,27 +62,35 @@ void CollectedHeap::registerCollectable(Collectable* c) {
     allocated.push_back(c);
 }
 template<typename T>
-T* CollectedHeap::allocate() {
+tagptr_t CollectedHeap::allocate() {
+    // to be used for None and Record
     T* ret = new T();
     registerCollectable(ret);
-    return ret;
+    return make_ptr(ret);
 }
-template<typename T, typename ARG>
-T* CollectedHeap::allocate(ARG a) {
-    // to be used for strings, ints, bools, ValWrapper, empty records
-    T* ret = new T(a);
-    registerCollectable(ret);
-    return ret;
-}
-template<typename T, typename KEY, typename VAL>
-T* CollectedHeap::allocate(map<KEY, VAL> mapping) {
-    T* ret = new T(mapping);
+template<typename T>
+T* CollectedHeap::allocate(tagptr_t ptr) {
+    // to be used for ValWrapper and Frame
+    T* ret = new T(ptr);
     registerCollectable(ret);
     return ret;
 }
 template<typename T>
+T* CollectedHeap::allocate(Function* ptr) {
+    // to be used for ValWrapper and Frame
+    T* ret = new T(ptr);
+    registerCollectable(ret);
+    return ret;
+}
+template<typename T, typename KEY, typename VAL>
+tagptr_t CollectedHeap::allocate(map<KEY, VAL> mapping) {
+    T* ret = new T(mapping);
+    registerCollectable(ret);
+    return make_ptr(ret);
+}
+template<typename T>
 T* CollectedHeap::allocate(vector<Function*> functions_,
-            vector<Constant*> constants_,
+            vector<tagptr_t> constants_,
             int32_t parameter_count_,
             vector<string> local_vars_,
             vector<string> local_reference_vars_,
@@ -91,9 +101,8 @@ T* CollectedHeap::allocate(vector<Function*> functions_,
     registerCollectable(ret);
     return ret;
 };
-template<typename T>
-T* CollectedHeap::allocate(vector<ValWrapper*> refs, Function* func) {
-    T* ret = new T(refs, func);
+Closure* CollectedHeap::allocate(vector<ValWrapper*> refs, Function* func) {
+    Closure* ret = new Closure(refs, func);
     registerCollectable(ret);
     return ret;
 }
@@ -135,30 +144,25 @@ template class vector<string>;
 template size_t Collectable::getVecSize<string>(vector<string>);
 template class vector<ValWrapper*>;
 template size_t Collectable::getVecSize<ValWrapper*>(vector<ValWrapper*>);
-template class vector<Constant*>;
-template size_t Collectable::getVecSize<Constant*>(vector<Constant*>);
 template class vector<Function*>;
 template size_t Collectable::getVecSize<Function*>(vector<Function*>);
-template class list<Value*>;
-template size_t Collectable::getStackSize<Value*>(list<Value*>);
-template class map<string, Value*>;
-template size_t Collectable::getMapSize(map<string, Value*>);
-//template size_t Collectable::getStringMapSize(map<string, Value*>);
+template class vector<tagptr_t>;
+template size_t Collectable::getVecSize<tagptr_t>(vector<tagptr_t>);
+template class list<tagptr_t>;
+template size_t Collectable::getStackSize(list<tagptr_t>);
+template class map<string, tagptr_t>;
+template size_t Collectable::getMapSize(map<string, tagptr_t>);
 template class map<string, ValWrapper*>;
 template size_t Collectable::getMapSize(map<string, ValWrapper*>);
 
 // Declarations for allocate
-template Function* CollectedHeap::allocate<Function>();
-template None* CollectedHeap::allocate<None>();
-template Boolean* CollectedHeap::allocate<Boolean>(bool);
-template String* CollectedHeap::allocate<String>(string);
-template Integer* CollectedHeap::allocate<Integer>(int);
-template Record* CollectedHeap::allocate<Record>();
-template Closure* CollectedHeap::allocate<Closure>(vector<ValWrapper*>, Function*);
-template Frame* CollectedHeap::allocate<Frame, Function*>(Function* func);
-template ValWrapper* CollectedHeap::allocate<ValWrapper, Constant*>(Constant*);
+template tagptr_t CollectedHeap::allocate<Function>();
+template tagptr_t CollectedHeap::allocate<None>();
+template tagptr_t CollectedHeap::allocate<Record>();
+template ValWrapper* CollectedHeap::allocate<ValWrapper>(tagptr_t);
+template Frame* CollectedHeap::allocate<Frame>(Function*);
 
 // Declarations for native functions
-template PrintNativeFunction* CollectedHeap::allocate<PrintNativeFunction>(vector<Function*>, vector<Constant*>, int, vector<string>, vector<string>, vector<string>, vector<string>, vector<BcInstruction>);
-template InputNativeFunction* CollectedHeap::allocate<InputNativeFunction>(vector<Function*>, vector<Constant*>, int, vector<string>, vector<string>, vector<string>, vector<string>, vector<BcInstruction>);
-template IntcastNativeFunction* CollectedHeap::allocate<IntcastNativeFunction>(vector<Function*>, vector<Constant*>, int, vector<string>, vector<string>, vector<string>, vector<string>, vector<BcInstruction>);
+template PrintNativeFunction* CollectedHeap::allocate<PrintNativeFunction>(vector<Function*>, vector<tagptr_t>, int, vector<string>, vector<string>, vector<string>, vector<string>, vector<BcInstruction>);
+template InputNativeFunction* CollectedHeap::allocate<InputNativeFunction>(vector<Function*>, vector<tagptr_t>, int, vector<string>, vector<string>, vector<string>, vector<string>, vector<BcInstruction>);
+template IntcastNativeFunction* CollectedHeap::allocate<IntcastNativeFunction>(vector<Function*>, vector<tagptr_t>, int, vector<string>, vector<string>, vector<string>, vector<string>, vector<BcInstruction>);

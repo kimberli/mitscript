@@ -8,6 +8,9 @@
 #include "gc/gc.h"
 
 
+/* Constant */
+const string Constant::typeS = "Constant";
+
 /* ValWrapper */
 const string ValWrapper::typeS = "ValWrapper";
 string ValWrapper::toString() {
@@ -21,8 +24,8 @@ bool ValWrapper::equals(Value* other) {
 }
 void ValWrapper::follow(CollectedHeap& heap){
     // mark the value this points to
-    if (ptr) {
-        heap.markSuccessors(ptr);
+    if (ptr && !is_tagged(ptr)) {
+        heap.markSuccessors(get_collectable(ptr));
     }
 }
 
@@ -39,8 +42,10 @@ void Function::follow(CollectedHeap& heap) {
     for (Function* f : functions_) {
         heap.markSuccessors(f);
     }
-    for (Constant* c : constants_) {
-        heap.markSuccessors(c);
+    for (tagptr_t c : constants_) {
+        if (!is_tagged(c)) {
+            heap.markSuccessors(get_collectable(c));
+        }
     }
 }
 size_t Function::getSize() {
@@ -152,15 +157,15 @@ const string Record::typeS = "Record";
 string Record::toString() {
     string res = "{";
     for (auto x: value) {
-        res += x.first + ":" + x.second->toString() + " ";
+        res += x.first + ":" + *ptr_to_str(x.second) + " ";
     }
     res += "}";
     return res;
 }
-Value* Record::get(string key) {
+tagptr_t Record::get(string key) {
     return value[key];
 }
-void Record::set(string key, Value* val, CollectedHeap& collector) {
+void Record::set(string key, tagptr_t val, CollectedHeap& collector) {
     if (value.count(key) == 0) {
         collector.increment(sizeof(key) + key.size() + sizeof(val));
     }
@@ -175,8 +180,10 @@ bool Record::equals(Value* other) {
 }
 void Record::follow(CollectedHeap& heap) {
     // point to all the values contained in the record
-    for (std::map<string, Value*>::iterator it = value.begin(); it != value.end(); it++) {
-        heap.markSuccessors(it->second);
+    for (auto it = value.begin(); it != value.end(); it++) {
+        if (!is_tagged(it->second)) {
+            heap.markSuccessors(get_collectable(it->second));
+        }
     }
 }
 size_t Record::getSize() {
@@ -222,31 +229,33 @@ void Closure::follow(CollectedHeap& heap) {
 }
 
 /* Native functions */
-Constant* PrintNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
+tagptr_t PrintNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
     string name = currentFrame.getLocalByIndex(0);
     auto val = currentFrame.getLocalVar(name);
-    cout << val->toString() << endl;
+    cout << *ptr_to_str(val) << endl;
     return ch.allocate<None>();
 };
-Constant* InputNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
-    string input;
-    getline(cin, input);
-    return ch.allocate<String, string>(input);
+tagptr_t InputNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
+    string* input = new string();
+    getline(cin, *input);
+    return make_ptr(&input);
 };
-Constant* IntcastNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
+tagptr_t IntcastNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
     string name = currentFrame.getLocalByIndex(0);
     auto val = currentFrame.getLocalVar(name);
-	auto intVal = dynamic_cast<Integer*>(val);
-    if (intVal != NULL) {
-        return ch.allocate<Integer, int>(intVal->value);
+    if (check_tag(val, INT_TAG)) {
+        return val;
     }
-    auto strVal = val->cast<String>();
-    if (strVal->value == "0") {
-        return ch.allocate<Integer, int>(0);
+    if (check_tag(val, STR_TAG)) {
+        string* s = get_str(val);
+        if (*s == "0") {
+            return make_ptr(0);
+        }
+        int result = atoi(s->c_str());
+        if (result == 0) {
+            throw IllegalCastException("cannot convert value " + *s + " to IntValue");
+        }
+        return make_ptr(result);
     }
-    int result = atoi(strVal->value.c_str());
-    if (result == 0) {
-        throw IllegalCastException("cannot convert value " + strVal->value + " to IntValue");
-    }
-    return ch.allocate<Integer, int>(result);
+    throw IllegalCastException("expected String for intcast");
 };

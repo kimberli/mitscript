@@ -61,14 +61,6 @@ enum class BcOp
     // Stack:       S :: operand 1 => S :: value_of(operand 1)
     LoadReference,
 
-    // Description: store value into reference
-    // Mnemonic:    store_ref
-    // Operand 0:   N/A
-    // Operand 1:   value to store
-    // Operand 2:   reference to store to
-    // Stack:       S :: operand 2 :: operand 1 => S
-    StoreReference,
-
     // Description: allocates a record and pushes it on the operand stack
     // Mnemonic:    alloc_record
     // Operand 0:   N/A

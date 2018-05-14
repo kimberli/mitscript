@@ -31,21 +31,20 @@ private:
 
  public:
     // static None
-    None* NONE;
+    tagptr_t NONE;
 
     CollectedHeap* collector;
     Interpreter(Function* mainFunc, int maxmem, bool callAsm);
     void run();  // executes all instructions until termination
 
     // handle different call methods for vm vs asm exeuction
-    Value* call(vector<Constant*> argsList, Value* closure);
+    tagptr_t call(vector<tagptr_t> argsList, tagptr_t clos_ptr);
     // handles calling from the vm
-    Value* callVM(vector<Constant*> argsList, Closure* clos);
+    tagptr_t callVM(vector<tagptr_t> argsList, tagptr_t clos_ptr);
     // handles calling from asm
-    Value* callAsm(vector<Constant*> argsList, Closure* clos);
+    tagptr_t callAsm(vector<tagptr_t> argsList, tagptr_t clos_ptr);
 
     // asm helpers
-    Value* add(Value* left, Value* right);
-    void storeGlobal(string name, Value* val);
-    Value* loadGlobal(string name);
+    void storeGlobal(string name, tagptr_t val);
+    tagptr_t loadGlobal(string name);
 };
