@@ -8,7 +8,7 @@ void RegOpt::optimize(IrFunc* irFunc) {
 
 struct compareIntervalEnd {
 	bool operator()(const tempptr_t &a, const tempptr_t &b) {
-		return a->endInterval < b->endInterval;
+		return a->endInterval <= b->endInterval;
 	};
 };
 
@@ -16,26 +16,36 @@ void RegOpt::linearScan(IrFunc* irFunc) {
 	set<tempptr_t, compareIntervalEnd> active; // ordered by endInterval
 	int stackOffset = 0;
 	int numRegisters = freeRegisters.size();
+//	for (tempptr_t temp_i: irFunc->temps) {
+//		// modifying all regs to be long
+//		temp_i->startInterval = 0;
+//		temp_i->endInterval = irFunc->instructions.size();
+//	}
 	for (tempptr_t temp_i: irFunc->temps) {
 		cout << temp_i->index << "start: " << temp_i->startInterval << ", end: " << temp_i->endInterval << endl;
+		cout << "active: " << active.size() << endl;
+		cout << "free: " << freeRegisters.size() << endl;
 		if (temp_i->startInterval == -1 && temp_i->endInterval == -1) {
+			// TODO: creating global temps that do nothing
 			continue;
 		}
-		if (temp_i->endInterval == -1) {
-			temp_i->endInterval = irFunc->instructions.size();
-		}
-		for (tempptr_t temp_j: active) { // Expire old intervals
+		std::set<tempptr_t, compareIntervalEnd>::iterator it;
+		for (it = active.begin(); it != active.end();) { // Expire old intervals
+			tempptr_t temp_j = *it;
 			if (temp_j->endInterval >= temp_i->startInterval) {
 				break;
 			}
-			active.erase(temp_j);
+			cout << "erase" << endl;
 			if (temp_j->reg) {
 				freeRegisters.push_back(temp_j->reg.value());
 			}
+			active.erase(it++);
 		}
 		if (active.size() == numRegisters) {
 			// Spill this interval
-			tempptr_t spill = *active.end();
+			std::set<tempptr_t, compareIntervalEnd>::iterator end = active.end();
+			end--;
+			tempptr_t spill = *(end);
 			if (spill->endInterval > temp_i->endInterval) {
 				temp_i->reg = spill->reg;
 				spill->reg = nullopt;

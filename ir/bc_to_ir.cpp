@@ -19,6 +19,7 @@ tempptr_t IrCompiler::getNewTemp() {
     tempptr_t newTemp = make_shared<Temp>(currentTemp);
 	temps.push_back(newTemp);
 	newTemp->startInterval = irInsts.size();
+	newTemp->endInterval = irInsts.size();	
     return newTemp;
 }
 void IrCompiler::pushTemp(tempptr_t temp) {
@@ -325,17 +326,19 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                         // add an instruction confirming that this is a ref
                         pushInstruction(make_shared<IrInstruction>(IrOp::AssertValWrapper, t));
 						instTemps->push_back(t);
-						checkIfUsed(t);
 					}
 					reverse(instTemps->begin(), instTemps->end());
 					tempptr_t func = popTemp();
-					checkIfUsed(func);
 					instTemps->push_back(func);
                     pushTemp(curr);
 					instTemps->push_back(curr);
 					reverse(instTemps->begin(), instTemps->end());
 					pushInstruction(make_shared<IrInstruction>(IrOp::AssertFunction, func));
 					pushInstruction(make_shared<IrInstruction>(IrOp::AllocClosure, inst.operand0, instTemps));
+					checkIfUsed(func);
+					for (tempptr_t t: *instTemps) {
+						checkIfUsed(t);
+					}
 	                break;
 	            }
 	        case BcOp::Call:
@@ -345,16 +348,18 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					for (int i = 0; i < inst.operand0; i++) {
                         tempptr_t t = popTemp();
                     	instTemps->push_back(t);
-						checkIfUsed(t);
 					}
 					tempptr_t clos = popTemp();
-					checkIfUsed(clos);
 					instTemps->push_back(clos);
                     pushTemp(curr);
 					instTemps->push_back(curr);
 					reverse(instTemps->begin(), instTemps->end());
 					pushInstruction(make_shared<IrInstruction>(IrOp::AssertClosure, clos));
 					pushInstruction(make_shared<IrInstruction>(IrOp::Call, inst.operand0, instTemps));
+					checkIfUsed(clos);
+					for (tempptr_t t: *instTemps) {
+						checkIfUsed(t);
+					}
 	                break;
 	            }
 	        case BcOp::Return:

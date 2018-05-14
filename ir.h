@@ -438,7 +438,8 @@ struct IrInstruction {
             s += to_string(t->index) + " ";
 			if (t->reg) {
 				s += "Reg: " + asmRegToString(t->reg.value()) + " ";
-			} else if (t->stackOffset) {
+			} 
+			if (t->stackOffset) {
 				s += "Stack: " + to_string(t->stackOffset.value()) + " ";
 			}
         }
