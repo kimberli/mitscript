@@ -7,6 +7,12 @@ bool is_tagged(tagptr_t ptr) {
     // TODO: think about gc for strings?
     return !check_tag(ptr, PTR_TAG);
 }
+Value* get_val(tagptr_t ptr) {
+    if (is_tagged(ptr)) {
+        throw IllegalCastException("expected Value, got " + get_type(ptr));
+    }
+    return (Value*) ptr;
+}
 string get_type(tagptr_t ptr) {
     if (check_tag(ptr, INT_TAG)) {
         return "int";
@@ -38,7 +44,7 @@ tagptr_t make_ptr(string* val) {
 }
 tagptr_t make_ptr(Constant* val) {
     tagptr_t result = (tagptr_t) val;
-    LOG("  TAGPTR CONSTANT: " << hex << result << " // " << val->toString());
+    LOG("  TAGPTR CONSTANT: " << hex << result << " // " << val->type());
     return result;
 }
 tagptr_t make_ptr(Function* val) {
@@ -69,12 +75,6 @@ string* get_str(tagptr_t ptr) {
         throw IllegalCastException("expected string, got " + get_type(ptr));
     }
     return (string*) ((ptr & CLEAR_TAG) >> 2);
-}
-Value* get_val(tagptr_t ptr) {
-    if (is_tagged(ptr)) {
-        throw IllegalCastException("expected Value, got " + get_type(ptr));
-    }
-    return (Value*) ptr;
 }
 Collectable* get_collectable(tagptr_t ptr) {
     if (is_tagged(ptr)) {
@@ -135,7 +135,7 @@ tagptr_t ptr_equals(tagptr_t left, tagptr_t right) {
             return make_ptr(get_str(left)->compare(*get_str(right)) == 0);
         }
         Value* leftV = get_val(left);
-        Value* rightV = get_val(left);
+        Value* rightV = get_val(right);
         return make_ptr(leftV->equals(rightV));
     } else {
         return make_ptr(false);

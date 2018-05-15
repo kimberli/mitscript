@@ -30,8 +30,8 @@ tagptr_t make_ptr(ValWrapper* val);
 int get_int(tagptr_t ptr);
 bool get_bool(tagptr_t ptr);
 string* get_str(tagptr_t ptr);
-Value* get_val(tagptr_t ptr);
 Collectable* get_collectable(tagptr_t ptr);
+Value* get_val(tagptr_t ptr);
 
 template<typename T>
 T* cast_val(tagptr_t ptr);
