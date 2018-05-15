@@ -674,12 +674,11 @@ void IrInterpreter::executeStep() {
         case IrOp::Not:
             {
                 LOG(to_string(instructionIndex) + ": Not");
-                auto operand = x64asm::edi;
-                auto one = x64asm::esi;
-                loadTemp(operand, inst->tempIndices->at(1));
-                assm.mov(one, x64asm::Imm32{1});
-                assm.xor_(operand, one);
-                storeTemp(operand, inst->tempIndices->at(0));
+				x64asm::R64 operand = getScratchReg();
+                moveTemp(operand, inst->tempIndices->at(1));
+                assm.xor_(operand, x64asm::Imm32{1});
+                moveTemp(inst->tempIndices->at(0), operand);
+				returnScratchReg(operand);
                 break;
             };
         case IrOp::Goto:
