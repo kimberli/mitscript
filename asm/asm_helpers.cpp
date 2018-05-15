@@ -296,14 +296,13 @@ void IrInterpreter::moveTemp(tempptr_t dest, x64asm::R64 src) {
     } else {
         // dest in mem, src is a reg
         uint32_t destOffset = getTempOffset(dest);
-        assm.assemble({x64asm::MOV_M64_R64, {
+        assm.mov(
             x64asm::M64{
                 x64asm::rbp,
-                x64asm::Scale::TIMES_1,
                 x64asm::Imm32{-destOffset}
             },
             src
-        }});
+        );
     }
 }
 
@@ -357,7 +356,6 @@ void IrInterpreter::moveTemp(x64asm::R64 dest, tempptr_t src, TempOp tempOp) {
             dest,
             x64asm::M64{
                 x64asm::rbp,
-                x64asm::Scale::TIMES_1,
                 x64asm::Imm32{-offset}
             }
         }});
@@ -397,7 +395,6 @@ void IrInterpreter::moveTemp(tempptr_t dest, tempptr_t src, TempOp tempOp) {
             assm.assemble({op, {
                 x64asm::M64{
                     x64asm::rbp,
-                    x64asm::Scale::TIMES_1,
                     x64asm::Imm32{-offset}
                 },
                 src->reg.value()
@@ -407,20 +404,18 @@ void IrInterpreter::moveTemp(tempptr_t dest, tempptr_t src, TempOp tempOp) {
             x64asm::R64 reg = getScratchReg();
             // move src into the reg
             uint32_t srcOffset = getTempOffset(src);
-            assm.assemble({x64asm::MOV_R64_M64, {
+            assm.mov(
                 reg,
                 x64asm::M64{
                     x64asm::rbp,
-                    x64asm::Scale::TIMES_1,
                     x64asm::Imm32{-srcOffset}
                 }
-            }});
+            );
             // move the reg into dest
             uint32_t destOffset = getTempOffset(dest);
             assm.assemble({op, {
                 x64asm::M64{
                     x64asm::rbp,
-                    x64asm::Scale::TIMES_1,
                     x64asm::Imm32{-destOffset}
                 },
                 reg
