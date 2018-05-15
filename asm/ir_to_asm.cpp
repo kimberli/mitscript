@@ -33,16 +33,66 @@ IrInterpreter::IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPoint
     finished = false;
 }
 
-void IrInterpreter::comparisonSetup(x64asm::R32 left, x64asm::R32 right, instptr_t inst) {
-    // load right temp into a reg
-    loadTemp(right, inst->tempIndices->at(1));
-    // load left temp into a reg
-    loadTemp(left, inst->tempIndices->at(2));
-    // perform the sub; result stored in left
-    assm.cmp(left, right); // this sets flags
-    // load 0 and 1 into two diff regs
-    assm.mov(right, x64asm::Imm32{1});
-    assm.mov(left, x64asm::Imm32{0});
+void IrInterpreter::comparisonSetup(instptr_t inst, TempBoolOp tempBoolOp) {
+    tempptr_t left = inst->tempIndices->at(2);
+    tempptr_t right = inst->tempIndices->at(1);
+    tempptr_t res = inst->tempIndices->at(0);
+    // perform a comparison; not stored anywhere
+    moveTemp(left, right, TempOp::CMP);
+
+    // get a scratch reg 
+    // would be better to get two free regs, but I haven't set up the 
+    // code to be able to do that yet
+    x64asm::R64 reg = getScratchReg(); 
+    if (res->reg) {
+        x64asm::Opcode op; 
+        switch (tempBoolOp) {
+            case TempBoolOp::CMOVNLE: 
+                op = x64asm::CMOVNLE_R64_R64;
+                break;
+            case TempBoolOp::CMOVNL: 
+                op = x64asm::CMOVNL_R64_R64;
+                break;
+        }
+        // put 1 in the scratch reg 
+        assm.mov(reg, x64asm::Imm64{1});
+        // put 0 in the return reg
+        assm.mov(res->reg.value(), x64asm::Imm32{0});
+        // do the operation, leaving val in the return reg
+        assm.assemble({op, {res->reg.value(), reg}});
+    } else {
+        x64asm::Opcode op; 
+        switch (tempBoolOp) {
+            case TempBoolOp::CMOVNLE: 
+                op = x64asm::CMOVNLE_R64_M64;
+                break;
+            case TempBoolOp::CMOVNL: 
+                op = x64asm::CMOVNL_R64_M64;
+                break;
+        }
+        // move 0 into the scratch reg 
+        assm.mov(reg, x64asm::Imm64{1});
+        // move 1 into the return temp
+        uint32_t offset = getTempOffset(res);
+        assm.assemble({x64asm::MOV_M64_IMM32, {
+            x64asm::M64{
+                x64asm::rbp, 
+                x64asm::Scale::TIMES_1,
+                x64asm::Imm32{-offset}
+            }, 
+            x64asm::Imm32{1}
+        }});
+        // perform the comparison, leaving in the reg
+        assm.assemble({op, {reg, 
+            x64asm::M64 {
+                x64asm::rbp, 
+                x64asm::Scale::TIMES_1,
+                x64asm::Imm32{-offset}
+            }
+        }});
+        // move from reg into its home in the temp 
+        moveTemp(res, reg);
+    }
 };
    
 x64asm::R32 IrInterpreter::getRegBottomHalf(x64asm::R64 reg) {
@@ -579,6 +629,9 @@ void IrInterpreter::moveTemp(x64asm::R64 dest, tempptr_t src, TempOp tempOp) {
             case TempOp::MUL: 
                 op = x64asm::IMUL_R64_R64;
                 break;
+            case TempOp::CMP: 
+                op = x64asm::CMP_R64_R64;
+                break;
         }
         assm.assemble({op, {dest, src->reg.value()}});
     } else {
@@ -592,6 +645,9 @@ void IrInterpreter::moveTemp(x64asm::R64 dest, tempptr_t src, TempOp tempOp) {
                 break;
             case TempOp::MUL: 
                 op = x64asm::IMUL_R64_M64;
+                break;
+            case TempOp::CMP: 
+                op = x64asm::CMP_R64_M64;
                 break;
         }
         assm.assemble({op, {
@@ -641,6 +697,9 @@ void IrInterpreter::moveTemp(tempptr_t dest, tempptr_t src, TempOp tempOp) {
             case TempOp::MUL: 
                 // multiplication can only do R->M, reverse order of args.
                 assert (false); 
+                break;
+            case TempOp::CMP: 
+                op = x64asm::CMP_M64_R64;
                 break;
         }
  
@@ -1056,36 +1115,19 @@ void IrInterpreter::executeStep() {
                 auto left = inst->tempIndices->at(2);
                 auto right = inst->tempIndices->at(1);
                 auto res = inst->tempIndices->at(0);
-                //auto left = x64asm::edi;
-                //auto right = x64asm::esi;
                 
-                if (left->reg) {
-                    if (right->reg) {
-                        assm.imul(left->reg.value(), right->reg.value());
-                    } else {
-                        // right is in mem
-                        uint32_t offset = getTempOffset(right);
-                        assm.assemble({x64asm::IMUL_R64_M64, {
-                            left->reg.value(),
-                            x64asm::M64{
-                                x64asm::rbp, 
-                                x64asm::Scale::TIMES_1,
-                                x64asm::Imm32{-offset}
-                            }
-                        }});
-                    }
+                // mul can only do mem -> reg
+                if (res->reg) {
+                    moveTemp(res, left);
+                    moveTemp(res, right, TempOp::MUL);
+                } else {
+                    // get a scratch reg 
+                    x64asm::R64 reg = getScratchReg();
+                    moveTemp(reg, left);
+                    moveTemp(reg, right, TempOp::MUL);
+                    moveTemp(res, reg);
+                    returnScratchReg(reg);
                 }
-
-
-                // asign these to src/dest based on where they 
-                // are stored
-                //loadTemp(left, inst->tempIndices->at(2));
-                // load right temp into a reg
-                //loadTemp(right, inst->tempIndices->at(1));
-                // perform the sub; result stored in left
-                //assm.imul(left, right);
-                // put the value back in the temp
-                //storeTemp(left, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::Div:
@@ -1109,6 +1151,7 @@ void IrInterpreter::executeStep() {
                 assm.idiv(getRegBottomHalf(divisor));
                 // put the value back in the temp
                 moveTemp(inst->tempIndices->at(0), x64asm::rax);
+        		returnScratchReg(divisor);
 				// restore rax and rdx
         		assm.pop(x64asm::rdx); 
         		assm.pop(x64asm::rax); 
@@ -1116,10 +1159,23 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Neg: {
                 LOG(to_string(instructionIndex) + ": Neg");
-                auto operand = x64asm::rdi;
-                moveTemp(operand, inst->tempIndices->at(1));
-                assm.neg(operand);
-                moveTemp(inst->tempIndices->at(0), operand);
+                //auto operand = x64asm::rdi;
+                tempptr_t temp0 = inst->tempIndices->at(0);
+                // move into the return var
+                moveTemp(temp0, inst->tempIndices->at(1));
+                // negate temp0 
+                if (temp0->reg) {
+                    assm.assemble({x64asm::NEG_R64, {temp0->reg.value()}});
+                } else {
+                    uint32_t offset = getTempOffset(temp0);
+                    assm.assemble({x64asm::NEG_M64, {
+                        x64asm::M64{
+                            x64asm::rbp, 
+                            x64asm::Scale::TIMES_1,
+                            x64asm::Imm32{-offset}
+                        }
+                    }});
+                }
                 break;
             };
         case IrOp::Gt:
@@ -1127,23 +1183,19 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": Gt");
                 // use a conditional move to put the bool in the right place
                 // right(1) gets moved into left(0) if left was greater
-                auto left = x64asm::edi;
-                auto right = x64asm::esi;
-                comparisonSetup(left, right, inst);
-                assm.cmovnle(left, right);
-                storeTemp(left, inst->tempIndices->at(0));
+                //auto left = x64asm::edi;
+                //auto right = x64asm::esi;
+                //assm.cmovnle(left, right);
+                //storeTemp(left, inst->tempIndices->at(0));
+                comparisonSetup(inst, TempBoolOp::CMOVNLE);
                 break;
             };
         case IrOp::Geq:
             {
                 LOG(to_string(instructionIndex) + ": Geq");
-                auto left = x64asm::edi;
-                auto right = x64asm::esi;
                 // use a conditional move to put the bool in the right place
                 // right(1) gets moved into left(0) if left was greater
-                comparisonSetup(left, right, inst);
-                assm.cmovnl(left, right);
-                storeTemp(left, inst->tempIndices->at(0));
+                comparisonSetup(inst, TempBoolOp::CMOVNL);
                 break;
             };
         case IrOp::Eq:
