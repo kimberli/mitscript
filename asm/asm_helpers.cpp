@@ -204,80 +204,18 @@ void IrInterpreter::installLocalRefNone(tempptr_t temp) {
 /************************
  * REG ALLOCATION HELPERS
  ***********************/
-void IrInterpreter::updateFreeRegs(instptr_t inst) {
-    // for each temp in the instruction
-    for (int i = 0; i < inst->tempIndices->size(); i++) {
-        tempptr_t temp = inst->tempIndices->at(i);
-        if (!temp->reg) {
-            return;
-        }
-
-        if (temp->startInterval == instructionIndex) {
-            // if a temp started here, add its reg
-            freeRegs.insert(temp->reg.value());
-        }
-        if (temp->endInterval -1 == instructionIndex) {
-            // if the temp ended here, remove it from the set
-            freeRegs.erase(temp->reg.value());
-        }
-    }
-}
-
-x64asm::R64 IrInterpreter::getReg(tempptr_t temp) {
-    if (temp->reg) {
-        return temp->reg.value();
-    } else {
-        uint32_t offset = temp->stackOffset.value();
-        // our temp is on the stack
-        // get a temp to load it into
-        x64asm::R64 reg = getScratchReg();
-        // mov it into the scratch reg
-        assm.mov(reg, x64asm::rbp);
-        assm.sub(reg, x64asm::Imm32{offset});
-        return reg;
-    }
-}
-
-void IrInterpreter::setReg(tempptr_t temp, x64asm::R64 reg) {
-    if (reg == temp->reg.value()) {
-        // it's already in the right reg
-        return;
-    }
-    if (temp->reg) {
-        // do a simple reg mov
-        assm.mov(temp->reg.value(), reg);
-        return;
-    } else {
-        // gotta put it back onto the stack eww
-        // TODO
-    }
-}
 
 x64asm::R64 IrInterpreter::getScratchReg() {
-    for (x64asm::R64 reg : freeRegs) {
-        return reg;
-    };
-    // there are no free regs available; we gotta dump something
-    // for now just randomly dump r10
-    // TODO
-    LOG("spilling");
-    spilled = true;
     x64asm::R64 toSpill = x64asm::r10;
     assm.push(toSpill);
+    regPopCount += 1; // metadata to check for errors
+    LOG("getting scratch reg: " + asmRegToString(toSpill));
     return toSpill;
 };
 
 void IrInterpreter::returnScratchReg(x64asm::R64 reg) {
-    // release a scratch reg for other uses and
-    // restores the regiser to its previous value
-    freeRegs.insert(reg);
-    // TODO: you should ONLY pop if you had to push!!!
-    // TODO
-    if (spilled) {
-        assm.pop(reg);
-        spilled = false;
-        LOG("returned from spill");
-    }
+    assm.pop(reg);
+    regPopCount -= 1;
 }
 
 /************************

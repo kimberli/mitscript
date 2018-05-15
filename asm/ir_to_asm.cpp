@@ -227,7 +227,6 @@ void IrInterpreter::loadTemp(x64asm::R64 reg, tempptr_t temp) {
  ***********************/
 void IrInterpreter::executeStep() {
     instptr_t inst = func->instructions.at(instructionIndex);
-    int freeRegsStartSize = freeRegs.size();
     switch(inst->op) {
         case IrOp::LoadConst:
             {
@@ -836,10 +835,7 @@ void IrInterpreter::executeStep() {
             throw RuntimeException("Should not get here: invalid ir inst");
     }
     LOG(inst->getInfo());
-    int freeRegsEndSize = freeRegs.size();
-    assert (freeRegsStartSize == freeRegsEndSize);
-    // run maintenance to figure out if regs are avlb
-    updateFreeRegs(inst);
+    assert (regPopCount == 0); // make sure we're pushing equally to popping
 
     instructionIndex += 1;
     if (instructionIndex >= func->instructions.size()) {
