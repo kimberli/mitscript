@@ -93,26 +93,41 @@ T* cast_val(tagptr_t ptr) {
     }
     return result;
 }
-string* ptr_to_str(tagptr_t ptr) {
+string ptr_to_str(tagptr_t ptr) {
     if (check_tag(ptr, INT_TAG)) {
-        return new string(to_string(get_int(ptr)));
+        return to_string(get_int(ptr));
     }
     if (check_tag(ptr, BOOL_TAG)) {
         bool val = get_bool(ptr);
         if (val) {
-            return new string("true");
+            return string("true");
         } else {
-            return new string("false");
+            return string("false");
         }
     }
     if (check_tag(ptr, STR_TAG)) {
-        return get_str(ptr);
+        string* val = get_str(ptr);
+        string replaced = string(*val);
+        auto pos = replaced.find("\\");
+        while (pos != string::npos) {
+            if (replaced.at(pos + 1) == 'n') {
+                replaced.replace(pos, 2, "\n");
+            } else if (replaced.at(pos + 1) == 't') {
+                replaced.replace(pos, 2, "\t");
+            } else if (replaced.at(pos + 1) == '\\') {
+                replaced.replace(pos, 2, "\\");
+            } else if (replaced.at(pos + 1) == '"') {
+                replaced.replace(pos, 2, "\"");
+            }
+            pos = replaced.find("\\", pos + 1);
+        }
+        return replaced;
     }
     auto c = get_val(ptr);
-    return new string(c->toString());
+    return c->toString();
 }
 tagptr_t ptr_equals(tagptr_t left, tagptr_t right) {
-    if (left & ALL_TAG == right & ALL_TAG) {  // same tag
+    if ((left & ALL_TAG) == (right & ALL_TAG)) {  // same tag
         if (check_tag(left, INT_TAG) || check_tag(left, BOOL_TAG)) {
             return make_ptr(left == right);
         }
@@ -121,7 +136,7 @@ tagptr_t ptr_equals(tagptr_t left, tagptr_t right) {
         }
         Value* leftV = get_val(left);
         Value* rightV = get_val(left);
-        return leftV->equals(rightV);
+        return make_ptr(leftV->equals(rightV));
     } else {
         return make_ptr(false);
     }
@@ -129,7 +144,7 @@ tagptr_t ptr_equals(tagptr_t left, tagptr_t right) {
 tagptr_t ptr_add(tagptr_t left, tagptr_t right) {
     // try adding strings if left or right is a string
     if (check_tag(left, STR_TAG) || check_tag(right, STR_TAG)) {
-        string* result = new string(*ptr_to_str(left) + *ptr_to_str(right));
+        string* result = new string(ptr_to_str(left) + ptr_to_str(right));
         return make_ptr(result);
     }
     // try adding integers if left is an int
