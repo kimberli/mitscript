@@ -70,6 +70,8 @@ void IrCompiler::doUnaryArithmetic(IrOp operation, bool toBoolean) {
     pushInstruction(make_shared<IrInstruction>(castOp, ret, result));
     pushTemp(ret);
 	checkIfUsed(val);
+	checkIfUsed(unboxed);
+	checkIfUsed(result);
 }
 void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoolean) {
     // takes in two unverified operands, asserts and casts the correct type, 
@@ -121,6 +123,7 @@ void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoo
 	checkIfUsed(left);
 	checkIfUsed(leftUnboxed);
 	checkIfUsed(rightUnboxed);
+	checkIfUsed(result);
     return;
 }
 
@@ -467,6 +470,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     pushInstruction(make_shared<IrInstruction>(IrOp::UnboxBoolean, exprVal, expr));
                     pushInstruction(make_shared<IrInstruction>(IrOp::If, inst.operand0.value(), exprVal));
 					checkIfUsed(expr);
+					checkIfUsed(exprVal);
 	                break;
 	            }
             case BcOp::Label:
