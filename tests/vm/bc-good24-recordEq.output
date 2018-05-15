@@ -1,4 +1,4 @@
 {} == {}: true
 x1 == x2: true
 x1 == z: false
-after update: x1 == x2: false
+after update: x1 == x2: true
