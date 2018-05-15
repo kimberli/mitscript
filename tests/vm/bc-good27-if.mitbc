@@ -51,7 +51,7 @@ function
     local_ref_vars = [],
     free_vars = [],
     names = [input, intcast, print],
-    labels = {0 : 23; 1 : 17; 2 : 31},
+    labels = {0 : 19; 1 : 14; 2 : 25},
     instructions =
     [
       load_func 0
@@ -63,28 +63,22 @@ function
       load_func 2
       alloc_closure 0
       store_global  1
-
       load_global 2
       load_const 4
       call 1
-
       load_const 0
       if 0
-
       label 1
 	  load_global 2
       load_const 2
       call 1
       goto 2
-
       label 0
       load_const 1
       if 1
-      
       load_global 2
       load_const 3
       call 1
-
       label 2
       load_global 2
       load_const 5

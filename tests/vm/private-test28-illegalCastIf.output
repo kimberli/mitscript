@@ -1,1 +1,2 @@
+This should print
 IllegalCastException: expected bool, got int
