@@ -9,6 +9,7 @@
 class Interpreter; 
 class IrInterpreter;
 enum class TempOp;
+enum class TempBoolOp;
 
 typedef set<x64asm::R64> regset_t;
 
@@ -48,7 +49,7 @@ private:
     void loadTemp(x64asm::R64 reg, tempptr_t temp);
     void storeTemp(x64asm::R32 reg, tempptr_t temp);
     void storeTemp(x64asm::R64 reg, tempptr_t temp);
-    void comparisonSetup(x64asm::R32 left, x64asm::R32 right, instptr_t inst);
+    void comparisonSetup(instptr_t inst, TempBoolOp tempBoolOp);
 
     // helpers and state to interface with register allocation
     // stores a set of currently avlb regs 
@@ -89,4 +90,10 @@ enum class TempOp {
     MOVE, 
     SUB, 
     MUL, 
+    CMP
+};
+
+enum class TempBoolOp {
+    CMOVNLE,
+    CMOVNL
 };
