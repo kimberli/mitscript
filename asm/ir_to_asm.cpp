@@ -114,7 +114,7 @@ void IrInterpreter::prolog() {
             // else, we are safe to move the reg into its arg
         }
 
-        // TODO: I would collect the following 3 occurences of this and put it in a single function to prevent bugs like this
+        // TODO: I would collect the following 3 occurences of this and put it in a single function to prevent bugs like switching installing locals vs refs
         if (isLocalRef.at(i)) {
             installLocalRefVar(localTemp, i);
         } else {
@@ -124,10 +124,9 @@ void IrInterpreter::prolog() {
     // now do rdi, if applicable
     if (rdiTemp >= 0) {
         if (isLocalRef.at(rdiTemp)) {
-            // TODO: @anelise is this what you intended? local var instead of ref?
-            installLocalVar(func->temps.at(rdiTemp), rdiTemp);
-        } else {
             installLocalRefVar(func->temps.at(rdiTemp), rdiTemp);
+        } else {
+            installLocalVar(func->temps.at(rdiTemp), rdiTemp);
         }
     }
 
@@ -135,10 +134,9 @@ void IrInterpreter::prolog() {
     for (uint64_t i = func->parameter_count_; i < func->local_count_; i++) {
         tempptr_t localTemp = func->temps.at(i);
         if (isLocalRef.at(i)) {
-            // TODO: @anelise is this what you intended? local var instead of ref?
-            installLocalNone(localTemp);
-        } else {
             installLocalRefNone(localTemp);
+        } else {
+            installLocalNone(localTemp);
         }
     }
 }
