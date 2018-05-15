@@ -54,7 +54,6 @@ void IrCompiler::doUnaryArithmetic(IrOp operation, bool toBoolean) {
     pushInstruction(make_shared<IrInstruction>(operation, result, val));
     pushTemp(result);
 	checkIfUsed(val);
-	checkIfUsed(result);
 }
 void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoolean) {
     // takes in two unverified operands, asserts and casts the correct type, 
@@ -83,7 +82,6 @@ void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoo
     pushTemp(result);
 	checkIfUsed(right);
 	checkIfUsed(left);
-	checkIfUsed(result);
     return;
 }
 
@@ -401,22 +399,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     doUnaryArithmetic(IrOp::Not, true);
                     break;
 	            }
-	        case BcOp::StartWhile:
-	            {
-					whileLevel++;
-                    break;
-	            }
-	        case BcOp::EndWhile:
-	            {
-					whileLevel--;
-					if (whileLevel == 0) {
-						for (tempptr_t temp: tempsInWhile) {
-							temp->endInterval = irInsts.size();	
-						}
-						tempsInWhile.clear();
-					}
-                    break;
-	            }
 	        case BcOp::Goto:
 	            {
                     pushInstruction(make_shared<IrInstruction>(IrOp::Goto, inst.operand0.value()));
@@ -429,6 +411,22 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     pushInstruction(make_shared<IrInstruction>(IrOp::If, inst.operand0.value(), expr));
 					checkIfUsed(expr);
 	                break;
+	            }
+            case BcOp::StartWhile:
+                {
+					whileLevel++;
+                    break;
+                }
+	        case BcOp::EndWhile:
+	            {
+					whileLevel--;
+					if (whileLevel == 0) {
+						for (tempptr_t temp: tempsInWhile) {
+							temp->endInterval = irInsts.size();	
+						}
+						tempsInWhile.clear();
+					}
+                    break;
 	            }
             case BcOp::Label:
                 {

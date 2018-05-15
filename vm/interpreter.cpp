@@ -342,6 +342,16 @@ void Interpreter::executeStep() {
                 }
                 break;
             }
+        case BcOp::StartWhile:
+            {
+                frame->instructionIndex++;
+                break;
+            }
+        case BcOp::EndWhile:
+            {
+                frame->instructionIndex++;
+                break;
+            }
         case BcOp::Label:
             {
                 frame->instructionIndex++;

@@ -688,7 +688,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [M, N, Tree, i, input, intcast, inval, j, max, min, missing, print, t, addx, min, max, contains, len],
-	labels = {40 : 55; 41 : 25; 42 : 45; 43 : 33; 44 : 104; 45 : 86; 46 : 94; 47 : 99},
+	labels = {40 : 58; 41 : 26; 42 : 47; 43 : 35; 44 : 109; 45 : 91; 46 : 99; 47 : 104},
 	instructions = 
 	[
 		load_func	0
@@ -714,6 +714,7 @@ function
 		store_global	12
 		load_const	2
 		store_global	3
+		startwhile
 		goto	40
 		label	41
 		load_const	3
@@ -722,6 +723,7 @@ function
 		load_const	4
 		call	1
 		store_global	6
+		startwhile
 		goto	42
 		label	43
 		load_global	12
@@ -741,6 +743,7 @@ function
 		swap
 		gt
 		if	43
+		endwhile
 		load_global	3
 		load_const	6
 		add
@@ -751,6 +754,7 @@ function
 		swap
 		gt
 		if	41
+		endwhile
 		load_global	12
 		field_load	14
 		call	0
@@ -775,6 +779,7 @@ function
 		store_global	3
 		load_const	9
 		store_global	10
+		startwhile
 		goto	44
 		label	45
 		load_global	12
@@ -800,6 +805,7 @@ function
 		swap
 		geq
 		if	45
+		endwhile
 		load_global	11
 		load_const	12
 		load_global	8

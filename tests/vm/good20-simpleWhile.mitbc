@@ -51,7 +51,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [input, intcast, print, x],
-	labels = {0 : 22; 1 : 13},
+	labels = {0 : 23; 1 : 14},
 	instructions = 
 	[
 		load_func	0
@@ -65,6 +65,7 @@ function
 		store_global	1
 		load_const	0
 		store_global	3
+		startwhile
 		goto	0
 		label	1
 		load_global	3
@@ -81,5 +82,6 @@ function
 		swap
 		gt
 		if	1
+		endwhile
 	]
 }

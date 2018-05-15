@@ -43,48 +43,72 @@ function
 			instructions = 
 			[
 			]
+		},
+		function
+		{
+			functions = [],
+			constants = [],
+			parameter_count = 8,
+			local_vars = [x, y, z, a, b, c, d, e],
+			local_ref_vars = [],
+			free_vars = [],
+			names = [],
+			labels = {},
+			instructions = 
+			[
+				load_local	0
+				load_local	1
+				add
+				load_local	2
+				add
+				load_local	3
+				add
+				load_local	4
+				add
+				load_local	5
+				add
+				load_local	6
+				add
+				load_local	7
+				add
+				return
+			]
 		}
 	],
-	constants = [0, 1, 5, "done!"],
+	constants = ["hi: ", 1, 2, 3, 4, 5, 6, 7, 8],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [input, intcast, print, x],
-	labels = {0 : 23; 1 : 14},
+	names = [f, input, intcast, print],
+	labels = {},
 	instructions = 
 	[
 		load_func	0
 		alloc_closure	0
-		store_global	2
+		store_global	3
 		load_func	1
 		alloc_closure	0
-		store_global	0
+		store_global	1
 		load_func	2
 		alloc_closure	0
-		store_global	1
+		store_global	2
+		load_func	3
+		alloc_closure	0
+		store_global	0
+		load_global	3
 		load_const	0
-		store_global	3
-		startwhile
-		goto	0
-		label	1
-		load_global	2
-		load_global	3
-		call	1
-		pop
-		load_global	3
+		load_global	0
 		load_const	1
-		add
-		store_global	3
-		label	0
-		load_global	3
 		load_const	2
-		swap
-		gt
-		if	1
-		endwhile
-		load_global	2
 		load_const	3
+		load_const	4
+		load_const	5
+		load_const	6
+		load_const	7
+		load_const	8
+		call	8
+		add
 		call	1
 		pop
 	]
