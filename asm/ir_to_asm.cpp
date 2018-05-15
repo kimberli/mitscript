@@ -993,36 +993,19 @@ void IrInterpreter::executeStep() {
                 auto left = inst->tempIndices->at(2);
                 auto right = inst->tempIndices->at(1);
                 auto res = inst->tempIndices->at(0);
-                //auto left = x64asm::edi;
-                //auto right = x64asm::esi;
                 
-                if (left->reg) {
-                    if (right->reg) {
-                        assm.imul(left->reg.value(), right->reg.value());
-                    } else {
-                        // right is in mem
-                        uint32_t offset = getTempOffset(right);
-                        assm.assemble({x64asm::IMUL_R64_M64, {
-                            left->reg.value(),
-                            x64asm::M64{
-                                x64asm::rbp, 
-                                x64asm::Scale::TIMES_1,
-                                x64asm::Imm32{-offset}
-                            }
-                        }});
-                    }
+                // mul can only do mem -> reg
+                if (res->reg) {
+                    moveTemp(res, left);
+                    moveTemp(res, right, TempOp::MUL);
+                } else {
+                    // get a scratch reg 
+                    x64asm::R64 reg = getScratchReg();
+                    moveTemp(reg, left);
+                    moveTemp(reg, right, TempOp::MUL);
+                    moveTemp(res, reg);
+                    returnScratchReg(reg);
                 }
-
-
-                // asign these to src/dest based on where they 
-                // are stored
-                //loadTemp(left, inst->tempIndices->at(2));
-                // load right temp into a reg
-                //loadTemp(right, inst->tempIndices->at(1));
-                // perform the sub; result stored in left
-                //assm.imul(left, right);
-                // put the value back in the temp
-                //storeTemp(left, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::Div:
