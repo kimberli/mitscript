@@ -695,11 +695,10 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": If");
                 string labelStr = to_string(inst->op0.value());
                 // load the temp into a reg
-                auto left = x64asm::edi;
-                auto right = x64asm::esi;
-                loadTemp(left, inst->tempIndices->at(0));
-                assm.mov(right, x64asm::Imm32{1});
-                assm.cmp(left, right);
+                x64asm::R64 left = getScratchReg();
+                moveTemp(left, inst->tempIndices->at(0));
+                assm.cmp(getRegBottomHalf(left), x64asm::Imm32{1});
+				returnScratchReg(left);
                 LOG("jumping if to label " + labelStr);
                 assm.je_1(x64asm::Label{labelStr});
                 break;
