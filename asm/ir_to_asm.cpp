@@ -1053,10 +1053,23 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Neg: {
                 LOG(to_string(instructionIndex) + ": Neg");
-                auto operand = x64asm::rdi;
-                moveTemp(operand, inst->tempIndices->at(1));
-                assm.neg(operand);
-                moveTemp(inst->tempIndices->at(0), operand);
+                //auto operand = x64asm::rdi;
+                tempptr_t temp0 = inst->tempIndices->at(0);
+                // move into the return var
+                moveTemp(temp0, inst->tempIndices->at(1));
+                // negate temp0 
+                if (temp0->reg) {
+                    assm.assemble({x64asm::NEG_R64, {temp0->reg.value()}});
+                } else {
+                    uint32_t offset = getTempOffset(temp0);
+                    assm.assemble({x64asm::NEG_M64, {
+                        x64asm::M64{
+                            x64asm::rbp, 
+                            x64asm::Scale::TIMES_1,
+                            x64asm::Imm32{-offset}
+                        }
+                    }});
+                }
                 break;
             };
         case IrOp::Gt:
