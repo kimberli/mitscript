@@ -67,7 +67,7 @@ function
       alloc_record
       store_global 3
 
-      alloc_record
+      load_global 3
       store_global 4
 
       alloc_record
