@@ -157,9 +157,19 @@ private:
     }
 
 
-    void print(const tagptr_t &constant, std::ostream &os)
+    void print(const tagptr_t &ptr, std::ostream &os)
     {
-        os << ptr_to_str(constant);
+        if (check_tag(ptr, INT_TAG)) {
+            os << get_int(ptr);
+        } else if (check_tag(ptr, BOOL_TAG)) {
+            os << (get_bool(ptr) ? "true" : "false");
+        } else if (check_tag(ptr, STR_TAG)) {
+            os << '"' << *get_str(ptr) << '"';
+        } else {
+            cast_val<None>(ptr);
+            os << "None";
+        }
+
     }
 
     void print(const BcInstruction &inst, std::ostream &os)

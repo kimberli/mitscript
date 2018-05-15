@@ -161,3 +161,4 @@ template ValWrapper* cast_val<ValWrapper>(tagptr_t);
 template Record* cast_val<Record>(tagptr_t);
 template Function* cast_val<Function>(tagptr_t);
 template Closure* cast_val<Closure>(tagptr_t);
+template None* cast_val<None>(tagptr_t);
