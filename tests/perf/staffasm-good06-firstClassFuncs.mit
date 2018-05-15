@@ -1,0 +1,11 @@
+y = fun(x) {
+    return fun(w) {
+        return x + w;
+    };
+};
+
+cool1 = y(10);
+cool2 = y(15);
+
+print(cool1(20));
+print(cool2("hello"));

@@ -1,0 +1,3 @@
+rec = {};
+rec.f = 1;
+print(rec);
