@@ -1,1 +1,1 @@
-IllegalCastException: cannot cast type Boolean to Integer
+IllegalCastException: expected int, got bool

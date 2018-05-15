@@ -1,1 +1,1 @@
-IllegalCastException: cannot cast type String to Integer
+IllegalCastException: expected int, got string
