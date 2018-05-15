@@ -44,6 +44,69 @@ void IrInterpreter::comparisonSetup(x64asm::R32 left, x64asm::R32 right, instptr
     assm.mov(right, x64asm::Imm32{1});
     assm.mov(left, x64asm::Imm32{0});
 };
+   
+x64asm::R32 IrInterpreter::getRegBottomHalf(x64asm::R64 reg) {
+	switch (reg) {
+		case x64asm::rdi:
+		{
+			return x64asm::edi;
+		}
+	    case x64asm::rsi:
+		{
+			return x64asm::esi;
+		}
+	    case x64asm::rax:
+		{
+			return x64asm::eax;
+		}
+	    case x64asm::rbx: 
+		{
+			return x64asm::ebx;
+		}
+	    case x64asm::rcx:
+		{
+			return x64asm::ecx;
+		}
+		case x64asm::rdx:
+		{
+			return x64asm::edx;
+		}
+	    case x64asm::r8: 
+		{
+			return x64asm::r8d;
+		}
+	    case x64asm::r9:
+		{
+			return x64asm::r9d;
+		}
+	    case x64asm::r10:
+		{
+			return x64asm::r10d;
+		}
+	    case x64asm::r11:
+		{
+			return x64asm::r11d;
+		}
+	    case x64asm::r12:
+		{
+			return x64asm::r12d;
+		}
+	    case x64asm::r13:
+		{
+			return x64asm::r13d;
+		}
+	    case x64asm::r14: 
+		{
+			return x64asm::r14d;
+		}
+	    case x64asm::r15: 
+		{
+			return x64asm::r15d;
+		}
+		default: 
+            throw RuntimeException("reg does not have bottom half");
+	}
+};
 
 void IrInterpreter::installLocalVar(tempptr_t temp, uint32_t localIdx) {
     // IMPORTANT! make sure you order these calls in a way that you do not
@@ -1043,7 +1106,7 @@ void IrInterpreter::executeStep() {
                 callHelper((void *) &(helper_assert_nonzero), args, temps, nullopt);
 				moveTemp(divisor, inst->tempIndices->at(1));
                 // perform the div; result stored in rax
-                assm.idiv(divisor);
+                assm.idiv(getRegBottomHalf(divisor));
                 // put the value back in the temp
                 moveTemp(inst->tempIndices->at(0), x64asm::rax);
 				// restore rax and rdx

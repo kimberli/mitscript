@@ -49,6 +49,7 @@ private:
     void storeTemp(x64asm::R32 reg, tempptr_t temp);
     void storeTemp(x64asm::R64 reg, tempptr_t temp);
     void comparisonSetup(x64asm::R32 left, x64asm::R32 right, instptr_t inst);
+    x64asm::R32 getRegBottomHalf(x64asm::R64 reg);
 
     // helpers and state to interface with register allocation
     // stores a set of currently avlb regs 
