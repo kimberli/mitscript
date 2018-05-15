@@ -1,0 +1,502 @@
+#include "ir_to_asm.h"
+
+/************************
+ * LOCATION HELPERS
+ ***********************/
+uint32_t IrInterpreter::getRefArrayOffset() {
+    return 8*(1 + numCalleeSaved);
+}
+
+uint32_t IrInterpreter::getTempOffset(tempptr_t temp) {
+    return 8*(1 + numCalleeSaved + 1 + temp->index);
+}
+
+void IrInterpreter::getRbpOffset(uint32_t offset) {
+    // put rbp in a reg
+    assm.mov(x64asm::r10, x64asm::rbp);
+    // subtract the offset from rbp
+    assm.sub(x64asm::r10, x64asm::Imm32{offset});
+}
+
+/************************
+ * CALL HELPERS
+ ***********************/
+void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps, opttemp_t returnTemp) {
+    callHelper(fn, args, temps, nullopt, returnTemp);
+}
+
+void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps, optreg_t lastArg, opttemp_t returnTemp) {
+    int totalArgs = args.size() + temps.size() + 1;
+    assert (totalArgs <= numArgRegs);
+
+    // IMPORTANT: the reg in lastArg should not be r10, rax, or any of the 6 argRegs
+    // STEP 1: save caller-saved registers to stack, reverse order
+    for (int i = 0; i < numCallerSaved; ++i) {
+        assm.push(callerSavedRegs[numCallerSaved -1 - i]);
+    }
+
+    // STEP 2: push first 6 arguments to registers, rest to stack
+    // args + temps are put in that order as arguments for the function to call
+    // on the stack
+    // args should contain pointers to values or immediate numbers
+    // temps are pointers to Temps which store stack offsets
+    int numArgs = args.size() + temps.size();
+    int argIndex = 0;
+    LOG("  calling helper w/ " + to_string(numArgs) + " total args");
+    while (argIndex < args.size()) {
+        // put args 1 - 6 into regs (direct imm values)
+        assm.mov(callerSavedRegs[argIndex], args[argIndex]);
+        argIndex++;
+    }
+    while (argIndex < numArgs) {
+        tempptr_t tempToPush = temps[argIndex - args.size()];
+        x64asm::R64 regToStore = callerSavedRegs[argIndex];
+        // load differently depending on where the arg is
+        if (tempToPush->reg) {
+            // if the val is stored in an earlier arg reg,
+            // have to get off the stack
+            bool wasClobbered = false;
+            for (uint32_t i = 0; i < argIndex; i++) {
+                if (callerSavedRegs[i] == tempToPush->reg.value()) {
+                   // the val got clobbered; get it from the stack
+                   assm.mov(
+                        regToStore,
+                        x64asm::M64{x64asm::rsp, x64asm::Imm32{i*8}}
+                   );
+                   wasClobbered = true;
+                   break;
+                 }
+            }
+            if (!wasClobbered) {
+                // the val was not clobbered; move directly
+                assm.mov(regToStore, tempToPush->reg.value());
+            }
+        } else { // the value is stored on the stack; move from mem
+            // move to the right reg from mem
+            uint32_t offset = getTempOffset(tempToPush);
+            assm.mov(
+                regToStore,
+                x64asm::M64{x64asm::rbp, x64asm::Imm32{-offset}}
+            );
+        }
+        argIndex++;
+    }
+    // if the optional register argument is defined, push it as an arg
+    if (lastArg) {
+        assm.mov(callerSavedRegs[argIndex], lastArg.value());
+    }
+
+    assm.mov(x64asm::r10, x64asm::Imm64{fn});
+    assm.call(x64asm::r10);
+
+    // assume we do not have args to pop from the stack
+
+    // restore caller-saved registers from stack, minus rax
+    for (uint32_t i = 0; i < numCallerSaved - 1; ++i) {
+        assm.pop(callerSavedRegs[i]);
+    }
+
+    // save return value
+    if (returnTemp) {
+        // move from rax to the temp
+        bool usesRax = (returnTemp.value()->reg) && (returnTemp.value()->reg.value() == x64asm::rax);
+        if (!usesRax) {
+            moveTemp(returnTemp.value(), x64asm::rax);
+            assm.pop(x64asm::rax);
+        } // if it does use rax, nothing to do!
+    } else {
+        // restore rax
+        assm.pop(x64asm::rax);
+    }
+}
+
+/************************
+ * LOCAL VAR/REF HELPERS
+ ***********************/
+void IrInterpreter::installLocalVar(tempptr_t temp, uint32_t localIdx) {
+    // IMPORTANT! make sure you order these calls in a way that you do not
+    // overrwrite rdi or rsi before you finish needing them
+    x64asm::M64 src = x64asm::M64{x64asm::rdi, x64asm::Imm32{localIdx*8}};
+    if (temp->reg) {
+        // move directly to the reg
+        assm.mov(temp->reg.value(), src);
+    } else {
+        // the arg is stored on the stack; use rdi as scratch space
+        assm.push(x64asm::rdi);
+        // move the value into rdi
+        assm.mov(x64asm::rdi, src);
+        // move rdi onto the right stack location
+        moveTemp(temp, x64asm::rdi);
+        // restore rdi
+        assm.pop(x64asm::rdi);
+    }
+}
+
+void IrInterpreter::installLocalNone(tempptr_t temp) {
+    x64asm::Imm64 src = x64asm::Imm64{vmPointer->NONE};
+    if (temp->reg) {
+        assm.mov(temp->reg.value(), src);
+    } else {
+        // put None in a scratch reg
+        assm.push(x64asm::rdi);
+        assm.mov(x64asm::rdi, src);
+        moveTemp(temp, x64asm::rdi);
+        assm.pop(x64asm::rdi);
+    }
+}
+
+void IrInterpreter::installLocalRefVar(tempptr_t temp, uint32_t localIdx) {
+    x64asm::R64 reg = x64asm::rdi;
+    bool usedScratch = false;
+    if (temp->reg) {
+        reg = temp->reg.value();
+    } else {
+        // use rdi as scratch space
+        assm.push(reg);
+        usedScratch = true;
+    }
+    // move the value to the right reg
+    assm.mov(
+         reg,
+         x64asm::M64{x64asm::rdi, x64asm::Imm32{8*localIdx}}
+    );
+    // convert to a valwrapper
+    vector<tempptr_t> noTempArgs;
+    vector<x64asm::Imm64> args = {
+        x64asm::Imm64{vmPointer},
+    };
+    tempptr_t returnTemp = temp;
+    // this will put the result back inside the right temp
+    callHelper((void*) &(helper_new_valwrapper), args, noTempArgs, reg, returnTemp);
+
+    // cleanup
+    if (usedScratch) {
+        // restore rdi
+        assm.pop(reg);
+    }
+}
+
+void IrInterpreter::installLocalRefNone(tempptr_t temp) {
+    x64asm::R64 reg = x64asm::rdi;
+    bool usedScratch = false;
+    if (temp->reg) {
+        reg = temp->reg.value();
+    } else {
+        usedScratch = true;
+        assm.push(reg);
+    }
+    assm.mov(reg, x64asm::Imm64{vmPointer->NONE});
+
+    // convert to ValWrapper
+    vector<tempptr_t> noTempArgs;
+    vector<x64asm::Imm64> args = {
+        x64asm::Imm64{vmPointer},
+    };
+    tempptr_t returnTemp = temp;
+    // this will put the result back inside the right temp
+    callHelper((void*) &(helper_new_valwrapper), args, noTempArgs, reg, returnTemp);
+
+    if (usedScratch) {
+        assm.pop(x64asm::rdi);
+    }
+}
+
+/************************
+ * REG ALLOCATION HELPERS
+ ***********************/
+void IrInterpreter::updateFreeRegs(instptr_t inst) {
+    // for each temp in the instruction
+    for (int i = 0; i < inst->tempIndices->size(); i++) {
+        tempptr_t temp = inst->tempIndices->at(i);
+        if (!temp->reg) {
+            return;
+        }
+
+        if (temp->startInterval == instructionIndex) {
+            // if a temp started here, add its reg
+            freeRegs.insert(temp->reg.value());
+        }
+        if (temp->endInterval -1 == instructionIndex) {
+            // if the temp ended here, remove it from the set
+            freeRegs.erase(temp->reg.value());
+        }
+    }
+}
+
+x64asm::R64 IrInterpreter::getReg(tempptr_t temp) {
+    if (temp->reg) {
+        return temp->reg.value();
+    } else {
+        uint32_t offset = temp->stackOffset.value();
+        // our temp is on the stack
+        // get a temp to load it into
+        x64asm::R64 reg = getScratchReg();
+        // mov it into the scratch reg
+        assm.mov(reg, x64asm::rbp);
+        assm.sub(reg, x64asm::Imm32{offset});
+        return reg;
+    }
+}
+
+void IrInterpreter::setReg(tempptr_t temp, x64asm::R64 reg) {
+    if (reg == temp->reg.value()) {
+        // it's already in the right reg
+        return;
+    }
+    if (temp->reg) {
+        // do a simple reg mov
+        assm.mov(temp->reg.value(), reg);
+        return;
+    } else {
+        // gotta put it back onto the stack eww
+        // TODO
+    }
+}
+
+x64asm::R64 IrInterpreter::getScratchReg() {
+    for (x64asm::R64 reg : freeRegs) {
+        return reg;
+    };
+    // there are no free regs available; we gotta dump something
+    // for now just randomly dump r10
+    // TODO
+    LOG("spilling");
+    spilled = true;
+    x64asm::R64 toSpill = x64asm::r10;
+    assm.push(toSpill);
+    return toSpill;
+};
+
+void IrInterpreter::returnScratchReg(x64asm::R64 reg) {
+    // release a scratch reg for other uses and
+    // restores the regiser to its previous value
+    freeRegs.insert(reg);
+    // TODO: you should ONLY pop if you had to push!!!
+    // TODO
+    if (spilled) {
+        assm.pop(reg);
+        spilled = false;
+        LOG("returned from spill");
+    }
+}
+
+/************************
+ * TEMP HELPERS
+ ***********************/
+void IrInterpreter::moveTemp(x64asm::R64 dest, tempptr_t src) {
+    moveTemp(dest, src, TempOp::MOVE);
+}
+void IrInterpreter::moveTemp(tempptr_t dest, tempptr_t src) {
+    moveTemp(dest, src, TempOp::MOVE);
+}
+
+void IrInterpreter::moveTemp(tempptr_t dest, x64asm::R64 src) {
+    if (dest->reg) {
+        assm.mov(dest->reg.value(), src);
+    } else {
+        // dest in mem, src is a reg
+        uint32_t destOffset = getTempOffset(dest);
+        assm.assemble({x64asm::MOV_M64_R64, {
+            x64asm::M64{
+                x64asm::rbp,
+                x64asm::Scale::TIMES_1,
+                x64asm::Imm32{-destOffset}
+            },
+            src
+        }});
+    }
+}
+
+void IrInterpreter::moveTemp(x64asm::R64 dest, tempptr_t src, TempOp tempOp) {
+    x64asm::Opcode op;
+    if (src->reg) {
+        switch (tempOp) {
+            case TempOp::MOVE:
+                op = x64asm::MOV_R64_R64;
+                break;
+            case TempOp::SUB:
+                op = x64asm::SUB_R64_R64;
+                break;
+            case TempOp::MUL:
+                op = x64asm::IMUL_R64_R64;
+                break;
+            case TempOp::CMP:
+                op = x64asm::CMP_R64_R64;
+                break;
+        }
+        assm.assemble({op, {dest, src->reg.value()}});
+    } else {
+        uint32_t offset = getTempOffset(src);
+        switch (tempOp) {
+            case TempOp::MOVE:
+                op = x64asm::MOV_R64_M64;
+                break;
+            case TempOp::SUB:
+                op = x64asm::SUB_R64_M64;
+                break;
+            case TempOp::MUL:
+                op = x64asm::IMUL_R64_M64;
+                break;
+            case TempOp::CMP:
+                op = x64asm::CMP_R64_M64;
+                break;
+        }
+        assm.assemble({op, {
+            dest,
+            x64asm::M64{
+                x64asm::rbp,
+                x64asm::Scale::TIMES_1,
+                x64asm::Imm32{-offset}
+            }
+        }});
+    }
+}
+
+void IrInterpreter::moveTemp(tempptr_t dest, tempptr_t src, TempOp tempOp) {
+    if (dest->reg) {
+        moveTemp(dest->reg.value(), src, tempOp);
+    } else {
+        x64asm::Opcode op;
+        switch (tempOp) {
+            case TempOp::MOVE:
+                op = x64asm::MOV_M64_R64;
+                break;
+            case TempOp::SUB:
+                op = x64asm::SUB_M64_R64;
+                break;
+            case TempOp::MUL:
+                // multiplication can only do R->M, reverse order of args.
+                assert (false);
+                break;
+            case TempOp::CMP:
+                op = x64asm::CMP_M64_R64;
+                break;
+        }
+
+        if (src->reg) {
+           // dest is in memory, src in a reg
+            uint32_t offset = getTempOffset(dest);
+            assm.assemble({op, {
+                x64asm::M64{
+                    x64asm::rbp,
+                    x64asm::Scale::TIMES_1,
+                    x64asm::Imm32{-offset}
+                },
+                src->reg.value()
+            }});
+        } else { // both are in memory :'(
+            // we need a scratch reg
+            x64asm::R64 reg = getScratchReg();
+            // move src into the reg
+            uint32_t srcOffset = getTempOffset(src);
+            assm.assemble({x64asm::MOV_R64_M64, {
+                reg,
+                x64asm::M64{
+                    x64asm::rbp,
+                    x64asm::Scale::TIMES_1,
+                    x64asm::Imm32{-srcOffset}
+                }
+            }});
+            // move the reg into dest
+            uint32_t destOffset = getTempOffset(dest);
+            assm.assemble({op, {
+                x64asm::M64{
+                    x64asm::rbp,
+                    x64asm::Scale::TIMES_1,
+                    x64asm::Imm32{-destOffset}
+                },
+                reg
+            }});
+            // give back the reg
+            returnScratchReg(reg);
+        }
+    }
+}
+
+/************************
+ * ASSM HELPERS
+ ***********************/
+x64asm::R32 IrInterpreter::getRegBottomHalf(x64asm::R64 reg) {
+    switch (reg) {
+        case x64asm::rdi:
+        {
+            return x64asm::edi;
+        }
+        case x64asm::rsi:
+        {
+            return x64asm::esi;
+        }
+        case x64asm::rax:
+        {
+            return x64asm::eax;
+        }
+        case x64asm::rbx:
+        {
+            return x64asm::ebx;
+        }
+        case x64asm::rcx:
+        {
+            return x64asm::ecx;
+        }
+        case x64asm::rdx:
+        {
+            return x64asm::edx;
+        }
+        case x64asm::r8:
+        {
+            return x64asm::r8d;
+        }
+        case x64asm::r9:
+        {
+            return x64asm::r9d;
+        }
+        case x64asm::r10:
+        {
+            return x64asm::r10d;
+        }
+        case x64asm::r11:
+        {
+            return x64asm::r11d;
+        }
+        case x64asm::r12:
+        {
+            return x64asm::r12d;
+        }
+        case x64asm::r13:
+        {
+            return x64asm::r13d;
+        }
+        case x64asm::r14:
+        {
+            return x64asm::r14d;
+        }
+        case x64asm::r15:
+        {
+            return x64asm::r15d;
+        }
+        default:
+            throw RuntimeException("reg does not have bottom half");
+    }
+};
+const x64asm::R64 IrInterpreter::callerSavedRegs[] = {
+    // the first 6 are the arg regs
+    x64asm::rdi,
+    x64asm::rsi,
+    x64asm::rdx,
+    x64asm::rcx,
+    x64asm::r8,
+    x64asm::r9,
+    // end arg regs
+    x64asm::r10,
+    x64asm::r11,
+    x64asm::rax
+};
+const x64asm::R64 IrInterpreter::calleeSavedRegs[] = {
+    // rbp and rsp are handled a little differently, so will not consider
+    // callee-saved
+    x64asm::rbx,
+    x64asm::r12,
+    x64asm::r13,
+    x64asm::r14,
+    x64asm::r15
+};

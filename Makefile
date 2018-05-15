@@ -6,13 +6,14 @@ SRCS := $(shell find $(SRC_DIRS) -name \"*.cpp\")
 OBJS := $(SRCS)/%.o
 DEPS := $(OBJS:.o=.d)
 
+# when adding a new source file, just add its .o to the appropriate object list below
 MS_PARSER = parser/ms
 MS_PARSER_OBJS = parser/ms/parser.o parser/ms/lexer.o
 BC_PARSER = parser/bc
 BC_PARSER_OBJS = parser/bc/parser.o parser/bc/lexer.o
 BC_COMPILER_OBJS = bc/bc-compiler.o bc/symboltable.o gc/gc.o frame.o types.o
 BC_COMPILER_HEADERS = bc/*.h gc/*.h frame.h types.h exception.h instructions.h parser/bc/printer.h
-VM_OBJS = vm/interpreter.o ir/bc_to_ir.o asm/ir_to_asm.o asm/helpers.o machine_code_func.o opt/opt_reg_alloc.o $(BC_COMPILER_OBJS)
+VM_OBJS = vm/interpreter.o ir/bc_to_ir.o asm/ir_to_asm.o asm/helpers.o  asm/asm_helpers.o machine_code_func.o opt/opt_reg_alloc.o $(BC_COMPILER_OBJS)
 VM_HEADERS = vm/*.h ir/*.h asm/*.h ir.h $(BC_COMPILER_HEADERS)
 ROOT_FILES = $(shell find . -name \"*.o\")
 REF = ref

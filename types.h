@@ -20,7 +20,7 @@
 using namespace std;
 using experimental::nullopt;
 
-#define LOG(msg) { if (true) cerr << msg << endl; }
+#define LOG(msg) { if (false) cerr << msg << endl; }
 
 class Frame;
 class Collectable;
