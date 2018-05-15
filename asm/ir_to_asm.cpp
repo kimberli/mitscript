@@ -9,9 +9,9 @@ const x64asm::R64 IrInterpreter::callerSavedRegs[] = {
     x64asm::r8,
     x64asm::r9,
     // end arg regs
-    x64asm::rax, 
     x64asm::r10, 
-    x64asm::r11
+    x64asm::r11,
+    x64asm::rax 
 };
 
 const x64asm::R64 IrInterpreter::calleeSavedRegs[] = {
@@ -266,7 +266,6 @@ x64asm::Function IrInterpreter::run() {
         }
     }
     
-    //assm.mov(x64asm::rax, x64asm::Imm64{vmPointer->NONE});
     // move None into rax
     assm.assemble({x64asm::MOV_R64_IMM64, {x64asm::rax, x64asm::Imm64{vmPointer->NONE}}});
     epilog();
@@ -356,15 +355,22 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
 
     // assume we do not have args to pop from the stack 
     
-    // STEP 3: save return value
+    // restore caller-saved registers from stack, minus rax
+    for (uint32_t i = 0; i < numCallerSaved - 1; ++i) {
+        assm.pop(callerSavedRegs[i]);
+    }
+    
+    // save return value
     if (returnTemp) {
         // move from rax to the temp 
-        moveTemp(returnTemp.value(), x64asm::rax);
-    }
-
-    // STEP 4: restore caller-saved registers from stack
-    for (uint32_t i = 1; i <= numCallerSaved; ++i) {
-        assm.pop(callerSavedRegs[i]);
+        bool usesRax = (returnTemp.value()->reg) && (returnTemp.value()->reg.value() == x64asm::rax);
+        if (!usesRax) {
+            moveTemp(returnTemp.value(), x64asm::rax);
+            assm.pop(x64asm::rax);
+        } // if it does use rax, nothing to do! 
+    } else {
+        // restore rax
+        assm.pop(x64asm::rax);
     }
 }
 
@@ -644,7 +650,6 @@ void IrInterpreter::executeStep() {
             }
         case IrOp::LoadGlobal:
             {
-                // TODO
                 LOG(to_string(instructionIndex) + ": LoadGlobal");
                 string* name = &inst->name0.value();
                 vector<x64asm::Imm64> args = {
@@ -666,7 +671,6 @@ void IrInterpreter::executeStep() {
             }
        case IrOp::StoreGlobal:
             {
-                // TODO
                 LOG(to_string(instructionIndex) + ": StoreGlobal");
                 string* name = &inst->name0.value();
                 vector<x64asm::Imm64> args = {
@@ -795,12 +799,12 @@ void IrInterpreter::executeStep() {
                 // TODO
                 LOG(to_string(instructionIndex) + ": IndexStore");
                 vector<x64asm::Imm64> args = {
-                    x64asm::Imm64{vmPointer},
+                    x64asm::Imm64{vmPointer}, // vm pointer
                 };
                 vector<tempptr_t> temps = {
-                    inst->tempIndices->at(2),
-                    inst->tempIndices->at(0),
-                    inst->tempIndices->at(1),
+                    inst->tempIndices->at(2), // index 
+                    inst->tempIndices->at(0), // record
+                    inst->tempIndices->at(1), // val
 				};
                 tempptr_t returnTemp = inst->tempIndices->at(0);
                 callHelper((void *) &(helper_set_record_index), args, temps, returnTemp);

@@ -197,7 +197,7 @@ enum class IrOp {
     // op0: N/A
     // temp0: temp index containing the record to store into (must be record)
     // temp1: temp index containing the field's new value
-    // temp2: temp index containing the field
+    // temp2: temp index containing the index/field
     // Result: temp at temp0 points to record with the new value set
     IndexStore,
 
