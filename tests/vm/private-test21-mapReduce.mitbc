@@ -53,7 +53,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [n],
-			labels = {0 : 18; 1 : 7},
+			labels = {0 : 19; 1 : 8},
 			instructions = 
 			[
 				load_local	0
@@ -61,6 +61,7 @@ function
 				store_local	3
 				load_const	0
 				store_local	2
+				startwhile
 				goto	0
 				label	1
 				load_local	1
@@ -79,6 +80,7 @@ function
 				swap
 				gt
 				if	1
+				endwhile
 			]
 		},
 		function
@@ -90,7 +92,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [n],
-			labels = {2 : 10; 3 : 13; 4 : 44; 5 : 30},
+			labels = {2 : 10; 3 : 13; 4 : 45; 5 : 31},
 			instructions = 
 			[
 				load_local	0
@@ -121,6 +123,7 @@ function
 				store_local	5
 				load_const	4
 				store_local	3
+				startwhile
 				goto	4
 				label	5
 				load_local	2
@@ -142,6 +145,7 @@ function
 				swap
 				gt
 				if	5
+				endwhile
 				load_local	5
 				return
 			]
@@ -183,7 +187,7 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [Car, n, vx, vy],
-			labels = {6 : 86; 7 : 19; 8 : 40; 9 : 47; 10 : 69; 11 : 76; 12 : 82; 13 : 85},
+			labels = {6 : 87; 7 : 20; 8 : 41; 9 : 48; 10 : 70; 11 : 77; 12 : 83; 13 : 86},
 			instructions = 
 			[
 				alloc_record
@@ -203,6 +207,7 @@ function
 				load_const	4
 				sub
 				store_local	0
+				startwhile
 				goto	6
 				label	7
 				load_global	0
@@ -276,6 +281,7 @@ function
 				load_const	15
 				geq
 				if	7
+				endwhile
 				load_local	3
 				return
 			]
@@ -456,7 +462,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [Car, Ncars, Nsteps, cars, forall, i, input, intcast, manycars, mapreduce, print, step],
-	labels = {16 : 56; 17 : 47},
+	labels = {16 : 57; 17 : 48},
 	instructions = 
 	[
 		load_func	0
@@ -504,6 +510,7 @@ function
 		pop
 		load_const	5
 		store_global	5
+		startwhile
 		goto	16
 		label	17
 		load_global	11
@@ -520,6 +527,7 @@ function
 		swap
 		gt
 		if	17
+		endwhile
 		load_global	10
 		load_const	7
 		load_global	3

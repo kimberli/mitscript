@@ -364,6 +364,16 @@ private:
 
             break;
         }
+        case BcOp::StartWhile:
+        {
+            os << "startwhile";
+            break;
+        }
+        case BcOp::EndWhile:
+        {
+            os << "endwhile";
+            break;
+        }
         case BcOp::Label:
         {
             os << "label"
@@ -389,7 +399,6 @@ private:
 
             break;
         }
-
         default:
             assert(false && "Unhandled BcOp");
         }
