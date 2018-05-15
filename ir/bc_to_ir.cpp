@@ -119,6 +119,8 @@ void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoo
     pushTemp(ret);
 	checkIfUsed(right);
 	checkIfUsed(left);
+	checkIfUsed(leftUnboxed);
+	checkIfUsed(rightUnboxed);
     return;
 }
 

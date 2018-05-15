@@ -22,6 +22,7 @@ void RegOpt::linearScan(IrFunc* irFunc) {
 //		temp_i->endInterval = irFunc->instructions.size();
 //	}
 	for (tempptr_t temp_i: irFunc->temps) {
+		LOG(to_string(temp_i->index) + "start: " + to_string(temp_i->startInterval) + ", end: " + to_string(temp_i->endInterval));
 		if (temp_i->startInterval == -1 && temp_i->endInterval == -1) {
 			// TODO: creating global temps that do nothing
 			continue;
