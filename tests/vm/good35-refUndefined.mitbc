@@ -46,57 +46,74 @@ function
 		},
 		function
 		{
-			functions = [],
-			constants = [true, "hi"],
-			parameter_count = 1,
-			local_vars = [hello],
-			local_ref_vars = [],
+			functions =
+			[
+				function
+				{
+					functions = [],
+					constants = [],
+					parameter_count = 0,
+					local_vars = [],
+					local_ref_vars = [],
+					free_vars = [y],
+					names = [print],
+					labels = {},
+					instructions = 
+					[
+						load_global	0
+						push_ref	0
+						load_ref
+						call	1
+						pop
+					]
+				}
+			],
+			constants = [5, 2],
+			parameter_count = 0,
+			local_vars = [g, y],
+			local_ref_vars = [y],
 			free_vars = [],
-			names = [print],
-			labels = {0 : 8; 1 : 3},
+			names = [],
+			labels = {},
 			instructions = 
 			[
-				startwhile
-				goto	0
-				label	1
-				load_global	0
-				load_local	0
-				call	1
-				pop
-				label	0
+				load_func	0
+				push_ref	0
+				alloc_closure	1
+				store_local	0
 				load_const	0
 				load_const	1
 				add
-				if	1
-				endwhile
+				store_local	1
+				load_local	0
+				call	0
+				pop
 			]
 		}
 	],
-	constants = [1249],
+	constants = [],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [input, intcast, print, xyz],
+	names = [f, input, intcast, print],
 	labels = {},
 	instructions = 
 	[
 		load_func	0
 		alloc_closure	0
-		store_global	2
+		store_global	3
 		load_func	1
 		alloc_closure	0
-		store_global	0
+		store_global	1
 		load_func	2
 		alloc_closure	0
-		store_global	1
+		store_global	2
 		load_func	3
 		alloc_closure	0
-		store_global	3
-		load_global	3
-		load_const	0
-		neg
-		call	1
+		store_global	0
+		load_global	0
+		call	0
 		pop
 	]
 }

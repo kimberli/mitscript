@@ -413,7 +413,6 @@ private:
 
             break;
         }
-
         default:
             assert(false && "Unhandled BcOp");
         }

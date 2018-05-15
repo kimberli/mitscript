@@ -437,22 +437,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     doUnaryArithmetic(IrOp::Not, true);
                     break;
 	            }
-	        case BcOp::StartWhile:
-	            {
-					whileLevel++;
-                    break;
-	            }
-	        case BcOp::EndWhile:
-	            {
-					whileLevel--;
-					if (whileLevel == 0) {
-						for (tempptr_t temp: tempsInWhile) {
-							temp->endInterval = irInsts.size();	
-						}
-						tempsInWhile.clear();
-					}
-                    break;
-	            }
 	        case BcOp::Goto:
 	            {
                     pushInstruction(make_shared<IrInstruction>(IrOp::Goto, inst.operand0.value()));
@@ -468,6 +452,22 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					checkIfUsed(expr);
 					checkIfUsed(exprVal);
 	                break;
+	            }
+            case BcOp::StartWhile:
+                {
+					whileLevel++;
+                    break;
+                }
+	        case BcOp::EndWhile:
+	            {
+					whileLevel--;
+					if (whileLevel == 0) {
+						for (tempptr_t temp: tempsInWhile) {
+							temp->endInterval = irInsts.size();	
+						}
+						tempsInWhile.clear();
+					}
+                    break;
 	            }
             case BcOp::Label:
                 {

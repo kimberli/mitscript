@@ -125,6 +125,8 @@ comment      ("//"[^\n]*)
 "not" { return T_not; }
 "goto" { return T_goto; }
 "if"  { return T_if; }
+"startwhile" { return T_startwhile; }
+"endwhile" { return T_endwhile; }
 "label"  { return T_label; }
 "dup" { return T_dup; }
 "swap" { return T_swap; }

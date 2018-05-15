@@ -189,18 +189,6 @@ enum class BcOp
     // Stack:       S :: operand 1 => S:: op(operand 1)
     Not,
 
-    // Description: Marks start of while loop
-    // Mnemonic:    startwhile
-    // Operand 0:   N/A
-    // Stack:       S => S
-    StartWhile,
-
-    // Description: Marks end of while loop
-    // Mnemonic:    endwhile
-    // Operand 0:   N/A
-    // Stack:       S => S
-    EndWhile,
-
     // Description: transfers execution of the function to a label index
     // Mnemonic:    goto i
     // Operand 0: label index to jump to
@@ -214,6 +202,18 @@ enum class BcOp
     // Operand 1:   value
     // Stack:       S :: operand 1 => S
     If,
+
+    // Description: Marks start of while loop
+    // Mnemonic:    startwhile
+    // Operand 0:   N/A
+    // Stack:       S => S
+    StartWhile,
+
+    // Description: Marks end of while loop
+    // Mnemonic:    endwhile
+    // Operand 0:   N/A
+    // Stack:       S => S
+    EndWhile,
 
     // Description: insert a label at this location in the generated code
     // Mnemonic:    label i

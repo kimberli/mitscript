@@ -53,17 +53,19 @@ function
 			local_ref_vars = [],
 			free_vars = [],
 			names = [print],
-			labels = {0 : 38; 1 : 4; 2 : 24; 3 : 10},
+			labels = {0 : 41; 1 : 5; 2 : 26; 3 : 12},
 			instructions = 
 			[
 				load_const	0
 				store_local	4
+				startwhile
 				goto	0
 				label	1
 				load_const	1
 				store_local	5
 				load_const	2
 				store_local	6
+				startwhile
 				goto	2
 				label	3
 				load_local	0
@@ -85,6 +87,7 @@ function
 				swap
 				gt
 				if	3
+				endwhile
 				load_global	0
 				load_local	6
 				call	1
@@ -99,6 +102,7 @@ function
 				swap
 				gt
 				if	1
+				endwhile
 			]
 		},
 		function
@@ -139,7 +143,7 @@ function
 	local_ref_vars = [],
 	free_vars = [],
 	names = [consolePrint, i, im, input, intcast, p, print, x, y, x, y],
-	labels = {6 : 46; 7 : 27},
+	labels = {6 : 47; 7 : 28},
 	instructions = 
 	[
 		load_func	0
@@ -167,6 +171,7 @@ function
 		store_global	2
 		load_const	2
 		store_global	1
+		startwhile
 		goto	6
 		label	7
 		load_global	0
@@ -193,5 +198,6 @@ function
 		swap
 		gt
 		if	7
+		endwhile
 	]
 }

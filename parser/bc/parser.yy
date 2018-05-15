@@ -131,6 +131,8 @@ int yyerror(BCLTYPE * yylloc, yyscan_t yyscanner, Function*& out, const char* me
 %token T_not
 %token T_goto
 %token T_if
+%token T_startwhile
+%token T_endwhile
 %token T_label
 %token T_dup
 %token T_swap
@@ -424,6 +426,14 @@ Instruction:
 | T_if T_int
 {
 	$$ = new BcInstruction(BcOp::If, safe_cast($2));
+}
+| T_startwhile
+{
+	$$ = new BcInstruction(BcOp::StartWhile, { });
+}
+| T_endwhile
+{
+	$$ = new BcInstruction(BcOp::EndWhile, { });
 }
 | T_label T_int
 {

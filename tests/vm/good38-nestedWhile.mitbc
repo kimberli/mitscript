@@ -45,13 +45,13 @@ function
 			]
 		}
 	],
-	constants = [0, 1, 5, "done!"],
+	constants = [0, 1, " ", 1, 3, 1, 5],
 	parameter_count = 0,
 	local_vars = [],
 	local_ref_vars = [],
 	free_vars = [],
-	names = [input, intcast, print, x],
-	labels = {0 : 23; 1 : 14},
+	names = [input, intcast, print, x, y],
+	labels = {0 : 45; 1 : 16; 2 : 34; 3 : 23},
 	instructions = 
 	[
 		load_func	0
@@ -65,6 +65,8 @@ function
 		store_global	1
 		load_const	0
 		store_global	3
+		load_const	1
+		store_global	4
 		startwhile
 		goto	0
 		label	1
@@ -72,20 +74,36 @@ function
 		load_global	3
 		call	1
 		pop
+		startwhile
+		goto	2
+		label	3
+		load_global	2
+		load_const	2
+		load_global	4
+		add
+		call	1
+		pop
+		load_global	4
+		load_const	3
+		add
+		store_global	4
+		label	2
+		load_global	4
+		load_const	4
+		swap
+		gt
+		if	3
+		endwhile
 		load_global	3
-		load_const	1
+		load_const	5
 		add
 		store_global	3
 		label	0
 		load_global	3
-		load_const	2
+		load_const	6
 		swap
 		gt
 		if	1
 		endwhile
-		load_global	2
-		load_const	3
-		call	1
-		pop
 	]
 }
