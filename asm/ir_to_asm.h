@@ -91,7 +91,9 @@ enum class TempOp {
     MOVE,
     SUB,
     MUL,
-    CMP
+    CMP, 
+    AND,
+    OR
 };
 
 enum class TempBoolOp {

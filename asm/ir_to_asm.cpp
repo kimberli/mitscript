@@ -646,29 +646,27 @@ void IrInterpreter::executeStep() {
         case IrOp::And:
             {
                 LOG(to_string(instructionIndex) + ": And");
-                auto left = x64asm::edi;
-                auto right = x64asm::esi;
-                loadTemp(left, inst->tempIndices->at(2));
-                // load right temp into a reg
-                loadTemp(right, inst->tempIndices->at(1));
-                // perform the sub; result stored in left
-                assm.and_(left, right);
-                // put the value back in the temp
-                storeTemp(left, inst->tempIndices->at(0));
-                break;
+                auto left = inst->tempIndices->at(2);
+                auto right = inst->tempIndices->at(1);
+                auto res = inst->tempIndices->at(0);
+
+                // move left into res
+                moveTemp(res, left);
+                // implement and as a form of move
+                moveTemp(res, right, TempOp::AND);
+               break;
             };
         case IrOp::Or:
             {
                 LOG(to_string(instructionIndex) + ": Or");
-                auto left = x64asm::edi;
-                auto right = x64asm::esi;
-                loadTemp(left, inst->tempIndices->at(2));
-                // load right temp into a reg
-                loadTemp(right, inst->tempIndices->at(1));
-                // perform the sub; result stored in left
-                assm.or_(left, right);
-                // put the value back in the temp
-                storeTemp(left, inst->tempIndices->at(0));
+                auto left = inst->tempIndices->at(2);
+                auto right = inst->tempIndices->at(1);
+                auto res = inst->tempIndices->at(0);
+
+                // move left into res
+                moveTemp(res, left);
+                // implement and as a form of move
+                moveTemp(res, right, TempOp::OR);
                 break;
             };
         case IrOp::Not:

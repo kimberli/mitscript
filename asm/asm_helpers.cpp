@@ -323,6 +323,12 @@ void IrInterpreter::moveTemp(x64asm::R64 dest, tempptr_t src, TempOp tempOp) {
             case TempOp::CMP:
                 op = x64asm::CMP_R64_R64;
                 break;
+            case TempOp::AND:
+                op = x64asm::AND_R64_R64;
+                break;
+            case TempOp::OR:
+                op = x64asm::OR_R64_R64;
+                break;
         }
         assm.assemble({op, {dest, src->reg.value()}});
     } else {
@@ -339,6 +345,12 @@ void IrInterpreter::moveTemp(x64asm::R64 dest, tempptr_t src, TempOp tempOp) {
                 break;
             case TempOp::CMP:
                 op = x64asm::CMP_R64_M64;
+                break;
+            case TempOp::AND:
+                op = x64asm::AND_R64_M64;
+                break;
+             case TempOp::OR:
+                op = x64asm::OR_R64_M64;
                 break;
         }
         assm.assemble({op, {
@@ -370,6 +382,12 @@ void IrInterpreter::moveTemp(tempptr_t dest, tempptr_t src, TempOp tempOp) {
                 break;
             case TempOp::CMP:
                 op = x64asm::CMP_M64_R64;
+                break;
+            case TempOp::AND:
+                op = x64asm::AND_M64_R64;
+                break;
+            case TempOp::OR:
+                op = x64asm::OR_M64_R64;
                 break;
         }
 
