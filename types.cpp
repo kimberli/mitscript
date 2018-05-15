@@ -176,7 +176,7 @@ bool Record::equals(Value* other) {
     if (otherV == NULL) {
         return false;
     }
-    return value == otherV->value;
+    return &value == &otherV->value;
 }
 void Record::follow(CollectedHeap& heap) {
     // point to all the values contained in the record
