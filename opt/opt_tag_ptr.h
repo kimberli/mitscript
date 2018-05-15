@@ -36,6 +36,6 @@ Collectable* get_collectable(tagptr_t ptr);
 template<typename T>
 T* cast_val(tagptr_t ptr);
 
-string* ptr_to_str(tagptr_t ptr);
+string ptr_to_str(tagptr_t ptr);
 tagptr_t ptr_equals(tagptr_t left, tagptr_t right);
 tagptr_t ptr_add(tagptr_t left, tagptr_t right);

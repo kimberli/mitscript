@@ -104,7 +104,8 @@ tagptr_t helper_new_valwrapper(Interpreter* interpreter, tagptr_t ptr) {
 }
 
 tagptr_t helper_cast_string(Interpreter* interpreter, tagptr_t ptr) {
-    return make_ptr(ptr_to_str(ptr));
+    // TODO: memory leak?
+    return make_ptr(new string(ptr_to_str(ptr)));
 }
 
 tagptr_t helper_get_record_field(Interpreter* interpreter, string* field, tagptr_t record_ptr) {
@@ -123,7 +124,7 @@ tagptr_t helper_set_record_field(Interpreter* interpreter, string* field, tagptr
 
 tagptr_t helper_get_record_index(Interpreter* interpreter, tagptr_t index, tagptr_t record_ptr) {
     Record* record = cast_val<Record>(record_ptr);
-    string key = *ptr_to_str(index);
+    string key = ptr_to_str(index);
     if (record->value.count(key) == 0) {
         return interpreter->NONE;
     }
@@ -132,6 +133,6 @@ tagptr_t helper_get_record_index(Interpreter* interpreter, tagptr_t index, tagpt
 
 tagptr_t helper_set_record_index(Interpreter* interpreter, tagptr_t index, tagptr_t record_ptr, tagptr_t ptr) {
     Record* record = cast_val<Record>(record_ptr);
-	record->set(*ptr_to_str(index), ptr, *interpreter->collector);
+	record->set(ptr_to_str(index), ptr, *interpreter->collector);
 	return record_ptr;
 }

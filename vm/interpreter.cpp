@@ -149,7 +149,7 @@ void Interpreter::executeStep() {
             }
         case BcOp::IndexLoad:
             {
-                string index = *ptr_to_str(frame->opStackPop());
+                string index = ptr_to_str(frame->opStackPop());
                 Record* record = cast_val<Record>(frame->opStackPop());
                 if (record->value.count(index) == 0) {
                     tagptr_t val = NONE;
@@ -165,7 +165,7 @@ void Interpreter::executeStep() {
             // record
             {
 				auto value = frame->opStackPop();
-				string index = *ptr_to_str(frame->opStackPop());
+				string index = ptr_to_str(frame->opStackPop());
 				Record* record = cast_val<Record>(frame->opStackPop());
                 record->set(index, value, *collector);
                 frame->instructionIndex++;

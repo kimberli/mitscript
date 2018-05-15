@@ -157,7 +157,7 @@ const string Record::typeS = "Record";
 string Record::toString() {
     string res = "{";
     for (auto x: value) {
-        res += x.first + ":" + *ptr_to_str(x.second) + " ";
+        res += x.first + ":" + ptr_to_str(x.second) + " ";
     }
     res += "}";
     return res;
@@ -232,7 +232,7 @@ void Closure::follow(CollectedHeap& heap) {
 tagptr_t PrintNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
     string name = currentFrame.getLocalByIndex(0);
     auto val = currentFrame.getLocalVar(name);
-    cout << *ptr_to_str(val) << endl;
+    cout << ptr_to_str(val) << endl;
     return ch.allocate<None>();
 };
 tagptr_t InputNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
