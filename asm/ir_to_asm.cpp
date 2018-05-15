@@ -1028,20 +1028,27 @@ void IrInterpreter::executeStep() {
         case IrOp::Div:
             {
                 LOG(to_string(instructionIndex) + ": Div");
-                auto numerator_secondhalf = x64asm::eax;
-                loadTemp(numerator_secondhalf, inst->tempIndices->at(2));
-    			assm.cdq(); // weird asm thing to sign-extend rax into rdx
+				// TODO: make this lesss inefficient
+				// save rax, rdx, and get an extra scratch register
+        		assm.push(x64asm::rax); 
+        		assm.push(x64asm::rdx); 
+        		x64asm::R64 divisor = getScratchReg();
+                x64asm::R64 numerator_secondhalf = x64asm::rax;
+                moveTemp(numerator_secondhalf, inst->tempIndices->at(2));
+    			assm.cdq(); // weird asm thing to sign-extend eax into edx
                 vector<x64asm::Imm64> args = {};
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1),
                 };
                 callHelper((void *) &(helper_assert_nonzero), args, temps, nullopt);
-                auto divisor = x64asm::ebx;
-				loadTemp(divisor, inst->tempIndices->at(1));
+				moveTemp(divisor, inst->tempIndices->at(1));
                 // perform the div; result stored in rax
                 assm.idiv(divisor);
                 // put the value back in the temp
-                storeTemp(x64asm::eax, inst->tempIndices->at(0));
+                moveTemp(inst->tempIndices->at(0), x64asm::rax);
+				// restore rax and rdx
+        		assm.pop(x64asm::rdx); 
+        		assm.pop(x64asm::rax); 
                 break;
             };
         case IrOp::Neg: {
