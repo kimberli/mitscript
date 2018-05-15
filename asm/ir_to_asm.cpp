@@ -1053,10 +1053,10 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Neg: {
                 LOG(to_string(instructionIndex) + ": Neg");
-                auto operand = x64asm::edi;
-                loadTemp(operand, inst->tempIndices->at(1));
+                auto operand = x64asm::rdi;
+                moveTemp(operand, inst->tempIndices->at(1));
                 assm.neg(operand);
-                storeTemp(operand, inst->tempIndices->at(0));
+                moveTemp(inst->tempIndices->at(0), operand);
                 break;
             };
         case IrOp::Gt:
