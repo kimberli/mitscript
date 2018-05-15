@@ -500,11 +500,38 @@ void IrInterpreter::returnScratchReg(x64asm::R64 reg) {
 }
 
 void IrInterpreter::moveTemp(x64asm::R64 dest, tempptr_t src) {
+    moveTemp(dest, src, TempOp::MOVE);
+}
+
+void IrInterpreter::moveTemp(x64asm::R64 dest, tempptr_t src, TempOp tempOp) {
+    x64asm::Opcode op;
     if (src->reg) {
-        assm.mov(dest, src->reg.value());
+        switch (tempOp) {
+            case TempOp::MOVE: 
+                op = x64asm::MOV_R64_R64;
+                break;
+            case TempOp::SUB: 
+                op = x64asm::SUB_R64_R64;
+                break;
+            case TempOp::MUL: 
+                op = x64asm::IMUL_R64_R64;
+                break;
+        }
+        assm.assemble({op, {dest, src->reg.value()}});
     } else {
         uint32_t offset = getTempOffset(src);
-        assm.assemble({x64asm::MOV_R64_M64, {
+        switch (tempOp) {
+            case TempOp::MOVE: 
+                op = x64asm::MOV_R64_M64;
+                break;
+            case TempOp::SUB: 
+                op = x64asm::SUB_R64_M64;
+                break;
+            case TempOp::MUL: 
+                op = x64asm::IMUL_R64_M64;
+                break;
+        }
+        assm.assemble({op, {
             dest,
             x64asm::M64{
                 x64asm::rbp, 
@@ -533,13 +560,31 @@ void IrInterpreter::moveTemp(tempptr_t dest, x64asm::R64 src) {
 }
 
 void IrInterpreter::moveTemp(tempptr_t dest, tempptr_t src) {
+    moveTemp(dest, src, TempOp::MOVE);
+}
+
+void IrInterpreter::moveTemp(tempptr_t dest, tempptr_t src, TempOp tempOp) {
     if (dest->reg) {
-        moveTemp(dest->reg.value(), src);
+        moveTemp(dest->reg.value(), src, tempOp);
     } else {
+        x64asm::Opcode op;
+        switch (tempOp) {
+            case TempOp::MOVE: 
+                op = x64asm::MOV_M64_R64;
+                break;
+            case TempOp::SUB: 
+                op = x64asm::SUB_M64_R64;
+                break;
+            case TempOp::MUL: 
+                // multiplication can only do R->M, reverse order of args.
+                assert (false); 
+                break;
+        }
+ 
         if (src->reg) {
-            // dest is in memory, src in a reg
+           // dest is in memory, src in a reg
             uint32_t offset = getTempOffset(dest);
-            assm.assemble({x64asm::MOV_M64_R64, {
+            assm.assemble({op, {
                 x64asm::M64{
                     x64asm::rbp, 
                     x64asm::Scale::TIMES_1,
@@ -562,7 +607,7 @@ void IrInterpreter::moveTemp(tempptr_t dest, tempptr_t src) {
             }});
             // move the reg into dest
             uint32_t destOffset = getTempOffset(dest);
-            assm.assemble({x64asm::MOV_M64_R64, {
+            assm.assemble({op, {
                 x64asm::M64{
                     x64asm::rbp, 
                     x64asm::Scale::TIMES_1,
@@ -736,7 +781,6 @@ void IrInterpreter::executeStep() {
             }
         case IrOp::AllocRecord:
             {
-                // TODO
                 LOG(to_string(instructionIndex) + ": AllocRecord");
                 vector<x64asm::Imm64> args = {
                     x64asm::Imm64{vmPointer},
@@ -748,7 +792,6 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::FieldLoad:
             {
-                // TODO
                 LOG(to_string(instructionIndex) + ": FieldLoad");
                 string* name = &inst->name0.value();
                 vector<x64asm::Imm64> args = {
@@ -764,7 +807,6 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::FieldStore:
             {
-                // TODO
                 LOG(to_string(instructionIndex) + ": FieldStore");
                 string* name = &inst->name0.value();
                 vector<x64asm::Imm64> args = {
@@ -781,7 +823,6 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::IndexLoad:
             {
-                // TODO
                 LOG(to_string(instructionIndex) + ": IndexLoad");
                 vector<x64asm::Imm64> args = {
                     x64asm::Imm64{vmPointer},
@@ -796,7 +837,6 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::IndexStore:
             {
-                // TODO
                 LOG(to_string(instructionIndex) + ": IndexStore");
                 vector<x64asm::Imm64> args = {
                     x64asm::Imm64{vmPointer}, // vm pointer
@@ -914,10 +954,9 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Return:
             {
-                // TODO
                 LOG(to_string(instructionIndex) + ": Return");
-                getRbpOffset(getTempOffset(inst->tempIndices->at(0)));
-                assm.mov(x64asm::rax, x64asm::M64{x64asm::r10});
+                // put temp0 in rax
+                moveTemp(x64asm::rax, inst->tempIndices->at(0));
                 epilog();
                 break;
             };
@@ -940,30 +979,50 @@ void IrInterpreter::executeStep() {
             {
                 LOG(to_string(instructionIndex) + ": Sub");
                 //rdi and rsi
-                // load the left temp into a reg
-                auto left = x64asm::edi;
-                auto right = x64asm::esi;
-                loadTemp(left, inst->tempIndices->at(2));
-                // load right temp into a reg
-                loadTemp(right, inst->tempIndices->at(1));
-                // perform the sub; result stored in left
-                assm.sub(left, right);
-                // put the value back in the temp
-                storeTemp(left, inst->tempIndices->at(0));
+                auto left = inst->tempIndices->at(2);
+                auto right = inst->tempIndices->at(1);
+                auto res = inst->tempIndices->at(0);
+                // mov left into temp0 
+                moveTemp(res, left);
+                moveTemp(res, right, TempOp::SUB);
                 break;
             };
         case IrOp::Mul:
             {
                 LOG(to_string(instructionIndex) + ": Mul");
-                auto left = x64asm::edi;
-                auto right = x64asm::esi;
-                loadTemp(left, inst->tempIndices->at(2));
+                auto left = inst->tempIndices->at(2);
+                auto right = inst->tempIndices->at(1);
+                auto res = inst->tempIndices->at(0);
+                //auto left = x64asm::edi;
+                //auto right = x64asm::esi;
+                
+                if (left->reg) {
+                    if (right->reg) {
+                        assm.imul(left->reg.value(), right->reg.value());
+                    } else {
+                        // right is in mem
+                        uint32_t offset = getTempOffset(right);
+                        assm.assemble({x64asm::IMUL_R64_M64, {
+                            left->reg.value(),
+                            x64asm::M64{
+                                x64asm::rbp, 
+                                x64asm::Scale::TIMES_1,
+                                x64asm::Imm32{-offset}
+                            }
+                        }});
+                    }
+                }
+
+
+                // asign these to src/dest based on where they 
+                // are stored
+                //loadTemp(left, inst->tempIndices->at(2));
                 // load right temp into a reg
-                loadTemp(right, inst->tempIndices->at(1));
+                //loadTemp(right, inst->tempIndices->at(1));
                 // perform the sub; result stored in left
-                assm.imul(left, right);
+                //assm.imul(left, right);
                 // put the value back in the temp
-                storeTemp(left, inst->tempIndices->at(0));
+                //storeTemp(left, inst->tempIndices->at(0));
                 break;
             };
         case IrOp::Div:

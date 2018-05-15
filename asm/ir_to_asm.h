@@ -8,6 +8,7 @@
 
 class Interpreter; 
 class IrInterpreter;
+enum class TempOp;
 
 typedef set<x64asm::R64> regset_t;
 
@@ -68,7 +69,9 @@ private:
     void returnScratchReg(x64asm::R64 reg);
     // moves a val between two temps efficiently given where they are currently
     void moveTemp(tempptr_t dest, tempptr_t src);
+    void moveTemp(tempptr_t dest, tempptr_t src, TempOp tempOp);
     void moveTemp(x64asm::R64 dest, tempptr_t src);
+    void moveTemp(x64asm::R64 dest, tempptr_t src, TempOp tempOp);
     void moveTemp(tempptr_t dest, x64asm::R64 src);
 
 public: 
@@ -80,4 +83,10 @@ public:
     static const int numArgRegs = 6;
     IrInterpreter(IrFunc* irFunction, Interpreter* vmInterpreterPointer, vector<bool> isLocalRefVec); 
     x64asm::Function run(); // runs the program 
+};
+
+enum class TempOp {
+    MOVE, 
+    SUB, 
+    MUL, 
 };
