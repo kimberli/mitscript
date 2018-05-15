@@ -404,9 +404,10 @@ void Interpreter::executeStep() {
             throw RuntimeException("should never get here - invalid instruction");
     }
 	collector->gc();
-    LOG("instructionIndex = " + to_string(frame->instructionIndex));
-    LOG("numInstructions = " + to_string(frame->numInstructions()));
-    LOG("frames.size = " + to_string(frames.size()));
+    LOG("  inst index = " << frame->instructionIndex <<
+            " || num insts = " << frame->numInstructions() <<
+            " || opstack len = " << frame->opStack.size() <<
+            " || frame num = " << frames.size());
     if (frames.size() == 1 && frame->instructionIndex == frame->numInstructions()) {
         // last instruction of the whole program
         finished = true;
