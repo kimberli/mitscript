@@ -9,7 +9,6 @@ THIS_FILE="test_perf.sh"
 DIFF=$DIR/diff.txt
 TEST_OUT=$DIR/tmp.out
 
-VERBOSE=false
 NUM_TIMES=5
 
 TOTAL=0
@@ -33,10 +32,6 @@ run_test() {
 repeat_tests() {
     for i in $NUM_TIMES; do
         run_test $1
-        if [[ $? -eq 139 ]]; then
-            echo -e "TEST $TOTAL - $(basename $filename): ${RED}Failed${NC}"
-            return 0
-        fi
     done
 }
 
@@ -45,9 +40,8 @@ time_tests() {
     TOTAL=$((TOTAL+1))
     run_test $filename  # warm up cache
     time repeat_tests $filename
-    if [[ $? -eq 0 ]]; then
-        return 0
-    fi
+
+    echo "continuing... $TOTAL"
 
     target=$DIR$(basename $filename $TEST_FILE_EXT)$TARGET_FILE_EXT
     if [ ! -e $target ]; then
@@ -60,9 +54,7 @@ time_tests() {
         diff $TEST_OUT $target > $DIFF
         if [ ! -s $DIFF ]; then
             SUCCESS=$((SUCCESS+1))
-            if $VERBOSE; then
-                echo -e "TEST $TOTAL - $(basename $filename): ${GREEN}Passed${NC}"
-            fi
+            echo -e "TEST $TOTAL - $(basename $filename): ${GREEN}Passed${NC}"
             return 0
         else
             echo -e "TEST $TOTAL - $(basename $filename): ${RED}Failed${NC}"
