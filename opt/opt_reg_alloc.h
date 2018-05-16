@@ -24,7 +24,7 @@ private:
     IrInstList instructions;
     void run();
     void executeStep();
-	void linearScan(IrFunc* irFunc);
+	int linearScan(IrFunc* irFunc);
 public: 
-    void optimize(IrFunc* irFunc) override;
+    int optimize(IrFunc* irFunc) override;
 };

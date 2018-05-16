@@ -24,12 +24,10 @@ tempptr_t IrCompiler::getNewTemp() {
 }
 void IrCompiler::pushTemp(tempptr_t temp) {
     tempStack.push(temp);
-	temp->timesInUse++;
 }
 tempptr_t IrCompiler::popTemp() {
     tempptr_t temp = tempStack.top();
     tempStack.pop();
-	temp->timesInUse--;
     return temp;
 }
 void IrCompiler::checkIfUsed(tempptr_t temp) {
@@ -507,6 +505,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
             func->constants_, 
             func->functions_,
 			temps,
+			temps.size(),
             func->parameter_count_, 
             func->local_vars_.size(), 
             ref_count);
