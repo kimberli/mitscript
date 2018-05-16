@@ -22,6 +22,15 @@ void IrInterpreter::getRbpOffset(uint32_t offset) {
 /************************
  * CALL HELPERS
  ***********************/
+void IrInterpreter::Pop(x64asm::R64 reg) {
+    popCount -=1;
+    assm.pop(reg);
+}
+void IrInterpreter::Push(x64asm::R64 reg) {
+    popCount +=1;
+    assm.push(reg);
+}
+
 void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps, opttemp_t returnTemp) {
     callHelper(fn, args, temps, nullopt, returnTemp);
 }
@@ -33,7 +42,22 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
     // IMPORTANT: the reg in lastArg should not be r10, rax, or any of the 6 argRegs
     // STEP 1: save caller-saved registers to stack, reverse order
     for (int i = 0; i < numCallerSaved; ++i) {
-        assm.push(callerSavedRegs[numCallerSaved -1 - i]);
+        Push(callerSavedRegs[numCallerSaved -1 - i]);
+    }
+
+    int pushed = 0;
+    // push the opt reg and the arg temps if they're in regs
+    if (lastArg) {
+         pushed += 1;
+         Push(lastArg.value());
+    }
+    for (auto it = temps.rbegin(); it != temps.rend(); it++) {
+        tempptr_t t = *it;
+        if (t->reg) {
+            pushed += 1;
+            LOG(t->reg.value());
+            Push(t->reg.value());
+        }
     }
 
     // STEP 2: push first 6 arguments to registers, rest to stack
@@ -54,38 +78,22 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
         x64asm::R64 regToStore = callerSavedRegs[argIndex];
         // load differently depending on where the arg is
         if (tempToPush->reg) {
-            // if the val is stored in an earlier arg reg,
-            // have to get off the stack
-            bool wasClobbered = false;
-            for (uint32_t i = 0; i < argIndex; i++) {
-                if (callerSavedRegs[i] == tempToPush->reg.value()) {
-                   // the val got clobbered; get it from the stack
-                   assm.mov(
-                        regToStore,
-                        x64asm::M64{x64asm::rsp, x64asm::Imm32{i*8}}
-                   );
-                   wasClobbered = true;
-                   break;
-                 }
-            }
-            if (!wasClobbered) {
-                // the val was not clobbered; move directly
-                assm.mov(regToStore, tempToPush->reg.value());
-            }
+            // can pop it 
+            Pop(regToStore);
+            pushed -=1;
         } else { // the value is stored on the stack; move from mem
             // move to the right reg from mem
-            uint32_t offset = getTempOffset(tempToPush);
-            assm.mov(
-                regToStore,
-                x64asm::M64{x64asm::rbp, x64asm::Imm32{-offset}}
-            );
+            moveTemp(regToStore, tempToPush);
         }
         argIndex++;
     }
     // if the optional register argument is defined, push it as an arg
     if (lastArg) {
-        assm.mov(callerSavedRegs[argIndex], lastArg.value());
+        Pop(callerSavedRegs[argIndex]);
+        pushed -=1;
     }
+
+    assert(pushed==0);
 
     assm.mov(x64asm::r10, x64asm::Imm64{fn});
     assm.call(x64asm::r10);
@@ -94,7 +102,7 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
 
     // restore caller-saved registers from stack, minus rax
     for (uint32_t i = 0; i < numCallerSaved - 1; ++i) {
-        assm.pop(callerSavedRegs[i]);
+        Pop(callerSavedRegs[i]);
     }
 
     // save return value
@@ -103,11 +111,11 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
         bool usesRax = (returnTemp.value()->reg) && (returnTemp.value()->reg.value() == x64asm::rax);
         if (!usesRax) {
             moveTemp(returnTemp.value(), x64asm::rax);
-            assm.pop(x64asm::rax);
+            Pop(x64asm::rax);
         } // if it does use rax, nothing to do!
     } else {
         // restore rax
-        assm.pop(x64asm::rax);
+        Pop(x64asm::rax);
     }
 }
 
@@ -123,13 +131,13 @@ void IrInterpreter::installLocalVar(tempptr_t temp, uint32_t localIdx) {
         assm.mov(temp->reg.value(), src);
     } else {
         // the arg is stored on the stack; use rdi as scratch space
-        assm.push(x64asm::rdi);
+        Push(x64asm::rdi);
         // move the value into rdi
         assm.mov(x64asm::rdi, src);
         // move rdi onto the right stack location
         moveTemp(temp, x64asm::rdi);
         // restore rdi
-        assm.pop(x64asm::rdi);
+        Pop(x64asm::rdi);
     }
 }
 
@@ -139,10 +147,10 @@ void IrInterpreter::installLocalNone(tempptr_t temp) {
         assm.mov(temp->reg.value(), src);
     } else {
         // put None in a scratch reg
-        assm.push(x64asm::rdi);
+        Push(x64asm::rdi);
         assm.mov(x64asm::rdi, src);
         moveTemp(temp, x64asm::rdi);
-        assm.pop(x64asm::rdi);
+        Pop(x64asm::rdi);
     }
 }
 
@@ -153,7 +161,7 @@ void IrInterpreter::installLocalRefVar(tempptr_t temp, uint32_t localIdx) {
         reg = temp->reg.value();
     } else {
         // use rdi as scratch space
-        assm.push(reg);
+        Push(reg);
         usedScratch = true;
     }
     // move the value to the target reg if applicable else a scratch reg
@@ -173,7 +181,7 @@ void IrInterpreter::installLocalRefVar(tempptr_t temp, uint32_t localIdx) {
     // cleanup
     if (usedScratch) {
         // restore rdi
-        assm.pop(reg);
+        Pop(reg);
     }
 }
 
@@ -195,14 +203,14 @@ void IrInterpreter::installLocalRefNone(tempptr_t temp) {
 
 x64asm::R64 IrInterpreter::getScratchReg() {
     x64asm::R64 toSpill = x64asm::r10;
-    assm.push(toSpill);
+    Push(toSpill);
     regPopCount += 1; // metadata to check for errors
     LOG("getting scratch reg: " + asmRegToString(toSpill));
     return toSpill;
 };
 
 void IrInterpreter::returnScratchReg(x64asm::R64 reg) {
-    assm.pop(reg);
+    Pop(reg);
     regPopCount -= 1;
 }
 

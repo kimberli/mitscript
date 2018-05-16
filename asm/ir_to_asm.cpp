@@ -243,12 +243,7 @@ void IrInterpreter::executeStep() {
                     // move the val into the scratch reg
                     assm.mov(reg, x64asm::Imm64{(uint64_t)c});
                     // get the offset of the temp on the stack
-                    uint32_t offset = getTempOffset(t);
-                    // this moves the val at reg into the right rbp offset
-                    assm.mov(
-                        x64asm::M64{x64asm::rbp, x64asm::Imm32{-offset}},
-                        reg
-                    );
+                    moveTemp(t, reg);
                     // give back the scratch reg
                     returnScratchReg(reg);
                 }
@@ -270,10 +265,7 @@ void IrInterpreter::executeStep() {
                     // get the offset of the temp on the stack
                     uint32_t offset = getTempOffset(t);
                     // this moves the val at reg into the right rbp offset
-                    assm.mov(
-                        x64asm::M64{x64asm::rbp, x64asm::Imm32{-offset}},
-                        reg
-                    );
+                    moveTemp(t, reg);
                     // give back the scratch reg
                     returnScratchReg(reg);
                 }
@@ -425,7 +417,7 @@ void IrInterpreter::executeStep() {
                     // push in reverse order, so first ref is lowest
                     refTemp = inst->tempIndices->at(2 + numRefs - i - 1);
                     if (refTemp->reg) {
-                        assm.push(refTemp->reg.value());
+                        Push(refTemp->reg.value());
                     } else {
                         // get a scratch reg to use as a trampoline 
                         // to the stack
@@ -434,7 +426,7 @@ void IrInterpreter::executeStep() {
                             usedScratchReg = true;
                         }
                         moveTemp(reg, refTemp);
-                        assm.push(reg);
+                        Push(reg);
                     }
                 }
                 // give back the scratch reg
@@ -456,7 +448,10 @@ void IrInterpreter::executeStep() {
                 };
                 callHelper((void *) &(helper_alloc_closure), args, temps, returnTemp);
                 // clear the stack by incrementing rsp 
-                assm.add(x64asm::rsp, x64asm::Imm32{8*numRefs});
+                //assm.add(x64asm::rsp, x64asm::Imm32{8*numRefs});
+                for (int i = 0; i < numRefs; i++) {
+                    Pop(x64asm::r10);
+                }
                 break;
             };
         case IrOp::Call:
@@ -476,7 +471,7 @@ void IrInterpreter::executeStep() {
                     // push in reverse order, so first arg is lowest
                     argTemp = inst->tempIndices->at(2 + numArgs - i - 1);
                     if (argTemp->reg) {
-                        assm.push(argTemp->reg.value());
+                        Push(argTemp->reg.value());
                     } else {
                         if (!usedScratchReg) {
                             reg = getScratchReg();
@@ -487,7 +482,7 @@ void IrInterpreter::executeStep() {
                             reg,
                             x64asm::M64{x64asm::rbp, x64asm::Imm32{-offset}}
                         );
-                        assm.push(reg);
+                        Push(reg);
                     }
                 }
                 if (usedScratchReg) {
@@ -507,7 +502,11 @@ void IrInterpreter::executeStep() {
                 callHelper((void *) &(helper_call), args, temps, returnTemp);
 
                 // clear the stack by incrementing
-                assm.add(x64asm::rsp, x64asm::Imm32{8*numArgs});
+                // assm.add(x64asm::rsp, x64asm::Imm32{8*numArgs});
+                for (int i = 0; i < numArgs; i++) {
+                    Pop(x64asm::r10);
+                }
+
                 break;
             };
         case IrOp::Return:
@@ -574,8 +573,8 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": Div");
                 // TODO: make this less inefficient
                 // save rax, rdx, and get an extra scratch register
-                assm.push(x64asm::rax);
-                assm.push(x64asm::rdx);
+                Push(x64asm::rax);
+                Push(x64asm::rdx);
                 x64asm::R64 divisor = getScratchReg();
                 x64asm::R64 numerator_secondhalf = x64asm::rax;
                 moveTemp(numerator_secondhalf, inst->tempIndices->at(2));
@@ -591,8 +590,8 @@ void IrInterpreter::executeStep() {
                 moveTemp(inst->tempIndices->at(0), x64asm::rax);
                 returnScratchReg(divisor);
                 // restore rax and rdx
-                assm.pop(x64asm::rdx);
-                assm.pop(x64asm::rax);
+                Pop(x64asm::rdx);
+                Pop(x64asm::rax);
                 break;
             };
         case IrOp::Neg: {
@@ -843,6 +842,7 @@ void IrInterpreter::executeStep() {
     }
     LOG(inst->getInfo());
     assert (regPopCount == 0); // make sure we're pushing equally to popping
+    assert (popCount == 0);
 
     instructionIndex += 1;
     if (instructionIndex >= func->instructions.size()) {

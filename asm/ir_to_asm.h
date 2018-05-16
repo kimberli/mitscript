@@ -53,6 +53,9 @@ private:
     x64asm::R32 getRegBottomHalf(x64asm::R64 reg);
 
     int regPopCount = 0;
+    int popCount = 0;
+    void Pop(x64asm::R64 reg);
+    void Push(x64asm::R64 reg);
     // generates a new free reg by pushing/popping and returns it
     x64asm::R64 getScratchReg();
     // returns a scratch reg
