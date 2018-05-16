@@ -52,7 +52,7 @@ private:
     void comparisonSetup(instptr_t inst, TempBoolOp tempBoolOp);
     x64asm::R32 getRegBottomHalf(x64asm::R64 reg);
 
-    uint32_t regPopCount;
+    int regPopCount = 0;
     // generates a new free reg by pushing/popping and returns it
     x64asm::R64 getScratchReg();
     // returns a scratch reg
