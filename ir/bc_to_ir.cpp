@@ -19,7 +19,7 @@ tempptr_t IrCompiler::getNewTemp() {
     tempptr_t newTemp = make_shared<Temp>(currentTemp);
 	temps.push_back(newTemp);
 	newTemp->startInterval = irInsts.size();
-	newTemp->endInterval = irInsts.size();	
+	newTemp->endInterval = irInsts.size() + 1;	
     return newTemp;
 }
 void IrCompiler::pushTemp(tempptr_t temp) {
@@ -33,9 +33,7 @@ tempptr_t IrCompiler::popTemp() {
     return temp;
 }
 void IrCompiler::checkIfUsed(tempptr_t temp) {
-	if (temp->timesInUse == 0 || temp->index < func->local_vars_.size()) {
-		temp->endInterval = irInsts.size();	
-	}
+	temp->endInterval = irInsts.size();	
 	if (whileLevel > 0) {
 		tempsInWhile.insert(temp);
 	}
@@ -161,6 +159,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                         tempptr_t val = getNewTemp();
                         pushInstruction(make_shared<IrInstruction>(IrOp::LoadReference, val, localTemp));
                         pushTemp(val);
+						checkIfUsed(localTemp);
                     } else {
                         tempptr_t localTemp = temps.at(localIndex);
                         pushTemp(localTemp);
@@ -189,7 +188,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                     tempptr_t localTemp = temps.at(localIndex);
                     pushInstruction(make_shared<IrInstruction>(op, localTemp, val));
 					checkIfUsed(val);
-					localTemp->endInterval = irInsts.size();
+					checkIfUsed(localTemp);
 	                break;
 	            }
 	        case BcOp::StoreGlobal:
@@ -232,6 +231,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 					pushInstruction(make_shared<IrInstruction>(IrOp::LoadReference, curr, ref));
                     pushTemp(curr);
                     checkIfUsed(ref);
+                    checkIfUsed(curr);
 	                break;
 	            }
 	        case BcOp::AllocRecord:

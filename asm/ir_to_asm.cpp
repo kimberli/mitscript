@@ -241,7 +241,7 @@ void IrInterpreter::executeStep() {
                     // get a scratch reg to store this
                     x64asm::R64 reg = getScratchReg();
                     // move the val into the scratch reg
-                    assm.mov(t->reg.value(), x64asm::Imm64{(uint64_t)c});
+                    assm.mov(reg, x64asm::Imm64{(uint64_t)c});
                     // get the offset of the temp on the stack
                     uint32_t offset = getTempOffset(t);
                     // this moves the val at reg into the right rbp offset
