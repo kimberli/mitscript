@@ -563,22 +563,30 @@ void IrInterpreter::executeStep() {
                 Push(x64asm::rax);
                 Push(x64asm::rdx);
                 x64asm::R64 divisor = getScratchReg();
-                x64asm::R64 numerator_secondhalf = x64asm::rax;
-                moveTemp(numerator_secondhalf, inst->tempIndices->at(2));
-                assm.cdq(); // weird asm thing to sign-extend eax into edx
+                moveTemp(divisor, inst->tempIndices->at(1));
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1),
                 };
                 callHelper((void *) &(helper_assert_nonzero), {}, temps, nullopt);
-                moveTemp(divisor, inst->tempIndices->at(1));
+                x64asm::R64 numerator_secondhalf = x64asm::rax;
+                moveTemp(numerator_secondhalf, inst->tempIndices->at(2));
+                assm.cdq(); // weird asm thing to sign-extend eax into edx
                 // perform the div; result stored in rax
                 assm.idiv(getRegBottomHalf(divisor));
                 // put the value back in the temp
                 moveTemp(inst->tempIndices->at(0), x64asm::rax);
                 returnScratchReg(divisor);
                 // restore rax and rdx
-                Pop(x64asm::rdx);
-                Pop(x64asm::rax);
+				if (inst->tempIndices->at(0)->reg.value() == x64asm::rdx) {
+					Pop();
+				} else {
+                	Pop(x64asm::rdx);
+				}
+				if (inst->tempIndices->at(0)->reg.value() == x64asm::rax) {
+					Pop();
+				} else {
+                	Pop(x64asm::rax);
+				}
                 break;
             };
         case IrOp::Neg: {

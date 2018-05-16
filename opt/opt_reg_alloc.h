@@ -15,7 +15,7 @@ private:
 	    x64asm::r9,
         // TODO: uncomment this
 	    //x64asm::r10,
-	    //x64asm::r11,
+	    x64asm::r11,
 	    x64asm::r12,
 	    x64asm::r13,
 	    x64asm::r14,
