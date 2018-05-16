@@ -52,20 +52,8 @@ private:
     void comparisonSetup(instptr_t inst, TempBoolOp tempBoolOp);
     x64asm::R32 getRegBottomHalf(x64asm::R64 reg);
 
-    // helpers and state to interface with register allocation
-    // stores a set of currently avlb regs
-    regset_t freeRegs;
-    // keeps track of whether the last scratch reg was spilled or not
-    bool spilled = false;
-    // helpers to update free regs
-    void updateFreeRegs(instptr_t inst);
-    // returns a register containing the value of that temp
-    x64asm::R64 getReg(tempptr_t temp);
-    // makes sure the value in register reg is put in the right place for
-    // the temp
-    void setReg(tempptr_t temp, x64asm::R64 reg);
-    // gets a free reg from the pool (or generates a new one
-    // by pushing/popping) and returns it
+    uint32_t regPopCount;
+    // generates a new free reg by pushing/popping and returns it
     x64asm::R64 getScratchReg();
     // returns a scratch reg
     void returnScratchReg(x64asm::R64 reg);

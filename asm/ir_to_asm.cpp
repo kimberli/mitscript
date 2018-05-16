@@ -228,7 +228,6 @@ void IrInterpreter::loadTemp(x64asm::R64 reg, tempptr_t temp) {
  ***********************/
 void IrInterpreter::executeStep() {
     instptr_t inst = func->instructions.at(instructionIndex);
-    int freeRegsStartSize = freeRegs.size();
     switch(inst->op) {
         case IrOp::LoadConst:
             {
@@ -430,46 +429,53 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": AllocClosure");
                 // the first two args to the helper are the
                 // interpreter pointer and the num refs
-                uint64_t numRefs = inst->op0.value();
-                vector<x64asm::Imm64> args = {vmPointer, numRefs};
+                uint32_t numRefs = inst->op0.value();
                 // the rest of the args are basically the temps minus temp0
                 // create an "array" by pushing these to the stack
                 tempptr_t refTemp;
+                // DO NOT USE THIS BEFORE SWITCHING THE REG VALUE
+                x64asm::R64 reg = x64asm::r10; 
+                bool usedScratchReg = false;
                 for (int i = 0; i < numRefs; ++i) {
                     // push in reverse order, so first ref is lowest
                     refTemp = inst->tempIndices->at(2 + numRefs - i - 1);
                     if (refTemp->reg) {
                         assm.push(refTemp->reg.value());
                     } else {
-                        // TODO don't use r10 as a lazy reg pls
-                        // on the stack;
-                        uint32_t offset = getTempOffset(refTemp);
-                        assm.mov(
-                            x64asm::r10,
-                            x64asm::M64{x64asm::rbp, x64asm::Imm32{-offset}}
-                        );
-                        assm.push(x64asm::r10);
+                        // get a scratch reg to use as a trampoline 
+                        // to the stack
+                        if (!usedScratchReg) {
+                            reg = getScratchReg();
+                            usedScratchReg = true;
+                        }
+                        moveTemp(reg, refTemp);
+                        assm.push(reg);
                     }
                 }
+                // give back the scratch reg
+                if (usedScratchReg) {
+                    returnScratchReg(reg);
+                }
 
-                // store the array pointer in a temp so callHelper can use it
+                vector<x64asm::Imm64> args = {
+                    vmPointer, // vm
+                    numRefs,   // num refs
+                }; 
+                // this a little hacky, but put the refs in the return temp 
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                moveTemp(returnTemp, x64asm::rsp);
+                // the func is in a temp
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1), // function
+                    returnTemp // refs
                 };
-                x64asm::R64 refs = x64asm::r10; // array of regs
-                assm.mov(x64asm::r10, x64asm::rsp);
-
-                tempptr_t returnTemp = inst->tempIndices->at(0);
-                callHelper((void *) &(helper_alloc_closure), args, temps, refs, returnTemp);
-                // clear the stack
-                for (int i = 0; i < numRefs; i++) {
-                    assm.pop(x64asm::r10);
-                };
+                callHelper((void *) &(helper_alloc_closure), args, temps, returnTemp);
+                // clear the stack by incrementing rsp 
+                assm.add(x64asm::rsp, x64asm::Imm32{8*numRefs});
                 break;
             };
         case IrOp::Call:
             {
-                // TODO
                 // we push all the MITScript function arguments to the stack,
                 // then pass %rsp (which points to the first element of that
                 // array) as an argument to helper_call
@@ -478,38 +484,45 @@ void IrInterpreter::executeStep() {
                 // push all the MITScript function arguments to the stack
                 // to make a contiguous array in memory
                 tempptr_t argTemp;
+                // DO NOT USE THIS W/O REASSIGNING REG USING GETSCRATCHREG
+                x64asm::R64 reg = x64asm::r10; 
+                bool usedScratchReg = false;
                 for (int i = 0; i < numArgs; ++i) {
                     // push in reverse order, so first arg is lowest
                     argTemp = inst->tempIndices->at(2 + numArgs - i - 1);
                     if (argTemp->reg) {
                         assm.push(argTemp->reg.value());
                     } else {
-                        // TODO don't use r10 as a lazy reg pls
-                        // on the stack;
+                        if (!usedScratchReg) {
+                            reg = getScratchReg();
+                            usedScratchReg = true;
+                        }
                         uint32_t offset = getTempOffset(argTemp);
                         assm.mov(
-                            x64asm::r10,
+                            reg,
                             x64asm::M64{x64asm::rbp, x64asm::Imm32{-offset}}
                         );
-                        assm.push(x64asm::r10);
+                        assm.push(reg);
                     }
+                }
+                if (usedScratchReg) {
+                    returnScratchReg(reg);
                 }
 
                 // helper_call takes args: vm pointer, numArgs,
                 // closure, array of args
                 vector<x64asm::Imm64> args = {vmPointer, numArgs};
-                vector<tempptr_t> temps = {
-                    inst->tempIndices->at(1) // closure
-                };
-                x64asm::R64 argsArray = x64asm::r10; // args
-                assm.mov(x64asm::r10, x64asm::rsp);
+                // jank, but put the args in the return temp
                 tempptr_t returnTemp = inst->tempIndices->at(0);
-                callHelper((void *) &(helper_call), args, temps, argsArray, returnTemp);
-
-                // clear the stack
-                for (int i = 0; i < numArgs; i++) {
-                    assm.pop(x64asm::r10);
+                moveTemp(returnTemp, x64asm::rsp);
+                vector<tempptr_t> temps = {
+                    inst->tempIndices->at(1), // closure
+                    returnTemp // args
                 };
+                callHelper((void *) &(helper_call), args, temps, returnTemp);
+
+                // clear the stack by incrementing
+                assm.add(x64asm::rsp, x64asm::Imm32{8*numArgs});
                 break;
             };
         case IrOp::Return:
@@ -561,6 +574,9 @@ void IrInterpreter::executeStep() {
                 } else {
                     // get a scratch reg
                     x64asm::R64 reg = getScratchReg();
+                    // note: these calls to move do NOT incur a 
+                    // scratch reg because they already have a red
+                    // on one side. Still only using one scratch reg
                     moveTemp(reg, left);
                     moveTemp(reg, right, TempOp::MUL);
                     moveTemp(res, reg);
@@ -614,12 +630,6 @@ void IrInterpreter::executeStep() {
         case IrOp::Gt:
             {
                 LOG(to_string(instructionIndex) + ": Gt");
-                // use a conditional move to put the bool in the right place
-                // right(1) gets moved into left(0) if left was greater
-                //auto left = x64asm::edi;
-                //auto right = x64asm::esi;
-                //assm.cmovnle(left, right);
-                //storeTemp(left, inst->tempIndices->at(0));
                 comparisonSetup(inst, TempBoolOp::CMOVNLE);
                 break;
             };
@@ -673,11 +683,22 @@ void IrInterpreter::executeStep() {
         case IrOp::Not:
             {
                 LOG(to_string(instructionIndex) + ": Not");
-				x64asm::R64 operand = getScratchReg();
-                moveTemp(operand, inst->tempIndices->at(1));
-                assm.xor_(operand, x64asm::Imm32{1});
-                moveTemp(inst->tempIndices->at(0), operand);
-				returnScratchReg(operand);
+				//x64asm::R64 operand = getScratchReg();
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                tempptr_t operand = inst->tempIndices->at(1);
+                moveTemp(returnTemp, operand);
+                if (returnTemp->reg) {
+                    assm.xor_(
+                        returnTemp->reg.value(),
+                        x64asm::Imm32{1}
+                    );
+                } else {
+                    uint32_t offset = getTempOffset(returnTemp);
+                    assm.xor_(
+                        x64asm::M64{x64asm::rbp, x64asm::Imm32{-offset}},
+                        x64asm::Imm32{1}
+                    );
+                }
                 break;
             };
         case IrOp::Goto:
@@ -837,10 +858,7 @@ void IrInterpreter::executeStep() {
             throw RuntimeException("Should not get here: invalid ir inst");
     }
     LOG(inst->getInfo());
-    int freeRegsEndSize = freeRegs.size();
-    assert (freeRegsStartSize == freeRegsEndSize);
-    // run maintenance to figure out if regs are avlb
-    updateFreeRegs(inst);
+    assert (regPopCount == 0); // make sure we're pushing equally to popping
 
     instructionIndex += 1;
     if (instructionIndex >= func->instructions.size()) {
