@@ -1,6 +1,0 @@
-rec = {
-  print : fun(){ print(1); };
-};
-
-print(rec.print);
-rec.print();
