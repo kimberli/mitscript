@@ -22,6 +22,10 @@ void IrInterpreter::getRbpOffset(uint32_t offset) {
 /************************
  * CALL HELPERS
  ***********************/
+void IrInterpreter::Pop() {
+    popCount -=1;
+    assm.add(x64asm::rsp, x64asm::Imm32{8});
+}
 void IrInterpreter::Pop(x64asm::R64 reg) {
     popCount -=1;
     assm.pop(reg);
@@ -112,10 +116,12 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
         if (!usesRax) {
             moveTemp(returnTemp.value(), x64asm::rax);
             Pop(x64asm::rax);
-        } // if it does use rax, nothing to do!
+        } else { // if it does use rax, nothing to do!
+            Pop();
+        }
     } else {
         // restore rax
-        Pop(x64asm::rax);
+        Pop();
     }
 }
 

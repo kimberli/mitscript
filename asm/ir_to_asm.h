@@ -55,6 +55,7 @@ private:
     int regPopCount = 0;
     int popCount = 0;
     void Pop(x64asm::R64 reg);
+    void Pop();
     void Push(x64asm::R64 reg);
     // generates a new free reg by pushing/popping and returns it
     x64asm::R64 getScratchReg();
