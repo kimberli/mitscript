@@ -115,7 +115,6 @@ void IrInterpreter::prolog() {
             // else, we are safe to move the reg into its arg
         }
 
-        // TODO: I would collect the following 3 occurences of this and put it in a single function to prevent bugs like switching installing locals vs refs
         if (isLocalRef.at(i)) {
             installLocalRefVar(localTemp, i);
         } else {
@@ -175,10 +174,7 @@ x64asm::Function IrInterpreter::run() {
         }
     }
 
-    // TODO: we've always done this, but is this correct? what about a function
-    // that has an early return statement? does the epilog get called twice?
-    // or maybe we should just call assm.finish() inside epilog?
-    assm.mov(x64asm::R64{x64asm::rax}, x64asm::Imm64{vmPointer->NONE});
+    assm.mov(x64asm::R64{x64asm::rax}, x64asm::Imm64{(uint64_t)vmPointer->NONE});
     epilog();
 
     // finish compiling
@@ -187,41 +183,6 @@ x64asm::Function IrInterpreter::run() {
     return asmFunc;
 }
 
-// TODO: deprecate
-// storeTemp puts a reg value into a temp
-void IrInterpreter::storeTemp(x64asm::R32 reg, tempptr_t temp) {
-    // right now, put everything on the stack
-    // assign the temp an offset (from rbp)
-    getRbpOffset(getTempOffset(temp)); // leaves correct address into r10
-    // Move the val in reg into the mem address stored in r10
-    assm.mov(x64asm::M64{x64asm::r10}, reg);
-}
-
-// TODO: deprecate
-// storeTemp puts a reg value into a temp
-void IrInterpreter::storeTemp(x64asm::R64 reg, tempptr_t temp) {
-    // right now, put everything on the stack
-    // assign the temp an offset (from rbp)
-    getRbpOffset(getTempOffset(temp)); // leaves correct address into r10
-    // Move the val in reg into the mem address stored in r10
-    assm.mov(x64asm::M64{x64asm::r10}, reg);
-}
-
-// TODO: deprecate
-// loadTemp takes a temp value and puts it in a register
-void IrInterpreter::loadTemp(x64asm::R32 reg, tempptr_t temp) {
-    getRbpOffset(getTempOffset(temp)); // location in r10
-    // put the thing from that mem address into the reg
-    assm.mov(reg, x64asm::M64{x64asm::r10});
-}
-
-// TODO: deprecate
-// loadTemp takes a temp value and puts it in a register
-void IrInterpreter::loadTemp(x64asm::R64 reg, tempptr_t temp) {
-    getRbpOffset(getTempOffset(temp)); // location in r10
-    // put the thing from that mem address into the reg
-    assm.mov(reg, x64asm::M64{x64asm::r10});
-}
 
 /************************
  * MAIN EXECUTION
@@ -402,7 +363,6 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::AllocClosure:
             {
-                // TODO
                 LOG(to_string(instructionIndex) + ": AllocClosure");
                 // the first two args to the helper are the
                 // interpreter pointer and the num refs
@@ -498,8 +458,6 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::Return:
             {
-                // TODO: hmm, are we sure we don't want to set finished to true
-                // and break out of executing steps?
                 LOG(to_string(instructionIndex) + ": Return");
                 // put temp0 in rax
                 moveTemp(x64asm::rax, inst->tempIndices->at(0));
