@@ -162,11 +162,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                         pushInstruction(make_shared<IrInstruction>(IrOp::LoadReference, val, localTemp));
                         pushTemp(val);
                     } else {
-                        // it is not a local ref var; generate plain LoadLocal
-                        //tempptr_t val = getNewTemp();
                         tempptr_t localTemp = temps.at(localIndex);
-                        //pushInstruction(make_shared<IrInstruction>(IrOp::LoadLocal, val, localTemp));
-                        //pushTemp(val);
                         pushTemp(localTemp);
                     }
 	                break;
@@ -206,7 +202,6 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::PushReference:
 	            {
-                    tempptr_t curr = getNewTemp();
                     int instrIdx = inst.operand0.value();
                     // if the index falls within the locals array, 
                     if (instrIdx < func->local_reference_vars_.size()) {
@@ -220,13 +215,14 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
                             }
                         } 
                         tempptr_t localTemp = temps.at(localIndex);
-					    pushInstruction(make_shared<IrInstruction>(IrOp::PushLocalRef, curr, localTemp));
+                        pushTemp(localTemp);
                     } else {
+                        tempptr_t curr = getNewTemp();
                         // else, generate a PushFreeRef instruction
                         int refIndex = instrIdx - func->local_reference_vars_.size();
 					    pushInstruction(make_shared<IrInstruction>(IrOp::PushFreeRef, refIndex, curr));
+                        pushTemp(curr);
                     }
-                    pushTemp(curr);
 	                break;
 	            }
 	        case BcOp::LoadReference:

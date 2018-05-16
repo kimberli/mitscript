@@ -279,15 +279,7 @@ void IrInterpreter::executeStep() {
                 }
                 break;
             }
-        case IrOp::LoadLocal:
-            {
-                LOG(to_string(instructionIndex) + ": LoadLocal");
-                tempptr_t src = inst->tempIndices->at(1);
-                tempptr_t dest = inst->tempIndices->at(0);
-                moveTemp(dest, src);
-                break;
-            }
-        case IrOp::LoadGlobal:
+       case IrOp::LoadGlobal:
             {
                 LOG(to_string(instructionIndex) + ": LoadGlobal");
                 string* name = &inst->name0.value();
@@ -325,16 +317,7 @@ void IrInterpreter::executeStep() {
                 callHelper((void *) &(helper_store_local_ref), {}, temps, returnTemp);
                 break;
             }
-        case IrOp::PushLocalRef:
-            {
-                // TODO: don't need this instruction
-                LOG(to_string(instructionIndex) + ": PushLocalRef");
-                tempptr_t src = inst->tempIndices->at(1);
-                tempptr_t dest = inst->tempIndices->at(0);
-                moveTemp(dest, src);
-                break;
-            }
-        case IrOp::PushFreeRef:
+       case IrOp::PushFreeRef:
             {
                 LOG(to_string(instructionIndex) + ": PushFreeRef");
                 // the ValWrapper is already sitting in the refs array;
@@ -685,7 +668,6 @@ void IrInterpreter::executeStep() {
         case IrOp::Not:
             {
                 LOG(to_string(instructionIndex) + ": Not");
-				//x64asm::R64 operand = getScratchReg();
                 tempptr_t returnTemp = inst->tempIndices->at(0);
                 tempptr_t operand = inst->tempIndices->at(1);
                 moveTemp(returnTemp, operand);

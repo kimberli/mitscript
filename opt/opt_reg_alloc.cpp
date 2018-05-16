@@ -85,12 +85,7 @@ void RegOpt::executeStep() {
                 LOG(to_string(instructionIndex) + ": LoadFunc");
                 break;
             }
-//        case IrOp::LoadLocal:
-//            {
-//                LOG(to_string(instructionIndex) + ": LoadLocal");
-//               break;
-//            }
-        case IrOp::LoadGlobal:
+       case IrOp::LoadGlobal:
             {
                 LOG(to_string(instructionIndex) + ": LoadGlobal");
                 break;
@@ -110,12 +105,7 @@ void RegOpt::executeStep() {
 				LOG(to_string(instructionIndex) + ": StoreLocalRef");
                 break;
 			}
-        case IrOp::PushLocalRef: 
-            {
-                LOG(to_string(instructionIndex) + ": PushLocalRef");
-                break;
-            }
-        case IrOp::PushFreeRef: 
+       case IrOp::PushFreeRef: 
             {
                 LOG(to_string(instructionIndex) + ": PushFreeRef");
                 break;

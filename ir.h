@@ -107,12 +107,6 @@ enum class IrOp {
     // Result: temp0 stores the specified function
     LoadFunc,
 
-    // Description: Load a local into a temp
-    // temp1: temp representing the appropriate local 
-    // temp0: temp index to store into
-    // Result: temp0 stores the desired local
-    LoadLocal,
-
     // Description: Load a global into a temp
     // op0: N/A
     // name0: name of the global to load
@@ -132,18 +126,6 @@ enum class IrOp {
     // temp0: temp index containing the value to store
     // Result: the global named contains the value stored by temp0
     StoreGlobal,
-
-    // Description: Store a reference to a local variable into a temp
-    // op0: index of the local to take the reference of
-    // temp0: temp index to store reference into
-    // Result: temp at temp0 contains reference to the local variable
-    //PushReference,
-
-    // Description: Store a reference to a local variable into a temp
-    // temp1: temp representing the local var
-    // temp0: temp index to store reference into
-    // Result: temp at temp0 contains reference to the local variable
-    PushLocalRef,
 
     // Description: Store a reference to a free variable into a temp
     // op0: index of the free var to store the reference of
