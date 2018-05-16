@@ -47,7 +47,7 @@ private:
 
     void addToRootset(Collectable* obj);
     void removeFromRootset(Collectable* obj);
-    void addToOpstack(Value* obj);
+    void setFrameCollectables(int numTemps, Collectable** collectables);
 
     // asm helpers
     Value* add(Value* left, Value* right);

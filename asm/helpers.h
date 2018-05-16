@@ -22,7 +22,7 @@ Value* helper_alloc_closure(Interpreter* interpreter, int numRefs, Function* fun
 
 Value* helper_call(Interpreter* interpreter, int numArgs, Closure* closure, Constant** args);
 
-void helper_gc(Interpreter* interpreter);
+void helper_gc(Interpreter* interpreter, int numTemps, Collectable** temps);
 
 void helper_assert_int(Value* v);
 void helper_assert_str(Value* v);

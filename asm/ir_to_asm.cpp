@@ -175,9 +175,6 @@ x64asm::Function IrInterpreter::run() {
         }
     }
 
-    // TODO: we've always done this, but is this correct? what about a function
-    // that has an early return statement? does the epilog get called twice?
-    // or maybe we should just call assm.finish() inside epilog?
     assm.mov(x64asm::R64{x64asm::rax}, x64asm::Imm64{vmPointer->NONE});
     epilog();
 
@@ -185,42 +182,6 @@ x64asm::Function IrInterpreter::run() {
     assm.finish();
     LOG("done compiling asm");
     return asmFunc;
-}
-
-// TODO: deprecate
-// storeTemp puts a reg value into a temp
-void IrInterpreter::storeTemp(x64asm::R32 reg, tempptr_t temp) {
-    // right now, put everything on the stack
-    // assign the temp an offset (from rbp)
-    getRbpOffset(getTempOffset(temp)); // leaves correct address into r10
-    // Move the val in reg into the mem address stored in r10
-    assm.mov(x64asm::M64{x64asm::r10}, reg);
-}
-
-// TODO: deprecate
-// storeTemp puts a reg value into a temp
-void IrInterpreter::storeTemp(x64asm::R64 reg, tempptr_t temp) {
-    // right now, put everything on the stack
-    // assign the temp an offset (from rbp)
-    getRbpOffset(getTempOffset(temp)); // leaves correct address into r10
-    // Move the val in reg into the mem address stored in r10
-    assm.mov(x64asm::M64{x64asm::r10}, reg);
-}
-
-// TODO: deprecate
-// loadTemp takes a temp value and puts it in a register
-void IrInterpreter::loadTemp(x64asm::R32 reg, tempptr_t temp) {
-    getRbpOffset(getTempOffset(temp)); // location in r10
-    // put the thing from that mem address into the reg
-    assm.mov(reg, x64asm::M64{x64asm::r10});
-}
-
-// TODO: deprecate
-// loadTemp takes a temp value and puts it in a register
-void IrInterpreter::loadTemp(x64asm::R64 reg, tempptr_t temp) {
-    getRbpOffset(getTempOffset(temp)); // location in r10
-    // put the thing from that mem address into the reg
-    assm.mov(reg, x64asm::M64{x64asm::r10});
 }
 
 /************************
@@ -826,10 +787,31 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::GarbageCollect:
             {
+                // TODO: this doesn't work
                 LOG(to_string(instructionIndex) + ": GarbageCollect");
-                vector<x64asm::Imm64> args = {vmPointer};
-                vector<tempptr_t> temps;
+                x64asm::R64 reg = getScratchReg();
+                for (auto it = activeTemps.begin(); it != activeTemps.end(); it++) {
+                    LOG("pushing temp " << *it);
+                    tempptr_t t = func->temps.at(*it);
+                    // push
+                    moveTemp(reg, t);
+                    Push(reg);
+                }
+
+                tempptr_t argTemp = inst->tempIndices->at(0);
+                moveTemp(argTemp, x64asm::rsp);
+
+                vector<x64asm::Imm64> args = {vmPointer, activeTemps.size()};
+                vector<tempptr_t> temps = {
+                    argTemp
+                };
                 callHelper((void *) &(helper_gc), args, temps, nullopt);
+
+                for (int i = 0; i < activeTemps.size(); i++) {
+                    Pop();
+                }
+
+                returnScratchReg(reg);
                 break;
             };
         default:
@@ -838,6 +820,7 @@ void IrInterpreter::executeStep() {
     LOG(inst->getInfo());
     assert (regPopCount == 0); // make sure we're pushing equally to popping
     assert (popCount == 0);
+    updateActiveTemps(inst, instructionIndex);
 
     instructionIndex += 1;
     if (instructionIndex >= func->instructions.size()) {

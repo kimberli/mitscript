@@ -125,6 +125,9 @@ void Frame::follow(CollectedHeap& heap) {
     for (Collectable* v : opStack) {
         heap.markSuccessors(v);
     }
+    for (Collectable* v : collectables) {
+        heap.markSuccessors(v);
+    }
    	for (string arg : func->local_vars_) {
 		if (vars.count(arg) != 0) {
 			Collectable* localVar = vars[arg];

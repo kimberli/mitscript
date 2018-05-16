@@ -30,6 +30,8 @@ public:
     Function* func;
     // operand stack
     list<Value*> opStack;
+    // attached collectables
+    list<Collectable*> collectables;
     // index of current instruction in func's instructions list
     int instructionIndex = 0;
     // garbage collector

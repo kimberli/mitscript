@@ -535,9 +535,12 @@ Value* Interpreter::callVM(vector<Constant*> argsList, Closure* clos) {
     }
 }
 
-void Interpreter::addToOpstack(Value* obj) {
+void Interpreter::setFrameCollectables(int numTemps, Collectable** collectables) {
     Frame* frame = frames.back();
-    frame->opStackPush(obj);
+    for (int i = 0; i < numTemps; i++) {
+        Collectable* temp = collectables[i];
+        frame->collectables.push_back(temp);
+    }
 }
 
 Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
