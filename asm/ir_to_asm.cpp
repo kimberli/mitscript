@@ -316,7 +316,6 @@ void IrInterpreter::executeStep() {
             }
         case IrOp::StoreLocalRef:
             {
-                // TODO
                 LOG(to_string(instructionIndex) + ": StoreLocalRef");
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(1), // value to store
@@ -328,35 +327,37 @@ void IrInterpreter::executeStep() {
             }
         case IrOp::PushLocalRef:
             {
-                // TODO
+                // TODO: don't need this instruction
                 LOG(to_string(instructionIndex) + ": PushLocalRef");
-                tempptr_t localTemp = inst->tempIndices->at(1);
-                loadTemp(x64asm::rdi, localTemp);
-                storeTemp(x64asm::rdi, inst->tempIndices->at(0));
+                tempptr_t src = inst->tempIndices->at(1);
+                tempptr_t dest = inst->tempIndices->at(0);
+                moveTemp(dest, src);
                 break;
             }
         case IrOp::PushFreeRef:
             {
-                // TODO
                 LOG(to_string(instructionIndex) + ": PushFreeRef");
                 // the ValWrapper is already sitting in the refs array;
                 // just move it into the temp
 
-                // get address of ref array
-                getRbpOffset(getRefArrayOffset());
-                assm.mov(x64asm::rdi, x64asm::M64{x64asm::r10});
+                // get address of ref array and put it in a scratch reg
+                uint32_t refArrayOffset = getRefArrayOffset();
+                x64asm::R64 reg = getScratchReg();
+                assm.mov(
+                    reg,
+                    x64asm::M64{x64asm::rbp, x64asm::Imm32{-refArrayOffset}}
+                );
                 // increment rdi to index into ref array
                 uint32_t offset = 8*inst->op0.value();
-                assm.add(x64asm::rdi, x64asm::Imm32{offset});
+                assm.add(reg, x64asm::Imm32{offset});
                 // one deref gets us to the val wrapper
-                assm.mov(x64asm::rdi, x64asm::M64{x64asm::rdi});
+                assm.mov(reg, x64asm::M64{reg});
                 // store this in a temp
-                storeTemp(x64asm::rdi, inst->tempIndices->at(0));
+                moveTemp(inst->tempIndices->at(0), reg);
                 break;
             }
         case IrOp::LoadReference:
             {
-                // TODO
                 LOG(to_string(instructionIndex) + ": LoadReference");
                 // dereferences to get to the object itself
                 vector<tempptr_t> temps = {inst->tempIndices->at(1)};
