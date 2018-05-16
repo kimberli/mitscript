@@ -1,0 +1,10 @@
+f = fun() {
+    g = fun() {
+        print(y + z);
+    };
+    y = 5 + 2;
+    z = " hello";
+    g();
+};
+f();
+
