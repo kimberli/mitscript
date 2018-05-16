@@ -660,12 +660,18 @@ void IrInterpreter::executeStep() {
             };
        case IrOp::AssertInteger:
             {
-                // TODO: change this to check if the last two bits == INT_TAG
                 LOG(to_string(instructionIndex) + ": AssertInteger");
-                vector<tempptr_t> temps = {
-                    inst->tempIndices->at(0)
-                };
-                callHelper((void *) &(helper_assert_int), {}, temps, nullopt);
+                // TODO: change this to check if the last two bits == INT_TAG
+                x64asm::R64 reg = getScratchReg();
+                // put the operand in a reg
+                moveTemp(reg, inst->tempIndices->at(0)); 
+                // and with 3 to leave the tag in reg
+                assm.and_(reg, x64asm::Imm32{ALL_TAG});
+                // do a comparison with the real tag
+                assm.cmp(reg, x64asm::Imm32{INT_TAG});
+                // error if its wrong
+                assm.jne(x64asm::Label{TYPE_ERROR_LABEL}); 
+                returnScratchReg(reg);
                 break;
             };
         case IrOp::AssertBoolean:
@@ -726,15 +732,13 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::UnboxInteger:
             {
-                // TODO: change this to clear the last two bits and shift right by 2
-                // make sure the shift is sign extended
+                // right shift 2 bits sign extended
                 LOG(to_string(instructionIndex) + ": UnboxInteger");
-                vector<x64asm::Imm64> args;
-                vector<tempptr_t> temps = {
-                    inst->tempIndices->at(1)
-                };
-                tempptr_t returnTemp = inst->tempIndices->at(0);
-                callHelper((void *) &(helper_unbox_int), args, temps, returnTemp);
+                x64asm::R64 reg = getScratchReg();
+                moveTemp(reg, inst->tempIndices->at(0));
+                assm.assemble({x64asm::SAR_R64_IMM8, {reg, x64asm::Imm8{2}}});
+                moveTemp(inst->tempIndices->at(0), reg);
+                returnScratchReg(reg);
                 break;
             };
         case IrOp::UnboxBoolean:
@@ -754,14 +758,15 @@ void IrInterpreter::executeStep() {
             {
                 // TODO: change this to shift left by 2 and OR with INT_TAG
                 LOG(to_string(instructionIndex) + ": NewInteger");
-                vector<x64asm::Imm64> args = {
-                    x64asm::Imm64{vmPointer},
-                };
-                vector<tempptr_t> temps = {
-                    inst->tempIndices->at(1)
-                };
-                tempptr_t returnTemp = inst->tempIndices->at(0);
-                //callHelper((void *) &(helper_new_integer), args, temps, returnTemp);
+                x64asm::R64 reg = getScratchReg();
+                moveTemp(reg, inst->tempIndices->at(1));
+                // left shift two places; pad w/ zeros
+                assm.assemble({x64asm::SHL_R64_IMM8, {reg, x64asm::Imm8{2}}});
+                // xor w/ the right tag
+                assm.or_(reg, x64asm::Imm32{INT_TAG});
+                // put it back in the right temp 
+                moveTemp(inst->tempIndices->at(0), reg);
+                returnScratchReg(reg);
                 break;
             };
         case IrOp::NewBoolean:

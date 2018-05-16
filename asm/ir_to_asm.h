@@ -7,6 +7,8 @@
 #include <set>
 #include <cassert>
 
+#define TYPE_ERROR_LABEL "typeErrorLabel"
+
 class Interpreter;
 class IrInterpreter;
 enum class TempOp;
@@ -73,6 +75,7 @@ private:
     void moveTemp(x64asm::R32 dest, tempptr_t src);
     void moveTemp(x64asm::R32 dest, tempptr_t src, TempOp tempOp);
     void moveTemp(tempptr_t dest, x64asm::R32 src);
+    void moveTemp(tempptr_t dest, x64asm::Imm32 src, TempOp tempOp);
 
 public:
     //static const x64asm::R64 argRegs[];
