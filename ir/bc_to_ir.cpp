@@ -363,7 +363,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Return:
 	            {
-                    pushInstruction(make_shared<IrInstruction>(IrOp::Return, popTemp()));
+					tempptr_t temp = popTemp();
+                    pushInstruction(make_shared<IrInstruction>(IrOp::Return, temp));
+					checkIfUsed(temp);
 	                break;
 	            }
 	        case BcOp::Add:
