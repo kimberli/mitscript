@@ -447,9 +447,12 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        case BcOp::If:
 	            {
                     tempptr_t expr = popTemp();
+                    tempptr_t exprVal = getNewTemp();
                     pushInstruction(make_shared<IrInstruction>(IrOp::AssertBoolean, expr));
-                    pushInstruction(make_shared<IrInstruction>(IrOp::If, inst.operand0.value(), expr));
+                    pushInstruction(make_shared<IrInstruction>(IrOp::UnboxBoolean, exprVal, expr));
+                    pushInstruction(make_shared<IrInstruction>(IrOp::If, inst.operand0.value(), exprVal));
 					checkIfUsed(expr);
+					checkIfUsed(exprVal);
 	                break;
 	            }
             case BcOp::StartWhile:
