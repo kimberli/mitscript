@@ -497,7 +497,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            throw RuntimeException("should never get here - invalid instruction");
 	    }
         // TODO: PUT BACK 
-        //pushInstruction(make_shared<IrInstruction>(IrOp::GarbageCollect, optint_t()));
+        pushInstruction(make_shared<IrInstruction>(IrOp::GarbageCollect, optint_t()));
 	}
     // TODO: figure out how to make refs work
     int32_t ref_count = 0; 
