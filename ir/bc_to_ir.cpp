@@ -503,14 +503,14 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	}
     // TODO: figure out how to make refs work
     int32_t ref_count = 0; 
-	IrFunc irFunc = IrFunc(irInsts, 
+	IrFunc* irFunc = new IrFunc(irInsts, 
             func->constants_, 
             func->functions_,
 			temps,
             func->parameter_count_, 
             func->local_vars_.size(), 
             ref_count);
-    return irFunc;
+    return *irFunc;
 };
 
 IrFunc IrCompiler::toIr() {
