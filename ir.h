@@ -23,7 +23,6 @@ typedef experimental::optional<x64asm::R64> optreg_t;
 
 struct Temp {
     int index;
-	int timesInUse = 0;
 	optreg_t reg = nullopt;
     optint_t stackOffset = nullopt;
 	int startInterval = -1;
@@ -434,7 +433,8 @@ struct IrFunc {
     IrInstList instructions;
     vector<Constant*> constants_;
     vector<Function*> functions_;
-	vector<tempptr_t> temps;
+	vector<vector<tempptr_t>> localTemps;
+	vector<tempptr_t> otherTemps;
     int32_t parameter_count_;
     int32_t local_count_;
     // TODO: rn hard-coding this at 0, but we need to actually keep track 
@@ -444,13 +444,15 @@ struct IrFunc {
     IrFunc(IrInstList instructions,
         vector<Constant*> constants_,
         vector<Function*> functions_,
-		vector<tempptr_t> temps,
+		vector<vector<tempptr_t>> localTemps,
+		vector<tempptr_t> otherTemps,
         int32_t parameter_count_,
         int32_t local_count_,
         int32_t ref_count_) :
         instructions(instructions),
         constants_(constants_),
-		temps(temps),
+		localTemps(localTemps),
+		otherTemps(otherTemps),
         functions_(functions_),
         parameter_count_(parameter_count_),
         local_count_(local_count_),

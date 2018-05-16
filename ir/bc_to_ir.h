@@ -28,12 +28,15 @@ private:
 	stack<tempptr_t> tempStack;
 	IrInstList irInsts;
 	offset_t currentTemp = 0;
-    vector<tempptr_t> temps;
+    vector<vector<tempptr_t>> localTemps;
+    vector<tempptr_t> otherTemps;
 	int whileLevel = 0;
 	set<tempptr_t> tempsInWhile;
 
     // helpers
     tempptr_t getNewTemp();
+    tempptr_t getNewLocalTemp(int i);
+    tempptr_t loadLocalTemp(int i);
     void pushTemp(tempptr_t temp);
     tempptr_t popTemp();
     void pushInstruction(instptr_t inst);
@@ -48,9 +51,10 @@ public:
         func(mainFunc),
         vmPointer(vmInterpreterPointer) {
         for (int i = 0; i < mainFunc->local_vars_.size(); i++) {
-        	tempptr_t newTemp = make_shared<Temp>(i);
-            temps.push_back(newTemp);
+			vector<tempptr_t> local;	
+            localTemps.push_back(local);
         }
+		currentTemp = localTemps.size();
     };
 	IrFunc toIr();
 	IrFunc toIrFunc(Function*);

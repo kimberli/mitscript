@@ -6,6 +6,12 @@ void RegOpt::optimize(IrFunc* irFunc) {
 	linearScan(irFunc);
 };
 
+struct compareIntervalStart {
+	bool operator()(const tempptr_t &a, const tempptr_t &b) {
+		return a->startInterval <= b->startInterval;
+	};
+};
+
 struct compareIntervalEnd {
 	bool operator()(const tempptr_t &a, const tempptr_t &b) {
 		return a->endInterval <= b->endInterval;
@@ -13,17 +19,22 @@ struct compareIntervalEnd {
 };
 
 void RegOpt::linearScan(IrFunc* irFunc) {
+	vector<tempptr_t> all_temps;
+	all_temps.insert(all_temps.end(), irFunc->otherTemps.begin(), irFunc->otherTemps.end()); 
+	for (vector<tempptr_t> temps: irFunc->localTemps) {	
+		all_temps.insert(all_temps.end(), temps.begin(), temps.end()); 
+	}	
+	std::sort(all_temps.begin(), all_temps.end(), compareIntervalStart()); // rip sort by startInterval
+	labelIntervals(irFunc->otherTemps);
+};
+
+void RegOpt::labelIntervals(vector<tempptr_t> temps) {
 	set<tempptr_t, compareIntervalEnd> active; // ordered by endInterval
 	int stackOffset = 0;
 	int numRegisters = freeRegisters.size();
-//	for (tempptr_t temp_i: irFunc->temps) {
-//		// modifying all regs to be long
-//		temp_i->startInterval = 0;
-//		temp_i->endInterval = irFunc->instructions.size();
-//	}
-	for (tempptr_t temp_i: irFunc->temps) {
+	for (tempptr_t temp_i: temps) {
 		if (temp_i->startInterval == -1 && temp_i->endInterval == -1) {
-			// TODO: creating global temps that do nothing
+			// TODO: creating temps that do nothing
 			continue;
 		}
 		std::set<tempptr_t, compareIntervalEnd>::iterator it;
@@ -61,8 +72,7 @@ void RegOpt::linearScan(IrFunc* irFunc) {
 		}
 		LOG(to_string(temp_i->index) + " start: " + to_string(temp_i->startInterval) + ", end: " + to_string(temp_i->endInterval));
 	}
-};
-
+}
 void RegOpt::run() {
     LOG("Starting reg alloc optimization");
     if (func->instructions.size() > 0) {

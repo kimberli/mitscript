@@ -86,7 +86,7 @@ void IrInterpreter::prolog() {
     // allocate space for locals, refs, and temps on the stack
     // by decrementing rsp
     // and note that we are only storing on ref pointer by pushing the pointer to the array
-    spaceToAllocate = 8*(1 + func->temps.size()); // locals are temps now
+    spaceToAllocate = 8*(1 + func->localTemps.size() + func->otherTemps.size()); // locals are temps now
     assm.sub(x64asm::rsp, x64asm::Imm32{spaceToAllocate});
 
     // put a pointer to the references onto the stack
@@ -102,10 +102,10 @@ void IrInterpreter::prolog() {
 
     // rdi stores arg0 which is the list of arguments to the MS func
     for (uint64_t i = 0; i < func->parameter_count_; i++) {
-        tempptr_t localTemp = func->temps.at(i);
-        if (localTemp->startInterval == -1 && localTemp->endInterval == -1) {
+        if (func->localTemps.at(i).size() == 0) {
            continue;  // the arg is never used, don't bother
         }
+        tempptr_t localTemp = func->localTemps.at(i).front();
 
         if (localTemp->reg && (localTemp->reg.value() == x64asm::rdi)) {
             // current arg is stored in a register; make sure it won't
@@ -125,15 +125,19 @@ void IrInterpreter::prolog() {
     // now do rdi, if applicable
     if (rdiTemp >= 0) {
         if (isLocalRef.at(rdiTemp)) {
-            installLocalRefVar(func->temps.at(rdiTemp), rdiTemp);
+            installLocalRefVar(func->localTemps.at(rdiTemp).front(), rdiTemp);
         } else {
-            installLocalVar(func->temps.at(rdiTemp), rdiTemp);
+            installLocalVar(func->localTemps.at(rdiTemp).front(), rdiTemp);
         }
     }
 
     // set all other locals to none
     for (uint64_t i = func->parameter_count_; i < func->local_count_; i++) {
-        tempptr_t localTemp = func->temps.at(i);
+		if (func->localTemps.at(i).size() == 0) {
+			tempptr_t localTemp = make_shared<Temp>(i);
+	        func->localTemps.at(i).push_back(localTemp);
+		}
+		tempptr_t localTemp = func->localTemps.at(i).front();
         if (isLocalRef.at(i)) {
             installLocalRefNone(localTemp);
         } else {
