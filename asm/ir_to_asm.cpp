@@ -429,10 +429,6 @@ void IrInterpreter::executeStep() {
                         Push(reg);
                     }
                 }
-                // give back the scratch reg
-                if (usedScratchReg) {
-                    returnScratchReg(reg);
-                }
 
                 vector<x64asm::Imm64> args = {
                     vmPointer, // vm
@@ -451,6 +447,10 @@ void IrInterpreter::executeStep() {
                 //assm.add(x64asm::rsp, x64asm::Imm32{8*numRefs});
                 for (int i = 0; i < numRefs; i++) {
                     Pop();
+                }
+                // give back the scratch reg
+                if (usedScratchReg) {
+                    returnScratchReg(reg);
                 }
                 break;
             };
