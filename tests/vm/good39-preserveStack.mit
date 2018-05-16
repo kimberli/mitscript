@@ -1,0 +1,4 @@
+f = fun(x, y, z, a, b, c, d, e) {
+    return x + y + z + a + b + c + d + e;
+};
+print("hi: " + f(1, 2, 3, 4, 5, 6, 7, 8));
