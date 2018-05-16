@@ -3,6 +3,7 @@
 ## Overview of Directories
 * `asm` - translation from intermediate representation (IR) to assembly
 * `bc` - compilation from MITScript to bytecode
+* `docs` - project documentation
 * `ex` - example folder (staff-provided)
 * `gc` - garbage collection
 * `ir` - translation from bytecode to IR
@@ -22,6 +23,7 @@
 * `make test` - runs all correctness tests (in `tests/vm`)
 * `make test-parser` - runs all parser tests (in `tests/parser`)
 * `make test-mem` - runs heap memory usage tests (in `tests/gc`)
+* `make test-perf` - runs performance tests by averaging 5 runs (in `tests/perf`)
 
 `make` by default makes the whole interpreter, producing the `mitscript` binary.
 
