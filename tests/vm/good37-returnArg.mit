@@ -1,0 +1,6 @@
+sum = fun(a) {
+    return a;
+};
+
+ans = sum(1);
+print(ans);
