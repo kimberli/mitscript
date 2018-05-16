@@ -11,6 +11,7 @@ uint32_t IrInterpreter::getTempOffset(tempptr_t temp) {
     return 8*(1 + numCalleeSaved + 1 + temp->index);
 }
 
+// TODO: deprecate
 void IrInterpreter::getRbpOffset(uint32_t offset) {
     // put rbp in a reg
     assm.mov(x64asm::r10, x64asm::rbp);
@@ -155,7 +156,7 @@ void IrInterpreter::installLocalRefVar(tempptr_t temp, uint32_t localIdx) {
         assm.push(reg);
         usedScratch = true;
     }
-    // move the value to the right reg
+    // move the value to the target reg if applicable else a scratch reg
     assm.mov(
          reg,
          x64asm::M64{x64asm::rdi, x64asm::Imm32{8*localIdx}}
@@ -177,28 +178,15 @@ void IrInterpreter::installLocalRefVar(tempptr_t temp, uint32_t localIdx) {
 }
 
 void IrInterpreter::installLocalRefNone(tempptr_t temp) {
-    x64asm::R64 reg = x64asm::rdi;
-    bool usedScratch = false;
-    if (temp->reg) {
-        reg = temp->reg.value();
-    } else {
-        usedScratch = true;
-        assm.push(reg);
-    }
-    assm.mov(reg, x64asm::Imm64{vmPointer->NONE});
-
     // convert to ValWrapper
     vector<tempptr_t> noTempArgs;
     vector<x64asm::Imm64> args = {
         x64asm::Imm64{vmPointer},
+        x64asm::Imm64{vmPointer->NONE},
     };
     tempptr_t returnTemp = temp;
     // this will put the result back inside the right temp
-    callHelper((void*) &(helper_new_valwrapper), args, noTempArgs, reg, returnTemp);
-
-    if (usedScratch) {
-        assm.pop(x64asm::rdi);
-    }
+    callHelper((void*) &(helper_new_valwrapper), args, noTempArgs, returnTemp);
 }
 
 /************************
