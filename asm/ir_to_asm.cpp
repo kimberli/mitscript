@@ -450,7 +450,7 @@ void IrInterpreter::executeStep() {
                 // clear the stack by incrementing rsp 
                 //assm.add(x64asm::rsp, x64asm::Imm32{8*numRefs});
                 for (int i = 0; i < numRefs; i++) {
-                    Pop(x64asm::r10);
+                    Pop();
                 }
                 break;
             };
@@ -504,7 +504,7 @@ void IrInterpreter::executeStep() {
                 // clear the stack by incrementing
                 // assm.add(x64asm::rsp, x64asm::Imm32{8*numArgs});
                 for (int i = 0; i < numArgs; i++) {
-                    Pop(x64asm::r10);
+                    Pop();
                 }
 
                 break;
