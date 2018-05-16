@@ -2,8 +2,8 @@
 #include <set>
 #include "include/x64asm.h"
 
-void RegOpt::optimize(IrFunc* irFunc) {
-	linearScan(irFunc);
+int RegOpt::optimize(IrFunc* irFunc) {
+	return linearScan(irFunc);
 };
 
 struct compareIntervalEnd {
@@ -12,7 +12,7 @@ struct compareIntervalEnd {
 	};
 };
 
-void RegOpt::linearScan(IrFunc* irFunc) {
+int RegOpt::linearScan(IrFunc* irFunc) {
 	set<tempptr_t, compareIntervalEnd> active; // ordered by endInterval
 	int stackOffset = 0;
 	int numRegisters = freeRegisters.size();
@@ -61,6 +61,7 @@ void RegOpt::linearScan(IrFunc* irFunc) {
 		}
 		LOG(to_string(temp_i->index) + " start: " + to_string(temp_i->startInterval) + ", end: " + to_string(temp_i->endInterval));
 	}
+	return stackOffset;
 };
 
 void RegOpt::run() {

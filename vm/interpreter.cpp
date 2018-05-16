@@ -520,8 +520,7 @@ Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
         IrFunc irf = irc.toIr();
         //TODO make optimization toggleable?
         RegOpt reg = RegOpt();
-        reg.optimize(&irf);
-
+		irf.temp_count = reg.optimize(&irf);
         // convert the ir to assembly
         IrInterpreter iri = IrInterpreter(&irf, self, irc.isLocalRef);
         x64asm::Function asmFunc = iri.run();
