@@ -17,7 +17,7 @@ void IrInterpreter::comparisonSetup(instptr_t inst, TempBoolOp tempBoolOp) {
     tempptr_t right = inst->tempIndices->at(1);
     tempptr_t res = inst->tempIndices->at(0);
     // perform a comparison; not stored anywhere
-    moveTemp(left, right, TempOp::CMP);
+    moveTemp32(left, right, TempOp::CMP);
     // get a scratch reg
     // would be better to get two free regs, but I haven't set up the
     // code to be able to do that yet
@@ -35,7 +35,7 @@ void IrInterpreter::comparisonSetup(instptr_t inst, TempBoolOp tempBoolOp) {
         // put 1 in the scratch reg
         assm.mov(reg, x64asm::Imm64{1});
         // put 0 in the return reg
-        assm.mov(res->reg.value(), x64asm::Imm32{0});
+        assm.mov(res->reg.value(), x64asm::Imm64{0});
         // do the operation, leaving val in the return reg
         assm.assemble({op, {res->reg.value(), reg}});
     } else {
@@ -66,6 +66,7 @@ void IrInterpreter::comparisonSetup(instptr_t inst, TempBoolOp tempBoolOp) {
         // move from reg into its home in the temp
         moveTemp(res, reg);
     }
+    returnScratchReg(reg);
 };
 
 /************************

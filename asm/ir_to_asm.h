@@ -75,6 +75,11 @@ private:
     void moveTemp(x64asm::R64 dest, tempptr_t src);
     void moveTemp(x64asm::R64 dest, tempptr_t src, TempOp tempOp);
     void moveTemp(tempptr_t dest, x64asm::R64 src);
+    void moveTemp32(tempptr_t dest, tempptr_t src);
+    void moveTemp32(tempptr_t dest, tempptr_t src, TempOp tempOp);
+    void moveTemp(x64asm::R32 dest, tempptr_t src);
+    void moveTemp(x64asm::R32 dest, tempptr_t src, TempOp tempOp);
+    void moveTemp(tempptr_t dest, x64asm::R32 src);
 
 public:
     //static const x64asm::R64 argRegs[];

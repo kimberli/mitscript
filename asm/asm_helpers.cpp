@@ -286,6 +286,7 @@ void IrInterpreter::returnScratchReg(x64asm::R64 reg) {
 void IrInterpreter::moveTemp(x64asm::R64 dest, tempptr_t src) {
     moveTemp(dest, src, TempOp::MOVE);
 }
+
 void IrInterpreter::moveTemp(tempptr_t dest, tempptr_t src) {
     moveTemp(dest, src, TempOp::MOVE);
 }
@@ -425,6 +426,152 @@ void IrInterpreter::moveTemp(tempptr_t dest, tempptr_t src, TempOp tempOp) {
         }
     }
 }
+
+void IrInterpreter::moveTemp(x64asm::R32 dest, tempptr_t src) {
+    moveTemp(dest, src, TempOp::MOVE);
+}
+
+void IrInterpreter::moveTemp(tempptr_t dest, x64asm::R32 src) {
+    if (dest->reg) {
+        assm.mov(getRegBottomHalf(dest->reg.value()), src);
+    } else {
+        // dest in mem, src is a reg
+        uint32_t destOffset = getTempOffset(dest);
+        assm.mov(
+            x64asm::M32{
+                x64asm::rbp,
+                x64asm::Imm32{-destOffset}
+            },
+            src
+        );
+    }
+}
+
+void IrInterpreter::moveTemp(x64asm::R32 dest, tempptr_t src, TempOp tempOp) {
+    x64asm::Opcode op;
+    if (src->reg) {
+        switch (tempOp) {
+            case TempOp::MOVE:
+                op = x64asm::MOV_R32_R32;
+                break;
+            case TempOp::SUB:
+                op = x64asm::SUB_R32_R32;
+                break;
+            case TempOp::MUL:
+                op = x64asm::IMUL_R32_R32;
+                break;
+            case TempOp::CMP:
+                op = x64asm::CMP_R32_R32;
+                break;
+            case TempOp::AND:
+                op = x64asm::AND_R32_R32;
+                break;
+            case TempOp::OR:
+                op = x64asm::OR_R32_R32;
+                break;
+        }
+        assm.assemble({op, {dest, getRegBottomHalf(src->reg.value())}});
+    } else {
+        uint32_t offset = getTempOffset(src);
+        switch (tempOp) {
+            case TempOp::MOVE:
+                op = x64asm::MOV_R32_M32;
+                break;
+            case TempOp::SUB:
+                op = x64asm::SUB_R32_M32;
+                break;
+            case TempOp::MUL:
+                op = x64asm::IMUL_R32_M32;
+                break;
+            case TempOp::CMP:
+                op = x64asm::CMP_R32_M32;
+                break;
+            case TempOp::AND:
+                op = x64asm::AND_R32_M32;
+                break;
+             case TempOp::OR:
+                op = x64asm::OR_R32_M32;
+                break;
+        }
+        assm.assemble({op, {
+            dest,
+            x64asm::M32{
+                x64asm::rbp,
+                x64asm::Imm32{-offset}
+            }
+        }});
+    }
+}
+
+void IrInterpreter::moveTemp32(tempptr_t dest, tempptr_t src) {
+    moveTemp32(dest, src, TempOp::MOVE);
+}
+
+void IrInterpreter::moveTemp32(tempptr_t dest, tempptr_t src, TempOp tempOp) {
+    if (dest->reg) {
+        moveTemp(getRegBottomHalf(dest->reg.value()), src, tempOp);
+    } else {
+        x64asm::Opcode op;
+        switch (tempOp) {
+            case TempOp::MOVE:
+                op = x64asm::MOV_M32_R32;
+                break;
+            case TempOp::SUB:
+                op = x64asm::SUB_M32_R32;
+                break;
+            case TempOp::MUL:
+                // multiplication can only do R->M, reverse order of args.
+                assert (false);
+                break;
+            case TempOp::CMP:
+                op = x64asm::CMP_M32_R32;
+                break;
+            case TempOp::AND:
+                op = x64asm::AND_M32_R32;
+                break;
+            case TempOp::OR:
+                op = x64asm::OR_M32_R32;
+                break;
+        }
+
+        if (src->reg) {
+           // dest is in memory, src in a reg
+            uint32_t offset = getTempOffset(dest);
+            assm.assemble({op, {
+                x64asm::M32{
+                    x64asm::rbp,
+                    x64asm::Imm32{-offset}
+                },
+                getRegBottomHalf(src->reg.value())
+            }});
+        } else { // both are in memory :'(
+            // we need a scratch reg
+            x64asm::R64 scratch = getScratchReg();
+			x64asm::R32 reg = getRegBottomHalf(scratch);	
+            // move src into the reg
+            uint32_t srcOffset = getTempOffset(src);
+            assm.mov(
+                reg,
+                x64asm::M32{
+                    x64asm::rbp,
+                    x64asm::Imm32{-srcOffset}
+                }
+            );
+            // move the reg into dest
+            uint32_t destOffset = getTempOffset(dest);
+            assm.assemble({op, {
+                x64asm::M32{
+                    x64asm::rbp,
+                    x64asm::Imm32{-destOffset}
+                },
+                reg
+            }});
+            // give back the reg
+            returnScratchReg(scratch);
+        }
+    }
+}
+
 
 /************************
  * ASSM HELPERS
