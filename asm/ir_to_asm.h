@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../vm/interpreter.h"
+#include "../opt/opt_tag_ptr.h"
 #include "../ir.h"
 #include "helpers.h"
 #include <set>
