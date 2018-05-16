@@ -11,14 +11,6 @@ uint32_t IrInterpreter::getTempOffset(tempptr_t temp) {
     return 8*(1 + numCalleeSaved + 1 + temp->index);
 }
 
-// TODO: deprecate
-void IrInterpreter::getRbpOffset(uint32_t offset) {
-    // put rbp in a reg
-    assm.mov(x64asm::r10, x64asm::rbp);
-    // subtract the offset from rbp
-    assm.sub(x64asm::r10, x64asm::Imm32{offset});
-}
-
 /************************
  * CALL HELPERS
  ***********************/
@@ -146,7 +138,7 @@ void IrInterpreter::installLocalVar(tempptr_t temp, uint32_t localIdx) {
 }
 
 void IrInterpreter::installLocalNone(tempptr_t temp) {
-    x64asm::Imm64 src = x64asm::Imm64{vmPointer->NONE};
+    x64asm::Imm64 src = x64asm::Imm64{(uint64_t)vmPointer->NONE};
     if (temp->reg) {
         assm.mov(temp->reg.value(), src);
     } else {
@@ -194,7 +186,7 @@ void IrInterpreter::installLocalRefNone(tempptr_t temp) {
     vector<tempptr_t> noTempArgs;
     vector<x64asm::Imm64> args = {
         x64asm::Imm64{vmPointer},
-        x64asm::Imm64{vmPointer->NONE},
+        x64asm::Imm64{(uint64_t)vmPointer->NONE},
     };
     tempptr_t returnTemp = temp;
     // this will put the result back inside the right temp
