@@ -573,6 +573,9 @@ void IrInterpreter::executeStep() {
                 } else {
                     // get a scratch reg
                     x64asm::R64 reg = getScratchReg();
+                    // note: these calls to move do NOT incur a 
+                    // scratch reg because they already have a red
+                    // on one side. Still only using one scratch reg
                     moveTemp(reg, left);
                     moveTemp(reg, right, TempOp::MUL);
                     moveTemp(res, reg);
@@ -679,11 +682,22 @@ void IrInterpreter::executeStep() {
         case IrOp::Not:
             {
                 LOG(to_string(instructionIndex) + ": Not");
-				x64asm::R64 operand = getScratchReg();
-                moveTemp(operand, inst->tempIndices->at(1));
-                assm.xor_(operand, x64asm::Imm32{1});
-                moveTemp(inst->tempIndices->at(0), operand);
-				returnScratchReg(operand);
+				//x64asm::R64 operand = getScratchReg();
+                tempptr_t returnTemp = inst->tempIndices->at(0);
+                tempptr_t operand = inst->tempIndices->at(1);
+                moveTemp(returnTemp, operand);
+                if (returnTemp->reg) {
+                    assm.xor_(
+                        returnTemp->reg.value(),
+                        x64asm::Imm32{1}
+                    );
+                } else {
+                    uint32_t offset = getTempOffset(returnTemp);
+                    assm.xor_(
+                        x64asm::M64{x64asm::rbp, x64asm::Imm32{-offset}},
+                        x64asm::Imm32{1}
+                    );
+                }
                 break;
             };
         case IrOp::Goto:
