@@ -77,7 +77,7 @@ private:
     void registerCollectable(Collectable* c);
     list<Collectable*> allocated;
 public:
-	list<Frame*>* rootset;
+	list<Collectable*>* rootset;
 	/*
 	 * The constructor should take as an argument the maximum size of
 	 * the garbage collected heap. You get to decide what the units of
@@ -89,7 +89,7 @@ public:
      * units of maxmem: KB
      * units of currentSize: B
 	 */
-	CollectedHeap(int maxmem, int currentSize, list<Frame*>* rootset);
+	CollectedHeap(int maxmem, int currentSize, list<Collectable*>* rootset);
 
     /*
      * Increment our tracked currentSizeBytes

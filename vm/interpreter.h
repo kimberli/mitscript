@@ -34,6 +34,7 @@ private:
     None* NONE;
 
     CollectedHeap* collector;
+    list<Collectable*>* rootset;
     Interpreter(Function* mainFunc, int maxmem, bool callAsm);
     void run();  // executes all instructions until termination
 
@@ -43,6 +44,10 @@ private:
     Value* callVM(vector<Constant*> argsList, Closure* clos);
     // handles calling from asm
     Value* callAsm(vector<Constant*> argsList, Closure* clos);
+
+    void addToRootset(Collectable* obj);
+    void removeFromRootset(Collectable* obj);
+    void addToOpstack(Value* obj);
 
     // asm helpers
     Value* add(Value* left, Value* right);

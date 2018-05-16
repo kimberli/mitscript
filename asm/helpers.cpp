@@ -7,7 +7,9 @@ void helper_store_global(Interpreter* interpreter, string* name, Value* val) {
 }
 
 Value* helper_load_global(Interpreter* interpreter, string* name) {
-    return interpreter->loadGlobal(*name);
+    auto value = interpreter->loadGlobal(*name);
+    interpreter->addToOpstack(value);
+    return value;
 }
 
 void helper_store_local_ref(Constant* val, ValWrapper* ref) {
@@ -15,11 +17,15 @@ void helper_store_local_ref(Constant* val, ValWrapper* ref) {
 }
 
 Value* helper_add(Interpreter* interpreter, Value* left, Value* right) {
-    return interpreter->add(left, right);
+    auto value = interpreter->add(left, right);
+    interpreter->addToOpstack(value);
+    return value;
 }
 
 Boolean* helper_eq(Interpreter* interpreter, Value* left, Value* right) {
-    return interpreter->collector->allocate<Boolean>(left->equals(right));
+    auto value = interpreter->collector->allocate<Boolean>(left->equals(right));
+    interpreter->addToOpstack(value);
+    return value;
 }
 
 Value* helper_alloc_closure(Interpreter* interpreter, int numRefs, Function* func, ValWrapper** refs) {
@@ -27,7 +33,9 @@ Value* helper_alloc_closure(Interpreter* interpreter, int numRefs, Function* fun
     for (int i = 0; i < numRefs; i++) {
         refVec.push_back(refs[i]); // these should be in order just like that
     }
-    return interpreter->collector->allocate<Closure>(refVec, func);
+    auto value = interpreter->collector->allocate<Closure>(refVec, func);
+    interpreter->addToOpstack(value);
+    return value;
 }
 
 Value* helper_call(Interpreter* interpreter, int numArgs, Closure* closure, Constant** args) {
@@ -36,7 +44,9 @@ Value* helper_call(Interpreter* interpreter, int numArgs, Closure* closure, Cons
     for (int i = 0; i < numArgs; i++) {
         argVec.push_back(args[i]);
     }
-    return interpreter->call(argVec, closure);
+    auto value = interpreter->call(argVec, closure);
+    interpreter->addToOpstack(value);
+    return value;
 }
 
 void helper_gc(Interpreter* interpreter) {
@@ -90,34 +100,47 @@ Value* helper_unbox_valwrapper(ValWrapper* v) {
 }
 
 Integer* helper_new_integer(Interpreter* interpreter, int32_t val) {
-    return interpreter->collector->allocate<Integer>(val);
+    auto value = interpreter->collector->allocate<Integer>(val);
+    interpreter->addToOpstack(value);
+    return value;
 }
 
 Boolean* helper_new_boolean(Interpreter* interpreter, bool val) {
-    return interpreter->collector->allocate<Boolean>(val);
+    auto value = interpreter->collector->allocate<Boolean>(val);
+    interpreter->addToOpstack(value);
+    return value;
 }
 
 Record* helper_new_record(Interpreter* interpreter) {
-    return interpreter->collector->allocate<Record>();
+    auto value = interpreter->collector->allocate<Record>();
+    interpreter->addToOpstack(value);
+    return value;
 }
 
 ValWrapper* helper_new_valwrapper(Interpreter* interpreter, Constant* ptr) {
-    return interpreter->collector->allocate<ValWrapper>(ptr);
+    auto value = interpreter->collector->allocate<ValWrapper>(ptr);
+    interpreter->addToOpstack(value);
+    return value;
 }
 
 String* helper_cast_string(Interpreter* interpreter, Value* val) {
-    return interpreter->collector->allocate<String>(val->toString());
+    auto value = interpreter->collector->allocate<String>(val->toString());
+    interpreter->addToOpstack(value);
+    return value;
 }
 
 Value* helper_get_record_field(Interpreter* interpreter, string* field, Record* record) {
     if (record->value.count(*field) == 0) {
         return interpreter->NONE;
     }
-	return record->get(*field);
+	auto value = record->get(*field);
+    interpreter->addToOpstack(value);
+    return value;
 }
 
 Record* helper_set_record_field(Interpreter* interpreter, string* field, Record* record, Value* val) {
 	record->set(*field, val, *interpreter->collector);
+    interpreter->addToOpstack(record);
 	return record;
 }
 
@@ -126,10 +149,13 @@ Value* helper_get_record_index(Interpreter* interpreter, Value* index, Record* r
     if (record->value.count(key) == 0) {
         return interpreter->NONE;
     }
-	return record->get(key);
+	auto value = record->get(key);
+    interpreter->addToOpstack(value);
+    return value;
 }
 
 Record* helper_set_record_index(Interpreter* interpreter, Value* index, Record* record, Value* val) {
 	record->set(index->toString(), val, *interpreter->collector);
+    interpreter->addToOpstack(record);
 	return record;
 }

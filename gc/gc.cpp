@@ -33,11 +33,11 @@ size_t Collectable::getStringSize(string s) {
 }
 
 /* CollectedHeap */
-CollectedHeap::CollectedHeap(int maxmem, int currentSize, list<Frame*>* frames) {
+CollectedHeap::CollectedHeap(int maxmem, int currentSize, list<Collectable*>* rtset) {
     // maxmem is in MB
     maxSizeBytes = long(maxmem * 1000000);
     currentSizeBytes = currentSize;
-    rootset = frames;
+    rootset = rtset;
 }
 void CollectedHeap::increment(int newMem) {
     // LOG("\tincreased size by " << newMem);
@@ -101,10 +101,10 @@ void CollectedHeap::gc() {
     // calls markSuccessors on everything in the root set
     // loop through the allocated ll. if marked = False, deallocate, decrement the size of the collector, and remove from ll. Else, set marked to False
     if (currentSizeBytes > maxSizeBytes / 2) {
-        LOG("STARTING GC: size = " << currentSizeBytes << "/" << maxSizeBytes << ", count = " << count());
+        LOG("STARTING GC: size = " << currentSizeBytes << "/" << maxSizeBytes << ", count = " << count() << " rootset size = " << rootset->size());
         // mark stage
-        for (auto frame = rootset->begin(); frame != rootset->end(); ++frame) {
-            markSuccessors(*frame);
+        for (auto item = rootset->begin(); item != rootset->end(); ++item) {
+            markSuccessors(*item);
         }
         // sweep stage
         // we recount the data we are using to get a more accurate tally
@@ -112,20 +112,15 @@ void CollectedHeap::gc() {
         while (it != allocated.end()) {
             Collectable* c = *it;
             if (!c->marked) {
-                // LOG("\tdecreased size by " << c->getSize() << " @ " << c);
                 currentSizeBytes -= c->getSize();
                 it = allocated.erase(it);
                 delete c;
             } else {
-                // LOG("\tskipped @ " << c);
                 c->marked = false;
                 ++it;
             }
         }
-        for (auto frame = rootset->begin(); frame != rootset->end(); ++frame) {
-            (*frame)->func->marked = false;
-        }
-        LOG("ENDING GC: size = " << currentSizeBytes << ", count = " << count());
+        LOG("ENDING GC: size = " << currentSizeBytes << ", count = " << count() << " rootset size = " << rootset->size());
     }
     checkSize();
 }

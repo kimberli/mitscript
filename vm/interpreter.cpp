@@ -10,11 +10,20 @@
 
 using namespace std;
 
+void Interpreter::addToRootset(Collectable* obj) {
+    rootset->push_back(obj);
+}
+
+void Interpreter::removeFromRootset(Collectable* obj) {
+    rootset->remove(obj);
+}
+
 Interpreter::Interpreter(Function* mainFunc, int maxmem, bool callAsm) {
     // initialize the garbage collector
     // note that mainFunc is not included in the gc's allocated list because
     // we never have to deallocate it
-    collector = new CollectedHeap(maxmem, mainFunc->getSize(), &frames);
+    rootset = new list<Collectable*>();
+    collector = new CollectedHeap(maxmem, mainFunc->getSize(), rootset);
 
     // initialize a static none
     NONE = new None();
@@ -36,6 +45,7 @@ Interpreter::Interpreter(Function* mainFunc, int maxmem, bool callAsm) {
     frame->collector = collector;
     globalFrame = frame;
     frames.push_back(frame);
+    addToRootset(frame);
     finished = false;
     shouldCallAsm = callAsm;
 
@@ -246,6 +256,7 @@ void Interpreter::executeStep() {
                 // take return val from top of stack & discard current frame
                 auto returnVal = frame->opStackPeek();
                 frames.pop_back();
+                removeFromRootset(frame);
                 if (frames.empty()) {
                     finished = true;
                     return;
@@ -373,6 +384,16 @@ void Interpreter::executeStep() {
                 }
                 break;
             }
+        case BcOp::StartWhile:
+            {
+                frame->instructionIndex++;
+                break;
+            }
+        case BcOp::EndWhile:
+            {
+                frame->instructionIndex++;
+                break;
+            }
         case BcOp::Label:
             {
                 frame->instructionIndex++;
@@ -416,6 +437,7 @@ void Interpreter::executeStep() {
         // last instruction of current function
         Value* returnVal = collector->allocate<None>();
         frames.pop_back();
+        removeFromRootset(frame);
         frame = frames.back();
         // push return val to top of new parent frame
         frame->opStackPush(returnVal);
@@ -504,6 +526,7 @@ Value* Interpreter::callVM(vector<Constant*> argsList, Closure* clos) {
 		return val;
     } else if (newFrame->numInstructions() != 0) {
         frames.push_back(newFrame);
+        addToRootset(newFrame);
         // TODO: do we need to return something here?
     } else {
         Value* returnVal = collector->allocate<None>();
@@ -512,8 +535,17 @@ Value* Interpreter::callVM(vector<Constant*> argsList, Closure* clos) {
     }
 }
 
+void Interpreter::addToOpstack(Value* obj) {
+    Frame* frame = frames.back();
+    frame->opStackPush(obj);
+}
+
 Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
     Interpreter* self = this;
+    Frame* newFrame = collector->allocate<Frame>(clos->func);
+    newFrame->collector = collector;
+    frames.push_back(newFrame);
+    addToRootset(newFrame);
     if (!(clos->func->mcf)) {
         // convert the bc function to the ir
         IrCompiler irc = IrCompiler(clos->func, self);
@@ -542,6 +574,11 @@ Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
     }
     vector<Value**> mcfArgs = {argsArray, refsArray};
     Value* result = clos->func->mcf->call(mcfArgs);
+
+    // clear things we added to rootset
+    removeFromRootset(newFrame);
+    frames.pop_back();
+
     LOG("done calling mcf");
     return result;
 }
