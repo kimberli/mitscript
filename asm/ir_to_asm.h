@@ -73,6 +73,9 @@ private:
     void moveTemp(x64asm::R32 dest, tempptr_t src, TempOp tempOp);
     void moveTemp(tempptr_t dest, x64asm::R32 src);
 
+    set<int> activeTemps;
+    void updateActiveTemps(instptr_t inst, int index);
+
 public:
     //static const x64asm::R64 argRegs[];
     static const x64asm::R64 callerSavedRegs[];

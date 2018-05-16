@@ -78,6 +78,7 @@ private:
     list<Collectable*> allocated;
 public:
 	list<Frame*>* rootset;
+    vector<Collectable*> rootsetAsm;
 	/*
 	 * The constructor should take as an argument the maximum size of
 	 * the garbage collected heap. You get to decide what the units of

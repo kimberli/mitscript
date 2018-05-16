@@ -513,6 +513,13 @@ Value* Interpreter::callVM(vector<Constant*> argsList, Closure* clos) {
 }
 
 Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
+    // add our stuff to the GC 
+    int numPushes = argsList.size() + 1;
+    collector->rootsetAsm.push_back(clos);
+    for (Constant* arg : argsList) {
+        collector->rootsetAsm.push_back(arg);
+    }
+
     Interpreter* self = this;
     if (!(clos->func->mcf)) {
         // convert the bc function to the ir
@@ -520,7 +527,8 @@ Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
         IrFunc irf = irc.toIr();
         //TODO make optimization toggleable?
         RegOpt reg = RegOpt();
-		irf.temp_count = reg.optimize(&irf);
+        reg.optimize(&irf);
+
         // convert the ir to assembly
         IrInterpreter iri = IrInterpreter(&irf, self, irc.isLocalRef);
         x64asm::Function asmFunc = iri.run();
@@ -543,6 +551,11 @@ Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
     vector<Value**> mcfArgs = {argsArray, refsArray};
     Value* result = clos->func->mcf->call(mcfArgs);
     LOG("done calling mcf");
+
+    // free stuff from rootset
+    //jfor (int i = 0; i < numPushes; i++) {
+    //j    collector->rootsetAsm.pop_back();
+    //j}
     return result;
 }
 

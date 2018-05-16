@@ -106,6 +106,9 @@ void CollectedHeap::gc() {
         for (auto frame = rootset->begin(); frame != rootset->end(); ++frame) {
             markSuccessors(*frame);
         }
+        for (auto item = rootsetAsm.begin(); item != rootsetAsm.end(); item++) {
+            markSuccessors(*item);
+        }
         // sweep stage
         // we recount the data we are using to get a more accurate tally
         auto it = allocated.begin();
@@ -122,9 +125,9 @@ void CollectedHeap::gc() {
                 ++it;
             }
         }
-        for (auto frame = rootset->begin(); frame != rootset->end(); ++frame) {
-            (*frame)->func->marked = false;
-        }
+        //for (auto frame = rootset->begin(); frame != rootset->end(); ++frame) {
+        //    (*frame)->func->marked = false;
+        //}
         LOG("ENDING GC: size = " << currentSizeBytes << ", count = " << count());
     }
     checkSize();

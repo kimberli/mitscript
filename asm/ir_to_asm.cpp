@@ -827,9 +827,25 @@ void IrInterpreter::executeStep() {
         case IrOp::GarbageCollect:
             {
                 LOG(to_string(instructionIndex) + ": GarbageCollect");
-                vector<x64asm::Imm64> args = {vmPointer};
+                x64asm::R64 reg = getScratchReg();
+                for (auto it = activeTemps.begin(); it != activeTemps.end(); it++) {
+                    tempptr_t t = func->temps.at(*it);
+                    // push
+                    moveTemp(reg, t);
+                    Push(reg);
+                }
+
+                assm.mov(reg, x64asm::rsp);
+
+                vector<x64asm::Imm64> args = {vmPointer, activeTemps.size()};
                 vector<tempptr_t> temps;
-                callHelper((void *) &(helper_gc), args, temps, nullopt);
+                callHelper((void *) &(helper_gc), args, temps, reg, nullopt);
+
+                for (int i = 0; i < activeTemps.size(); i++) {
+                    Pop();
+                }
+
+                returnScratchReg(reg);
                 break;
             };
         default:
@@ -842,5 +858,17 @@ void IrInterpreter::executeStep() {
     instructionIndex += 1;
     if (instructionIndex >= func->instructions.size()) {
         finished = true;
+    }
+}
+
+void IrInterpreter::updateActiveTemps(instptr_t inst, int index) {
+    // if it's the end of this temp's range, it's no longer active
+    for (tempptr_t t : *(inst->tempIndices)) {
+        if (index >= t->startInterval) {
+            activeTemps.insert(t->index);
+        }
+        if (index >= t->endInterval) {
+            activeTemps.erase(t->index);
+        }
     }
 }

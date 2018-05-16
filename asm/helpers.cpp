@@ -39,7 +39,11 @@ Value* helper_call(Interpreter* interpreter, int numArgs, Closure* closure, Cons
     return interpreter->call(argVec, closure);
 }
 
-void helper_gc(Interpreter* interpreter) {
+void helper_gc(Interpreter* interpreter, int numTemps, Collectable** temps) {
+    for (int i = 0; i < numTemps; i++) {
+        Collectable* temp = temps[i];
+        interpreter->collector->markSuccessors(temp);
+    }
     interpreter->collector->gc();
 }
 
