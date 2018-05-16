@@ -354,6 +354,7 @@ void IrInterpreter::executeStep() {
                 assm.mov(reg, x64asm::M64{reg});
                 // store this in a temp
                 moveTemp(inst->tempIndices->at(0), reg);
+                returnScratchReg(reg);
                 break;
             }
         case IrOp::LoadReference:
@@ -481,7 +482,7 @@ void IrInterpreter::executeStep() {
                 // then pass %rsp (which points to the first element of that
                 // array) as an argument to helper_call
                 LOG(to_string(instructionIndex) + ": Call");
-                uint64_t numArgs = inst->op0.value();
+                uint32_t numArgs = inst->op0.value();
                 // push all the MITScript function arguments to the stack
                 // to make a contiguous array in memory
                 tempptr_t argTemp;
