@@ -1,7 +1,7 @@
 #!/bin/bash
 ROOT=$(git rev-parse --show-toplevel)
 DIR=$ROOT/tests/perf/
-PROG="${ROOT}/mitscript -s --opt=all"
+PROG="${ROOT}/mitscript -mem 8 -s --opt=all"
 TEST_FILE_EXT=".mit"
 INPUT_FILE_EXT=".input"
 TARGET_FILE_EXT=".output"
