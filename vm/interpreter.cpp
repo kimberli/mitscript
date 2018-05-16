@@ -513,20 +513,23 @@ Value* Interpreter::callVM(vector<Constant*> argsList, Closure* clos) {
 }
 
 Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
-    // convert the bc function to the ir
-    IrCompiler irc = IrCompiler(clos->func, this);
-    IrFunc irf = irc.toIr();
-	//TODO make optimization toggleable?
-	RegOpt reg = RegOpt();
-	reg.optimize(&irf);
+    Interpreter* self = this;
+    if (!(clos->func->mcf)) {
+        // convert the bc function to the ir
+        IrCompiler irc = IrCompiler(clos->func, self);
+        IrFunc irf = irc.toIr();
+        //TODO make optimization toggleable?
+        RegOpt reg = RegOpt();
+        reg.optimize(&irf);
 
-    // convert the ir to assembly
-    IrInterpreter iri = IrInterpreter(&irf, this, irc.isLocalRef);
-    x64asm::Function asmFunc = iri.run();
-    // create a MachineCodeFunction object
-    MachineCodeFunction mcf = MachineCodeFunction(2, asmFunc);
-    mcf.compile();
-    LOG("done compiling mcf");
+        // convert the ir to assembly
+        IrInterpreter iri = IrInterpreter(&irf, self, irc.isLocalRef);
+        x64asm::Function asmFunc = iri.run();
+        // create a MachineCodeFunction object
+        clos->func->mcf = new MachineCodeFunction(2, asmFunc);
+        clos->func->mcf->compile();
+        LOG("done compiling mcf");
+    } // else, already compiled and should be there! 
     // put the args in an array
     Value** argsArray = new Value*[argsList.size()];
     for (int i = 0; i < argsList.size(); i++) {
@@ -539,7 +542,7 @@ Value* Interpreter::callAsm(vector<Constant*> argsList, Closure* clos) {
         refsArray[i] = refs[i];
     }
     vector<Value**> mcfArgs = {argsArray, refsArray};
-    Value* result = mcf.call(mcfArgs);
+    Value* result = clos->func->mcf->call(mcfArgs);
     LOG("done calling mcf");
     return result;
 }

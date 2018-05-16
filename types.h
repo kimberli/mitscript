@@ -24,6 +24,7 @@ using experimental::nullopt;
 
 class Frame;
 class Collectable;
+class MachineCodeFunction;
 
 struct Value : public Collectable {
     // Abstract class for program values that can be stored on a frame's
@@ -83,6 +84,9 @@ struct Function : public Value {
 
     // map of label indices to instruction indices
     map<int, int> labels_;
+
+    // store a pointer to the compiled version
+    MachineCodeFunction* mcf = nullptr;
 
     BcInstructionList instructions;
 
