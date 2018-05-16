@@ -322,7 +322,7 @@ void IrInterpreter::executeStep() {
                     reg,
                     x64asm::M64{x64asm::rbp, x64asm::Imm32{-refArrayOffset}}
                 );
-                // increment rdi to index into ref array
+                // increment reg to index into ref array
                 uint32_t offset = 8*inst->op0.value();
                 assm.add(reg, x64asm::Imm32{offset});
                 // one deref gets us to the val wrapper
@@ -411,8 +411,7 @@ void IrInterpreter::executeStep() {
                 // create an "array" by pushing these to the stack
                 tempptr_t refTemp;
                 // DO NOT USE THIS BEFORE SWITCHING THE REG VALUE
-                x64asm::R64 reg = x64asm::r10; 
-                bool usedScratchReg = false;
+                x64asm::R64 reg = getScratchReg();
                 for (int i = 0; i < numRefs; ++i) {
                     // push in reverse order, so first ref is lowest
                     refTemp = inst->tempIndices->at(2 + numRefs - i - 1);
@@ -421,10 +420,6 @@ void IrInterpreter::executeStep() {
                     } else {
                         // get a scratch reg to use as a trampoline 
                         // to the stack
-                        if (!usedScratchReg) {
-                            reg = getScratchReg();
-                            usedScratchReg = true;
-                        }
                         moveTemp(reg, refTemp);
                         Push(reg);
                     }
@@ -449,9 +444,7 @@ void IrInterpreter::executeStep() {
                     Pop();
                 }
                 // give back the scratch reg
-                if (usedScratchReg) {
-                    returnScratchReg(reg);
-                }
+                returnScratchReg(reg);
                 break;
             };
         case IrOp::Call:
@@ -465,18 +458,13 @@ void IrInterpreter::executeStep() {
                 // to make a contiguous array in memory
                 tempptr_t argTemp;
                 // DO NOT USE THIS W/O REASSIGNING REG USING GETSCRATCHREG
-                x64asm::R64 reg = x64asm::r10; 
-                bool usedScratchReg = false;
+                x64asm::R64 reg = getScratchReg();
                 for (int i = 0; i < numArgs; ++i) {
                     // push in reverse order, so first arg is lowest
                     argTemp = inst->tempIndices->at(2 + numArgs - i - 1);
                     if (argTemp->reg) {
                         Push(argTemp->reg.value());
                     } else {
-                        if (!usedScratchReg) {
-                            reg = getScratchReg();
-                            usedScratchReg = true;
-                        }
                         uint32_t offset = getTempOffset(argTemp);
                         assm.mov(
                             reg,
@@ -504,9 +492,7 @@ void IrInterpreter::executeStep() {
                     Pop();
                 }
                 // now restore the scratch reg
-                if (usedScratchReg) {
-                    returnScratchReg(reg);
-                }
+                returnScratchReg(reg);
 
                 break;
             };
