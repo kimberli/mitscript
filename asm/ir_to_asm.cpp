@@ -660,6 +660,7 @@ void IrInterpreter::executeStep() {
             };
        case IrOp::AssertInteger:
             {
+                // TODO: change this to check if the last two bits == INT_TAG
                 LOG(to_string(instructionIndex) + ": AssertInteger");
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
@@ -669,6 +670,7 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::AssertBoolean:
             {
+                // TODO: change this to check if the last two bits == BOOL_TAG
                 LOG(to_string(instructionIndex) + ": AssertBool");
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
@@ -678,6 +680,7 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::AssertString:
             {
+                // TODO: change this to check if the last two bits == STR_TAG
                 LOG(to_string(instructionIndex) + ": AssertString");
                 vector<tempptr_t> temps = {
                     inst->tempIndices->at(0)
@@ -723,7 +726,8 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::UnboxInteger:
             {
-                // TODO
+                // TODO: change this to clear the last two bits and shift right by 2
+                // make sure the shift is sign extended
                 LOG(to_string(instructionIndex) + ": UnboxInteger");
                 vector<x64asm::Imm64> args;
                 vector<tempptr_t> temps = {
@@ -735,7 +739,8 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::UnboxBoolean:
             {
-                // TODO
+                // TODO: change this to clear the last two bits and shift right by 2
+                // make sure the shift is sign extended
                 LOG(to_string(instructionIndex) + ": UnboxBoolean");
                 vector<x64asm::Imm64> args;
                 vector<tempptr_t> temps = {
@@ -747,7 +752,7 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::NewInteger:
             {
-                // TODO
+                // TODO: change this to shift left by 2 and OR with INT_TAG
                 LOG(to_string(instructionIndex) + ": NewInteger");
                 vector<x64asm::Imm64> args = {
                     x64asm::Imm64{vmPointer},
@@ -761,7 +766,7 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::NewBoolean:
             {
-                // TODO
+                // TODO: change this to shift left by 2 and OR with BOOL_TAG
                 LOG(to_string(instructionIndex) + ": NewBoolean");
                 vector<x64asm::Imm64> args = {
                     x64asm::Imm64{vmPointer},
