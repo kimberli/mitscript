@@ -353,6 +353,7 @@ enum class IrOp {
     AddLabel,
 
     // Description: runs the garbage collector
+    // temp0: working temp gross
     GarbageCollect
 };
 

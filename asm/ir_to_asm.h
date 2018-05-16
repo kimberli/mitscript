@@ -31,6 +31,10 @@ private:
     vector<bool> isLocalRef;
     uint32_t spaceToAllocate;
 
+    // active temp tracking
+    set<int> activeTemps;
+    void updateActiveTemps(instptr_t inst, int index);
+
     void callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps, opttemp_t returnTemp);
     void callHelper(void* fn, vector<x64asm::Imm64> args, vector<tempptr_t> temps, optreg_t lastArg, opttemp_t returnTemp);
 

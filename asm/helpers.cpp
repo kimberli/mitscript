@@ -44,7 +44,8 @@ tagptr_t helper_call(Interpreter* interpreter, int numArgs, tagptr_t clos_ptr, t
     return interpreter->call(argVec, clos_ptr);
 }
 
-void helper_gc(Interpreter* interpreter) {
+void helper_gc(Interpreter* interpreter, int numTemps, Collectable** temps) {
+    interpreter->setFrameCollectables(numTemps, temps);
     interpreter->collector->gc();
 }
 
@@ -113,7 +114,8 @@ tagptr_t helper_get_record_field(Interpreter* interpreter, string* field, tagptr
     if (record->value.count(*field) == 0) {
         return interpreter->NONE;
     }
-	return record->get(*field);
+	auto value = record->get(*field);
+    return value;
 }
 
 tagptr_t helper_set_record_field(Interpreter* interpreter, string* field, tagptr_t record_ptr, tagptr_t ptr) {
@@ -128,7 +130,8 @@ tagptr_t helper_get_record_index(Interpreter* interpreter, tagptr_t index, tagpt
     if (record->value.count(key) == 0) {
         return interpreter->NONE;
     }
-	return record->get(key);
+	auto value = record->get(key);
+    return value;
 }
 
 tagptr_t helper_set_record_index(Interpreter* interpreter, tagptr_t index, tagptr_t record_ptr, tagptr_t ptr) {

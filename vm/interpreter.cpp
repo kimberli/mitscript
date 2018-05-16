@@ -10,11 +10,20 @@
 
 using namespace std;
 
+void Interpreter::addToRootset(Collectable* obj) {
+    rootset->push_back(obj);
+}
+
+void Interpreter::removeFromRootset(Collectable* obj) {
+    rootset->remove(obj);
+}
+
 Interpreter::Interpreter(Function* mainFunc, int maxmem, bool callAsm) {
     // initialize the garbage collector
     // note that mainFunc is not included in the gc's allocated list because
     // we never have to deallocate it
-    collector = new CollectedHeap(maxmem, mainFunc->getSize(), &frames);
+    rootset = new list<Collectable*>();
+    collector = new CollectedHeap(maxmem, mainFunc->getSize(), rootset);
 
     // initialize a static none
     NONE = make_ptr(new None());
@@ -36,6 +45,7 @@ Interpreter::Interpreter(Function* mainFunc, int maxmem, bool callAsm) {
     frame->collector = collector;
     globalFrame = frame;
     frames.push_back(frame);
+    addToRootset(frame);
     finished = false;
     shouldCallAsm = callAsm;
 
@@ -219,6 +229,7 @@ void Interpreter::executeStep() {
                 // take return val from top of stack & discard current frame
                 auto returnVal = frame->opStackPeek();
                 frames.pop_back();
+                removeFromRootset(frame);
                 if (frames.empty()) {
                     finished = true;
                     return;
@@ -395,6 +406,7 @@ void Interpreter::executeStep() {
     if (frame->instructionIndex == frame->numInstructions()) {
         // last instruction of current function
         frames.pop_back();
+        removeFromRootset(frame);
         frame = frames.back();
         // push return val to top of new parent frame
         frame->opStackPush(NONE);
@@ -481,6 +493,7 @@ tagptr_t Interpreter::callVM(vector<tagptr_t> argsList, tagptr_t clos_ptr) {
 		return val;
     } else if (newFrame->numInstructions() != 0) {
         frames.push_back(newFrame);
+        addToRootset(newFrame);
         // TODO: do we need to return something here?
     } else {
         tagptr_t returnVal = NONE;
@@ -489,9 +502,21 @@ tagptr_t Interpreter::callVM(vector<tagptr_t> argsList, tagptr_t clos_ptr) {
     }
 }
 
+void Interpreter::setFrameCollectables(int numTemps, Collectable** collectables) {
+    Frame* frame = frames.back();
+    for (int i = 0; i < numTemps; i++) {
+        Collectable* temp = collectables[i];
+        frame->collectables.push_back(temp);
+    }
+}
+
 tagptr_t Interpreter::callAsm(vector<tagptr_t> argsList, tagptr_t clos_ptr) {
     Interpreter* self = this;
     Closure* clos = cast_val<Closure>(clos_ptr);
+    Frame* newFrame = collector->allocate<Frame>(clos->func);
+    newFrame->collector = collector;
+    frames.push_back(newFrame);
+    addToRootset(newFrame);
     if (!(clos->func->mcf)) {
         // convert the bc function to the ir
         IrCompiler irc = IrCompiler(clos->func, self);
@@ -520,6 +545,11 @@ tagptr_t Interpreter::callAsm(vector<tagptr_t> argsList, tagptr_t clos_ptr) {
     }
     vector<tagptr_t*> mcfArgs = {argsArray, refsArray};
     tagptr_t result = clos->func->mcf->call(mcfArgs);
+
+    // clear things we added to rootset
+    removeFromRootset(newFrame);
+    frames.pop_back();
+
     LOG("done calling mcf");
     return result;
 }

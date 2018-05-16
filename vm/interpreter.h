@@ -34,6 +34,7 @@ private:
     tagptr_t NONE;
 
     CollectedHeap* collector;
+    list<Collectable*>* rootset;
     Interpreter(Function* mainFunc, int maxmem, bool callAsm);
     void run();  // executes all instructions until termination
 
@@ -43,6 +44,10 @@ private:
     tagptr_t callVM(vector<tagptr_t> argsList, tagptr_t clos_ptr);
     // handles calling from asm
     tagptr_t callAsm(vector<tagptr_t> argsList, tagptr_t clos_ptr);
+
+    void addToRootset(Collectable* obj);
+    void removeFromRootset(Collectable* obj);
+    void setFrameCollectables(int numTemps, Collectable** collectables);
 
     // asm helpers
     void storeGlobal(string name, tagptr_t val);

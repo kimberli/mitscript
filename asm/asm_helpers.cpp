@@ -11,6 +11,18 @@ uint32_t IrInterpreter::getTempOffset(tempptr_t temp) {
     return 8*(1 + numCalleeSaved + 1 + temp->index);
 }
 
+void IrInterpreter::updateActiveTemps(instptr_t inst, int index) {
+    // if it's the end of this temp's range, it's no longer active
+    for (tempptr_t t : *(inst->tempIndices)) {
+        if (index >= t->startInterval) {
+            activeTemps.insert(t->index);
+        }
+        if (index >= t->endInterval) {
+            activeTemps.erase(t->index);
+        }
+    }
+}
+
 /************************
  * CALL HELPERS
  ***********************/

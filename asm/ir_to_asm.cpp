@@ -813,10 +813,31 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::GarbageCollect:
             {
+                // TODO: this doesn't work
                 LOG(to_string(instructionIndex) + ": GarbageCollect");
-                vector<x64asm::Imm64> args = {vmPointer};
-                vector<tempptr_t> temps;
+                x64asm::R64 reg = getScratchReg();
+                for (auto it = activeTemps.begin(); it != activeTemps.end(); it++) {
+                    LOG("pushing temp " << *it);
+                    tempptr_t t = func->temps.at(*it);
+                    // push
+                    moveTemp(reg, t);
+                    Push(reg);
+                }
+
+                tempptr_t argTemp = inst->tempIndices->at(0);
+                moveTemp(argTemp, x64asm::rsp);
+
+                vector<x64asm::Imm64> args = {vmPointer, activeTemps.size()};
+                vector<tempptr_t> temps = {
+                    argTemp
+                };
                 callHelper((void *) &(helper_gc), args, temps, nullopt);
+
+                for (int i = 0; i < activeTemps.size(); i++) {
+                    Pop();
+                }
+
+                returnScratchReg(reg);
                 break;
             };
         default:
@@ -825,6 +846,7 @@ void IrInterpreter::executeStep() {
     LOG(inst->getInfo());
     assert (regPopCount == 0); // make sure we're pushing equally to popping
     assert (popCount == 0);
+    updateActiveTemps(inst, instructionIndex);
 
     instructionIndex += 1;
     if (instructionIndex >= func->instructions.size()) {
