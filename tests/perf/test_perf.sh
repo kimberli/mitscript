@@ -1,7 +1,7 @@
 #!/bin/bash
 ROOT=$(git rev-parse --show-toplevel)
 DIR=$ROOT/tests/perf/
-PROG="${ROOT}/mitscript --opt=all -s"
+PROG="${ROOT}/mitscript -s --opt=all"
 TEST_FILE_EXT=".mit"
 INPUT_FILE_EXT=".input"
 TARGET_FILE_EXT=".output"
@@ -41,11 +41,9 @@ time_tests() {
     run_test $filename  # warm up cache
     time repeat_tests $filename
 
-    echo "continuing... $TOTAL"
-
     target=$DIR$(basename $filename $TEST_FILE_EXT)$TARGET_FILE_EXT
     if [ ! -e $target ]; then
-        echo -e "TEST $TOTAL - $(basename $filename): ${RED}Failed${NC} (target file not found)"
+        echo -e "TEST $TOTAL ($NUM_TIMES iters) - $(basename $filename): ${RED}Failed${NC} (target file not found)"
         if [ $count == 1 ]; then
             cat $TEST_OUT > $DIFF
         fi
@@ -54,10 +52,10 @@ time_tests() {
         diff $TEST_OUT $target > $DIFF
         if [ ! -s $DIFF ]; then
             SUCCESS=$((SUCCESS+1))
-            echo -e "TEST $TOTAL - $(basename $filename): ${GREEN}Passed${NC}"
+            echo -e "TEST $TOTAL ($NUM_TIMES iters) - $(basename $filename): ${GREEN}Passed${NC}"
             return 0
         else
-            echo -e "TEST $TOTAL - $(basename $filename): ${RED}Failed${NC}"
+            echo -e "TEST $TOTAL ($NUM_TIMES iters) - $(basename $filename): ${RED}Failed${NC}"
             return 1
         fi
     fi

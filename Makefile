@@ -69,6 +69,9 @@ test-vm: mitscript
 test-interpreter: mitscript
 	tests/vm/test_interpreter.sh
 
+test-perf: mitscript
+	tests/perf/test_perf.sh
+
 test-mem: mitscript
 	tests/gc/test_massif.sh
 
