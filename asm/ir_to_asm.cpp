@@ -587,19 +587,11 @@ void IrInterpreter::executeStep() {
                 // perform the div; result stored in rax
                 assm.idiv(getRegBottomHalf(divisor));
                 // put the value back in the temp
-                moveTemp(inst->tempIndices->at(0), getRegBottomHalf(divisor));
+                moveTemp(inst->tempIndices->at(0), x64asm::rax);
                 returnScratchReg(divisor);
                 // restore rax and rdx
-				if (inst->tempIndices->at(0)->reg.value() == x64asm::rdx) {
-                	Pop(x64asm::rax);
-                	Pop(x64asm::rax);
-				} else if (inst->tempIndices->at(0)->reg.value() == x64asm::rax) {
-                	Pop(x64asm::rdx);
-                	Pop(x64asm::rdx);
-				} else {
-                	Pop(x64asm::rdx);
-                	Pop(x64asm::rax);
-				}
+                Pop(x64asm::rdx);
+                Pop(x64asm::rax);
                 break;
             };
         case IrOp::Neg: {
