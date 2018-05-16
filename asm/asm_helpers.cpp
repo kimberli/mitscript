@@ -237,6 +237,41 @@ void IrInterpreter::moveTemp(tempptr_t dest, x64asm::R64 src) {
     }
 }
 
+//void IrInterpreter::moveTemp(tempptr_t dest, x64asm::Imm32 src, TempOp tempOp) {
+//    x64asm::Opcode op;
+//    if (src->reg) {
+//        switch (tempOp) {
+//            case TempOp::AND: 
+//                op = x64asm::AND_R64_IMM32;
+//                break;
+//            case TempOp::CMP: 
+//                op = x64asm::CMP_R64_IMM32;
+//                break;
+//            case default: 
+//                assert (false); // don't get here
+//        }
+//        assm.assemble({op, {dest->reg.value(), src}}); 
+//    } else {
+//        switch (tempOp) {
+//            case TempOp::AND: 
+//                op = x64asm::AND_M64_IMM32;
+//                break;
+//            case TempOp::CMP: 
+//                op = x64asm::CMP_M64_IMM32;
+//                break;
+//            case default: 
+//                assert (false); // don't get here
+//        }
+//        assm.assemble({op, {
+//            x64asm::M64{
+//                x64asm::rbp,
+//                x64asm::Imm32{-offset}
+//            }, 
+//            src
+//       }}); 
+//   }
+//}
+
 void IrInterpreter::moveTemp(x64asm::R64 dest, tempptr_t src, TempOp tempOp) {
     x64asm::Opcode op;
     if (src->reg) {
