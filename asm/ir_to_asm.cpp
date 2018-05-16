@@ -49,7 +49,7 @@ void IrInterpreter::comparisonSetup(instptr_t inst, TempBoolOp tempBoolOp) {
                 break;
         }
         // move 0 into the scratch reg
-        assm.mov(reg, x64asm::Imm64{1});
+        assm.mov(reg, x64asm::Imm64{0});
         // move 1 into the return temp
         uint32_t offset = getTempOffset(res);
         assm.mov(
