@@ -433,14 +433,15 @@ struct IrInstruction {
         if (name0) {
             s += "\tname0: " + name0.value() + "\n";
         }
-        s += "\ttemps: ";
+        s += "\ttemps:";
         for (tempptr_t t : *tempIndices) {
+            s += " #";
             s += to_string(t->index) + " ";
 			if (t->reg) {
-				s += "Reg: " + asmRegToString(t->reg.value()) + " ";
+				s += "(" + asmRegToString(t->reg.value()) + ")";
 			} 
 			if (t->stackOffset) {
-				s += "Stack: " + to_string(t->stackOffset.value()) + " ";
+				s += "(stack " + to_string(t->stackOffset.value()) + ")";
 			}
         }
         return s;
