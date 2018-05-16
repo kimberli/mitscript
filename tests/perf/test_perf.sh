@@ -24,25 +24,30 @@ echo -e "Testing performance of interpreter from MITScript to program output..."
 run_test() {
     # filename is the filename of the test with the appropriate file ext
     filename=$1
+    input=$DIR$(basename $filename $TEST_FILE_EXT)$INPUT_FILE_EXT
 
-    TOTAL=$((TOTAL+1))
-    $PROG $filename > $TEST_OUT
-    if [[ $? -eq 139 ]]; then
-        echo -e "TEST $TOTAL - $(basename $filename): ${RED}Failed${NC}"
-        return 0
-    fi
+    cat $input | $PROG $filename > $TEST_OUT
+    return $?
 }
 
 repeat_tests() {
-    for i in $(NUM_TIMES); do
+    for i in $NUM_TIMES; do
         run_test $1
+        if [[ $? -eq 139 ]]; then
+            echo -e "TEST $TOTAL - $(basename $filename): ${RED}Failed${NC}"
+            return 0
+        fi
     done
 }
 
 time_tests() {
     filename=$1
+    TOTAL=$((TOTAL+1))
     run_test $filename  # warm up cache
     time repeat_tests $filename
+    if [[ $? -eq 0 ]]; then
+        return 0
+    fi
 
     target=$DIR$(basename $filename $TEST_FILE_EXT)$TARGET_FILE_EXT
     if [ ! -e $target ]; then
