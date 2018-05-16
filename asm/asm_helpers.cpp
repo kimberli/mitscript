@@ -59,7 +59,6 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
         tempptr_t t = *it;
         if (t->reg) {
             pushed += 1;
-            LOG(t->reg.value());
             Push(t->reg.value());
         }
     }
@@ -112,10 +111,14 @@ void IrInterpreter::callHelper(void* fn, vector<x64asm::Imm64> args, vector<temp
     // save return value
     if (returnTemp) {
         // move from rax to the temp
-        moveTemp(returnTemp.value(), x64asm::rax);
-        Pop(x64asm::rax);
+        bool usesRax = (returnTemp.value()->reg) && (returnTemp.value()->reg.value() == x64asm::rax);
+        if (!usesRax) {
+            moveTemp(returnTemp.value(), x64asm::rax);
+            Pop(x64asm::rax);
+        } else { // if it does use rax, nothing to do!
+            Pop();
+        }
     } else {
-        // restore rax
         Pop(x64asm::rax);
     }
 }

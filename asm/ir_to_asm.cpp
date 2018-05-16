@@ -485,9 +485,6 @@ void IrInterpreter::executeStep() {
                         Push(reg);
                     }
                 }
-                if (usedScratchReg) {
-                    returnScratchReg(reg);
-                }
 
                 // helper_call takes args: vm pointer, numArgs,
                 // closure, array of args
@@ -505,6 +502,10 @@ void IrInterpreter::executeStep() {
                 // assm.add(x64asm::rsp, x64asm::Imm32{8*numArgs});
                 for (int i = 0; i < numArgs; i++) {
                     Pop();
+                }
+                // now restore the scratch reg
+                if (usedScratchReg) {
+                    returnScratchReg(reg);
                 }
 
                 break;
