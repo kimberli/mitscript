@@ -136,3 +136,7 @@ tagptr_t helper_set_record_index(Interpreter* interpreter, tagptr_t index, tagpt
 	record->set(ptr_to_str(index), ptr, *interpreter->collector);
 	return record_ptr;
 }
+
+void helper_type_exception() {
+    throw IllegalCastException("cannot cast to type");
+}

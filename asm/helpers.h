@@ -46,3 +46,5 @@ tagptr_t helper_get_record_field(Interpreter* interpreter, string* field, tagptr
 tagptr_t helper_set_record_field(Interpreter* interpreter, string* field, tagptr_t record_ptr, tagptr_t ptr);
 tagptr_t helper_get_record_index(Interpreter* interpreter, tagptr_t index, tagptr_t record_ptr);
 tagptr_t helper_set_record_index(Interpreter* interpreter, tagptr_t index, tagptr_t record_ptr, tagptr_t ptr);
+
+void helper_type_exception();

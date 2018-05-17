@@ -11,6 +11,7 @@ typedef int64_t tagptr_t;
 #define ALL_TAG 3
 #define CLEAR_TAG ~3
 #define NULL_PTR 0
+#define SHIFT 2
 
 using namespace std;
 
