@@ -824,14 +824,12 @@ void IrInterpreter::executeStep() {
                     Push(reg);
                 }
 
-                tempptr_t argTemp = inst->tempIndices->at(0);
-                moveTemp(argTemp, x64asm::rsp);
+                //tempptr_t argTemp = inst->tempIndices->at(0);
+                assm.mov(reg, x64asm::rsp);
 
                 vector<x64asm::Imm64> args = {vmPointer, activeTemps.size()};
-                vector<tempptr_t> temps = {
-                    argTemp
-                };
-                callHelper((void *) &(helper_gc), args, temps, nullopt);
+                vector<tempptr_t> temps;
+                callHelper((void *) &(helper_gc), args, temps, reg, nullopt);
 
                 for (int i = 0; i < activeTemps.size(); i++) {
                     Pop();
