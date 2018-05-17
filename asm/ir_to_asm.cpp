@@ -673,7 +673,7 @@ void IrInterpreter::executeStep() {
                 // do a comparison with the real tag
                 assm.cmp(reg, x64asm::Imm32{INT_TAG});
                 // error if its wrong
-                assm.jne(x64asm::Label{TYPE_ERROR_LABEL}); 
+                assm.jne_1(x64asm::Label{TYPE_ERROR_LABEL}); 
                 returnScratchReg(reg);
                 break;
             };
@@ -688,7 +688,7 @@ void IrInterpreter::executeStep() {
                 // do a comparison with the real tag
                 assm.cmp(reg, x64asm::Imm32{BOOL_TAG});
                 // error if its wrong
-                assm.jne(x64asm::Label{TYPE_ERROR_LABEL}); 
+                assm.jne_1(x64asm::Label{TYPE_ERROR_LABEL}); 
                 returnScratchReg(reg);
                 break;
             };
@@ -703,7 +703,7 @@ void IrInterpreter::executeStep() {
                 // do a comparison with the real tag
                 assm.cmp(reg, x64asm::Imm32{STR_TAG});
                 // error if its wrong
-                assm.jne(x64asm::Label{TYPE_ERROR_LABEL}); 
+                assm.jne_1(x64asm::Label{TYPE_ERROR_LABEL}); 
                 returnScratchReg(reg);
                 break;
             };
