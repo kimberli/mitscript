@@ -60,13 +60,10 @@ void IrCompiler::doUnaryArithmetic(IrOp operation, bool toBoolean) {
     // unbox
     pushInstruction(make_shared<IrInstruction>(unboxOp, val, val));
     // perform the operation
-    tempptr_t result = getNewTemp();
-    pushInstruction(make_shared<IrInstruction>(operation, result, val));
+    pushInstruction(make_shared<IrInstruction>(operation, val, val));
     // cast return value
-    pushInstruction(make_shared<IrInstruction>(castOp, result, result));
-    pushTemp(result);
-	checkIfUsed(val);
-    checkIfUsed(result);
+    pushInstruction(make_shared<IrInstruction>(castOp, val, val));
+    pushTemp(val);
 }
 void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoolean) {
     // takes in two unverified operands, asserts and casts the correct type, 
@@ -97,11 +94,9 @@ void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoo
     pushInstruction(make_shared<IrInstruction>(assertOp, left)); 
 
 // generate instructions to unbox right
-    TempListPtr rightOperands = make_shared<TempList>(TempList{right, right});
-    pushInstruction(make_shared<IrInstruction>(unboxOp, rightOperands));
+    pushInstruction(make_shared<IrInstruction>(unboxOp, right));
     // generate to unbox left
-    TempListPtr leftOperands = make_shared<TempList>(TempList{left, left});
-    pushInstruction(make_shared<IrInstruction>(unboxOp, leftOperands));
+    pushInstruction(make_shared<IrInstruction>(unboxOp, left));
 
     // generate a list of operands for an arith operation
     tempptr_t result = getNewTemp(); 
@@ -113,7 +108,6 @@ void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoo
     pushTemp(result);
 	checkIfUsed(right);
 	checkIfUsed(left);
-    checkIfUsed(result);
     return;
 }
 
