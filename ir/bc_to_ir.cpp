@@ -341,6 +341,8 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            }
 	        case BcOp::Call:
 	            {
+            		pushInstruction(make_shared<IrInstruction>(IrOp::GarbageCollect, nullopt));
+					numAllocatedSinceCollect = 0;
 					TempListPtr instTemps = make_shared<TempList>();
 					tempptr_t curr = getNewTemp();
 					for (int i = 0; i < inst.operand0; i++) {
