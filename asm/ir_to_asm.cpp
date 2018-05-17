@@ -748,7 +748,7 @@ void IrInterpreter::executeStep() {
                 // right shift 2 bits sign extended
                 LOG(to_string(instructionIndex) + ": UnboxInteger");
                 x64asm::R64 reg = getScratchReg();
-                moveTemp(reg, inst->tempIndices->at(0));
+                moveTemp(reg, inst->tempIndices->at(1));
                 assm.assemble({x64asm::SAR_R64_IMM8, {reg, x64asm::Imm8{SHIFT}}});
                 moveTemp(inst->tempIndices->at(0), reg);
                 returnScratchReg(reg);
@@ -758,7 +758,7 @@ void IrInterpreter::executeStep() {
             {
                 LOG(to_string(instructionIndex) + ": UnboxBoolean");
                 x64asm::R64 reg = getScratchReg();
-                moveTemp(reg, inst->tempIndices->at(0));
+                moveTemp(reg, inst->tempIndices->at(1));
                 assm.assemble({x64asm::SAR_R64_IMM8, {reg, x64asm::Imm8{SHIFT}}});
                 moveTemp(inst->tempIndices->at(0), reg);
                 returnScratchReg(reg);
@@ -768,7 +768,7 @@ void IrInterpreter::executeStep() {
             {
                 LOG(to_string(instructionIndex) + ": NewInteger");
                 x64asm::R64 reg = getScratchReg();
-                moveTemp(reg, inst->tempIndices->at(0));
+                moveTemp(reg, inst->tempIndices->at(1));
                 // left shift two places; pad w/ zeros
                 assm.assemble({x64asm::SHL_R64_IMM8, {reg, x64asm::Imm8{SHIFT}}});
                 // xor w/ the right tag
@@ -782,7 +782,7 @@ void IrInterpreter::executeStep() {
             {
                 LOG(to_string(instructionIndex) + ": NewBoolean");
                 x64asm::R64 reg = getScratchReg();
-                moveTemp(reg, inst->tempIndices->at(0));
+                moveTemp(reg, inst->tempIndices->at(1));
                 // left shift two places; pad w/ zeros
                 assm.assemble({x64asm::SHL_R64_IMM8, {reg, x64asm::Imm8{SHIFT}}});
                 // xor w/ the right tag

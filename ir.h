@@ -319,26 +319,26 @@ enum class IrOp {
     // Description: unboxes a temp to integer
     // op0: N/A
     // temp0: temp index where the int will be stored
-    // temp0: temp index of the value to unbox; must be a tagged tagptr_t
+    // temp1: temp index of the value to unbox; must be a tagged tagptr_t
     // Result: stores int(temp1) in temp0
     UnboxInteger,
 
     // Description: unboxes a temp to bool
     // op0: N/A
     // temp0: temp index where bool will be stored
-    // temp0: temp index of the value to unbox; must be a tagged tagptr_t
+    // temp1: temp index of the value to unbox; must be a tagged tagptr_t
     // Result: stores bool(temp1) in temp0
     UnboxBoolean,
     
     // Description: takes a raw int and creates an Integer object
     // temp0: temp to hold the new Integer object
-    // temp0: holds the int value 
+    // temp1: holds the int value 
     // Result: stores tagptr_t(temp1) in temp0
     NewInteger,
  
     // Description: takes a raw bool and creates a Boolean object
     // temp0: temp to hold the new Boolean object
-    // temp0: holds the bool value 
+    // temp1: holds the bool value 
     // Result: stores tagptr_t(temp1) in temp0
     NewBoolean,
 
