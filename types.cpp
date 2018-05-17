@@ -238,7 +238,7 @@ tagptr_t PrintNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedH
 tagptr_t InputNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
     string* input = new string();
     getline(cin, *input);
-    return make_ptr(&input);
+    return make_ptr(input);
 };
 tagptr_t IntcastNativeFunction::evalNativeFunction(Frame& currentFrame, CollectedHeap& ch) {
     string name = currentFrame.getLocalByIndex(0);
