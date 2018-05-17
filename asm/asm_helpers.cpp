@@ -14,11 +14,17 @@ uint32_t IrInterpreter::getTempOffset(tempptr_t temp) {
 void IrInterpreter::updateActiveTemps(instptr_t inst, int index) {
     // if it's the end of this temp's range, it's no longer active
     for (tempptr_t t : *(inst->tempIndices)) {
+        LOG("ENDINTERVAL");
+        LOG(t->endInterval);
         if (index >= t->startInterval) {
+            LOG("inserting");
             activeTemps.insert(t->index);
         }
-        if (index >= t->endInterval) {
+        if (index + 1 == t->endInterval) {
+            LOG("REMOVING");
+            LOG(activeTemps.size());
             activeTemps.erase(t->index);
+            LOG(activeTemps.size());
         }
     }
 }

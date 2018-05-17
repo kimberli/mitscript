@@ -165,7 +165,7 @@ void IrInterpreter::epilog() {
 x64asm::Function IrInterpreter::run() {
     // start the assembler on the function
     assm.start(asmFunc);
-    asmFunc.reserve(func->instructions.size() * 100); // TODO: figure out how to allocate the right amount of memory
+    asmFunc.reserve(func->instructions.size() * 1000); // TODO: figure out how to allocate the right amount of memory
     prolog();
 
     if (func->instructions.size() > 0) {
