@@ -129,6 +129,9 @@ void Frame::follow(CollectedHeap& heap) {
         }
     }
     for (Collectable* v : collectables) {
+        if (v == nullptr) {
+            throw RuntimeException("tried to follow a nullptr collectable");
+        }
         heap.markSuccessors(v);
     }
    	for (string arg : func->local_vars_) {
