@@ -16,10 +16,8 @@ void IrInterpreter::updateActiveTemps(instptr_t inst, int index) {
     for (tempptr_t t : *(inst->tempIndices)) {
         LOG("ENDINTERVAL");
         LOG(t->endInterval);
-        if (index >= t->startInterval) {
-            LOG("inserting");
-            activeTemps.insert(t->index);
-        }
+        LOG("inserting");
+        activeTemps.insert(t->index);
         if (index + 1 == t->endInterval) {
             LOG("REMOVING");
             LOG(activeTemps.size());

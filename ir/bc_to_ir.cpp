@@ -497,12 +497,13 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        default:
 	            throw RuntimeException("should never get here - invalid instruction");
 	    }
-        if (numAllocatedSinceCollect > 20) {
+        if (numAllocatedSinceCollect > 0) {
         	// TODO: PUT BACK 
 			numAllocatedSinceCollect = 0;
-            tempptr_t temp = getNewTemp();
-            pushInstruction(make_shared<IrInstruction>(IrOp::GarbageCollect, temp));
-		    checkIfUsed(temp);
+            //tempptr_t temp = getNewTemp();
+            //pushInstruction(make_shared<IrInstruction>(IrOp::GarbageCollect, temp));
+            pushInstruction(make_shared<IrInstruction>(IrOp::GarbageCollect, nullopt));
+		    //checkIfUsed(temp);
         }
 	}
     // TODO: figure out how to make refs work
