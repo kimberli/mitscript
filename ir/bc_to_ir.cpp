@@ -58,17 +58,14 @@ void IrCompiler::doUnaryArithmetic(IrOp operation, bool toBoolean) {
     // assert 
     pushInstruction(make_shared<IrInstruction>(assertOp, val)); 
     // unbox
-    tempptr_t unboxed = getNewTemp();
-    pushInstruction(make_shared<IrInstruction>(unboxOp, unboxed, val));
+    pushInstruction(make_shared<IrInstruction>(unboxOp, val, val));
     // perform the operation
     tempptr_t result = getNewTemp();
-    pushInstruction(make_shared<IrInstruction>(operation, result, unboxed));
+    pushInstruction(make_shared<IrInstruction>(operation, result, val));
     // cast return value
-    tempptr_t ret = getNewTemp();
-    pushInstruction(make_shared<IrInstruction>(castOp, ret, result));
-    pushTemp(ret);
+    pushInstruction(make_shared<IrInstruction>(castOp, result, result));
+    pushTemp(result);
 	checkIfUsed(val);
-    checkIfUsed(unboxed);
     checkIfUsed(result);
 }
 void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoolean) {
@@ -100,27 +97,22 @@ void IrCompiler::doBinaryArithmetic(IrOp operation, bool fromBoolean, bool toBoo
     pushInstruction(make_shared<IrInstruction>(assertOp, left)); 
 
 // generate instructions to unbox right
-    tempptr_t rightUnboxed = getNewTemp();
-    TempListPtr rightOperands = make_shared<TempList>(TempList{rightUnboxed, right});
+    TempListPtr rightOperands = make_shared<TempList>(TempList{right, right});
     pushInstruction(make_shared<IrInstruction>(unboxOp, rightOperands));
     // generate to unbox left
-    tempptr_t leftUnboxed = getNewTemp();
-    TempListPtr leftOperands = make_shared<TempList>(TempList{leftUnboxed, left});
+    TempListPtr leftOperands = make_shared<TempList>(TempList{left, left});
     pushInstruction(make_shared<IrInstruction>(unboxOp, leftOperands));
 
     // generate a list of operands for an arith operation
     tempptr_t result = getNewTemp(); 
-	TempListPtr operands = make_shared<TempList>(TempList{result, rightUnboxed, leftUnboxed});
+	TempListPtr operands = make_shared<TempList>(TempList{result, right, left});
     // perform the op
 	pushInstruction(make_shared<IrInstruction>(operation, operands));
     // cast back to the right type
-	tempptr_t ret = getNewTemp();
-    pushInstruction(make_shared<IrInstruction>(castOp, ret, result));
-    pushTemp(ret);
+    pushInstruction(make_shared<IrInstruction>(castOp, result, result));
+    pushTemp(result);
 	checkIfUsed(right);
 	checkIfUsed(left);
-	checkIfUsed(leftUnboxed);
-    checkIfUsed(rightUnboxed);
     checkIfUsed(result);
     return;
 }
@@ -447,12 +439,10 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        case BcOp::If:
 	            {
                     tempptr_t expr = popTemp();
-                    tempptr_t exprVal = getNewTemp();
                     pushInstruction(make_shared<IrInstruction>(IrOp::AssertBoolean, expr));
-                    pushInstruction(make_shared<IrInstruction>(IrOp::UnboxBoolean, exprVal, expr));
-                    pushInstruction(make_shared<IrInstruction>(IrOp::If, inst.operand0.value(), exprVal));
+                    pushInstruction(make_shared<IrInstruction>(IrOp::UnboxBoolean, expr, expr));
+                    pushInstruction(make_shared<IrInstruction>(IrOp::If, inst.operand0.value(), expr));
 					checkIfUsed(expr);
-					checkIfUsed(exprVal);
 	                break;
 	            }
             case BcOp::StartWhile:
@@ -499,7 +489,7 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	            throw RuntimeException("should never get here - invalid instruction");
 	    }
         // TODO: PUT BACK 
-        pushInstruction(make_shared<IrInstruction>(IrOp::GarbageCollect, optint_t()));
+        //pushInstruction(make_shared<IrInstruction>(IrOp::GarbageCollect, optint_t()));
 	}
     // TODO: figure out how to make refs work
     int32_t ref_count = 0; 

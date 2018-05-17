@@ -176,6 +176,10 @@ x64asm::Function IrInterpreter::run() {
 
     assm.mov(x64asm::R64{x64asm::rax}, x64asm::Imm64{(uint64_t)vmPointer->NONE});
     epilog();
+    // add exception throwing after returning None
+    assm.bind(x64asm::Label{TYPE_ERROR_LABEL});
+    callHelper((void*) helper_type_exception, {}, {}, nullopt);
+    epilog();
 
     // finish compiling
     assm.finish();
@@ -661,7 +665,6 @@ void IrInterpreter::executeStep() {
        case IrOp::AssertInteger:
             {
                 LOG(to_string(instructionIndex) + ": AssertInteger");
-                // TODO: change this to check if the last two bits == INT_TAG
                 x64asm::R64 reg = getScratchReg();
                 // put the operand in a reg
                 moveTemp(reg, inst->tempIndices->at(0)); 
@@ -676,22 +679,32 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::AssertBoolean:
             {
-                // TODO: change this to check if the last two bits == BOOL_TAG
                 LOG(to_string(instructionIndex) + ": AssertBool");
-                vector<tempptr_t> temps = {
-                    inst->tempIndices->at(0)
-                };
-                callHelper((void *) &(helper_assert_bool), {}, temps, nullopt);
+                x64asm::R64 reg = getScratchReg();
+                // put the operand in a reg
+                moveTemp(reg, inst->tempIndices->at(0)); 
+                // and with 3 to leave the tag in reg
+                assm.and_(reg, x64asm::Imm32{ALL_TAG});
+                // do a comparison with the real tag
+                assm.cmp(reg, x64asm::Imm32{BOOL_TAG});
+                // error if its wrong
+                assm.jne(x64asm::Label{TYPE_ERROR_LABEL}); 
+                returnScratchReg(reg);
                 break;
             };
         case IrOp::AssertString:
             {
-                // TODO: change this to check if the last two bits == STR_TAG
                 LOG(to_string(instructionIndex) + ": AssertString");
-                vector<tempptr_t> temps = {
-                    inst->tempIndices->at(0)
-                };
-                callHelper((void *) &(helper_assert_str), {}, temps, nullopt);
+                x64asm::R64 reg = getScratchReg();
+                // put the operand in a reg
+                moveTemp(reg, inst->tempIndices->at(0)); 
+                // and with 3 to leave the tag in reg
+                assm.and_(reg, x64asm::Imm32{ALL_TAG});
+                // do a comparison with the real tag
+                assm.cmp(reg, x64asm::Imm32{STR_TAG});
+                // error if its wrong
+                assm.jne(x64asm::Label{TYPE_ERROR_LABEL}); 
+                returnScratchReg(reg);
                 break;
             };
         case IrOp::AssertRecord:
@@ -736,32 +749,28 @@ void IrInterpreter::executeStep() {
                 LOG(to_string(instructionIndex) + ": UnboxInteger");
                 x64asm::R64 reg = getScratchReg();
                 moveTemp(reg, inst->tempIndices->at(0));
-                assm.assemble({x64asm::SAR_R64_IMM8, {reg, x64asm::Imm8{2}}});
+                assm.assemble({x64asm::SAR_R64_IMM8, {reg, x64asm::Imm8{SHIFT}}});
                 moveTemp(inst->tempIndices->at(0), reg);
                 returnScratchReg(reg);
                 break;
             };
         case IrOp::UnboxBoolean:
             {
-                // TODO: change this to clear the last two bits and shift right by 2
-                // make sure the shift is sign extended
                 LOG(to_string(instructionIndex) + ": UnboxBoolean");
-                vector<x64asm::Imm64> args;
-                vector<tempptr_t> temps = {
-                    inst->tempIndices->at(1)
-                };
-                tempptr_t returnTemp = inst->tempIndices->at(0);
-                callHelper((void *) &(helper_unbox_bool), args, temps, returnTemp);
+                x64asm::R64 reg = getScratchReg();
+                moveTemp(reg, inst->tempIndices->at(0));
+                assm.assemble({x64asm::SAR_R64_IMM8, {reg, x64asm::Imm8{SHIFT}}});
+                moveTemp(inst->tempIndices->at(0), reg);
+                returnScratchReg(reg);
                 break;
             };
         case IrOp::NewInteger:
             {
-                // TODO: change this to shift left by 2 and OR with INT_TAG
                 LOG(to_string(instructionIndex) + ": NewInteger");
                 x64asm::R64 reg = getScratchReg();
-                moveTemp(reg, inst->tempIndices->at(1));
+                moveTemp(reg, inst->tempIndices->at(0));
                 // left shift two places; pad w/ zeros
-                assm.assemble({x64asm::SHL_R64_IMM8, {reg, x64asm::Imm8{2}}});
+                assm.assemble({x64asm::SHL_R64_IMM8, {reg, x64asm::Imm8{SHIFT}}});
                 // xor w/ the right tag
                 assm.or_(reg, x64asm::Imm32{INT_TAG});
                 // put it back in the right temp 
@@ -771,16 +780,16 @@ void IrInterpreter::executeStep() {
             };
         case IrOp::NewBoolean:
             {
-                // TODO: change this to shift left by 2 and OR with BOOL_TAG
                 LOG(to_string(instructionIndex) + ": NewBoolean");
-                vector<x64asm::Imm64> args = {
-                    x64asm::Imm64{vmPointer},
-                };
-                vector<tempptr_t> temps = {
-                    inst->tempIndices->at(1)
-                };
-                tempptr_t returnTemp = inst->tempIndices->at(0);
-                //callHelper((void *) &(helper_new_boolean), args, temps, returnTemp);
+                x64asm::R64 reg = getScratchReg();
+                moveTemp(reg, inst->tempIndices->at(0));
+                // left shift two places; pad w/ zeros
+                assm.assemble({x64asm::SHL_R64_IMM8, {reg, x64asm::Imm8{SHIFT}}});
+                // xor w/ the right tag
+                assm.or_(reg, x64asm::Imm32{BOOL_TAG});
+                // put it back in the right temp 
+                moveTemp(inst->tempIndices->at(0), reg);
+                returnScratchReg(reg);
                 break;
             };
         case IrOp::CastString:

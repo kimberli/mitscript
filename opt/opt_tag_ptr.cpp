@@ -28,33 +28,33 @@ string get_type(tagptr_t ptr) {
 }
 
 tagptr_t make_ptr(int val) {
-    tagptr_t result = (val << 2) | INT_TAG;
-    LOG("  TAGPTR INT: " << hex << result << " // " << val);
+    tagptr_t result = (val << SHIFT) | INT_TAG;
+    //LOG("  TAGPTR INT: " << hex << result << " // " << val);
     return result;
 }
 tagptr_t make_ptr(bool val) {
-    tagptr_t result = (val << 2) | BOOL_TAG;
-    LOG("  TAGPTR BOOL: " << hex << result << " // " << val);
+    tagptr_t result = (val << SHIFT) | BOOL_TAG;
+    //LOG("  TAGPTR BOOL: " << hex << result << " // " << val);
     return result;
 }
 tagptr_t make_ptr(string* val) {
-    tagptr_t result = ((tagptr_t) val << 2) | STR_TAG;
-    LOG("  TAGPTR STR: " << hex << result << " // " << val);
+    tagptr_t result = ((tagptr_t) val << SHIFT) | STR_TAG;
+    //LOG("  TAGPTR STR: " << hex << result << " // " << val);
     return result;
 }
 tagptr_t make_ptr(Constant* val) {
     tagptr_t result = (tagptr_t) val;
-    LOG("  TAGPTR CONSTANT: " << hex << result << " // " << val->type());
+    //LOG("  TAGPTR CONSTANT: " << hex << result << " // " << val->type());
     return result;
 }
 tagptr_t make_ptr(Function* val) {
     tagptr_t result = (tagptr_t) val;
-    LOG("  TAGPTR FUNCTION: " << hex << result << " // " << val);
+    //LOG("  TAGPTR FUNCTION: " << hex << result << " // " << val);
     return result;
 }
 tagptr_t make_ptr(ValWrapper* val) {
     tagptr_t result = (tagptr_t) val;
-    LOG("  TAGPTR VALWRAPPER: " << hex << result << " // " << val);
+    //LOG("  TAGPTR VALWRAPPER: " << hex << result << " // " << val);
     return result;
 }
 
@@ -62,19 +62,19 @@ int get_int(tagptr_t ptr) {
     if (!check_tag(ptr, INT_TAG)) {
         throw IllegalCastException("expected int, got " + get_type(ptr));
     }
-    return (ptr & CLEAR_TAG) >> 2;  // ptr needs to be signed for an arithmetic shift
+    return (ptr & CLEAR_TAG) >> SHIFT;  // ptr needs to be signed for an arithmetic shift
 }
 bool get_bool(tagptr_t ptr) {
     if (!check_tag(ptr, BOOL_TAG)) {
         throw IllegalCastException("expected bool, got " + get_type(ptr));
     }
-    return (ptr & CLEAR_TAG) >> 2;  // ptr needs to be signed for an arithmetic shift
+    return (ptr & CLEAR_TAG) >> SHIFT;  // ptr needs to be signed for an arithmetic shift
 }
 string* get_str(tagptr_t ptr) {
     if (!check_tag(ptr, STR_TAG)) {
         throw IllegalCastException("expected string, got " + get_type(ptr));
     }
-    return (string*) ((ptr & CLEAR_TAG) >> 2);
+    return (string*) ((ptr & CLEAR_TAG) >> SHIFT);
 }
 Collectable* get_collectable(tagptr_t ptr) {
     if (is_tagged(ptr)) {
