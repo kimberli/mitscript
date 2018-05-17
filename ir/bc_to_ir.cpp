@@ -15,6 +15,7 @@ class Interpreter;
 
 // Helpers
 tempptr_t IrCompiler::getNewTemp() {
+	numAllocatedSinceCollect++;
 	currentTemp = temps.size();
     tempptr_t newTemp = make_shared<Temp>(currentTemp);
 	temps.push_back(newTemp);
@@ -496,8 +497,9 @@ IrFunc IrCompiler::toIrFunc(Function* func) {
 	        default:
 	            throw RuntimeException("should never get here - invalid instruction");
 	    }
-        // TODO: PUT BACK 
-        if (irInsts.size() % 5 == 0) {
+        if (numAllocatedSinceCollect > 20) {
+        	// TODO: PUT BACK 
+			numAllocatedSinceCollect = 0;
             tempptr_t temp = getNewTemp();
             pushInstruction(make_shared<IrInstruction>(IrOp::GarbageCollect, temp));
 		    checkIfUsed(temp);

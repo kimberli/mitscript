@@ -31,6 +31,7 @@ private:
     vector<tempptr_t> temps;
 	int whileLevel = 0;
 	set<tempptr_t> tempsInWhile;
+	int numAllocatedSinceCollect = 0;
 
     // helpers
     tempptr_t getNewTemp();
