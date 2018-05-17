@@ -18,13 +18,12 @@ void IrInterpreter::updateActiveTemps(instptr_t inst, int index) {
         LOG(t->endInterval);
         LOG("inserting");
         activeTemps.insert(t->index);
-        if (index + 1 == t->endInterval) {
-            LOG("REMOVING");
-            LOG(activeTemps.size());
-            activeTemps.erase(t->index);
-            LOG(activeTemps.size());
-        }
     }
+	for (int i: activeTemps) {
+		if (func->temps.at(i)->endInterval - 1 <= index) {
+			activeTemps.erase(i);
+		}
+	}
 }
 
 /************************
